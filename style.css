@@ -537,6 +537,11 @@ body {
     letter-spacing: 2px;
 }
 
+/* Hide footer on dashboard */
+#dashboard-screen.active ~ .footer {
+    display: none;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .dashboard-title {
