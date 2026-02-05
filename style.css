@@ -142,15 +142,40 @@ body {
 }
 
 .title-he {
-    font-size: 48px;
+    font-size: 64px;
     font-weight: bold;
     color: #d400ff;
     text-shadow: 
         0 0 20px #d400ff,
         0 0 40px #d400ff,
-        2px 2px 0 #00ff00;
+        0 0 60px #d400ff,
+        0 0 80px #d400ff,
+        3px 3px 0 #00ff00,
+        -1px -1px 0 #00ffff;
     margin-bottom: 10px;
-    letter-spacing: 8px;
+    letter-spacing: 12px;
+    animation: shine 2s ease-in-out infinite;
+}
+
+@keyframes shine {
+    0%, 100% {
+        text-shadow: 
+            0 0 20px #d400ff,
+            0 0 40px #d400ff,
+            0 0 60px #d400ff,
+            0 0 80px #d400ff,
+            3px 3px 0 #00ff00,
+            -1px -1px 0 #00ffff;
+    }
+    50% {
+        text-shadow: 
+            0 0 30px #d400ff,
+            0 0 60px #d400ff,
+            0 0 90px #d400ff,
+            0 0 120px #d400ff,
+            3px 3px 0 #00ff00,
+            -1px -1px 0 #00ffff;
+    }
 }
 
 .title-subtitle {
@@ -259,14 +284,17 @@ body {
 }
 
 .dashboard-title {
-    font-size: 48px;
+    font-size: 56px;
     margin-bottom: 10px;
     color: #d400ff;
     text-shadow: 
         0 0 20px #d400ff,
         0 0 40px #d400ff,
-        2px 2px 0 #00ff00;
-    letter-spacing: 6px;
+        0 0 60px #d400ff,
+        3px 3px 0 #00ff00,
+        -1px -1px 0 #00ffff;
+    letter-spacing: 10px;
+    animation: shine 2s ease-in-out infinite;
 }
 
 .status-text {
@@ -512,8 +540,8 @@ body {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .dashboard-title {
-        font-size: 32px;
-        letter-spacing: 3px;
+        font-size: 36px;
+        letter-spacing: 5px;
     }
     
     .nav-menu {
@@ -529,8 +557,8 @@ body {
     }
     
     .title-he {
-        font-size: 32px;
-        letter-spacing: 4px;
+        font-size: 40px;
+        letter-spacing: 6px;
     }
     
     .title-subtitle {
