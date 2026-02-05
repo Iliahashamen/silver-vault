@@ -1,0 +1,508 @@
+/* ===========================
+   THE SILVER VAULT - 80s SYNTHWAVE STYLE
+   Colors: Neon Green (#00ff00), Purple (#d400ff), Black (#000000)
+   =========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background: #000000;
+    color: #00ff00;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ===== ANIMATED GRID BACKGROUND ===== */
+.grid-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridScroll 20s linear infinite;
+    z-index: -1;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+@keyframes gridScroll {
+    0% {
+        transform: translateY(0) rotateX(60deg);
+    }
+    100% {
+        transform: translateY(50px) rotateX(60deg);
+    }
+}
+
+/* ===== GLITCH EFFECT ===== */
+.glitch {
+    position: relative;
+    color: #00ff00;
+    text-shadow: 
+        0 0 10px #00ff00,
+        0 0 20px #00ff00,
+        0 0 30px #00ff00;
+    animation: glitch 3s infinite;
+}
+
+.glitch::before {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: -2px 0 #d400ff;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-before 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: 2px 0 #00ffff;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-after 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+    0%, 100% { clip: rect(0, 900px, 0, 0); }
+    25% { clip: rect(0, 900px, 50px, 0); }
+    50% { clip: rect(50px, 900px, 100px, 0); }
+    75% { clip: rect(0, 900px, 100px, 0); }
+}
+
+@keyframes glitch-before {
+    0% { clip: rect(61px, 9999px, 52px, 0); }
+    20% { clip: rect(33px, 9999px, 144px, 0); }
+    40% { clip: rect(121px, 9999px, 115px, 0); }
+    60% { clip: rect(144px, 9999px, 162px, 0); }
+    80% { clip: rect(0px, 9999px, 72px, 0); }
+    100% { clip: rect(68px, 9999px, 115px, 0); }
+}
+
+@keyframes glitch-after {
+    0% { clip: rect(76px, 9999px, 136px, 0); }
+    20% { clip: rect(34px, 9999px, 143px, 0); }
+    40% { clip: rect(26px, 9999px, 134px, 0); }
+    60% { clip: rect(148px, 9999px, 145px, 0); }
+    80% { clip: rect(0px, 9999px, 76px, 0); }
+    100% { clip: rect(128px, 9999px, 149px, 0); }
+}
+
+/* ===== BLINK ANIMATION ===== */
+.blink {
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+/* ===== SCREEN MANAGEMENT ===== */
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== LOGIN SCREEN ===== */
+.terminal-container {
+    width: 90%;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #00ff00;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.5),
+        inset 0 0 50px rgba(0, 255, 0, 0.1);
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.terminal-header {
+    background: #00ff00;
+    color: #000000;
+    padding: 10px 20px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #00ff00;
+}
+
+.terminal-body {
+    padding: 30px;
+}
+
+.ascii-art {
+    color: #d400ff;
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #d400ff;
+}
+
+.login-text {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.login-text p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.input-group {
+    margin: 30px 0;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.terminal-input {
+    width: 100%;
+    padding: 15px;
+    background: #000000;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.terminal-input::placeholder {
+    color: #00ff0050;
+}
+
+.terminal-input:focus {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+    border-color: #d400ff;
+}
+
+.error-msg {
+    color: #ff0000;
+    margin-top: 10px;
+    font-size: 14px;
+    min-height: 20px;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+.neon-button {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 2px solid #d400ff;
+    color: #d400ff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 18px;
+    cursor: pointer;
+    text-shadow: 0 0 10px #d400ff;
+    box-shadow: 0 0 20px rgba(212, 0, 255, 0.5);
+    transition: all 0.3s;
+}
+
+.neon-button:hover {
+    background: #d400ff;
+    color: #000000;
+    box-shadow: 0 0 30px rgba(212, 0, 255, 0.8);
+    text-shadow: none;
+}
+
+.neon-button:active {
+    transform: scale(0.98);
+}
+
+/* ===== DASHBOARD ===== */
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0, 255, 0, 0.05);
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.dashboard-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.status-text {
+    color: #00ff00;
+    font-size: 14px;
+}
+
+.status-online {
+    color: #d400ff;
+    text-shadow: 0 0 10px #d400ff;
+}
+
+/* ===== NAVIGATION ===== */
+.nav-menu {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    flex: 1;
+    min-width: 150px;
+    padding: 15px 20px;
+    background: transparent;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.nav-btn:hover {
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.nav-btn.active {
+    background: #00ff00;
+    color: #000000;
+    text-shadow: none;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+/* ===== CONTENT AREA ===== */
+.content-area {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #00ff00;
+    padding: 30px;
+    min-height: 500px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.section-title {
+    color: #d400ff;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    text-shadow: 0 0 10px #d400ff;
+}
+
+/* ===== ARCHIVES ===== */
+.search-bar {
+    margin-bottom: 30px;
+}
+
+.files-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.file-card {
+    background: rgba(0, 255, 0, 0.05);
+    border: 2px solid #00ff00;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.file-card:hover {
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    transform: translateY(-5px);
+}
+
+.file-icon {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #d400ff;
+}
+
+.file-name {
+    color: #00ff00;
+    font-size: 14px;
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+
+.file-meta {
+    color: #00ff0080;
+    font-size: 12px;
+}
+
+.loading {
+    text-align: center;
+    color: #d400ff;
+    font-size: 18px;
+    padding: 40px;
+    animation: blink 1s infinite;
+}
+
+/* ===== GUIDE ===== */
+.guide-content {
+    display: grid;
+    gap: 20px;
+}
+
+.guide-card {
+    background: rgba(212, 0, 255, 0.05);
+    border: 2px solid #d400ff;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(212, 0, 255, 0.3);
+}
+
+.guide-card h3 {
+    color: #d400ff;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #d400ff;
+}
+
+.guide-card p {
+    color: #00ff00;
+    line-height: 1.8;
+}
+
+/* ===== CHAT ===== */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #00ff00;
+    margin-bottom: 20px;
+}
+
+.chat-message {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-left: 3px solid #00ff00;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.chat-message.bot {
+    border-left-color: #d400ff;
+    background: rgba(212, 0, 255, 0.05);
+}
+
+.chat-message.user {
+    border-left-color: #00ff00;
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.message-author {
+    color: #d400ff;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.message-text {
+    color: #00ff00;
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 10px;
+}
+
+#chat-input {
+    flex: 1;
+}
+
+.neon-button-small {
+    padding: 15px 30px;
+    background: transparent;
+    border: 2px solid #d400ff;
+    color: #d400ff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.neon-button-small:hover {
+    background: #d400ff;
+    color: #000000;
+}
+
+.chat-disclaimer {
+    text-align: center;
+    color: #00ff0050;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .dashboard-header h1 {
+        font-size: 24px;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+    }
+    
+    .nav-btn {
+        width: 100%;
+    }
+    
+    .files-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ascii-art {
+        font-size: 6px;
+    }
+}
