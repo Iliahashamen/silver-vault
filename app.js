@@ -37,6 +37,9 @@ function handleLogin() {
         setTimeout(() => {
             document.getElementById('login-screen').classList.remove('active');
             document.getElementById('dashboard-screen').classList.add('active');
+            // Hide footer after login
+            const footer = document.querySelector('.footer');
+            if (footer) footer.style.display = 'none';
             loadFiles();
         }, 1000);
     } else {
