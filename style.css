@@ -45,77 +45,34 @@ body {
     }
 }
 
-/* ===== GLITCH EFFECT ===== */
+/* ===== GLITCH EFFECT (Simplified) ===== */
 .glitch {
-    position: relative;
     color: #00ff00;
     text-shadow: 
         0 0 10px #00ff00,
         0 0 20px #00ff00,
-        0 0 30px #00ff00;
-    animation: glitch 3s infinite;
-    display: inline-block;
+        0 0 30px #00ff00,
+        2px 2px 0 #d400ff,
+        -2px -2px 0 #00ffff;
+    animation: subtleGlitch 3s ease-in-out infinite;
 }
 
-.glitch::before {
-    content: attr(data-text);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    text-shadow: -2px 0 #d400ff;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-    animation: glitch-before 3s infinite linear alternate-reverse;
-}
-
-.glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    text-shadow: 2px 0 #00ffff;
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-    animation: glitch-after 2.5s infinite linear alternate-reverse;
-}
-
-@keyframes glitch {
-    0%, 100% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-}
-
-@keyframes glitch-before {
-    0% { 
-        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-        transform: translateX(-3px);
+@keyframes subtleGlitch {
+    0%, 100% { 
+        text-shadow: 
+            0 0 10px #00ff00,
+            0 0 20px #00ff00,
+            0 0 30px #00ff00,
+            2px 2px 0 #d400ff,
+            -2px -2px 0 #00ffff;
     }
     50% { 
-        clip-path: polygon(0 20%, 100% 20%, 100% 60%, 0 60%);
-        transform: translateX(-2px);
-    }
-    100% { 
-        clip-path: polygon(0 40%, 100% 40%, 100% 80%, 0 80%);
-        transform: translateX(-3px);
-    }
-}
-
-@keyframes glitch-after {
-    0% { 
-        clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-        transform: translateX(3px);
-    }
-    50% { 
-        clip-path: polygon(0 30%, 100% 30%, 100% 70%, 0 70%);
-        transform: translateX(2px);
-    }
-    100% { 
-        clip-path: polygon(0 10%, 100% 10%, 100% 50%, 0 50%);
-        transform: translateX(3px);
+        text-shadow: 
+            0 0 15px #00ff00,
+            0 0 25px #00ff00,
+            0 0 35px #00ff00,
+            -2px 2px 0 #d400ff,
+            2px -2px 0 #00ffff;
     }
 }
 
@@ -172,13 +129,41 @@ body {
     padding: 30px;
 }
 
-.ascii-art {
-    color: #d400ff;
-    font-size: 10px;
-    line-height: 1.2;
+/* ===== VAULT TITLE ===== */
+.vault-title {
     text-align: center;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px #d400ff;
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 3px solid #d400ff;
+    background: rgba(212, 0, 255, 0.05);
+    box-shadow: 
+        0 0 20px rgba(212, 0, 255, 0.5),
+        inset 0 0 20px rgba(212, 0, 255, 0.1);
+}
+
+.title-he {
+    font-size: 48px;
+    font-weight: bold;
+    color: #d400ff;
+    text-shadow: 
+        0 0 20px #d400ff,
+        0 0 40px #d400ff,
+        2px 2px 0 #00ff00;
+    margin-bottom: 10px;
+    letter-spacing: 8px;
+}
+
+.title-subtitle {
+    font-size: 14px;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+    letter-spacing: 4px;
+}
+
+.access-text {
+    color: #00ff00;
+    font-size: 18px;
+    text-shadow: 0 0 10px #00ff00;
 }
 
 .login-text {
@@ -273,9 +258,15 @@ body {
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
 }
 
-.dashboard-header h1 {
-    font-size: 36px;
+.dashboard-title {
+    font-size: 48px;
     margin-bottom: 10px;
+    color: #d400ff;
+    text-shadow: 
+        0 0 20px #d400ff,
+        0 0 40px #d400ff,
+        2px 2px 0 #00ff00;
+    letter-spacing: 6px;
 }
 
 .status-text {
@@ -520,8 +511,9 @@ body {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .dashboard-header h1 {
-        font-size: 24px;
+    .dashboard-title {
+        font-size: 32px;
+        letter-spacing: 3px;
     }
     
     .nav-menu {
@@ -536,8 +528,14 @@ body {
         grid-template-columns: 1fr;
     }
     
-    .ascii-art {
-        font-size: 6px;
+    .title-he {
+        font-size: 32px;
+        letter-spacing: 4px;
+    }
+    
+    .title-subtitle {
+        font-size: 10px;
+        letter-spacing: 2px;
     }
     
     .footer {
