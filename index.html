@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE SILVER VAULT</title>
+    <title>כספת הכסף</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -15,7 +15,7 @@
     <div id="login-screen" class="screen active">
         <div class="terminal-container">
             <div class="terminal-header">
-                <span class="terminal-title">◢◤ SILVER VAULT ACCESS ◢◤</span>
+                <span class="terminal-title">◢◤ כספת הכסף - גישה ◢◤</span>
             </div>
             <div class="terminal-body">
                 <div class="ascii-art">
@@ -27,16 +27,16 @@
     ╚══════╝╚═╝╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝
                 </div>
                 <div class="login-text">
-                    <p class="glitch" data-text="RESTRICTED ACCESS">RESTRICTED ACCESS</p>
-                    <p class="blink">▓▓▓ AUTHORIZATION REQUIRED ▓▓▓</p>
+                    <p class="glitch" data-text="גישה מוגבלת">גישה מוגבלת</p>
+                    <p class="blink">▓▓▓ נדרש אימות ▓▓▓</p>
                 </div>
                 <div class="input-group">
-                    <label for="passcode">ENTER PASSCODE:</label>
+                    <label for="passcode">הזן קוד גישה:</label>
                     <input type="password" id="passcode" class="terminal-input" placeholder="••••••••" autocomplete="off">
                     <div id="error-msg" class="error-msg"></div>
                 </div>
                 <button id="login-btn" class="neon-button">
-                    <span>◢ ACCESS VAULT ◤</span>
+                    <span>◢ גישה לכספת ◤</span>
                 </button>
             </div>
         </div>
@@ -47,20 +47,20 @@
         <div class="dashboard-container">
             <!-- Header -->
             <div class="dashboard-header">
-                <h1 class="glitch" data-text="THE SILVER VAULT">THE SILVER VAULT</h1>
-                <p class="status-text">SYSTEM STATUS: <span class="status-online">ONLINE</span> ◢◤ SECURE CONNECTION</p>
+                <h1 class="glitch" data-text="כספת הכסף">כספת הכסף</h1>
+                <p class="status-text">סטטוס מערכת: <span class="status-online">מקוון</span> ◢◤ חיבור מאובטח</p>
             </div>
 
             <!-- Navigation Menu -->
             <div class="nav-menu">
                 <button class="nav-btn active" data-section="archives">
-                    <span class="icon">▓</span> ARCHIVES
+                    <span class="icon">▓</span> ארכיון
                 </button>
                 <button class="nav-btn" data-section="guide">
-                    <span class="icon">▓</span> SILVER 101
+                    <span class="icon">▓</span> כסף 101
                 </button>
                 <button class="nav-btn" data-section="chat">
-                    <span class="icon">▓</span> MR. D
+                    <span class="icon">▓</span> מר ד'
                 </button>
             </div>
 
@@ -68,58 +68,61 @@
             <div class="content-area">
                 <!-- ARCHIVES Section -->
                 <div id="archives-section" class="content-section active">
-                    <h2 class="section-title">◢ KNOWLEDGE ARCHIVES ◤</h2>
+                    <h2 class="section-title">◢ ארכיון הידע ◤</h2>
                     <div class="search-bar">
-                        <input type="text" id="search-input" placeholder="SEARCH FILES..." class="terminal-input">
+                        <input type="text" id="search-input" placeholder="חפש קבצים..." class="terminal-input">
                     </div>
                     <div id="files-container" class="files-grid">
-                        <div class="loading">LOADING ARCHIVES...</div>
+                        <div class="loading">טוען ארכיון...</div>
                     </div>
                 </div>
 
                 <!-- SILVER 101 Section -->
                 <div id="guide-section" class="content-section">
-                    <h2 class="section-title">◢ SILVER 101: THE GUIDE ◤</h2>
+                    <h2 class="section-title">◢ כסף 101: המדריך ◤</h2>
                     <div class="guide-content">
                         <div class="guide-card">
-                            <h3>▓ WHAT IS SILVER?</h3>
-                            <p>Silver is a precious metal with unique properties. It has been used as money, jewelry, and in industrial applications for thousands of years.</p>
+                            <h3>▓ מה זה כסף?</h3>
+                            <p>כסף הוא מתכת יקרה עם תכונות ייחודיות. הוא משמש ככסף, תכשיטים ויישומים תעשייתיים כבר אלפי שנים.</p>
                         </div>
                         <div class="guide-card">
-                            <h3>▓ WHY INVEST IN SILVER?</h3>
-                            <p>• Hedge against inflation<br>• Tangible asset<br>• Industrial demand<br>• Limited supply<br>• Portfolio diversification</p>
+                            <h3>▓ למה להשקיע בכסף?</h3>
+                            <p>• הגנה מפני אינפלציה<br>• נכס מוחשי<br>• ביקוש תעשייתי<br>• היצע מוגבל<br>• פיזור תיק השקעות</p>
                         </div>
                         <div class="guide-card">
-                            <h3>▓ SILVER IN ISRAEL</h3>
-                            <p>Israel has specific regulations regarding precious metals. Understanding local laws and tax implications is crucial for Israeli investors.</p>
+                            <h3>▓ כסף בישראל</h3>
+                            <p>בישראל יש תקנות ספציפיות לגבי מתכות יקרות. הבנת החוקים המקומיים והשלכות המס חיונית למשקיעים ישראלים.</p>
                         </div>
                         <div class="guide-card">
-                            <h3>▓ GETTING STARTED</h3>
-                            <p>1. Research and educate yourself<br>2. Consult with Mr. D<br>3. Start with small investments<br>4. Diversify your portfolio<br>5. Stay informed</p>
+                            <h3>▓ איך להתחיל</h3>
+                            <p>1. חקור והשכל את עצמך<br>2. התייעץ עם מר ד'<br>3. התחל עם השקעות קטנות<br>4. פזר את תיק ההשקעות<br>5. הישאר מעודכן</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- MR. D Chat Section -->
                 <div id="chat-section" class="content-section">
-                    <h2 class="section-title">◢ CONSULT MR. D ◤</h2>
+                    <h2 class="section-title">◢ התייעצות עם מר ד' ◤</h2>
                     <div class="chat-container">
                         <div id="chat-messages" class="chat-messages">
                             <div class="chat-message bot">
-                                <span class="message-author">MR. D:</span>
-                                <span class="message-text">Greetings. I am Mr. D, your guide to silver investing in Israel. Ask me anything about precious metals, market strategies, or Israeli regulations.</span>
+                                <span class="message-author">מר ד':</span>
+                                <span class="message-text">שלום. אני מר ד', המדריך שלך להשקעות בכסף בישראל. שאל אותי כל שאלה על מתכות יקרות, אסטרטגיות שוק, או תקנות ישראליות.</span>
                             </div>
                         </div>
                         <div class="chat-input-area">
-                            <input type="text" id="chat-input" placeholder="TYPE YOUR QUESTION..." class="terminal-input">
-                            <button id="send-btn" class="neon-button-small">SEND</button>
+                            <input type="text" id="chat-input" placeholder="הקלד את שאלתך..." class="terminal-input">
+                            <button id="send-btn" class="neon-button-small">שלח</button>
                         </div>
-                        <p class="chat-disclaimer">⚠ AI ADVISOR - FOR EDUCATIONAL PURPOSES</p>
+                        <p class="chat-disclaimer">⚠ יועץ AI - למטרות חינוכיות בלבד</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <div class="footer">powered by SHAMEN corp ver 1.3</div>
 
     <script src="app.js"></script>
 </body>

@@ -484,6 +484,18 @@ body {
     margin-top: 10px;
 }
 
+/* ===== FOOTER ===== */
+.footer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    color: #00ff0050;
+    font-size: 10px;
+    text-shadow: 0 0 5px #00ff0030;
+    z-index: 1000;
+    font-family: 'Share Tech Mono', monospace;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .dashboard-header h1 {
@@ -504,5 +516,11 @@ body {
     
     .ascii-art {
         font-size: 6px;
+    }
+    
+    .footer {
+        font-size: 8px;
+        bottom: 5px;
+        right: 5px;
     }
 }

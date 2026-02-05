@@ -31,7 +31,7 @@ function handleLogin() {
     
     if (passcode === CONFIG.PASSCODE) {
         // Success
-        errorMsg.textContent = '✓ ACCESS GRANTED';
+        errorMsg.textContent = '✓ גישה אושרה';
         errorMsg.style.color = '#00ff00';
         
         setTimeout(() => {
@@ -41,7 +41,7 @@ function handleLogin() {
         }, 1000);
     } else {
         // Failure
-        errorMsg.textContent = '✗ ACCESS DENIED - INVALID PASSCODE';
+        errorMsg.textContent = '✗ גישה נדחתה - קוד שגוי';
         errorMsg.style.color = '#ff0000';
         document.getElementById('passcode').value = '';
         
@@ -89,7 +89,7 @@ function switchSection(sectionName) {
 // ===== LOAD FILES FROM SUPABASE =====
 async function loadFiles() {
     const container = document.getElementById('files-container');
-    container.innerHTML = '<div class="loading">LOADING ARCHIVES...</div>';
+    container.innerHTML = '<div class="loading">טוען ארכיון...</div>';
     
     try {
         const response = await fetch(`${CONFIG.SUPABASE_URL}/rest/v1/files?select=*&order=created_at.desc`, {
@@ -105,7 +105,7 @@ async function loadFiles() {
         displayFiles(filesData);
     } catch (error) {
         console.error('Error loading files:', error);
-        container.innerHTML = '<div class="loading">⚠ ERROR LOADING ARCHIVES</div>';
+        container.innerHTML = '<div class="loading">⚠ שגיאה בטעינת הארכיון</div>';
     }
 }
 
@@ -113,7 +113,7 @@ function displayFiles(files) {
     const container = document.getElementById('files-container');
     
     if (files.length === 0) {
-        container.innerHTML = '<div class="loading">NO FILES IN VAULT</div>';
+        container.innerHTML = '<div class="loading">אין קבצים בכספת</div>';
         return;
     }
     
@@ -122,15 +122,15 @@ function displayFiles(files) {
 
 function createFileCard(file) {
     const icon = getFileIcon(file.file_type);
-    const date = new Date(file.created_at).toLocaleDateString();
+    const date = new Date(file.created_at).toLocaleDateString('he-IL');
     
     return `
         <div class="file-card" onclick="openFile('${file.file_url}', '${file.file_type}')">
             <div class="file-icon">${icon}</div>
             <div class="file-name">${escapeHtml(file.file_name)}</div>
             <div class="file-meta">
-                TYPE: ${file.file_type.toUpperCase()}<br>
-                DATE: ${date}
+                סוג: ${file.file_type.toUpperCase()}<br>
+                תאריך: ${date}
             </div>
         </div>
     `;
@@ -206,14 +206,14 @@ function addChatMessage(author, text, type) {
 }
 
 function getBotResponse(message) {
-    // Simple placeholder responses
+    // Simple placeholder responses in Hebrew
     const responses = {
-        'silver': 'Silver is an excellent investment for diversification. In Israel, you should consider tax implications and storage options.',
-        'price': 'Silver prices fluctuate based on market conditions. Check the current spot price and consider dollar-cost averaging.',
-        'tax': 'In Israel, precious metals have specific tax regulations. I recommend consulting with a tax advisor for your specific situation.',
-        'buy': 'You can purchase silver through authorized dealers in Israel. Look for reputable sources and compare premiums.',
-        'store': 'Storage options include home safes, bank vaults, or allocated storage with dealers. Each has pros and cons.',
-        'gold': 'Gold and silver serve different purposes in a portfolio. Silver has more industrial demand and higher volatility.'
+        'כסף': 'כסף הוא השקעה מצוינת לפיזור. בישראל, כדאי לשקול את השלכות המס ואפשרויות האחסון.',
+        'מחיר': 'מחירי הכסף משתנים בהתאם לתנאי השוק. בדוק את המחיר הנוכחי ושקול ממוצע עלות.',
+        'מס': 'בישראל יש תקנות מס ספציפיות למתכות יקרות. אני ממליץ להתייעץ עם יועץ מס למצבך הספציפי.',
+        'קנייה': 'אפשר לרכוש כסף דרך סוחרים מורשים בישראל. חפש מקורות מוכרים והשווה פרמיות.',
+        'אחסון': 'אפשרויות אחסון כוללות כספות ביתיות, כספות בנק, או אחסון מוקצה אצל סוחרים. לכל אחת יתרונות וחסרונות.',
+        'זהב': 'זהב וכסף משרתים מטרות שונות בתיק השקעות. לכסף יש ביקוש תעשייתי גבוה יותר ותנודתיות גבוהה יותר.'
     };
     
     const lowerMessage = message.toLowerCase();
@@ -223,8 +223,8 @@ function getBotResponse(message) {
         }
     }
     
-    return 'Interesting question. For detailed advice on this topic, I recommend reviewing the archives or consulting directly with our team.';
+    return 'שאלה מעניינת. לייעוץ מפורט בנושא זה, אני ממליץ לעיין בארכיון או להתייעץ ישירות עם הצוות שלנו.';
 }
 
 // ===== INITIALIZATION =====
-console.log('◢◤ THE SILVER VAULT - SYSTEM INITIALIZED ◢◤');
+console.log('◢◤ כספת הכסף - מערכת מאותחלת ◢◤');
