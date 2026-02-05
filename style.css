@@ -54,49 +54,69 @@ body {
         0 0 20px #00ff00,
         0 0 30px #00ff00;
     animation: glitch 3s infinite;
+    display: inline-block;
 }
 
 .glitch::before {
     content: attr(data-text);
     position: absolute;
-    left: -2px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     text-shadow: -2px 0 #d400ff;
-    clip: rect(44px, 450px, 56px, 0);
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
     animation: glitch-before 3s infinite linear alternate-reverse;
 }
 
 .glitch::after {
     content: attr(data-text);
     position: absolute;
-    left: 2px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     text-shadow: 2px 0 #00ffff;
-    clip: rect(44px, 450px, 56px, 0);
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
     animation: glitch-after 2.5s infinite linear alternate-reverse;
 }
 
 @keyframes glitch {
-    0%, 100% { clip: rect(0, 900px, 0, 0); }
-    25% { clip: rect(0, 900px, 50px, 0); }
-    50% { clip: rect(50px, 900px, 100px, 0); }
-    75% { clip: rect(0, 900px, 100px, 0); }
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
 }
 
 @keyframes glitch-before {
-    0% { clip: rect(61px, 9999px, 52px, 0); }
-    20% { clip: rect(33px, 9999px, 144px, 0); }
-    40% { clip: rect(121px, 9999px, 115px, 0); }
-    60% { clip: rect(144px, 9999px, 162px, 0); }
-    80% { clip: rect(0px, 9999px, 72px, 0); }
-    100% { clip: rect(68px, 9999px, 115px, 0); }
+    0% { 
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        transform: translateX(-3px);
+    }
+    50% { 
+        clip-path: polygon(0 20%, 100% 20%, 100% 60%, 0 60%);
+        transform: translateX(-2px);
+    }
+    100% { 
+        clip-path: polygon(0 40%, 100% 40%, 100% 80%, 0 80%);
+        transform: translateX(-3px);
+    }
 }
 
 @keyframes glitch-after {
-    0% { clip: rect(76px, 9999px, 136px, 0); }
-    20% { clip: rect(34px, 9999px, 143px, 0); }
-    40% { clip: rect(26px, 9999px, 134px, 0); }
-    60% { clip: rect(148px, 9999px, 145px, 0); }
-    80% { clip: rect(0px, 9999px, 76px, 0); }
-    100% { clip: rect(128px, 9999px, 149px, 0); }
+    0% { 
+        clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        transform: translateX(3px);
+    }
+    50% { 
+        clip-path: polygon(0 30%, 100% 30%, 100% 70%, 0 70%);
+        transform: translateX(2px);
+    }
+    100% { 
+        clip-path: polygon(0 10%, 100% 10%, 100% 50%, 0 50%);
+        transform: translateX(3px);
+    }
 }
 
 /* ===== BLINK ANIMATION ===== */
@@ -487,13 +507,15 @@ body {
 /* ===== FOOTER ===== */
 .footer {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    color: #00ff0050;
-    font-size: 10px;
-    text-shadow: 0 0 5px #00ff0030;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #00ff0070;
+    font-size: 14px;
+    text-shadow: 0 0 10px #00ff0050;
     z-index: 1000;
     font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 2px;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -519,8 +541,7 @@ body {
     }
     
     .footer {
-        font-size: 8px;
-        bottom: 5px;
-        right: 5px;
+        font-size: 12px;
+        bottom: 10px;
     }
 }
