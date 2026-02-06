@@ -292,21 +292,21 @@ function addChatMessage(author, text, type) {
 // ===== INITIALIZATION =====
 console.log('◢◤ כספת הכסף - מערכת מאותחלת ◢◤');
 
-// ===== MATRIX FLOATING CHARACTERS =====
+// ===== MATRIX FLOATING CHARACTERS (NUMBERS ONLY) =====
 function initMatrix() {
     const container = document.getElementById('matrix-container');
     if (!container) return;
     
-    // Characters to use (MORE numbers, letters, Hebrew, symbols)
-    const chars = '0123456789012345אבגדהוזחטיכלמנסעפצקרשת$₪<>[]{}#+=*'.split('');
+    // ONLY numbers (lots of them!) + minimal symbols
+    const chars = '0123456789012345678901234567890123456789$₪'.split('');
     const colors = ['', 'purple', 'cyan'];
     
-    // Create 25 floating characters
-    for (let i = 0; i < 25; i++) {
+    // Create 40 floating characters (more density)
+    for (let i = 0; i < 40; i++) {
         const char = document.createElement('div');
         char.className = 'matrix-char';
         
-        // Random character
+        // Random character (mostly numbers now)
         char.textContent = chars[Math.floor(Math.random() * chars.length)];
         
         // Random color (mostly green)
@@ -317,16 +317,20 @@ function initMatrix() {
         // Random position
         char.style.left = Math.random() * 100 + '%';
         
-        // Random animation duration (15-35 seconds)
-        const duration = 15 + Math.random() * 20;
+        // Random animation duration (12-30 seconds)
+        const duration = 12 + Math.random() * 18;
         char.style.setProperty('--fall-duration', duration + 's');
         
-        // Random delay
-        char.style.animationDelay = Math.random() * 10 + 's';
+        // Random delay (start immediately)
+        char.style.animationDelay = Math.random() * 5 + 's';
         
         container.appendChild(char);
     }
 }
 
-// Initialize Matrix effect on load
-initMatrix();
+// Initialize Matrix effect IMMEDIATELY (before page fully loads)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMatrix);
+} else {
+    initMatrix();
+}

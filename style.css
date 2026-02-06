@@ -53,11 +53,12 @@ body {
 .matrix-char {
     position: absolute;
     font-family: 'Share Tech Mono', monospace;
-    font-size: 16px;
+    font-size: 18px;
     color: #00ff00;
     opacity: 0.25;
     animation: matrixFall var(--fall-duration) linear infinite;
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+    font-weight: bold;
 }
 
 .matrix-char.purple {
