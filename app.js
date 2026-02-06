@@ -273,10 +273,10 @@ function addChatMessage(author, text, type) {
     const messageEl = document.createElement('div');
     messageEl.className = `chat-message ${type}`;
     
-    // Format message for RTL (Hebrew)
+    // Format message for RTL (Hebrew) - better layout
     messageEl.innerHTML = `
-        <div style="margin-bottom: 5px; line-height: 1.6;">${escapeHtml(text)}</div>
-        <div style="font-size: 11px; opacity: 0.6; text-align: left;">${author}</div>
+        <div style="line-height: 1.8; margin-bottom: 8px; white-space: pre-wrap;">${escapeHtml(text)}</div>
+        <div style="font-size: 10px; opacity: 0.5; text-align: left; white-space: nowrap;">— ${author}</div>
     `;
     
     messagesContainer.appendChild(messageEl);

@@ -479,24 +479,28 @@ body {
 
 .chat-message {
     margin-bottom: 20px;
-    padding: 15px;
+    padding: 18px;
     border-right: 3px solid #00ff00;
     background: rgba(0, 255, 0, 0.05);
     direction: rtl;
     text-align: right;
     max-width: 85%;
+    border-radius: 8px;
+    line-height: 1.8;
 }
 
 .chat-message.bot {
     border-right-color: #d400ff;
-    background: rgba(212, 0, 255, 0.05);
+    background: rgba(212, 0, 255, 0.08);
     margin-right: auto;
+    box-shadow: 0 2px 8px rgba(212, 0, 255, 0.2);
 }
 
 .chat-message.user {
     border-right-color: #00ff00;
-    background: rgba(0, 255, 0, 0.1);
+    background: rgba(0, 255, 0, 0.12);
     margin-left: auto;
+    box-shadow: 0 2px 8px rgba(0, 255, 0, 0.2);
 }
 
 .message-author {
