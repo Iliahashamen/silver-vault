@@ -479,28 +479,37 @@ body {
 
 .chat-message {
     margin-bottom: 20px;
-    padding: 18px;
+    padding: 20px 24px;
     border-right: 3px solid #00ff00;
     background: rgba(0, 255, 0, 0.05);
     direction: rtl;
     text-align: right;
-    max-width: 85%;
-    border-radius: 8px;
-    line-height: 1.8;
+    max-width: 95%;
+    width: fit-content;
+    min-width: 200px;
+    border-radius: 12px;
+    line-height: 2;
+    font-size: 16px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .chat-message.bot {
     border-right-color: #d400ff;
     background: rgba(212, 0, 255, 0.08);
-    margin-right: auto;
+    margin-right: 0;
+    margin-left: auto;
     box-shadow: 0 2px 8px rgba(212, 0, 255, 0.2);
+    max-width: 90%;
 }
 
 .chat-message.user {
     border-right-color: #00ff00;
     background: rgba(0, 255, 0, 0.12);
-    margin-left: auto;
+    margin-right: auto;
+    margin-left: 0;
     box-shadow: 0 2px 8px rgba(0, 255, 0, 0.2);
+    max-width: 80%;
 }
 
 .message-author {
@@ -610,5 +619,26 @@ body {
     .footer {
         font-size: 12px;
         bottom: 10px;
+    }
+    
+    /* Better chat spacing on mobile */
+    .chat-message {
+        max-width: 95%;
+        padding: 18px 20px;
+        font-size: 15px;
+        line-height: 2.2;
+        margin-bottom: 18px;
+    }
+    
+    .chat-message.bot {
+        max-width: 92%;
+    }
+    
+    .chat-message.user {
+        max-width: 85%;
+    }
+    
+    .chat-messages {
+        padding: 15px;
     }
 }
