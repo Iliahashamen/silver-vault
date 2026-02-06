@@ -297,12 +297,12 @@ function initMatrix() {
     const container = document.getElementById('matrix-container');
     if (!container) return;
     
-    // ONLY numbers (lots of them!) + minimal symbols
-    const chars = '0123456789012345678901234567890123456789$₪'.split('');
+    // MAXIMUM NUMBERS!!! (pure digital rain)
+    const chars = '01234567890123456789012345678901234567890123456789012345678901234567890123456789$₪'.split('');
     const colors = ['', 'purple', 'cyan'];
     
-    // Create 40 floating characters (more density)
-    for (let i = 0; i < 40; i++) {
+    // Create 70 floating characters (MAXIMUM DENSITY!)
+    for (let i = 0; i < 70; i++) {
         const char = document.createElement('div');
         char.className = 'matrix-char';
         
