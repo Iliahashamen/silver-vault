@@ -202,27 +202,70 @@ document.getElementById('search-input').addEventListener('input', (e) => {
     displayFiles(filtered);
 });
 
-// ===== CHAT FUNCTIONALITY (Placeholder) =====
+// ===== CHAT FUNCTIONALITY (Connected to Mr. D AI) =====
+let userId = tg?.initDataUnsafe?.user?.id || Math.floor(Math.random() * 1000000);
+let chatInitialized = false;
+
 document.getElementById('send-btn').addEventListener('click', sendMessage);
 document.getElementById('chat-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();
 });
 
-function sendMessage() {
+async function sendMessage() {
     const input = document.getElementById('chat-input');
     const message = input.value.trim();
     
     if (!message) return;
     
+    // Show intro on first message
+    if (!chatInitialized) {
+        chatInitialized = true;
+        addChatMessage('MR. D', `היי! אני דמיאן בל - המדריך שלך לבניית עושר אמיתי דרך כסף ומתכות יקרות.
+
+💡 הכלל הזהב שלי: קנה לפחות אונקיה אחת של כסף כל חודש.
+
+שאל אותי הכל על כסף, זהב, קריפטו - במיוחד בישראל! 🚀`, 'bot');
+    }
+    
     // Add user message
-    addChatMessage('YOU', message, 'user');
+    addChatMessage('אתה', message, 'user');
     input.value = '';
     
-    // Simulate bot response (placeholder)
-    setTimeout(() => {
-        const response = getBotResponse(message);
-        addChatMessage('MR. D', response, 'bot');
-    }, 1000);
+    // Show typing indicator
+    const typingMsg = addChatMessage('MR. D', 'מקליד...', 'bot typing');
+    
+    try {
+        // Call Mr. D API
+        const response = await fetch(`${CONFIG.CHAT_API_URL}/chat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: userId,
+                message: message
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('API connection failed');
+        }
+        
+        const data = await response.json();
+        
+        // Remove typing indicator
+        typingMsg.remove();
+        
+        // Add Mr. D's real AI response
+        addChatMessage('MR. D', data.response, 'bot');
+        
+    } catch (error) {
+        console.error('Chat error:', error);
+        typingMsg.remove();
+        
+        // Fallback response if API is down
+        addChatMessage('MR. D', 'סליחה, יש לי רגע טכני כאן. נסה לשאול אותי שוב בעוד שנייה! 🔧', 'bot error');
+    }
 }
 
 function addChatMessage(author, text, type) {
@@ -231,36 +274,14 @@ function addChatMessage(author, text, type) {
     messageEl.className = `chat-message ${type}`;
     
     // Format message for RTL (Hebrew)
-    // Show text first, then author in smaller text
     messageEl.innerHTML = `
-        <div style="margin-bottom: 5px;">${escapeHtml(text)}</div>
-        <div style="font-size: 12px; opacity: 0.7; text-align: left;">${author}</div>
+        <div style="margin-bottom: 5px; line-height: 1.6;">${escapeHtml(text)}</div>
+        <div style="font-size: 11px; opacity: 0.6; text-align: left;">${author}</div>
     `;
     
     messagesContainer.appendChild(messageEl);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     return messageEl;
-}
-
-function getBotResponse(message) {
-    // Simple placeholder responses in Hebrew
-    const responses = {
-        'כסף': 'כסף הוא השקעה מצוינת לפיזור. בישראל, כדאי לשקול את השלכות המס ואפשרויות האחסון.',
-        'מחיר': 'מחירי הכסף משתנים בהתאם לתנאי השוק. בדוק את המחיר הנוכחי ושקול ממוצע עלות.',
-        'מס': 'בישראל יש תקנות מס ספציפיות למתכות יקרות. אני ממליץ להתייעץ עם יועץ מס למצבך הספציפי.',
-        'קנייה': 'אפשר לרכוש כסף דרך סוחרים מורשים בישראל. חפש מקורות מוכרים והשווה פרמיות.',
-        'אחסון': 'אפשרויות אחסון כוללות כספות ביתיות, כספות בנק, או אחסון מוקצה אצל סוחרים. לכל אחת יתרונות וחסרונות.',
-        'זהב': 'זהב וכסף משרתים מטרות שונות בתיק השקעות. לכסף יש ביקוש תעשייתי גבוה יותר ותנודתיות גבוהה יותר.'
-    };
-    
-    const lowerMessage = message.toLowerCase();
-    for (const [keyword, response] of Object.entries(responses)) {
-        if (lowerMessage.includes(keyword)) {
-            return response;
-        }
-    }
-    
-    return 'שאלה מעניינת. לייעוץ מפורט בנושא זה, אני ממליץ לעיין בארכיון או להתייעץ ישירות עם הצוות שלנו.';
 }
 
 // ===== INITIALIZATION =====
