@@ -273,13 +273,36 @@ function addChatMessage(author, text, type) {
     const messageEl = document.createElement('div');
     messageEl.className = `chat-message ${type}`;
     
-    // Format message for RTL (Hebrew) - better layout
-    messageEl.innerHTML = `
-        <div style="line-height: 1.8; margin-bottom: 8px; white-space: pre-wrap;">${escapeHtml(text)}</div>
-        <div style="font-size: 10px; opacity: 0.5; text-align: left; white-space: nowrap;">— ${author}</div>
-    `;
+    const textContainer = document.createElement('div');
+    textContainer.style.cssText = 'line-height: 1.8; margin-bottom: 8px; white-space: pre-wrap;';
     
+    const authorLabel = document.createElement('div');
+    authorLabel.style.cssText = 'font-size: 10px; opacity: 0.5; text-align: left; white-space: nowrap;';
+    authorLabel.textContent = `— ${author}`;
+    
+    messageEl.appendChild(textContainer);
+    messageEl.appendChild(authorLabel);
     messagesContainer.appendChild(messageEl);
+    
+    // Subtle Matrix typing effect (only for bot messages, not typing indicator)
+    if (type === 'bot' && !text.includes('מקליד')) {
+        let i = 0;
+        const speed = 15; // milliseconds per character (fast but visible)
+        
+        function typeChar() {
+            if (i < text.length) {
+                textContainer.textContent = text.substring(0, i + 1);
+                i++;
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                setTimeout(typeChar, speed);
+            }
+        }
+        typeChar();
+    } else {
+        // Instant for user messages and typing indicator
+        textContainer.textContent = text;
+    }
+    
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     return messageEl;
 }
