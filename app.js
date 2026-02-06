@@ -217,15 +217,8 @@ async function sendMessage() {
     
     if (!message) return;
     
-    // Show intro on first message
-    if (!chatInitialized) {
-        chatInitialized = true;
-        addChatMessage('MR. D', `היי! אני דמיאן בל - המדריך שלך לבניית עושר אמיתי דרך כסף ומתכות יקרות.
-
-💡 הכלל הזהב שלי: קנה לפחות אונקיה אחת של כסף כל חודש.
-
-שאל אותי הכל על כסף, זהב, קריפטו - במיוחד בישראל! 🚀`, 'bot');
-    }
+    // Initialize chat (no intro message)
+    chatInitialized = true;
     
     // Add user message
     addChatMessage('אתה', message, 'user');
