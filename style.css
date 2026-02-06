@@ -61,14 +61,45 @@ body {
     font-weight: bold;
 }
 
-.matrix-char.purple {
-    color: #d400ff;
-    text-shadow: 0 0 8px rgba(212, 0, 255, 0.5);
+/* Rainbow colors for Matrix characters */
+.matrix-char.red {
+    color: #ff0066;
+    text-shadow: 0 0 8px rgba(255, 0, 102, 0.5);
+}
+
+.matrix-char.orange {
+    color: #ff6600;
+    text-shadow: 0 0 8px rgba(255, 102, 0, 0.5);
+}
+
+.matrix-char.yellow {
+    color: #ffff00;
+    text-shadow: 0 0 8px rgba(255, 255, 0, 0.5);
+}
+
+.matrix-char.green {
+    color: #00ff00;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
 }
 
 .matrix-char.cyan {
     color: #00ffff;
     text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.matrix-char.blue {
+    color: #0066ff;
+    text-shadow: 0 0 8px rgba(0, 102, 255, 0.5);
+}
+
+.matrix-char.purple {
+    color: #9900ff;
+    text-shadow: 0 0 8px rgba(153, 0, 255, 0.5);
+}
+
+.matrix-char.pink {
+    color: #ff00ff;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
 }
 
 @keyframes matrixFall {

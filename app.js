@@ -292,14 +292,16 @@ function addChatMessage(author, text, type) {
 // ===== INITIALIZATION =====
 console.log('◢◤ כספת הכסף - מערכת מאותחלת ◢◤');
 
-// ===== MATRIX FLOATING CHARACTERS (NUMBERS ONLY) =====
+// ===== MATRIX FLOATING CHARACTERS (NUMBERS ONLY - RAINBOW!) =====
 function initMatrix() {
     const container = document.getElementById('matrix-container');
     if (!container) return;
     
     // MAXIMUM NUMBERS!!! (pure digital rain)
     const chars = '01234567890123456789012345678901234567890123456789012345678901234567890123456789$₪'.split('');
-    const colors = ['', 'purple', 'cyan'];
+    
+    // RAINBOW COLORS!
+    const colors = ['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'purple', 'pink'];
     
     // Create 70 floating characters (MAXIMUM DENSITY!)
     for (let i = 0; i < 70; i++) {
@@ -309,10 +311,9 @@ function initMatrix() {
         // Random character (mostly numbers now)
         char.textContent = chars[Math.floor(Math.random() * chars.length)];
         
-        // Random color (mostly green)
-        if (Math.random() > 0.7) {
-            char.classList.add(colors[Math.floor(Math.random() * colors.length) + 1] || 'purple');
-        }
+        // Random rainbow color for EACH character!
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        char.classList.add(randomColor);
         
         // Random position
         char.style.left = Math.random() * 100 + '%';
