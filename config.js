@@ -39,7 +39,7 @@ const CONFIG = {
     },
     
     // Version
-    VERSION: '1.5'
+    VERSION: '1.4.3'
 };
 
 // Passcode is validated server-side for security
