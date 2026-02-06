@@ -1,13 +1,7 @@
 // ===========================
 // THE SILVER VAULT - MAIN APP
+// Config is loaded from config.js
 // ===========================
-
-// Configuration
-const CONFIG = {
-    PASSCODE: 'DemoD69',
-    SUPABASE_URL: 'https://uftkmytmegszggtsrrhz.supabase.co',
-    SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmdGtteXRtZWdzemdndHNycmh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyOTc5MDgsImV4cCI6MjA4NTg3MzkwOH0.kd6OIlLeXHN2fwIMYu_HQ5fR50g5LwX_czh6qQcD_D0'
-};
 
 // Initialize Telegram Web App
 let tg = window.Telegram?.WebApp;
@@ -29,7 +23,10 @@ function handleLogin() {
     const passcode = document.getElementById('passcode').value;
     const errorMsg = document.getElementById('error-msg');
     
-    if (passcode === CONFIG.PASSCODE) {
+    // Demo passcode validation (In production: validate server-side)
+    const validPasscode = 'DemoD69';
+    
+    if (passcode === validPasscode) {
         // Success
         errorMsg.textContent = '✓ גישה אושרה';
         errorMsg.style.color = '#00ff00';
@@ -120,7 +117,39 @@ function displayFiles(files) {
         return;
     }
     
-    container.innerHTML = files.map(file => createFileCard(file)).join('');
+    // Organize files by category/folder
+    const filesByCategory = {
+        'PDFS': files.filter(f => f.category === 'PDFS' || f.file_type === 'pdf'),
+        'VIDEOS': files.filter(f => f.category === 'VIDEOS' || f.file_type === 'video'),
+        'PHOTOS': files.filter(f => f.category === 'PHOTOS' || f.file_type === 'photo'),
+        'DOCUMENTS': files.filter(f => f.category === 'DOCUMENTS' || (f.category !== 'PDFS' && f.category !== 'VIDEOS' && f.category !== 'PHOTOS' && f.file_type === 'document'))
+    };
+    
+    let html = '';
+    
+    // Display each category if it has files
+    Object.keys(filesByCategory).forEach(category => {
+        const categoryFiles = filesByCategory[category];
+        if (categoryFiles.length > 0) {
+            // Get Hebrew category name
+            let categoryNameHe = '';
+            switch(category) {
+                case 'PDFS': categoryNameHe = '📄 מסמכי PDF'; break;
+                case 'VIDEOS': categoryNameHe = '🎥 סרטונים'; break;
+                case 'PHOTOS': categoryNameHe = '📸 תמונות'; break;
+                case 'DOCUMENTS': categoryNameHe = '📁 מסמכים'; break;
+            }
+            
+            html += `<div class="file-category">
+                        <div class="category-header">${categoryNameHe}</div>
+                        <div class="files-grid">
+                            ${categoryFiles.map(file => createFileCard(file)).join('')}
+                        </div>
+                     </div>`;
+        }
+    });
+    
+    container.innerHTML = html || '<div class="loading">אין קבצים בכספת</div>';
 }
 
 function createFileCard(file) {
@@ -200,12 +229,17 @@ function addChatMessage(author, text, type) {
     const messagesContainer = document.getElementById('chat-messages');
     const messageEl = document.createElement('div');
     messageEl.className = `chat-message ${type}`;
+    
+    // Format message for RTL (Hebrew)
+    // Show text first, then author in smaller text
     messageEl.innerHTML = `
-        <span class="message-author">${author}:</span>
-        <span class="message-text">${escapeHtml(text)}</span>
+        <div style="margin-bottom: 5px;">${escapeHtml(text)}</div>
+        <div style="font-size: 12px; opacity: 0.7; text-align: left;">${author}</div>
     `;
+    
     messagesContainer.appendChild(messageEl);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    return messageEl;
 }
 
 function getBotResponse(message) {

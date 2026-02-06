@@ -17,6 +17,8 @@ body {
     color: #00ff00;
     overflow-x: hidden;
     min-height: 100vh;
+    direction: rtl; /* Hebrew text direction */
+    text-align: right; /* Hebrew text alignment */
 }
 
 /* ===== ANIMATED GRID BACKGROUND ===== */
@@ -45,15 +47,13 @@ body {
     }
 }
 
-/* ===== GLITCH EFFECT (Simplified) ===== */
+/* ===== GLITCH EFFECT (Clean for Hebrew) ===== */
 .glitch {
     color: #00ff00;
     text-shadow: 
         0 0 10px #00ff00,
         0 0 20px #00ff00,
-        0 0 30px #00ff00,
-        2px 2px 0 #d400ff,
-        -2px -2px 0 #00ffff;
+        0 0 30px #00ff00;
     animation: subtleGlitch 3s ease-in-out infinite;
 }
 
@@ -62,17 +62,13 @@ body {
         text-shadow: 
             0 0 10px #00ff00,
             0 0 20px #00ff00,
-            0 0 30px #00ff00,
-            2px 2px 0 #d400ff,
-            -2px -2px 0 #00ffff;
+            0 0 30px #00ff00;
     }
     50% { 
         text-shadow: 
             0 0 15px #00ff00,
             0 0 25px #00ff00,
-            0 0 35px #00ff00,
-            -2px 2px 0 #d400ff,
-            2px -2px 0 #00ffff;
+            0 0 35px #00ff00;
     }
 }
 
@@ -376,6 +372,22 @@ body {
     margin-bottom: 30px;
 }
 
+/* File Categories */
+.file-category {
+    margin-bottom: 40px;
+}
+
+.category-header {
+    color: #d400ff;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #d400ff, 0 0 20px #d400ff;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #d400ff;
+    letter-spacing: 2px;
+}
+
 .files-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -461,23 +473,30 @@ body {
     background: rgba(0, 0, 0, 0.5);
     border: 2px solid #00ff00;
     margin-bottom: 20px;
+    direction: rtl;
+    text-align: right;
 }
 
 .chat-message {
     margin-bottom: 20px;
     padding: 15px;
-    border-left: 3px solid #00ff00;
+    border-right: 3px solid #00ff00;
     background: rgba(0, 255, 0, 0.05);
+    direction: rtl;
+    text-align: right;
+    max-width: 85%;
 }
 
 .chat-message.bot {
-    border-left-color: #d400ff;
+    border-right-color: #d400ff;
     background: rgba(212, 0, 255, 0.05);
+    margin-right: auto;
 }
 
 .chat-message.user {
-    border-left-color: #00ff00;
+    border-right-color: #00ff00;
     background: rgba(0, 255, 0, 0.1);
+    margin-left: auto;
 }
 
 .message-author {
@@ -535,6 +554,8 @@ body {
     z-index: 1000;
     font-family: 'Share Tech Mono', monospace;
     letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
 }
 
 /* ===== RESPONSIVE ===== */
