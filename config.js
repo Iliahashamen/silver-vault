@@ -9,7 +9,7 @@ const CONFIG = {
     SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmdGtteXRtZWdzemdndHNycmh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyOTc5MDgsImV4cCI6MjA4NTg3MzkwOH0.kd6OIlLeXHN2fwIMYu_HQ5fR50g5LwX_czh6qQcD_D0',
     
     // Mr. D Chat API (Backend endpoint)
-    CHAT_API_URL: 'https://silver-vault-bot-production.up.railway.app',
+    CHAT_API_URL: 'https://web-production-f049.up.railway.app',
     
     // File Categories (Hebrew)
     CATEGORIES: {
