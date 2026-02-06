@@ -277,23 +277,12 @@ function addChatMessage(author, text, type) {
     messageEl.appendChild(authorLabel);
     messagesContainer.appendChild(messageEl);
     
-    // Subtle Matrix typing effect (only for bot messages, not typing indicator)
+    // Set text content
+    textContainer.textContent = text;
+    
+    // Add fade-in animation for bot messages (not typing indicator)
     if (type === 'bot' && !text.includes('מקליד')) {
-        let i = 0;
-        const speed = 15; // milliseconds per character (fast but visible)
-        
-        function typeChar() {
-            if (i < text.length) {
-                textContainer.textContent = text.substring(0, i + 1);
-                i++;
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                setTimeout(typeChar, speed);
-            }
-        }
-        typeChar();
-    } else {
-        // Instant for user messages and typing indicator
-        textContainer.textContent = text;
+        messageEl.classList.add('fade-in-message');
     }
     
     messagesContainer.scrollTop = messagesContainer.scrollHeight;

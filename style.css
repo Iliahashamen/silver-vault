@@ -547,6 +547,22 @@ body {
 }
 
 /* ===== FOOTER ===== */
+/* Fade-in animation for messages */
+@keyframes fadeInDissolve {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-message {
+    animation: fadeInDissolve 0.6s ease-out;
+}
+
 .footer {
     position: fixed;
     bottom: 15px;
