@@ -291,3 +291,42 @@ function addChatMessage(author, text, type) {
 
 // ===== INITIALIZATION =====
 console.log('◢◤ כספת הכסף - מערכת מאותחלת ◢◤');
+
+// ===== MATRIX FLOATING CHARACTERS =====
+function initMatrix() {
+    const container = document.getElementById('matrix-container');
+    if (!container) return;
+    
+    // Characters to use (numbers, letters, Hebrew, symbols)
+    const chars = '01אבגדהוזחטיכלמנסעפצקרשת$₪<>[]{}#+=*'.split('');
+    const colors = ['', 'purple', 'cyan'];
+    
+    // Create 25 floating characters
+    for (let i = 0; i < 25; i++) {
+        const char = document.createElement('div');
+        char.className = 'matrix-char';
+        
+        // Random character
+        char.textContent = chars[Math.floor(Math.random() * chars.length)];
+        
+        // Random color (mostly green)
+        if (Math.random() > 0.7) {
+            char.classList.add(colors[Math.floor(Math.random() * colors.length) + 1] || 'purple');
+        }
+        
+        // Random position
+        char.style.left = Math.random() * 100 + '%';
+        
+        // Random animation duration (15-35 seconds)
+        const duration = 15 + Math.random() * 20;
+        char.style.setProperty('--fall-duration', duration + 's');
+        
+        // Random delay
+        char.style.animationDelay = Math.random() * 10 + 's';
+        
+        container.appendChild(char);
+    }
+}
+
+// Initialize Matrix effect on load
+initMatrix();
