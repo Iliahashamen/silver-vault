@@ -297,8 +297,8 @@ function initMatrix() {
     const container = document.getElementById('matrix-container');
     if (!container) return;
     
-    // Characters to use (numbers, letters, Hebrew, symbols)
-    const chars = '01אבגדהוזחטיכלמנסעפצקרשת$₪<>[]{}#+=*'.split('');
+    // Characters to use (MORE numbers, letters, Hebrew, symbols)
+    const chars = '0123456789012345אבגדהוזחטיכלמנסעפצקרשת$₪<>[]{}#+=*'.split('');
     const colors = ['', 'purple', 'cyan'];
     
     // Create 25 floating characters

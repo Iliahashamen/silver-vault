@@ -55,7 +55,7 @@ body {
     font-family: 'Share Tech Mono', monospace;
     font-size: 16px;
     color: #00ff00;
-    opacity: 0.3;
+    opacity: 0.25;
     animation: matrixFall var(--fall-duration) linear infinite;
     text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
 }
@@ -76,10 +76,10 @@ body {
         opacity: 0;
     }
     10% {
-        opacity: 0.3;
+        opacity: 0.25;
     }
     90% {
-        opacity: 0.3;
+        opacity: 0.25;
     }
     100% {
         transform: translateY(100vh);
