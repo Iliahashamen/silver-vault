@@ -384,6 +384,46 @@ body {
     text-shadow: 0 0 10px #d400ff;
 }
 
+/* ===== LIVE PRICE BAR ===== */
+.price-bar {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 170, 0.15));
+    border: 2px solid #00ff88;
+    border-radius: 12px;
+    padding: 15px 25px;
+    margin: 0 auto 25px;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    animation: priceBarPulse 3s ease-in-out infinite;
+}
+
+@keyframes priceBarPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.5); }
+}
+
+.price-label {
+    font-size: 16px;
+    color: #00ffaa;
+    font-weight: 600;
+}
+
+.price-value {
+    font-size: 28px;
+    color: #00ff00;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    letter-spacing: 1px;
+}
+
+.price-update {
+    font-size: 12px;
+    color: #88ffaa;
+    opacity: 0.7;
+}
+
 /* ===== NAVIGATION ===== */
 .nav-menu {
     display: flex;

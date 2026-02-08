@@ -127,6 +127,33 @@ function hideAIDisclaimer() {
 // Handle accept button
 document.getElementById('accept-disclaimer-btn').addEventListener('click', hideAIDisclaimer);
 
+// ===== LIVE SILVER PRICE =====
+async function updateSilverPrice() {
+    try {
+        const response = await fetch(`${CONFIG.CHAT_API_URL}/api/silver-price`);
+        if (response.ok) {
+            const data = await response.json();
+            if (data.success) {
+                const priceValue = document.getElementById('price-value');
+                const priceUpdate = document.getElementById('price-update');
+                
+                priceValue.textContent = `$${data.xag_usd}`;
+                
+                const cacheAgeMin = Math.floor(data.cache_age_seconds / 60);
+                priceUpdate.textContent = `עודכן לפני ${cacheAgeMin} דקות`;
+            }
+        }
+    } catch (error) {
+        console.error('Failed to fetch silver price:', error);
+        document.getElementById('price-value').textContent = '—';
+        document.getElementById('price-update').textContent = 'לא זמין';
+    }
+}
+
+// Update price on load and every 20 minutes
+updateSilverPrice();
+setInterval(updateSilverPrice, 20 * 60 * 1000); // 20 min
+
 // ===== LOAD FILES FROM SUPABASE =====
 async function loadFiles() {
     const container = document.getElementById('files-container');
