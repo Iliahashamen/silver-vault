@@ -84,7 +84,48 @@ function switchSection(sectionName) {
         section.classList.remove('active');
     });
     document.getElementById(`${sectionName}-section`).classList.add('active');
+    
+    // Show AI disclaimer if switching to chat (once per day)
+    if (sectionName === 'chat') {
+        checkAndShowAIDisclaimer();
+    }
 }
+
+// ===== AI DISCLAIMER (Once per day) =====
+function checkAndShowAIDisclaimer() {
+    const lastShown = localStorage.getItem('ai_disclaimer_last_shown');
+    const today = new Date().toDateString();
+    
+    // Show if never shown or last shown was not today
+    if (!lastShown || lastShown !== today) {
+        showAIDisclaimer();
+    }
+}
+
+function showAIDisclaimer() {
+    const modal = document.getElementById('ai-disclaimer-modal');
+    modal.style.display = 'flex';
+    
+    // Disable chat input while modal is open
+    document.getElementById('chat-input').disabled = true;
+    document.getElementById('send-btn').disabled = true;
+}
+
+function hideAIDisclaimer() {
+    const modal = document.getElementById('ai-disclaimer-modal');
+    modal.style.display = 'none';
+    
+    // Re-enable chat input
+    document.getElementById('chat-input').disabled = false;
+    document.getElementById('send-btn').disabled = false;
+    
+    // Save today's date
+    const today = new Date().toDateString();
+    localStorage.setItem('ai_disclaimer_last_shown', today);
+}
+
+// Handle accept button
+document.getElementById('accept-disclaimer-btn').addEventListener('click', hideAIDisclaimer);
 
 // ===== LOAD FILES FROM SUPABASE =====
 async function loadFiles() {

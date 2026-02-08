@@ -7,9 +7,9 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
         <title>ה-כספת</title>
-        <link rel="stylesheet" href="style.css?v=25">
+        <link rel="stylesheet" href="style.css?v=26">
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
-        <script src="config.js?v=25"></script>
+        <script src="config.js?v=26"></script>
 </head>
 <body>
     <!-- Animated Grid Background -->
@@ -207,6 +207,20 @@
         </div>
     </div>
 
-        <script src="app.js?v=25"></script>
+    <!-- AI Disclaimer Modal (shown once per day) -->
+    <div id="ai-disclaimer-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <h2 class="modal-title">⚠️ הצהרת אחריות</h2>
+            <div class="modal-content">
+                <p>זהו מדריך AI לצורכי חינוך בלבד.</p>
+                <p>למרות שאנו שואפים לדייקנות, המערכת אינה מחליפה יועץ אנושי.</p>
+                <p><strong>להחלטות השקעה סופיות, תמיד התייעץ עם מר ד' (Damien Bell) באופן אישי.</strong></p>
+                <p>אל תסמוך 100% על תשובות ה-AI.</p>
+            </div>
+            <button id="accept-disclaimer-btn" class="modal-button">אני מבין</button>
+        </div>
+    </div>
+
+        <script src="app.js?v=26"></script>
 </body>
 </html>
