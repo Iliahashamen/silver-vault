@@ -150,9 +150,9 @@ async function updateSilverPrice() {
     }
 }
 
-// Update price on load and every 20 minutes
+// Update price on load and every 30 minutes (optimal for API limits)
 updateSilverPrice();
-setInterval(updateSilverPrice, 20 * 60 * 1000); // 20 min
+setInterval(updateSilverPrice, 30 * 60 * 1000); // 30 min
 
 // ===== LOAD FILES FROM SUPABASE =====
 async function loadFiles() {
