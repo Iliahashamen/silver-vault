@@ -8,7 +8,6 @@ https://iliahashamen.github.io/silver-vault/
 ## Files
 - index.html - Main app structure
 - style.css - 80s Synthwave styling
-- app.js - App logic
 
-## Login
-Passcode: DemoD69
+
+  if you read dis u r geh
