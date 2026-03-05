@@ -766,3 +766,166 @@ body {
         inset 3px 3px 8px rgba(100, 50, 20, 0.35),
         inset -2px -2px 6px rgba(255, 190, 140, 0.22);
 }
+
+/* ════════════════════════════════════════════
+   PRICE CHART MODAL
+   ════════════════════════════════════════════ */
+.chart-modal-box {
+    max-width: 640px;
+    width: 95%;
+    padding: 24px 22px 20px;
+    direction: rtl;
+}
+
+.chart-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.chart-modal-title {
+    margin-bottom: 0;
+    font-size: 1.25rem;
+    text-align: right;
+}
+
+.chart-close-btn {
+    background: var(--card-inner);
+    border: none;
+    border-radius: var(--radius-pill);
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--text-mid);
+    box-shadow: var(--nm-raised);
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.chart-close-btn:hover {
+    box-shadow: var(--nm-raised-hover);
+    transform: translateY(-1px);
+}
+.chart-close-btn:active {
+    box-shadow: var(--nm-inset);
+    transform: translateY(0);
+}
+
+/* Period tabs — neumorphic pills */
+.chart-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    justify-content: center;
+}
+
+.chart-tab {
+    flex: 1;
+    max-width: 120px;
+    padding: 10px 14px;
+    background: var(--card);
+    border: none;
+    border-radius: var(--radius-pill);
+    color: var(--text-mid);
+    font-family: 'Assistant', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--nm-raised);
+    transition: all 0.18s;
+}
+.chart-tab:hover {
+    box-shadow: var(--nm-raised-hover);
+    transform: translateY(-1px);
+}
+.chart-tab.active {
+    background: var(--clay);
+    color: var(--text-light);
+    box-shadow:
+        inset 3px 3px 8px rgba(100, 50, 20, 0.30),
+        inset -2px -2px 6px rgba(255, 190, 140, 0.22),
+        0 4px 10px rgba(130, 70, 30, 0.30);
+}
+
+/* Chart canvas inset well */
+.chart-well {
+    background: var(--card-inner);
+    border-radius: var(--radius-md);
+    padding: 16px 12px 10px;
+    box-shadow: var(--nm-inset);
+    margin-bottom: 14px;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#price-chart {
+    width: 100% !important;
+    max-height: 220px;
+}
+
+.chart-loading {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    font-family: 'Assistant', sans-serif;
+}
+
+/* Stats row below chart */
+.chart-stats {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.chart-stat {
+    flex: 1;
+    background: var(--card);
+    border-radius: var(--radius-md);
+    padding: 10px 8px;
+    box-shadow: var(--nm-raised);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.chart-stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 700;
+    font-family: 'Assistant', sans-serif;
+}
+
+.chart-stat-val {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    font-family: 'Comfortaa', sans-serif;
+}
+
+.chart-stat-val.positive { color: var(--green); }
+.chart-stat-val.negative { color: #C04040; }
+
+/* Price bar hover hint */
+.price-bar:hover {
+    box-shadow:
+        12px 16px 40px rgba(30, 48, 36, 0.60),
+        -2px -3px 12px rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+    transition: all 0.2s;
+}
+
+@media (max-width: 640px) {
+    .chart-modal-box { padding: 18px 14px; }
+    .chart-tab       { font-size: 12px; padding: 9px 10px; }
+    .chart-stats     { gap: 6px; }
+    .chart-stat-val  { font-size: 12px; }
+}

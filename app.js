@@ -438,8 +438,169 @@ function addChatMessage(author, text, type) {
     return messageEl;
 }
 
+// ===== PRICE HISTORY CHART =====
+let _priceChart = null;
+let _chartPeriod = 'daily';
+let _historyCache = {};
+
+function openPriceChart() {
+    const modal = document.getElementById('price-chart-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    loadChartData('daily');
+}
+
+function closePriceChart() {
+    const modal = document.getElementById('price-chart-modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+// Close on backdrop click
+document.getElementById('price-chart-modal').addEventListener('click', function(e) {
+    if (e.target === this) closePriceChart();
+});
+document.getElementById('chart-close-btn').addEventListener('click', closePriceChart);
+
+// Period tab clicks
+document.querySelectorAll('.chart-tab').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.chart-tab').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        loadChartData(this.dataset.period);
+    });
+});
+
+async function loadChartData(period) {
+    if (_chartPeriod === period && _historyCache[period]) {
+        renderChart(_historyCache[period], period);
+        return;
+    }
+    _chartPeriod = period;
+
+    // Show loading
+    document.getElementById('chart-loading').style.display = 'block';
+    document.getElementById('price-chart').style.display  = 'none';
+    document.getElementById('chart-stats').style.display  = 'none';
+
+    try {
+        const res  = await fetch(`${API_BASE_URL}/api/silver-history?period=${period}`);
+        const json = await res.json();
+
+        if (!json.success || !json.data || json.data.length === 0) {
+            document.getElementById('chart-loading').textContent = 'שגיאה בטעינת נתונים';
+            return;
+        }
+
+        _historyCache[period] = json.data;
+        renderChart(json.data, period);
+
+    } catch (err) {
+        console.error('Chart fetch error:', err);
+        document.getElementById('chart-loading').textContent = 'שגיאה: ' + err.message;
+    }
+}
+
+function renderChart(data, period) {
+    document.getElementById('chart-loading').style.display = 'none';
+    const canvas = document.getElementById('price-chart');
+    canvas.style.display = 'block';
+    document.getElementById('chart-stats').style.display = 'flex';
+
+    const labels = data.map(p => formatChartDate(p.date, period));
+    const prices = data.map(p => p.price);
+
+    const minP    = Math.min(...prices);
+    const maxP    = Math.max(...prices);
+    const first   = prices[0];
+    const last    = prices[prices.length - 1];
+    const change  = last - first;
+    const changePct = ((change / first) * 100).toFixed(1);
+
+    // Stats
+    document.getElementById('stat-min').textContent    = `$${minP.toFixed(2)}`;
+    document.getElementById('stat-max').textContent    = `$${maxP.toFixed(2)}`;
+    const changeEl = document.getElementById('stat-change');
+    const sign = change >= 0 ? '+' : '';
+    changeEl.textContent  = `${sign}${changePct}%`;
+    changeEl.className    = 'chart-stat-val ' + (change >= 0 ? 'positive' : 'negative');
+
+    // Destroy existing chart
+    if (_priceChart) { _priceChart.destroy(); _priceChart = null; }
+
+    // Clay color palette for chart
+    const lineColor   = 'rgba(196, 132, 90, 1)';       // --clay
+    const fillColor   = 'rgba(196, 132, 90, 0.12)';
+    const gridColor   = 'rgba(74, 88, 72, 0.10)';
+    const textColor   = 'rgba(74, 88, 72, 0.75)';
+    const pointColor  = change >= 0 ? 'rgba(74, 184, 130, 1)' : 'rgba(192, 64, 64, 1)';
+
+    _priceChart = new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                data:           prices,
+                borderColor:    lineColor,
+                backgroundColor: fillColor,
+                borderWidth:    2.5,
+                pointRadius:    data.length > 60 ? 0 : 3,
+                pointHoverRadius: 5,
+                pointBackgroundColor: pointColor,
+                pointBorderColor:     lineColor,
+                fill:  true,
+                tension: 0.4,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(240, 237, 231, 0.96)',
+                    titleColor:       '#2C3028',
+                    bodyColor:        '#C4845A',
+                    borderColor:      'rgba(168,148,128,0.3)',
+                    borderWidth:      1,
+                    cornerRadius:     10,
+                    padding:          10,
+                    callbacks: {
+                        label: ctx => ` $${ctx.parsed.y.toFixed(3)} USD/oz`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks:  { color: textColor, font: { size: 10, family: 'Assistant' }, maxTicksLimit: 7 },
+                    grid:   { color: gridColor },
+                    border: { display: false }
+                },
+                y: {
+                    ticks:  { color: textColor, font: { size: 10, family: 'Assistant' },
+                              callback: v => `$${v.toFixed(0)}` },
+                    grid:   { color: gridColor },
+                    border: { display: false }
+                }
+            }
+        }
+    });
+}
+
+function formatChartDate(dateStr, period) {
+    const d = new Date(dateStr);
+    if (period === 'daily') {
+        return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric' });
+    } else if (period === 'weekly') {
+        return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'short' });
+    } else {
+        return d.toLocaleDateString('he-IL', { month: 'short', year: '2-digit' });
+    }
+}
+
 // ===== INITIALIZATION =====
-console.log('◢◤ כספת הכסף - מערכת מאותחלת ◢◤');
+console.log('Silver Vault - system ready');
 
 // ===== MATRIX FLOATING CHARACTERS (NUMBERS ONLY - RAINBOW!) =====
 function initMatrix() {
