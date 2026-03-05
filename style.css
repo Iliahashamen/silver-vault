@@ -1,56 +1,85 @@
 /* ===========================
-   THE SILVER VAULT — CLAY 3D
-   Palette: Deep Sage bg, Near-white floating cards, Terracotta accents
-   Style: 3D Clay Morphism — minimal, clean, physical depth
+   THE SILVER VAULT — TRUE 3D CLAY
+   Technique: Neumorphism + Organic terrain blobs
+   Reference: 3D clay dashboard moodboard
    =========================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Comfortaa:wght@600;700&display=swap');
 
-/* ── DESIGN TOKENS ──────────────────────────────────────────────── */
+/* ── PALETTE & TOKENS ───────────────────────────────────────────── */
 :root {
-    /* Background layers */
-    --bg-base:        #8FA89C;   /* mid sage */
-    --bg-dark:        #5C7A6A;   /* deep sage for blobs */
-    --bg-deeper:      #3E5C4E;   /* darkest blob mass */
+    /* ---- Background base ---- */
+    --bg:            #8EA89A;   /* mid sage for body */
 
-    /* Cards — almost white, very light cream */
-    --card:           #F4F1EB;
-    --card-inner:     #EAE6DE;   /* inset areas, input backgrounds */
-    --card-deep:      #DDD9D0;   /* pressed/deep inset */
+    /* ---- Blob / terrain colors ---- */
+    --blob-dk:       #3D5A4A;   /* darkest organic mass */
+    --blob-md:       #4E6E5C;
+    --blob-lt:       #5E8070;
 
-    /* Clay accent — warm terracotta */
-    --clay:           #C4845A;
-    --clay-light:     #D49E80;
-    --clay-dark:      #A06840;
+    /* ---- Cards — near-white, very light so they "float" ---- */
+    --card:          #F0EDE7;
+    --card-inner:    #E6E2DB;   /* inner surfaces / input bg */
+    --card-deep:     #D8D3CA;   /* deepest inset */
 
-    /* Clay teal — for secondary elements */
-    --teal:           #7AAAA0;
-    --teal-dark:      #5A8A80;
+    /* ---- Clay accent ---- */
+    --clay:          #C4845A;
+    --clay-lt:       #D49E7E;
+    --clay-dk:       #A26840;
 
-    /* Text */
-    --text:           #2A3028;
-    --text-mid:       #4A5848;
-    --text-muted:     rgba(42, 48, 40, 0.5);
-    --text-light:     #F5F2EC;
+    /* ---- Teal accent ---- */
+    --teal:          #7AAAA0;
+    --teal-dk:       #548A80;
 
-    /* Accent */
-    --accent-purple:  #9880CC;
-    --accent-green:   #4AB882;
+    /* ---- Text ---- */
+    --text:          #2C3028;
+    --text-mid:      #4A5848;
+    --text-muted:    rgba(44, 48, 40, 0.48);
+    --text-light:    #F5F2EC;
 
-    /* Shadows — key to clay look */
-    /* Floating card on dark bg: strong bottom-right shadow + bright top-left highlight */
-    --shadow-float:   8px 10px 24px rgba(30,50,38,0.38), -4px -4px 14px rgba(255,255,255,0.30);
-    /* Raised element on light card bg */
-    --shadow-raised:  4px 4px 10px rgba(160,140,120,0.45), -2px -2px 7px rgba(255,255,255,0.90);
-    /* Pressed/active inset */
-    --shadow-pressed: inset 3px 3px 8px rgba(160,140,120,0.5), inset -2px -2px 6px rgba(255,255,255,0.80);
-    /* Subtle raised — for small pills/tags */
-    --shadow-subtle:  2px 2px 6px rgba(160,140,120,0.4), -1px -1px 4px rgba(255,255,255,0.85);
+    /* ---- Accents ---- */
+    --purple:        #9880CC;
+    --green:         #4AB882;
+
+    /* ====================================================
+       NEUMORPHIC SHADOW SYSTEM
+       Rule: element bg == card bg → use two opposing shadows
+             dark shadow bottom-right + light shadow top-left
+       ==================================================== */
+
+    /* Raised element on --card surface */
+    --nm-raised:
+        5px 5px 12px rgba(168, 148, 128, 0.55),
+       -4px -4px 10px rgba(255, 255, 255, 0.92);
+
+    /* Deeply raised / hover */
+    --nm-raised-hover:
+        7px 8px 18px rgba(168, 148, 128, 0.60),
+       -4px -5px 13px rgba(255, 255, 255, 0.95);
+
+    /* Inset / pressed / input well on --card surface */
+    --nm-inset:
+        inset 4px 4px 10px rgba(168, 148, 128, 0.52),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.88);
+
+    /* Raised element on --card-inner surface */
+    --nm-inner-raised:
+        3px 3px 8px  rgba(155, 138, 118, 0.52),
+       -2px -2px 6px rgba(255, 255, 255, 0.88);
+
+    /* Inset on --card-inner */
+    --nm-inner-inset:
+        inset 3px 3px 8px  rgba(155, 138, 118, 0.50),
+        inset -2px -2px 6px rgba(255, 255, 255, 0.85);
+
+    /* Floating card above dark bg */
+    --float-card:
+        10px 14px 36px rgba(30, 48, 36, 0.55),
+        -2px -3px 12px rgba(255, 255, 255, 0.22);
 
     --radius-sm:   10px;
     --radius-md:   18px;
     --radius-lg:   26px;
-    --radius-xl:   36px;
+    --radius-xl:   34px;
     --radius-pill: 100px;
 }
 
@@ -60,43 +89,121 @@
 /* ── BODY ───────────────────────────────────────────────────────── */
 body {
     font-family: 'Assistant', sans-serif;
-    background-color: var(--bg-base);
+    background-color: var(--bg);
     color: var(--text);
     overflow-x: hidden;
     min-height: 100vh;
     direction: rtl;
     text-align: right;
+    position: relative;
 }
 
-/* ── ORGANIC BACKGROUND BLOBS ───────────────────────────────────── */
-/*  These large dark masses create the "3D clay landscape" from the ref */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-        /* bottom-left heavy dark mass */
-        radial-gradient(ellipse 90% 65% at -10% 105%, var(--bg-deeper) 0%, transparent 65%),
-        /* bottom-right flowing dark shape */
-        radial-gradient(ellipse 70% 55% at 110% 95%,  var(--bg-darker, #4A6A58) 0%, transparent 60%),
-        /* top-right blob */
-        radial-gradient(ellipse 60% 45% at 100% 0%,   var(--bg-dark)   0%, transparent 60%),
-        /* center-left subtle dark */
-        radial-gradient(ellipse 40% 35% at 0%   50%,  var(--bg-dark)   0%, transparent 55%),
-        /* top-left subtle */
-        radial-gradient(ellipse 45% 30% at 5%   5%,   var(--bg-deeper) 0%, transparent 50%);
-    z-index: -1;
-    pointer-events: none;
-}
-
-/* ── HIDE MATRIX / GRID (keep in DOM for JS) ────────────────────── */
+/* ── HIDE OLD ELEMENTS ──────────────────────────────────────────── */
 .grid-background  { display: none; }
 .matrix-container { display: none; }
 
+/* ════════════════════════════════════════════
+   3D CLAY TERRAIN BLOBS
+   Each blob is an organic shape with a flat-top
+   highlight + bottom shadow to sell the 3D hill look
+   ════════════════════════════════════════════ */
+.clay-bg {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    background: var(--blob-dk);
+}
+
+/* ---- BLOB 1: massive bottom-left mountain ---- */
+.blob-1 {
+    width: 85vw;
+    height: 75vw;
+    bottom: -38vw;
+    left: -25vw;
+    background: radial-gradient(ellipse at 45% 30%, var(--blob-md) 0%, var(--blob-dk) 55%, #2A3E30 100%);
+    border-radius: 55% 45% 30% 70% / 60% 30% 70% 40%;
+    box-shadow:
+        0  30px 80px rgba(20, 38, 28, 0.70),   /* ground shadow */
+        inset 0 -20px 60px rgba(20,38,28,0.35), /* inner bottom dark */
+        inset 0  15px 40px rgba(110,160,130,0.25); /* top highlight */
+    filter: blur(0.5px);
+}
+
+/* ---- BLOB 2: top-right terrain mass ---- */
+.blob-2 {
+    width: 65vw;
+    height: 60vw;
+    top: -28vw;
+    right: -22vw;
+    background: radial-gradient(ellipse at 50% 65%, var(--blob-md) 0%, var(--blob-dk) 55%, #2A3E30 100%);
+    border-radius: 45% 55% 70% 30% / 40% 65% 35% 60%;
+    box-shadow:
+        0  20px 60px rgba(20, 38, 28, 0.60),
+        inset 0 -15px 45px rgba(20,38,28,0.30),
+        inset 0  12px 35px rgba(110,160,130,0.20);
+    filter: blur(0.5px);
+}
+
+/* ---- BLOB 3: bottom-right secondary shape ---- */
+.blob-3 {
+    width: 55vw;
+    height: 48vw;
+    bottom: -22vw;
+    right: -18vw;
+    background: radial-gradient(ellipse at 40% 35%, var(--blob-lt) 0%, var(--blob-md) 50%, var(--blob-dk) 100%);
+    border-radius: 65% 35% 50% 50% / 35% 55% 45% 65%;
+    box-shadow:
+        0  18px 50px rgba(20, 38, 28, 0.55),
+        inset 0 -10px 35px rgba(20,38,28,0.28),
+        inset 0  10px 28px rgba(110,160,130,0.18);
+    filter: blur(0.8px);
+}
+
+/* ---- BLOB 4: mid-left accent ---- */
+.blob-4 {
+    width: 30vw;
+    height: 30vw;
+    top: 35%;
+    left: -12vw;
+    background: radial-gradient(ellipse at 55% 40%, var(--blob-lt) 0%, var(--blob-dk) 80%);
+    border-radius: 50% 50% 65% 35% / 55% 45% 55% 45%;
+    box-shadow:
+        0 12px 35px rgba(20, 38, 28, 0.45),
+        inset 0 8px 20px rgba(110,160,130,0.15);
+    filter: blur(1px);
+}
+
+/* ---- BLOB 5: top-left small hill ---- */
+.blob-5 {
+    width: 28vw;
+    height: 26vw;
+    top: -10vw;
+    left: 10%;
+    background: radial-gradient(ellipse at 50% 60%, var(--blob-md) 0%, var(--blob-dk) 75%);
+    border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%;
+    box-shadow:
+        0 10px 28px rgba(20, 38, 28, 0.40),
+        inset 0 6px 18px rgba(110,160,130,0.12);
+    filter: blur(1px);
+}
+
+/* All content sits on top of blobs */
+.screen,
+.footer {
+    position: relative;
+    z-index: 1;
+}
+
 /* ── ANIMATIONS ─────────────────────────────────────────────────── */
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.97) translateY(10px); }
-    to   { opacity: 1; transform: scale(1)    translateY(0); }
+    from { opacity: 0; transform: translateY(12px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
 }
 @keyframes fadeInDissolve {
     from { opacity: 0; transform: translateY(8px); }
@@ -107,10 +214,10 @@ body::before {
     50%, 100%{ opacity: 0.3; }
 }
 
-.fade-in-message { animation: fadeInDissolve 0.5s ease-out; }
+.fade-in-message { animation: fadeInDissolve 0.45s ease-out; }
 .blink           { animation: blink 1.5s infinite; color: var(--clay); }
 
-/* ── SCREEN MANAGEMENT ──────────────────────────────────────────── */
+/* ── SCREEN ─────────────────────────────────────────────────────── */
 .screen { display: none; min-height: 100vh; padding: 20px; }
 .screen.active {
     display: flex;
@@ -119,65 +226,68 @@ body::before {
 }
 
 /* ════════════════════════════════════════════
-   LOGIN SCREEN
+   LOGIN — floating card above the terrain
    ════════════════════════════════════════════ */
 .terminal-container {
     width: 90%;
-    max-width: 420px;
+    max-width: 400px;
     background: var(--card);
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-float);
+    box-shadow: var(--float-card);
     animation: fadeIn 0.55s ease;
     overflow: hidden;
 }
 
+/* Header strip — clay orange raised pill */
 .terminal-header {
     background: var(--clay);
     color: var(--text-light);
-    padding: 15px 24px;
+    padding: 14px 24px;
     font-weight: 700;
     font-size: 14px;
     text-align: center;
     letter-spacing: 0.5px;
-    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    /* Neumorphic raised header on card */
+    box-shadow:
+        0 6px 16px rgba(140, 90, 50, 0.40),
+        inset 0 2px 6px rgba(255,255,255,0.25),
+        inset 0 -2px 6px rgba(100,50,20,0.20);
 }
 
-.terminal-body { padding: 30px 26px; }
+.terminal-body { padding: 28px 24px 32px; }
 
-/* Title block — inset clay look */
+/* Title block — deep inset well */
 .vault-title {
     text-align: center;
-    margin-bottom: 26px;
-    padding: 20px 14px;
+    margin-bottom: 24px;
+    padding: 18px 12px;
     background: var(--card-inner);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-pressed);
+    box-shadow: var(--nm-inset);
 }
 
 .title-he {
     font-family: 'Comfortaa', sans-serif;
-    font-size: 52px;
+    font-size: 50px;
     font-weight: 700;
-    color: var(--accent-purple);
-    letter-spacing: 3px;
-    margin-bottom: 5px;
+    color: var(--purple);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
 }
 
 .title-subtitle {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--text-muted);
     letter-spacing: 6px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
-.login-text { text-align: center; margin: 16px 0; }
-.login-text p { margin: 6px 0; font-size: 14px; color: var(--text-mid); }
+.login-text { text-align: center; margin: 14px 0; }
+.login-text p { font-size: 14px; color: var(--text-mid); margin: 4px 0; }
+.access-text  { color: var(--text-mid); font-size: 16px; }
 
-.access-text { color: var(--text-mid); font-size: 16px; }
-
-.input-group { margin: 22px 0; }
-
+.input-group { margin: 20px 0; }
 .input-group label {
     display: block;
     margin-bottom: 7px;
@@ -186,7 +296,7 @@ body::before {
     font-size: 13px;
 }
 
-/* Inputs — deep inset clay wells */
+/* Input — deep clay well */
 .terminal-input {
     width: 100%;
     padding: 13px 16px;
@@ -197,25 +307,21 @@ body::before {
     font-family: 'Assistant', sans-serif;
     font-size: 15px;
     outline: none;
-    box-shadow: var(--shadow-pressed);
+    box-shadow: var(--nm-inset);
     transition: box-shadow 0.2s;
     direction: rtl;
 }
 .terminal-input::placeholder { color: var(--text-muted); }
 .terminal-input:focus {
-    box-shadow: var(--shadow-pressed),
-                0 0 0 2.5px rgba(196, 132, 90, 0.3);
+    box-shadow:
+        inset 5px 5px 12px rgba(168, 148, 128, 0.58),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.90),
+        0 0 0 2px rgba(196, 132, 90, 0.28);
 }
 
-.error-msg {
-    color: #B04040;
-    margin-top: 7px;
-    font-size: 13px;
-    min-height: 16px;
-    font-weight: 700;
-}
+.error-msg { color: #B04040; margin-top: 6px; font-size: 13px; min-height: 16px; font-weight: 700; }
 
-/* Primary clay button */
+/* Raised clay pill button */
 .neon-button {
     width: 100%;
     padding: 14px;
@@ -227,19 +333,30 @@ body::before {
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: var(--shadow-raised);
-    transition: all 0.2s;
-    letter-spacing: 0.5px;
+    transition: all 0.18s;
+    /* Clay pill 3D shadow */
+    box-shadow:
+        5px 6px 14px rgba(130, 80, 40, 0.45),
+       -2px -2px 8px rgba(255, 200, 160, 0.35),
+        inset 0 2px 5px rgba(255, 200, 160, 0.25),
+        inset 0 -2px 5px rgba(100, 45, 15, 0.20);
 }
 .neon-button:hover {
-    background: var(--clay-light);
-    box-shadow: 5px 6px 14px rgba(160,130,100,0.5), -2px -2px 8px rgba(255,255,255,0.9);
-    transform: translateY(-1px);
+    background: var(--clay-lt);
+    box-shadow:
+        7px 8px 18px rgba(130, 80, 40, 0.50),
+       -3px -3px 10px rgba(255, 200, 160, 0.40),
+        inset 0 2px 5px rgba(255, 210, 170, 0.30),
+        inset 0 -2px 5px rgba(100, 45, 15, 0.15);
+    transform: translateY(-2px);
 }
 .neon-button:active {
     transform: translateY(1px);
-    box-shadow: var(--shadow-pressed);
-    background: var(--clay-dark);
+    box-shadow:
+        2px 3px 8px rgba(130, 80, 40, 0.40),
+        inset 3px 3px 8px rgba(100, 50, 20, 0.30),
+        inset -2px -2px 6px rgba(255, 200, 160, 0.20);
+    background: var(--clay-dk);
 }
 
 /* ════════════════════════════════════════════
@@ -247,298 +364,259 @@ body::before {
    ════════════════════════════════════════════ */
 .dashboard-container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 980px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Header card */
+/* Floating header card */
 .dashboard-header {
     text-align: center;
-    margin-bottom: 18px;
-    padding: 22px 24px 18px;
+    margin-bottom: 16px;
+    padding: 20px 22px 16px;
     background: var(--card);
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-float);
+    box-shadow: var(--float-card);
 }
 
 .dashboard-title {
     font-family: 'Comfortaa', sans-serif;
-    font-size: 48px;
+    font-size: 46px;
     font-weight: 700;
     margin-bottom: 5px;
-    color: var(--accent-purple);
+    color: var(--purple);
     letter-spacing: 3px;
 }
 
-.status-text { color: var(--text-muted); font-size: 12px; font-weight: 600; }
-.status-online { color: var(--accent-green); font-weight: 800; }
+.status-text   { color: var(--text-muted); font-size: 12px; font-weight: 600; }
+.status-online { color: var(--green); font-weight: 800; }
 
-/* ── LIVE PRICE BAR ─────────────────────────────────────────────── */
+/* ── PRICE BAR ──────────────────────────────────────────────────── */
 .price-bar {
     background: var(--card);
     border-radius: var(--radius-pill);
-    padding: 13px 26px;
-    margin: 0 auto 18px;
-    max-width: 520px;
+    padding: 12px 24px;
+    margin: 0 auto 16px;
+    max-width: 500px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: var(--shadow-float);
+    box-shadow: var(--float-card);
 }
 
-.price-label {
-    font-size: 13px;
-    color: var(--text-mid);
-    font-weight: 700;
-}
+.price-label { font-size: 13px; color: var(--text-mid); font-weight: 700; }
 
+/* Price number — raised neumorphic pill ON the card */
 .price-value {
-    font-size: 24px;
-    color: var(--accent-green);
+    font-size: 22px;
+    color: var(--green);
     font-weight: 800;
     font-family: 'Comfortaa', sans-serif;
-    /* Raised pill feel for the number */
-    background: var(--card-inner);
-    padding: 4px 16px;
+    background: var(--card);
+    padding: 4px 18px;
     border-radius: var(--radius-pill);
-    box-shadow: var(--shadow-raised);
+    box-shadow: var(--nm-raised);
 }
 
 .price-update { font-size: 11px; color: var(--text-muted); }
 
-/* ── NAVIGATION TABS ────────────────────────────────────────────── */
+/* ── NAV TABS ───────────────────────────────────────────────────── */
 .nav-menu {
     display: flex;
     gap: 10px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
 }
 
+/* Each tab: raised clay pill */
 .nav-btn {
     flex: 1;
-    min-width: 100px;
-    padding: 13px 16px;
+    min-width: 90px;
+    padding: 13px 14px;
     background: var(--card);
     border: none;
     border-radius: var(--radius-pill);
     color: var(--text-mid);
     font-family: 'Assistant', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: var(--shadow-raised);
-    transition: all 0.2s;
+    box-shadow: var(--nm-raised);
+    transition: all 0.18s;
 }
 .nav-btn:hover {
-    background: var(--card-inner);
-    transform: translateY(-1px);
+    box-shadow: var(--nm-raised-hover);
+    transform: translateY(-2px);
 }
-/* Active tab — clay orange raised */
+/* Active tab: pressed in + clay orange tint */
 .nav-btn.active {
     background: var(--clay);
     color: var(--text-light);
-    box-shadow: 4px 5px 12px rgba(140,90,60,0.45), -1px -1px 5px rgba(255,255,255,0.7);
+    box-shadow:
+        inset 3px 3px 8px rgba(100, 50, 20, 0.35),
+        inset -2px -2px 6px rgba(255, 190, 140, 0.25),
+        0 4px 10px rgba(130, 70, 30, 0.35);
 }
-.nav-btn.active:hover { background: var(--clay-light); }
-
-.icon { margin-right: 6px; }
 
 /* ── CONTENT PANEL ──────────────────────────────────────────────── */
 .content-area {
     background: var(--card);
     border-radius: var(--radius-xl);
-    padding: 26px;
-    min-height: 480px;
-    box-shadow: var(--shadow-float);
+    padding: 24px;
+    min-height: 460px;
+    box-shadow: var(--float-card);
 }
 
 .content-section { display: none; }
-.content-section.active {
-    display: block;
-    animation: fadeIn 0.38s ease;
-}
+.content-section.active { display: block; animation: fadeIn 0.35s ease; }
 
 .section-title {
     color: var(--text-mid);
     text-align: center;
-    margin-bottom: 24px;
-    font-size: 20px;
+    margin-bottom: 22px;
+    font-size: 19px;
     font-weight: 800;
     font-family: 'Comfortaa', 'Assistant', sans-serif;
-    letter-spacing: 0.5px;
 }
 
 /* ── ARCHIVES ───────────────────────────────────────────────────── */
-.search-bar { margin-bottom: 22px; }
-
-.file-category { margin-bottom: 32px; }
+.search-bar { margin-bottom: 20px; }
+.file-category { margin-bottom: 28px; }
 
 .category-header {
-    color: var(--clay-dark);
-    font-size: 16px;
+    color: var(--clay-dk);
+    font-size: 15px;
     font-weight: 800;
-    margin-bottom: 14px;
-    padding-bottom: 9px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
     border-bottom: 2px solid var(--card-inner);
-    letter-spacing: 0.5px;
 }
 
 .files-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
 }
 
-/* File cards — raised on the card surface */
+/* File card: raised on the panel surface */
 .file-card {
-    background: var(--card-inner);
+    background: var(--card);
     border-radius: var(--radius-md);
-    padding: 18px;
+    padding: 16px;
     cursor: pointer;
-    box-shadow: var(--shadow-raised);
-    transition: all 0.22s;
+    box-shadow: var(--nm-raised);
+    transition: all 0.2s;
 }
 .file-card:hover {
-    background: var(--card);
-    box-shadow: 5px 6px 14px rgba(140,120,100,0.4), -2px -2px 8px rgba(255,255,255,0.95);
-    transform: translateY(-3px);
+    box-shadow: var(--nm-raised-hover);
+    transform: translateY(-4px);
 }
 .file-card:active {
-    box-shadow: var(--shadow-pressed);
+    box-shadow: var(--nm-inset);
     transform: translateY(0);
 }
 
-.file-icon {
-    font-size: 40px;
-    text-align: center;
-    margin-bottom: 10px;
-    color: var(--clay);
-}
-
-.file-name {
-    color: var(--text);
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    word-break: break-word;
-}
-
-.file-meta { color: var(--text-muted); font-size: 11px; }
-
-.loading {
-    text-align: center;
-    color: var(--clay);
-    font-size: 16px;
-    padding: 40px;
-    font-weight: 700;
-}
+.file-icon  { font-size: 38px; text-align: center; margin-bottom: 10px; color: var(--clay); }
+.file-name  { color: var(--text); font-size: 13px; font-weight: 700; margin-bottom: 5px; word-break: break-word; }
+.file-meta  { color: var(--text-muted); font-size: 11px; }
+.loading    { text-align: center; color: var(--clay); font-size: 16px; padding: 40px; font-weight: 700; }
 
 /* ── SILVER 101 GUIDE ───────────────────────────────────────────── */
 .guide-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 18px;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
-/* Guide cards — raised on the panel */
 .guide-card {
-    background: var(--card-inner);
+    background: var(--card);
     border-radius: var(--radius-md);
-    padding: 22px 20px;
-    box-shadow: var(--shadow-raised);
-    transition: all 0.25s;
+    padding: 20px 18px;
+    box-shadow: var(--nm-raised);
+    transition: all 0.22s;
 }
 .guide-card:hover {
-    background: var(--card);
-    box-shadow: 5px 6px 14px rgba(140,120,100,0.4), -2px -2px 8px rgba(255,255,255,0.95);
-    transform: translateY(-3px);
+    box-shadow: var(--nm-raised-hover);
+    transform: translateY(-4px);
 }
 
 .guide-card h3 {
-    color: var(--clay-dark);
-    margin-bottom: 13px;
-    font-size: 16px;
+    color: var(--clay-dk);
+    margin-bottom: 12px;
+    font-size: 15px;
     font-weight: 800;
-    border-bottom: 2px solid var(--card-deep);
-    padding-bottom: 9px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--card-inner);
 }
-
-.guide-card p {
-    color: var(--text);
-    line-height: 1.9;
-    font-size: 14px;
-}
-
-.guide-card p strong {
-    color: var(--clay-dark);
-    font-weight: 700;
-}
+.guide-card p        { color: var(--text); line-height: 1.88; font-size: 13px; }
+.guide-card p strong { color: var(--clay-dk); font-weight: 700; }
 
 @media (max-width: 768px) {
-    .guide-content  { grid-template-columns: 1fr; gap: 14px; }
-    .guide-card     { padding: 18px 16px; }
-    .guide-card h3  { font-size: 15px; }
-    .guide-card p   { font-size: 13px; }
+    .guide-content { grid-template-columns: 1fr; gap: 12px; }
+    .guide-card    { padding: 16px 14px; }
 }
 
 /* ── CHAT ───────────────────────────────────────────────────────── */
-.chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 510px;
-}
+.chat-container { display: flex; flex-direction: column; height: 500px; }
 
-/* Message area — deep inset well */
+/* Chat window: deep inset well in the panel */
 .chat-messages {
     flex: 1;
     overflow-y: auto;
-    padding: 16px;
+    padding: 14px;
     background: var(--card-inner);
     border-radius: var(--radius-md);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     direction: rtl;
     text-align: right;
-    box-shadow: var(--shadow-pressed);
+    box-shadow: var(--nm-inset);
 }
 
-/* Message bubbles — raised from the inset surface */
+/* Scroll bar styling */
+.chat-messages::-webkit-scrollbar { width: 5px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--card-deep); border-radius: 10px; }
+
+/* Chat bubbles: raised on the inset surface */
 .chat-message {
-    margin-bottom: 14px;
-    padding: 14px 18px;
+    margin-bottom: 12px;
+    padding: 12px 16px;
     border-radius: var(--radius-md);
     direction: rtl;
     text-align: right;
-    max-width: 82%;
+    max-width: 80%;
     width: fit-content;
-    min-width: 160px;
+    min-width: 140px;
     line-height: 1.8;
     font-size: 14px;
     word-wrap: break-word;
     white-space: pre-wrap;
-    box-shadow: var(--shadow-raised);
+    /* Raised from inset surface */
+    box-shadow: var(--nm-inner-raised);
 }
 
-/* Bot bubble — near-white raised */
+/* Bot bubble: card-color raised from inner surface */
 .chat-message.bot {
     background: var(--card);
     margin-right: 0;
     margin-left: auto;
     border-radius: var(--radius-md) var(--radius-md) 6px var(--radius-md);
-    max-width: 86%;
+    max-width: 84%;
 }
 
-/* User bubble — clay teal raised */
+/* User bubble: teal clay raised */
 .chat-message.user {
     background: var(--teal);
     color: var(--text-light);
     margin-right: auto;
     margin-left: 0;
     border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 6px;
-    max-width: 76%;
-    box-shadow: 3px 3px 9px rgba(60,100,88,0.45), -1px -1px 5px rgba(255,255,255,0.4);
+    max-width: 74%;
+    box-shadow:
+        4px 4px 10px rgba(50, 90, 82, 0.50),
+       -2px -2px 7px rgba(160, 220, 210, 0.40);
 }
 
 .message-author {
@@ -547,18 +625,16 @@ body::before {
     display: block;
     margin-bottom: 3px;
     font-size: 12px;
-    letter-spacing: 0.3px;
 }
-.chat-message.user .message-author { color: rgba(240,238,232,0.8); }
-
+.chat-message.user .message-author { color: rgba(240, 238, 232, 0.78); }
 .message-text { color: inherit; }
 
 .chat-input-area { display: flex; gap: 10px; }
 #chat-input { flex: 1; }
 
-/* Send button */
+/* Send button: clay raised pill */
 .neon-button-small {
-    padding: 13px 22px;
+    padding: 12px 20px;
     background: var(--clay);
     border: none;
     border-radius: var(--radius-pill);
@@ -567,26 +643,30 @@ body::before {
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: var(--shadow-raised);
-    transition: all 0.2s;
+    transition: all 0.18s;
     white-space: nowrap;
+    box-shadow:
+        4px 5px 12px rgba(130, 80, 40, 0.45),
+       -1px -2px 6px rgba(255, 200, 160, 0.30),
+        inset 0 2px 4px rgba(255, 200, 160, 0.20),
+        inset 0 -2px 4px rgba(100, 45, 15, 0.18);
 }
 .neon-button-small:hover {
-    background: var(--clay-light);
-    transform: translateY(-1px);
+    background: var(--clay-lt);
+    transform: translateY(-2px);
+    box-shadow:
+        6px 7px 16px rgba(130, 80, 40, 0.50),
+       -2px -3px 8px rgba(255, 200, 160, 0.38);
 }
 .neon-button-small:active {
     transform: translateY(1px);
-    box-shadow: var(--shadow-pressed);
-    background: var(--clay-dark);
+    background: var(--clay-dk);
+    box-shadow:
+        inset 3px 3px 8px rgba(100, 50, 20, 0.35),
+        inset -2px -2px 6px rgba(255, 190, 140, 0.22);
 }
 
-.chat-disclaimer {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 11px;
-    margin-top: 9px;
-}
+.chat-disclaimer { text-align: center; color: var(--text-muted); font-size: 11px; margin-top: 8px; }
 
 /* ── FOOTER ─────────────────────────────────────────────────────── */
 .footer {
@@ -594,9 +674,9 @@ body::before {
     bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
-    color: rgba(42, 48, 40, 0.38);
+    color: rgba(42, 48, 40, 0.35);
     font-size: 11px;
-    z-index: 1000;
+    z-index: 10;
     font-family: 'Assistant', sans-serif;
     letter-spacing: 2px;
     text-align: center;
@@ -605,16 +685,15 @@ body::before {
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-    .dashboard-title { font-size: 36px; letter-spacing: 2px; }
+    .dashboard-title { font-size: 34px; letter-spacing: 2px; }
     .nav-btn         { font-size: 13px; padding: 11px 8px; }
     .files-grid      { grid-template-columns: 1fr; }
     .title-he        { font-size: 40px; }
-    .title-subtitle  { font-size: 9px; }
     .footer          { font-size: 10px; }
-    .chat-message    { max-width: 90%; font-size: 13px; line-height: 1.85; }
-    .chat-messages   { padding: 12px; }
-    .content-area    { padding: 16px; }
-    .price-value     { font-size: 20px; }
+    .chat-message    { max-width: 90%; font-size: 13px; }
+    .content-area    { padding: 14px; }
+    .price-value     { font-size: 18px; }
+    .blob-4, .blob-5 { display: none; } /* cleaner on small screens */
 }
 
 /* ════════════════════════════════════════════
@@ -622,9 +701,9 @@ body::before {
    ════════════════════════════════════════════ */
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(40, 60, 48, 0.6);
-    backdrop-filter: blur(12px);
+    inset: 0;
+    background: rgba(40, 60, 44, 0.55);
+    backdrop-filter: blur(14px);
     z-index: 10000;
     display: flex;
     align-items: center;
@@ -635,10 +714,10 @@ body::before {
 .modal-box {
     background: var(--card);
     border-radius: var(--radius-xl);
-    padding: 36px 30px;
-    max-width: 460px;
+    padding: 36px 28px;
+    max-width: 440px;
     width: 90%;
-    box-shadow: var(--shadow-float);
+    box-shadow: var(--float-card);
     text-align: center;
     direction: rtl;
     animation: fadeIn 0.35s ease;
@@ -646,43 +725,44 @@ body::before {
 
 .modal-title {
     font-family: 'Comfortaa', 'Assistant', sans-serif;
-    font-size: 1.5rem;
-    color: var(--clay-dark);
-    margin-bottom: 20px;
+    font-size: 1.45rem;
+    color: var(--clay-dk);
+    margin-bottom: 18px;
     font-weight: 700;
-    text-align: center;
 }
 
-.modal-content {
-    margin-bottom: 26px;
-    line-height: 1.85;
-    color: var(--text);
-    text-align: right;
-}
-
-.modal-content p { margin-bottom: 10px; font-size: 14px; }
-.modal-content strong { color: var(--clay-dark); font-weight: 700; }
+.modal-content        { margin-bottom: 24px; line-height: 1.85; color: var(--text); text-align: right; }
+.modal-content p      { margin-bottom: 10px; font-size: 14px; }
+.modal-content strong { color: var(--clay-dk); font-weight: 700; }
 
 .modal-button {
     background: var(--clay);
     color: var(--text-light);
     border: none;
-    padding: 13px 40px;
-    font-size: 1rem;
+    padding: 13px 38px;
+    font-size: 15px;
     font-weight: 700;
     font-family: 'Assistant', sans-serif;
     border-radius: var(--radius-pill);
     cursor: pointer;
-    box-shadow: var(--shadow-raised);
-    transition: all 0.22s;
+    box-shadow:
+        5px 6px 14px rgba(130, 80, 40, 0.45),
+       -2px -2px 8px rgba(255, 200, 160, 0.30),
+        inset 0 2px 5px rgba(255, 200, 160, 0.22),
+        inset 0 -2px 5px rgba(100, 45, 15, 0.18);
+    transition: all 0.2s;
 }
 .modal-button:hover {
-    background: var(--clay-light);
+    background: var(--clay-lt);
     transform: translateY(-2px);
-    box-shadow: 5px 6px 14px rgba(140,100,70,0.45), -2px -2px 8px rgba(255,255,255,0.9);
+    box-shadow:
+        7px 8px 18px rgba(130, 80, 40, 0.50),
+       -3px -3px 10px rgba(255, 200, 160, 0.38);
 }
 .modal-button:active {
     transform: translateY(1px);
-    box-shadow: var(--shadow-pressed);
-    background: var(--clay-dark);
+    background: var(--clay-dk);
+    box-shadow:
+        inset 3px 3px 8px rgba(100, 50, 20, 0.35),
+        inset -2px -2px 6px rgba(255, 190, 140, 0.22);
 }
