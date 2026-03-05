@@ -912,22 +912,12 @@ body {
 .chart-stat-val.positive { color: var(--green); }
 .chart-stat-val.negative { color: #C04040; }
 
-/* Price bar wrapper — holds bar + hint label */
-.price-bar-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto 16px;
-    max-width: 500px;
-    gap: 8px;
-}
-
-/* Make the price bar fill the wrapper */
+/* Price bar — clickable, full width centered */
 .price-bar {
-    width: 100%;
-    margin: 0;
     cursor: pointer;
     transition: all 0.2s;
+    max-width: 520px;
+    margin: 0 auto 16px;
 }
 .price-bar:hover {
     box-shadow:
@@ -936,29 +926,26 @@ body {
     transform: translateY(-2px);
 }
 
-/* "גרפים" hint pill below price bar */
+/* Left group inside price bar */
+.price-bar-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* "גרפים" chip — sits inside the price bar on the right */
 .price-chart-hint {
-    background: var(--card);
+    background: var(--card-inner);
     border-radius: var(--radius-pill);
-    padding: 6px 20px;
-    font-size: 12px;
-    font-weight: 700;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 800;
     color: var(--clay);
     font-family: 'Assistant', sans-serif;
-    cursor: pointer;
     box-shadow: var(--nm-raised);
-    transition: all 0.18s;
-    letter-spacing: 0.5px;
-}
-.price-chart-hint:hover {
-    background: var(--clay);
-    color: var(--text-light);
-    box-shadow: var(--nm-raised-hover);
-    transform: translateY(-2px);
-}
-.price-chart-hint:active {
-    box-shadow: var(--nm-inset);
-    transform: translateY(0);
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    pointer-events: none; /* entire bar is clickable */
 }
 
 @media (max-width: 640px) {
