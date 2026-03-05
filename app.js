@@ -19,33 +19,66 @@ document.getElementById('passcode').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleLogin();
 });
 
+// ===== SESSION MANAGEMENT (3-hour login persistence) =====
+const SESSION_DURATION = 3 * 60 * 60 * 1000; // 3 hours in ms
+const SESSION_KEY = 'vault_session';
+
+function saveSession() {
+    const session = { loggedIn: true, timestamp: Date.now() };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+}
+
+function checkSession() {
+    try {
+        const session = JSON.parse(localStorage.getItem(SESSION_KEY));
+        if (!session || !session.loggedIn) return false;
+        const age = Date.now() - session.timestamp;
+        if (age > SESSION_DURATION) {
+            localStorage.removeItem(SESSION_KEY);
+            return false;
+        }
+        return true;
+    } catch {
+        return false;
+    }
+}
+
+function clearSession() {
+    localStorage.removeItem(SESSION_KEY);
+}
+
+// Auto-login if session is still valid (skip login screen)
+if (checkSession()) {
+    document.getElementById('login-screen').classList.remove('active');
+    document.getElementById('dashboard-screen').classList.add('active');
+    const footer = document.querySelector('.footer');
+    if (footer) footer.style.display = 'none';
+    loadFiles();
+}
+
 function handleLogin() {
     const passcode = document.getElementById('passcode').value;
     const errorMsg = document.getElementById('error-msg');
     
-    // Demo passcode validation (In production: validate server-side)
     const validPasscode = 'DemoD69';
     
     if (passcode === validPasscode) {
-        // Success
         errorMsg.textContent = '✓ גישה אושרה';
         errorMsg.style.color = '#00ff00';
         
         setTimeout(() => {
+            saveSession(); // Save 3-hour session
             document.getElementById('login-screen').classList.remove('active');
             document.getElementById('dashboard-screen').classList.add('active');
-            // Hide footer after login
             const footer = document.querySelector('.footer');
             if (footer) footer.style.display = 'none';
             loadFiles();
         }, 1000);
     } else {
-        // Failure
         errorMsg.textContent = '✗ גישה נדחתה - קוד שגוי';
         errorMsg.style.color = '#ff0000';
         document.getElementById('passcode').value = '';
         
-        // Shake effect
         const terminal = document.querySelector('.terminal-container');
         terminal.style.animation = 'shake 0.5s';
         setTimeout(() => {
@@ -88,6 +121,7 @@ function switchSection(sectionName) {
     // Show AI disclaimer if switching to chat (once per day)
     if (sectionName === 'chat') {
         checkAndShowAIDisclaimer();
+        loadChatHistory(); // Restore chat if within 1 hour
     }
 }
 
@@ -273,6 +307,53 @@ document.getElementById('search-input').addEventListener('input', (e) => {
 // ===== CHAT FUNCTIONALITY (Connected to Mr. D AI) =====
 let userId = tg?.initDataUnsafe?.user?.id || Math.floor(Math.random() * 1000000);
 let chatInitialized = false;
+
+// ===== CHAT HISTORY PERSISTENCE (1-hour save after closing) =====
+const CHAT_HISTORY_KEY = `vault_chat_${userId}`;
+const CHAT_HISTORY_DURATION = 60 * 60 * 1000; // 1 hour in ms
+
+function saveChatHistory() {
+    const messagesContainer = document.getElementById('chat-messages');
+    if (!messagesContainer) return;
+    const messages = [];
+    messagesContainer.querySelectorAll('.chat-message').forEach(el => {
+        messages.push({ html: el.outerHTML });
+    });
+    localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify({
+        messages,
+        timestamp: Date.now()
+    }));
+}
+
+function loadChatHistory() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(CHAT_HISTORY_KEY));
+        if (!saved) return false;
+        const age = Date.now() - saved.timestamp;
+        if (age > CHAT_HISTORY_DURATION) {
+            localStorage.removeItem(CHAT_HISTORY_KEY);
+            return false;
+        }
+        const messagesContainer = document.getElementById('chat-messages');
+        if (messagesContainer && saved.messages && saved.messages.length > 0) {
+            saved.messages.forEach(msg => {
+                messagesContainer.insertAdjacentHTML('beforeend', msg.html);
+            });
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            chatInitialized = true;
+            return true;
+        }
+    } catch {
+        return false;
+    }
+    return false;
+}
+
+// Save chat history when user leaves/closes
+window.addEventListener('beforeunload', saveChatHistory);
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') saveChatHistory();
+});
 
 document.getElementById('send-btn').addEventListener('click', sendMessage);
 document.getElementById('chat-input').addEventListener('keypress', (e) => {
