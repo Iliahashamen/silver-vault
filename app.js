@@ -443,27 +443,35 @@ let _priceChart = null;
 let _chartPeriod = 'daily';
 let _historyCache = {};
 
-function openPriceChart() {
+// Exposed globally so onclick="openPriceChart()" in HTML always works
+window.openPriceChart = function() {
     const modal = document.getElementById('price-chart-modal');
+    if (!modal) return;
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    // Reset to daily tab
+    document.querySelectorAll('.chart-tab').forEach(b => b.classList.remove('active'));
+    const firstTab = document.querySelector('.chart-tab[data-period="daily"]');
+    if (firstTab) firstTab.classList.add('active');
     loadChartData('daily');
-}
+};
 
-function closePriceChart() {
+window.closePriceChart = function() {
     const modal = document.getElementById('price-chart-modal');
+    if (!modal) return;
     modal.style.display = 'none';
     document.body.style.overflow = '';
-}
+};
 
-// Open chart when price bar is clicked (hint chip is inside bar, pointer-events:none)
-document.getElementById('price-bar').addEventListener('click', openPriceChart);
+// Also attach via addEventListener as belt-and-suspenders
+const _pricebar = document.getElementById('price-bar');
+if (_pricebar) _pricebar.addEventListener('click', window.openPriceChart);
 
-// Close on backdrop click
-document.getElementById('price-chart-modal').addEventListener('click', function(e) {
-    if (e.target === this) closePriceChart();
-});
-document.getElementById('chart-close-btn').addEventListener('click', closePriceChart);
+// Close on backdrop click or X button
+const _chartModal = document.getElementById('price-chart-modal');
+const _chartCloseBtn = document.getElementById('chart-close-btn');
+if (_chartModal)    _chartModal.addEventListener('click', function(e) { if (e.target === this) window.closePriceChart(); });
+if (_chartCloseBtn) _chartCloseBtn.addEventListener('click', window.closePriceChart);
 
 // Period tab clicks
 document.querySelectorAll('.chart-tab').forEach(btn => {

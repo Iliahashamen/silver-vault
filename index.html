@@ -7,10 +7,10 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
         <title>ה-כספת</title>
-        <link rel="stylesheet" href="style.css?v=35">
+        <link rel="stylesheet" href="style.css?v=36">
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-        <script src="config.js?v=35"></script>
+        <script src="config.js?v=36"></script>
 </head>
 <body>
     <!-- Animated Grid Background (kept for JS, visually hidden) -->
@@ -64,13 +64,13 @@
             </div>
 
             <!-- Live Silver Price Bar — click anywhere to open chart -->
-            <div class="price-bar" id="price-bar">
+            <div class="price-bar" id="price-bar" onclick="openPriceChart()">
                 <div class="price-bar-left">
                     <div class="price-label">כסף (XAG/USD)</div>
                     <div class="price-update" id="price-update">מעדכן...</div>
                 </div>
                 <div class="price-value" id="price-value">טוען...</div>
-                <div class="price-chart-hint" id="chart-hint-btn">גרפים 📈</div>
+                <div class="price-chart-hint" onclick="openPriceChart()">גרפים 📈</div>
             </div>
 
             <!-- Navigation Menu -->
@@ -225,7 +225,7 @@
         <div class="modal-box chart-modal-box">
             <div class="chart-modal-header">
                 <h2 class="modal-title chart-modal-title">מחיר כסף XAG/USD</h2>
-                <button id="chart-close-btn" class="chart-close-btn">✕</button>
+                <button id="chart-close-btn" class="chart-close-btn" onclick="closePriceChart()">✕</button>
             </div>
             <!-- Period selector tabs -->
             <div class="chart-tabs">
@@ -270,6 +270,6 @@
         </div>
     </div>
 
-        <script src="app.js?v=35"></script>
+        <script src="app.js?v=36"></script>
 </body>
 </html>
