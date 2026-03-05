@@ -495,7 +495,7 @@ async function loadChartData(period) {
     document.getElementById('chart-stats').style.display  = 'none';
 
     try {
-        const res  = await fetch(`${API_BASE_URL}/api/silver-history?period=${period}`);
+        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/silver-history?period=${period}`);
         const json = await res.json();
 
         if (!json.success || !json.data || json.data.length === 0) {
@@ -602,10 +602,13 @@ function renderChart(data, period) {
 function formatChartDate(dateStr, period) {
     const d = new Date(dateStr);
     if (period === 'daily') {
-        return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric' });
+        // 24h — show hour:minute
+        return d.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
     } else if (period === 'weekly') {
-        return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'short' });
+        // 7 days — show day/month
+        return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric' });
     } else {
+        // 12 months — show month + year
         return d.toLocaleDateString('he-IL', { month: 'short', year: '2-digit' });
     }
 }
