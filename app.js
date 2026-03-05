@@ -456,6 +456,10 @@ function closePriceChart() {
     document.body.style.overflow = '';
 }
 
+// Open chart on price bar OR chart hint button click
+document.getElementById('price-bar').addEventListener('click', openPriceChart);
+document.getElementById('chart-hint-btn').addEventListener('click', openPriceChart);
+
 // Close on backdrop click
 document.getElementById('price-chart-modal').addEventListener('click', function(e) {
     if (e.target === this) closePriceChart();
