@@ -63,7 +63,7 @@ function handleLogin() {
     const validPasscode = 'DemoD69';
     
     if (passcode === validPasscode) {
-        errorMsg.textContent = '✓ גישה אושרה';
+        errorMsg.textContent = 'גישה אושרה ✓';
         errorMsg.style.color = '#00ff00';
         
         setTimeout(() => {
@@ -75,7 +75,7 @@ function handleLogin() {
             loadFiles();
         }, 1000);
     } else {
-        errorMsg.textContent = '✗ גישה נדחתה - קוד שגוי';
+        errorMsg.textContent = 'גישה נדחתה - קוד שגוי ✗';
         errorMsg.style.color = '#ff0000';
         document.getElementById('passcode').value = '';
         
@@ -207,7 +207,7 @@ async function loadFiles() {
         displayFiles(filesData);
     } catch (error) {
         console.error('Error loading files:', error);
-        container.innerHTML = '<div class="loading">⚠ שגיאה בטעינת הארכיון</div>';
+        container.innerHTML = '<div class="loading">שגיאה בטעינת הארכיון ⚠</div>';
     }
 }
 
@@ -236,10 +236,10 @@ function displayFiles(files) {
             // Get Hebrew category name
             let categoryNameHe = '';
             switch(category) {
-                case 'PDFS': categoryNameHe = '📄 מסמכי PDF'; break;
-                case 'VIDEOS': categoryNameHe = '🎥 סרטונים'; break;
-                case 'PHOTOS': categoryNameHe = '📸 תמונות'; break;
-                case 'DOCUMENTS': categoryNameHe = '📁 מסמכים'; break;
+                case 'PDFS': categoryNameHe = 'מסמכי PDF 📄'; break;
+                case 'VIDEOS': categoryNameHe = 'סרטונים 🎥'; break;
+                case 'PHOTOS': categoryNameHe = 'תמונות 📸'; break;
+                case 'DOCUMENTS': categoryNameHe = 'מסמכים 📁'; break;
             }
             
             html += `<div class="file-category">
