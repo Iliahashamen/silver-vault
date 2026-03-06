@@ -374,7 +374,7 @@ async function sendMessage() {
     input.value = '';
     
     // Show typing indicator
-    const typingMsg = addChatMessage('MR. D', 'מקליד...', 'bot typing');
+    const typingMsg = addChatMessage('מר ד׳', 'מקליד...', 'bot typing');
     
     try {
         // Call Mr. D API
@@ -399,14 +399,14 @@ async function sendMessage() {
         typingMsg.remove();
         
         // Add Mr. D's real AI response
-        addChatMessage('MR. D', data.response, 'bot');
+        addChatMessage('מר ד׳', data.response, 'bot');
         
     } catch (error) {
         console.error('Chat error:', error);
         typingMsg.remove();
         
         // Fallback response if API is down
-        addChatMessage('MR. D', 'סליחה, יש לי רגע טכני כאן. נסה לשאול אותי שוב בעוד שנייה! 🔧', 'bot error');
+        addChatMessage('מר ד׳', 'סליחה, יש לי רגע טכני כאן. נסה לשאול אותי שוב בעוד שנייה! 🔧', 'bot error');
     }
 }
 
