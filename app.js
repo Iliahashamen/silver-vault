@@ -601,15 +601,16 @@ function renderChart(data, period) {
 
 function formatChartDate(dateStr, period) {
     const d = new Date(dateStr);
+    const tz = 'Asia/Jerusalem';
     if (period === 'daily') {
-        // 24h — show hour:minute
-        return d.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
+        // 24h — show Israel local time
+        return d.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', timeZone: tz });
     } else if (period === 'weekly') {
-        // 7 days — show day/month
-        return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric' });
+        // 7 days — show day/month in Israel timezone
+        return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric', timeZone: tz });
     } else {
-        // 12 months — show month + year
-        return d.toLocaleDateString('he-IL', { month: 'short', year: '2-digit' });
+        // 12 months — show month + year in Israel timezone
+        return d.toLocaleDateString('he-IL', { month: 'short', year: '2-digit', timeZone: tz });
     }
 }
 
