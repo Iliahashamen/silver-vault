@@ -80,10 +80,10 @@ function handleLogin() {
         document.getElementById('passcode').value = '';
         
         const terminal = document.querySelector('.terminal-container');
-        terminal.style.animation = 'shake 0.5s';
-        setTimeout(() => {
-            terminal.style.animation = '';
-        }, 500);
+        if (terminal) {
+            terminal.style.animation = 'shake 0.5s';
+            setTimeout(() => { terminal.style.animation = ''; }, 500);
+        }
     }
 }
 
@@ -254,15 +254,20 @@ function displayFiles(files) {
     container.innerHTML = html || '<div class="loading">אין קבצים בכספת</div>';
 }
 
+// File cards are built as HTML strings and inserted via innerHTML.
+// Clicks are handled by event delegation on the container (safe, no XSS).
 function createFileCard(file) {
     const icon = getFileIcon(file.file_type);
     const date = new Date(file.created_at).toLocaleDateString('he-IL');
+    const url = file.file_url || '';
     const isYoutube = file.file_type === 'video' &&
-        (file.file_url.includes('youtube.com') || file.file_url.includes('youtu.be'));
+        (url.includes('youtube.com') || url.includes('youtu.be'));
     const badge = isYoutube ? '<span class="yt-badge">YouTube</span>' : '';
+    const safeUrl  = encodeURIComponent(url);
+    const safeType = encodeURIComponent(file.file_type);
 
     return `
-        <div class="file-card" onclick="openFile('${file.file_url}', '${file.file_type}')">
+        <div class="file-card" data-url="${safeUrl}" data-type="${safeType}">
             <div class="file-icon">${icon}${badge}</div>
             <div class="file-name">${escapeHtml(file.file_name)}</div>
             <div class="file-meta">
@@ -284,12 +289,22 @@ function getFileIcon(fileType) {
 }
 
 function openFile(url, type) {
+    if (!url) return;
     if (tg) {
         tg.openLink(url);
     } else {
         window.open(url, '_blank');
     }
 }
+
+// Event delegation for file cards (safe, handles dynamically added cards)
+document.getElementById('files-container').addEventListener('click', function(e) {
+    const card = e.target.closest('.file-card');
+    if (!card) return;
+    const url  = decodeURIComponent(card.dataset.url  || '');
+    const type = decodeURIComponent(card.dataset.type || '');
+    openFile(url, type);
+});
 
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -444,7 +459,8 @@ function addChatMessage(author, text, type) {
 // ===== PRICE HISTORY CHART =====
 let _priceChart = null;
 let _chartPeriod = 'daily';
-let _historyCache = {};
+let _historyCache = {};          // { period: { data, ts } }
+const _CHART_TTL = { daily: 30 * 60 * 1000, weekly: 2 * 60 * 60 * 1000, yearly: 12 * 60 * 60 * 1000 };
 
 // Exposed globally so onclick="openPriceChart()" in HTML always works
 window.openPriceChart = function() {
@@ -486,8 +502,10 @@ document.querySelectorAll('.chart-tab').forEach(btn => {
 });
 
 async function loadChartData(period) {
-    if (_chartPeriod === period && _historyCache[period]) {
-        renderChart(_historyCache[period], period);
+    const cached = _historyCache[period];
+    const ttl = _CHART_TTL[period] || 30 * 60 * 1000;
+    if (cached && (Date.now() - cached.ts) < ttl) {
+        renderChart(cached.data, period);
         return;
     }
     _chartPeriod = period;
@@ -506,7 +524,7 @@ async function loadChartData(period) {
             return;
         }
 
-        _historyCache[period] = json.data;
+        _historyCache[period] = { data: json.data, ts: Date.now() };
         renderChart(json.data, period);
 
     } catch (err) {
