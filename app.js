@@ -257,13 +257,16 @@ function displayFiles(files) {
 function createFileCard(file) {
     const icon = getFileIcon(file.file_type);
     const date = new Date(file.created_at).toLocaleDateString('he-IL');
-    
+    const isYoutube = file.file_type === 'video' &&
+        (file.file_url.includes('youtube.com') || file.file_url.includes('youtu.be'));
+    const badge = isYoutube ? '<span class="yt-badge">YouTube</span>' : '';
+
     return `
         <div class="file-card" onclick="openFile('${file.file_url}', '${file.file_type}')">
-            <div class="file-icon">${icon}</div>
+            <div class="file-icon">${icon}${badge}</div>
             <div class="file-name">${escapeHtml(file.file_name)}</div>
             <div class="file-meta">
-                סוג: ${file.file_type.toUpperCase()}<br>
+                ${isYoutube ? 'סרטון YouTube 🎬' : 'סוג: ' + file.file_type.toUpperCase()}<br>
                 תאריך: ${date}
             </div>
         </div>
