@@ -23,23 +23,24 @@ document.getElementById('passcode').addEventListener('keypress', (e) => {
 const SESSION_DURATION = 3 * 60 * 60 * 1000; // 3 hours in ms
 const SESSION_KEY = 'vault_session';
 
-function saveSession() {
-    const session = { loggedIn: true, timestamp: Date.now() };
+function saveSession(token) {
+    const session = { loggedIn: true, timestamp: Date.now(), token: token || '' };
     localStorage.setItem(SESSION_KEY, JSON.stringify(session));
 }
 
+/** Returns the auth token if session is valid, null otherwise. */
 function checkSession() {
     try {
         const session = JSON.parse(localStorage.getItem(SESSION_KEY));
-        if (!session || !session.loggedIn) return false;
+        if (!session || !session.loggedIn) return null;
         const age = Date.now() - session.timestamp;
         if (age > SESSION_DURATION) {
             localStorage.removeItem(SESSION_KEY);
-            return false;
+            return null;
         }
-        return true;
+        return session.token || null;
     } catch {
-        return false;
+        return null;
     }
 }
 
@@ -48,42 +49,65 @@ function clearSession() {
 }
 
 // Auto-login if session is still valid (skip login screen)
-if (checkSession()) {
-    document.getElementById('login-screen').classList.remove('active');
-    document.getElementById('dashboard-screen').classList.add('active');
-    const footer = document.querySelector('.footer');
-    if (footer) footer.style.display = 'none';
-    loadFiles();
-}
+(function autoLogin() {
+    const token = checkSession();
+    if (token) {
+        document.getElementById('login-screen').classList.remove('active');
+        document.getElementById('dashboard-screen').classList.add('active');
+        const footer = document.querySelector('.footer');
+        if (footer) footer.style.display = 'none';
+        loadFiles();
+    }
+})();
 
-function handleLogin() {
-    const passcode = document.getElementById('passcode').value;
-    const errorMsg = document.getElementById('error-msg');
-    
-    const validPasscode = 'DemoD69';
-    
-    if (passcode === validPasscode) {
-        errorMsg.textContent = 'גישה אושרה ✓';
-        errorMsg.style.color = '#00ff00';
-        
-        setTimeout(() => {
-            saveSession(); // Save 3-hour session
-            document.getElementById('login-screen').classList.remove('active');
-            document.getElementById('dashboard-screen').classList.add('active');
-            const footer = document.querySelector('.footer');
-            if (footer) footer.style.display = 'none';
-            loadFiles();
-        }, 1000);
-    } else {
-        errorMsg.textContent = 'גישה נדחתה - קוד שגוי ✗';
-        errorMsg.style.color = '#ff0000';
-        document.getElementById('passcode').value = '';
-        
-        const terminal = document.querySelector('.terminal-container');
-        if (terminal) {
-            terminal.style.animation = 'shake 0.5s';
-            setTimeout(() => { terminal.style.animation = ''; }, 500);
+async function handleLogin() {
+    const passcode = document.getElementById('passcode').value.trim();
+    const errorMsg  = document.getElementById('error-msg');
+    const loginBtn  = document.getElementById('login-btn');
+
+    if (!passcode) return;
+
+    loginBtn.disabled = true;
+    errorMsg.textContent = 'מתחבר...';
+    errorMsg.style.color = '#888';
+
+    try {
+        const response = await fetch(`${CONFIG.CHAT_API_URL}/api/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ passcode })
+        });
+        const data = await response.json();
+
+        if (response.status === 429) {
+            errorMsg.textContent = 'יותר מדי ניסיונות. נסה שוב מאוחר יותר ✗';
+            errorMsg.style.color = '#ff4444';
+        } else if (data.success) {
+            errorMsg.textContent = 'גישה אושרה ✓';
+            errorMsg.style.color = '#00cc66';
+            saveSession(data.token);
+            setTimeout(() => {
+                document.getElementById('login-screen').classList.remove('active');
+                document.getElementById('dashboard-screen').classList.add('active');
+                const footer = document.querySelector('.footer');
+                if (footer) footer.style.display = 'none';
+                loadFiles();
+            }, 800);
+        } else {
+            errorMsg.textContent = data.error || 'גישה נדחתה - קוד שגוי ✗';
+            errorMsg.style.color = '#ff4444';
+            document.getElementById('passcode').value = '';
+            const terminal = document.querySelector('.terminal-container');
+            if (terminal) {
+                terminal.style.animation = 'shake 0.5s';
+                setTimeout(() => { terminal.style.animation = ''; }, 500);
+            }
         }
+    } catch (err) {
+        errorMsg.textContent = 'שגיאת חיבור — נסה שוב ✗';
+        errorMsg.style.color = '#ff4444';
+    } finally {
+        loginBtn.disabled = false;
     }
 }
 
@@ -395,34 +419,49 @@ async function sendMessage() {
     const typingMsg = addChatMessage('מר ד׳', 'מקליד...', 'bot typing');
     
     try {
-        // Call Mr. D API
+        const sessionToken = checkSession();
+
+        // Call Mr. D API with auth token
         const response = await fetch(`${CONFIG.CHAT_API_URL}/chat`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                ...(sessionToken ? { 'Authorization': `Bearer ${sessionToken}` } : {})
             },
             body: JSON.stringify({
                 user_id: userId,
                 message: message
             })
         });
-        
+
+        // Session expired on the server side — force re-login
+        if (response.status === 401) {
+            typingMsg.remove();
+            clearSession();
+            addChatMessage('מר ד׳', 'תוקף החיבור פג. אנא התחבר מחדש.', 'bot error');
+            setTimeout(() => {
+                document.getElementById('dashboard-screen').classList.remove('active');
+                document.getElementById('login-screen').classList.add('active');
+            }, 2000);
+            return;
+        }
+
         if (!response.ok) {
             throw new Error('API connection failed');
         }
-        
+
         const data = await response.json();
-        
+
         // Remove typing indicator
         typingMsg.remove();
-        
+
         // Add Mr. D's real AI response
         addChatMessage('מר ד׳', data.response, 'bot');
-        
+
     } catch (error) {
         console.error('Chat error:', error);
         typingMsg.remove();
-        
+
         // Fallback response if API is down
         addChatMessage('מר ד׳', 'סליחה, יש לי רגע טכני כאן. נסה לשאול אותי שוב בעוד שנייה! 🔧', 'bot error');
     }
