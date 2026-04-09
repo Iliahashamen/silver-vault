@@ -60,6 +60,43 @@ function clearSession() {
     }
 })();
 
+// איזור אישי — מודאל “בפיתוח” (הכנה לעתיד)
+function wirePersonalSpaceModal() {
+    const modal = document.getElementById('personal-space-modal');
+    const btn = document.getElementById('personal-space-btn');
+    const closeBtn = document.getElementById('personal-space-close');
+    const card = modal?.querySelector('.personal-space-card');
+    if (!modal || !btn) return;
+
+    const open = () => {
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden', 'false');
+        if (window.tg?.HapticFeedback) {
+            try { window.tg.HapticFeedback.impactOccurred('light'); } catch (_) {}
+        }
+    };
+    const close = () => {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+    };
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        open();
+    });
+    closeBtn?.addEventListener('click', close);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) close();
+    });
+    card?.addEventListener('click', (e) => e.stopPropagation());
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wirePersonalSpaceModal);
+} else {
+    wirePersonalSpaceModal();
+}
+
 async function handleLogin() {
     const passcode = document.getElementById('passcode').value.trim();
     const errorMsg  = document.getElementById('error-msg');
