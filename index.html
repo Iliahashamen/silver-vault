@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
         <title>ה-כספת</title>
-        <link rel="stylesheet" href="style.css?v=44">
+        <link rel="stylesheet" href="style.css?v=45">
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
         <script src="config.js?v=42"></script>
@@ -224,11 +224,35 @@
         </div>
     </div>
 
-    <!-- איזור אישי — placeholder מינימלי -->
+    <!--
+      איזור אישי — קליפה נפרדת מהכספת (מודאל משלו).
+      שלד לעתיד: data-personal-slot מזהה מסך/מודול; אין לוגיקה עדיין — הארכיון והדשבורד לא משתנים.
+    -->
     <div id="personal-space-modal" class="modal-overlay personal-space-overlay" style="display: none;" aria-hidden="true" role="presentation">
-        <div class="modal-box personal-space-card" role="dialog" aria-modal="true" aria-labelledby="personal-space-status">
+        <div class="modal-box personal-space-card" role="dialog" aria-modal="true" aria-labelledby="personal-space-heading">
             <button type="button" id="personal-space-close" class="personal-space-close" aria-label="סגור">✕</button>
-            <p id="personal-space-status" class="personal-space-badge">בפיתוח</p>
+            <header class="personal-space-head">
+                <h2 id="personal-space-heading" class="personal-space-heading">איזור אישי</h2>
+                <span class="personal-space-badge" id="personal-space-status">בפיתוח</span>
+            </header>
+            <div class="personal-space-grid" id="personal-space-grid" role="group" aria-label="אזורים עתידיים">
+                <div class="personal-space-tile" data-personal-slot="homework" aria-disabled="true">
+                    <span class="personal-space-tile-label">שיעורי בית</span>
+                    <span class="personal-space-tile-hint">בקרוב</span>
+                </div>
+                <div class="personal-space-tile" data-personal-slot="summaries" aria-disabled="true">
+                    <span class="personal-space-tile-label">סיכומים</span>
+                    <span class="personal-space-tile-hint">בקרוב</span>
+                </div>
+                <div class="personal-space-tile" data-personal-slot="settings" aria-disabled="true">
+                    <span class="personal-space-tile-label">הגדרות</span>
+                    <span class="personal-space-tile-hint">בקרוב</span>
+                </div>
+                <div class="personal-space-tile" data-personal-slot="more" aria-disabled="true">
+                    <span class="personal-space-tile-label">עוד</span>
+                    <span class="personal-space-tile-hint">בקרוב</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -282,6 +306,6 @@
         </div>
     </div>
 
-        <script src="app.js?v=44"></script>
+        <script src="app.js?v=45"></script>
 </body>
 </html>

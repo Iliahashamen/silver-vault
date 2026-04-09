@@ -60,13 +60,29 @@ function clearSession() {
     }
 })();
 
-// איזור אישי — מודאל “בפיתוח” (הכנה לעתיד)
+/**
+ * איזור אישי — מודאל נפרד מהכספת. שלד בלבד: `data-personal-slot` למסכים עתידיים.
+ * הארכיון / ניווט ראשי לא משתנים. עתיד: openSlot(slot), תוכן דינמי, API.
+ */
+window.PersonalSpace = window.PersonalSpace || {
+    version: 1,
+    /** מפת אלמנטי משבצת (homework, summaries, settings, more, …) */
+    slots: {},
+    /** סוכן מקום — יחובר לרוטינג פנימי כשיהיו מסכים */
+    openSlot(_slotName) {},
+};
+
 function wirePersonalSpaceModal() {
     const modal = document.getElementById('personal-space-modal');
     const btn = document.getElementById('personal-space-btn');
     const closeBtn = document.getElementById('personal-space-close');
     const card = modal?.querySelector('.personal-space-card');
     if (!modal || !btn) return;
+
+    modal.querySelectorAll('[data-personal-slot]').forEach((el) => {
+        const k = el.getAttribute('data-personal-slot');
+        if (k) window.PersonalSpace.slots[k] = el;
+    });
 
     const open = () => {
         modal.style.display = 'flex';
