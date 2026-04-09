@@ -780,9 +780,13 @@ body {
 
 .personal-space-card {
     position: relative;
-    max-width: 300px;
-    width: 100%;
-    padding: 26px 22px 22px;
+    max-width: 220px;
+    width: auto;
+    min-width: 160px;
+    padding: 28px 24px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     border-radius: var(--radius-xl);
     animation: personalSpacePop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -823,46 +827,17 @@ body {
     transform: translateY(-1px);
 }
 
-.personal-space-emoji {
-    font-size: 2.1rem;
-    line-height: 1;
-    margin-bottom: 6px;
-    filter: drop-shadow(0 2px 4px rgba(60, 80, 70, 0.2));
-}
-
-.personal-space-title {
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--purple);
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-}
-
-.personal-space-lead {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.65;
-    margin-bottom: 14px;
-    text-align: center;
-}
-
 .personal-space-badge {
-    display: inline-block;
-    padding: 6px 14px;
+    margin: 0;
+    padding: 10px 20px;
     border-radius: var(--radius-pill);
     background: var(--card-inner);
     color: var(--clay-dk);
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 800;
+    font-family: 'Assistant', sans-serif;
+    letter-spacing: 0.4px;
     box-shadow: var(--nm-inset);
-    margin-bottom: 12px;
-}
-
-.personal-space-foot {
-    font-size: 12px;
-    color: var(--text-muted);
-    font-weight: 600;
 }
 
 /* ════════════════════════════════════════════

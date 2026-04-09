@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
         <title>ה-כספת</title>
-        <link rel="stylesheet" href="style.css?v=43">
+        <link rel="stylesheet" href="style.css?v=44">
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
         <script src="config.js?v=42"></script>
@@ -224,15 +224,11 @@
         </div>
     </div>
 
-    <!-- איזור אישי — placeholder (עתידי) -->
+    <!-- איזור אישי — placeholder מינימלי -->
     <div id="personal-space-modal" class="modal-overlay personal-space-overlay" style="display: none;" aria-hidden="true" role="presentation">
-        <div class="modal-box personal-space-card" role="dialog" aria-modal="true" aria-labelledby="personal-space-title">
+        <div class="modal-box personal-space-card" role="dialog" aria-modal="true" aria-labelledby="personal-space-status">
             <button type="button" id="personal-space-close" class="personal-space-close" aria-label="סגור">✕</button>
-            <div class="personal-space-emoji" aria-hidden="true">✨</div>
-            <h2 id="personal-space-title" class="personal-space-title">איזור אישי</h2>
-            <p class="personal-space-lead">כאן יתגור מרכז קטן וחמוד רק בשבילך — עדכונים, מועדפים, והמשך שיחה עם מר ד'.</p>
-            <p class="personal-space-badge">בפיתוח</p>
-            <p class="personal-space-foot">בינתיים הכספת פתוחה כרגיל 💎</p>
+            <p id="personal-space-status" class="personal-space-badge">בפיתוח</p>
         </div>
     </div>
 
@@ -286,6 +282,6 @@
         </div>
     </div>
 
-        <script src="app.js?v=43"></script>
+        <script src="app.js?v=44"></script>
 </body>
 </html>
