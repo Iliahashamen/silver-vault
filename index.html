@@ -56,239 +56,157 @@
 
     <!-- Dashboard Screen -->
     <div id="dashboard-screen" class="screen">
-        <div class="dashboard-container">
-            <!-- Header -->
-            <div class="dashboard-header">
-                <button type="button" id="personal-space-btn" class="personal-space-btn" aria-haspopup="dialog" aria-controls="personal-space-modal" aria-label="איזור אישי">
-                    <span class="personal-space-btn-icon" aria-hidden="true">◈</span>
-                    <span class="personal-space-btn-label">איזור אישי</span>
-                </button>
+        <div class="dashboard-v2">
+            <header class="dashboard-v2-header">
                 <h1 class="dashboard-title">ה-כספת</h1>
-                <p class="status-text">סטטוס: <span class="status-online">מקוון</span> — חיבור מאובטח</p>
-            </div>
-
-            <!-- Live Silver Price Bar — click anywhere to open chart -->
-            <div class="price-bar" id="price-bar" onclick="openPriceChart()">
-                <div class="price-bar-left">
-                    <div class="price-label">כסף (XAG/USD)</div>
-                    <div class="price-update" id="price-update">מעדכן...</div>
+                <p class="status-text">סטטוס: <span class="status-online">מקוון</span> — סביבת מסחר לימודית</p>
+                <div class="price-strip">
+                    <span class="price-strip-label">כסף (XAG/USD)</span>
+                    <span class="price-strip-value" id="price-value">טוען...</span>
+                    <span class="price-strip-update" id="price-update">מעדכן...</span>
                 </div>
-                <div class="price-value" id="price-value">טוען...</div>
-                <div class="price-chart-hint" onclick="openPriceChart()">גרפים 📈</div>
-            </div>
-
-            <!-- Navigation Menu -->
-            <div class="nav-menu">
-                <button class="nav-btn active" data-section="archives">ארכיון</button>
-                <button class="nav-btn" data-section="guide">כסף 101</button>
-                <button class="nav-btn" data-section="chat">מר ד'</button>
-            </div>
-
-            <!-- Content Sections -->
-            <div class="content-area">
-                <!-- ARCHIVES Section -->
-                <div id="archives-section" class="content-section active">
-                    <h2 class="section-title">ארכיון הידע</h2>
-                    <div class="search-bar">
-                        <input type="text" id="search-input" placeholder="חפש קבצים..." class="terminal-input">
-                    </div>
-                    <div id="files-container" class="files-grid">
-                        <div class="loading">טוען ארכיון...</div>
-                    </div>
-                </div>
-
-                <!-- SILVER 101 Section -->
-                <div id="guide-section" class="content-section">
-                    <h2 class="section-title">כסף 101 — המדריך</h2>
-                    <div class="guide-content">
-                        <div class="guide-card">
-                            <h3>מה זה כסף?</h3>
-                            <p>כסף הוא מתכת יקרה עם תכונות ייחודיות. הוא משמש ככסף, תכשיטים ויישומים תעשייתיים כבר אלפי שנים.</p>
-                        </div>
-                        <div class="guide-card">
-                            <h3>למה להשקיע בכסף?</h3>
-                            <p>• הגנה מפני אינפלציה<br>• נכס מוחשי<br>• ביקוש תעשייתי<br>• היצע מוגבל<br>• פיזור תיק השקעות</p>
-                        </div>
-                        <div class="guide-card">
-                            <h3>כסף בישראל</h3>
-                            <p>בישראל יש תקנות ספציפיות לגבי מתכות יקרות. הבנת החוקים המקומיים והשלכות המס חיונית למשקיעים ישראלים.</p>
-                        </div>
-                        <div class="guide-card">
-                            <h3>איך להתחיל</h3>
-                            <p>1. חקור והשכל את עצמך<br>2. התייעץ עם מר ד'<br>3. התחל עם השקעות קטנות<br>4. פזר את תיק ההשקעות<br>5. הישאר מעודכן</p>
-                        </div>
-                        
-                        <!-- ISRAEL-SPECIFIC EXPANDED GUIDES -->
-                        <div class="guide-card">
-                            <h3>איפה לקנות כסף בישראל — מדריך מפורט</h3>
-                            <p>                            <strong>מקומות רכישה מומלצים 🏪</strong><br>
-                            • <strong>המטבעה הישראלית</strong> - המקור הרשמי והמהימן ביותר. מוכרים מטבעות כסף באיכות גבוהה<br>
-                            • <strong>חנויות מטבעות מורשות</strong> - בתל אביב (רח' אלנבי, דיזנגוף), ירושלים, חיפה. בדוק רישיון עסק<br>
-                            • <strong>יבואנים מורשים</strong> - מייבאים מטילים ומטבעות מחו"ל. קבל אישור על מקוריות<br>
-                            • <strong>פלטפורמות אונליין</strong> - השווה מחירים, אבל קנה רק מאתרים מאובטחים עם המלצות<br><br>
-                            
-                            <strong>עלויות נוספות לשים לב 💰</strong><br>
-                            • <strong>מע"מ:</strong> 17% על מטילי כסף (בארים, מטילים)<br>
-                            • <strong>פרמיום:</strong> 5-15% מעל מחיר הספוט (תלוי בכמות)<br>
-                            • <strong>משלוח מאובטח:</strong> ₪50-200 (תלוי בערך)<br>
-                            • <strong>ביטוח:</strong> מומלץ מאוד - 0.5-1% מהערך בשנה<br><br>
-                            
-                            <strong>טיפים חשובים ⚠️</strong><br>
-                            • תמיד דרוש אישור מקוריות בכתב<br>
-                            • בדוק משקל ודרגת טהרה (999 pure)<br>
-                            • קנה כמויות גדולות = פרמיום נמוך יותר<br>
-                            • שמור קבלות לצורכי מס וביטוח<br>
-                            • השווה לפחות 3 מקומות לפני קניה</p>
-                        </div>
-                        
-                        <div class="guide-card">
-                            <h3>חוקים, תקנות ומע"מ בישראל</h3>
-                            <p><strong>מסגרת חוקית ⚖️</strong><br>
-                            • <strong>אין הגבלה</strong> על כמות הכסף שניתן לרכוש או להחזיק בישראל<br>
-                            • <strong>דיווח למס הכנסה:</strong> חובה בעסקאות מעל ₪50,000 (סך הכל בשנה)<br>
-                            • <strong>מניעת הלבנת הון:</strong> זיהוי מלא נדרש ברכישות מעל ₪50,000<br>
-                            • <strong>יבוא אישי:</strong> עד $1,000 ללא מכס. מעל זה - מכס 12% + מע"מ 17%<br><br>
-                            
-                            <strong>מע"מ - הבדלים קריטיים 💎</strong><br>
-                            • <strong>מטילי כסף (בולים/בארים):</strong> חייבים במע"מ 17%<br>
-                            • <strong>מטבעות משקל:</strong> חייבים במע"מ 17%<br>
-                            • <strong>מטבעות חוקיים זרים:</strong> פטורים ממע"מ (American Eagle, Maple Leaf, Britannia)<br>
-                            • <strong>תכשיטים:</strong> מע"מ 17% + מס קנייה 25%<br>
-                            • <strong>כלי כסף עתיקים (100+ שנה):</strong> ייתכן פטור ממע"מ<br><br>
-                            
-                            <strong>דיווח ומיסוי 📋</strong><br>
-                            • שמור תיעוד של כל רכישה - תאריך, מחיר, מוכר<br>
-                            • צלם חשבוניות ושמור בענן<br>
-                            • עדכן רשימת נכסים אצל יועץ מס<br>
-                            • במכירה - שמור אסמכתאות למחיר המקורי<br><br>
-                            
-                            <strong>טיפ משתלם 🎯</strong><br>
-                            קנה מטבעות חוקיים זרים (כמו Canadian Maple Leaf) במקום מטילים - 
-                            חוסך 17% מע"מ ונזיל יותר במכירה!</p>
-                        </div>
-                        
-                        <div class="guide-card">
-                            <h3>מיסוי והשקעות — האמת המלאה</h3>
-                            <p><strong>מס רווח הון (2024) 💰</strong><br>
-                            • <strong>יחידים:</strong> 25% על רווח ריאלי (אחרי ניכוי אינפלציה)<br>
-                            • <strong>עסקים:</strong> לפי מדרגות מס חברות (עד 23%)<br>
-                            • <strong>אין מס על החזקה</strong> - המס נגבה רק במכירה בפועל<br>
-                            • <strong>ירושה:</strong> פטור ממס רווח הון עד למכירה על ידי היורש<br><br>
-                            
-                            <strong>חישוב מס - דוגמה 📊</strong><br>
-                            קנית ב-2020: ₪10,000<br>
-                            מכרת ב-2024: ₪15,000<br>
-                            אינפלציה מצטברת: 12%<br>
-                            רווח ריאלי: ₪15,000 - (₪10,000 × 1.12) = ₪3,800<br>
-                            מס (25%): ₪950<br>
-                            רווח נקי: ₪4,050<br><br>
-                            
-                            <strong>אסטרטגיות מיסוי חכמות 🎓</strong><br>
-                            • <strong>פיזור מכירות:</strong> מכור על פני מספר שנים להישאר במדרגת מס נמוכה<br>
-                            • <strong>קיזוז הפסדים:</strong> אפשר לקזז הפסדים מנכסים אחרים<br>
-                            • <strong>תיק משפחתי:</strong> פזר רכישות בין בני משפחה (כל אחד עד ₪50K בשנה)<br>
-                            • <strong>תכנון עתידי:</strong> אם מתכנן מכירה גדולה - תיעץ עם רו"ח 6 חודשים מראש<br>
-                            • <strong>תיעוד מושלם:</strong> שמור קבלות, תמונות, הערכות שווי - חוסך כסף בוויכוחים עם מס הכנסה<br><br>
-                            
-                            <strong>טעויות נפוצות להימנע מהן ⚠️</strong><br>
-                            • לא לדווח על מכירות - קנס 30% + המס עצמו<br>
-                            • לשכוח ניכוי אינפלציה - משלמים יותר מהנדרש<br>
-                            • לא לשמור קבלות - מס הכנסה לא מאמין בלי אסמכתאות<br>
-                            • לערבב עסקאות אישיות ועסקיות - בעיות מיסוי<br><br>
-                            
-                            <strong>כלל הזהב 💡</strong><br>
-                            תמיד התייעץ עם רואה חשבון לפני עסקה מעל ₪100,000 - 
-                            השקעה של ₪2,000 בייעוץ יכולה לחסוך ₪20,000+ במסים!</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MR. D Chat Section -->
-                <div id="chat-section" class="content-section">
-                    <h2 class="section-title">התייעצות עם מר ד'</h2>
-                    <div class="chat-container">
-                        <div id="chat-messages" class="chat-messages">
-                            <div class="chat-message bot">
-                                <span class="message-author">מר ד':</span>
-                                <span class="message-text">שלום. אני מר ד', המדריך שלך להשקעות בכסף בישראל. שאל אותי כל שאלה על מתכות יקרות, אסטרטגיות שוק, או תקנות ישראליות.</span>
-                            </div>
-                        </div>
-                        <div class="chat-input-area">
-                            <input type="text" id="chat-input" placeholder="הקלד את שאלתך..." class="terminal-input">
-                            <button id="send-btn" class="neon-button-small">שלח</button>
-                        </div>
-                        <p class="chat-disclaimer">יועץ AI - למטרות חינוכיות בלבד ⚠</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--
-      איזור אישי — קליפה נפרדת מהכספת (מודאל משלו).
-      שלד לעתיד: data-personal-slot מזהה מסך/מודול; אין לוגיקה עדיין — הארכיון והדשבורד לא משתנים.
-    -->
-    <div id="personal-space-modal" class="modal-overlay personal-space-overlay" style="display: none;" aria-hidden="true" role="presentation">
-        <div class="modal-box personal-space-card" role="dialog" aria-modal="true" aria-labelledby="personal-space-heading">
-            <button type="button" id="personal-space-close" class="personal-space-close" aria-label="סגור">✕</button>
-            <header class="personal-space-head">
-                <h2 id="personal-space-heading" class="personal-space-heading">איזור אישי</h2>
-                <span class="personal-space-badge" id="personal-space-status">בפיתוח</span>
             </header>
-            <div class="personal-space-grid" id="personal-space-grid" role="group" aria-label="אזורים עתידיים">
-                <div class="personal-space-tile" data-personal-slot="homework" aria-disabled="true">
-                    <span class="personal-space-tile-label">שיעורי בית</span>
-                    <span class="personal-space-tile-hint">בקרוב</span>
-                </div>
-                <div class="personal-space-tile" data-personal-slot="summaries" aria-disabled="true">
-                    <span class="personal-space-tile-label">סיכומים</span>
-                    <span class="personal-space-tile-hint">בקרוב</span>
-                </div>
-                <div class="personal-space-tile" data-personal-slot="settings" aria-disabled="true">
-                    <span class="personal-space-tile-label">הגדרות</span>
-                    <span class="personal-space-tile-hint">בקרוב</span>
-                </div>
-                <div class="personal-space-tile" data-personal-slot="more" aria-disabled="true">
-                    <span class="personal-space-tile-label">עוד</span>
-                    <span class="personal-space-tile-hint">בקרוב</span>
-                </div>
-            </div>
+
+            <div class="main-wave"></div>
+
+            <nav class="main-switcher" aria-label="ניווט ראשי">
+                <button class="main-switch-btn active" data-section="personal">
+                    <span class="main-switch-index">1</span>
+                    <span>איזור אישי</span>
+                </button>
+                <button class="main-switch-btn" data-section="homework">
+                    <span class="main-switch-index">2</span>
+                    <span>שיעורי בית</span>
+                </button>
+                <button class="main-switch-btn" data-section="updates">
+                    <span class="main-switch-index">3</span>
+                    <span>עדכונים וחדשות</span>
+                </button>
+                <button class="main-switch-btn" data-section="charts">
+                    <span class="main-switch-index">4</span>
+                    <span>גרפים</span>
+                </button>
+            </nav>
+
+            <div class="main-wave muted"></div>
+
+            <main class="section-panels">
+                <section id="personal-section" class="section-panel active" aria-label="איזור אישי">
+                    <h2 class="section-title">איזור אישי — מעקב רווח / הפסד</h2>
+                    <p class="section-subtitle">הכנס עסקאות כסף, והמערכת תחשב שווי נוכחי לפי המחיר הנוכחי של אונקיה.</p>
+                    <form id="pnl-form" class="pnl-form">
+                        <input id="tx-date" type="date" required>
+                        <input id="tx-note" type="text" placeholder="הערה (לדוגמה: קניית מטיל)">
+                        <input id="tx-amount-ils" type="number" min="0" step="0.01" placeholder="סכום בשקלים" required>
+                        <input id="tx-buy-price" type="number" min="0" step="0.01" placeholder="מחיר קנייה $ לאונקיה" required>
+                        <input id="tx-fx" type="number" min="0" step="0.001" placeholder="שער דולר/שקל (ברירת מחדל 3.65)">
+                        <button type="submit" class="neon-button-small">הוסף עסקה</button>
+                    </form>
+                    <div class="pnl-summary">
+                        <div><span>סה"כ עלות:</span> <strong id="total-cost-ils">₪0</strong></div>
+                        <div><span>שווי היום:</span> <strong id="total-current-ils">₪0</strong></div>
+                        <div><span>רווח/הפסד:</span> <strong id="total-pnl-ils">₪0</strong></div>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="pnl-table">
+                            <thead>
+                                <tr>
+                                    <th>תאריך</th>
+                                    <th>עסקה</th>
+                                    <th>עלות (₪)</th>
+                                    <th>$ בקנייה</th>
+                                    <th>אונקיות</th>
+                                    <th>שווי היום (₪)</th>
+                                    <th>רווח/הפסד</th>
+                                    <th>מחיקה</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pnl-table-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="homework-section" class="section-panel" aria-label="שיעורי בית">
+                    <h2 class="section-title">שיעורי בית — משחק שאלות ותשובות</h2>
+                    <p class="section-subtitle">תרגול קצר להבנת השוק, ניהול סיכונים ועולם העסקאות.</p>
+                    <div class="quiz-card">
+                        <div class="quiz-top-row">
+                            <span id="quiz-progress">שאלה 1 מתוך 5</span>
+                            <span id="quiz-score">ניקוד: 0</span>
+                        </div>
+                        <h3 id="quiz-question" class="quiz-question"></h3>
+                        <div id="quiz-options" class="quiz-options"></div>
+                        <div class="quiz-actions">
+                            <button id="quiz-next-btn" class="neon-button-small" disabled>המשך</button>
+                            <button id="quiz-reset-btn" class="neon-button-small secondary">איפוס</button>
+                        </div>
+                        <p id="quiz-feedback" class="quiz-feedback"></p>
+                    </div>
+                </section>
+
+                <section id="updates-section" class="section-panel" aria-label="עדכונים וחדשות">
+                    <h2 class="section-title">עדכונים וחדשות</h2>
+                    <p class="section-subtitle">כל התוכן כאן כרגע מומצא ולא אמיתי — לבדיקה בלבד.</p>
+                    <div class="news-grid">
+                        <article class="news-card">
+                            <span class="news-tag">מומצא לבדיקה בלבד</span>
+                            <h3>השוק מגיב לירידה במלאי גלובלי</h3>
+                            <p>בדוח דמו לחודש אפריל נרשמה ירידה של 8% במלאי כסף עולמי, מה שיצר תנודתיות גבוהה במסחר היומי.</p>
+                        </article>
+                        <article class="news-card">
+                            <span class="news-tag">מומצא לבדיקה בלבד</span>
+                            <h3>ביקוש תעשייתי באנרגיה ירוקה עולה</h3>
+                            <p>עדכון שבועי מדומה: מפעלי סולארי באירופה הגדילו הזמנות כסף לרבעון הקרוב.</p>
+                        </article>
+                        <article class="news-card">
+                            <span class="news-tag">מומצא לבדיקה בלבד</span>
+                            <h3>סקר קהילה: סוחרים מעדיפים ניהול סיכון</h3>
+                            <p>בסקר דמו פנימי, 72% מהתלמידים ציינו שפקודות סטופ הן הכלי החשוב ביותר במסחר קצר.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="charts-section" class="section-panel" aria-label="גרפים">
+                    <h2 class="section-title">גרפים — נרות יפנים</h2>
+                    <p class="section-subtitle">בחר טווח זמן והגרף יתעדכן. ירוק = עליה, אדום = ירידה.</p>
+                    <div class="chart-time-buttons">
+                        <button class="chart-time-btn active" data-timeframe="5m">5 דקות</button>
+                        <button class="chart-time-btn" data-timeframe="1h">שעה</button>
+                        <button class="chart-time-btn" data-timeframe="1d">יום</button>
+                        <button class="chart-time-btn" data-timeframe="1w">שבוע</button>
+                        <button class="chart-time-btn" data-timeframe="1m">חודש</button>
+                    </div>
+                    <div class="candles-wrap">
+                        <canvas id="candles-canvas" width="1000" height="420"></canvas>
+                    </div>
+                    <p class="chart-note">* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.</p>
+                </section>
+            </main>
         </div>
+
+        <button type="button" id="mr-d-fab" class="mr-d-fab" aria-haspopup="dialog" aria-controls="mr-d-modal">
+            <span class="mr-d-fab-label">מר ד'</span>
+            <span class="mr-d-fab-index">5</span>
+        </button>
     </div>
 
-    <!-- Price History Chart Modal -->
-    <div id="price-chart-modal" class="modal-overlay" style="display:none;">
-        <div class="modal-box chart-modal-box">
-            <div class="chart-modal-header">
-                <h2 class="modal-title chart-modal-title">מחיר כסף XAG/USD</h2>
-                <button id="chart-close-btn" class="chart-close-btn" onclick="closePriceChart()">✕</button>
-            </div>
-            <!-- Period selector tabs -->
-            <div class="chart-tabs">
-                <button class="chart-tab active" data-period="daily">24 שעות</button>
-                <button class="chart-tab" data-period="weekly">7 ימים</button>
-                <button class="chart-tab" data-period="yearly">12 חודשים</button>
-            </div>
-            <!-- Chart canvas container (inset clay well) -->
-            <div class="chart-well">
-                <div id="chart-loading" class="chart-loading">טוען נתונים...</div>
-                <canvas id="price-chart" style="display:none;"></canvas>
-            </div>
-            <!-- Stats bar below chart -->
-            <div class="chart-stats" id="chart-stats" style="display:none;">
-                <div class="chart-stat">
-                    <span class="chart-stat-label">מינימום</span>
-                    <span class="chart-stat-val" id="stat-min">—</span>
-                </div>
-                <div class="chart-stat">
-                    <span class="chart-stat-label">מקסימום</span>
-                    <span class="chart-stat-val" id="stat-max">—</span>
-                </div>
-                <div class="chart-stat">
-                    <span class="chart-stat-label">שינוי</span>
-                    <span class="chart-stat-val" id="stat-change">—</span>
+    <div id="mr-d-modal" class="mr-d-modal" style="display:none;" role="dialog" aria-modal="true" aria-label="צ'אט עם מר ד'">
+        <div class="mr-d-modal-head">
+            <h2>מר ד' — צ'אט מלא</h2>
+            <button id="mr-d-close" class="chart-close-btn" type="button">✕</button>
+        </div>
+        <div class="chat-container chat-fullscreen">
+            <div id="chat-messages" class="chat-messages">
+                <div class="chat-message bot">
+                    <span class="message-author">מר ד':</span>
+                    <span class="message-text">שלום. אני מר ד'. שאל אותי על כסף, שוק, אסטרטגיה וניהול סיכון.</span>
                 </div>
             </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="הקלד את שאלתך..." class="terminal-input">
+                <button id="send-btn" class="neon-button-small">שלח</button>
+            </div>
+            <p class="chat-disclaimer">יועץ AI - למטרות חינוכיות בלבד ⚠</p>
         </div>
     </div>
 
@@ -306,6 +224,6 @@
         </div>
     </div>
 
-        <script src="app.js?v=45"></script>
+        <script src="app_v2.js?v=1"></script>
 </body>
 </html>
