@@ -1721,6 +1721,19 @@ body {
 .fx-status.fx-loading { color: var(--clay); }
 .fx-status.fx-ok      { color: var(--green); }
 
+/* Live FX rate info line below the summary */
+.fx-live-info {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    background: var(--card-inner);
+    border-radius: var(--radius-md);
+    box-shadow: var(--nm-inset);
+    text-align: center;
+}
+
 /* ── PNL form responsive fix (no FX field = 5 cols max) ── */
 .pnl-form {
     grid-template-columns: repeat(5, minmax(110px, 1fr));

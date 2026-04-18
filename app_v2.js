@@ -11,6 +11,7 @@ const PNL_KEY        = 'vault_pnl_entries_v1';
 const DEFAULT_FX     = 3.65;
 
 let silverPrice   = 32;
+let currentFx     = 3.65;        // today's USD→ILS rate, fetched on startup
 let pnlRows       = [];
 const chartCache  = {};          // { frame: [{open,close,high,low,ts}, …] }
 let activeFrame   = '5m';
@@ -43,6 +44,9 @@ function goToScreen(screenId) {
     if (target) target.classList.add('active');
     window.scrollTo(0, 0);
     if (screenId === 'charts-screen') {
+        // Always clear cache so chart regenerates with the live price
+        Object.keys(chartCache).forEach(k => delete chartCache[k]);
+        if (lineChart) { lineChart.destroy(); lineChart = null; }
         requestAnimationFrame(() => renderActiveChart());
     }
 }
@@ -96,7 +100,7 @@ function escapeHtml(text) {
     return d.innerHTML;
 }
 
-// ── SILVER PRICE ─────────────────────────────────────────────────────
+// ── SILVER PRICE + CURRENT FX ────────────────────────────────────────
 async function updateSilverPrice() {
     try {
         const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/silver-price`);
@@ -111,11 +115,19 @@ async function updateSilverPrice() {
         document.getElementById('price-update').textContent = 'מצב דמו';
         silverPrice = 32;
     }
+    // Refresh today's USD→ILS rate for net spot valuation
+    await refreshCurrentFx();
     renderPnl();
     Object.keys(chartCache).forEach(k => delete chartCache[k]);
     if (document.getElementById('charts-screen')?.classList.contains('active')) {
         requestAnimationFrame(() => renderActiveChart());
     }
+}
+
+async function refreshCurrentFx() {
+    const today = new Date().toISOString().slice(0, 10);
+    const rate  = await fetchFxRate(today);
+    if (rate && rate > 0) currentFx = rate;
 }
 
 // ── EXCHANGE RATE AUTO-FETCH ─────────────────────────────────────────
@@ -144,15 +156,22 @@ function savePnl() {
 }
 
 function calcRow(r) {
-    const fx   = Number(r.fx  || DEFAULT_FX);
-    const cost = Number(r.cost || 0);
-    const buy  = Number(r.buy  || 0);
-    const oz   = buy > 0 ? cost / (buy * fx) : 0;
-    const now  = oz * silverPrice * fx;
-    return { ...r, fx, cost, buy, oz, now, pnl: now - cost };
+    const histFx = Number(r.fx  || DEFAULT_FX); // FX rate at purchase (for oz calculation)
+    const cost   = Number(r.cost || 0);
+    const buy    = Number(r.buy  || 0);
+    const oz     = buy > 0 ? cost / (buy * histFx) : 0;
+    // Net spot value = ounces × today's spot × today's FX rate (no premium)
+    const now    = oz * silverPrice * currentFx;
+    return { ...r, histFx, cost, buy, oz, now, pnl: now - cost };
 }
 
 function renderPnl() {
+    // Show live FX rate used for spot valuation
+    const fxInfo = document.getElementById('fx-live-info');
+    if (fxInfo) {
+        fxInfo.textContent = `שווי ספוט מחושב לפי: כסף $${silverPrice.toFixed(2)}/oz × שער ₪${currentFx.toFixed(4)}/$`;
+    }
+
     const body = document.getElementById('pnl-table-body');
     if (!body) return;
     if (!pnlRows.length) {

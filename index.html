@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>ה-כספת</title>
-    <link rel="stylesheet" href="style.css?v=47">
+    <link rel="stylesheet" href="style.css?v=48">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="config.js?v=43"></script>
@@ -101,9 +101,10 @@
             <div id="fx-status" class="fx-status"></div>
             <div class="pnl-summary">
                 <div><span>סה"כ עלות:</span> <strong id="total-cost-ils">₪0</strong></div>
-                <div><span>שווי היום:</span> <strong id="total-current-ils">₪0</strong></div>
+                <div><span>שווי ספוט נקי:</span> <strong id="total-current-ils">₪0</strong></div>
                 <div><span>רווח/הפסד:</span> <strong id="total-pnl-ils">₪0</strong></div>
             </div>
+            <div id="fx-live-info" class="fx-live-info"></div>
             <div class="table-wrap">
                 <table class="pnl-table">
                     <thead>
@@ -113,7 +114,7 @@
                             <th>עלות (₪)</th>
                             <th>$ בקנייה</th>
                             <th>אונקיות</th>
-                            <th>שווי היום (₪)</th>
+                            <th>שווי ספוט נקי (₪)</th>
                             <th>רווח/הפסד</th>
                             <th>מחיקה</th>
                         </tr>
@@ -238,6 +239,6 @@
         </div>
     </div>
 
-    <script src="app_v2.js?v=3"></script>
+    <script src="app_v2.js?v=4"></script>
 </body>
 </html>
