@@ -14,7 +14,7 @@ let silverPrice   = 32;
 let currentFx     = 3.65;        // today's USD→ILS rate, fetched on startup
 let pnlRows       = [];
 const chartCache  = {};          // { frame: [{open,close,high,low,ts}, …] }
-let activeFrame   = '5m';
+let activeFrame   = '1d';
 let activeChartType = 'candles'; // 'candles' | 'line'
 let lineChart     = null;
 let dashboardInited = false;
@@ -227,11 +227,9 @@ function renderPnl() {
 
 // ── CHART DATA GENERATION ────────────────────────────────────────────
 const FRAME_CONF = {
-    '5m': { count: 36, vol: 0.003, intervalMs: 5  * 60 * 1000 },
-    '1h': { count: 40, vol: 0.005, intervalMs: 60 * 60 * 1000 },
-    '1d': { count: 34, vol: 0.009, intervalMs: 24 * 60 * 60 * 1000 },
-    '1w': { count: 26, vol: 0.013, intervalMs:  7 * 24 * 60 * 60 * 1000 },
-    '1m': { count: 30, vol: 0.018, intervalMs: 30 * 24 * 60 * 60 * 1000 },
+    '1d': { count: 20, vol: 0.009, intervalMs: 24 * 60 * 60 * 1000 },         // 20 days
+    '1w': { count: 12, vol: 0.013, intervalMs:  7 * 24 * 60 * 60 * 1000 },    // 12 weeks
+    '1m': { count: 12, vol: 0.018, intervalMs: 30 * 24 * 60 * 60 * 1000 },    // 12 months
 };
 
 function genCandles(frame) {
@@ -253,13 +251,23 @@ function genCandles(frame) {
 function formatCandleTime(ts, frame) {
     const d  = new Date(ts);
     const tz = 'Asia/Jerusalem';
-    if (frame === '5m' || frame === '1h') {
-        return d.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', timeZone: tz });
+    if (frame === '1d') {
+        // Exact date: DD/MM/YYYY
+        const day   = d.toLocaleDateString('he-IL', { day: '2-digit',   timeZone: tz });
+        const month = d.toLocaleDateString('he-IL', { month: '2-digit', timeZone: tz });
+        const year  = d.toLocaleDateString('he-IL', { year:  '2-digit', timeZone: tz });
+        return `${day}/${month}/${year}`;
     }
-    if (frame === '1d' || frame === '1w') {
-        return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric', timeZone: tz });
+    if (frame === '1w') {
+        // Week start: DD/MM
+        const day   = d.toLocaleDateString('he-IL', { day: '2-digit',   timeZone: tz });
+        const month = d.toLocaleDateString('he-IL', { month: '2-digit', timeZone: tz });
+        return `${day}/${month}`;
     }
-    return d.toLocaleDateString('he-IL', { month: 'numeric', year: '2-digit', timeZone: tz });
+    // Monthly: MM/YYYY
+    const month = d.toLocaleDateString('he-IL', { month: '2-digit', timeZone: tz });
+    const year  = d.toLocaleDateString('he-IL', { year:  '2-digit', timeZone: tz });
+    return `${month}/${year}`;
 }
 
 // ── CANDLESTICK RENDERER (canvas) ───────────────────────────────────
@@ -287,8 +295,8 @@ function renderCandleChart(frame) {
     c.height   = Math.floor(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // Padding: extra bottom for timestamps, extra left for price labels
-    const p  = { t: 20, r: 16, b: 52, l: 52 };
+    // Padding: generous bottom for angled timestamps, left for price labels
+    const p  = { t: 20, r: 16, b: 70, l: 52 };
     const iw = W - p.l - p.r;
     const ih = H - p.t - p.b;
     const max   = Math.max(...data.map(x => x.high));
@@ -315,10 +323,9 @@ function renderCandleChart(frame) {
         ctx.fillText(`$${price.toFixed(1)}`, p.l - 5, y + 4);
     }
 
-    // Candles + X timestamps
-    const step      = iw / data.length;
-    const bw        = Math.max(4, step * 0.56);
-    const labelStep = Math.max(1, Math.floor(data.length / 7));
+    // Candles + X timestamps (every candle gets a label, drawn at angle)
+    const step = iw / data.length;
+    const bw   = Math.max(4, step * 0.56);
 
     data.forEach((d, i) => {
         const x  = p.l + i * step + step / 2;
@@ -340,22 +347,24 @@ function renderCandleChart(frame) {
         const bodyH = Math.max(2, Math.abs(yc - yo));
         ctx.fillRect(x - bw / 2, bodyY, bw, bodyH);
 
-        // Timestamp label
-        if (i % labelStep === 0 || i === data.length - 1) {
-            const label = formatCandleTime(d.ts, frame);
-            ctx.fillStyle   = 'rgba(74,88,72,.65)';
-            ctx.font        = '9px Assistant, sans-serif';
-            ctx.textAlign   = 'center';
-            ctx.fillText(label, x, H - p.b + 16);
+        // Tick mark at bottom of chart area
+        ctx.strokeStyle = 'rgba(78,110,92,.25)';
+        ctx.lineWidth   = 0.8;
+        ctx.beginPath();
+        ctx.moveTo(x, H - p.b);
+        ctx.lineTo(x, H - p.b + 4);
+        ctx.stroke();
 
-            // Tick mark
-            ctx.strokeStyle = 'rgba(78,110,92,.28)';
-            ctx.lineWidth   = 0.8;
-            ctx.beginPath();
-            ctx.moveTo(x, H - p.b);
-            ctx.lineTo(x, H - p.b + 5);
-            ctx.stroke();
-        }
+        // Date label — rotated 40° so all dates fit without overlap
+        const label = formatCandleTime(d.ts, frame);
+        ctx.save();
+        ctx.translate(x, H - p.b + 6);
+        ctx.rotate(-40 * Math.PI / 180);
+        ctx.fillStyle = 'rgba(74,88,72,.70)';
+        ctx.font      = '9px Assistant, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(label, 0, 0);
+        ctx.restore();
     });
 }
 
@@ -412,7 +421,13 @@ function renderLineChart(frame) {
             },
             scales: {
                 x: {
-                    ticks:  { color: textColor, font: { size: 10 }, maxTicksLimit: 8 },
+                    ticks: {
+                        color:    textColor,
+                        font:     { size: 9 },
+                        maxRotation: 40,
+                        minRotation: 40,
+                        autoSkip: false,
+                    },
                     grid:   { color: gridColor },
                     border: { display: false },
                 },

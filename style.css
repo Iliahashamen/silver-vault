@@ -1470,7 +1470,7 @@ body {
 
 .candles-wrap {
     width: 100%;
-    height: 420px;
+    height: 460px;
     border-radius: var(--radius-lg);
     box-shadow: var(--nm-inset);
     background: var(--card-inner);
@@ -1559,7 +1559,7 @@ body {
 @media (max-width: 640px) {
     .dashboard-v2 { padding: 14px 12px; }
     .main-switch-btn { font-size: 15px; }
-    .candles-wrap { height: 340px; }
+    .candles-wrap { height: 380px; }
     .mr-d-fab { width: 62px; height: 62px; }
 }
 
