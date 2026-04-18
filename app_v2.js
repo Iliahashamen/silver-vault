@@ -61,7 +61,7 @@ async function handleLogin() {
     if (!pass) return;
     const msg = document.getElementById('error-msg');
     const btn = document.getElementById('login-btn');
-    if (msg) msg.textContent = 'מתחבר...';
+    if (msg) { msg.textContent = 'מתחבר...'; msg.style.color = '#888'; }
     if (btn)  btn.disabled = true;
     try {
         const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/login`, {
@@ -70,12 +70,13 @@ async function handleLogin() {
             body: JSON.stringify({ passcode: pass }),
         });
         const data = await res.json();
-        if (!data.success) throw new Error(data.error || 'גישה נדחתה');
+        if (!data.success) throw new Error(data.error || 'קוד שגוי');
         saveSession(data.token);
-        if (msg) msg.textContent = 'גישה אושרה ✓';
+        if (msg) { msg.textContent = 'גישה אושרה ✓'; msg.style.color = '#4AB882'; }
         setTimeout(() => showDashboard(), 500);
-    } catch {
-        if (msg) msg.textContent = 'שגיאת התחברות ✗';
+    } catch (e) {
+        if (msg) { msg.textContent = (e.message && !e.message.includes('fetch')) ? e.message + ' ✗' : 'שגיאת חיבור ✗'; msg.style.color = '#C04040'; }
+        document.getElementById('passcode').value = '';
     } finally {
         if (btn) btn.disabled = false;
     }
@@ -125,6 +126,7 @@ function escapeHtml(text) {
 
 // ── SILVER PRICE + CURRENT FX ────────────────────────────────────────
 async function updateSilverPrice() {
+    let priceOk = false;
     try {
         const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/silver-price`);
         const data = await res.json();
@@ -133,12 +135,14 @@ async function updateSilverPrice() {
         document.getElementById('price-value').textContent  = `$${silverPrice.toFixed(2)}`;
         document.getElementById('price-update').textContent =
             `עודכן לפני ${Math.floor((data.cache_age_seconds || 0) / 60)} דקות`;
+        priceOk = true;
     } catch {
-        document.getElementById('price-value').textContent  = '$32.00';
-        document.getElementById('price-update').textContent = 'מצב דמו';
-        silverPrice = 32;
+        if (!priceOk) {
+            document.getElementById('price-value').textContent  = '$—';
+            document.getElementById('price-update').textContent = 'אין חיבור';
+        }
     }
-    // Refresh today's USD→ILS rate for net spot valuation
+    // Always refresh FX rate regardless of price API success
     await refreshCurrentFx();
     renderPnl();
     Object.keys(chartCache).forEach(k => delete chartCache[k]);
@@ -148,9 +152,11 @@ async function updateSilverPrice() {
 }
 
 async function refreshCurrentFx() {
-    const today = new Date().toISOString().slice(0, 10);
-    const rate  = await fetchFxRate(today);
-    if (rate && rate > 0) currentFx = rate;
+    try {
+        const today = new Date().toISOString().slice(0, 10);
+        const rate  = await fetchFxRate(today);
+        if (rate && rate > 0) currentFx = rate;
+    } catch { /* keep DEFAULT_FX */ }
 }
 
 // ── EXCHANGE RATE AUTO-FETCH ─────────────────────────────────────────
@@ -227,11 +233,12 @@ function renderPnl() {
 
 // ── CHART DATA GENERATION ────────────────────────────────────────────
 const FRAME_CONF = {
-    '1d': { count: 20, vol: 0.009, intervalMs: 24 * 60 * 60 * 1000 },         // 20 days
-    '1w': { count: 12, vol: 0.013, intervalMs:  7 * 24 * 60 * 60 * 1000 },    // 12 weeks
-    '1m': { count: 12, vol: 0.018, intervalMs: 30 * 24 * 60 * 60 * 1000 },    // 12 months
+    '1d': { count: 20, vol: 0.006, intervalMs:      60 * 60 * 1000 },   // hourly for ~20 candles
+    '1w': { count: 7,  vol: 0.010, intervalMs:  24 * 60 * 60 * 1000 },  // 7 days
+    '1m': { count: 12, vol: 0.014, intervalMs:   7 * 24 * 60 * 60 * 1000 }, // 12 weeks
 };
 
+// Fallback: generate simulated candles anchored at current live price
 function genCandles(frame) {
     const conf = FRAME_CONF[frame];
     const now  = Date.now();
@@ -241,52 +248,110 @@ function genCandles(frame) {
         const ts   = now - (conf.count - i) * conf.intervalMs;
         const open = close;
         close = Math.max(8, open + (Math.random() - 0.5) * conf.vol * open);
-        const high = Math.max(open, close) + Math.random() * conf.vol * open * 1.8;
-        const low  = Math.min(open, close) - Math.random() * conf.vol * open * 1.8;
+        const high = Math.max(open, close) + Math.random() * conf.vol * open * 1.5;
+        const low  = Math.min(open, close) - Math.random() * conf.vol * open * 1.5;
         out.push({ open, close, high, low: Math.max(0.1, low), ts });
     }
     return out;
 }
 
+// Fetch real historical silver price data from backend (Yahoo Finance via /api/silver-history)
+async function fetchRealChartData(frame) {
+    const periodMap = { '1d': 'daily', '1w': 'weekly', '1m': 'yearly' };
+    const period    = periodMap[frame] || 'daily';
+    try {
+        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/silver-history?period=${period}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        if (!json.success || !Array.isArray(json.data) || json.data.length < 3) return null;
+
+        // Convert {date, price} → OHLC candles (close = real price, wicks simulated)
+        const vol = FRAME_CONF[frame]?.vol || 0.01;
+        return json.data.map((pt, i, arr) => {
+            const close = pt.price;
+            const open  = i > 0 ? arr[i - 1].price : close;
+            const wick  = Math.random() * vol;
+            return {
+                open,
+                close,
+                high: Math.max(open, close) * (1 + wick),
+                low:  Math.max(0.1, Math.min(open, close) * (1 - wick)),
+                ts:   new Date(pt.date).getTime(),
+            };
+        });
+    } catch { return null; }
+}
+
+// Load chart data: real API first, simulated fallback; result is always cached
+async function loadChartData(frame) {
+    if (chartCache[frame]) return chartCache[frame];
+    const real = await fetchRealChartData(frame);
+    if (real && real.length >= 3) {
+        _lastDataReal = true;
+        chartCache[frame] = real;
+        return real;
+    }
+    _lastDataReal = false;
+    const sim = genCandles(frame);
+    chartCache[frame] = sim;
+    return sim;
+}
+
+// Whether the current chart is using real market data
+let _lastDataReal = false;
+
+// Reliable date part extraction using Intl (handles DST, locale correctly)
+function _dateParts(ts, tz) {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+        day: '2-digit', month: '2-digit', year: '2-digit', timeZone: tz
+    }).formatToParts(new Date(ts));
+    return {
+        day:   parts.find(p => p.type === 'day')?.value   ?? '00',
+        month: parts.find(p => p.type === 'month')?.value ?? '00',
+        year:  parts.find(p => p.type === 'year')?.value  ?? '00',
+    };
+}
+
 function formatCandleTime(ts, frame) {
-    const d  = new Date(ts);
     const tz = 'Asia/Jerusalem';
-    if (frame === '1d') {
-        // Exact date: DD/MM/YYYY
-        const day   = d.toLocaleDateString('he-IL', { day: '2-digit',   timeZone: tz });
-        const month = d.toLocaleDateString('he-IL', { month: '2-digit', timeZone: tz });
-        const year  = d.toLocaleDateString('he-IL', { year:  '2-digit', timeZone: tz });
-        return `${day}/${month}/${year}`;
-    }
-    if (frame === '1w') {
-        // Week start: DD/MM
-        const day   = d.toLocaleDateString('he-IL', { day: '2-digit',   timeZone: tz });
-        const month = d.toLocaleDateString('he-IL', { month: '2-digit', timeZone: tz });
-        return `${day}/${month}`;
-    }
-    // Monthly: MM/YYYY
-    const month = d.toLocaleDateString('he-IL', { month: '2-digit', timeZone: tz });
-    const year  = d.toLocaleDateString('he-IL', { year:  '2-digit', timeZone: tz });
-    return `${month}/${year}`;
+    const { day, month, year } = _dateParts(ts, tz);
+    if (frame === '1d') return `${day}/${month}`;  // e.g. 18/04 (year implied, recent data)
+    if (frame === '1w') return `${day}/${month}`;  // e.g. 14/04 (week start)
+    return `${month}/${year}`;                      // e.g. 04/25 (month/year)
+}
+
+// Full date label for tooltip / display (includes year)
+function formatCandleTimeFull(ts, frame) {
+    const tz = 'Asia/Jerusalem';
+    const { day, month, year } = _dateParts(ts, tz);
+    if (frame === '1m') return `${month}/20${year}`;
+    return `${day}/${month}/20${year}`;
 }
 
 // ── CANDLESTICK RENDERER (canvas) ───────────────────────────────────
-function drawRoundRect(ctx, x, y, w, h, r) {
-    const rr = Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2);
-    ctx.beginPath();
-    ctx.moveTo(x + rr, y);
-    ctx.arcTo(x + w, y,     x + w, y + h, rr);
-    ctx.arcTo(x + w, y + h, x,     y + h, rr);
-    ctx.arcTo(x,     y + h, x,     y,     rr);
-    ctx.arcTo(x,     y,     x + w, y,     rr);
-    ctx.closePath();
-}
-
-function renderCandleChart(frame) {
+function _showCanvasLoading() {
     const c = document.getElementById('candles-canvas');
     if (!c) return;
-    activeFrame = frame;
-    const data = chartCache[frame] || (chartCache[frame] = genCandles(frame));
+    const ctx = c.getContext('2d');
+    const W = c.clientWidth || 700;
+    const H = c.clientHeight || 380;
+    c.width = Math.floor(W * (window.devicePixelRatio || 1));
+    c.height = Math.floor(H * (window.devicePixelRatio || 1));
+    ctx.setTransform(window.devicePixelRatio || 1, 0, 0, window.devicePixelRatio || 1, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(240,237,231,.9)';
+    ctx.beginPath();
+    ctx.roundRect?.(0, 0, W, H, 18) ?? ctx.rect(0, 0, W, H);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(74,88,72,.45)';
+    ctx.font = '14px Assistant, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('טוען נתונים...', W / 2, H / 2);
+}
+
+function _drawCandleData(frame, data) {
+    const c = document.getElementById('candles-canvas');
+    if (!c || !data?.length) return;
     const ctx  = c.getContext('2d');
     const dpr  = window.devicePixelRatio || 1;
     const W    = c.clientWidth  || 700;
@@ -295,18 +360,19 @@ function renderCandleChart(frame) {
     c.height   = Math.floor(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // Padding: generous bottom for angled timestamps, left for price labels
     const p  = { t: 20, r: 16, b: 70, l: 52 };
     const iw = W - p.l - p.r;
     const ih = H - p.t - p.b;
-    const max   = Math.max(...data.map(x => x.high));
-    const min   = Math.min(...data.map(x => x.low));
-    const span  = Math.max(0.0001, max - min);
+    const max  = Math.max(...data.map(x => x.high));
+    const min  = Math.min(...data.map(x => x.low));
+    const span = Math.max(0.0001, max - min);
 
     // Background
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = 'rgba(240,237,231,.9)';
-    drawRoundRect(ctx, 0, 0, W, H, 18);
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(0, 0, W, H, 18);
+    else ctx.rect(0, 0, W, H);
     ctx.fill();
 
     // Horizontal grid + Y price labels
@@ -317,13 +383,13 @@ function renderCandleChart(frame) {
         ctx.strokeStyle = 'rgba(78,110,92,.16)';
         ctx.lineWidth   = 1;
         ctx.beginPath(); ctx.moveTo(p.l, y); ctx.lineTo(W - p.r, y); ctx.stroke();
-        ctx.fillStyle  = 'rgba(74,88,72,.60)';
-        ctx.font       = '10px Assistant, sans-serif';
-        ctx.textAlign  = 'right';
-        ctx.fillText(`$${price.toFixed(1)}`, p.l - 5, y + 4);
+        ctx.fillStyle   = 'rgba(74,88,72,.60)';
+        ctx.font        = '10px Assistant, sans-serif';
+        ctx.textAlign   = 'right';
+        ctx.fillText(`$${price.toFixed(2)}`, p.l - 4, y + 4);
     }
 
-    // Candles + X timestamps (every candle gets a label, drawn at angle)
+    // Candles + X timestamps
     const step = iw / data.length;
     const bw   = Math.max(4, step * 0.56);
 
@@ -336,18 +402,15 @@ function renderCandleChart(frame) {
         const up  = d.close >= d.open;
         const col = up ? '#4AB882' : '#D94949';
 
-        // Wick
         ctx.strokeStyle = col;
         ctx.lineWidth   = 1.5;
         ctx.beginPath(); ctx.moveTo(x, yh); ctx.lineTo(x, yl); ctx.stroke();
 
-        // Body
         ctx.fillStyle = col;
         const bodyY = Math.min(yo, yc);
         const bodyH = Math.max(2, Math.abs(yc - yo));
         ctx.fillRect(x - bw / 2, bodyY, bw, bodyH);
 
-        // Tick mark at bottom of chart area
         ctx.strokeStyle = 'rgba(78,110,92,.25)';
         ctx.lineWidth   = 0.8;
         ctx.beginPath();
@@ -355,25 +418,44 @@ function renderCandleChart(frame) {
         ctx.lineTo(x, H - p.b + 4);
         ctx.stroke();
 
-        // Date label — rotated 40° so all dates fit without overlap
-        const label = formatCandleTime(d.ts, frame);
-        ctx.save();
-        ctx.translate(x, H - p.b + 6);
-        ctx.rotate(-40 * Math.PI / 180);
-        ctx.fillStyle = 'rgba(74,88,72,.70)';
-        ctx.font      = '9px Assistant, sans-serif';
-        ctx.textAlign = 'right';
-        ctx.fillText(label, 0, 0);
-        ctx.restore();
+        // Every 2nd label for daily (many candles), every label for weekly/monthly
+        const showLabel = frame === '1d' ? i % 2 === 0 : true;
+        if (showLabel) {
+            const label = formatCandleTime(d.ts, frame);
+            ctx.save();
+            ctx.translate(x, H - p.b + 8);
+            ctx.rotate(-40 * Math.PI / 180);
+            ctx.fillStyle = 'rgba(74,88,72,.72)';
+            ctx.font      = '9px Assistant, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(label, 0, 0);
+            ctx.restore();
+        }
     });
+
+    // Update footnote based on whether data is real or simulated
+    const note = document.querySelector('.chart-note');
+    if (note) {
+        note.textContent = _lastDataReal
+            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (SI=F)'
+            : '* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.';
+    }
+}
+
+function renderCandleChart(frame) {
+    activeFrame = frame;
+    if (chartCache[frame]) {
+        _drawCandleData(frame, chartCache[frame]);
+        return;
+    }
+    _showCanvasLoading();
+    loadChartData(frame).then(data => _drawCandleData(frame, data));
 }
 
 // ── LINE CHART (Chart.js) ─────────────────────────────────────────────
-function renderLineChart(frame) {
+function _drawLineData(frame, data) {
     const canvas = document.getElementById('line-canvas');
-    if (!canvas) return;
-    activeFrame = frame;
-    const data   = chartCache[frame] || (chartCache[frame] = genCandles(frame));
+    if (!canvas || !data?.length) return;
     const labels = data.map(c => formatCandleTime(c.ts, frame));
     const prices = data.map(c => c.close);
 
@@ -381,8 +463,6 @@ function renderLineChart(frame) {
     const fillColor = 'rgba(196,132,90,0.12)';
     const gridColor = 'rgba(74,88,72,0.10)';
     const textColor = 'rgba(74,88,72,0.75)';
-
-    if (lineChart) { lineChart.destroy(); lineChart = null; }
 
     lineChart = new Chart(canvas, {
         type: 'line',
@@ -406,18 +486,23 @@ function renderLineChart(frame) {
             interaction: { mode: 'index', intersect: false },
             plugins: {
                 legend: { display: false },
-                tooltip: {
-                    backgroundColor: 'rgba(240,237,231,0.96)',
-                    titleColor:      '#2C3028',
-                    bodyColor:       '#C4845A',
-                    borderColor:     'rgba(168,148,128,0.3)',
-                    borderWidth:     1,
-                    cornerRadius:    10,
-                    padding:         10,
-                    callbacks: {
-                        label: ctx => ` $${ctx.parsed.y.toFixed(3)} USD/oz`
+                    tooltip: {
+                        backgroundColor: 'rgba(240,237,231,0.96)',
+                        titleColor:      '#2C3028',
+                        bodyColor:       '#C4845A',
+                        borderColor:     'rgba(168,148,128,0.3)',
+                        borderWidth:     1,
+                        cornerRadius:    10,
+                        padding:         10,
+                        callbacks: {
+                            title: ctx => {
+                                const idx = ctx[0]?.dataIndex;
+                                const d   = (chartCache[activeFrame] || [])[idx];
+                                return d ? formatCandleTimeFull(d.ts, activeFrame) : '';
+                            },
+                            label: ctx => ` $${ctx.parsed.y.toFixed(3)} USD/oz`
+                        }
                     }
-                }
             },
             scales: {
                 x: {
@@ -438,6 +523,27 @@ function renderLineChart(frame) {
                 }
             }
         }
+    });
+
+    // Update footnote
+    const note = document.querySelector('.chart-note');
+    if (note) {
+        note.textContent = _lastDataReal
+            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (SI=F)'
+            : '* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.';
+    }
+}
+
+function renderLineChart(frame) {
+    activeFrame = frame;
+    if (lineChart) { lineChart.destroy(); lineChart = null; }
+    if (chartCache[frame]) {
+        _drawLineData(frame, chartCache[frame]);
+        return;
+    }
+    loadChartData(frame).then(data => {
+        if (lineChart) { lineChart.destroy(); lineChart = null; }
+        _drawLineData(frame, data);
     });
 }
 
