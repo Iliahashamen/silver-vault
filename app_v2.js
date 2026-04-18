@@ -312,18 +312,26 @@ function _dateParts(ts, tz) {
     };
 }
 
-function formatCandleTime(ts, frame) {
-    const tz = 'Asia/Jerusalem';
-    const { day, month, year } = _dateParts(ts, tz);
-    if (frame === '1d') return `${day}/${month}`;  // e.g. 18/04 (year implied, recent data)
-    if (frame === '1w') return `${day}/${month}`;  // e.g. 14/04 (week start)
-    return `${month}/${year}`;                      // e.g. 04/25 (month/year)
+function _timeStr(ts, tz) {
+    return new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit', minute: '2-digit', timeZone: tz, hour12: false
+    }).format(new Date(ts));
 }
 
-// Full date label for tooltip / display (includes year)
+// Short label for chart axis (1d = HH:MM, 1w = DD/MM, 1m = MM/YY)
+function formatCandleTime(ts, frame) {
+    const tz = 'Asia/Jerusalem';
+    if (frame === '1d') return _timeStr(ts, tz);          // e.g. "14:00"
+    const { day, month, year } = _dateParts(ts, tz);
+    if (frame === '1w') return `${day}/${month}`;          // e.g. "09/04"
+    return `${month}/${year}`;                             // e.g. "04/25"
+}
+
+// Full label for tooltips (includes year / date)
 function formatCandleTimeFull(ts, frame) {
     const tz = 'Asia/Jerusalem';
     const { day, month, year } = _dateParts(ts, tz);
+    if (frame === '1d') return `${day}/${month}/20${year} ${_timeStr(ts, tz)}`;
     if (frame === '1m') return `${month}/20${year}`;
     return `${day}/${month}/20${year}`;
 }
@@ -418,12 +426,13 @@ function _drawCandleData(frame, data) {
         ctx.lineTo(x, H - p.b + 4);
         ctx.stroke();
 
-        // Every 2nd label for daily (many candles), every label for weekly/monthly
-        const showLabel = frame === '1d' ? i % 2 === 0 : true;
-        if (showLabel) {
+        // Dynamic label step: skip labels so they never overlap (target min 28px gap after rotation)
+        const labelStep = Math.max(1, Math.ceil(30 / (step * Math.cos(40 * Math.PI / 180))));
+        if (i % labelStep === 0) {
             const label = formatCandleTime(d.ts, frame);
             ctx.save();
             ctx.translate(x, H - p.b + 8);
+            // -40° (CCW) + textAlign 'left' → text extends toward upper-right in screen space
             ctx.rotate(-40 * Math.PI / 180);
             ctx.fillStyle = 'rgba(74,88,72,.72)';
             ctx.font      = '9px Assistant, sans-serif';
@@ -507,11 +516,12 @@ function _drawLineData(frame, data) {
             scales: {
                 x: {
                     ticks: {
-                        color:    textColor,
-                        font:     { size: 9 },
-                        maxRotation: 40,
-                        minRotation: 40,
-                        autoSkip: false,
+                        color:          textColor,
+                        font:           { size: 9 },
+                        maxRotation:    40,
+                        minRotation:    30,
+                        autoSkip:       true,
+                        maxTicksLimit:  10,   // never show more than 10 x-axis ticks
                     },
                     grid:   { color: gridColor },
                     border: { display: false },
