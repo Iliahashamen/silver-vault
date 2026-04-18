@@ -81,7 +81,30 @@ async function handleLogin() {
     }
 }
 
-function showDashboard() {
+async function validateTokenWithServer(token) {
+    try {
+        const res = await fetch(`${CONFIG.CHAT_API_URL}/api/auth-check`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        return res.status !== 401;
+    } catch {
+        return true; // network error — don't kick user out
+    }
+}
+
+async function showDashboard() {
+    const token = sessionToken();
+    if (token) {
+        const valid = await validateTokenWithServer(token);
+        if (!valid) {
+            localStorage.removeItem(SESSION_KEY);
+            // Token was invalidated (server restart) — go back to login
+            goToScreen('login-screen');
+            const msg = document.getElementById('error-msg');
+            if (msg) { msg.textContent = 'החיבור פג — יש להתחבר שוב.'; msg.style.color = '#C04040'; }
+            return;
+        }
+    }
     goToScreen('dashboard-screen');
     const footer = document.querySelector('.footer');
     if (footer) footer.style.display = 'none';
@@ -441,6 +464,21 @@ async function sendMessage() {
             },
             body: JSON.stringify({ user_id: uid, message: text }),
         });
+
+        // Server restarted → token invalidated → force re-login
+        if (res.status === 401) {
+            typing.remove();
+            addMsg('מר ד׳', 'החיבור פג תוקף. מתחבר מחדש...', 'bot error');
+            localStorage.removeItem(SESSION_KEY);
+            setTimeout(() => {
+                document.getElementById('mr-d-modal').style.display = 'none';
+                document.body.style.overflow = '';
+                document.getElementById('mr-d-fab').style.display = 'none';
+                goToScreen('login-screen');
+            }, 1500);
+            return;
+        }
+
         const data = await res.json();
         typing.remove();
         addMsg('מר ד׳', data.response || 'אין כרגע מענה, נסה שוב.', 'bot');
