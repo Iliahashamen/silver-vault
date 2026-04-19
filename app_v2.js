@@ -644,6 +644,200 @@ async function sendMessage() {
     }
 }
 
+// ══════════════════════════════════════════════════════════════════════
+// SILVER TRIVIA QUIZ
+// ══════════════════════════════════════════════════════════════════════
+const QUIZ_BANK = [
+  { q: "כמה גרם יש באונקיה טרויה של כסף?", a: ["31.10 גרם","28.35 גרם","33.00 גרם","29.58 גרם"] },
+  { q: "מה הסמל הבינלאומי של כסף בשוק הסחורות?", a: ["XAG","AG","SL","SIL"] },
+  { q: "מה נחשב 'כסף טהור' (Fine Silver)?", a: ["999 חלקים מאלף","925 חלקים מאלף","990 חלקים מאלף","970 חלקים מאלף"] },
+  { q: "מה עדיף לרכוש כשרוצים לשלם פרמיה נמוכה יותר?", a: ["מטיל","מטבע","הפרמיה זהה","תלוי בגודל בלבד"] },
+  { q: "מה הוא 'יחס זהב-כסף' (Gold-Silver Ratio)?", a: ["כמה אונקיות כסף שוות אונקיה אחת של זהב","כמה גרם כסף יש לעומת זהב בעולם","היחס בין מחיר זהב לכסף ב-1900","אחוז הכסף בסגסוגת זהב"] },
+  { q: "מה הוא 'פרמיה' בשוק הכסף הפיזי?", a: ["ההפרש בין מחיר הספוט למחיר הקמעונאי","מס על רכישת כסף","עלות האחסון השנתית","עמלת הברוקר"] },
+  { q: "איזה מטבע כסף מנפיקה ארצות הברית?", a: ["Silver Eagle","Maple Leaf","Britannia","Philharmoniker"] },
+  { q: "מה הוא 'ספוט' (Spot Price) של כסף?", a: ["המחיר העדכני לאונקיה בשוק הבינלאומי","מחיר כסף ישן","המחיר המינימלי שמוכרים מוכנים לקבל","מחיר עתידי ידוע מראש"] },
+  { q: "מה הוא 'כסף 999.9' (ארבעה תשעות)?", a: ["כסף עם 99.99% טוהר","כסף מיוצר בשנת 1999","סוג מיוחד של כסף קולוידלי","כסף שעומד בתקן אירופאי בלבד"] },
+  { q: "איזה יחס זהב-כסף (GSR) נחשב 'גבוה' ומציין כסף זול יחסית?", a: ["מעל 80","מעל 50","מעל 30","מעל 100"] },
+  { q: "מה היא 'אסטרטגיית DCA' (Dollar Cost Averaging)?", a: ["קנייה בכמות קבועה בתדירות קבועה ללא קשר למחיר","לקנות הכל פעם אחת כשהמחיר נמוך","למכור חלק מהאחזקות בעלייה","לשמור מזומן ולחכות לירידות"] },
+  { q: "מה מס רווח הון משוער על כסף בישראל?", a: ["כ-25%","10%","17%","33%"] },
+  { q: "מה ההבדל בין 'כסף פיזי' ל'כסף נייר'?", a: ["כסף פיזי הוא מתכת אמיתית, כסף נייר הוא חוזה או ETF","כסף פיזי הוא מטבעות ישנים בלבד","כסף נייר שווה יותר","אין הבדל"] },
+  { q: "מה הם 'מטבעות נומיסמטיים'?", a: ["מטבעות אספנות עם ערך מעבר לתוכן המתכת","מטבעות לסחר יומיומי","מטבעות עם ערך נקוב גבוה","מטבעות שנוצרו לפני 1950 בלבד"] },
+  { q: "מה הוא 'Sterling Silver' (כסף 925)?", a: ["כסף עם 925 חלקים מאלף טוהר","כסף עם 99.9% טוהר","כסף שנוצר בבריטניה בלבד","כסף שאינו מתאים להשקעה"] },
+  { q: "באיזה תחום תעשייתי חשוב משתמשים בכסף?", a: ["לוחות סולאריים ואלקטרוניקה","רק בתכשיטים","רק במטבעות ושטרות","בתעשיית הנפט בלבד"] },
+  { q: "מה שיא המחיר ההיסטורי המשוער של כסף?", a: ["כ-$50 לאונקיה","כ-$30 לאונקיה","כ-$70 לאונקיה","כ-$100 לאונקיה"] },
+  { q: "מה יתרון מטיל כסף גדול על פני מטיל קטן?", a: ["פרמיה נמוכה יותר לאונקיה","קל יותר לאחסן","יותר נזיל","טוהר גבוה יותר"] },
+  { q: "מה הוא 'Silver ETF'?", a: ["קרן סל שעוקבת אחר מחיר הכסף ללא החזקת מתכת פיזית","מטיל כסף גדול במיוחד","כסף שנמכר בבורסה ישראלית","חוזה עתידי על כסף"] },
+  { q: "כמה אונקיות טרוי יש בקילוגרם כסף?", a: ["32.15 אונקיות","28 אונקיות","35 אונקיות","40 אונקיות"] },
+  { q: "מה הוא ה-LBMA?", a: ["גוף שמגדיר תקני איכות בינלאומיים למתכות יקרות","בנק מרכזי לכסף","חברת ביטוח למתכות","מדד כסף אירופאי"] },
+  { q: "איזה מטבע כסף מנפיקה קנדה?", a: ["Maple Leaf","Silver Eagle","Britannia","Philharmoniker"] },
+  { q: "מה הוא ה-COMEX?", a: ["בורסת הסחורות בניו יורק המשפיעה על מחיר הכסף","חברת ייצור כסף אמריקאית","תקן בינלאומי לטוהר כסף","מועדון משקיעי כסף"] },
+  { q: "מה הוא 'Allocated Storage' (אחסון מוקצה)?", a: ["כסף ספציפי שנאגר בנפרד ושייך לך לחלוטין","כסף שנאגר ביחד עם מתכות של אחרים","כסף שמאוחסן בבנק","שירות ממשלתי לאחסון מתכות"] },
+  { q: "מה הוא 'בוליון' (Bullion)?", a: ["מטילים ומטבעות המוערכים לפי משקל המתכת שלהם","מטבעות עם ערך נקוב גבוה","כסף שנוצר לפני 1900","שם של חברת כסף בינלאומית"] },
+  { q: "מתי עדיף להחזיק מטבעות על פני מטילים?", a: ["כשרוצים נזילות קלה יותר","כשרוצים לשלם פרמיה נמוכה","כשקונים כמויות גדולות","כשהאחסון הוא הגורם המרכזי"] },
+  { q: "מה הם 'Silver Stackers'?", a: ["אנשים שצוברים כסף פיזי לאורך זמן","מוכרי כסף מקצועיים","מנהלי קרנות כסף","יצרני מטילי כסף"] },
+  { q: "מה הסיכון העיקרי ברכישת כסף ממוכר לא מוכר?", a: ["קבלת כסף מזויף","מחיר גבוה מדי","בעיות מס","בעיות אחסון"] },
+  { q: "איזה מטבע כסף מנפיקה אוסטריה?", a: ["Philharmoniker","Silver Eagle","Maple Leaf","Britannia"] },
+  { q: "מה הוא 'Numismatic Premium'?", a: ["תוספת מחיר על מטבעות אספנות מעבר לערך המתכת","פרמיה על כמות גדולה","הנחה על רכישת מטילים","עלות האריזה של המטבע"] },
+  { q: "כיצד ריבית נמוכה של הפד האמריקאי משפיעה על מחיר הכסף?", a: ["נוטה להעלות את מחיר הכסף","מוריד את מחיר הכסף","אין השפעה","גורם לייסוף הדולר בלבד"] },
+  { q: "כמה כניסות שוק מינימום מומלצות לכסף פיזי?", a: ["3–5 כניסות נפרדות","כניסה אחת מלאה","2 כניסות מקסימום","עד 10 כניסות קטנות בלבד"] },
+  { q: "מה ההמלצה לגבי קנייה חודשית מינימלית בכסף?", a: ["אונקיה אחת לפחות בחודש","5 אונקיות לחודש","100 גרם לחודש","תלוי לחלוטין בתקציב"] },
+  { q: "מה אחד מהסיכונים הייחודיים לכסף לעומת זהב?", a: ["תנודתיות גבוהה יותר","לא ניתן לאחסן אותו","אין ביקוש תעשייתי","קשה יותר לזיוף"] },
+  { q: "מה פירוש 'Bid Price' לעומת 'Ask Price'?", a: ["Bid – מחיר שקונה מוכן לשלם; Ask – מחיר שמוכר מוכן לקבל","Bid – מחיר שמוכר מוכן למכור; Ask – מחיר שקונה מוכן לשלם","שניהם זהים תמיד","Bid מחיר כסף, Ask מחיר זהב"] },
+  { q: "מה יתרון כסף פיזי על פני ETF של כסף?", a: ["ללא סיכון צד שלישי ובעלות ישירה על המתכת","נזיל יותר מ-ETF","זול יותר לרכישה","אין הבדל מהותי"] },
+  { q: "מה מציין יחס זהב-כסף מעל 80?", a: ["כסף זול יחסית לזהב – הזדמנות פוטנציאלית לקנייה","כסף יקר מדי לעומת זהב","עודף היצע של כסף בשוק","שוק דובי בכסף"] },
+  { q: "מה כדאי לעשות כשמחיר הכסף יורד בחדות?", a: ["לצבור בהדרגה לפי תקציב – ירידה יכולה להיות הזדמנות","למכור מיד לפני שמאבדים יותר","לחכות שהמחיר יחזור לשיא","לקנות הכל בבת אחת"] },
+  { q: "מה הוא 'Unallocated' בניגוד ל-'Allocated'?", a: ["Unallocated – דרישה כללית ללא מתכת ספציפית; Allocated – מתכת ספציפית שלך","אין הבדל מהותי","Unallocated תמיד בטוח יותר","Allocated זמין רק לבנקים"] },
+  { q: "למה מומלץ לפצל קנייה ל-3–5 כניסות נפרדות?", a: ["להוריד סיכון תזמון שגוי ולנצל ירידות בדרך","כי הפרמיה נמוכה יותר כך","בגלל חוק ישראלי שמגביל קנייה בסכום אחד","כדי לחסוך בעמלות בנק"] },
+  { q: "מה ה-'Spot' מחושב לפי?", a: ["מחיר המסחר הנוכחי בשוק הסחורות הבינלאומי","ממוצע מחירים של השנה האחרונה","מחיר שקובעת ממשלת ארה\"ב","מחיר קבוע שמתעדכן פעם בשבוע"] },
+  { q: "מה הוא המוליך החשמלי הטוב ביותר מבין כל המתכות?", a: ["כסף (Silver)","זהב","נחושת","פלטינה"] },
+  { q: "כמה אחוז מהתיק מומלץ להקצות למתכות יקרות למשקיע מתחיל?", a: ["עד 15%","עד 50%","עד 5%","עד 30%"] },
+  { q: "מה החיסרון הייחודי של קרן סל (ETF) כסף לעומת כסף פיזי?", a: ["סיכון צד נגדי — אינכם הבעלים הישירים של הכסף","לא ניתן לקנות בסכומים קטנים","אין שקיפות על ביצועי הקרן","מחיר הקנייה גבוה יותר"] },
+  { q: "מה ייחודי בכסף לעומת זהב בהקשר מהפכת האנרגיה הירוקה?", a: ["כסף הוא רכיב קריטי בפאנלים סולאריים וברכבים חשמליים","כסף זול יותר לייצור פאנלים","זהב אינו בשימוש תעשייתי כלל","כסף נפוץ יותר מזהב בקרום כדור הארץ"] },
+  { q: "מהי הדרך הזולה והנגישה ביותר למשקיע מתחיל להיחשף לכסף?", a: ["קרנות סל (ETF)","רכישת מטילים פיזיים","חוזים עתידיים","מניות חברות כרייה"] },
+  { q: "מה הסיכון המרכזי של חוזים עתידיים (Futures) על כסף?", a: ["מינוף גבוה — ההפסד יכול לעלות על ההשקעה הראשונית","לא ניתן למכור לפני הפקיעה","אין חשיפה לשינויי מחיר","דמי ניהול גבוהים מאוד"] },
+  { q: "מה כולל מחיר ה'פרמיה' על כסף פיזי?", a: ["עלויות ייצור, שינוע וביטוח של המתכת","מע\"מ בלבד","רווח המוכר בלבד","עלות האחסון השנתית"] },
+  { q: "מה שם הגוף הישראלי המפורסם שמוכר כסף ומטבעות מקומיים?", a: ["The Holy Land Mint (החברה הישראלית למדליות ומטבעות)","בנק ישראל","Israel Coins Ltd","המטבעה הישראלית הרשמית"] },
+  { q: "מה המשמעות של 'סיכון צד נגדי' (Counterparty Risk)?", a: ["סיכון שמנהל הקרן לא יוכל לעמוד בהתחייבויותיו","סיכון נפילת מחיר כסף בשוק","סיכון גניבת כסף פיזי","סיכון מטבע חוץ"] },
+  { q: "מה ייחד את ביקוש הכסף לעומת זהב בשוק הגלובלי?", a: ["לכסף יש ביקוש תעשייתי נרחב בנוסף לביקוש להשקעה","לזהב ביקוש תעשייתי גדול יותר","ביקוש הכסף נובע בעיקר מתכשיטים","אין הבדל בין הביקושים"] },
+  { q: "מה אחד מחסרונות ההשקעה בכסף פיזי?", a: ["נזילות נמוכה — מכירה עלולה להיות איטית","אין הגנה מול אינפלציה","לא ניתן לאחסן בכספות","המחיר קבוע ולא מגיב לשוק"] },
+  { q: "מה ההבדל בין 'Ask price' ל-'Bid price' בשוק המתכות?", a: ["Ask הוא המחיר שהמוכרים מבקשים, Bid הוא המחיר שהקונים מוכנים לשלם","Ask תמיד גבוה מ-Bid באחוז קבוע","Bid הוא המחיר הרשמי, Ask הוא ספקולטיבי","שניהם זהים בשוק סחורות"] },
+  { q: "לאיזה סוג משקיע מתאימים חוזים עתידיים (Futures) על כסף?", a: ["משקיעים מנוסים עם סבילות גבוהה לסיכון","משקיעים פסיביים לטווח ארוך","משקיעים מתחילים עם תקציב קטן","כל משקיע ללא הבדל"] },
+  { q: "מה החיסרון בהשקעה במניות חברות כרייה כחלופה לכסף פיזי?", a: ["ההצלחה תלויה בניהול ותפעול החברה ולא רק במחיר הכסף","לא ניתן לקנות בבורסה","הן לא עוקבות אחר מחיר הכסף בשום מצב","אין דיבידנד בחברות כרייה"] },
+];
+
+const QUIZ_TOTAL = 15;
+const QUIZ_SECS  = 600;
+
+let quizState = { questions: [], idx: 0, score: 0, timeLeft: QUIZ_SECS, timer: null, locked: false };
+
+function _quizShuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function _quizBuild() {
+    return _quizShuffle(QUIZ_BANK).slice(0, QUIZ_TOTAL).map(({ q, a }) => {
+        const order = _quizShuffle([0, 1, 2, 3]);
+        return { q, answers: order.map(i => a[i]), correct: order.indexOf(0) };
+    });
+}
+
+function _quizFmt(sec) {
+    return `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
+}
+
+function _quizPanel(show) {
+    ['quiz-start', 'quiz-playing', 'quiz-done'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = (id === show) ? '' : 'none';
+    });
+}
+
+function _quizRender() {
+    const { questions, idx, score, timeLeft } = quizState;
+    const q = questions[idx];
+    const pct = Math.round((idx / QUIZ_TOTAL) * 100);
+
+    document.getElementById('quiz-q-num').textContent   = `${idx + 1} / ${QUIZ_TOTAL}`;
+    document.getElementById('quiz-score-hud').textContent = `${score} נק'`;
+    document.getElementById('quiz-question').textContent  = q.q;
+    const bar = document.getElementById('quiz-bar');
+    if (bar) bar.style.width = pct + '%';
+
+    const timerEl = document.getElementById('quiz-timer');
+    if (timerEl) {
+        timerEl.textContent = _quizFmt(timeLeft);
+        timerEl.classList.toggle('quiz-timer-low', timeLeft <= 60);
+    }
+
+    const wrap = document.getElementById('quiz-options');
+    wrap.innerHTML = '';
+    q.answers.forEach((ans, i) => {
+        const btn = document.createElement('button');
+        btn.className   = 'quiz-opt-btn';
+        btn.textContent = ans;
+        btn.onclick     = () => _quizSelect(i);
+        wrap.appendChild(btn);
+    });
+    quizState.locked = false;
+}
+
+function _quizSelect(chosen) {
+    if (quizState.locked) return;
+    quizState.locked = true;
+    const { questions, idx } = quizState;
+    const correct = questions[idx].correct;
+    const ok = chosen === correct;
+    if (ok) quizState.score++;
+
+    document.querySelectorAll('.quiz-opt-btn').forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct) btn.classList.add('correct');
+        if (i === chosen && !ok) btn.classList.add('wrong');
+    });
+    document.getElementById('quiz-score-hud').textContent = `${quizState.score} נק'`;
+    setTimeout(_quizNext, 2000);
+}
+
+function _quizNext() {
+    quizState.idx++;
+    if (quizState.idx >= QUIZ_TOTAL) {
+        _quizEnd();
+    } else {
+        _quizRender();
+    }
+}
+
+function _quizTick() {
+    quizState.timeLeft--;
+    const timerEl = document.getElementById('quiz-timer');
+    if (timerEl) {
+        timerEl.textContent = _quizFmt(quizState.timeLeft);
+        timerEl.classList.toggle('quiz-timer-low', quizState.timeLeft <= 60);
+    }
+    if (quizState.timeLeft <= 0) {
+        clearInterval(quizState.timer);
+        quizState.timer = null;
+        _quizEnd();
+    }
+}
+
+function _quizEnd() {
+    if (quizState.timer) { clearInterval(quizState.timer); quizState.timer = null; }
+    const s = quizState.score;
+    const pct = Math.round((s / QUIZ_TOTAL) * 100);
+    document.getElementById('quiz-final-score').textContent = s;
+    document.getElementById('quiz-done-msg').textContent =
+        pct >= 90 ? 'מעולה! אתה מומחה כסף אמיתי 🏆' :
+        pct >= 70 ? 'תוצאה מצוינת! ידע מרשים של שוק הכסף.' :
+        pct >= 50 ? 'לא רע! כדאי לחזור על חומר הלמידה.' :
+                    'יש מקום לשיפור — חזור ולמד שוב!';
+    _quizPanel('quiz-done');
+}
+
+function quizStart() {
+    if (quizState.timer) clearInterval(quizState.timer);
+    quizState = { questions: _quizBuild(), idx: 0, score: 0, timeLeft: QUIZ_SECS, timer: null, locked: false };
+    _quizPanel('quiz-playing');
+    _quizRender();
+    quizState.timer = setInterval(_quizTick, 1000);
+}
+
+function quizReset() {
+    if (quizState.timer) { clearInterval(quizState.timer); quizState.timer = null; }
+    quizState = { questions: [], idx: 0, score: 0, timeLeft: QUIZ_SECS, timer: null, locked: false };
+    _quizPanel('quiz-start');
+}
+
+function initQuiz() {
+    document.getElementById('quiz-start-btn')?.addEventListener('click', quizStart);
+    document.getElementById('quiz-restart-btn')?.addEventListener('click', quizReset);
+}
+
 // ── INIT DASHBOARD ────────────────────────────────────────────────────
 function initDashboard() {
     if (dashboardInited) return;
@@ -663,8 +857,13 @@ function initDashboard() {
     // ── Back buttons ──
     ['personal', 'homework', 'updates', 'charts'].forEach(name => {
         const btn = document.getElementById(`back-${name}`);
-        if (btn) btn.onclick = goBack;
+        if (btn) btn.onclick = () => {
+            if (name === 'homework') quizReset(); // stop timer when leaving
+            goBack();
+        };
     });
+
+    initQuiz();
 
     // ── Personal area sub-navigation ──
     document.getElementById('dark-mode-btn')?.addEventListener('click', toggleDarkMode);

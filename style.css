@@ -1878,3 +1878,201 @@ body {
     .line-chart-wrap   { height: 320px; }
     .section-screen-wrap { padding: 14px 12px 20px; }
 }
+
+/* ════════════════════════════════════════════
+   SILVER TRIVIA QUIZ
+   ════════════════════════════════════════════ */
+
+.quiz-panel {
+    animation: fadeIn 0.32s ease;
+}
+
+/* ── Start screen ── */
+.quiz-intro-text {
+    text-align: center;
+    color: var(--text-mid);
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.quiz-stats-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.quiz-stat-box {
+    flex: 1;
+    max-width: 110px;
+    background: var(--card);
+    border-radius: var(--radius-md);
+    box-shadow: var(--nm-raised);
+    padding: 12px 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.quiz-stat-box strong {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 20px;
+    color: var(--clay-dk);
+}
+
+.quiz-stat-box span {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.quiz-cta-btn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+/* ── Playing HUD ── */
+.quiz-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.quiz-hud-item {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-mid);
+    background: var(--card);
+    border-radius: var(--radius-pill);
+    padding: 5px 10px;
+    box-shadow: var(--nm-raised);
+}
+
+.quiz-timer-txt {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 14px;
+    color: var(--teal-dk);
+}
+
+.quiz-timer-low {
+    color: #c43f3f !important;
+    animation: blink 0.8s infinite;
+}
+
+/* ── Progress bar ── */
+.quiz-progress-bar {
+    height: 5px;
+    background: var(--card-deep);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: var(--nm-inner-inset);
+}
+
+.quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal) 0%, var(--clay) 100%);
+    border-radius: var(--radius-pill);
+    transition: width 0.4s ease;
+}
+
+/* ── Question text ── */
+.quiz-question-txt {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.65;
+    text-align: right;
+    margin-bottom: 18px;
+    min-height: 56px;
+}
+
+/* ── Answer buttons ── */
+.quiz-options-wrap {
+    display: grid;
+    gap: 10px;
+}
+
+.quiz-opt-btn {
+    width: 100%;
+    padding: 13px 16px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--card);
+    color: var(--text);
+    font-family: 'Assistant', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: right;
+    cursor: pointer;
+    box-shadow: var(--nm-raised);
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.2s;
+    line-height: 1.5;
+}
+
+.quiz-opt-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--nm-raised-hover);
+}
+
+.quiz-opt-btn:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: var(--nm-inset);
+}
+
+.quiz-opt-btn.correct {
+    background: rgba(74, 184, 130, 0.22);
+    color: #1a7a4e;
+    box-shadow: 0 0 0 2px rgba(74, 184, 130, 0.55);
+    font-weight: 800;
+}
+
+.quiz-opt-btn.wrong {
+    background: rgba(196, 63, 63, 0.16);
+    color: #9f2f2f;
+    box-shadow: 0 0 0 2px rgba(196, 63, 63, 0.45);
+}
+
+/* ── Done screen ── */
+.quiz-done-head {
+    text-align: center;
+    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-size: 1.3rem;
+    color: var(--clay-dk);
+    margin-bottom: 16px;
+}
+
+.quiz-done-score {
+    text-align: center;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--clay);
+    line-height: 1.1;
+    margin-bottom: 6px;
+}
+
+.quiz-done-denom {
+    font-size: 24px;
+    color: var(--text-muted);
+}
+
+.quiz-done-msg {
+    text-align: center;
+    font-size: 15px;
+    color: var(--text-mid);
+    font-weight: 600;
+    margin-bottom: 24px;
+    min-height: 22px;
+}
+
+/* Dark mode overrides */
+body.dark-mode .quiz-opt-btn.correct { color: #3dd68a; background: rgba(74, 184, 130, 0.18); }
+body.dark-mode .quiz-opt-btn.wrong   { color: #e06060; background: rgba(196, 63, 63, 0.14); }
+body.dark-mode .quiz-stat-box        { background: var(--card); }
+body.dark-mode .quiz-hud-item        { background: var(--card); }

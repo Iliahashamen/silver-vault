@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>ה-כספת</title>
-    <link rel="stylesheet" href="style.css?v=51">
+    <link rel="stylesheet" href="style.css?v=52">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="config.js?v=43"></script>
@@ -150,11 +150,40 @@
         <div class="section-screen-wrap">
             <div class="section-screen-header">
                 <button class="back-btn" id="back-homework">→ חזרה</button>
-                <h2 class="section-screen-title">שיעורי בית</h2>
+                <h2 class="section-screen-title">שיעורי בית — טריוויה כסף</h2>
             </div>
-            <div class="coming-soon-wrap">
-                <div class="coming-soon-badge">בהכנה</div>
-                <p class="coming-soon-text">התוכן של שיעורי הבית נמצא בהכנה ויגיע בקרוב!</p>
+
+            <!-- Start panel -->
+            <div id="quiz-start" class="quiz-panel">
+                <p class="quiz-intro-text">בחן את הידע שלך בעולם הכסף הפיזי</p>
+                <div class="quiz-stats-row">
+                    <div class="quiz-stat-box"><strong>55</strong><span>שאלות במאגר</span></div>
+                    <div class="quiz-stat-box"><strong>15</strong><span>שאלות למשחק</span></div>
+                    <div class="quiz-stat-box"><strong>10:00</strong><span>זמן משחק</span></div>
+                </div>
+                <button class="neon-button quiz-cta-btn" id="quiz-start-btn">התחל משחק</button>
+            </div>
+
+            <!-- Playing panel -->
+            <div id="quiz-playing" class="quiz-panel" style="display:none">
+                <div class="quiz-hud">
+                    <span id="quiz-q-num" class="quiz-hud-item">1 / 15</span>
+                    <span id="quiz-timer" class="quiz-hud-item quiz-timer-txt">10:00</span>
+                    <span id="quiz-score-hud" class="quiz-hud-item">0 נק'</span>
+                </div>
+                <div class="quiz-progress-bar"><div id="quiz-bar" class="quiz-progress-fill" style="width:0%"></div></div>
+                <p id="quiz-question" class="quiz-question-txt"></p>
+                <div id="quiz-options" class="quiz-options-wrap"></div>
+            </div>
+
+            <!-- Done panel -->
+            <div id="quiz-done" class="quiz-panel" style="display:none">
+                <h3 class="quiz-done-head">סיכום המשחק</h3>
+                <div class="quiz-done-score">
+                    <span id="quiz-final-score">0</span><span class="quiz-done-denom"> / 15</span>
+                </div>
+                <p id="quiz-done-msg" class="quiz-done-msg"></p>
+                <button class="neon-button quiz-cta-btn" id="quiz-restart-btn">שחק שוב</button>
             </div>
         </div>
     </div>
@@ -257,6 +286,6 @@
         </div>
     </div>
 
-    <script src="app_v2.js?v=9"></script>
+    <script src="app_v2.js?v=10"></script>
 </body>
 </html>
