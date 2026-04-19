@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>ה-כספת</title>
-    <link rel="stylesheet" href="style.css?v=54">
+    <link rel="stylesheet" href="style.css?v=55">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="config.js?v=43"></script>
@@ -66,18 +66,22 @@
                 </div>
             </header>
 
-            <nav class="main-switcher" aria-label="ניווט ראשי">
-                <button class="main-switch-btn" data-target="personal">
-                    <span>איזור אישי</span>
+            <nav class="icon-grid" aria-label="ניווט ראשי">
+                <button class="icon-btn" data-target="personal">
+                    <span class="icon-btn-emoji">👤</span>
+                    <span class="icon-btn-label">איזור אישי</span>
                 </button>
-                <button class="main-switch-btn" data-target="homework">
-                    <span>שיעורי בית</span>
+                <button class="icon-btn" data-target="homework">
+                    <span class="icon-btn-emoji">🤓</span>
+                    <span class="icon-btn-label">שיעורי בית</span>
                 </button>
-                <button class="main-switch-btn" data-target="updates">
-                    <span>עדכונים וחדשות</span>
+                <button class="icon-btn icon-btn-new" data-target="updates">
+                    <span class="icon-btn-badge">NEW</span>
+                    <span class="icon-btn-label">חדשות ועדכונים</span>
                 </button>
-                <button class="main-switch-btn" data-target="charts">
-                    <span>גרפים</span>
+                <button class="icon-btn" data-target="charts">
+                    <span class="icon-btn-emoji">📊</span>
+                    <span class="icon-btn-label">גרפים</span>
                 </button>
             </nav>
         </div>
@@ -286,6 +290,6 @@
         </div>
     </div>
 
-    <script src="app_v2.js?v=13"></script>
+    <script src="app_v2.js?v=14"></script>
 </body>
 </html>

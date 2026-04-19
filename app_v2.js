@@ -854,7 +854,7 @@ function initDashboard() {
     renderPnl();
 
     // ── Main menu navigation ──
-    document.querySelectorAll('.main-switch-btn').forEach(b => {
+    document.querySelectorAll('.main-switch-btn, .icon-btn').forEach(b => {
         b.onclick = () => goToScreen(`${b.dataset.target}-screen`);
     });
 
