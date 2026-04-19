@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
         <title>ה-כספת</title>
-        <link rel="stylesheet" href="style.css?v=45">
+        <link rel="stylesheet" href="style.css?v=46">
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
         <script src="config.js?v=42"></script>
@@ -67,32 +67,40 @@
                 </div>
             </header>
 
-            <div class="main-wave"></div>
+            <main id="home-page" class="vault-page active" aria-label="דף הבית">
+                <nav class="home-menu" aria-label="ניווט ראשי">
+                    <button class="home-menu-btn" type="button" data-open-page="personal">איזור אישי</button>
+                    <button class="home-menu-btn" type="button" data-open-page="homework">שיעורי בית</button>
+                    <button class="home-menu-btn" type="button" data-open-page="updates">עדכונים וחדשות</button>
+                    <button class="home-menu-btn" type="button" data-open-page="charts">גרפים</button>
+                </nav>
+            </main>
 
-            <nav class="main-switcher" aria-label="ניווט ראשי">
-                <button class="main-switch-btn active" data-section="personal">
-                    <span class="main-switch-index">1</span>
-                    <span>איזור אישי</span>
-                </button>
-                <button class="main-switch-btn" data-section="homework">
-                    <span class="main-switch-index">2</span>
-                    <span>שיעורי בית</span>
-                </button>
-                <button class="main-switch-btn" data-section="updates">
-                    <span class="main-switch-index">3</span>
-                    <span>עדכונים וחדשות</span>
-                </button>
-                <button class="main-switch-btn" data-section="charts">
-                    <span class="main-switch-index">4</span>
-                    <span>גרפים</span>
-                </button>
-            </nav>
+            <main id="personal-page" class="vault-page" aria-label="איזור אישי">
+                <div class="page-head">
+                    <button class="page-back-btn" type="button" data-back-home>חזרה</button>
+                </div>
+                <section class="page-content">
+                    <h2 class="section-title">איזור אישי</h2>
+                    <nav class="home-menu personal-menu" aria-label="תפריט איזור אישי">
+                        <button class="home-menu-btn personal-action-btn" type="button" id="dark-mode-btn">
+                            <span class="personal-btn-icon" id="dark-mode-icon">🌙</span>
+                            <span id="dark-mode-label">מצב לילה</span>
+                        </button>
+                        <button class="home-menu-btn personal-action-btn" type="button" data-open-page="pnl">
+                            <span class="personal-btn-icon">📊</span>
+                            <span>מעקב רווח / הפסד</span>
+                        </button>
+                    </nav>
+                </section>
+            </main>
 
-            <div class="main-wave muted"></div>
-
-            <main class="section-panels">
-                <section id="personal-section" class="section-panel active" aria-label="איזור אישי">
-                    <h2 class="section-title">איזור אישי — מעקב רווח / הפסד</h2>
+            <main id="pnl-page" class="vault-page" aria-label="מעקב רווח הפסד">
+                <div class="page-head">
+                    <button class="page-back-btn" type="button" data-back-page="personal">חזרה</button>
+                </div>
+                <section id="personal-section" class="page-content" aria-label="מעקב רווח הפסד">
+                    <h2 class="section-title">מעקב רווח / הפסד</h2>
                     <p class="section-subtitle">הכנס עסקאות כסף, והמערכת תחשב שווי נוכחי לפי המחיר הנוכחי של אונקיה.</p>
                     <form id="pnl-form" class="pnl-form">
                         <input id="tx-date" type="date" required>
@@ -125,8 +133,13 @@
                         </table>
                     </div>
                 </section>
+            </main>
 
-                <section id="homework-section" class="section-panel" aria-label="שיעורי בית">
+            <main id="homework-page" class="vault-page" aria-label="שיעורי בית">
+                <div class="page-head">
+                    <button class="page-back-btn" type="button" data-back-home>חזרה</button>
+                </div>
+                <section id="homework-section" class="page-content" aria-label="שיעורי בית">
                     <h2 class="section-title">שיעורי בית — משחק שאלות ותשובות</h2>
                     <p class="section-subtitle">תרגול קצר להבנת השוק, ניהול סיכונים ועולם העסקאות.</p>
                     <div class="quiz-card">
@@ -143,8 +156,13 @@
                         <p id="quiz-feedback" class="quiz-feedback"></p>
                     </div>
                 </section>
+            </main>
 
-                <section id="updates-section" class="section-panel" aria-label="עדכונים וחדשות">
+            <main id="updates-page" class="vault-page" aria-label="עדכונים וחדשות">
+                <div class="page-head">
+                    <button class="page-back-btn" type="button" data-back-home>חזרה</button>
+                </div>
+                <section id="updates-section" class="page-content" aria-label="עדכונים וחדשות">
                     <h2 class="section-title">עדכונים וחדשות</h2>
                     <p class="section-subtitle">כל התוכן כאן כרגע מומצא ולא אמיתי — לבדיקה בלבד.</p>
                     <div class="news-grid">
@@ -165,8 +183,13 @@
                         </article>
                     </div>
                 </section>
+            </main>
 
-                <section id="charts-section" class="section-panel" aria-label="גרפים">
+            <main id="charts-page" class="vault-page" aria-label="גרפים">
+                <div class="page-head">
+                    <button class="page-back-btn" type="button" data-back-home>חזרה</button>
+                </div>
+                <section id="charts-section" class="page-content" aria-label="גרפים">
                     <h2 class="section-title">גרפים — נרות יפנים</h2>
                     <p class="section-subtitle">בחר טווח זמן והגרף יתעדכן. ירוק = עליה, אדום = ירידה.</p>
                     <div class="chart-time-buttons">
@@ -186,7 +209,6 @@
 
         <button type="button" id="mr-d-fab" class="mr-d-fab" aria-haspopup="dialog" aria-controls="mr-d-modal">
             <span class="mr-d-fab-label">מר ד'</span>
-            <span class="mr-d-fab-index">5</span>
         </button>
     </div>
 
@@ -224,6 +246,6 @@
         </div>
     </div>
 
-        <script src="app_v2.js?v=1"></script>
+        <script src="app_v2.js?v=2"></script>
 </body>
 </html>

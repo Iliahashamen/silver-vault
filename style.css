@@ -83,6 +83,97 @@
     --radius-pill: 100px;
 }
 
+/* ── DARK MODE ──────────────────────────────────────────────────── */
+body.dark-mode {
+    --bg:            #181d19;
+    --blob-dk:       #0c1110;
+    --blob-md:       #141a15;
+    --blob-lt:       #1c251e;
+
+    --card:          #222c24;
+    --card-inner:    #1a2219;
+    --card-deep:     #141b14;
+
+    --clay:          #b87550;
+    --clay-lt:       #cc8f68;
+    --clay-dk:       #9a5e38;
+
+    --teal:          #5a8c82;
+    --teal-dk:       #3e726a;
+
+    --text:          #ddeadd;
+    --text-mid:      #9db89e;
+    --text-muted:    rgba(185, 215, 186, 0.42);
+    --text-light:    #edf5ee;
+
+    --purple:        #a896d8;
+
+    --nm-raised:
+        5px 5px 12px rgba(0, 0, 0, 0.60),
+       -3px -3px 9px rgba(60, 90, 64, 0.22);
+    --nm-raised-hover:
+        7px 8px 18px rgba(0, 0, 0, 0.68),
+       -4px -5px 12px rgba(60, 90, 64, 0.28);
+    --nm-inset:
+        inset 4px 4px 10px rgba(0, 0, 0, 0.55),
+        inset -3px -3px 8px rgba(60, 90, 64, 0.18);
+    --nm-inner-raised:
+        3px 3px 8px rgba(0, 0, 0, 0.55),
+       -2px -2px 6px rgba(60, 90, 64, 0.18);
+    --nm-inner-inset:
+        inset 3px 3px 8px rgba(0, 0, 0, 0.52),
+        inset -2px -2px 6px rgba(60, 90, 64, 0.15);
+    --float-card:
+        10px 14px 36px rgba(0, 0, 0, 0.72),
+        -2px -3px 12px rgba(60, 90, 64, 0.14);
+}
+
+body.dark-mode .dashboard-v2 {
+    background: rgba(26, 36, 28, 0.96);
+    border-color: rgba(80, 110, 82, 0.25);
+}
+
+body.dark-mode .page-content {
+    background: rgba(26, 36, 28, 0.90);
+}
+
+body.dark-mode #dashboard-screen.subpage-mode .vault-page.active {
+    background: rgba(20, 26, 20, 0.98);
+}
+
+body.dark-mode .blob { opacity: 0.35; }
+
+body.dark-mode .terminal-container {
+    background: var(--card);
+}
+
+body.dark-mode .modal-overlay {
+    background: rgba(5, 8, 5, 0.78);
+}
+
+body.dark-mode .pnl-table th {
+    color: var(--text-mid);
+}
+
+body.dark-mode .row-delete-btn {
+    background: #2e3a2e;
+    color: var(--text-muted);
+}
+
+body.dark-mode .news-tag {
+    background: rgba(180, 60, 60, 0.22);
+    color: #e08888;
+}
+
+body.dark-mode .terminal-input {
+    background: var(--card-inner);
+    color: var(--text);
+}
+
+body.dark-mode .mr-d-modal {
+    background: rgba(8, 12, 8, 0.72);
+}
+
 /* ── RESET ──────────────────────────────────────────────────────── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -1219,72 +1310,111 @@ body {
     color: var(--text-muted);
 }
 
-.main-wave {
-    width: 100%;
-    height: 14px;
-    margin: 14px 0;
-    border-radius: 999px;
-    background:
-        radial-gradient(circle at 10px 16px, transparent 9px, #da5555 10px, #da5555 12px, transparent 13px) repeat-x;
-    background-size: 30px 14px;
-    opacity: 0.95;
-}
-
-.main-wave.muted { opacity: 0.55; }
-
-.main-switcher {
+.home-menu {
     display: grid;
-    gap: 10px;
+    gap: 12px;
+    margin-top: 14px;
 }
 
-.main-switch-btn {
+.home-menu-btn {
     border: none;
     background: var(--card);
     color: var(--text);
     border-radius: var(--radius-pill);
-    box-shadow: var(--nm-raised);
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.08);
     padding: 12px 14px;
     font-size: 16px;
     font-weight: 700;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
+    justify-content: center;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.main-switch-btn:hover {
+.home-menu-btn:hover {
     transform: translateY(-1px);
-    box-shadow: var(--nm-raised-hover);
+    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.12);
 }
 
-.main-switch-btn.active {
-    background: linear-gradient(135deg, #f2ede5 0%, #e6ddd1 100%);
-    outline: 2px solid rgba(122, 170, 160, 0.35);
+/* Personal page action buttons */
+.personal-menu { margin-top: 0; }
+
+.personal-action-btn {
+    gap: 10px;
+    font-size: 17px;
+    padding: 16px 20px;
 }
 
-.main-switch-index {
-    min-width: 28px;
-    min-height: 28px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: var(--purple);
-    color: #fff;
-    font-family: 'Comfortaa', sans-serif;
-    font-size: 13px;
-    box-shadow: 0 4px 10px rgba(53, 42, 76, 0.3);
+.personal-btn-icon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
 }
 
-.section-panels { margin-top: 14px; }
+/* Dark mode button — teal tint when dark-mode is active */
+body.dark-mode #dark-mode-btn {
+    background: var(--teal);
+    color: var(--text-light);
+    box-shadow: var(--nm-raised);
+}
 
-.section-panel { display: none; }
+.vault-page {
+    display: none;
+    margin-top: 14px;
+}
 
-.section-panel.active {
+.vault-page.active {
     display: block;
     animation: fadeIn 0.35s ease;
+}
+
+.page-head {
+    margin-bottom: 10px;
+}
+
+.page-back-btn {
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--card-inner);
+    color: var(--text-mid);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 14px;
+    box-shadow: var(--nm-raised);
+    cursor: pointer;
+}
+
+.page-content {
+    background: rgba(240, 237, 231, 0.86);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    box-shadow: var(--nm-raised);
+}
+
+#dashboard-screen.subpage-mode .dashboard-v2-header,
+#dashboard-screen.subpage-mode #home-page {
+    display: none;
+}
+
+#dashboard-screen.subpage-mode .vault-page.active {
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    margin: 0;
+    padding: 14px;
+    background: rgba(142, 168, 154, 0.97);
+    overflow-y: auto;
+}
+
+#dashboard-screen.subpage-mode .vault-page.active .page-content {
+    max-width: 980px;
+    margin: 0 auto 20px;
+}
+
+#dashboard-screen.subpage-mode .vault-page.active .page-head {
+    max-width: 980px;
+    margin: 0 auto 10px;
 }
 
 .section-subtitle {
@@ -1587,7 +1717,7 @@ body {
 
 @media (max-width: 640px) {
     .dashboard-v2 { padding: 14px 12px; }
-    .main-switch-btn { font-size: 15px; }
+    .home-menu-btn { font-size: 15px; }
     .candles-wrap { height: 340px; }
     .mr-d-fab { width: 62px; height: 62px; }
 }
