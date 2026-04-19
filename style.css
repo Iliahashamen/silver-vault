@@ -325,9 +325,29 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    animation: screenFadeIn 0.35s ease forwards;
 }
 /* Login stays vertically centred */
 #login-screen.active { align-items: center; }
+
+/* Leaving screen — stays visible while fading out */
+.screen.screen-leaving {
+    display: flex !important;
+    justify-content: center;
+    align-items: flex-start;
+    pointer-events: none;
+    animation: screenFadeOut 0.2s ease forwards;
+}
+#login-screen.screen-leaving { align-items: center; }
+
+@keyframes screenFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes screenFadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
 
 /* ════════════════════════════════════════════
    LOGIN — floating card above the terrain

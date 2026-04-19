@@ -40,15 +40,28 @@ function saveSession(token) {
 
 // ── SCREEN NAVIGATION ────────────────────────────────────────────────
 function goToScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const current = document.querySelector('.screen.active');
     const target = document.getElementById(screenId);
-    if (target) target.classList.add('active');
-    window.scrollTo(0, 0);
-    if (screenId === 'charts-screen') {
-        // Always clear cache so chart regenerates with the live price
-        Object.keys(chartCache).forEach(k => delete chartCache[k]);
-        if (lineChart) { lineChart.destroy(); lineChart = null; }
-        requestAnimationFrame(() => renderActiveChart());
+    if (!target || (current && current.id === screenId)) return;
+
+    function activateTarget() {
+        target.classList.add('active');
+        window.scrollTo(0, 0);
+        if (screenId === 'charts-screen') {
+            Object.keys(chartCache).forEach(k => delete chartCache[k]);
+            if (lineChart) { lineChart.destroy(); lineChart = null; }
+            requestAnimationFrame(() => renderActiveChart());
+        }
+    }
+
+    if (current && current !== target) {
+        current.classList.add('screen-leaving');
+        setTimeout(() => {
+            current.classList.remove('active', 'screen-leaving');
+            activateTarget();
+        }, 200);
+    } else {
+        activateTarget();
     }
 }
 
