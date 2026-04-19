@@ -68,11 +68,14 @@ function applyDarkMode(dark) {
 function toggleDarkMode() {
     const dark = !document.body.classList.contains('dark-mode');
     localStorage.setItem(DARK_MODE_KEY, dark ? '1' : '0');
-    applyDarkMode(dark);
-    // Redraw chart if visible so canvas colors update
-    if (document.getElementById('charts-screen')?.classList.contains('active')) {
-        renderActiveChart();
-    }
+    // Defer heavy repaint to next frame so click feedback renders first
+    requestAnimationFrame(() => {
+        applyDarkMode(dark);
+        // Redraw chart canvas in a second frame — after dark-mode class is applied
+        if (document.getElementById('charts-screen')?.classList.contains('active')) {
+            requestAnimationFrame(() => renderActiveChart());
+        }
+    });
 }
 
 // ── LOGIN ────────────────────────────────────────────────────────────

@@ -176,6 +176,23 @@ body.dark-mode #dark-mode-btn {
     color: var(--text-light);
 }
 
+/* Smooth dark mode transition — only key surfaces, no box-shadow (expensive) */
+body,
+.section-screen-wrap,
+.dashboard-v2,
+.terminal-container,
+.terminal-body,
+.main-switch-btn,
+.modal-box,
+.news-card,
+.pnl-summary > div,
+.quiz-card,
+.terminal-input,
+.chat-messages,
+.mr-d-modal {
+    transition: background-color 0.28s ease, color 0.2s ease;
+}
+
 /* ── RESET ──────────────────────────────────────────────────────── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
