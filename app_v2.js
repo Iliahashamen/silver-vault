@@ -987,6 +987,13 @@ function initDashboard() {
 
 // ── BOOT ──────────────────────────────────────────────────────────────
 function boot() {
+    // Fallback for Telegram < 8.0: set safe-area CSS var from the JS API
+    const _tgSafeTop = tg?.contentSafeAreaInset?.top ?? tg?.safeAreaInset?.top ?? 0;
+    if (_tgSafeTop > 0) {
+        document.documentElement.style.setProperty(
+            '--tg-content-safe-area-inset-top', _tgSafeTop + 'px'
+        );
+    }
     applyDarkMode(localStorage.getItem(DARK_MODE_KEY) === '1');
     document.getElementById('login-btn')?.addEventListener('click', handleLogin);
     document.getElementById('passcode')?.addEventListener('keypress', e => {

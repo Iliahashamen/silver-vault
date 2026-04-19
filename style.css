@@ -320,12 +320,14 @@ body {
 .blink           { animation: blink 1.5s infinite; color: var(--clay); }
 
 /* ── SCREEN ─────────────────────────────────────────────────────── */
-.screen { display: none; min-height: 100vh; padding: 20px; }
+.screen { display: none; min-height: 100vh; padding: 20px; padding-top: max(20px, calc(var(--tg-content-safe-area-inset-top, 0px) + 16px)); }
 .screen.active {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
+/* Login stays vertically centred */
+#login-screen.active { align-items: center; }
 
 /* ════════════════════════════════════════════
    LOGIN — floating card above the terrain
