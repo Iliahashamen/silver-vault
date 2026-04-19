@@ -1530,10 +1530,10 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 body.dark-mode .icon-btn-label {
-    color: var(--text-light);
+    color: #1a1a1a;
     text-shadow:
-        0 0 8px rgba(180, 230, 200, 0.70),
-        0 0 18px rgba(120, 200, 160, 0.40);
+        0 0 6px rgba(0, 0, 0, 0.80),
+        0 0 14px rgba(0, 0, 0, 0.50);
 }
 
 @media (max-width: 360px) {
