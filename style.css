@@ -198,6 +198,15 @@ body {
     direction: rtl;
     text-align: right;
     position: relative;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Allow text selection only in inputs and chat */
+input, textarea, .chat-messages, .chat-message {
+    -webkit-user-select: text;
+    user-select: text;
 }
 
 /* ── HIDE OLD ELEMENTS ──────────────────────────────────────────── */
@@ -1479,6 +1488,9 @@ body {
     height: 100%;
     overflow: hidden;
     border-radius: inherit;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .icon-img-wrap img {
@@ -1489,6 +1501,11 @@ body {
     transform: scale(1.30);
     transform-origin: center center;
     transition: transform 0.22s ease;
+    draggable: false;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
 }
 
 .icon-btn:hover .icon-img-wrap img {

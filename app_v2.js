@@ -5,6 +5,10 @@
 let tg = window.Telegram?.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
 
+// Block long-press context menu on all images and buttons
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('dragstart',   e => e.preventDefault());
+
 const SESSION_KEY    = 'vault_session';
 const SESSION_DURATION = 3 * 60 * 60 * 1000;
 const PNL_KEY        = 'vault_pnl_entries_v1';
