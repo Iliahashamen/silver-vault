@@ -1528,14 +1528,14 @@ body {
     font-size: 11px;
 }
 
-/* Crop green/colored outer border — just enough so border-radius hides corners */
+/* Crop outer corners — border-radius handles the rest */
 .icon-btn-image--crop {
-    transform: scale(1.13);
+    transform: scale(1.05);
     transform-origin: center center;
 }
 
 .icon-btn-img:hover .icon-btn-image--crop {
-    transform: scale(1.17);
+    transform: scale(1.09);
 }
 
 body.dark-mode .icon-btn {
