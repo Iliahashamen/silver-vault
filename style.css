@@ -1491,6 +1491,16 @@ body {
     font-size: 11px;
 }
 
+/* Crop green/colored outer border from images that have background bleed */
+.icon-btn-image--crop {
+    transform: scale(1.38);
+    transform-origin: center center;
+}
+
+.icon-btn-img:hover .icon-btn-image--crop {
+    transform: scale(1.42);
+}
+
 body.dark-mode .icon-btn {
     background: var(--card);
 }
