@@ -547,11 +547,11 @@ body {
 
 .dashboard-title {
     font-family: 'Comfortaa', sans-serif;
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 700;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
     color: var(--purple);
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
 }
 
 .status-text   { color: var(--text-muted); font-size: 12px; font-weight: 600; }
@@ -1284,22 +1284,24 @@ body {
 
 #dashboard-screen {
     align-items: flex-start;
-    padding: 12px 12px 90px;
+    justify-content: center;
+    padding: 10px 10px 80px;
 }
 
 .dashboard-v2 {
-    width: min(980px, 100%);
+    width: min(400px, 100%);
     background: rgba(240, 237, 231, 0.92);
     border-radius: var(--radius-xl);
     box-shadow: var(--float-card);
-    padding: 12px 12px 14px;
+    padding: 10px 10px 12px;
     border: 1px solid rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(8px);
 }
 
 .dashboard-v2-header {
     display: grid;
-    gap: 6px;
+    gap: 5px;
+    margin-bottom: 2px;
 }
 
 .price-strip {
@@ -1371,14 +1373,15 @@ body {
 /* ════════════════════════════════════════════
    ICON GRID — 2×2 app-icon style navigation
    ════════════════════════════════════════════ */
+/* ════════════════════════════════════════════
+   ICON GRID — 2×2 compact app-icon navigation
+   ════════════════════════════════════════════ */
 .icon-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 140px));
     gap: 10px;
     margin-top: 8px;
-    max-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
+    justify-content: center;
 }
 
 .icon-btn {
@@ -1387,20 +1390,19 @@ body {
     background: var(--card);
     border-radius: var(--radius-lg);
     box-shadow: var(--nm-raised);
-    padding: 12px 8px 10px;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 6px;
+    align-items: stretch;
     cursor: pointer;
     aspect-ratio: 1 / 1;
+    width: 100%;
     transition: transform 0.18s ease, box-shadow 0.18s ease;
     overflow: hidden;
 }
 
 .icon-btn:hover {
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-2px) scale(1.02);
     box-shadow: var(--nm-raised-hover);
 }
 
@@ -1409,100 +1411,81 @@ body {
     box-shadow: var(--nm-inset);
 }
 
-.icon-btn-emoji {
-    font-size: 32px;
-    line-height: 1;
+/* Image fills the entire button */
+.icon-btn-img .icon-btn-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
     display: block;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.18));
     transition: transform 0.18s ease;
 }
 
-.icon-btn:hover .icon-btn-emoji {
-    transform: scale(1.08);
+.icon-btn-img:hover .icon-btn-image {
+    transform: scale(1.04);
 }
 
+/* Label bar pinned to bottom */
 .icon-btn-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     font-family: 'Assistant', sans-serif;
     font-size: 11px;
     font-weight: 800;
     color: var(--text);
     text-align: center;
     line-height: 1.2;
+    padding: 4px 4px 6px;
+    background: rgba(240, 237, 231, 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
-/* "NEW" badge variant */
-.icon-btn-new {
-    background: linear-gradient(145deg, #4a6e6a 0%, #3a5a56 100%);
-    box-shadow:
-        6px 7px 18px rgba(30, 60, 56, 0.50),
-       -3px -3px 10px rgba(120, 180, 170, 0.30),
-        inset 0 2px 6px rgba(160, 220, 210, 0.18),
-        inset 0 -2px 6px rgba(20, 50, 46, 0.30);
-}
-
-.icon-btn-new .icon-btn-label {
-    color: rgba(240, 250, 248, 0.90);
-}
-
-.icon-btn-new:hover {
-    background: linear-gradient(145deg, #567e7a 0%, #3a5a56 100%);
-}
-
-.icon-btn-badge {
-    font-family: 'Comfortaa', sans-serif;
+/* Emoji variant (fallback) */
+.icon-btn-emoji {
     font-size: 32px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 1px;
-    text-shadow:
-        0 2px 8px rgba(0,0,0,0.28),
-        0 0 20px rgba(200, 240, 235, 0.22);
-    display: block;
     line-height: 1;
-}
-
-/* Image icon variant */
-.icon-btn-img {
-    padding: 8px 8px 10px;
-    gap: 5px;
-}
-
-.icon-btn-image {
-    width: 68%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 22%;
     display: block;
-    box-shadow:
-        4px 6px 14px rgba(60, 90, 70, 0.22),
-       -2px -2px 8px rgba(255, 255, 255, 0.75);
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    margin: auto auto 6px;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.18));
+    transition: transform 0.18s ease;
+    position: relative;
+    z-index: 1;
 }
 
-.icon-btn-img:hover .icon-btn-image {
-    transform: scale(1.06);
-    box-shadow:
-        6px 8px 18px rgba(60, 90, 70, 0.28),
-       -2px -3px 10px rgba(255, 255, 255, 0.85);
+.icon-btn:hover .icon-btn-emoji {
+    transform: scale(1.08);
+}
+
+/* Label for emoji buttons (not absolute) */
+.icon-btn:not(.icon-btn-img) .icon-btn-label {
+    position: static;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0 4px 8px;
+    font-size: 11px;
 }
 
 body.dark-mode .icon-btn {
     background: var(--card);
 }
 
-body.dark-mode .icon-btn-image {
-    box-shadow:
-        4px 6px 14px rgba(0, 0, 0, 0.45),
-       -1px -1px 6px rgba(80, 120, 90, 0.18);
+body.dark-mode .icon-btn-label {
+    background: rgba(26, 36, 28, 0.82);
+    color: var(--text-light);
 }
 
-@media (max-width: 380px) {
-    .icon-grid { gap: 10px; }
-    .icon-btn-emoji { font-size: 38px; }
-    .icon-btn-label { font-size: 12px; }
-    .icon-btn-badge { font-size: 24px; }
+@media (max-width: 360px) {
+    .icon-grid {
+        grid-template-columns: repeat(2, minmax(0, 120px));
+        gap: 8px;
+    }
+    .icon-btn-label { font-size: 10px; }
 }
 
 /* Personal area sub-menu */
