@@ -1351,16 +1351,14 @@ body {
         margin-top: 14px;
     }
 
-    .icon-btn { padding: 18px 14px 14px; gap: 10px; }
-    .icon-btn-label { font-size: 14px; }
+    .icon-btn-label { font-size: 14px; padding: 6px 6px 9px; }
 }
 
 @media (min-width: 900px) {
     .dashboard-v2 { width: min(660px, 100%); padding: 26px 26px 30px; }
     .dashboard-title { font-size: 44px; }
     .icon-grid { grid-template-columns: repeat(2, minmax(0, 250px)); gap: 18px; }
-    .icon-btn { padding: 20px 16px 16px; gap: 12px; }
-    .icon-btn-label { font-size: 15px; }
+    .icon-btn-label { font-size: 15px; padding: 7px 8px 10px; }
 }
 
 .price-strip {
@@ -1441,16 +1439,19 @@ body {
 }
 
 .icon-btn {
+    position: relative;
     border: none;
     background: var(--card);
     border-radius: var(--radius-lg);
-    box-shadow: var(--nm-raised);
-    padding: 14px 10px 10px;
+    /* Strong neumorphic shadow = clearly a raised button */
+    box-shadow:
+        6px 8px 20px rgba(140, 120, 100, 0.50),
+       -4px -5px 14px rgba(255, 255, 255, 0.95),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 8px;
     cursor: pointer;
     aspect-ratio: 1 / 1;
     width: 100%;
@@ -1459,8 +1460,10 @@ body {
 }
 
 .icon-btn:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: var(--nm-raised-hover);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+        8px 10px 26px rgba(140, 120, 100, 0.55),
+       -5px -6px 16px rgba(255, 255, 255, 1);
 }
 
 .icon-btn:active {
@@ -1468,16 +1471,14 @@ body {
     box-shadow: var(--nm-inset);
 }
 
-/* Inner image container — clips edges cleanly */
+/* Image fills button completely */
 .icon-img-wrap {
-    width: 76%;
-    aspect-ratio: 1 / 1;
-    border-radius: 18%;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    flex-shrink: 0;
-    box-shadow:
-        2px 3px 7px rgba(140, 120, 100, 0.28),
-       -2px -2px 6px rgba(255, 255, 255, 0.78);
+    border-radius: inherit;
 }
 
 .icon-img-wrap img {
@@ -1485,40 +1486,48 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.18s ease;
+    transition: transform 0.22s ease;
 }
 
 .icon-btn:hover .icon-img-wrap img {
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
-/* Charts: crop green outer edge */
+/* Charts: scale to crop green outer border */
 .icon-img-wrap--crop img {
     transform: scale(1.35);
 }
-
 .icon-btn:hover .icon-img-wrap--crop img {
-    transform: scale(1.40);
+    transform: scale(1.39);
 }
 
-/* Label */
+/* Label — pinned to bottom with frosted glass strip */
 .icon-btn-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
     font-family: 'Assistant', sans-serif;
     font-size: 11px;
     font-weight: 800;
     color: var(--text);
     text-align: center;
     line-height: 1.2;
-    flex-shrink: 0;
+    padding: 5px 4px 7px;
+    background: rgba(240, 237, 231, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
-body.dark-mode .icon-btn { background: var(--card); }
-body.dark-mode .icon-btn-label { color: var(--text); }
+body.dark-mode .icon-btn-label {
+    background: rgba(22, 30, 22, 0.85);
+    color: var(--text-light);
+}
 
 @media (max-width: 360px) {
     .icon-grid { gap: 8px; }
-    .icon-btn  { padding: 10px 8px 8px; gap: 6px; }
-    .icon-btn-label { font-size: 10px; }
+    .icon-btn-label { font-size: 10px; padding: 4px 4px 6px; }
 }
 
 /* Personal area sub-menu */
