@@ -985,6 +985,34 @@ function initDashboard() {
     });
 }
 
+
+// ── SWIPE-BACK GESTURE ────────────────────────────────────────────────
+// Right-to-left swipe anywhere on screen navigates back (RTL-natural)
+function initSwipeBack() {
+    let _sx = 0, _sy = 0;
+
+    document.addEventListener('touchstart', e => {
+        _sx = e.touches[0].clientX;
+        _sy = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', e => {
+        const dx = _sx - e.changedTouches[0].clientX;   // positive = moved left
+        const dy = Math.abs(_sy - e.changedTouches[0].clientY);
+        if (dx < 80 || dy > 55) return;                 // too short or too diagonal
+
+        const active = document.querySelector('.screen.active');
+        if (!active) return;
+        switch (active.id) {
+            case 'pnl-screen':      goToScreen('personal-screen'); break;
+            case 'homework-screen': quizReset(); goBack();         break;
+            case 'personal-screen':
+            case 'updates-screen':
+            case 'charts-screen':   goBack();                      break;
+        }
+    }, { passive: true });
+}
+
 // ── BOOT ──────────────────────────────────────────────────────────────
 function boot() {
     // Fallback for Telegram < 8.0: set safe-area CSS var from the JS API
@@ -999,6 +1027,7 @@ function boot() {
     document.getElementById('passcode')?.addEventListener('keypress', e => {
         if (e.key === 'Enter') handleLogin();
     });
+    initSwipeBack();
     if (sessionToken()) showDashboard();
 }
 
