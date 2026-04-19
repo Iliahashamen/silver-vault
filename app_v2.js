@@ -59,10 +59,9 @@ function goBack() {
 // ── DARK MODE ────────────────────────────────────────────────────────
 function applyDarkMode(dark) {
     document.body.classList.toggle('dark-mode', dark);
-    // Opacity flash — GPU-composited, causes zero repaint
+    // Restart opacity flash via rAF — avoids synchronous forced reflow
     document.body.classList.remove('dark-mode-animating');
-    void document.body.offsetWidth; // trigger reflow to restart animation
-    document.body.classList.add('dark-mode-animating');
+    requestAnimationFrame(() => document.body.classList.add('dark-mode-animating'));
     const icon  = document.getElementById('dark-mode-icon');
     const label = document.getElementById('dark-mode-label');
     if (icon)  icon.textContent  = dark ? '☀️' : '🌙';
