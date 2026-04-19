@@ -1528,29 +1528,16 @@ body {
     font-size: 11px;
 }
 
-/* Crop outer corners — border-radius handles the rest */
+/* Crop outer green border — scale fills button with white-square only */
 .icon-btn-image--crop {
-    transform: scale(1.05);
+    transform: scale(1.32);
     transform-origin: center center;
 }
 
 .icon-btn-img:hover .icon-btn-image--crop {
-    transform: scale(1.09);
+    transform: scale(1.36);
 }
 
-/* Background-image variant — zoom in to crop colored border */
-.icon-btn-bg {
-    background-image: var(--icon-bg);
-    background-size: 148%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: var(--card);
-    transition: background-size 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.icon-btn-bg:hover {
-    background-size: 154%;
-}
 
 body.dark-mode .icon-btn {
     background: var(--card);
