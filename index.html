@@ -6,16 +6,15 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-        <title>ה-כספת</title>
-        <link rel="stylesheet" href="style.css?v=46">
-        <script src="https://telegram.org/js/telegram-web-app.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-        <script src="config.js?v=42"></script>
+    <title>ה-כספת</title>
+    <link rel="stylesheet" href="style.css?v=49">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="config.js?v=43"></script>
 </head>
 <body>
     <!-- Animated Grid Background (kept for JS, visually hidden) -->
     <div class="grid-background"></div>
-    <!-- Matrix Floating Characters (kept for JS, visually hidden) -->
     <div class="matrix-container" id="matrix-container"></div>
 
     <!-- 3D Clay Background Terrain Blobs -->
@@ -26,10 +25,10 @@
         <div class="blob blob-4"></div>
         <div class="blob blob-5"></div>
     </div>
-    
-    <!-- Login Screen -->
+
+    <!-- ══ LOGIN SCREEN ══ -->
     <div id="login-screen" class="screen active">
-                <div class="footer">V-1.6.0</div>
+        <div class="footer">V-1.7.0</div>
         <div class="terminal-container">
             <div class="terminal-header">
                 <span class="terminal-title">ה-כספת — כניסה</span>
@@ -54,7 +53,7 @@
         </div>
     </div>
 
-    <!-- Dashboard Screen -->
+    <!-- ══ DASHBOARD SCREEN (Main Menu) ══ -->
     <div id="dashboard-screen" class="screen">
         <div class="dashboard-v2">
             <header class="dashboard-v2-header">
@@ -67,151 +66,164 @@
                 </div>
             </header>
 
-            <main id="home-page" class="vault-page active" aria-label="דף הבית">
-                <nav class="home-menu" aria-label="ניווט ראשי">
-                    <button class="home-menu-btn" type="button" data-open-page="personal">איזור אישי</button>
-                    <button class="home-menu-btn" type="button" data-open-page="homework">שיעורי בית</button>
-                    <button class="home-menu-btn" type="button" data-open-page="updates">עדכונים וחדשות</button>
-                    <button class="home-menu-btn" type="button" data-open-page="charts">גרפים</button>
-                </nav>
-            </main>
-
-            <main id="personal-page" class="vault-page" aria-label="איזור אישי">
-                <div class="page-head">
-                    <button class="page-back-btn" type="button" data-back-home>חזרה</button>
-                </div>
-                <section class="page-content">
-                    <h2 class="section-title">איזור אישי</h2>
-                    <nav class="home-menu personal-menu" aria-label="תפריט איזור אישי">
-                        <button class="home-menu-btn personal-action-btn" type="button" id="dark-mode-btn">
-                            <span class="personal-btn-icon" id="dark-mode-icon">🌙</span>
-                            <span id="dark-mode-label">מצב לילה</span>
-                        </button>
-                        <button class="home-menu-btn personal-action-btn" type="button" data-open-page="pnl">
-                            <span class="personal-btn-icon">📊</span>
-                            <span>מעקב רווח / הפסד</span>
-                        </button>
-                    </nav>
-                </section>
-            </main>
-
-            <main id="pnl-page" class="vault-page" aria-label="מעקב רווח הפסד">
-                <div class="page-head">
-                    <button class="page-back-btn" type="button" data-back-page="personal">חזרה</button>
-                </div>
-                <section id="personal-section" class="page-content" aria-label="מעקב רווח הפסד">
-                    <h2 class="section-title">מעקב רווח / הפסד</h2>
-                    <p class="section-subtitle">הכנס עסקאות כסף, והמערכת תחשב שווי נוכחי לפי המחיר הנוכחי של אונקיה.</p>
-                    <form id="pnl-form" class="pnl-form">
-                        <input id="tx-date" type="date" required>
-                        <input id="tx-note" type="text" placeholder="הערה (לדוגמה: קניית מטיל)">
-                        <input id="tx-amount-ils" type="number" min="0" step="0.01" placeholder="סכום בשקלים" required>
-                        <input id="tx-buy-price" type="number" min="0" step="0.01" placeholder="מחיר קנייה $ לאונקיה" required>
-                        <input id="tx-fx" type="number" min="0" step="0.001" placeholder="שער דולר/שקל (ברירת מחדל 3.65)">
-                        <button type="submit" class="neon-button-small">הוסף עסקה</button>
-                    </form>
-                    <div class="pnl-summary">
-                        <div><span>סה"כ עלות:</span> <strong id="total-cost-ils">₪0</strong></div>
-                        <div><span>שווי היום:</span> <strong id="total-current-ils">₪0</strong></div>
-                        <div><span>רווח/הפסד:</span> <strong id="total-pnl-ils">₪0</strong></div>
-                    </div>
-                    <div class="table-wrap">
-                        <table class="pnl-table">
-                            <thead>
-                                <tr>
-                                    <th>תאריך</th>
-                                    <th>עסקה</th>
-                                    <th>עלות (₪)</th>
-                                    <th>$ בקנייה</th>
-                                    <th>אונקיות</th>
-                                    <th>שווי היום (₪)</th>
-                                    <th>רווח/הפסד</th>
-                                    <th>מחיקה</th>
-                                </tr>
-                            </thead>
-                            <tbody id="pnl-table-body"></tbody>
-                        </table>
-                    </div>
-                </section>
-            </main>
-
-            <main id="homework-page" class="vault-page" aria-label="שיעורי בית">
-                <div class="page-head">
-                    <button class="page-back-btn" type="button" data-back-home>חזרה</button>
-                </div>
-                <section id="homework-section" class="page-content" aria-label="שיעורי בית">
-                    <h2 class="section-title">שיעורי בית — משחק שאלות ותשובות</h2>
-                    <p class="section-subtitle">תרגול קצר להבנת השוק, ניהול סיכונים ועולם העסקאות.</p>
-                    <div class="quiz-card">
-                        <div class="quiz-top-row">
-                            <span id="quiz-progress">שאלה 1 מתוך 5</span>
-                            <span id="quiz-score">ניקוד: 0</span>
-                        </div>
-                        <h3 id="quiz-question" class="quiz-question"></h3>
-                        <div id="quiz-options" class="quiz-options"></div>
-                        <div class="quiz-actions">
-                            <button id="quiz-next-btn" class="neon-button-small" disabled>המשך</button>
-                            <button id="quiz-reset-btn" class="neon-button-small secondary">איפוס</button>
-                        </div>
-                        <p id="quiz-feedback" class="quiz-feedback"></p>
-                    </div>
-                </section>
-            </main>
-
-            <main id="updates-page" class="vault-page" aria-label="עדכונים וחדשות">
-                <div class="page-head">
-                    <button class="page-back-btn" type="button" data-back-home>חזרה</button>
-                </div>
-                <section id="updates-section" class="page-content" aria-label="עדכונים וחדשות">
-                    <h2 class="section-title">עדכונים וחדשות</h2>
-                    <p class="section-subtitle">כל התוכן כאן כרגע מומצא ולא אמיתי — לבדיקה בלבד.</p>
-                    <div class="news-grid">
-                        <article class="news-card">
-                            <span class="news-tag">מומצא לבדיקה בלבד</span>
-                            <h3>השוק מגיב לירידה במלאי גלובלי</h3>
-                            <p>בדוח דמו לחודש אפריל נרשמה ירידה של 8% במלאי כסף עולמי, מה שיצר תנודתיות גבוהה במסחר היומי.</p>
-                        </article>
-                        <article class="news-card">
-                            <span class="news-tag">מומצא לבדיקה בלבד</span>
-                            <h3>ביקוש תעשייתי באנרגיה ירוקה עולה</h3>
-                            <p>עדכון שבועי מדומה: מפעלי סולארי באירופה הגדילו הזמנות כסף לרבעון הקרוב.</p>
-                        </article>
-                        <article class="news-card">
-                            <span class="news-tag">מומצא לבדיקה בלבד</span>
-                            <h3>סקר קהילה: סוחרים מעדיפים ניהול סיכון</h3>
-                            <p>בסקר דמו פנימי, 72% מהתלמידים ציינו שפקודות סטופ הן הכלי החשוב ביותר במסחר קצר.</p>
-                        </article>
-                    </div>
-                </section>
-            </main>
-
-            <main id="charts-page" class="vault-page" aria-label="גרפים">
-                <div class="page-head">
-                    <button class="page-back-btn" type="button" data-back-home>חזרה</button>
-                </div>
-                <section id="charts-section" class="page-content" aria-label="גרפים">
-                    <h2 class="section-title">גרפים — נרות יפנים</h2>
-                    <p class="section-subtitle">בחר טווח זמן והגרף יתעדכן. ירוק = עליה, אדום = ירידה.</p>
-                    <div class="chart-time-buttons">
-                        <button class="chart-time-btn active" data-timeframe="5m">5 דקות</button>
-                        <button class="chart-time-btn" data-timeframe="1h">שעה</button>
-                        <button class="chart-time-btn" data-timeframe="1d">יום</button>
-                        <button class="chart-time-btn" data-timeframe="1w">שבוע</button>
-                        <button class="chart-time-btn" data-timeframe="1m">חודש</button>
-                    </div>
-                    <div class="candles-wrap">
-                        <canvas id="candles-canvas" width="1000" height="420"></canvas>
-                    </div>
-                    <p class="chart-note">* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.</p>
-                </section>
-            </main>
+            <nav class="main-switcher" aria-label="ניווט ראשי">
+                <button class="main-switch-btn" data-target="personal">
+                    <span>איזור אישי</span>
+                </button>
+                <button class="main-switch-btn" data-target="homework">
+                    <span>שיעורי בית</span>
+                </button>
+                <button class="main-switch-btn" data-target="updates">
+                    <span>עדכונים וחדשות</span>
+                </button>
+                <button class="main-switch-btn" data-target="charts">
+                    <span>גרפים</span>
+                </button>
+            </nav>
         </div>
-
-        <button type="button" id="mr-d-fab" class="mr-d-fab" aria-haspopup="dialog" aria-controls="mr-d-modal">
-            <span class="mr-d-fab-label">מר ד'</span>
-        </button>
     </div>
 
+    <!-- ══ PERSONAL SECTION SCREEN ══ -->
+    <div id="personal-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-personal">→ חזרה</button>
+                <h2 class="section-screen-title">איזור אישי</h2>
+            </div>
+            <nav class="personal-action-menu">
+                <button class="main-switch-btn personal-action-btn" id="dark-mode-btn">
+                    <span class="personal-btn-icon" id="dark-mode-icon">🌙</span>
+                    <span id="dark-mode-label">מצב לילה</span>
+                </button>
+                <button class="main-switch-btn personal-action-btn" id="pnl-open-btn">
+                    <span class="personal-btn-icon">📊</span>
+                    <span>מעקב רווח / הפסד</span>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ══ P&L SCREEN ══ -->
+    <div id="pnl-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-pnl">→ חזרה</button>
+                <h2 class="section-screen-title">מעקב רווח / הפסד</h2>
+            </div>
+            <p class="section-subtitle">הכנס עסקאות כסף, והמערכת תחשב שווי נוכחי לפי המחיר הנוכחי של אונקיה.</p>
+            <form id="pnl-form" class="pnl-form">
+                <input id="tx-date" type="date" required>
+                <input id="tx-note" type="text" placeholder="הערה (לדוגמה: קנייה)">
+                <input id="tx-amount-ils" type="number" min="0" step="0.01" placeholder="סכום בשקלים" required>
+                <input id="tx-buy-price" type="number" min="0" step="0.01" placeholder="מחיר קנייה $ לאונקיה" required>
+                <button type="submit" class="neon-button-small">הוסף עסקה</button>
+            </form>
+            <div id="fx-status" class="fx-status"></div>
+            <div class="pnl-summary">
+                <div><span>סה"כ עלות:</span> <strong id="total-cost-ils">₪0</strong></div>
+                <div><span>שווי ספוט נקי:</span> <strong id="total-current-ils">₪0</strong></div>
+                <div><span>רווח/הפסד:</span> <strong id="total-pnl-ils">₪0</strong></div>
+            </div>
+            <div id="fx-live-info" class="fx-live-info"></div>
+            <div class="table-wrap">
+                <table class="pnl-table">
+                    <thead>
+                        <tr>
+                            <th>תאריך</th>
+                            <th>עסקה</th>
+                            <th>עלות (₪)</th>
+                            <th>$ בקנייה</th>
+                            <th>אונקיות</th>
+                            <th>שווי ספוט נקי (₪)</th>
+                            <th>רווח/הפסד</th>
+                            <th>מחיקה</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pnl-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ HOMEWORK SCREEN ══ -->
+    <div id="homework-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-homework">→ חזרה</button>
+                <h2 class="section-screen-title">שיעורי בית</h2>
+            </div>
+            <div class="coming-soon-wrap">
+                <div class="coming-soon-badge">בהכנה</div>
+                <p class="coming-soon-text">התוכן של שיעורי הבית נמצא בהכנה ויגיע בקרוב!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ UPDATES SCREEN ══ -->
+    <div id="updates-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-updates">→ חזרה</button>
+                <h2 class="section-screen-title">עדכונים וחדשות</h2>
+            </div>
+            <p class="section-subtitle">כל התוכן כאן כרגע מומצא ולא אמיתי — לבדיקה בלבד.</p>
+            <div class="news-grid">
+                <article class="news-card">
+                    <span class="news-tag">מומצא לבדיקה בלבד</span>
+                    <h3>השוק מגיב לירידה במלאי גלובלי</h3>
+                    <p>בדוח דמו לחודש אפריל נרשמה ירידה של 8% במלאי כסף עולמי, מה שיצר תנודתיות גבוהה במסחר היומי.</p>
+                </article>
+                <article class="news-card">
+                    <span class="news-tag">מומצא לבדיקה בלבד</span>
+                    <h3>ביקוש תעשייתי באנרגיה ירוקה עולה</h3>
+                    <p>עדכון שבועי מדומה: מפעלי סולארי באירופה הגדילו הזמנות כסף לרבעון הקרוב.</p>
+                </article>
+                <article class="news-card">
+                    <span class="news-tag">מומצא לבדיקה בלבד</span>
+                    <h3>סקר קהילה: סוחרים מעדיפים ניהול סיכון</h3>
+                    <p>בסקר דמו פנימי, 72% מהתלמידים ציינו שפקודות סטופ הן הכלי החשוב ביותר במסחר קצר.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ CHARTS SCREEN ══ -->
+    <div id="charts-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-charts">→ חזרה</button>
+                <h2 class="section-screen-title">גרפים</h2>
+            </div>
+            <p class="section-subtitle">בחר טווח זמן והגרף יתעדכן. ירוק = עליה, אדום = ירידה.</p>
+
+            <div class="chart-type-toggle">
+                <button class="chart-type-btn active" data-chart-type="candles">נרות יפניים</button>
+                <button class="chart-type-btn" data-chart-type="line">גרף קו</button>
+            </div>
+
+            <div class="chart-time-buttons">
+                <button class="chart-time-btn active" data-timeframe="1d">יומי</button>
+                <button class="chart-time-btn" data-timeframe="1w">שבועי</button>
+                <button class="chart-time-btn" data-timeframe="1m">חודשי</button>
+            </div>
+
+            <div id="candles-container" class="candles-wrap">
+                <canvas id="candles-canvas"></canvas>
+            </div>
+            <div id="line-container" class="line-chart-wrap" style="display:none;">
+                <canvas id="line-canvas"></canvas>
+            </div>
+            <p class="chart-note">* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.</p>
+        </div>
+    </div>
+
+    <!-- ══ MR. D FAB (fixed, shown after login) ══ -->
+    <button type="button" id="mr-d-fab" class="mr-d-fab" style="display:none;"
+            aria-haspopup="dialog" aria-controls="mr-d-modal">
+        <span class="mr-d-fab-label">מר ד'</span>
+    </button>
+
+    <!-- ══ MR. D MODAL ══ -->
     <div id="mr-d-modal" class="mr-d-modal" style="display:none;" role="dialog" aria-modal="true" aria-label="צ'אט עם מר ד'">
         <div class="mr-d-modal-head">
             <h2>מר ד' — צ'אט מלא</h2>
@@ -220,8 +232,7 @@
         <div class="chat-container chat-fullscreen">
             <div id="chat-messages" class="chat-messages">
                 <div class="chat-message bot">
-                    <span class="message-author">מר ד':</span>
-                    <span class="message-text">שלום. אני מר ד'. שאל אותי על כסף, שוק, אסטרטגיה וניהול סיכון.</span>
+                    <div class="msg-content"><span class="msg-inline-author">מר ד':</span> שלום. אני מר ד'. שאל אותי על כסף, שוק, אסטרטגיה וניהול סיכון.</div>
                 </div>
             </div>
             <div class="chat-input-area">
@@ -232,7 +243,7 @@
         </div>
     </div>
 
-    <!-- AI Disclaimer Modal (shown once per day) -->
+    <!-- ══ AI DISCLAIMER MODAL ══ -->
     <div id="ai-disclaimer-modal" class="modal-overlay" style="display: none;">
         <div class="modal-box">
             <h2 class="modal-title">הצהרת אחריות ⚠️</h2>
@@ -246,6 +257,6 @@
         </div>
     </div>
 
-        <script src="app_v2.js?v=2"></script>
+    <script src="app_v2.js?v=8"></script>
 </body>
 </html>
