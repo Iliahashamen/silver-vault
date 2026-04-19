@@ -1351,14 +1351,16 @@ body {
         margin-top: 14px;
     }
 
-    .icon-btn-label { font-size: 14px; padding: 5px 6px 8px; }
+    .icon-btn { padding: 18px 14px 14px; gap: 10px; }
+    .icon-btn-label { font-size: 14px; }
 }
 
 @media (min-width: 900px) {
     .dashboard-v2 { width: min(660px, 100%); padding: 26px 26px 30px; }
     .dashboard-title { font-size: 44px; }
     .icon-grid { grid-template-columns: repeat(2, minmax(0, 250px)); gap: 18px; }
-    .icon-btn-label { font-size: 15px; padding: 6px 8px 10px; }
+    .icon-btn { padding: 20px 16px 16px; gap: 12px; }
+    .icon-btn-label { font-size: 15px; }
 }
 
 .price-strip {
@@ -1428,10 +1430,7 @@ body {
 .main-switch-index { display: none; }
 
 /* ════════════════════════════════════════════
-   ICON GRID — 2×2 app-icon style navigation
-   ════════════════════════════════════════════ */
-/* ════════════════════════════════════════════
-   ICON GRID — 2×2 compact app-icon navigation
+   ICON GRID — 2×2 app-icon navigation
    ════════════════════════════════════════════ */
 .icon-grid {
     display: grid;
@@ -1442,15 +1441,16 @@ body {
 }
 
 .icon-btn {
-    position: relative;
     border: none;
     background: var(--card);
     border-radius: var(--radius-lg);
     box-shadow: var(--nm-raised);
-    padding: 0;
+    padding: 14px 10px 10px;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     cursor: pointer;
     aspect-ratio: 1 / 1;
     width: 100%;
@@ -1468,91 +1468,56 @@ body {
     box-shadow: var(--nm-inset);
 }
 
-/* Image fills the entire button */
-.icon-btn-img .icon-btn-image {
-    position: absolute;
-    inset: 0;
+/* Inner image container — clips edges cleanly */
+.icon-img-wrap {
+    width: 76%;
+    aspect-ratio: 1 / 1;
+    border-radius: 18%;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow:
+        2px 3px 7px rgba(140, 120, 100, 0.28),
+       -2px -2px 6px rgba(255, 255, 255, 0.78);
+}
+
+.icon-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0;
     display: block;
     transition: transform 0.18s ease;
 }
 
-.icon-btn-img:hover .icon-btn-image {
-    transform: scale(1.04);
+.icon-btn:hover .icon-img-wrap img {
+    transform: scale(1.05);
 }
 
-/* Label bar pinned to bottom */
+/* Charts: crop green outer edge */
+.icon-img-wrap--crop img {
+    transform: scale(1.35);
+}
+
+.icon-btn:hover .icon-img-wrap--crop img {
+    transform: scale(1.40);
+}
+
+/* Label */
 .icon-btn-label {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     font-family: 'Assistant', sans-serif;
     font-size: 11px;
     font-weight: 800;
     color: var(--text);
     text-align: center;
     line-height: 1.2;
-    padding: 4px 4px 6px;
-    background: rgba(240, 237, 231, 0.82);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    flex-shrink: 0;
 }
 
-/* Emoji variant (fallback) */
-.icon-btn-emoji {
-    font-size: 32px;
-    line-height: 1;
-    display: block;
-    margin: auto auto 6px;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.18));
-    transition: transform 0.18s ease;
-    position: relative;
-    z-index: 1;
-}
-
-.icon-btn:hover .icon-btn-emoji {
-    transform: scale(1.08);
-}
-
-/* Label for emoji buttons (not absolute) */
-.icon-btn:not(.icon-btn-img) .icon-btn-label {
-    position: static;
-    background: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    padding: 0 4px 8px;
-    font-size: 11px;
-}
-
-/* Crop outer green border — scale fills button with white-square only */
-.icon-btn-image--crop {
-    transform: scale(1.36) !important;
-    transform-origin: center center;
-}
-
-.icon-btn-img:hover .icon-btn-image--crop {
-    transform: scale(1.40) !important;
-}
-
-
-body.dark-mode .icon-btn {
-    background: var(--card);
-}
-
-body.dark-mode .icon-btn-label {
-    background: rgba(26, 36, 28, 0.82);
-    color: var(--text-light);
-}
+body.dark-mode .icon-btn { background: var(--card); }
+body.dark-mode .icon-btn-label { color: var(--text); }
 
 @media (max-width: 360px) {
-    .icon-grid {
-        grid-template-columns: repeat(2, minmax(0, 120px));
-        gap: 8px;
-    }
+    .icon-grid { gap: 8px; }
+    .icon-btn  { padding: 10px 8px 8px; gap: 6px; }
     .icon-btn-label { font-size: 10px; }
 }
 
