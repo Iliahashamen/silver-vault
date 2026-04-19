@@ -59,6 +59,10 @@ function goBack() {
 // ── DARK MODE ────────────────────────────────────────────────────────
 function applyDarkMode(dark) {
     document.body.classList.toggle('dark-mode', dark);
+    // Opacity flash — GPU-composited, causes zero repaint
+    document.body.classList.remove('dark-mode-animating');
+    void document.body.offsetWidth; // trigger reflow to restart animation
+    document.body.classList.add('dark-mode-animating');
     const icon  = document.getElementById('dark-mode-icon');
     const label = document.getElementById('dark-mode-label');
     if (icon)  icon.textContent  = dark ? '☀️' : '🌙';
@@ -68,14 +72,15 @@ function applyDarkMode(dark) {
 function toggleDarkMode() {
     const dark = !document.body.classList.contains('dark-mode');
     localStorage.setItem(DARK_MODE_KEY, dark ? '1' : '0');
-    // Defer heavy repaint to next frame so click feedback renders first
-    requestAnimationFrame(() => {
+    // setTimeout(0) yields to the macro-task queue — click event fully
+    // completes and the browser can process any pending paint before the
+    // CSS variable cascade fires, keeping the UI responsive.
+    setTimeout(() => {
         applyDarkMode(dark);
-        // Redraw chart canvas in a second frame — after dark-mode class is applied
         if (document.getElementById('charts-screen')?.classList.contains('active')) {
             requestAnimationFrame(() => renderActiveChart());
         }
-    });
+    }, 0);
 }
 
 // ── LOGIN ────────────────────────────────────────────────────────────

@@ -176,21 +176,13 @@ body.dark-mode #dark-mode-btn {
     color: var(--text-light);
 }
 
-/* Smooth dark mode transition — only key surfaces, no box-shadow (expensive) */
-body,
-.section-screen-wrap,
-.dashboard-v2,
-.terminal-container,
-.terminal-body,
-.main-switch-btn,
-.modal-box,
-.news-card,
-.pnl-summary > div,
-.quiz-card,
-.terminal-input,
-.chat-messages,
-.mr-d-modal {
-    transition: background-color 0.28s ease, color 0.2s ease;
+/* Dark mode flash — opacity only (GPU composited, zero repaint cost) */
+@keyframes darkModeFlash {
+    from { opacity: 0.82; }
+    to   { opacity: 1; }
+}
+.dark-mode-animating {
+    animation: darkModeFlash 0.22s ease forwards;
 }
 
 /* ── RESET ──────────────────────────────────────────────────────── */
