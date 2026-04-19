@@ -1495,7 +1495,7 @@ body {
     transform: scale(1.35);
 }
 
-/* Label — pinned to bottom with frosted glass strip */
+/* Label — plain text, no background */
 .icon-btn-label {
     position: absolute;
     bottom: 0;
@@ -1509,14 +1509,14 @@ body {
     text-align: center;
     line-height: 1.2;
     padding: 5px 4px 7px;
-    background: rgba(240, 237, 231, 0.88);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: none;
 }
 
 body.dark-mode .icon-btn-label {
-    background: rgba(22, 30, 22, 0.85);
     color: var(--text-light);
+    text-shadow:
+        0 0 8px rgba(180, 230, 200, 0.70),
+        0 0 18px rgba(120, 200, 160, 0.40);
 }
 
 @media (max-width: 360px) {
