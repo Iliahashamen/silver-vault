@@ -1486,19 +1486,13 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    transform: scale(1.30);
+    transform-origin: center center;
     transition: transform 0.22s ease;
 }
 
 .icon-btn:hover .icon-img-wrap img {
-    transform: scale(1.04);
-}
-
-/* Charts: scale to crop green outer border */
-.icon-img-wrap--crop img {
     transform: scale(1.35);
-}
-.icon-btn:hover .icon-img-wrap--crop img {
-    transform: scale(1.39);
 }
 
 /* Label — pinned to bottom with frosted glass strip */
