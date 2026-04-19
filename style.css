@@ -1541,7 +1541,7 @@ body {
 /* Background-image variant — zoom in to crop colored border */
 .icon-btn-bg {
     background-image: var(--icon-bg);
-    background-size: 132%;
+    background-size: 148%;
     background-position: center;
     background-repeat: no-repeat;
     background-color: var(--card);
@@ -1549,7 +1549,7 @@ body {
 }
 
 .icon-btn-bg:hover {
-    background-size: 138%;
+    background-size: 154%;
 }
 
 body.dark-mode .icon-btn {
