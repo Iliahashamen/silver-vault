@@ -1530,12 +1530,12 @@ body {
 
 /* Crop outer green border — scale fills button with white-square only */
 .icon-btn-image--crop {
-    transform: scale(1.32);
+    transform: scale(1.36) !important;
     transform-origin: center center;
 }
 
 .icon-btn-img:hover .icon-btn-image--crop {
-    transform: scale(1.36);
+    transform: scale(1.40) !important;
 }
 
 
