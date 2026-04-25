@@ -644,12 +644,7 @@ function _renderNewsDigest(lang) {
 
     // Date meta line — only "as of" date, no next-update
     if (meta) {
-        const metaTexts = {
-            he: `נכון ל-${_formatNewsDate(pubDate, 'he')}`,
-            en: `As of ${_formatNewsDate(pubDate, 'en')}`,
-            ru: `По состоянию на ${_formatNewsDate(pubDate, 'ru')}`,
-        };
-        meta.textContent = metaTexts[lang] || metaTexts.he;
+        meta.textContent = lang === 'he' ? `נכון ל-${_formatNewsDate(pubDate, 'he')}` : '';
     }
 
     const dir     = NEWS_LANG_DIR[lang] || 'rtl';
