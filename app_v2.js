@@ -611,28 +611,92 @@ function renderActiveChart() {
 }
 
 // ── WEEKLY NEWS ───────────────────────────────────────────────────────
-const NEWS_CATEGORY_LABELS = {
-    financial:    'פיננסי',
-    geopolitical: 'גיאופוליטי',
-    positive:     'חדשות טובות',
-    negative:     'חדשות שליליות',
+const NEWS_CAT_LABELS = {
+    he: { financial: 'פיננסי', geopolitical: 'גיאופוליטי', positive: 'חיובי', negative: 'שלילי' },
+    en: { financial: 'Financial', geopolitical: 'Geopolitical', positive: 'Positive', negative: 'Negative' },
+    ru: { financial: 'Финансы', geopolitical: 'Геополитика', positive: 'Позитив', negative: 'Негатив' },
 };
-const NEWS_CATEGORY_CLASS = {
-    financial:    'news-tag-financial',
-    geopolitical: 'news-tag-geo',
-    positive:     'news-tag-positive',
-    negative:     'news-tag-negative',
+const NEWS_CAT_CLASS = {
+    financial: 'news-tag-financial', geopolitical: 'news-tag-geo',
+    positive:  'news-tag-positive',  negative:     'news-tag-negative',
 };
+const NEWS_LANG_DIR  = { he: 'rtl', en: 'ltr', ru: 'ltr' };
+const NEWS_LANG_KEY  = 'vault_news_lang';
 
-let _newsLoaded = false;
+let _newsData    = null;   // cached API response
+let _newsLang    = localStorage.getItem(NEWS_LANG_KEY) || 'he';
+
+function _formatNewsDate(isoDate, lang) {
+    if (!isoDate) return '';
+    const d = new Date(isoDate + 'T00:00:00');
+    const locales = { he: 'he-IL', en: 'en-GB', ru: 'ru-RU' };
+    return d.toLocaleDateString(locales[lang] || 'he-IL', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function _renderNewsDigest(lang) {
+    const container = document.getElementById('news-container');
+    const meta      = document.getElementById('news-date-meta');
+    if (!container || !_newsData) return;
+
+    const items       = _newsData.items || [];
+    const pubDate     = _newsData.published_date || '';
+    const nextUpdate  = _newsData.next_update    || '';
+
+    // Date meta line
+    if (meta) {
+        const metaTexts = {
+            he: `${_formatNewsDate(pubDate, 'he')} · עדכון הבא: ${_formatNewsDate(nextUpdate, 'he')}`,
+            en: `${_formatNewsDate(pubDate, 'en')} · Next update: ${_formatNewsDate(nextUpdate, 'en')}`,
+            ru: `${_formatNewsDate(pubDate, 'ru')} · Следующее обновление: ${_formatNewsDate(nextUpdate, 'ru')}`,
+        };
+        meta.textContent = metaTexts[lang] || metaTexts.he;
+    }
+
+    const dir     = NEWS_LANG_DIR[lang] || 'rtl';
+    const digest  = document.createElement('div');
+    digest.className = 'news-digest';
+    digest.setAttribute('dir', dir);
+
+    items.forEach((item, idx) => {
+        const langBlock = item[lang] || item['he'] || {};
+        const catLabel  = (NEWS_CAT_LABELS[lang] || NEWS_CAT_LABELS.he)[item.category] || item.category;
+        const catClass  = NEWS_CAT_CLASS[item.category] || '';
+
+        const section = document.createElement('div');
+        section.className = 'news-section';
+        section.innerHTML = `
+            <span class="news-tag ${catClass}">${escapeHtml(catLabel)}</span>
+            <h3 class="news-section-title">${escapeHtml(langBlock.title || '')}</h3>
+            <p class="news-section-body">${escapeHtml(langBlock.summary || '')}</p>
+        `;
+        digest.appendChild(section);
+
+        if (idx < items.length - 1) {
+            const hr = document.createElement('hr');
+            hr.className = 'news-divider';
+            digest.appendChild(hr);
+        }
+    });
+
+    container.innerHTML = '';
+    container.appendChild(digest);
+}
+
+function _switchNewsLang(lang) {
+    _newsLang = lang;
+    localStorage.setItem(NEWS_LANG_KEY, lang);
+    document.querySelectorAll('.news-lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    if (_newsData) _renderNewsDigest(lang);
+}
 
 async function loadNews() {
-    if (_newsLoaded) return;
     const container = document.getElementById('news-container');
-    const label     = document.getElementById('news-week-label');
     if (!container) return;
+    if (_newsData) { _renderNewsDigest(_newsLang); return; }
 
-    container.innerHTML = '<div class="news-loading" id="news-loading">טוען חדשות...</div>';
+    container.innerHTML = '<div class="news-loading">טוען חדשות...</div>';
 
     try {
         const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/news`);
@@ -642,36 +706,18 @@ async function loadNews() {
             container.innerHTML = '<p class="news-empty">אין חדשות זמינות כרגע. נסה שוב מאוחר יותר.</p>';
             return;
         }
-
-        // Update subtitle with the week date
-        if (label && data.week_date) {
-            const d = new Date(data.week_date + 'T00:00:00');
-            const formatted = d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' });
-            label.textContent = `סיכום שבוע ${formatted}`;
-        }
-
-        const grid = document.createElement('div');
-        grid.className = 'news-grid';
-
-        data.items.forEach(item => {
-            const catLabel = NEWS_CATEGORY_LABELS[item.category] || item.category;
-            const catClass = NEWS_CATEGORY_CLASS[item.category]  || '';
-            const article  = document.createElement('article');
-            article.className = 'news-card';
-            article.innerHTML = `
-                <span class="news-tag ${catClass}">${escapeHtml(catLabel)}</span>
-                <h3>${escapeHtml(item.title)}</h3>
-                <p>${escapeHtml(item.summary)}</p>
-            `;
-            grid.appendChild(article);
-        });
-
-        container.innerHTML = '';
-        container.appendChild(grid);
-        _newsLoaded = true;
+        _newsData = data;
+        _renderNewsDigest(_newsLang);
     } catch {
         container.innerHTML = '<p class="news-empty">שגיאת חיבור — נסה שוב מאוחר יותר.</p>';
     }
+}
+
+function initNewsLangToggle() {
+    document.querySelectorAll('.news-lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === _newsLang);
+        btn.addEventListener('click', () => _switchNewsLang(btn.dataset.lang));
+    });
 }
 
 // ── CHAT ──────────────────────────────────────────────────────────────
@@ -951,6 +997,7 @@ function initDashboard() {
     });
 
     initQuiz();
+    initNewsLangToggle();
 
     // ── Personal area sub-navigation ──
     document.getElementById('dark-mode-btn')?.addEventListener('click', toggleDarkMode);

@@ -2244,6 +2244,90 @@ body.dark-mode .quiz-opt-btn.wrong   { color: #e06060; background: rgba(196, 63,
 body.dark-mode .quiz-stat-box        { background: var(--card); }
 body.dark-mode .quiz-hud-item        { background: var(--card); }
 
+/* ── News — language toggle row ── */
+.news-lang-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+}
+
+.news-lang-toggle {
+    display: flex;
+    gap: 6px;
+}
+
+.news-lang-btn {
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Assistant', sans-serif;
+    cursor: pointer;
+    background: var(--card);
+    color: var(--text-muted);
+    box-shadow: var(--nm-raised);
+    transition: background 0.18s, color 0.18s;
+    letter-spacing: 0.03em;
+}
+
+.news-lang-btn.active {
+    background: var(--clay);
+    color: #fff;
+    box-shadow: none;
+}
+
+.news-date-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-align: left;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── News — digest layout (replaces card grid) ── */
+.news-digest {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 8px;
+}
+
+.news-section {
+    padding: 20px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.news-section-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.news-section-body {
+    font-size: 14.5px;
+    color: var(--text-mid, var(--text));
+    line-height: 1.75;
+    margin: 0;
+}
+
+.news-divider {
+    border: none;
+    border-top: 1px solid var(--border, rgba(120,120,120,0.18));
+    margin: 0;
+}
+
 /* ── News category tag variants ── */
 .news-tag-financial {
     background: rgba(74, 130, 184, 0.16);
@@ -2265,13 +2349,16 @@ body.dark-mode .quiz-hud-item        { background: var(--card); }
 .news-loading,
 .news-empty {
     text-align: center;
-    padding: 32px 16px;
+    padding: 40px 16px;
     color: var(--text-muted);
     font-size: 15px;
     font-weight: 500;
 }
 
-body.dark-mode .news-tag-financial { background: rgba(74, 130, 184, 0.22); color: #7ab8e8; }
-body.dark-mode .news-tag-geo       { background: rgba(200, 130, 50, 0.20); color: #d4955a; }
-body.dark-mode .news-tag-positive  { background: rgba(74, 184, 130, 0.18); color: #3dd68a; }
-body.dark-mode .news-tag-negative  { background: rgba(212, 73, 73, 0.18);  color: #e06060; }
+/* Dark mode */
+body.dark-mode .news-lang-btn.active   { background: var(--clay-dk, #5a7a5e); }
+body.dark-mode .news-tag-financial     { background: rgba(74, 130, 184, 0.22); color: #7ab8e8; }
+body.dark-mode .news-tag-geo           { background: rgba(200, 130, 50, 0.20); color: #d4955a; }
+body.dark-mode .news-tag-positive      { background: rgba(74, 184, 130, 0.18); color: #3dd68a; }
+body.dark-mode .news-tag-negative      { background: rgba(212, 73, 73, 0.18);  color: #e06060; }
+body.dark-mode .news-section-body      { color: var(--text-mid, rgba(220,220,220,0.85)); }
