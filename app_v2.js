@@ -659,13 +659,10 @@ function _renderNewsDigest(lang) {
 
     items.forEach((item, idx) => {
         const langBlock = item[lang] || item['he'] || {};
-        const catLabel  = (NEWS_CAT_LABELS[lang] || NEWS_CAT_LABELS.he)[item.category] || item.category;
-        const catClass  = NEWS_CAT_CLASS[item.category] || '';
 
         const section = document.createElement('div');
         section.className = 'news-section';
         section.innerHTML = `
-            <span class="news-tag ${catClass}">${escapeHtml(catLabel)}</span>
             <h3 class="news-section-title">${escapeHtml(langBlock.title || '')}</h3>
             <p class="news-section-body">${escapeHtml(langBlock.summary || '')}</p>
         `;
