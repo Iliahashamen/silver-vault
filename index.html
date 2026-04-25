@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>ה-כספת</title>
-    <link rel="stylesheet" href="style.css?v=78">
+    <link rel="stylesheet" href="style.css?v=79">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="config.js?v=43"></script>
@@ -205,25 +205,11 @@
         <div class="section-screen-wrap">
             <div class="section-screen-header">
                 <button class="back-btn" id="back-updates">→ חזרה</button>
-                <h2 class="section-screen-title">עדכונים וחדשות</h2>
+                <h2 class="section-screen-title">חדשות ועדכונים</h2>
             </div>
-            <p class="section-subtitle">כל התוכן כאן כרגע מומצא ולא אמיתי — לבדיקה בלבד.</p>
-            <div class="news-grid">
-                <article class="news-card">
-                    <span class="news-tag">מומצא לבדיקה בלבד</span>
-                    <h3>השוק מגיב לירידה במלאי גלובלי</h3>
-                    <p>בדוח דמו לחודש אפריל נרשמה ירידה של 8% במלאי כסף עולמי, מה שיצר תנודתיות גבוהה במסחר היומי.</p>
-                </article>
-                <article class="news-card">
-                    <span class="news-tag">מומצא לבדיקה בלבד</span>
-                    <h3>ביקוש תעשייתי באנרגיה ירוקה עולה</h3>
-                    <p>עדכון שבועי מדומה: מפעלי סולארי באירופה הגדילו הזמנות כסף לרבעון הקרוב.</p>
-                </article>
-                <article class="news-card">
-                    <span class="news-tag">מומצא לבדיקה בלבד</span>
-                    <h3>סקר קהילה: סוחרים מעדיפים ניהול סיכון</h3>
-                    <p>בסקר דמו פנימי, 72% מהתלמידים ציינו שפקודות סטופ הן הכלי החשוב ביותר במסחר קצר.</p>
-                </article>
+            <p class="section-subtitle" id="news-week-label">חדשות שבועיות — מתעדכן כל יום ראשון בבוקר</p>
+            <div id="news-container">
+                <div class="news-loading" id="news-loading">טוען חדשות...</div>
             </div>
         </div>
     </div>
@@ -298,6 +284,6 @@
         </div>
     </div>
 
-    <script src="app_v2.js?v=16"></script>
+    <script src="app_v2.js?v=17"></script>
 </body>
 </html>

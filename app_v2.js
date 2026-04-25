@@ -67,6 +67,8 @@ function goToScreen(screenId) {
     } else {
         activateTarget();
     }
+
+    if (screenId === 'updates-screen') loadNews();
 }
 
 function goBack() {
@@ -606,6 +608,70 @@ function renderLineChart(frame) {
 function renderActiveChart() {
     if (activeChartType === 'candles') renderCandleChart(activeFrame);
     else                               renderLineChart(activeFrame);
+}
+
+// ── WEEKLY NEWS ───────────────────────────────────────────────────────
+const NEWS_CATEGORY_LABELS = {
+    financial:    'פיננסי',
+    geopolitical: 'גיאופוליטי',
+    positive:     'חדשות טובות',
+    negative:     'חדשות שליליות',
+};
+const NEWS_CATEGORY_CLASS = {
+    financial:    'news-tag-financial',
+    geopolitical: 'news-tag-geo',
+    positive:     'news-tag-positive',
+    negative:     'news-tag-negative',
+};
+
+let _newsLoaded = false;
+
+async function loadNews() {
+    if (_newsLoaded) return;
+    const container = document.getElementById('news-container');
+    const label     = document.getElementById('news-week-label');
+    if (!container) return;
+
+    container.innerHTML = '<div class="news-loading" id="news-loading">טוען חדשות...</div>';
+
+    try {
+        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/news`);
+        const data = await res.json();
+
+        if (!data.success || !Array.isArray(data.items) || !data.items.length) {
+            container.innerHTML = '<p class="news-empty">אין חדשות זמינות כרגע. נסה שוב מאוחר יותר.</p>';
+            return;
+        }
+
+        // Update subtitle with the week date
+        if (label && data.week_date) {
+            const d = new Date(data.week_date + 'T00:00:00');
+            const formatted = d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' });
+            label.textContent = `סיכום שבוע ${formatted}`;
+        }
+
+        const grid = document.createElement('div');
+        grid.className = 'news-grid';
+
+        data.items.forEach(item => {
+            const catLabel = NEWS_CATEGORY_LABELS[item.category] || item.category;
+            const catClass = NEWS_CATEGORY_CLASS[item.category]  || '';
+            const article  = document.createElement('article');
+            article.className = 'news-card';
+            article.innerHTML = `
+                <span class="news-tag ${catClass}">${escapeHtml(catLabel)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+                <p>${escapeHtml(item.summary)}</p>
+            `;
+            grid.appendChild(article);
+        });
+
+        container.innerHTML = '';
+        container.appendChild(grid);
+        _newsLoaded = true;
+    } catch {
+        container.innerHTML = '<p class="news-empty">שגיאת חיבור — נסה שוב מאוחר יותר.</p>';
+    }
 }
 
 // ── CHAT ──────────────────────────────────────────────────────────────
