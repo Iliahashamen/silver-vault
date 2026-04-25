@@ -642,12 +642,12 @@ function _renderNewsDigest(lang) {
     const pubDate     = _newsData.published_date || '';
     const nextUpdate  = _newsData.next_update    || '';
 
-    // Date meta line
+    // Date meta line — only "as of" date, no next-update
     if (meta) {
         const metaTexts = {
-            he: `${_formatNewsDate(pubDate, 'he')} · עדכון הבא: ${_formatNewsDate(nextUpdate, 'he')}`,
-            en: `${_formatNewsDate(pubDate, 'en')} · Next update: ${_formatNewsDate(nextUpdate, 'en')}`,
-            ru: `${_formatNewsDate(pubDate, 'ru')} · Следующее обновление: ${_formatNewsDate(nextUpdate, 'ru')}`,
+            he: `נכון ל-${_formatNewsDate(pubDate, 'he')}`,
+            en: `As of ${_formatNewsDate(pubDate, 'en')}`,
+            ru: `По состоянию на ${_formatNewsDate(pubDate, 'ru')}`,
         };
         meta.textContent = metaTexts[lang] || metaTexts.he;
     }

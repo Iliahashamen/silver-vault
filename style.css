@@ -2300,10 +2300,17 @@ body.dark-mode .quiz-hud-item        { background: var(--card); }
     margin-top: 8px;
 }
 
+/* LTR languages: everything reads left → right */
+.news-digest[dir="ltr"] {
+    text-align: left;
+    direction: ltr;
+}
+
 .news-section {
     padding: 20px 4px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;  /* tag hugs the inline-start edge (right in RTL, left in LTR) */
     gap: 10px;
 }
 
@@ -2313,6 +2320,7 @@ body.dark-mode .quiz-hud-item        { background: var(--card); }
     color: var(--text);
     line-height: 1.4;
     margin: 0;
+    align-self: stretch;      /* title fills full width */
 }
 
 .news-section-body {
@@ -2320,12 +2328,14 @@ body.dark-mode .quiz-hud-item        { background: var(--card); }
     color: var(--text-mid, var(--text));
     line-height: 1.75;
     margin: 0;
+    align-self: stretch;
 }
 
 .news-divider {
     border: none;
     border-top: 1px solid var(--border, rgba(120,120,120,0.18));
     margin: 0;
+    align-self: stretch;
 }
 
 /* ── News category tag variants ── */
