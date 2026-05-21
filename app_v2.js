@@ -726,7 +726,7 @@ const NAV_CHIP_DEFS = {
     'museum:uk':      { he: '🇬🇧 המינט המלכותי',    en: '🇬🇧 Royal Mint',                ru: '🇬🇧 Королевский монетный двор',
                         action: ['mint', 'uk'] },
     'quiz':           { he: '❓ טריוויה כסף',        en: '❓ Silver Quiz',                ru: '❓ Викторина',
-                        action: ['screen', 'homework-screen'] },
+                        action: ['quiz', ''] },
     'pnl':            { he: '📈 מעקב רווח / הפסד',  en: '📈 P&L Tracker',               ru: '📈 Трекер прибыли/убытков',
                         action: ['screen', 'pnl-screen'] },
 };
@@ -763,6 +763,9 @@ function handleNavChip(token) {
         goToScreen(target);
     } else if (type === 'mint') {
         openMuseumMint(target);
+    } else if (type === 'quiz') {
+        goToScreen('homework-screen');
+        setTimeout(_hwOpenQuiz, 250); // wait for screen transition
     }
 }
 
@@ -1031,12 +1034,32 @@ function quizStart() {
 function quizReset() {
     if (quizState.timer) { clearInterval(quizState.timer); quizState.timer = null; }
     quizState = { questions: [], idx: 0, score: 0, timeLeft: QUIZ_SECS, timer: null, locked: false };
+    _hwShowMenu(); // return to homework menu instead of showing quiz-start directly
+}
+
+function _hwShowMenu() {
+    const menu = document.getElementById('hw-menu');
+    const wrap = document.getElementById('hw-quiz-wrap');
+    if (menu) menu.style.display = '';
+    if (wrap) wrap.style.display = 'none';
+    _quizPanel('quiz-start'); // reset quiz panels for next time
+}
+
+function _hwOpenQuiz() {
+    const menu = document.getElementById('hw-menu');
+    const wrap = document.getElementById('hw-quiz-wrap');
+    if (menu) menu.style.display = 'none';
+    if (wrap) wrap.style.display = '';
     _quizPanel('quiz-start');
 }
 
 function initQuiz() {
     document.getElementById('quiz-start-btn')?.addEventListener('click', quizStart);
     document.getElementById('quiz-restart-btn')?.addEventListener('click', quizReset);
+    document.getElementById('quiz-menu-btn')?.addEventListener('click', _hwOpenQuiz);
+    document.getElementById('back-to-hw-menu')?.addEventListener('click', () => {
+        quizReset(); // stops timer, resets state, shows menu
+    });
 }
 
 // ══════════════════════════════════════════════════════════════════════
@@ -1535,7 +1558,15 @@ function initDashboard() {
     ['personal', 'homework', 'updates', 'charts'].forEach(name => {
         const btn = document.getElementById(`back-${name}`);
         if (btn) btn.onclick = () => {
-            if (name === 'homework') quizReset(); // stop timer when leaving
+            if (name === 'homework') {
+                const quizWrap = document.getElementById('hw-quiz-wrap');
+                if (quizWrap && quizWrap.style.display !== 'none') {
+                    // Quiz is open — go back to hw menu, not dashboard
+                    quizReset();
+                    return;
+                }
+                quizReset();
+            }
             goBack();
         };
     });
@@ -1680,7 +1711,12 @@ function initSwipeBack() {
         if (!active) return;
         switch (active.id) {
             case 'pnl-screen':          goToScreen('personal-screen'); break;
-            case 'homework-screen':     quizReset(); goBack();         break;
+            case 'homework-screen': {
+                const qw = document.getElementById('hw-quiz-wrap');
+                if (qw && qw.style.display !== 'none') { quizReset(); }
+                else { quizReset(); goBack(); }
+                break;
+            }
             case 'museum-screen':       goToScreen('homework-screen'); break;
             case 'mint-detail-screen':  goToScreen('museum-screen');   break;
             case 'personal-screen':

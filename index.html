@@ -165,53 +165,53 @@
                 <h2 class="section-screen-title">שיעורי בית</h2>
             </div>
 
-            <!-- Sub-feature menu -->
-            <div class="hw-features-row">
-                <button class="hw-feature-card" id="museum-open-btn">
-                    <span class="hw-feature-icon">🏛️</span>
-                    <div class="hw-feature-info">
-                        <strong class="hw-feature-name">מוזיאון המינטים</strong>
-                        <span class="hw-feature-sub">גלה מינטים מרחבי העולם</span>
-                    </div>
-                    <span class="hw-feature-arrow">←</span>
+            <!-- ── Feature selection (default view) ── -->
+            <div id="hw-menu" class="hw-menu-grid">
+                <button class="hw-big-card" id="museum-open-btn">
+                    <span class="hw-big-icon">🏛️</span>
+                    <strong class="hw-big-name">מוזיאון המינטים</strong>
+                    <span class="hw-big-sub">גלה מינטים מרחבי העולם</span>
+                </button>
+                <button class="hw-big-card" id="quiz-menu-btn">
+                    <span class="hw-big-icon">❓</span>
+                    <strong class="hw-big-name">טריוויה כסף</strong>
+                    <span class="hw-big-sub">55 שאלות · 10 דקות</span>
                 </button>
             </div>
 
-            <div class="hw-divider">
-                <span>טריוויה כסף</span>
-            </div>
+            <!-- ── Quiz (hidden until Trivia button is clicked) ── -->
+            <div id="hw-quiz-wrap" style="display:none">
+                <button class="back-btn hw-quiz-back-btn" id="back-to-hw-menu">→ חזרה לתפריט</button>
 
-            <!-- Start panel -->
-            <div id="quiz-start" class="quiz-panel">
-                <p class="quiz-intro-text">בחן את הידע שלך בעולם הכסף הפיזי</p>
-                <div class="quiz-stats-row">
-                    <div class="quiz-stat-box"><strong>55</strong><span>שאלות במאגר</span></div>
-                    <div class="quiz-stat-box"><strong>15</strong><span>שאלות למשחק</span></div>
-                    <div class="quiz-stat-box"><strong>10:00</strong><span>זמן משחק</span></div>
+                <div id="quiz-start" class="quiz-panel">
+                    <p class="quiz-intro-text">בחן את הידע שלך בעולם הכסף הפיזי</p>
+                    <div class="quiz-stats-row">
+                        <div class="quiz-stat-box"><strong>55</strong><span>שאלות במאגר</span></div>
+                        <div class="quiz-stat-box"><strong>15</strong><span>שאלות למשחק</span></div>
+                        <div class="quiz-stat-box"><strong>10:00</strong><span>זמן משחק</span></div>
+                    </div>
+                    <button class="neon-button quiz-cta-btn" id="quiz-start-btn">התחל משחק</button>
                 </div>
-                <button class="neon-button quiz-cta-btn" id="quiz-start-btn">התחל משחק</button>
-            </div>
 
-            <!-- Playing panel -->
-            <div id="quiz-playing" class="quiz-panel" style="display:none">
-                <div class="quiz-hud">
-                    <span id="quiz-q-num" class="quiz-hud-item">1 / 15</span>
-                    <span id="quiz-timer" class="quiz-hud-item quiz-timer-txt">10:00</span>
-                    <span id="quiz-score-hud" class="quiz-hud-item">0 נק'</span>
+                <div id="quiz-playing" class="quiz-panel" style="display:none">
+                    <div class="quiz-hud">
+                        <span id="quiz-q-num" class="quiz-hud-item">1 / 15</span>
+                        <span id="quiz-timer" class="quiz-hud-item quiz-timer-txt">10:00</span>
+                        <span id="quiz-score-hud" class="quiz-hud-item">0 נק'</span>
+                    </div>
+                    <div class="quiz-progress-bar"><div id="quiz-bar" class="quiz-progress-fill" style="width:0%"></div></div>
+                    <p id="quiz-question" class="quiz-question-txt"></p>
+                    <div id="quiz-options" class="quiz-options-wrap"></div>
                 </div>
-                <div class="quiz-progress-bar"><div id="quiz-bar" class="quiz-progress-fill" style="width:0%"></div></div>
-                <p id="quiz-question" class="quiz-question-txt"></p>
-                <div id="quiz-options" class="quiz-options-wrap"></div>
-            </div>
 
-            <!-- Done panel -->
-            <div id="quiz-done" class="quiz-panel" style="display:none">
-                <h3 class="quiz-done-head">סיכום המשחק</h3>
-                <div class="quiz-done-score">
-                    <span id="quiz-final-score">0</span><span class="quiz-done-denom"> / 15</span>
+                <div id="quiz-done" class="quiz-panel" style="display:none">
+                    <h3 class="quiz-done-head">סיכום המשחק</h3>
+                    <div class="quiz-done-score">
+                        <span id="quiz-final-score">0</span><span class="quiz-done-denom"> / 15</span>
+                    </div>
+                    <p id="quiz-done-msg" class="quiz-done-msg"></p>
+                    <button class="neon-button quiz-cta-btn" id="quiz-restart-btn">שחק שוב</button>
                 </div>
-                <p id="quiz-done-msg" class="quiz-done-msg"></p>
-                <button class="neon-button quiz-cta-btn" id="quiz-restart-btn">שחק שוב</button>
             </div>
         </div>
     </div>
