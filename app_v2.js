@@ -740,10 +740,14 @@ function _detectChatLang(text) {
 }
 
 function _parseNavTokens(rawText) {
+    const seen  = new Set();
     const tokens = [];
     const text = rawText.replace(/\[NAV:([^\]]+)\]/gi, (_, key) => {
         const k = key.trim().toLowerCase();
-        if (NAV_CHIP_DEFS[k] && tokens.length < 2) tokens.push(k);
+        if (NAV_CHIP_DEFS[k] && !seen.has(k) && tokens.length < 2) {
+            seen.add(k);
+            tokens.push(k);
+        }
         return '';
     }).replace(/\n{3,}/g, '\n\n').trim();
     return { text, tokens };
