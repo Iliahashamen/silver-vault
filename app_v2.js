@@ -712,14 +712,90 @@ function initNewsLangToggle() {
     });
 }
 
+// ── NAVIGATION CHIPS (Mr. D → App deeplinks) ─────────────────────────
+
+const NAV_CHIP_DEFS = {
+    'charts':         { he: '📊 גרפים',            en: '📊 Charts',                    ru: '📊 Графики',
+                        action: ['screen', 'charts-screen'] },
+    'museum':         { he: '🏛️ מוזיאון מינטים',    en: '🏛️ Mints Museum',              ru: '🏛️ Музей монетных дворов',
+                        action: ['screen', 'museum-screen'] },
+    'museum:israel':  { he: '🇮🇱 מינט ישראל',       en: '🇮🇱 Israel Mint',               ru: '🇮🇱 Монетный двор Израиля',
+                        action: ['mint', 'israel'] },
+    'museum:germany': { he: '🇩🇪 מינט גרמניה',      en: '🇩🇪 Germany Mint',              ru: '🇩🇪 Баварский монетный двор',
+                        action: ['mint', 'germany'] },
+    'museum:uk':      { he: '🇬🇧 המינט המלכותי',    en: '🇬🇧 Royal Mint',                ru: '🇬🇧 Королевский монетный двор',
+                        action: ['mint', 'uk'] },
+    'quiz':           { he: '❓ טריוויה כסף',        en: '❓ Silver Quiz',                ru: '❓ Викторина',
+                        action: ['screen', 'homework-screen'] },
+    'pnl':            { he: '📈 מעקב רווח / הפסד',  en: '📈 P&L Tracker',               ru: '📈 Трекер прибыли/убытков',
+                        action: ['screen', 'pnl-screen'] },
+};
+
+function _detectChatLang(text) {
+    const he = (text.match(/[\u0590-\u05FF]/g) || []).length;
+    const ru = (text.match(/[\u0400-\u04FF]/g) || []).length;
+    if (he >= 5 && he >= ru) return 'he';
+    if (ru >= 5) return 'ru';
+    return 'en';
+}
+
+function _parseNavTokens(rawText) {
+    const tokens = [];
+    const text = rawText.replace(/\[NAV:([^\]]+)\]/gi, (_, key) => {
+        const k = key.trim().toLowerCase();
+        if (NAV_CHIP_DEFS[k] && tokens.length < 2) tokens.push(k);
+        return '';
+    }).replace(/\n{3,}/g, '\n\n').trim();
+    return { text, tokens };
+}
+
+function handleNavChip(token) {
+    const def = NAV_CHIP_DEFS[token];
+    if (!def) return;
+    // Close modal
+    const modal = document.getElementById('mr-d-modal');
+    if (modal && modal.style.display !== 'none') {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    const [type, target] = def.action;
+    if (type === 'screen') {
+        goToScreen(target);
+    } else if (type === 'mint') {
+        openMuseumMint(target);
+    }
+}
+
 // ── CHAT ──────────────────────────────────────────────────────────────
-function addMsg(author, text, type) {
+function addMsg(author, rawText, type) {
     const box = document.getElementById('chat-messages');
     const el  = document.createElement('div');
     el.className = `chat-message ${type}`;
-    const safe = escapeHtml(text);
+
+    // Parse nav tokens only on final bot messages (not typing indicator / error)
+    let displayText = rawText;
+    let navTokens   = [];
+    const isFinalBot = type === 'bot';
+    if (isFinalBot) {
+        const parsed = _parseNavTokens(rawText);
+        displayText  = parsed.text;
+        navTokens    = parsed.tokens;
+    }
+
+    const safe = escapeHtml(displayText);
     if (type.includes('bot')) {
-        el.innerHTML = `<div class="msg-content"><span class="msg-inline-author">${escapeHtml(author)}:</span> <span class="msg-text">${safe}</span></div>`;
+        let html = `<div class="msg-content"><span class="msg-inline-author">${escapeHtml(author)}:</span> <span class="msg-text">${safe}</span></div>`;
+        if (navTokens.length > 0) {
+            const lang     = _detectChatLang(displayText);
+            const chipsHtml = navTokens.map(token => {
+                const def = NAV_CHIP_DEFS[token];
+                if (!def) return '';
+                const label = escapeHtml(def[lang] || def.he);
+                return `<button class="nav-chip" onclick="handleNavChip('${token}')">${label}</button>`;
+            }).join('');
+            html += `<div class="nav-chips-row">${chipsHtml}</div>`;
+        }
+        el.innerHTML = html;
     } else {
         el.innerHTML = `<div class="msg-content"><span class="msg-text">${safe}</span></div>`;
     }
@@ -963,6 +1039,482 @@ function initQuiz() {
     document.getElementById('quiz-restart-btn')?.addEventListener('click', quizReset);
 }
 
+// ══════════════════════════════════════════════════════════════════════
+// MUSEUM — Mint data + logic
+// ══════════════════════════════════════════════════════════════════════
+
+const MINT_DATA = {
+    israel: {
+        id: 'israel',
+        flag: '🇮🇱',
+        buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg/800px-Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg',
+        he: {
+            name: 'חברת מטבעות ישראל',
+            subtitle: 'Israel Coins and Medals Corp. — ICMC',
+            founded: 'נוסדה 1952',
+            location: 'ירושלים, ישראל',
+            website: 'coins.gov.il',
+            history: [
+                {
+                    title: 'ייסוד ורקע היסטורי',
+                    text: 'חברת מטבעות ישראל (ICMC) הוקמה בשנת 1952 כחברה ממשלתית מטעם בנק ישראל, כשלוש שנים לאחר הכרזת העצמאות. החברה הוקמה במטרה לייצר מטבעות זיכרון ומדליות המסמלים את ערכי ואירועי המדינה הצעירה. הטביעה הראשונה בוצעה בחו"ל בעקבות מגבלות טכנולוגיות מקומיות.'
+                },
+                {
+                    title: 'פיתוח ומקום בזירה הבינלאומית',
+                    text: 'לאורך העשורים הפכה ICMC לאחת מחברות המטבעות המוכרות ביותר בעולם. המטבעות שלה מופצים ב-60 מדינות ונחשבים לפריטי אספנות יוקרתיים. החברה עובדת עם אמנים ישראלים בולטים שמעצבים את פני המטבעות, ומשלבת ערכים יהודיים ולאומיים בכל יצירה.'
+                },
+                {
+                    title: 'כסף פיזי ומטבעות אספנות',
+                    text: 'מדי שנה, לרגל יום העצמאות, מנפיקה החברה סדרות מוגבלות של מטבעות כסף טהור. בנוסף, מייצרת ICMC מטבעות כסף לנושאים כגון ירושלים, חנוכה, פסח ואישים היסטוריים. מטבעות אלה מוטבעים מכסף 999 ו-925, ורבים מהם הפכו לפריטים נדירים בשוק האספנות הבינלאומי.'
+                }
+            ],
+            products: [
+                {
+                    title: 'מטבע יום העצמאות',
+                    type: 'מטבע',
+                    weight: '1 אונקיה',
+                    year: 'שנתי',
+                    purity: 'כסף 999',
+                    desc: 'סדרה שנתית לרגל יום עצמאות ישראל, עם עיצוב ייחודי מדי שנה המשלב תמונה נושאית וסמלי המדינה.',
+                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/1_NIS_coin_%28obverse%2C_2017%29.jpg/300px-1_NIS_coin_%28obverse%2C_2017%29.jpg',
+                    emoji: '🪙'
+                },
+                {
+                    title: 'מטבע ירושלים',
+                    type: 'מטבע',
+                    weight: '2 אונקיות',
+                    year: '2022',
+                    purity: 'כסף 999',
+                    desc: 'מטבע פרמיום לרגל 55 שנים לאיחוד ירושלים, עם עיצוב מפורט של החומה העתיקה ועיר דוד.',
+                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Jerusalem_Old_City_from_Above.jpg/300px-Jerusalem_Old_City_from_Above.jpg',
+                    emoji: '🏛️'
+                },
+                {
+                    title: 'מדלית כסף מנורה',
+                    type: 'מדלייה',
+                    weight: '50 גרם',
+                    year: '2020',
+                    purity: 'כסף 925',
+                    desc: 'מדלית כסף סטרלינג עם עיצוב מנורת שבעת הקנים, סמל המדינה. מוגבל ל-1,000 יחידות.',
+                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Menora.svg/300px-Menora.svg.png',
+                    emoji: '🕎'
+                },
+                {
+                    title: 'מטיל כסף ישראלי',
+                    type: 'מטיל',
+                    weight: '10 גרם',
+                    year: 'שוטף',
+                    purity: 'כסף 999',
+                    desc: 'מטיל כסף טהור עם סמל מדינת ישראל, מיוצר לשוק האספנות ולהשקעה בכסף פיזי.',
+                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg',
+                    emoji: '🥈'
+                },
+                {
+                    title: 'מטבע חנוכה',
+                    type: 'מטבע',
+                    weight: '1 אונקיה',
+                    year: '2023',
+                    purity: 'כסף 999',
+                    desc: 'מטבע כסף לרגל חג החנוכה עם עיצוב חנוכייה היסטורית מהמוזיאון הלאומי. מהדורה מוגבלת.',
+                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Hanukkah_Menorah.jpg/300px-Hanukkah_Menorah.jpg',
+                    emoji: '🕯️'
+                },
+                {
+                    title: 'מטבע שלמה המלך',
+                    type: 'מטבע',
+                    weight: '2 אונקיות',
+                    year: '2021',
+                    purity: 'כסף 999',
+                    desc: 'מטבע כסף אמנותי מסדרת "מלכי ישראל" המוקדשת לשלמה המלך, עם ציפוי זהב חלקי.',
+                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/King_Solomon%27s_Temple.jpg/300px-King_Solomon%27s_Temple.jpg',
+                    emoji: '👑'
+                }
+            ]
+        },
+        en: {
+            name: 'Israel Coins and Medals Corp.',
+            subtitle: 'State-owned coin authority — ICMC',
+            founded: 'Founded 1952',
+            location: 'Jerusalem, Israel',
+            website: 'coins.gov.il',
+            history: [
+                {
+                    title: 'Foundation & Historical Background',
+                    text: 'The Israel Coins and Medals Corporation (ICMC) was established in 1952 as a government-owned company under the Bank of Israel, just a few years after the Declaration of Independence. It was created to produce commemorative coins and medals representing the values and events of the young nation. The first coins were minted abroad due to local technical limitations.'
+                },
+                {
+                    title: 'Growth & International Standing',
+                    text: 'Over the decades, ICMC has grown into one of the most recognized coin producers in the world. Its coins are distributed in over 60 countries and are considered prestigious collectibles. The company collaborates with leading Israeli artists who design coin faces, integrating Jewish and national values into every piece.'
+                },
+                {
+                    title: 'Physical Silver & Collector Coins',
+                    text: 'Each year, to mark Israeli Independence Day, the company issues limited series of pure silver coins. ICMC also produces silver coins themed around Jerusalem, Hanukkah, Passover, and historical figures. These coins, struck from 999 and 925 silver, have become rare collectibles in the international numismatic market.'
+                }
+            ],
+            products: [
+                { title: 'Independence Day Coin', type: 'Coin', weight: '1 oz', year: 'Annual', purity: '999 Silver', desc: 'Annual series marking Israeli Independence Day, featuring a unique design each year with national symbols.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/1_NIS_coin_%28obverse%2C_2017%29.jpg/300px-1_NIS_coin_%28obverse%2C_2017%29.jpg', emoji: '🪙' },
+                { title: 'Jerusalem Coin', type: 'Coin', weight: '2 oz', year: '2022', purity: '999 Silver', desc: 'Premium coin celebrating 55 years since the reunification of Jerusalem, featuring the Old City walls.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Jerusalem_Old_City_from_Above.jpg/300px-Jerusalem_Old_City_from_Above.jpg', emoji: '🏛️' },
+                { title: 'Menorah Silver Medal', type: 'Medal', weight: '50g', year: '2020', purity: '925 Silver', desc: 'Sterling silver medal featuring the seven-branched Menorah, the national emblem. Limited to 1,000 pieces.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Menora.svg/300px-Menora.svg.png', emoji: '🕎' },
+                { title: 'Israeli Silver Bar', type: 'Bar', weight: '10g', year: 'Current', purity: '999 Silver', desc: 'Pure silver bar with the State of Israel emblem, produced for the collectors and physical silver investment market.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
+                { title: 'Hanukkah Coin', type: 'Coin', weight: '1 oz', year: '2023', purity: '999 Silver', desc: 'Silver coin for Hanukkah featuring a historic menorah design from the National Museum. Limited edition.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Hanukkah_Menorah.jpg/300px-Hanukkah_Menorah.jpg', emoji: '🕯️' },
+                { title: 'King Solomon Coin', type: 'Coin', weight: '2 oz', year: '2021', purity: '999 Silver', desc: 'Artistic silver coin from the "Kings of Israel" series, dedicated to King Solomon, with partial gold plating.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/King_Solomon%27s_Temple.jpg/300px-King_Solomon%27s_Temple.jpg', emoji: '👑' }
+            ]
+        },
+        ru: {
+            name: 'Израильский монетный двор',
+            subtitle: 'Государственная монетная корпорация — ICMC',
+            founded: 'Основан в 1952',
+            location: 'Иерусалим, Израиль',
+            website: 'coins.gov.il',
+            history: [
+                {
+                    title: 'Основание и исторический фон',
+                    text: 'Израильская корпорация монет и медалей (ICMC) была основана в 1952 году как государственная компания под управлением Банка Израиля, примерно через три года после провозглашения независимости. Она была создана для чеканки памятных монет и медалей, символизирующих ценности и события молодого государства. Первые монеты чеканились за рубежом из-за местных технических ограничений.'
+                },
+                {
+                    title: 'Развитие и международное признание',
+                    text: 'На протяжении десятилетий ICMC стала одним из наиболее признанных производителей монет в мире. Её монеты распространяются более чем в 60 странах и считаются престижными предметами коллекционирования. Компания сотрудничает с ведущими израильскими художниками, создающими дизайн монет с интеграцией еврейских и национальных ценностей.'
+                },
+                {
+                    title: 'Физическое серебро и коллекционные монеты',
+                    text: 'Ежегодно, в честь Дня независимости Израиля, компания выпускает ограниченные серии монет из чистого серебра. ICMC также производит серебряные монеты на темы Иерусалима, Хануки, Пасхи и исторических деятелей. Эти монеты из серебра 999 и 925 пробы стали редкими предметами коллекционирования на международном рынке нумизматики.'
+                }
+            ],
+            products: [
+                { title: 'Монета Дня независимости', type: 'Монета', weight: '1 унция', year: 'Ежегодно', purity: 'Серебро 999', desc: 'Ежегодная серия ко Дню независимости Израиля с уникальным дизайном каждого года и национальными символами.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/1_NIS_coin_%28obverse%2C_2017%29.jpg/300px-1_NIS_coin_%28obverse%2C_2017%29.jpg', emoji: '🪙' },
+                { title: 'Монета Иерусалима', type: 'Монета', weight: '2 унции', year: '2022', purity: 'Серебро 999', desc: 'Премиальная монета к 55-летию воссоединения Иерусалима с изображением стен Старого города.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Jerusalem_Old_City_from_Above.jpg/300px-Jerusalem_Old_City_from_Above.jpg', emoji: '🏛️' },
+                { title: 'Серебряная медаль Менора', type: 'Медаль', weight: '50 г', year: '2020', purity: 'Серебро 925', desc: 'Медаль из серебра 925 пробы с изображением семисвечника Меноры — национального символа. Тираж 1 000 штук.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Menora.svg/300px-Menora.svg.png', emoji: '🕎' },
+                { title: 'Израильский серебряный слиток', type: 'Слиток', weight: '10 г', year: 'Текущий', purity: 'Серебро 999', desc: 'Слиток из чистого серебра с гербом государства Израиль для рынка коллекционирования и инвестиций.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
+                { title: 'Монета Хануки', type: 'Монета', weight: '1 унция', year: '2023', purity: 'Серебро 999', desc: 'Серебряная монета к празднику Хануки с изображением исторической меноры из Национального музея. Лимитированный выпуск.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Hanukkah_Menorah.jpg/300px-Hanukkah_Menorah.jpg', emoji: '🕯️' },
+                { title: 'Монета царя Соломона', type: 'Монета', weight: '2 унции', year: '2021', purity: 'Серебро 999', desc: 'Художественная монета из серии "Цари Израиля", посвящённая царю Соломону с частичным золотым покрытием.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/King_Solomon%27s_Temple.jpg/300px-King_Solomon%27s_Temple.jpg', emoji: '👑' }
+            ]
+        }
+    },
+
+    germany: {
+        id: 'germany',
+        flag: '🇩🇪',
+        buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg/800px-M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg',
+        he: {
+            name: 'בית המטבע הבוורי',
+            subtitle: 'Bayerisches Hauptmünzamt — מינכן',
+            founded: 'נוסד 1158',
+            location: 'מינכן, בוואריה, גרמניה',
+            website: 'bayerisches-hauptmuenzamt.de',
+            history: [
+                {
+                    title: 'ייסוד ימי הביניים',
+                    text: 'בית המטבע הבוורי (Bayerisches Hauptmünzamt) הוא אחד מבתי המטבע הוותיקים ביותר בעולם, עם תולדות המתחילות בשנת 1158 תחת הנסיך הנריך האריה ממינכן. לאורך מאות שנים שימש בית המטבע לייצור מטבעות לממלכת בוואריה, ומאוחר יותר לאימפריה הגרמנית. מיקומו ההיסטורי במינכן, בלב בוואריה, עיצב את זהותו הייחודית.'
+                },
+                {
+                    title: 'עידן מודרני ומוצרי כסף',
+                    text: 'בעידן המודרני הפך בית המטבע הבוורי לגוף מוביל בייצור מטבעות אספנות ועיטורים מדינתיים. בית המטבע מתמחה במטבעות זיכרון כסף ברמה גבוהה, הכוללים סדרות היסטוריות, מוזיקה קלאסית ומורשת בוורית. כיום הוא אחד משמונה בתי מטבע גרמניים פעילים, כאשר כל בית מטבע מסמן מטבעותיו בסימן ייחודי (לבוואריה: D).'
+                },
+                {
+                    title: 'מטילי כסף ואספנות',
+                    text: 'בנוסף למטבעות הזיכרון, מייצר בית המטבע הבוורי מטילי כסף טהורים לשוק ההשקעות. מוצריו זוכים להכרה בינלאומית בשל דיוקן הטביעה הגבוה ועיצובים היסטוריים מפוארים. סדרת המטבעות הגרמנית "Deutschland Silber Unze" הפכה לאחת מהפופולריות ביותר בקרב משקיעי כסף באירופה.'
+                }
+            ],
+            products: [
+                { title: 'מטבע כסף גרמניה 10 יורו', type: 'מטבע', weight: '16 גרם', year: '2023', purity: 'כסף 925', desc: 'מטבע זיכרון רשמי מטעם גרמניה, מסדרת "גרמניה יפה" עם נופים מרהיבים מרחבי המדינה.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/10_Euro_coin_Germany.jpg/300px-10_Euro_coin_Germany.jpg', emoji: '🪙' },
+                { title: 'מטיל כסף Bavaria', type: 'מטיל', weight: '1 אונקיה', year: 'שוטף', purity: 'כסף 999', desc: 'מטיל כסף פרמיום עם סמל הדוב הבוורי ורישום ייחודי של בית המטבע. תעודת אותנטיות כלולה.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
+                { title: 'מטבע כסף לודוויג ואן בטהובן', type: 'מטבע', weight: '1 אונקיה', year: '2020', purity: 'כסף 999', desc: 'מטבע זיכרון לציון 250 שנה להולדת בטהובן, עם דיוקן מפורט ומוטיבים מוזיקליים. מהדורה מוגבלת.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/300px-Beethoven.jpg', emoji: '🎵' },
+                { title: 'מטבע ברנדנבורג שאלה', type: 'מטבע', weight: '18 גרם', year: '2022', purity: 'כסף 925', desc: 'מסדרת "16 מדינות גרמניה" — מטבע המוקדש לברנדנבורג עם תמונת שער ברנדנבורג האיקוני.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/BrandenburgerTor_Dusk.jpg/300px-BrandenburgerTor_Dusk.jpg', emoji: '🏰' },
+                { title: 'סט כסף עידן גרמני', type: 'סט', weight: '5×1 אונקיה', year: '2023', purity: 'כסף 999', desc: 'סט חמישה מטבעות המסכם את 5 תקופות גרמניות מבית המטבע, באריזת מתנה פרמיום.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Germany_coin_set.jpg/300px-Germany_coin_set.jpg', emoji: '🎁' },
+                { title: 'מטבע הנסיך הנריך', type: 'מטבע', weight: '2 אונקיות', year: '2021', purity: 'כסף 999', desc: 'מטבע יובל לציון 850 שנה לייסוד בית המטבע הבוורי, עם דיוקן הנסיך הנריך האריה.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Henry_the_Lion.jpg/300px-Henry_the_Lion.jpg', emoji: '🦁' }
+            ]
+        },
+        en: {
+            name: 'Bavarian State Mint',
+            subtitle: 'Bayerisches Hauptmünzamt — Munich',
+            founded: 'Founded 1158',
+            location: 'Munich, Bavaria, Germany',
+            website: 'bayerisches-hauptmuenzamt.de',
+            history: [
+                {
+                    title: 'Medieval Foundation',
+                    text: 'The Bavarian State Mint (Bayerisches Hauptmünzamt) is one of the oldest mints in the world, with origins dating to 1158 under Prince Henry the Lion in Munich. Over centuries it served as the coin-producing authority for the Kingdom of Bavaria and later the German Empire. Its historic location in the heart of Munich shaped its unique identity.'
+                },
+                {
+                    title: 'Modern Era & Silver Products',
+                    text: 'In the modern era, the Bavarian Mint became a leader in high-quality commemorative coins and state decorations. It specializes in premium silver coins featuring historical series, classical music, and Bavarian heritage. Today it is one of eight active German mints, each identified by a unique mintmark (Bavaria uses the letter "D").'
+                },
+                {
+                    title: 'Silver Bars & Collecting',
+                    text: 'In addition to commemorative coins, the Bavarian Mint produces pure silver bars for the investment market. Its products are internationally recognized for precision striking and magnificent historical designs. The German "Deutschland Silber Unze" series has become one of the most popular among silver investors in Europe.'
+                }
+            ],
+            products: [
+                { title: 'Germany 10 Euro Silver Coin', type: 'Coin', weight: '16g', year: '2023', purity: '925 Silver', desc: 'Official German commemorative coin from the "Beautiful Germany" series featuring stunning landscapes.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/10_Euro_coin_Germany.jpg/300px-10_Euro_coin_Germany.jpg', emoji: '🪙' },
+                { title: 'Bavaria Silver Bar', type: 'Bar', weight: '1 oz', year: 'Current', purity: '999 Silver', desc: 'Premium silver bar with the Bavarian bear emblem and unique mint registry. Certificate of authenticity included.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
+                { title: 'Ludwig van Beethoven Silver Coin', type: 'Coin', weight: '1 oz', year: '2020', purity: '999 Silver', desc: 'Commemorative coin marking 250 years since Beethoven\'s birth, with detailed portrait and musical motifs. Limited edition.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/300px-Beethoven.jpg', emoji: '🎵' },
+                { title: 'Brandenburg Gate Coin', type: 'Coin', weight: '18g', year: '2022', purity: '925 Silver', desc: 'From the "16 German States" series — coin dedicated to Brandenburg featuring the iconic Brandenburg Gate.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/BrandenburgerTor_Dusk.jpg/300px-BrandenburgerTor_Dusk.jpg', emoji: '🏰' },
+                { title: 'German Era Silver Set', type: 'Set', weight: '5×1 oz', year: '2023', purity: '999 Silver', desc: 'Set of five coins summarizing 5 German eras from the mint, in premium gift packaging.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Germany_coin_set.jpg/300px-Germany_coin_set.jpg', emoji: '🎁' },
+                { title: 'Prince Henry the Lion Coin', type: 'Coin', weight: '2 oz', year: '2021', purity: '999 Silver', desc: 'Jubilee coin marking 850 years since the founding of the Bavarian Mint, featuring Prince Henry the Lion.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Henry_the_Lion.jpg/300px-Henry_the_Lion.jpg', emoji: '🦁' }
+            ]
+        },
+        ru: {
+            name: 'Баварский монетный двор',
+            subtitle: 'Bayerisches Hauptmünzamt — Мюнхен',
+            founded: 'Основан в 1158',
+            location: 'Мюнхен, Бавария, Германия',
+            website: 'bayerisches-hauptmuenzamt.de',
+            history: [
+                {
+                    title: 'Средневековое основание',
+                    text: 'Баварский государственный монетный двор (Bayerisches Hauptmünzamt) — один из старейших монетных дворов в мире, история которого восходит к 1158 году при принце Генрихе Льве в Мюнхене. На протяжении столетий он служил органом чеканки монет для Королевства Бавария, а впоследствии для Германской империи. Историческое расположение в сердце Мюнхена сформировало его уникальную идентичность.'
+                },
+                {
+                    title: 'Современная эпоха и серебряные изделия',
+                    text: 'В современную эпоху Баварский монетный двор стал лидером в производстве высококачественных памятных монет и государственных наград. Он специализируется на коллекционных серебряных монетах: исторические серии, классическая музыка, баварское наследие. Сегодня это один из восьми действующих немецких монетных дворов, каждый из которых имеет уникальный знак (у Баварии — «D»).'
+                },
+                {
+                    title: 'Серебряные слитки и коллекционирование',
+                    text: 'В дополнение к памятным монетам, Баварский монетный двор производит слитки чистого серебра для инвестиционного рынка. Его продукция пользуется международным признанием благодаря высокоточной чеканке и великолепным историческим дизайнам. Серия «Deutschland Silber Unze» стала одной из наиболее популярных среди инвесторов в серебро по всей Европе.'
+                }
+            ],
+            products: [
+                { title: 'Германия 10 евро серебряная монета', type: 'Монета', weight: '16 г', year: '2023', purity: 'Серебро 925', desc: 'Официальная памятная монета Германии из серии «Красивая Германия» с живописными пейзажами страны.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/10_Euro_coin_Germany.jpg/300px-10_Euro_coin_Germany.jpg', emoji: '🪙' },
+                { title: 'Баварский серебряный слиток', type: 'Слиток', weight: '1 унция', year: 'Текущий', purity: 'Серебро 999', desc: 'Премиальный серебряный слиток с изображением баварского медведя и уникальным реестром монетного двора. Прилагается сертификат.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
+                { title: 'Монета Людвига ван Бетховена', type: 'Монета', weight: '1 унция', year: '2020', purity: 'Серебро 999', desc: 'Памятная монета к 250-летию со дня рождения Бетховена с детальным портретом и музыкальными мотивами. Лимитированный выпуск.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/300px-Beethoven.jpg', emoji: '🎵' },
+                { title: 'Монета Бранденбургских ворот', type: 'Монета', weight: '18 г', year: '2022', purity: 'Серебро 925', desc: 'Из серии «16 федеральных земель Германии» — монета, посвящённая Бранденбургу с изображением знаменитых ворот.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/BrandenburgerTor_Dusk.jpg/300px-BrandenburgerTor_Dusk.jpg', emoji: '🏰' },
+                { title: 'Серебряный набор германских эпох', type: 'Набор', weight: '5×1 унция', year: '2023', purity: 'Серебро 999', desc: 'Набор из пяти монет, отражающих 5 немецких эпох монетного двора, в премиальной подарочной упаковке.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Germany_coin_set.jpg/300px-Germany_coin_set.jpg', emoji: '🎁' },
+                { title: 'Монета принца Генриха Льва', type: 'Монета', weight: '2 унции', year: '2021', purity: 'Серебро 999', desc: 'Юбилейная монета к 850-летию основания Баварского монетного двора с изображением принца Генриха Льва.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Henry_the_Lion.jpg/300px-Henry_the_Lion.jpg', emoji: '🦁' }
+            ]
+        }
+    },
+
+    uk: {
+        id: 'uk',
+        flag: '🇬🇧',
+        buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/The_Royal_Mint_-_geograph.org.uk_-_1002232.jpg/800px-The_Royal_Mint_-_geograph.org.uk_-_1002232.jpg',
+        he: {
+            name: 'המינט המלכותי',
+            subtitle: 'The Royal Mint — לנטריסנט, ויילס',
+            founded: 'נוסד 886',
+            location: 'לנטריסנט, ויילס, בריטניה',
+            website: 'royalmint.com',
+            history: [
+                {
+                    title: 'ייסוד ועידן המלוכה',
+                    text: 'המינט המלכותי (The Royal Mint) הוא אחד הגופים הממשלתיים הוותיקים ביותר בעולם, עם מסורת טביעת מטבעות שמתחילה בשנת 886 לספירה תחת המלך אלפרד הגדול. במשך מאות שנים שכן המינט ב"מגדל לונדון", ולאחר מכן ברחוב Tower Hill בלונדון. בשנת 1968 עבר לאתרו הנוכחי בלנטריסנט, ויילס.'
+                },
+                {
+                    title: 'הברבריאניה — סמל הכסף הבריטי',
+                    text: 'הסדרה הנחשבת ביותר של המינט המלכותי היא ללא ספק מטבע הברבריאניה (Britannia), שנטבע לראשונה כמטבע כסף השקעה בשנת 1987. ברבריאניה, המייצגת את בריטניה כדמות נשית לוחמת, הפכה לאחד הסמלים הנודעים ביותר של שוק הכסף הפיזי הבינלאומי. המטבע עשוי כסף 999.9 ומהווה הילך חוקי בממלכה המאוחדת.'
+                },
+                {
+                    title: 'חדשנות ומנהיגות בשוק',
+                    text: 'המינט המלכותי מוביל בחדשנות: הוא היה הראשון להנפיק מטבעות כסף בצבעים (2016), ומטבעות עם אפקטים הולוגרפיים. סדרת "חיות המלכה" (Queen\'s Beasts, 2016–2021), שהכילה 10 מטבעות כסף תוך שנות ייצור, הפכה לפנומן אספנות עולמי. בנוסף, המינט מנפיק מטבעות זיכרון, שטרות זהב ומטילי כסף למשקיעים.'
+                }
+            ],
+            products: [
+                { title: 'מטבע ברבריאניה 1 אונקיה', type: 'מטבע', weight: '1 אונקיה', year: '2024', purity: 'כסף 999.9', desc: 'המטבע הנחשב ביותר של המינט המלכותי — ברבריאניה בכסף טהור 999.9. הילך חוקי בשווי 2 ליש"ט. מסדרת 1987.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/2015_Britannia_silver_proof_1oz.jpg/300px-2015_Britannia_silver_proof_1oz.jpg', emoji: '🦅' },
+                { title: 'חיית המלכה — האריה האנגלי', type: 'מטבע', weight: '2 אונקיות', year: '2016', purity: 'כסף 999.9', desc: 'מטבע ראשון בסדרת "חיות המלכה" — האריה האנגלי. סדרה של 10 מטבעות, כ-2 אונקיות כסף כ"א. מהדורה מוגבלת.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lion_England_heraldic.svg/300px-Lion_England_heraldic.svg.png', emoji: '🦁' },
+                { title: 'מטיל כסף רויאל מינט', type: 'מטיל', weight: '100 גרם', year: 'שוטף', purity: 'כסף 999', desc: 'מטיל כסף רשמי עם לוגו המינט המלכותי ומספר סידורי. אחד המטילים המוכרים ביותר בשוק ההשקעות הבריטי.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
+                { title: 'מטבע קינג צ\'רלס III ברבריאניה', type: 'מטבע', weight: '1 אונקיה', year: '2023', purity: 'כסף 999.9', desc: 'הגרסה הראשונה של מטבע הברבריאניה עם דיוקן המלך צ\'רלס השלישי — אספנות היסטורית.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/King_Charles_III_2023.jpg/300px-King_Charles_III_2023.jpg', emoji: '👑' },
+                { title: 'מטבע יובל המלכה', type: 'מטבע', weight: '5 אונקיות', year: '2022', purity: 'כסף 999', desc: 'מטבע זיכרון מיוחד לציון 70 שנות שלטון המלכה אליזבת השנייה. אחד הנדירים בהיסטוריה של המינט המלכותי.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Queen_Elizabeth_II_1953.jpg/300px-Queen_Elizabeth_II_1953.jpg', emoji: '💎' },
+                { title: 'חיית המלכה — הדרקון האדום', type: 'מטבע', weight: '2 אונקיות', year: '2017', purity: 'כסף 999.9', desc: 'הדרקון האדום של ויילס מסדרת "חיות המלכה" — אחד הפופולריים מבין 10 מטבעות הסדרה. ייצוג ייחודי של ויילס.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Red_dragon.svg/300px-Red_dragon.svg.png', emoji: '🐉' }
+            ]
+        },
+        en: {
+            name: 'The Royal Mint',
+            subtitle: 'The Royal Mint — Llantrisant, Wales',
+            founded: 'Founded 886 AD',
+            location: 'Llantrisant, Wales, United Kingdom',
+            website: 'royalmint.com',
+            history: [
+                {
+                    title: 'Foundation & Royal History',
+                    text: 'The Royal Mint is one of the oldest government bodies in the world, with a coinage tradition dating to 886 AD under King Alfred the Great. For centuries it was housed in the Tower of London, then on Tower Hill. In 1968 it moved to its current site in Llantrisant, Wales, becoming a world-class coin manufacturing facility.'
+                },
+                {
+                    title: 'Britannia — Symbol of British Silver',
+                    text: 'The most celebrated Royal Mint product is undoubtedly the Britannia silver coin, first struck as a silver bullion coin in 1987. Britannia, representing Britain as a female warrior figure, has become one of the most recognised symbols in the international physical silver market. The coin is struck in 999.9 fine silver and is legal tender in the United Kingdom.'
+                },
+                {
+                    title: 'Innovation & Market Leadership',
+                    text: 'The Royal Mint leads in innovation: it was the first to issue coloured silver coins (2016) and coins with holographic effects. The "Queen\'s Beasts" series (2016–2021), comprising 10 silver coins over its production years, became a global collecting phenomenon. The Mint also issues commemorative coins, gold notes, and silver bars for investors.'
+                }
+            ],
+            products: [
+                { title: 'Britannia 1 oz Silver Coin', type: 'Coin', weight: '1 oz', year: '2024', purity: '999.9 Silver', desc: 'The Royal Mint\'s most celebrated coin — pure 999.9 silver Britannia. Legal tender at £2 face value. Series from 1987.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/2015_Britannia_silver_proof_1oz.jpg/300px-2015_Britannia_silver_proof_1oz.jpg', emoji: '🦅' },
+                { title: "Queen's Beast — English Lion", type: 'Coin', weight: '2 oz', year: '2016', purity: '999.9 Silver', desc: 'First coin in the "Queen\'s Beasts" series — the English Lion. A series of 10 coins, each 2 oz silver. Limited mintage.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lion_England_heraldic.svg/300px-Lion_England_heraldic.svg.png', emoji: '🦁' },
+                { title: 'Royal Mint Silver Bar', type: 'Bar', weight: '100g', year: 'Current', purity: '999 Silver', desc: 'Official silver bar with Royal Mint logo and serial number. One of the most recognised bars in the UK investment market.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
+                { title: 'King Charles III Britannia', type: 'Coin', weight: '1 oz', year: '2023', purity: '999.9 Silver', desc: 'The first Britannia coin featuring King Charles III\'s portrait — a piece of historic collectibility.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/King_Charles_III_2023.jpg/300px-King_Charles_III_2023.jpg', emoji: '👑' },
+                { title: "Queen's Jubilee Coin", type: 'Coin', weight: '5 oz', year: '2022', purity: '999 Silver', desc: 'Special commemorative coin marking 70 years of Queen Elizabeth II\'s reign. One of the rarest in Royal Mint history.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Queen_Elizabeth_II_1953.jpg/300px-Queen_Elizabeth_II_1953.jpg', emoji: '💎' },
+                { title: "Queen's Beast — Red Dragon", type: 'Coin', weight: '2 oz', year: '2017', purity: '999.9 Silver', desc: 'The Red Dragon of Wales from the "Queen\'s Beasts" series — one of the most popular of the 10 coins. Unique Welsh representation.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Red_dragon.svg/300px-Red_dragon.svg.png', emoji: '🐉' }
+            ]
+        },
+        ru: {
+            name: 'Королевский монетный двор',
+            subtitle: 'The Royal Mint — Лланттресант, Уэльс',
+            founded: 'Основан в 886 г. н.э.',
+            location: 'Лланттресант, Уэльс, Великобритания',
+            website: 'royalmint.com',
+            history: [
+                {
+                    title: 'Основание и королевская история',
+                    text: 'Королевский монетный двор — один из старейших государственных органов в мире, с традицией чеканки монет, восходящей к 886 году н.э. при короле Альфреде Великом. Столетиями он располагался в Тауэре, затем на Тауэр-Хилл в Лондоне. В 1968 году двор переехал в нынешнее здание в Лланттресанте, Уэльс, став производственным объектом мирового класса.'
+                },
+                {
+                    title: 'Britannia — символ британского серебра',
+                    text: 'Самым известным продуктом Королевского монетного двора, несомненно, является серебряная монета Britannia, впервые выпущенная как инвестиционная серебряная монета в 1987 году. Britannia, изображающая Британию в образе женщины-воина, стала одним из наиболее узнаваемых символов на мировом рынке физического серебра. Монета чеканится из серебра 999.9 пробы и является законным платёжным средством.'
+                },
+                {
+                    title: 'Инновации и лидерство на рынке',
+                    text: 'Королевский монетный двор лидирует в инновациях: он первым выпустил цветные серебряные монеты (2016) и монеты с голографическими эффектами. Серия «Звери королевы» (2016–2021), состоящая из 10 серебряных монет, стала мировым коллекционным феноменом. Двор также выпускает памятные монеты, золотые ноты и серебряные слитки для инвесторов.'
+                }
+            ],
+            products: [
+                { title: 'Britannia 1 унция серебра', type: 'Монета', weight: '1 унция', year: '2024', purity: 'Серебро 999.9', desc: 'Самая известная монета Королевского монетного двора — чистая серебряная Britannia 999.9. Законное платёжное средство номиналом 2 фунта. Серия с 1987 года.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/2015_Britannia_silver_proof_1oz.jpg/300px-2015_Britannia_silver_proof_1oz.jpg', emoji: '🦅' },
+                { title: 'Звери королевы — Английский лев', type: 'Монета', weight: '2 унции', year: '2016', purity: 'Серебро 999.9', desc: 'Первая монета серии «Звери королевы» — Английский лев. Серия из 10 монет, каждая по 2 унции серебра. Ограниченный тираж.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lion_England_heraldic.svg/300px-Lion_England_heraldic.svg.png', emoji: '🦁' },
+                { title: 'Серебряный слиток Royal Mint', type: 'Слиток', weight: '100 г', year: 'Текущий', purity: 'Серебро 999', desc: 'Официальный серебряный слиток с логотипом Royal Mint и серийным номером. Один из наиболее узнаваемых слитков на британском инвестиционном рынке.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
+                { title: 'Britannia короля Карла III', type: 'Монета', weight: '1 унция', year: '2023', purity: 'Серебро 999.9', desc: 'Первая монета Britannia с портретом короля Карла III — исторически значимый коллекционный предмет.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/King_Charles_III_2023.jpg/300px-King_Charles_III_2023.jpg', emoji: '👑' },
+                { title: 'Монета Юбилея королевы', type: 'Монета', weight: '5 унций', year: '2022', purity: 'Серебро 999', desc: 'Специальная памятная монета к 70-летию правления королевы Елизаветы II. Одна из редчайших в истории Королевского монетного двора.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Queen_Elizabeth_II_1953.jpg/300px-Queen_Elizabeth_II_1953.jpg', emoji: '💎' },
+                { title: 'Звери королевы — Красный дракон', type: 'Монета', weight: '2 унции', year: '2017', purity: 'Серебро 999.9', desc: 'Красный дракон Уэльса из серии «Звери королевы» — один из самых популярных из 10 монет серии. Уникальное представление Уэльса.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Red_dragon.svg/300px-Red_dragon.svg.png', emoji: '🐉' }
+            ]
+        }
+    }
+};
+
+// ── Museum state ──────────────────────────────────────────────────────
+let _museumActiveMint = null;
+let _museumActiveLang = 'he';
+
+function _mintImgFallback(el, emoji) {
+    el.outerHTML = `<div class="mint-product-img-placeholder">${emoji}</div>`;
+}
+
+function renderMintDetail(mintId, lang) {
+    _museumActiveMint = mintId;
+    _museumActiveLang = lang || _museumActiveLang;
+
+    const mint = MINT_DATA[mintId];
+    if (!mint) return;
+    const d = mint[_museumActiveLang] || mint.he;
+
+    // Update title bar
+    const titleEl = document.getElementById('mint-detail-title');
+    if (titleEl) titleEl.textContent = `${mint.flag} ${d.name}`;
+
+    // Update lang tabs
+    document.querySelectorAll('.mint-lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === _museumActiveLang);
+    });
+
+    // Determine page direction
+    const isRtl = _museumActiveLang === 'he';
+    const detailWrap = document.getElementById('mint-detail-screen');
+    if (detailWrap) {
+        detailWrap.dir = isRtl ? 'rtl' : 'ltr';
+        detailWrap.style.textAlign = isRtl ? 'right' : 'left';
+    }
+
+    // Products HTML
+    const productsHtml = d.products.map(p => `
+        <div class="mint-product-card">
+            <div class="mint-product-img-wrap">
+                <img class="mint-product-img"
+                     src="${escapeHtml(p.img)}"
+                     alt="${escapeHtml(p.title)}"
+                     loading="lazy"
+                     onerror="this.outerHTML='<div class=\\'mint-product-img-placeholder\\'>${p.emoji}</div>'">
+            </div>
+            <div class="mint-product-info">
+                <p class="mint-product-title">${escapeHtml(p.title)}</p>
+                <p class="mint-product-year">${escapeHtml(p.year)} · ${escapeHtml(p.weight)}</p>
+                <span class="mint-product-type">${escapeHtml(p.type)}</span>
+                <p class="mint-product-desc">${escapeHtml(p.desc)}</p>
+            </div>
+        </div>
+    `).join('');
+
+    // History HTML
+    const historyHtml = d.history.map(h => `
+        <div class="mint-history-item">
+            <h4>${escapeHtml(h.title)}</h4>
+            <p>${escapeHtml(h.text)}</p>
+        </div>
+    `).join('');
+
+    // Products section label by lang
+    const labels = {
+        he: { history: '📖 היסטוריה', products: '🪙 מוצרי כסף', purity: 'טוהר', more: 'אתר רשמי' },
+        en: { history: '📖 History', products: '🪙 Silver Products', purity: 'Purity', more: 'Official Website' },
+        ru: { history: '📖 История', products: '🪙 Серебряные изделия', purity: 'Проба', more: 'Официальный сайт' }
+    };
+    const L = labels[_museumActiveLang] || labels.he;
+
+    const content = document.getElementById('mint-detail-content');
+    if (!content) return;
+    content.innerHTML = `
+        <div class="mint-hero">
+            <div class="mint-hero-flag">${mint.flag}</div>
+            <div class="mint-hero-body">
+                <h1 class="mint-hero-name">${escapeHtml(d.name)}</h1>
+                <p class="mint-hero-subtitle">${escapeHtml(d.subtitle)}</p>
+                <div class="mint-meta-row">
+                    <span class="mint-meta-chip">📅 ${escapeHtml(d.founded)}</span>
+                    <span class="mint-meta-chip">📍 ${escapeHtml(d.location)}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mint-building-wrap">
+            <img class="mint-building-img"
+                 src="${escapeHtml(mint.buildingImg)}"
+                 alt="${escapeHtml(d.name)}"
+                 loading="lazy"
+                 onerror="this.style.display='none'">
+        </div>
+
+        <section class="mint-section">
+            <h3 class="mint-section-title">${L.history}</h3>
+            <div class="mint-history-block">${historyHtml}</div>
+        </section>
+
+        <section class="mint-section">
+            <h3 class="mint-section-title">${L.products}</h3>
+            <div class="mint-products-grid">${productsHtml}</div>
+        </section>
+    `;
+}
+
+function openMuseumMint(mintId) {
+    renderMintDetail(mintId, _museumActiveLang);
+    goToScreen('mint-detail-screen');
+}
+
+function initMuseum() {
+    // Mint hub cards
+    document.querySelectorAll('.mint-hub-card').forEach(btn => {
+        btn.onclick = () => openMuseumMint(btn.dataset.mint);
+    });
+
+    // Language tabs
+    document.querySelectorAll('.mint-lang-btn').forEach(btn => {
+        btn.onclick = () => {
+            if (_museumActiveMint) renderMintDetail(_museumActiveMint, btn.dataset.lang);
+        };
+    });
+
+    // Museum open button (from homework)
+    document.getElementById('museum-open-btn')?.addEventListener('click', () => {
+        goToScreen('museum-screen');
+    });
+
+    // Back from museum hub → homework
+    document.getElementById('back-museum')?.addEventListener('click', () => {
+        goToScreen('homework-screen');
+    });
+
+    // Back from mint detail → museum hub
+    document.getElementById('back-mint-detail')?.addEventListener('click', () => {
+        goToScreen('museum-screen');
+    });
+}
+
 // ── INIT DASHBOARD ────────────────────────────────────────────────────
 function initDashboard() {
     if (dashboardInited) return;
@@ -990,6 +1542,7 @@ function initDashboard() {
 
     initQuiz();
     initNewsLangToggle();
+    initMuseum();
 
     // ── Personal area sub-navigation ──
     document.getElementById('dark-mode-btn')?.addEventListener('click', toggleDarkMode);
@@ -1126,11 +1679,13 @@ function initSwipeBack() {
         const active = document.querySelector('.screen.active');
         if (!active) return;
         switch (active.id) {
-            case 'pnl-screen':      goToScreen('personal-screen'); break;
-            case 'homework-screen': quizReset(); goBack();         break;
+            case 'pnl-screen':          goToScreen('personal-screen'); break;
+            case 'homework-screen':     quizReset(); goBack();         break;
+            case 'museum-screen':       goToScreen('homework-screen'); break;
+            case 'mint-detail-screen':  goToScreen('museum-screen');   break;
             case 'personal-screen':
             case 'updates-screen':
-            case 'charts-screen':   goBack();                      break;
+            case 'charts-screen':       goBack();                      break;
         }
     }, { passive: true });
 }

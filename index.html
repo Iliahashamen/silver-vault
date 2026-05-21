@@ -162,7 +162,23 @@
         <div class="section-screen-wrap">
             <div class="section-screen-header">
                 <button class="back-btn" id="back-homework">→ חזרה</button>
-                <h2 class="section-screen-title">שיעורי בית — טריוויה כסף</h2>
+                <h2 class="section-screen-title">שיעורי בית</h2>
+            </div>
+
+            <!-- Sub-feature menu -->
+            <div class="hw-features-row">
+                <button class="hw-feature-card" id="museum-open-btn">
+                    <span class="hw-feature-icon">🏛️</span>
+                    <div class="hw-feature-info">
+                        <strong class="hw-feature-name">מוזיאון המינטים</strong>
+                        <span class="hw-feature-sub">גלה מינטים מרחבי העולם</span>
+                    </div>
+                    <span class="hw-feature-arrow">←</span>
+                </button>
+            </div>
+
+            <div class="hw-divider">
+                <span>טריוויה כסף</span>
             </div>
 
             <!-- Start panel -->
@@ -251,6 +267,50 @@
                 <canvas id="line-canvas"></canvas>
             </div>
             <p class="chart-note">* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.</p>
+        </div>
+    </div>
+
+    <!-- ══ MUSEUM SCREEN (mint hub) ══ -->
+    <div id="museum-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-museum">→ חזרה</button>
+                <h2 class="section-screen-title">🏛️ מוזיאון המינטים</h2>
+            </div>
+            <p class="section-subtitle">בחר מינט לחקירה — היסטוריה, מוצרים ומטבעות כסף</p>
+            <div class="mint-hub-grid">
+                <button class="mint-hub-card" data-mint="israel">
+                    <span class="mint-hub-flag">🇮🇱</span>
+                    <div><strong class="mint-hub-name">מינט ישראל</strong><span class="mint-hub-year">מ-1952</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+                <button class="mint-hub-card" data-mint="germany">
+                    <span class="mint-hub-flag">🇩🇪</span>
+                    <div><strong class="mint-hub-name">בית המטבע הבוורי</strong><span class="mint-hub-year">מ-1158</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+                <button class="mint-hub-card" data-mint="uk">
+                    <span class="mint-hub-flag">🇬🇧</span>
+                    <div><strong class="mint-hub-name">המינט המלכותי</strong><span class="mint-hub-year">מ-886</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ MINT DETAIL SCREEN ══ -->
+    <div id="mint-detail-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-mint-detail">→ חזרה</button>
+                <h2 class="section-screen-title" id="mint-detail-title"></h2>
+            </div>
+            <div class="mint-lang-bar">
+                <button class="mint-lang-btn active" data-lang="he">עב</button>
+                <button class="mint-lang-btn" data-lang="en">EN</button>
+                <button class="mint-lang-btn" data-lang="ru">РУ</button>
+            </div>
+            <div id="mint-detail-content" class="mint-detail-content"></div>
         </div>
     </div>
 
