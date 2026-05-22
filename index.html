@@ -58,7 +58,7 @@
         <div class="dashboard-v2">
             <header class="dashboard-v2-header">
                 <h1 class="dashboard-title">ה-כספת</h1>
-                <p class="status-text">סטטוס: <span class="status-online">מקוון</span> — סביבת מסחר לימודית</p>
+                <p class="status-text">סביבת מסחר לימודית</p>
                 <div class="price-strip">
                     <span class="price-strip-label">כסף (XAG/USD)</span>
                     <span class="price-strip-value" id="price-value">טוען...</span>
@@ -90,6 +90,18 @@
                         <img src="icons/v2_charts.png" alt="" draggable="false">
                     </div>
                     <span class="icon-btn-label">גרפים</span>
+                </button>
+                <button class="icon-btn" data-target="museum">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_museum.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">מוזיאון</span>
+                </button>
+                <button class="icon-btn" data-target="guide">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_guide.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">מדריך הכסף</span>
                 </button>
             </nav>
         </div>
@@ -166,12 +178,7 @@
             </div>
 
             <!-- ── Feature selection (default view) ── -->
-            <div id="hw-menu" class="hw-menu-grid">
-                <button class="hw-big-card" id="museum-open-btn">
-                    <span class="hw-big-icon">🏛️</span>
-                    <strong class="hw-big-name">מוזיאון המינטים</strong>
-                    <span class="hw-big-sub">גלה מינטים מרחבי העולם</span>
-                </button>
+            <div id="hw-menu" class="hw-menu-grid hw-menu-single">
                 <button class="hw-big-card" id="quiz-menu-btn">
                     <span class="hw-big-icon">❓</span>
                     <strong class="hw-big-name">טריוויה כסף</strong>
@@ -314,6 +321,22 @@
         </div>
     </div>
 
+    <!-- ══ SILVER GUIDE SCREEN ══ -->
+    <div id="guide-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-guide">→ חזרה</button>
+                <h2 class="section-screen-title">📖 מדריך הכסף 2026</h2>
+            </div>
+            <div class="mint-lang-bar guide-lang-bar">
+                <button class="mint-lang-btn active" data-lang="he">עב</button>
+                <button class="mint-lang-btn" data-lang="en">EN</button>
+                <button class="mint-lang-btn" data-lang="ru">РУ</button>
+            </div>
+            <div id="guide-content" class="guide-content"></div>
+        </div>
+    </div>
+
     <!-- ══ MR. D FAB (fixed, shown after login) ══ -->
     <button type="button" id="mr-d-fab" class="mr-d-fab" style="display:none;"
             aria-haspopup="dialog" aria-controls="mr-d-modal">
@@ -354,6 +377,6 @@
         </div>
     </div>
 
-    <script src="app_v2.js?v=21"></script>
+    <script src="app_v2.js?v=22"></script>
 </body>
 </html>

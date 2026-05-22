@@ -1359,14 +1359,15 @@ input, textarea, .chat-messages, .chat-message {
         gap: 16px;
         margin-top: 14px;
     }
+    .dashboard-v2 { width: min(460px, 100%); }
 
     .icon-btn-label { font-size: 14px; padding: 6px 6px 9px; }
 }
 
 @media (min-width: 900px) {
-    .dashboard-v2 { width: min(660px, 100%); padding: 26px 26px 30px; }
+    .dashboard-v2 { width: min(560px, 100%); padding: 26px 26px 30px; }
     .dashboard-title { font-size: 44px; }
-    .icon-grid { grid-template-columns: repeat(2, minmax(0, 250px)); gap: 18px; }
+    .icon-grid { grid-template-columns: repeat(2, minmax(0, 220px)); gap: 18px; }
     .icon-btn-label { font-size: 15px; padding: 7px 8px 10px; }
 }
 
@@ -1437,7 +1438,7 @@ input, textarea, .chat-messages, .chat-message {
 .main-switch-index { display: none; }
 
 /* ════════════════════════════════════════════
-   ICON GRID — 2×2 app-icon navigation
+   ICON GRID — 2×3 app-icon navigation
    ════════════════════════════════════════════ */
 .icon-grid {
     display: grid;
@@ -2383,6 +2384,10 @@ body.dark-mode .news-section-body      { color: var(--text-mid, rgba(220,220,220
     gap: 14px;
     margin-bottom: 8px;
 }
+.hw-menu-single {
+    grid-template-columns: minmax(0, 280px);
+    justify-content: center;
+}
 
 .hw-big-card {
     display: flex;
@@ -2860,3 +2865,108 @@ body.dark-mode .mint-product-card,
 body.dark-mode .mint-hero,
 body.dark-mode .mint-lang-btn { background: var(--card); }
 body.dark-mode .mint-lang-btn.active { background: var(--clay); }
+
+/* ════════════════════════════════════════════
+   SILVER GUIDE SCREEN
+   ════════════════════════════════════════════ */
+.guide-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-bottom: 30px;
+}
+
+.guide-chapter {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--nm-raised);
+    overflow: hidden;
+}
+
+.guide-chapter-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: right;
+    font-family: 'Assistant', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text);
+    transition: background 0.18s;
+}
+.guide-chapter-header:hover { background: rgba(0,0,0,0.03); }
+
+.guide-chapter-icon { font-size: 22px; flex-shrink: 0; }
+.guide-chapter-title { flex: 1; }
+
+.guide-chapter-arrow {
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: transform 0.22s;
+    flex-shrink: 0;
+}
+.guide-chapter.open .guide-chapter-arrow { transform: rotate(90deg); }
+
+.guide-chapter-body {
+    display: none;
+    padding: 0 16px 16px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+}
+.guide-chapter.open .guide-chapter-body { display: block; }
+
+.guide-chapter-body p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text);
+    margin: 10px 0 0;
+}
+.guide-chapter-body ul, .guide-chapter-body ol {
+    margin: 8px 0 0 0;
+    padding-right: 20px;
+    padding-left: 0;
+}
+.guide-chapter-body li {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+.guide-chapter-body strong { color: var(--clay-dk); }
+
+.guide-warn-box {
+    background: rgba(220, 100, 50, 0.09);
+    border-right: 3px solid rgba(200, 80, 40, 0.55);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+}
+[dir="ltr"] .guide-warn-box, .guide-content[dir="ltr"] .guide-warn-box {
+    border-right: none;
+    border-left: 3px solid rgba(200, 80, 40, 0.55);
+}
+
+.guide-tip-box {
+    background: rgba(50, 140, 100, 0.09);
+    border-right: 3px solid rgba(50, 140, 100, 0.5);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+}
+
+.guide-lang-bar { margin-bottom: 6px; }
+
+body.dark-mode .guide-chapter { background: var(--card); }
+body.dark-mode .guide-chapter-body { border-top-color: rgba(255,255,255,0.08); }
+body.dark-mode .guide-warn-box { background: rgba(220,100,50,0.13); }
+body.dark-mode .guide-tip-box  { background: rgba(50,140,100,0.13); }
