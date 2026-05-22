@@ -67,48 +67,44 @@
             </header>
 
             <nav class="icon-grid" aria-label="ניווט ראשי">
-                <!-- RTL grid: odd items → right column, even items → left column -->
-                <!-- Row 1 right -->
-                <button class="icon-btn" data-target="homework">
-                    <div class="icon-img-wrap">
-                        <img src="icons/v2_homework.png" alt="" draggable="false">
-                    </div>
-                    <span class="icon-btn-label">שיעורי בית</span>
-                </button>
-                <!-- Row 1 left (next to שיעורי בית) -->
-                <button class="icon-btn" data-target="museum">
-                    <div class="icon-img-wrap">
-                        <img src="icons/v2_museum.png" alt="" draggable="false">
-                    </div>
-                    <span class="icon-btn-label">מוזיאון</span>
-                </button>
-                <!-- Row 2 right -->
-                <button class="icon-btn" data-target="charts">
-                    <div class="icon-img-wrap">
-                        <img src="icons/v2_charts.png" alt="" draggable="false">
-                    </div>
-                    <span class="icon-btn-label">גרפים</span>
-                </button>
-                <!-- Row 2 left (next to גרפים) -->
-                <button class="icon-btn" data-target="guide">
-                    <div class="icon-img-wrap">
-                        <img src="icons/v2_guide.png" alt="" draggable="false">
-                    </div>
-                    <span class="icon-btn-label">מדריך הכסף</span>
-                </button>
-                <!-- Row 3 right -->
+                <!-- RTL 3-col grid: col order per row = right → center → left -->
+                <!-- Row 1: [מוזיאון LEFT | שיעורי בית CENTER | איזור אישי RIGHT] -->
                 <button class="icon-btn" data-target="personal">
                     <div class="icon-img-wrap">
                         <img src="icons/v2_personal.png" alt="" draggable="false">
                     </div>
                     <span class="icon-btn-label">איזור אישי</span>
                 </button>
-                <!-- Row 3 left -->
+                <button class="icon-btn" data-target="homework">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_homework.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">שיעורי בית</span>
+                </button>
+                <button class="icon-btn" data-target="museum">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_museum.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">מוזיאון</span>
+                </button>
+                <!-- Row 2: [מדריך הכסף LEFT | גרפים CENTER | חדשות ועדכונים RIGHT] -->
                 <button class="icon-btn" data-target="updates">
                     <div class="icon-img-wrap">
                         <img src="icons/v2_news.png" alt="" draggable="false">
                     </div>
                     <span class="icon-btn-label">חדשות ועדכונים</span>
+                </button>
+                <button class="icon-btn" data-target="charts">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_charts.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">גרפים</span>
+                </button>
+                <button class="icon-btn" data-target="guide">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_guide.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">מדריך הכסף</span>
                 </button>
             </nav>
         </div>
@@ -409,6 +405,6 @@
         </div>
     </div>
 
-    <script src="app_v2.js?v=24"></script>
+    <script src="app_v2.js?v=25"></script>
 </body>
 </html>

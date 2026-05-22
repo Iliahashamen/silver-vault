@@ -1355,19 +1355,19 @@ input, textarea, .chat-messages, .chat-message {
     .price-strip-label { font-size: 13px; }
 
     .icon-grid {
-        grid-template-columns: repeat(2, minmax(0, 210px));
-        gap: 16px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
         margin-top: 14px;
     }
-    .dashboard-v2 { width: min(460px, 100%); }
+    .dashboard-v2 { width: min(540px, 100%); }
 
     .icon-btn-label { font-size: 13px; padding: 6px 6px 8px; }
 }
 
 @media (min-width: 900px) {
-    .dashboard-v2 { width: min(560px, 100%); padding: 26px 26px 30px; }
+    .dashboard-v2 { width: min(640px, 100%); padding: 26px 26px 30px; }
     .dashboard-title { font-size: 44px; }
-    .icon-grid { grid-template-columns: repeat(2, minmax(0, 220px)); gap: 18px; }
+    .icon-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .icon-btn-label { font-size: 14px; padding: 6px 8px 9px; }
 }
 
@@ -1442,10 +1442,9 @@ input, textarea, .chat-messages, .chat-message {
    ════════════════════════════════════════════ */
 .icon-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 140px));
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin-top: 8px;
-    justify-content: center;
 }
 
 .icon-btn {
