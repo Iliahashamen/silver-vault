@@ -1510,6 +1510,17 @@ input, textarea, .chat-messages, .chat-message {
     transform: scale(1.27);
 }
 
+/* Museum & Guide icons fill their canvas edge-to-edge (no internal padding),
+   so scale them down to visually match the other icons that have built-in padding */
+.icon-btn[data-target="museum"] .icon-img-wrap img,
+.icon-btn[data-target="guide"]  .icon-img-wrap img {
+    transform: scale(0.76);
+}
+.icon-btn[data-target="museum"]:hover .icon-img-wrap img,
+.icon-btn[data-target="guide"]:hover  .icon-img-wrap img {
+    transform: scale(0.83);
+}
+
 /* Label sits below the image in normal flow — always fully visible */
 .icon-btn-label {
     position: relative;
