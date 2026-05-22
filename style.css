@@ -1480,13 +1480,17 @@ input, textarea, .chat-messages, .chat-message {
     box-shadow: var(--nm-inset);
 }
 
-/* Square image area — label is BELOW, not overlapping */
+/* Square image area — label is BELOW, not overlapping.
+   padding: 13% guarantees identical visual icon size for every PNG
+   regardless of how much internal whitespace the source file has. */
 .icon-img-wrap {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     flex-shrink: 0;
+    padding: 13%;
+    box-sizing: border-box;
     -webkit-touch-callout: none;
     user-select: none;
     -webkit-user-select: none;
@@ -1495,9 +1499,9 @@ input, textarea, .chat-messages, .chat-message {
 .icon-img-wrap img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
-    transform: scale(1.20);
+    transform: scale(1.0);
     transform-origin: center center;
     transition: transform 0.22s ease;
     -webkit-touch-callout: none;
@@ -1507,7 +1511,7 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 .icon-btn:hover .icon-img-wrap img {
-    transform: scale(1.27);
+    transform: scale(1.10);
 }
 
 
