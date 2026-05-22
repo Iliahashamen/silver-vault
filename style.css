@@ -1490,8 +1490,7 @@ input, textarea, .chat-messages, .chat-message {
     aspect-ratio: 1 / 1;
     overflow: hidden;
     flex-shrink: 0;
-    padding: 8%;
-    box-sizing: border-box;
+    padding: 0;
     -webkit-touch-callout: none;
     user-select: none;
     -webkit-user-select: none;
