@@ -1481,15 +1481,16 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 /* Square image area — label is BELOW, not overlapping.
-   padding: 13% guarantees identical visual icon size for every PNG
-   regardless of how much internal whitespace the source file has. */
+   padding: 8% keeps icons large while staying consistent across all PNGs.
+   mix-blend-mode: multiply removes any white fill — only the green strokes
+   are visible, blending seamlessly with the beige button background. */
 .icon-img-wrap {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     flex-shrink: 0;
-    padding: 13%;
+    padding: 8%;
     box-sizing: border-box;
     -webkit-touch-callout: none;
     user-select: none;
@@ -1501,6 +1502,7 @@ input, textarea, .chat-messages, .chat-message {
     height: 100%;
     object-fit: contain;
     display: block;
+    mix-blend-mode: multiply;
     transform: scale(1.0);
     transform-origin: center center;
     transition: transform 0.22s ease;
@@ -1511,7 +1513,7 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 .icon-btn:hover .icon-img-wrap img {
-    transform: scale(1.10);
+    transform: scale(1.08);
 }
 
 
