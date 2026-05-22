@@ -1361,14 +1361,14 @@ input, textarea, .chat-messages, .chat-message {
     }
     .dashboard-v2 { width: min(460px, 100%); }
 
-    .icon-btn-label { font-size: 14px; padding: 6px 6px 9px; }
+    .icon-btn-label { font-size: 13px; padding: 6px 6px 8px; }
 }
 
 @media (min-width: 900px) {
     .dashboard-v2 { width: min(560px, 100%); padding: 26px 26px 30px; }
     .dashboard-title { font-size: 44px; }
     .icon-grid { grid-template-columns: repeat(2, minmax(0, 220px)); gap: 18px; }
-    .icon-btn-label { font-size: 15px; padding: 7px 8px 10px; }
+    .icon-btn-label { font-size: 14px; padding: 6px 8px 9px; }
 }
 
 .price-strip {
@@ -1461,9 +1461,9 @@ input, textarea, .chat-messages, .chat-message {
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     cursor: pointer;
-    aspect-ratio: 1 / 1;
+    /* No aspect-ratio — height = square image area + label row */
     width: 100%;
     transition: transform 0.18s ease, box-shadow 0.18s ease;
     overflow: hidden;
@@ -1481,14 +1481,13 @@ input, textarea, .chat-messages, .chat-message {
     box-shadow: var(--nm-inset);
 }
 
-/* Image fills button completely */
+/* Square image area — label is BELOW, not overlapping */
 .icon-img-wrap {
-    position: absolute;
-    inset: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-    border-radius: inherit;
+    flex-shrink: 0;
     -webkit-touch-callout: none;
     user-select: none;
     -webkit-user-select: none;
@@ -1499,10 +1498,9 @@ input, textarea, .chat-messages, .chat-message {
     height: 100%;
     object-fit: cover;
     display: block;
-    transform: scale(1.30);
+    transform: scale(1.20);
     transform-origin: center center;
     transition: transform 0.22s ease;
-    draggable: false;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
@@ -1510,16 +1508,14 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 .icon-btn:hover .icon-img-wrap img {
-    transform: scale(1.35);
+    transform: scale(1.27);
 }
 
-/* Label — plain text, no background */
+/* Label sits below the image in normal flow — always fully visible */
 .icon-btn-label {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
     z-index: 2;
+    flex-shrink: 0;
     font-family: 'Assistant', sans-serif;
     font-size: 11px;
     font-weight: 800;
