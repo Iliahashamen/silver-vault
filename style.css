@@ -2517,16 +2517,19 @@ body.dark-mode .news-section-body      { color: var(--text-mid, rgba(220,220,220
    MUSEUM — Mint Hub Screen
    ══════════════════════════════════════════════════════════════ */
 .mint-hub-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+@media (max-width: 380px) {
+    .mint-hub-grid { grid-template-columns: 1fr; }
 }
 
 .mint-hub-card {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 18px 20px;
+    gap: 10px;
+    padding: 14px 12px;
     background: var(--card);
     border: none;
     border-radius: var(--radius-lg);
@@ -2535,12 +2538,13 @@ body.dark-mode .news-section-body      { color: var(--text-mid, rgba(220,220,220
     text-align: right;
     transition: transform 0.17s, box-shadow 0.17s;
     width: 100%;
+    min-width: 0;
 }
 .mint-hub-card:hover  { transform: translateY(-3px); box-shadow: var(--nm-raised-hover); }
 .mint-hub-card:active { transform: translateY(1px);  box-shadow: var(--nm-inset); }
 
 .mint-hub-flag {
-    font-size: 40px;
+    font-size: 30px;
     line-height: 1;
     flex-shrink: 0;
 }
@@ -2684,6 +2688,35 @@ body.dark-mode .news-section-body      { color: var(--text-mid, rgba(220,220,220
     object-fit: cover;
     display: block;
 }
+.mint-building-placeholder {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    background: var(--card-inner);
+}
+.mint-website-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--clay-dk);
+    text-decoration: none;
+    padding: 8px 14px;
+    background: var(--card);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--nm-raised);
+    margin-top: 4px;
+    margin-bottom: 20px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.mint-website-link:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--nm-raised-hover);
+}
+body.dark-mode .mint-website-link { background: var(--card); color: var(--text-light); }
 
 /* Content sections */
 .mint-section {
