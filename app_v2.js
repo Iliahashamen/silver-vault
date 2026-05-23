@@ -741,6 +741,10 @@ const NAV_CHIP_DEFS = {
                         action: ['screen', 'pnl-screen'] },
     'guide':          { he: '📖 מדריך הכסף',         en: '📖 Silver Guide',               ru: '📖 Руководство по серебру',
                         action: ['screen', 'guide-screen'] },
+    'news':           { he: '📰 חדשות ועדכונים',    en: '📰 News & Updates',             ru: '📰 Новости и обновления',
+                        action: ['screen', 'updates-screen'] },
+    'homework':       { he: '📚 שיעורי בית',         en: '📚 Homework',                   ru: '📚 Домашнее задание',
+                        action: ['screen', 'homework-screen'] },
 };
 
 function _detectChatLang(text) {
@@ -756,7 +760,7 @@ function _parseNavTokens(rawText) {
     const tokens = [];
     const text = rawText.replace(/\[NAV:([^\]]+)\]/gi, (_, key) => {
         const k = key.trim().toLowerCase();
-        if (NAV_CHIP_DEFS[k] && !seen.has(k) && tokens.length < 2) {
+        if (NAV_CHIP_DEFS[k] && !seen.has(k) && tokens.length < 4) {
             seen.add(k);
             tokens.push(k);
         }
