@@ -75,6 +75,26 @@ function goBack() {
     goToScreen('dashboard-screen');
 }
 
+function openDailyLineChart() {
+    activeChartType = 'line';
+    activeFrame = '1d';
+
+    document.querySelectorAll('.chart-type-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.chartType === 'line');
+    });
+    document.querySelectorAll('.chart-time-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.timeframe === '1d');
+    });
+
+    const candlesEl = document.getElementById('candles-container');
+    const lineEl    = document.getElementById('line-container');
+    if (candlesEl) candlesEl.style.display = 'none';
+    if (lineEl)    lineEl.style.display    = '';
+    if (lineChart) { lineChart.destroy(); lineChart = null; }
+
+    goToScreen('charts-screen');
+}
+
 // ── DARK MODE ────────────────────────────────────────────────────────
 function applyDarkMode(dark) {
     document.body.classList.toggle('dark-mode', dark);
@@ -2318,6 +2338,8 @@ function initDashboard() {
 
     updateSilverPrice();
     setInterval(updateSilverPrice, 30 * 60 * 1000);
+
+    document.getElementById('price-strip-btn')?.addEventListener('click', openDailyLineChart);
 
     loadPnl();
     renderPnl();
