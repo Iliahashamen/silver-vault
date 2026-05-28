@@ -2851,9 +2851,6 @@ body.dark-mode .mint-website-link { background: var(--card); color: var(--text-l
     transition: transform 0.3s;
 }
 
-.mint-product-img--transparent {
-    /* same fit rules as all product images */
-}
 .mint-product-card:hover .mint-product-img { transform: scale(1.03); }
 
 .mint-product-img-placeholder {
