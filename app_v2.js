@@ -1169,66 +1169,6 @@ const MINT_DATA = {
                     img: SILVER_GRAINS_300G_IMG,
                     emoji: '✨',
                     transparent: true
-                },
-                {
-                    title: 'מטבע יום העצמאות',
-                    type: 'מטבע',
-                    weight: '1 אונקיה',
-                    year: 'שנתי',
-                    purity: 'כסף 999',
-                    desc: 'סדרה שנתית לרגל יום עצמאות ישראל, עם עיצוב ייחודי מדי שנה המשלב תמונה נושאית וסמלי המדינה.',
-                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/1_NIS_coin_%28obverse%2C_2017%29.jpg/300px-1_NIS_coin_%28obverse%2C_2017%29.jpg',
-                    emoji: '🪙'
-                },
-                {
-                    title: 'מטבע ירושלים',
-                    type: 'מטבע',
-                    weight: '2 אונקיות',
-                    year: '2022',
-                    purity: 'כסף 999',
-                    desc: 'מטבע פרמיום לרגל 55 שנים לאיחוד ירושלים, עם עיצוב מפורט של החומה העתיקה ועיר דוד.',
-                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Jerusalem_Old_City_from_Above.jpg/300px-Jerusalem_Old_City_from_Above.jpg',
-                    emoji: '🏛️'
-                },
-                {
-                    title: 'מדלית כסף מנורה',
-                    type: 'מדלייה',
-                    weight: '50 גרם',
-                    year: '2020',
-                    purity: 'כסף 925',
-                    desc: 'מדלית כסף סטרלינג עם עיצוב מנורת שבעת הקנים, סמל המדינה. מוגבל ל-1,000 יחידות.',
-                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Menora.svg/300px-Menora.svg.png',
-                    emoji: '🕎'
-                },
-                {
-                    title: 'מטיל כסף ישראלי',
-                    type: 'מטיל',
-                    weight: '10 גרם',
-                    year: 'שוטף',
-                    purity: 'כסף 999',
-                    desc: 'מטיל כסף טהור עם סמל מדינת ישראל, מיוצר לשוק האספנות ולהשקעה בכסף פיזי.',
-                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg',
-                    emoji: '🥈'
-                },
-                {
-                    title: 'מטבע חנוכה',
-                    type: 'מטבע',
-                    weight: '1 אונקיה',
-                    year: '2023',
-                    purity: 'כסף 999',
-                    desc: 'מטבע כסף לרגל חג החנוכה עם עיצוב חנוכייה היסטורית מהמוזיאון הלאומי. מהדורה מוגבלת.',
-                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Hanukkah_Menorah.jpg/300px-Hanukkah_Menorah.jpg',
-                    emoji: '🕯️'
-                },
-                {
-                    title: 'מטבע שלמה המלך',
-                    type: 'מטבע',
-                    weight: '2 אונקיות',
-                    year: '2021',
-                    purity: 'כסף 999',
-                    desc: 'מטבע כסף אמנותי מסדרת "מלכי ישראל" המוקדשת לשלמה המלך, עם ציפוי זהב חלקי.',
-                    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/King_Solomon%27s_Temple.jpg/300px-King_Solomon%27s_Temple.jpg',
-                    emoji: '👑'
                 }
             ]
         },
@@ -1255,13 +1195,7 @@ const MINT_DATA = {
             products: [
                 { title: 'Dove of Peace Bullion', type: 'Bullion', weight: 'Various weights', year: '2014–', purity: '.999 Silver / .9999 Gold', desc: 'Israeli "Dove of Peace" bullion by The Holy Land Mint, produced since 2014. Obverse: a white dove with an olive branch in flight above the Old City of Jerusalem walls. Reverse: Holy Land Mint logo, metal purity and weight; bars also carry the Melter Assayer mark and serial number. Available as rounds or bars. Gold .9999 versions since 2019.', img: DOVE_OF_PEACE_IMG, emoji: '🕊️', transparent: true },
                 { title: 'Dove of Peace 1 kg Cast Bar', type: 'Bar', weight: '1 kg', year: '2014–', purity: '.999 Silver', desc: 'Cast .999 fine silver bar from the "Dove of Peace" series by The Holy Land Mint. Stamped with the company logo, dove motif, SILVER .999, weight, ICMC mark and serial number. Produced since 2014; gold .9999 versions available since 2019.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: '🥈', transparent: true },
-                { title: '300g Fine Silver Grains', type: 'Grains', weight: '300g', year: 'Current', purity: '.999 Silver', desc: '300 grams of .999 fine silver grains (shot) from The Holy Land Mint — Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true },
-                { title: 'Independence Day Coin', type: 'Coin', weight: '1 oz', year: 'Annual', purity: '999 Silver', desc: 'Annual series marking Israeli Independence Day, featuring a unique design each year with national symbols.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/1_NIS_coin_%28obverse%2C_2017%29.jpg/300px-1_NIS_coin_%28obverse%2C_2017%29.jpg', emoji: '🪙' },
-                { title: 'Jerusalem Coin', type: 'Coin', weight: '2 oz', year: '2022', purity: '999 Silver', desc: 'Premium coin celebrating 55 years since the reunification of Jerusalem, featuring the Old City walls.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Jerusalem_Old_City_from_Above.jpg/300px-Jerusalem_Old_City_from_Above.jpg', emoji: '🏛️' },
-                { title: 'Menorah Silver Medal', type: 'Medal', weight: '50g', year: '2020', purity: '925 Silver', desc: 'Sterling silver medal featuring the seven-branched Menorah, the national emblem. Limited to 1,000 pieces.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Menora.svg/300px-Menora.svg.png', emoji: '🕎' },
-                { title: 'Israeli Silver Bar', type: 'Bar', weight: '10g', year: 'Current', purity: '999 Silver', desc: 'Pure silver bar with the State of Israel emblem, produced for the collectors and physical silver investment market.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'Hanukkah Coin', type: 'Coin', weight: '1 oz', year: '2023', purity: '999 Silver', desc: 'Silver coin for Hanukkah featuring a historic menorah design from the National Museum. Limited edition.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Hanukkah_Menorah.jpg/300px-Hanukkah_Menorah.jpg', emoji: '🕯️' },
-                { title: 'King Solomon Coin', type: 'Coin', weight: '2 oz', year: '2021', purity: '999 Silver', desc: 'Artistic silver coin from the "Kings of Israel" series, dedicated to King Solomon, with partial gold plating.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/King_Solomon%27s_Temple.jpg/300px-King_Solomon%27s_Temple.jpg', emoji: '👑' }
+                { title: '300g Fine Silver Grains', type: 'Grains', weight: '300g', year: 'Current', purity: '.999 Silver', desc: '300 grams of .999 fine silver grains (shot) from The Holy Land Mint — Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true }
             ]
         },
         ru: {
@@ -1287,13 +1221,7 @@ const MINT_DATA = {
             products: [
                 { title: 'Буллион «Голубь мира»', type: 'Буллион', weight: 'Разные веса', year: '2014–', purity: 'Серебро 999 / Золото 999.9', desc: 'Израильский буллион «Голубь мира» от The Holy Land Mint, выпускается с 2014 года. Аверс: белый голубь с оливковой ветвью над стенами Старого города Иерусалима. Реверс: логотип Holy Land Mint, проба и вес; на слитках также знак Melter Assayer и серийный номер. Доступен в виде монет и слитков. С 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_IMG, emoji: '🕊️', transparent: true },
                 { title: 'Литой слиток 1 кг «Голубь мира»', type: 'Слиток', weight: '1 кг', year: '2014–', purity: 'Серебро 999', desc: 'Литой слиток из серебра 999 пробы весом 1 кг из серии «Голубь мира» от The Holy Land Mint. На слитке: логотип компании, голубь, SILVER .999, вес, знак ICMC и серийный номер. Выпускается с 2014 года; с 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: '🥈', transparent: true },
-                { title: '300 г серебряных гранул', type: 'Гранулы', weight: '300 г', year: 'Текущий', purity: 'Серебро 999', desc: '300 граммов серебряных гранул (shot) пробы 999 от The Holy Land Mint — Israel Coins & Medals Corp. Официальная герметичная пластиковая упаковка с маркировкой Fine Silver 999. Подходит для инвестиций в физическое серебро, производства и коллекционирования.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true },
-                { title: 'Монета Дня независимости', type: 'Монета', weight: '1 унция', year: 'Ежегодно', purity: 'Серебро 999', desc: 'Ежегодная серия ко Дню независимости Израиля с уникальным дизайном каждого года и национальными символами.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/1_NIS_coin_%28obverse%2C_2017%29.jpg/300px-1_NIS_coin_%28obverse%2C_2017%29.jpg', emoji: '🪙' },
-                { title: 'Монета Иерусалима', type: 'Монета', weight: '2 унции', year: '2022', purity: 'Серебро 999', desc: 'Премиальная монета к 55-летию воссоединения Иерусалима с изображением стен Старого города.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Jerusalem_Old_City_from_Above.jpg/300px-Jerusalem_Old_City_from_Above.jpg', emoji: '🏛️' },
-                { title: 'Серебряная медаль Менора', type: 'Медаль', weight: '50 г', year: '2020', purity: 'Серебро 925', desc: 'Медаль из серебра 925 пробы с изображением семисвечника Меноры — национального символа. Тираж 1 000 штук.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Menora.svg/300px-Menora.svg.png', emoji: '🕎' },
-                { title: 'Израильский серебряный слиток', type: 'Слиток', weight: '10 г', year: 'Текущий', purity: 'Серебро 999', desc: 'Слиток из чистого серебра с гербом государства Израиль для рынка коллекционирования и инвестиций.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'Монета Хануки', type: 'Монета', weight: '1 унция', year: '2023', purity: 'Серебро 999', desc: 'Серебряная монета к празднику Хануки с изображением исторической меноры из Национального музея. Лимитированный выпуск.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Hanukkah_Menorah.jpg/300px-Hanukkah_Menorah.jpg', emoji: '🕯️' },
-                { title: 'Монета царя Соломона', type: 'Монета', weight: '2 унции', year: '2021', purity: 'Серебро 999', desc: 'Художественная монета из серии "Цари Израиля", посвящённая царю Соломону с частичным золотым покрытием.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/King_Solomon%27s_Temple.jpg/300px-King_Solomon%27s_Temple.jpg', emoji: '👑' }
+                { title: '300 г серебряных гранул', type: 'Гранулы', weight: '300 г', year: 'Текущий', purity: 'Серебро 999', desc: '300 граммов серебряных гранул (shot) пробы 999 от The Holy Land Mint — Israel Coins & Medals Corp. Официальная герметичная пластиковая упаковка с маркировкой Fine Silver 999. Подходит для инвестиций в физическое серебро, производства и коллекционирования.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true }
             ]
         }
     },
@@ -1323,12 +1251,6 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'מטבע כסף גרמניה 10 יורו', type: 'מטבע', weight: '16 גרם', year: '2023', purity: 'כסף 925', desc: 'מטבע זיכרון רשמי מטעם גרמניה, מסדרת "גרמניה יפה" עם נופים מרהיבים מרחבי המדינה.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/10_Euro_coin_Germany.jpg/300px-10_Euro_coin_Germany.jpg', emoji: '🪙' },
-                { title: 'מטיל כסף Bavaria', type: 'מטיל', weight: '1 אונקיה', year: 'שוטף', purity: 'כסף 999', desc: 'מטיל כסף פרמיום עם סמל הדוב הבוורי ורישום ייחודי של בית המטבע. תעודת אותנטיות כלולה.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'מטבע כסף לודוויג ואן בטהובן', type: 'מטבע', weight: '1 אונקיה', year: '2020', purity: 'כסף 999', desc: 'מטבע זיכרון לציון 250 שנה להולדת בטהובן, עם דיוקן מפורט ומוטיבים מוזיקליים. מהדורה מוגבלת.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/300px-Beethoven.jpg', emoji: '🎵' },
-                { title: 'מטבע ברנדנבורג שאלה', type: 'מטבע', weight: '18 גרם', year: '2022', purity: 'כסף 925', desc: 'מסדרת "16 מדינות גרמניה" — מטבע המוקדש לברנדנבורג עם תמונת שער ברנדנבורג האיקוני.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/BrandenburgerTor_Dusk.jpg/300px-BrandenburgerTor_Dusk.jpg', emoji: '🏰' },
-                { title: 'סט כסף עידן גרמני', type: 'סט', weight: '5×1 אונקיה', year: '2023', purity: 'כסף 999', desc: 'סט חמישה מטבעות המסכם את 5 תקופות גרמניות מבית המטבע, באריזת מתנה פרמיום.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Germany_coin_set.jpg/300px-Germany_coin_set.jpg', emoji: '🎁' },
-                { title: 'מטבע הנסיך הנריך', type: 'מטבע', weight: '2 אונקיות', year: '2021', purity: 'כסף 999', desc: 'מטבע יובל לציון 850 שנה לייסוד בית המטבע הבוורי, עם דיוקן הנסיך הנריך האריה.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Henry_the_Lion.jpg/300px-Henry_the_Lion.jpg', emoji: '🦁' }
             ]
         },
         en: {
@@ -1352,12 +1274,6 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'Germany 10 Euro Silver Coin', type: 'Coin', weight: '16g', year: '2023', purity: '925 Silver', desc: 'Official German commemorative coin from the "Beautiful Germany" series featuring stunning landscapes.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/10_Euro_coin_Germany.jpg/300px-10_Euro_coin_Germany.jpg', emoji: '🪙' },
-                { title: 'Bavaria Silver Bar', type: 'Bar', weight: '1 oz', year: 'Current', purity: '999 Silver', desc: 'Premium silver bar with the Bavarian bear emblem and unique mint registry. Certificate of authenticity included.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'Ludwig van Beethoven Silver Coin', type: 'Coin', weight: '1 oz', year: '2020', purity: '999 Silver', desc: 'Commemorative coin marking 250 years since Beethoven\'s birth, with detailed portrait and musical motifs. Limited edition.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/300px-Beethoven.jpg', emoji: '🎵' },
-                { title: 'Brandenburg Gate Coin', type: 'Coin', weight: '18g', year: '2022', purity: '925 Silver', desc: 'From the "16 German States" series — coin dedicated to Brandenburg featuring the iconic Brandenburg Gate.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/BrandenburgerTor_Dusk.jpg/300px-BrandenburgerTor_Dusk.jpg', emoji: '🏰' },
-                { title: 'German Era Silver Set', type: 'Set', weight: '5×1 oz', year: '2023', purity: '999 Silver', desc: 'Set of five coins summarizing 5 German eras from the mint, in premium gift packaging.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Germany_coin_set.jpg/300px-Germany_coin_set.jpg', emoji: '🎁' },
-                { title: 'Prince Henry the Lion Coin', type: 'Coin', weight: '2 oz', year: '2021', purity: '999 Silver', desc: 'Jubilee coin marking 850 years since the founding of the Bavarian Mint, featuring Prince Henry the Lion.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Henry_the_Lion.jpg/300px-Henry_the_Lion.jpg', emoji: '🦁' }
             ]
         },
         ru: {
@@ -1381,12 +1297,6 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'Германия 10 евро серебряная монета', type: 'Монета', weight: '16 г', year: '2023', purity: 'Серебро 925', desc: 'Официальная памятная монета Германии из серии «Красивая Германия» с живописными пейзажами страны.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/10_Euro_coin_Germany.jpg/300px-10_Euro_coin_Germany.jpg', emoji: '🪙' },
-                { title: 'Баварский серебряный слиток', type: 'Слиток', weight: '1 унция', year: 'Текущий', purity: 'Серебро 999', desc: 'Премиальный серебряный слиток с изображением баварского медведя и уникальным реестром монетного двора. Прилагается сертификат.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'Монета Людвига ван Бетховена', type: 'Монета', weight: '1 унция', year: '2020', purity: 'Серебро 999', desc: 'Памятная монета к 250-летию со дня рождения Бетховена с детальным портретом и музыкальными мотивами. Лимитированный выпуск.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/300px-Beethoven.jpg', emoji: '🎵' },
-                { title: 'Монета Бранденбургских ворот', type: 'Монета', weight: '18 г', year: '2022', purity: 'Серебро 925', desc: 'Из серии «16 федеральных земель Германии» — монета, посвящённая Бранденбургу с изображением знаменитых ворот.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/BrandenburgerTor_Dusk.jpg/300px-BrandenburgerTor_Dusk.jpg', emoji: '🏰' },
-                { title: 'Серебряный набор германских эпох', type: 'Набор', weight: '5×1 унция', year: '2023', purity: 'Серебро 999', desc: 'Набор из пяти монет, отражающих 5 немецких эпох монетного двора, в премиальной подарочной упаковке.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Germany_coin_set.jpg/300px-Germany_coin_set.jpg', emoji: '🎁' },
-                { title: 'Монета принца Генриха Льва', type: 'Монета', weight: '2 унции', year: '2021', purity: 'Серебро 999', desc: 'Юбилейная монета к 850-летию основания Баварского монетного двора с изображением принца Генриха Льва.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Henry_the_Lion.jpg/300px-Henry_the_Lion.jpg', emoji: '🦁' }
             ]
         }
     },
@@ -1416,12 +1326,6 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'מטבע ברבריאניה 1 אונקיה', type: 'מטבע', weight: '1 אונקיה', year: '2024', purity: 'כסף 999.9', desc: 'המטבע הנחשב ביותר של המינט המלכותי — ברבריאניה בכסף טהור 999.9. הילך חוקי בשווי 2 ליש"ט. מסדרת 1987.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/2015_Britannia_silver_proof_1oz.jpg/300px-2015_Britannia_silver_proof_1oz.jpg', emoji: '🦅' },
-                { title: 'חיית המלכה — האריה האנגלי', type: 'מטבע', weight: '2 אונקיות', year: '2016', purity: 'כסף 999.9', desc: 'מטבע ראשון בסדרת "חיות המלכה" — האריה האנגלי. סדרה של 10 מטבעות, כ-2 אונקיות כסף כ"א. מהדורה מוגבלת.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lion_England_heraldic.svg/300px-Lion_England_heraldic.svg.png', emoji: '🦁' },
-                { title: 'מטיל כסף רויאל מינט', type: 'מטיל', weight: '100 גרם', year: 'שוטף', purity: 'כסף 999', desc: 'מטיל כסף רשמי עם לוגו המינט המלכותי ומספר סידורי. אחד המטילים המוכרים ביותר בשוק ההשקעות הבריטי.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'מטבע קינג צ\'רלס III ברבריאניה', type: 'מטבע', weight: '1 אונקיה', year: '2023', purity: 'כסף 999.9', desc: 'הגרסה הראשונה של מטבע הברבריאניה עם דיוקן המלך צ\'רלס השלישי — אספנות היסטורית.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/King_Charles_III_2023.jpg/300px-King_Charles_III_2023.jpg', emoji: '👑' },
-                { title: 'מטבע יובל המלכה', type: 'מטבע', weight: '5 אונקיות', year: '2022', purity: 'כסף 999', desc: 'מטבע זיכרון מיוחד לציון 70 שנות שלטון המלכה אליזבת השנייה. אחד הנדירים בהיסטוריה של המינט המלכותי.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Queen_Elizabeth_II_1953.jpg/300px-Queen_Elizabeth_II_1953.jpg', emoji: '💎' },
-                { title: 'חיית המלכה — הדרקון האדום', type: 'מטבע', weight: '2 אונקיות', year: '2017', purity: 'כסף 999.9', desc: 'הדרקון האדום של ויילס מסדרת "חיות המלכה" — אחד הפופולריים מבין 10 מטבעות הסדרה. ייצוג ייחודי של ויילס.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Red_dragon.svg/300px-Red_dragon.svg.png', emoji: '🐉' }
             ]
         },
         en: {
@@ -1445,12 +1349,6 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'Britannia 1 oz Silver Coin', type: 'Coin', weight: '1 oz', year: '2024', purity: '999.9 Silver', desc: 'The Royal Mint\'s most celebrated coin — pure 999.9 silver Britannia. Legal tender at £2 face value. Series from 1987.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/2015_Britannia_silver_proof_1oz.jpg/300px-2015_Britannia_silver_proof_1oz.jpg', emoji: '🦅' },
-                { title: "Queen's Beast — English Lion", type: 'Coin', weight: '2 oz', year: '2016', purity: '999.9 Silver', desc: 'First coin in the "Queen\'s Beasts" series — the English Lion. A series of 10 coins, each 2 oz silver. Limited mintage.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lion_England_heraldic.svg/300px-Lion_England_heraldic.svg.png', emoji: '🦁' },
-                { title: 'Royal Mint Silver Bar', type: 'Bar', weight: '100g', year: 'Current', purity: '999 Silver', desc: 'Official silver bar with Royal Mint logo and serial number. One of the most recognised bars in the UK investment market.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'King Charles III Britannia', type: 'Coin', weight: '1 oz', year: '2023', purity: '999.9 Silver', desc: 'The first Britannia coin featuring King Charles III\'s portrait — a piece of historic collectibility.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/King_Charles_III_2023.jpg/300px-King_Charles_III_2023.jpg', emoji: '👑' },
-                { title: "Queen's Jubilee Coin", type: 'Coin', weight: '5 oz', year: '2022', purity: '999 Silver', desc: 'Special commemorative coin marking 70 years of Queen Elizabeth II\'s reign. One of the rarest in Royal Mint history.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Queen_Elizabeth_II_1953.jpg/300px-Queen_Elizabeth_II_1953.jpg', emoji: '💎' },
-                { title: "Queen's Beast — Red Dragon", type: 'Coin', weight: '2 oz', year: '2017', purity: '999.9 Silver', desc: 'The Red Dragon of Wales from the "Queen\'s Beasts" series — one of the most popular of the 10 coins. Unique Welsh representation.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Red_dragon.svg/300px-Red_dragon.svg.png', emoji: '🐉' }
             ]
         },
         ru: {
@@ -1474,12 +1372,6 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'Britannia 1 унция серебра', type: 'Монета', weight: '1 унция', year: '2024', purity: 'Серебро 999.9', desc: 'Самая известная монета Королевского монетного двора — чистая серебряная Britannia 999.9. Законное платёжное средство номиналом 2 фунта. Серия с 1987 года.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/2015_Britannia_silver_proof_1oz.jpg/300px-2015_Britannia_silver_proof_1oz.jpg', emoji: '🦅' },
-                { title: 'Звери королевы — Английский лев', type: 'Монета', weight: '2 унции', year: '2016', purity: 'Серебро 999.9', desc: 'Первая монета серии «Звери королевы» — Английский лев. Серия из 10 монет, каждая по 2 унции серебра. Ограниченный тираж.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lion_England_heraldic.svg/300px-Lion_England_heraldic.svg.png', emoji: '🦁' },
-                { title: 'Серебряный слиток Royal Mint', type: 'Слиток', weight: '100 г', year: 'Текущий', purity: 'Серебро 999', desc: 'Официальный серебряный слиток с логотипом Royal Mint и серийным номером. Один из наиболее узнаваемых слитков на британском инвестиционном рынке.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'Britannia короля Карла III', type: 'Монета', weight: '1 унция', year: '2023', purity: 'Серебро 999.9', desc: 'Первая монета Britannia с портретом короля Карла III — исторически значимый коллекционный предмет.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/King_Charles_III_2023.jpg/300px-King_Charles_III_2023.jpg', emoji: '👑' },
-                { title: 'Монета Юбилея королевы', type: 'Монета', weight: '5 унций', year: '2022', purity: 'Серебро 999', desc: 'Специальная памятная монета к 70-летию правления королевы Елизаветы II. Одна из редчайших в истории Королевского монетного двора.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Queen_Elizabeth_II_1953.jpg/300px-Queen_Elizabeth_II_1953.jpg', emoji: '💎' },
-                { title: 'Звери королевы — Красный дракон', type: 'Монета', weight: '2 унции', year: '2017', purity: 'Серебро 999.9', desc: 'Красный дракон Уэльса из серии «Звери королевы» — один из самых популярных из 10 монет серии. Уникальное представление Уэльса.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Red_dragon.svg/300px-Red_dragon.svg.png', emoji: '🐉' }
             ]
         }
     },
@@ -1520,13 +1412,7 @@ const MINT_DATA = {
                     img: AMERICAN_SILVER_EAGLE_IMG,
                     emoji: '🦅',
                     transparent: true
-                },
-                { title: 'American Silver Eagle 2022', type: 'מטבע', weight: '1 אונקיה', year: '2022', purity: 'כסף 999', desc: 'גרסת 2022 עם ה-Reverse החדש (Type 2) — נשר הנוחת עם כנפיים פרושות. הנמכר ביותר בעולם. הילך חוקי $1.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png/300px-2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png', emoji: '🦅' },
-                { title: 'Silver Eagle Reverse Type 2', type: 'מטבע', weight: '1 אונקיה', year: '2021+', purity: 'כסף 999', desc: 'צד הנשר החדש שהוחלף לראשונה ב-35 שנה — עיצוב נשר מפורט ומרשים יותר. מהדורות מיוחדות בגמר Proof ו-Uncirculated.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/%241_Silver_Eagle_Type_2_Reverse.png/300px-%241_Silver_Eagle_Type_2_Reverse.png', emoji: '🦅' },
-                { title: 'Morgan Silver Dollar 2021', type: 'מטבע', weight: '26.73 גרם', year: '2021', purity: 'כסף 999', desc: 'חזרת האגדה — Morgan Dollar החדש בטוהר 999 לעומת המקורי של .900. סדרה מוגבלת של 175,000 יחידות למינט. מוטבע עם מנטמארק 5 מינטים.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🪙' },
-                { title: 'America the Beautiful 5oz', type: 'מטבע', weight: '5 אונקיות', year: '2010–2021', purity: 'כסף 999', desc: 'הגדול ביותר בסדרת מטבעות ציבוריים — 5 אונקיות כסף עם עיצוב של 56 פארקים לאומיים. קוטר: 76.2 מ"מ. 56 מינטים שונים.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/American_Silver_Eagle_monster_box_from_United_States_Mint.png/300px-American_Silver_Eagle_monster_box_from_United_States_Mint.png', emoji: '🏛️' },
-                { title: 'Peace Dollar 2021', type: 'מטבע', weight: '26.73 גרם', year: '2021', purity: 'כסף 999', desc: 'שיבה לסמל השלום — Peace Dollar כסף 999. גרסת 2021 מחזירה עיצוב קלאסי משנת 1921 (100 שנות יובל) במהדורה מוגבלת.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🕊️' },
-                { title: 'Silver Eagle Monster Box', type: 'ארגז', weight: '500 אונקיות', year: 'שוטף', purity: 'כסף 999', desc: 'ה"Monster Box" הרשמי — 25 צינורות של 20 מטבעות Silver Eagle. הדרך המקובלת לרכישת כסף בכמויות. אריזה ושמירת ערך.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/American_Silver_Eagle_monster_box_from_United_States_Mint.png/300px-American_Silver_Eagle_monster_box_from_United_States_Mint.png', emoji: '📦' }
+                }
             ]
         },
         en: {
@@ -1541,13 +1427,7 @@ const MINT_DATA = {
                 { title: 'Heritage & Special Products', text: 'In addition to the Silver Eagle, the Mint issued redesigned Morgan and Peace Dollars in 2021 — two iconic 20th-century coins now struck in .999 fine silver. The "America the Beautiful" series (2010–2021) comprised 56 five-ounce coins depicting national parks. The US Mint maintains a national strategic silver reserve at West Point.' }
             ],
             products: [
-                { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
-                { title: 'American Silver Eagle 2022', type: 'Coin', weight: '1 oz', year: '2022', purity: '999 Silver', desc: '2022 version with the new Type 2 Reverse — a landing eagle with spread wings. World\'s best-seller. Legal tender face value $1.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png/300px-2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png', emoji: '🦅' },
-                { title: 'Silver Eagle Type 2 Reverse', type: 'Coin', weight: '1 oz', year: '2021+', purity: '999 Silver', desc: 'The new eagle reverse replaced for the first time in 35 years — a more detailed, impressive eagle design. Available in Proof and Uncirculated finishes.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/%241_Silver_Eagle_Type_2_Reverse.png/300px-%241_Silver_Eagle_Type_2_Reverse.png', emoji: '🦅' },
-                { title: 'Morgan Silver Dollar 2021', type: 'Coin', weight: '26.73g', year: '2021', purity: '999 Silver', desc: 'Return of a legend — the new Morgan Dollar in .999 fine silver vs the original .900. Limited series of 175,000 per mint. Struck with mintmarks from 5 mint facilities.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🪙' },
-                { title: 'America the Beautiful 5oz', type: 'Coin', weight: '5 oz', year: '2010–2021', purity: '999 Silver', desc: 'The largest US public coin series — 5 oz silver featuring 56 national parks. Diameter: 76.2mm. 56 different designs over the series.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/American_Silver_Eagle_monster_box_from_United_States_Mint.png/300px-American_Silver_Eagle_monster_box_from_United_States_Mint.png', emoji: '🏛️' },
-                { title: 'Peace Dollar 2021', type: 'Coin', weight: '26.73g', year: '2021', purity: '999 Silver', desc: 'Return of the peace symbol — the Peace Dollar in .999 fine silver. The 2021 version revives the classic 1921 design for the 100th anniversary in a limited edition.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🕊️' },
-                { title: 'Silver Eagle Monster Box', type: 'Box', weight: '500 oz', year: 'Current', purity: '999 Silver', desc: 'The official "Monster Box" — 25 tubes of 20 Silver Eagle coins. The standard format for bulk silver purchases. Official US Mint packaging and value preservation.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/American_Silver_Eagle_monster_box_from_United_States_Mint.png/300px-American_Silver_Eagle_monster_box_from_United_States_Mint.png', emoji: '📦' }
+                { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true }
             ]
         },
         ru: {
@@ -1562,13 +1442,7 @@ const MINT_DATA = {
                 { title: 'Наследие и специальные выпуски', text: 'В 2021 году монетный двор выпустил обновлённые Morgan Dollar и Peace Dollar из серебра .999. Серия «Красоты Америки» (2010–2021) включала 56 пятиунцевых монет с изображением национальных парков. Монетный двор США хранит национальный стратегический резерв серебра в Вест-Пойнте.' }
             ],
             products: [
-                { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986–', purity: 'Серебро 999', desc: 'American Silver Eagle — самая популярная инвестиционная монета в Северной Америке. Выпуск с 1986 года в золоте и серебре. Имеет статус законного платёжного средства США с номиналом $1. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
-                { title: 'American Silver Eagle 2022', type: 'Монета', weight: '1 унция', year: '2022', purity: 'Серебро 999', desc: 'Выпуск 2022 года с новым реверсом Type 2 — приземляющийся орёл с расправленными крыльями. Самая продаваемая в мире. Номинал $1.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png/300px-2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png', emoji: '🦅' },
-                { title: 'Silver Eagle Type 2 Reverse', type: 'Монета', weight: '1 унция', year: '2021+', purity: 'Серебро 999', desc: 'Новый реверс орла, изменённый впервые за 35 лет — более детальный дизайн. Доступен в исполнении Proof и Uncirculated.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/%241_Silver_Eagle_Type_2_Reverse.png/300px-%241_Silver_Eagle_Type_2_Reverse.png', emoji: '🦅' },
-                { title: 'Morgan Silver Dollar 2021', type: 'Монета', weight: '26,73 г', year: '2021', purity: 'Серебро 999', desc: 'Возвращение легенды — новый Morgan Dollar из серебра .999 вместо исходного .900. Ограниченная серия 175 000 штук с каждого монетного двора.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🪙' },
-                { title: 'America the Beautiful 5 oz', type: 'Монета', weight: '5 унций', year: '2010–2021', purity: 'Серебро 999', desc: 'Крупнейшая серия монет США — 5 унций серебра с изображением 56 национальных парков. Диаметр 76,2 мм. 56 различных дизайнов.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/American_Silver_Eagle_monster_box_from_United_States_Mint.png/300px-American_Silver_Eagle_monster_box_from_United_States_Mint.png', emoji: '🏛️' },
-                { title: 'Peace Dollar 2021', type: 'Монета', weight: '26,73 г', year: '2021', purity: 'Серебро 999', desc: 'Возвращение символа мира — Peace Dollar из серебра .999. Версия 2021 года возрождает классический дизайн 1921 года к 100-летнему юбилею, ограниченный тираж.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🕊️' },
-                { title: 'Monster Box Silver Eagle', type: 'Ящик', weight: '500 унций', year: 'Текущий', purity: 'Серебро 999', desc: 'Официальный «Monster Box» — 25 тюбиков по 20 монет Silver Eagle. Стандарт оптовых закупок серебра. Официальная упаковка Монетного двора США.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/American_Silver_Eagle_monster_box_from_United_States_Mint.png/300px-American_Silver_Eagle_monster_box_from_United_States_Mint.png', emoji: '📦' }
+                { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986–', purity: 'Серебро 999', desc: 'American Silver Eagle — самая популярная инвестиционная монета в Северной Америке. Выпуск с 1986 года в золоте и серебре. Имеет статус законного платёжного средства США с номиналом $1. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true }
             ]
         }
     },
@@ -1590,12 +1464,6 @@ const MINT_DATA = {
                 { title: 'חדשנות וסדרות מיוחדות', text: 'בית המטבע הקנדי חלוץ טכנולוגי — הוא הנפיק את מטבע ה-"25 קילוגרם" הגדול בעולם (2007), ומטבעות עם הולוגרמה. סדרות "Call of the Wild", "Predator Series" ו-"Birds of Prey" הפכו לפנומן אספנות עולמי. הקנדים ייצרו גם מטבעות עם רובידיום — יסוד נדיר, בפעם הראשונה בהיסטוריית המטבעות.' }
             ],
             products: [
-                { title: 'Silver Maple Leaf 1oz', type: 'מטבע', weight: '1 אונקיה', year: '2024', purity: 'כסף 9999', desc: 'הנמכר ביותר בקנדה — כסף טהור 9999 עם עיצוב עלה מייפל. הילך חוקי $5 קנדי. תכונת אבטחה ייחודית נגד זיוף מ-2015.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/1-ounce_Silver_Canadian_Maple_Leaf_MADE_OF_.9999%25_PURE_SILVER.jpg/300px-1-ounce_Silver_Canadian_Maple_Leaf_MADE_OF_.9999%25_PURE_SILVER.jpg', emoji: '🍁' },
-                { title: 'Maple Leaf צינורות השקעה', type: 'צינור', weight: '25 אונקיות', year: 'שוטף', purity: 'כסף 9999', desc: 'צינורות 25 מטבעות Maple Leaf — האריזה הסטנדרטית להשקעה. אריזה מקורית של בית המטבע. כסף ישיר מהמפעל.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Canadian_Silver_Maple_Leaf_coins_and_tubes.png/300px-Canadian_Silver_Maple_Leaf_coins_and_tubes.png', emoji: '🍁' },
-                { title: 'Canadian Silver Portfolio', type: 'אוסף', weight: 'מגוון', year: 'שוטף', purity: 'כסף 9999', desc: 'אוסף מטבעות כסף קנדיים כולל Maple Leaf, Wildlife Series ועוד. מגוון גדלים ועיצובים מבית המטבע הקנדי.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Canadian_Silver_%2883655181%29.jpeg/300px-Canadian_Silver_%2883655181%29.jpeg', emoji: '🇨🇦' },
-                { title: 'Call of the Wild — Howling Wolf', type: 'מטבע', weight: '1 אונקיה', year: '2014', purity: 'כסף 9999', desc: 'הראשון בסדרת "Call of the Wild" — זאב יוליל בעיצוב דרמטי. מהדורה מוגבלת. הסדרה כללה: זאב, בז, מוסה, אריה ים, פומה ועוד.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🐺' },
-                { title: 'Predator Series — Cougar', type: 'מטבע', weight: '1 אונקיה', year: '2012', purity: 'כסף 9999', desc: 'פומה קנדית מסדרת "Predator" — אחת הפופולריות שייצר בית המטבע הקנדי. עיצוב חי ומרשים של טורף המדבריות.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🐆' },
-                { title: 'Maple Leaf 1kg Silver Bar', type: 'מטיל', weight: '1 ק"ג', year: 'שוטף', purity: 'כסף 9999', desc: 'מטיל כסף קנדי 1 ק"ג עם לוגו עלה המייפל ומספר סידורי. אחד המטילים המוכרים ביותר בשוק ההשקעות הקנדי.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' }
             ]
         },
         en: {
@@ -1610,12 +1478,6 @@ const MINT_DATA = {
                 { title: 'Innovation & Special Series', text: 'The Royal Canadian Mint is a technology pioneer — it issued the world\'s largest coin (25kg, 2007) and holographic coins. The "Call of the Wild," "Predator Series," and "Birds of Prey" series became global collecting phenomena. Canada also produced coins incorporating rubidium — a rare element — for the first time in coin history.' }
             ],
             products: [
-                { title: 'Silver Maple Leaf 1oz', type: 'Coin', weight: '1 oz', year: '2024', purity: '9999 Silver', desc: 'Canada\'s best-seller — .9999 pure silver with iconic maple leaf design. Legal tender C$5. Unique anti-counterfeiting radial lines feature added since 2015.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/1-ounce_Silver_Canadian_Maple_Leaf_MADE_OF_.9999%25_PURE_SILVER.jpg/300px-1-ounce_Silver_Canadian_Maple_Leaf_MADE_OF_.9999%25_PURE_SILVER.jpg', emoji: '🍁' },
-                { title: 'Maple Leaf Investment Tubes', type: 'Tube', weight: '25 oz', year: 'Current', purity: '9999 Silver', desc: 'Tubes of 25 Maple Leaf coins — the standard bullion investment format. Original mint packaging. Direct from the mint factory.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Canadian_Silver_Maple_Leaf_coins_and_tubes.png/300px-Canadian_Silver_Maple_Leaf_coins_and_tubes.png', emoji: '🍁' },
-                { title: 'Canadian Silver Portfolio', type: 'Collection', weight: 'Various', year: 'Current', purity: '9999 Silver', desc: 'Collection of Canadian silver coins including Maple Leaf, Wildlife Series and more. Various sizes and designs from the Royal Canadian Mint.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Canadian_Silver_%2883655181%29.jpeg/300px-Canadian_Silver_%2883655181%29.jpeg', emoji: '🇨🇦' },
-                { title: 'Call of the Wild — Howling Wolf', type: 'Coin', weight: '1 oz', year: '2014', purity: '9999 Silver', desc: 'First in the "Call of the Wild" series — a howling wolf in dramatic design. Limited mintage. The series featured wolf, falcon, moose, sea lion, cougar and more.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🐺' },
-                { title: 'Predator Series — Cougar', type: 'Coin', weight: '1 oz', year: '2012', purity: '9999 Silver', desc: 'Canadian cougar from the "Predator" series — one of the most popular series from the Royal Canadian Mint. Vivid and impressive design of this wilderness predator.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🐆' },
-                { title: 'Maple Leaf 1kg Silver Bar', type: 'Bar', weight: '1 kg', year: 'Current', purity: '9999 Silver', desc: 'Canadian 1kg silver bar with maple leaf logo and serial number. One of the most recognised bars in the Canadian investment market.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' }
             ]
         },
         ru: {
@@ -1630,12 +1492,6 @@ const MINT_DATA = {
                 { title: 'Инновации и специальные серии', text: 'Королевский монетный двор Канады — технологический пионер. Он выпустил крупнейшую монету в мире (25 кг, 2007) и голографические монеты. Серии «Call of the Wild», «Predator Series» и «Birds of Prey» стали мировыми коллекционными феноменами. Канада также выпустила монеты с рубидием — редким элементом — впервые в истории монетного дела.' }
             ],
             products: [
-                { title: 'Silver Maple Leaf 1 oz', type: 'Монета', weight: '1 унция', year: '2024', purity: 'Серебро 9999', desc: 'Самая продаваемая монета Канады — серебро .9999 с иконическим дизайном кленового листа. Номинал C$5. Уникальная защита от подделок с радиальными линиями с 2015 года.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/1-ounce_Silver_Canadian_Maple_Leaf_MADE_OF_.9999%25_PURE_SILVER.jpg/300px-1-ounce_Silver_Canadian_Maple_Leaf_MADE_OF_.9999%25_PURE_SILVER.jpg', emoji: '🍁' },
-                { title: 'Тюбики Maple Leaf', type: 'Тюбик', weight: '25 унций', year: 'Текущий', purity: 'Серебро 9999', desc: 'Тюбики по 25 монет Maple Leaf — стандарт инвестиционных закупок. Оригинальная упаковка монетного двора. Серебро напрямую с завода.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Canadian_Silver_Maple_Leaf_coins_and_tubes.png/300px-Canadian_Silver_Maple_Leaf_coins_and_tubes.png', emoji: '🍁' },
-                { title: 'Канадское серебро', type: 'Коллекция', weight: 'Разный', year: 'Текущий', purity: 'Серебро 9999', desc: 'Коллекция канадских серебряных монет: Maple Leaf, Wildlife Series и другие. Различные размеры и дизайны Королевского монетного двора Канады.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Canadian_Silver_%2883655181%29.jpeg/300px-Canadian_Silver_%2883655181%29.jpeg', emoji: '🇨🇦' },
-                { title: 'Call of the Wild — Воющий волк', type: 'Монета', weight: '1 унция', year: '2014', purity: 'Серебро 9999', desc: 'Первая монета серии «Зов природы» — воющий волк в драматическом дизайне. Ограниченный тираж. Серия: волк, сокол, лось, морской лев, пума и другие.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🐺' },
-                { title: 'Predator Series — Кугуар', type: 'Монета', weight: '1 унция', year: '2012', purity: 'Серебро 9999', desc: 'Канадский кугуар из серии «Хищники» — одна из самых популярных серий Королевского монетного двора Канады. Яркий и впечатляющий дизайн дикого хищника.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🐆' },
-                { title: 'Серебряный слиток Maple Leaf 1 кг', type: 'Слиток', weight: '1 кг', year: 'Текущий', purity: 'Серебро 9999', desc: 'Канадский серебряный слиток 1 кг с логотипом кленового листа и серийным номером. Один из самых узнаваемых слитков на канадском инвестиционном рынке.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' }
             ]
         }
     },
@@ -1657,12 +1513,6 @@ const MINT_DATA = {
                 { title: 'טוהר ואמינות', text: 'Perth Mint ידוע בייצור מטבעות עם טוהר 9999 ו-99999 (Five Nines — 99.999%). הוא מציע שירות "סוכנות" ייחודי המאפשר למשקיעים לרכוש ולאחסן כסף בכספת פרת\' עצמה. בית המטבע גם מציע מוצרי כסף עם ציפוי זהב (gilded) ועם צבע. הוא גם מייצר מטבעות עבור ממשלות אחרות.' }
             ],
             products: [
-                { title: 'Silver Kangaroo 2020', type: 'מטבע', weight: '1 אונקיה', year: '2020', purity: 'כסף 9999', desc: 'קנגרו אוסטרלי — מטבע ההשקעה הרשמי של אוסטרליה. כסף 9999. עיצוב מרהיב של קנגרו בתנועה. פופולרי ביותר עם משקיעי כסף ברחבי העולם.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Obverse_2020_Australia_1_oz_Silver_Kangaroo.jpg/300px-Obverse_2020_Australia_1_oz_Silver_Kangaroo.jpg', emoji: '🦘' },
-                { title: 'Silver Kookaburra 2oz Proof', type: 'מטבע', weight: '2 אונקיות', year: 'שנתי', purity: 'כסף 9999', desc: 'קוקאברה — ציפור צחקנת אוסטרלית בגרסת Proof מוזהבת. הסדרה הוחלה ב-1990. עיצוב ייחודי מדי שנה. מוגבלת ומבוקשת.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Obverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg/300px-Obverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg', emoji: '🦅' },
-                { title: 'Kookaburra Reverse Proof', type: 'מטבע', weight: '2 אונקיות', year: 'שנתי', purity: 'כסף 9999', desc: 'גב מטבע הקוקאברה — עיצוב המשלים את ה-Obverse. גמר Reverse Proof מיוחד עם ניגוד עמוק בין פני המטבע המבוקים.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Reverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg/300px-Reverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg', emoji: '🦅' },
-                { title: 'Silver Swan 2022', type: 'מטבע', weight: '1 אונקיה', year: '2022', purity: 'כסף 9999', desc: 'ברבור אוסטרלי (Black Swan) — אחת הסדרות הנדירות מפרת\'. מהדורה מוגבלת בסדרה שנתית. ברבור שחור על רקע כסף.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Obverse_2022_Australia_1_oz_Silver_Swan_Perth_Mint.jpg/300px-Obverse_2022_Australia_1_oz_Silver_Swan_Perth_Mint.jpg', emoji: '🦢' },
-                { title: 'Lunar Series III — Dragon 2024', type: 'מטבע', weight: '1 אונקיה', year: '2024', purity: 'כסף 9999', desc: 'דרקון לוח שנה סיני 2024 מסדרת Lunar III. הפופולרי ביותר בסדרה שנתית. מייצר סקרנות עצומה גם בקרב אספנים אסייתים ומשקיעים.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🐉' },
-                { title: 'Perth Mint 1kg Silver Bar', type: 'מטיל', weight: '1 ק"ג', year: 'שוטף', purity: 'כסף 9999', desc: 'מטיל כסף 1 ק"ג של פרת\' — גמר מבריק ועם הולוגרמת אבטחה. אחד המטילים המאומתים ביותר בשוק האוסטרלי. כולל תעודת אמיתות.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' }
             ]
         },
         en: {
@@ -1677,12 +1527,6 @@ const MINT_DATA = {
                 { title: 'Purity & Reliability', text: 'Perth Mint is renowned for coins of .9999 and .99999 purity (Five Nines — 99.999%). It offers a unique "Certificate" storage service allowing investors to buy and store silver in Perth\'s own vault. The mint also offers gold-plated (gilded) and coloured silver products. It also strikes coins for other governments worldwide.' }
             ],
             products: [
-                { title: 'Silver Kangaroo 2020', type: 'Coin', weight: '1 oz', year: '2020', purity: '9999 Silver', desc: 'Australian Kangaroo — Australia\'s official investment coin. .9999 fine silver. Stunning design of a kangaroo in motion. Very popular among silver investors worldwide.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Obverse_2020_Australia_1_oz_Silver_Kangaroo.jpg/300px-Obverse_2020_Australia_1_oz_Silver_Kangaroo.jpg', emoji: '🦘' },
-                { title: 'Silver Kookaburra 2oz Proof', type: 'Coin', weight: '2 oz', year: 'Annual', purity: '9999 Silver', desc: 'Kookaburra — the laughing Australian bird in gilded Proof version. Series started 1990. Unique design each year. Limited and highly sought-after.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Obverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg/300px-Obverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg', emoji: '🦅' },
-                { title: 'Kookaburra Reverse Proof', type: 'Coin', weight: '2 oz', year: 'Annual', purity: '9999 Silver', desc: 'The Kookaburra reverse side — design complementing the obverse. Special Reverse Proof finish with deep contrast between frosted coin surfaces.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Reverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg/300px-Reverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg', emoji: '🦅' },
-                { title: 'Silver Swan 2022', type: 'Coin', weight: '1 oz', year: '2022', purity: '9999 Silver', desc: 'Australian Black Swan — one of Perth\'s rarest series. Limited mintage annual series. Black swan on silver background.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Obverse_2022_Australia_1_oz_Silver_Swan_Perth_Mint.jpg/300px-Obverse_2022_Australia_1_oz_Silver_Swan_Perth_Mint.jpg', emoji: '🦢' },
-                { title: 'Lunar Series III — Dragon 2024', type: 'Coin', weight: '1 oz', year: '2024', purity: '9999 Silver', desc: 'Chinese zodiac Dragon 2024 from the Lunar Series III. Most popular in the annual series. Generates enormous interest among Asian collectors and investors alike.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🐉' },
-                { title: 'Perth Mint 1kg Silver Bar', type: 'Bar', weight: '1 kg', year: 'Current', purity: '9999 Silver', desc: 'Perth Mint 1kg silver bar — mirror finish with security hologram. One of the most trusted bars in the Australian market. Certificate of authenticity included.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' }
             ]
         },
         ru: {
@@ -1697,12 +1541,6 @@ const MINT_DATA = {
                 { title: 'Чистота и надёжность', text: 'Монетный двор Перта известен монетами с пробой .9999 и .99999 (Five Nines — 99,999%). Он предлагает уникальный сервис хранения, позволяющий инвесторам покупать и хранить серебро в собственном хранилище Перта. Двор также выпускает позолоченные и цветные серебряные изделия и чеканит монеты для правительств других стран.' }
             ],
             products: [
-                { title: 'Silver Kangaroo 2020', type: 'Монета', weight: '1 унция', year: '2020', purity: 'Серебро 9999', desc: 'Австралийский кенгуру — официальная инвестиционная монета Австралии. Серебро .9999. Великолепный дизайн кенгуру в движении. Очень популярна среди инвесторов по всему миру.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Obverse_2020_Australia_1_oz_Silver_Kangaroo.jpg/300px-Obverse_2020_Australia_1_oz_Silver_Kangaroo.jpg', emoji: '🦘' },
-                { title: 'Silver Kookaburra 2 oz Proof', type: 'Монета', weight: '2 унции', year: 'Ежегодно', purity: 'Серебро 9999', desc: 'Кукабарра — смеющаяся австралийская птица в позолоченной версии Proof. Серия с 1990 года. Уникальный дизайн каждый год. Ограниченный тираж.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Obverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg/300px-Obverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg', emoji: '🦅' },
-                { title: 'Kookaburra Reverse Proof', type: 'Монета', weight: '2 унции', year: 'Ежегодно', purity: 'Серебро 9999', desc: 'Реверс монеты Кукабарра — дизайн, дополняющий аверс. Специальный финиш Reverse Proof с глубоким контрастом матовых поверхностей.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Reverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg/300px-Reverse_of_two_ounce_Kookaburra_proof_coin_from_the_Perth_mint.jpg', emoji: '🦅' },
-                { title: 'Silver Swan 2022', type: 'Монета', weight: '1 унция', year: '2022', purity: 'Серебро 9999', desc: 'Австралийский чёрный лебедь — одна из редчайших серий Перта. Ограниченный ежегодный тираж. Чёрный лебедь на серебряном фоне.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Obverse_2022_Australia_1_oz_Silver_Swan_Perth_Mint.jpg/300px-Obverse_2022_Australia_1_oz_Silver_Swan_Perth_Mint.jpg', emoji: '🦢' },
-                { title: 'Lunar Series III — Дракон 2024', type: 'Монета', weight: '1 унция', year: '2024', purity: 'Серебро 9999', desc: 'Дракон китайского зодиака 2024 из серии Lunar III. Самая популярная в ежегодной серии. Огромный интерес среди азиатских коллекционеров и инвесторов.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🐉' },
-                { title: 'Серебряный слиток Perth Mint 1 кг', type: 'Слиток', weight: '1 кг', year: 'Текущий', purity: 'Серебро 9999', desc: 'Серебряный слиток 1 кг от монетного двора Перта — зеркальная полировка с голографической защитой. Один из наиболее надёжных слитков на австралийском рынке. Прилагается сертификат.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' }
             ]
         }
     },
@@ -1724,12 +1562,6 @@ const MINT_DATA = {
                 { title: 'הנבה ומדלי', text: 'מעבר ל-Philharmoniker, בית המטבע הווינאי מנפיק את Vienna Mint Collection — כולל מטבעות כסף נדירים עם עיצובים של אמני וינה. מטבע ה-100 יורו זהב הוא אחד הגדולים שהנפיק. בית המטבע גם ידוע בייצור מדלי כסף ועיטורים מדינתיים למדינות אחרות. הוא שיתף פעולה עם אמנים עולמיים לסדרות מוגבלות.' }
             ],
             products: [
-                { title: 'Wiener Philharmoniker Obverse', type: 'מטבע', weight: '1 אונקיה', year: '2024', purity: 'כסף 999', desc: 'פני המטבע — כלי התזמורת: כינור, צ\'לו, חצוצרה, ועוד. עיצוב קלאסי שלא השתנה מאז 1989. הילך חוקי 1.5 יורו. ראי ביסוד האסתטי האוסטרי.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png', emoji: '🎻' },
-                { title: 'Wiener Philharmoniker Reverse', type: 'מטבע', weight: '1 אונקיה', year: '2024', purity: 'כסף 999', desc: 'גב המטבע — עיצוב האורגן הגדול של "ויינר מוזיקפריין". שני צדי המטבע מהווים יצירת אמנות שלמה. קונקרט ויזואלי בכסף.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png', emoji: '🎵' },
-                { title: 'Vienna Silver Coins Collection', type: 'אוסף', weight: 'מגוון', year: 'שוטף', purity: 'כסף 999', desc: 'אוסף מטבעות כסף ווינאיים — מגוון שנים, גדלים ועיצובים. מציג את עושר הסדרה מ-1989 עד היום.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Silvercoins.jpg/300px-Silvercoins.jpg', emoji: '🎼' },
-                { title: 'Philharmoniker ¼ oz', type: 'מטבע', weight: '¼ אונקיה', year: 'שוטף', purity: 'כסף 999', desc: 'גרסת ¼ אונקיה — פתרון השקעה קטן ונגיש יותר. אותו עיצוב קלאסי במחיר נמוך יותר. מועדף על מתחילים ועל מי שרוצה לפזר קניות.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png', emoji: '🎻' },
-                { title: 'Philharmoniker 10oz', type: 'מטבע', weight: '10 אונקיות', year: 'שוטף', purity: 'כסף 999', desc: 'גרסת 10 אונקיות — מהגדולות בסדרת Philharmoniker. אסתטית ומשמעותית כפריט השקעה. ייצור מוגבל ועלות פרמיום.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png', emoji: '🥈' },
-                { title: 'Vienna Mint Collection Box', type: 'סט', weight: 'מגוון', year: '2023', purity: 'כסף 999', desc: 'קופסת אוסף Vienna Mint — כמה מטבעות Philharmoniker מסנות שונות, ובאריזת מתנה מפוארת. מהדורה מוגבלת לשנת 2023.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Silvercoins.jpg/300px-Silvercoins.jpg', emoji: '🎁' }
             ]
         },
         en: {
@@ -1744,12 +1576,6 @@ const MINT_DATA = {
                 { title: 'Innovation & Medals', text: 'Beyond the Philharmoniker, the Austrian Mint issues the Vienna Mint Collection — including rare silver coins with designs by Viennese artists. Its 100 Euro gold coin is one of the largest ever issued. The mint also produces silver medals and state decorations for other countries, and has collaborated with international artists for limited series.' }
             ],
             products: [
-                { title: 'Wiener Philharmoniker Obverse', type: 'Coin', weight: '1 oz', year: '2024', purity: '999 Silver', desc: 'Coin obverse — orchestra instruments: violin, cello, trumpet and more. Classic design unchanged since 1989. Legal tender €1.50. A visual foundation of Austrian aesthetics.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png', emoji: '🎻' },
-                { title: 'Wiener Philharmoniker Reverse', type: 'Coin', weight: '1 oz', year: '2024', purity: '999 Silver', desc: 'Coin reverse — the great organ of the Wiener Musikverein. Both sides form a complete artwork. A visual concert in silver.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png', emoji: '🎵' },
-                { title: 'Vienna Silver Coins Collection', type: 'Collection', weight: 'Various', year: 'Current', purity: '999 Silver', desc: 'Vienna silver coins collection — various years, sizes and designs. Showcasing the richness of the series from 1989 to today.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Silvercoins.jpg/300px-Silvercoins.jpg', emoji: '🎼' },
-                { title: 'Philharmoniker ¼ oz', type: 'Coin', weight: '¼ oz', year: 'Current', purity: '999 Silver', desc: 'Quarter-ounce version — a more accessible, smaller investment option. Same classic design at a lower price point. Popular with beginners and those building a dollar-cost average strategy.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png', emoji: '🎻' },
-                { title: 'Philharmoniker 10oz', type: 'Coin', weight: '10 oz', year: 'Current', purity: '999 Silver', desc: 'Ten-ounce version — one of the largest in the Philharmoniker series. Aesthetically striking and significant as an investment piece. Limited production and premium price.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png', emoji: '🥈' },
-                { title: 'Vienna Mint Collection Box', type: 'Set', weight: 'Various', year: '2023', purity: '999 Silver', desc: 'Vienna Mint collection box — several Philharmoniker coins from different years in luxurious gift packaging. Limited 2023 edition.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Silvercoins.jpg/300px-Silvercoins.jpg', emoji: '🎁' }
             ]
         },
         ru: {
@@ -1764,12 +1590,6 @@ const MINT_DATA = {
                 { title: 'Инновации и медали', text: 'Помимо Philharmoniker, Австрийский монетный двор выпускает Vienna Mint Collection — редкие серебряные монеты с дизайном венских художников. Его золотая монета номиналом 100 евро — одна из крупнейших когда-либо выпускавшихся. Двор также производит серебряные медали и государственные награды для других стран.' }
             ],
             products: [
-                { title: 'Wiener Philharmoniker Аверс', type: 'Монета', weight: '1 унция', year: '2024', purity: 'Серебро 999', desc: 'Аверс монеты — инструменты оркестра: скрипка, виолончель, труба и другие. Классический дизайн, не менявшийся с 1989 года. Номинал €1,50.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png', emoji: '🎻' },
-                { title: 'Wiener Philharmoniker Реверс', type: 'Монета', weight: '1 унция', year: '2024', purity: 'Серебро 999', desc: 'Реверс монеты — великий орган Wiener Musikverein. Обе стороны образуют единое произведение искусства. Визуальный концерт в серебре.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png', emoji: '🎵' },
-                { title: 'Коллекция венских монет', type: 'Коллекция', weight: 'Разный', year: 'Текущий', purity: 'Серебро 999', desc: 'Коллекция венских серебряных монет — различные годы, размеры и дизайны. Демонстрирует богатство серии с 1989 года по сегодняшний день.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Silvercoins.jpg/300px-Silvercoins.jpg', emoji: '🎼' },
-                { title: 'Philharmoniker ¼ унции', type: 'Монета', weight: '¼ унции', year: 'Текущий', purity: 'Серебро 999', desc: 'Четвертьунцевая версия — более доступный вариант инвестиции. Тот же классический дизайн по более низкой цене. Популярна среди начинающих и приверженцев усреднения стоимости.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Obverse.png', emoji: '🎻' },
-                { title: 'Philharmoniker 10 унций', type: 'Монета', weight: '10 унций', year: 'Текущий', purity: 'Серебро 999', desc: 'Десятиунцевая версия — одна из крупнейших в серии Philharmoniker. Эстетически выразительна и значима как инвестиционный объект. Ограниченное производство.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png/300px-Austria_2009_Silver_Philharmonic_%E2%80%93_Reverse.png', emoji: '🥈' },
-                { title: 'Коробка Vienna Mint Collection', type: 'Набор', weight: 'Разный', year: '2023', purity: 'Серебро 999', desc: 'Подарочная коробка Vienna Mint — несколько монет Philharmoniker разных лет в роскошной упаковке. Лимитированный выпуск 2023 года.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Silvercoins.jpg/300px-Silvercoins.jpg', emoji: '🎁' }
             ]
         }
     },
@@ -1791,12 +1611,6 @@ const MINT_DATA = {
                 { title: 'מורשת אמנותית ועושר', text: 'מקסיקו הייתה בעל מכרות הכסף הגדולים בעולם — מכרות גואנחוואטו וסאקאטקאס סיפקו לאורך מאות שנים חלק ניכר מהכסף הגלובלי. Libertad נחשב לאחד המטבעות עם העיצוב הנחשב ביותר בשוק העולמי. המינט מייצר גם מטבעות זיכרון עם עיצובים פרה-קולומביאניים — אצטקים, מאיה ועוד.' }
             ],
             products: [
-                { title: 'Libertad 1oz — Winged Victory', type: 'מטבע', weight: '1 אונקיה', year: '2024', purity: 'כסף 999', desc: 'מטבע ה-Libertad הסטנדרטי 1 אונקיה — "הניצחון המכונף" עם הרים הרקע. עיצוב המוכר כיפה ביותר של כסף ההשקעה. גרסאות Proof ו-BU.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Venta_de_Onza_de_Plata_Libertad_en_ventanilla_bancaria.png/300px-Venta_de_Onza_de_Plata_Libertad_en_ventanilla_bancaria.png', emoji: '🏆' },
-                { title: 'Libertad 5oz', type: 'מטבע', weight: '5 אונקיות', year: 'שוטף', purity: 'כסף 999', desc: 'גרסת 5 אונקיות — Libertad גדולה ומרשימה. פריט אספנות נדיר ויקר ערך. עיצוב זהה לגרסת 1 אונקיה אך בפרמיום גבוה יותר.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'Libertad ¼ oz', type: 'מטבע', weight: '¼ אונקיה', year: 'שוטף', purity: 'כסף 999', desc: 'גרסת ¼ אונקיה — כניסה קטנה יותר לעולם ה-Libertad. פופולרי כמתנה ולאיסוף. הגרסה הקטנה ביותר מתוך 5 גדלים רשמיים.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🪙' },
-                { title: 'Aztec Calendar Silver Coin', type: 'מטבע', weight: '1 אונקיה', year: '2023', purity: 'כסף 999', desc: 'מטבע זיכרון עם לוח השנה האצטקי המפורסם — "אבן השמש" האצטקית. מסדרת מורשת פרה-קולומביאנית.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '☀️' },
-                { title: 'Maya Tzolkin Silver Medal', type: 'מדלייה', weight: '1 אונקיה', year: '2022', purity: 'כסף 999', desc: 'מדלית כסף עם לוח השנה המאיאני Tzolkin — מורשת התרבות המאיאנית. מסדרת "Culturas Prehispánicas" של בית המטבע.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🗿' },
-                { title: 'Mexican Silver Plata Pura Bar', type: 'מטיל', weight: '100 גרם', year: 'שוטף', purity: 'כסף 999', desc: 'מטיל כסף מקסיקני עם חותמת "Plata Pura" — כסף טהור. עם לוגו Casa de Moneda ומספר סידורי. ייצור ממלכתי ייעודי להשקעה.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' }
             ]
         },
         en: {
@@ -1811,12 +1625,6 @@ const MINT_DATA = {
                 { title: 'Artistic Heritage & Wealth', text: 'Mexico was home to the world\'s largest silver mines — the Guanajuato and Zacatecas mines supplied a significant portion of global silver for centuries. The Libertad is considered one of the most beautifully designed coins in the world market. The mint also produces commemorative coins with Pre-Columbian designs — Aztec, Maya and more.' }
             ],
             products: [
-                { title: 'Libertad 1oz — Winged Victory', type: 'Coin', weight: '1 oz', year: '2024', purity: '999 Silver', desc: 'The standard 1oz Libertad coin — "Winged Victory" with mountain backdrop. Design widely regarded as the most beautiful in investment silver. Available in Proof and BU finishes.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Venta_de_Onza_de_Plata_Libertad_en_ventanilla_bancaria.png/300px-Venta_de_Onza_de_Plata_Libertad_en_ventanilla_bancaria.png', emoji: '🏆' },
-                { title: 'Libertad 5oz', type: 'Coin', weight: '5 oz', year: 'Current', purity: '999 Silver', desc: '5-ounce version — a large and impressive Libertad. A rare and highly valued collectible. Same design as the 1oz but commands a higher premium.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'Libertad ¼ oz', type: 'Coin', weight: '¼ oz', year: 'Current', purity: '999 Silver', desc: 'Quarter-ounce version — a smaller entry point into the Libertad world. Popular as a gift and for collecting. The smallest of 5 official sizes.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🪙' },
-                { title: 'Aztec Calendar Silver Coin', type: 'Coin', weight: '1 oz', year: '2023', purity: '999 Silver', desc: 'Commemorative coin featuring the famous Aztec calendar — the "Aztec Sun Stone." From the Pre-Columbian heritage series.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '☀️' },
-                { title: 'Maya Tzolkin Silver Medal', type: 'Medal', weight: '1 oz', year: '2022', purity: '999 Silver', desc: 'Silver medal featuring the Maya Tzolkin calendar — Mayan cultural heritage. From the "Culturas Prehispánicas" series of the mint.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🗿' },
-                { title: 'Mexican Plata Pura Silver Bar', type: 'Bar', weight: '100g', year: 'Current', purity: '999 Silver', desc: 'Mexican silver bar stamped "Plata Pura" — pure silver. With Casa de Moneda logo and serial number. State production specifically for investment purposes.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' }
             ]
         },
         ru: {
@@ -1831,12 +1639,6 @@ const MINT_DATA = {
                 { title: 'Художественное наследие и богатство', text: 'Мексика была родиной крупнейших серебряных рудников мира — шахты Гуанахуато и Сакатекас веками снабжали значительную часть мирового серебра. Libertad считается одной из красивейших монет на мировом рынке. Монетный двор также выпускает памятные монеты с доколумбийскими дизайнами — ацтекскими, майя и другими.' }
             ],
             products: [
-                { title: 'Libertad 1 унция — Крылатая победа', type: 'Монета', weight: '1 унция', year: '2024', purity: 'Серебро 999', desc: 'Стандартная монета Libertad 1 унция — «Крылатая победа» на фоне гор. Дизайн, широко признанный красивейшим в инвестиционном серебре. Доступна в вариантах Proof и BU.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Venta_de_Onza_de_Plata_Libertad_en_ventanilla_bancaria.png/300px-Venta_de_Onza_de_Plata_Libertad_en_ventanilla_bancaria.png', emoji: '🏆' },
-                { title: 'Libertad 5 унций', type: 'Монета', weight: '5 унций', year: 'Текущий', purity: 'Серебро 999', desc: 'Пятиунцевая версия — крупная и впечатляющая Libertad. Редкий и высокоценный предмет коллекционирования. Тот же дизайн, что у 1-унцевой, но с более высокой надбавкой.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' },
-                { title: 'Libertad ¼ унции', type: 'Монета', weight: '¼ унции', year: 'Текущий', purity: 'Серебро 999', desc: 'Четвертьунцевая версия — меньший вход в мир Libertad. Популярна как подарок и для коллекционирования. Наименьший из 5 официальных размеров.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🪙' },
-                { title: 'Серебряная монета Aztec Calendar', type: 'Монета', weight: '1 унция', year: '2023', purity: 'Серебро 999', desc: 'Памятная монета с известным ацтекским календарём — «Камнем Солнца». Из серии доколумбийского наследия.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '☀️' },
-                { title: 'Серебряная медаль Maya Tzolkin', type: 'Медаль', weight: '1 унция', year: '2022', purity: 'Серебро 999', desc: 'Серебряная медаль с календарём майя Цолькин — наследие культуры майя. Из серии «Culturas Prehispánicas» монетного двора.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🗿' },
-                { title: 'Мексиканский слиток Plata Pura', type: 'Слиток', weight: '100 г', year: 'Текущий', purity: 'Серебро 999', desc: 'Мексиканский серебряный слиток со штампом «Plata Pura» — чистое серебро. С логотипом Casa de Moneda и серийным номером. Государственное производство для инвестиций.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🥈' }
             ]
         }
     }
@@ -1956,10 +1758,12 @@ function renderMintDetail(mintId, lang) {
         </section>
         ` : ''}
 
+        ${d.products.length ? `
         <section class="mint-section">
             <h3 class="mint-section-title">${L.products}</h3>
             <div class="mint-products-grid">${productsHtml}</div>
         </section>
+        ` : ''}
 
         <a class="mint-website-link" href="https://${escapeHtml(d.website)}" target="_blank" rel="noopener">
             🌐 ${L.more}: ${escapeHtml(d.website)}
