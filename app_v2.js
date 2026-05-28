@@ -1845,11 +1845,22 @@ function renderMintDetail(mintId, lang) {
         </div>
     `).join('');
 
+    // Records / highlights HTML
+    const recordsHtml = (d.records || []).map(r => `
+        <div class="mint-record-item">
+            <span class="mint-record-icon" aria-hidden="true">🏆</span>
+            <div class="mint-record-body">
+                <h4>${escapeHtml(r.title)}</h4>
+                <p>${escapeHtml(r.text)}</p>
+            </div>
+        </div>
+    `).join('');
+
     // Products section label by lang
     const labels = {
-        he: { history: '📖 היסטוריה', products: '🪙 מוצרי כסף', purity: 'טוהר', more: 'אתר רשמי' },
-        en: { history: '📖 History', products: '🪙 Silver Products', purity: 'Purity', more: 'Official Website' },
-        ru: { history: '📖 История', products: '🪙 Серебряные изделия', purity: 'Проба', more: 'Официальный сайт' }
+        he: { history: '📖 היסטוריה', records: '🏆 שיאים ועובדות', products: '🪙 מוצרי כסף', purity: 'טוהר', more: 'אתר רשמי' },
+        en: { history: '📖 History', records: '🏆 Records & Highlights', products: '🪙 Silver Products', purity: 'Purity', more: 'Official Website' },
+        ru: { history: '📖 История', records: '🏆 Рекорды и факты', products: '🪙 Серебряные изделия', purity: 'Проба', more: 'Официальный сайт' }
     };
     const L = labels[_museumActiveLang] || labels.he;
 
@@ -1880,6 +1891,13 @@ function renderMintDetail(mintId, lang) {
             <h3 class="mint-section-title">${L.history}</h3>
             <div class="mint-history-block">${historyHtml}</div>
         </section>
+
+        ${recordsHtml ? `
+        <section class="mint-section">
+            <h3 class="mint-section-title">${L.records}</h3>
+            <div class="mint-records-block">${recordsHtml}</div>
+        </section>
+        ` : ''}
 
         <section class="mint-section">
             <h3 class="mint-section-title">${L.products}</h3>

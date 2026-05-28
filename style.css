@@ -2765,6 +2765,44 @@ body.dark-mode .mint-website-link { background: var(--card); color: var(--text-l
     margin: 0;
 }
 
+/* Records / highlights */
+.mint-records-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mint-record-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: var(--card-inner);
+    border-radius: var(--radius-md);
+    box-shadow: var(--nm-inset);
+}
+
+.mint-record-icon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.mint-record-body h4 {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--clay-dk);
+    margin: 0 0 4px;
+}
+
+.mint-record-item p {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.65;
+    margin: 0;
+}
+
 /* Products grid */
 .mint-products-grid {
     display: grid;
