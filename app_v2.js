@@ -1107,6 +1107,7 @@ function initQuiz() {
 // ══════════════════════════════════════════════════════════════════════
 
 const DOVE_OF_PEACE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp';
+const DOVE_OF_PEACE_1KG_BAR_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace-1kg-bar.webp';
 
 const MINT_DATA = {
     israel: {
@@ -1143,6 +1144,17 @@ const MINT_DATA = {
                     desc: 'בוליון הכסף הישראלי "יונת השלום" של The Holy Land Mint, המיוצר החל משנת 2014. בחלקו הקדמי: יונה צחורה עם עלה זית במעופה מעל חומות ירושלים העתיקה. בחלקו האחורי: סמל החברה, טוהר המתכת ומשקלה; במטילים גם סימן Melter Assayer ומספר סידורי. זמין כראונד או מטיל. החל מ-2019 גם בזהב טהור 999.9.',
                     img: DOVE_OF_PEACE_IMG,
                     emoji: '🕊️',
+                    transparent: true
+                },
+                {
+                    title: 'מטיל כסף יצוק 1 ק"ג — יונת השלום',
+                    type: 'מטיל',
+                    weight: '1 ק"ג',
+                    year: '2014–',
+                    purity: 'כסף 999',
+                    desc: 'מטיל כסף טהור יצוק במשקל 1 ק"ג מסדרת "יונת השלום" של The Holy Land Mint. על המטיל מוטבעים סמל החברה, יונת השלום, טוהר המתכת (SILVER .999), משקל, סימן ICMC ומספר סידורי. מיוצר החל מ-2014; החל מ-2019 זמין גם בזהב טהור 999.9.',
+                    img: DOVE_OF_PEACE_1KG_BAR_IMG,
+                    emoji: '🥈',
                     transparent: true
                 },
                 {
@@ -1229,6 +1241,7 @@ const MINT_DATA = {
             ],
             products: [
                 { title: 'Dove of Peace Bullion', type: 'Bullion', weight: 'Various weights', year: '2014–', purity: '.999 Silver / .9999 Gold', desc: 'Israeli "Dove of Peace" bullion by The Holy Land Mint, produced since 2014. Obverse: a white dove with an olive branch in flight above the Old City of Jerusalem walls. Reverse: Holy Land Mint logo, metal purity and weight; bars also carry the Melter Assayer mark and serial number. Available as rounds or bars. Gold .9999 versions since 2019.', img: DOVE_OF_PEACE_IMG, emoji: '🕊️', transparent: true },
+                { title: 'Dove of Peace 1 kg Cast Bar', type: 'Bar', weight: '1 kg', year: '2014–', purity: '.999 Silver', desc: 'Cast .999 fine silver bar from the "Dove of Peace" series by The Holy Land Mint. Stamped with the company logo, dove motif, SILVER .999, weight, ICMC mark and serial number. Produced since 2014; gold .9999 versions available since 2019.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: '🥈', transparent: true },
                 { title: 'Independence Day Coin', type: 'Coin', weight: '1 oz', year: 'Annual', purity: '999 Silver', desc: 'Annual series marking Israeli Independence Day, featuring a unique design each year with national symbols.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/1_NIS_coin_%28obverse%2C_2017%29.jpg/300px-1_NIS_coin_%28obverse%2C_2017%29.jpg', emoji: '🪙' },
                 { title: 'Jerusalem Coin', type: 'Coin', weight: '2 oz', year: '2022', purity: '999 Silver', desc: 'Premium coin celebrating 55 years since the reunification of Jerusalem, featuring the Old City walls.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Jerusalem_Old_City_from_Above.jpg/300px-Jerusalem_Old_City_from_Above.jpg', emoji: '🏛️' },
                 { title: 'Menorah Silver Medal', type: 'Medal', weight: '50g', year: '2020', purity: '925 Silver', desc: 'Sterling silver medal featuring the seven-branched Menorah, the national emblem. Limited to 1,000 pieces.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Menora.svg/300px-Menora.svg.png', emoji: '🕎' },
@@ -1259,6 +1272,7 @@ const MINT_DATA = {
             ],
             products: [
                 { title: 'Буллион «Голубь мира»', type: 'Буллион', weight: 'Разные веса', year: '2014–', purity: 'Серебро 999 / Золото 999.9', desc: 'Израильский буллион «Голубь мира» от The Holy Land Mint, выпускается с 2014 года. Аверс: белый голубь с оливковой ветвью над стенами Старого города Иерусалима. Реверс: логотип Holy Land Mint, проба и вес; на слитках также знак Melter Assayer и серийный номер. Доступен в виде монет и слитков. С 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_IMG, emoji: '🕊️', transparent: true },
+                { title: 'Литой слиток 1 кг «Голубь мира»', type: 'Слиток', weight: '1 кг', year: '2014–', purity: 'Серебро 999', desc: 'Литой слиток из серебра 999 пробы весом 1 кг из серии «Голубь мира» от The Holy Land Mint. На слитке: логотип компании, голубь, SILVER .999, вес, знак ICMC и серийный номер. Выпускается с 2014 года; с 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: '🥈', transparent: true },
                 { title: 'Монета Дня независимости', type: 'Монета', weight: '1 унция', year: 'Ежегодно', purity: 'Серебро 999', desc: 'Ежегодная серия ко Дню независимости Израиля с уникальным дизайном каждого года и национальными символами.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/1_NIS_coin_%28obverse%2C_2017%29.jpg/300px-1_NIS_coin_%28obverse%2C_2017%29.jpg', emoji: '🪙' },
                 { title: 'Монета Иерусалима', type: 'Монета', weight: '2 унции', year: '2022', purity: 'Серебро 999', desc: 'Премиальная монета к 55-летию воссоединения Иерусалима с изображением стен Старого города.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Jerusalem_Old_City_from_Above.jpg/300px-Jerusalem_Old_City_from_Above.jpg', emoji: '🏛️' },
                 { title: 'Серебряная медаль Менора', type: 'Медаль', weight: '50 г', year: '2020', purity: 'Серебро 925', desc: 'Медаль из серебра 925 пробы с изображением семисвечника Меноры — национального символа. Тираж 1 000 штук.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Menora.svg/300px-Menora.svg.png', emoji: '🕎' },
