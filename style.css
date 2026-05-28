@@ -2827,12 +2827,12 @@ body.dark-mode .mint-website-link { background: var(--card); color: var(--text-l
     width: 100%;
     aspect-ratio: 1 / 1;
     background: var(--card-inner);
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 18px;
+    padding: 26px 16px 14px;
     box-sizing: border-box;
 }
 
@@ -2841,13 +2841,14 @@ body.dark-mode .mint-website-link { background: var(--card); color: var(--text-l
 }
 
 .mint-product-img {
-    width: 72%;
-    height: 72%;
     max-width: 72%;
     max-height: 72%;
+    width: auto;
+    height: auto;
     object-fit: contain;
     object-position: center;
     display: block;
+    flex-shrink: 0;
 }
 
 .mint-product-card:hover .mint-product-img { transform: none; }
