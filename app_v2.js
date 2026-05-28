@@ -1111,6 +1111,19 @@ const DOVE_OF_PEACE_1KG_BAR_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/stor
 const SILVER_GRAINS_300G_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp?v=2';
 const AMERICAN_SILVER_EAGLE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2';
 
+const MUSEUM_UPLOADED_MINTS = new Set(['israel', 'usa']);
+const MUSEUM_UPLOADED_IMG_HOST = 'uftkmytmegszggtsrrhz.supabase.co';
+
+function getUploadedMintProducts(products) {
+    return (products || []).filter(p => p?.img && p.img.includes(MUSEUM_UPLOADED_IMG_HOST));
+}
+
+function mintHasUploadedProducts(mintId) {
+    const mint = MINT_DATA[mintId];
+    if (!mint) return false;
+    return ['he', 'en', 'ru'].some(lang => getUploadedMintProducts(mint[lang]?.products).length > 0);
+}
+
 const MINT_DATA = {
     israel: {
         id: 'israel',
@@ -1677,8 +1690,9 @@ function renderMintDetail(mintId, lang) {
         detailWrap.style.textAlign = isRtl ? 'right' : 'left';
     }
 
-    // Products HTML
-    const productsHtml = d.products.map(p => `
+    // Products HTML — only user-uploaded Supabase images
+    const uploadedProducts = getUploadedMintProducts(d.products);
+    const productsHtml = uploadedProducts.map(p => `
         <div class="mint-product-card">
             <div class="mint-product-img-wrap${p.transparent ? ' mint-product-img-wrap--transparent' : ''}">
                 <img class="mint-product-img${p.transparent ? ' mint-product-img--transparent' : ''}"
@@ -1758,7 +1772,7 @@ function renderMintDetail(mintId, lang) {
         </section>
         ` : ''}
 
-        ${d.products.length ? `
+        ${uploadedProducts.length ? `
         <section class="mint-section">
             <h3 class="mint-section-title">${L.products}</h3>
             <div class="mint-products-grid">${productsHtml}</div>
@@ -1772,14 +1786,18 @@ function renderMintDetail(mintId, lang) {
 }
 
 function openMuseumMint(mintId) {
+    if (!mintHasUploadedProducts(mintId)) return;
     renderMintDetail(mintId, _museumActiveLang);
     goToScreen('mint-detail-screen');
 }
 
 function initMuseum() {
-    // Mint hub cards
+    // Mint hub cards — only mints with uploaded product images
     document.querySelectorAll('.mint-hub-card').forEach(btn => {
-        btn.onclick = () => openMuseumMint(btn.dataset.mint);
+        const mintId = btn.dataset.mint;
+        const visible = mintHasUploadedProducts(mintId);
+        btn.style.display = visible ? '' : 'none';
+        btn.onclick = visible ? () => openMuseumMint(mintId) : null;
     });
 
     // Language tabs on mint-detail-screen only
