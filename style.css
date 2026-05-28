@@ -2829,6 +2829,11 @@ body.dark-mode .mint-website-link { background: var(--card); color: var(--text-l
     background: var(--card-inner);
     overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-sizing: border-box;
 }
 
 .mint-product-img-wrap--transparent {
@@ -2838,16 +2843,18 @@ body.dark-mode .mint-website-link { background: var(--card); color: var(--text-l
 .mint-product-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
     display: block;
     transition: transform 0.3s;
 }
 
 .mint-product-img--transparent {
-    object-fit: contain;
-    padding: 14%;
+    /* same fit rules as all product images */
 }
-.mint-product-card:hover .mint-product-img { transform: scale(1.05); }
+.mint-product-card:hover .mint-product-img { transform: scale(1.03); }
 
 .mint-product-img-placeholder {
     width: 100%;
