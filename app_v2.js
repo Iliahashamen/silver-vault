@@ -1109,6 +1109,7 @@ function initQuiz() {
 const DOVE_OF_PEACE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp';
 const DOVE_OF_PEACE_1KG_BAR_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace-1kg-bar.webp';
 const SILVER_GRAINS_300G_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp';
+const AMERICAN_SILVER_EAGLE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp';
 
 const MINT_DATA = {
     israel: {
@@ -1509,6 +1510,17 @@ const MINT_DATA = {
                 }
             ],
             products: [
+                {
+                    title: 'נשר אמריקני',
+                    type: 'מטבע',
+                    weight: '1 אונקיה',
+                    year: '1986–',
+                    purity: 'כסף 999',
+                    desc: 'הנשר האמריקני (American Silver Eagle) הוא מטבע הבוליון הנפוץ בצפון אמריקה. הנפקת המטבע החלה בשנת 1986 בזהב וכן גם בכסף. למטבע יש מעמד של הילך חוקי בארה"ב, וערכו הנקוב (הסמלי) עומד על 1 דולר. הנשר האמריקני הוא מטבע כסף נפוץ שניתן לפדותו בקלות יחסית ברוב העולם.',
+                    img: AMERICAN_SILVER_EAGLE_IMG,
+                    emoji: '🦅',
+                    transparent: true
+                },
                 { title: 'American Silver Eagle 2022', type: 'מטבע', weight: '1 אונקיה', year: '2022', purity: 'כסף 999', desc: 'גרסת 2022 עם ה-Reverse החדש (Type 2) — נשר הנוחת עם כנפיים פרושות. הנמכר ביותר בעולם. הילך חוקי $1.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png/300px-2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png', emoji: '🦅' },
                 { title: 'Silver Eagle Reverse Type 2', type: 'מטבע', weight: '1 אונקיה', year: '2021+', purity: 'כסף 999', desc: 'צד הנשר החדש שהוחלף לראשונה ב-35 שנה — עיצוב נשר מפורט ומרשים יותר. מהדורות מיוחדות בגמר Proof ו-Uncirculated.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/%241_Silver_Eagle_Type_2_Reverse.png/300px-%241_Silver_Eagle_Type_2_Reverse.png', emoji: '🦅' },
                 { title: 'Morgan Silver Dollar 2021', type: 'מטבע', weight: '26.73 גרם', year: '2021', purity: 'כסף 999', desc: 'חזרת האגדה — Morgan Dollar החדש בטוהר 999 לעומת המקורי של .900. סדרה מוגבלת של 175,000 יחידות למינט. מוטבע עם מנטמארק 5 מינטים.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🪙' },
@@ -1529,6 +1541,7 @@ const MINT_DATA = {
                 { title: 'Heritage & Special Products', text: 'In addition to the Silver Eagle, the Mint issued redesigned Morgan and Peace Dollars in 2021 — two iconic 20th-century coins now struck in .999 fine silver. The "America the Beautiful" series (2010–2021) comprised 56 five-ounce coins depicting national parks. The US Mint maintains a national strategic silver reserve at West Point.' }
             ],
             products: [
+                { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
                 { title: 'American Silver Eagle 2022', type: 'Coin', weight: '1 oz', year: '2022', purity: '999 Silver', desc: '2022 version with the new Type 2 Reverse — a landing eagle with spread wings. World\'s best-seller. Legal tender face value $1.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png/300px-2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png', emoji: '🦅' },
                 { title: 'Silver Eagle Type 2 Reverse', type: 'Coin', weight: '1 oz', year: '2021+', purity: '999 Silver', desc: 'The new eagle reverse replaced for the first time in 35 years — a more detailed, impressive eagle design. Available in Proof and Uncirculated finishes.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/%241_Silver_Eagle_Type_2_Reverse.png/300px-%241_Silver_Eagle_Type_2_Reverse.png', emoji: '🦅' },
                 { title: 'Morgan Silver Dollar 2021', type: 'Coin', weight: '26.73g', year: '2021', purity: '999 Silver', desc: 'Return of a legend — the new Morgan Dollar in .999 fine silver vs the original .900. Limited series of 175,000 per mint. Struck with mintmarks from 5 mint facilities.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🪙' },
@@ -1549,6 +1562,7 @@ const MINT_DATA = {
                 { title: 'Наследие и специальные выпуски', text: 'В 2021 году монетный двор выпустил обновлённые Morgan Dollar и Peace Dollar из серебра .999. Серия «Красоты Америки» (2010–2021) включала 56 пятиунцевых монет с изображением национальных парков. Монетный двор США хранит национальный стратегический резерв серебра в Вест-Пойнте.' }
             ],
             products: [
+                { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986–', purity: 'Серебро 999', desc: 'American Silver Eagle — самая популярная инвестиционная монета в Северной Америке. Выпуск с 1986 года в золоте и серебре. Имеет статус законного платёжного средства США с номиналом $1. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
                 { title: 'American Silver Eagle 2022', type: 'Монета', weight: '1 унция', year: '2022', purity: 'Серебро 999', desc: 'Выпуск 2022 года с новым реверсом Type 2 — приземляющийся орёл с расправленными крыльями. Самая продаваемая в мире. Номинал $1.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png/300px-2022-american-eagle-silver-one-ounce-bullion-coin-obverse.png', emoji: '🦅' },
                 { title: 'Silver Eagle Type 2 Reverse', type: 'Монета', weight: '1 унция', year: '2021+', purity: 'Серебро 999', desc: 'Новый реверс орла, изменённый впервые за 35 лет — более детальный дизайн. Доступен в исполнении Proof и Uncirculated.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/%241_Silver_Eagle_Type_2_Reverse.png/300px-%241_Silver_Eagle_Type_2_Reverse.png', emoji: '🦅' },
                 { title: 'Morgan Silver Dollar 2021', type: 'Монета', weight: '26,73 г', year: '2021', purity: 'Серебро 999', desc: 'Возвращение легенды — новый Morgan Dollar из серебра .999 вместо исходного .900. Ограниченная серия 175 000 штук с каждого монетного двора.', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Silver_bullion_bar.jpg/300px-Silver_bullion_bar.jpg', emoji: '🪙' },
