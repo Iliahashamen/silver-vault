@@ -22,7 +22,7 @@ const MINT_EXPANSION = {
                 { title: '60+ מדינות', text: 'מטבעות ICMC מופצים ביותר מ-60 מדינות ברחבי העולם.' },
                 { title: 'מפעל ירושלים 1962', text: 'מאז 1962 מייצרת החברה מטבעות במפעל מקומי בירושלים.' },
                 { title: 'כסף 999 ו-925', text: 'מייצרת מטבעות השקעה ואספנות בטוהר 999, ומדליות סטרלינג 925.' },
-                { title: 'סדרה שנתית ליום העצמאות', text: 'מדי שנה מנפיקה מטבע כסף מוגבל לרגל יום העצמאות עם עיצוב חדש.' }
+                { title: 'יונת השלום 2014', text: 'בוליון הדגל "יונת השלום" — כסף 999 מ-2014, וזהב 999.9 מ-2019, בראונדים ומטילים.' },
             ]
         },
         en: {
@@ -45,7 +45,7 @@ const MINT_EXPANSION = {
                 { title: '60+ Countries', text: 'ICMC coins are distributed in more than 60 countries worldwide.' },
                 { title: 'Jerusalem Plant 1962', text: 'Has minted coins at its Jerusalem facility since 1962.' },
                 { title: '.999 & .925 Silver', text: 'Produces investment and collector pieces in .999 fine and .925 sterling silver.' },
-                { title: 'Annual Independence Coin', text: 'Issues a limited silver Independence Day coin with a new design every year.' }
+                { title: 'Dove of Peace 2014', text: 'Flagship "Dove of Peace" bullion — .999 silver since 2014, .9999 gold since 2019, in rounds and bars.' },
             ]
         },
         ru: {
@@ -68,7 +68,7 @@ const MINT_EXPANSION = {
                 { title: '60+ стран', text: 'Монеты ICMC распространяются более чем в 60 странах мира.' },
                 { title: 'Завод в Иерусалиме 1962', text: 'С 1962 года чеканит монеты на заводе в Иерусалиме.' },
                 { title: 'Серебро 999 и 925', text: 'Выпускает инвестиционные и коллекционные изделия из серебра .999 и .925.' },
-                { title: 'Ежегодная монета независимости', text: 'Каждый год выпускает лимитированную серебряную монету ко Дню независимости с новым дизайном.' }
+                { title: '«Голубь мира» 2014', text: 'Флагманский буллион «Голубь мира» — серебро 999 с 2014, золото 999.9 с 2019, монеты и слитки.' }
             ]
         }
     },
