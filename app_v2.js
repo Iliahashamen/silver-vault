@@ -1142,6 +1142,17 @@ function formatProductDesc(p) {
     return prefix + (p.desc || '');
 }
 
+function mintWebsiteHref(website) {
+    if (!website) return '';
+    const value = String(website).trim();
+    if (/^https?:\/\//i.test(value)) return value;
+    return `https://${value}`;
+}
+
+function mintWebsiteLabel(website) {
+    return String(website || '').trim().replace(/^https?:\/\//i, '').replace(/\/$/, '');
+}
+
 const MINT_DATA = {
     israel: {
         id: 'israel',
@@ -1152,7 +1163,7 @@ const MINT_DATA = {
             subtitle: 'Israel Coins and Medals Corp. — ICMC',
             founded: 'נוסדה 1952',
             location: 'ירושלים, ישראל',
-            website: 'coins.gov.il',
+            website: 'en.israelmint.com',
             history: [
                 {
                     title: 'ייסוד ורקע היסטורי',
@@ -1208,7 +1219,7 @@ const MINT_DATA = {
             subtitle: 'State-owned coin authority — ICMC',
             founded: 'Founded 1952',
             location: 'Jerusalem, Israel',
-            website: 'coins.gov.il',
+            website: 'en.israelmint.com',
             history: [
                 {
                     title: 'Foundation & Historical Background',
@@ -1234,7 +1245,7 @@ const MINT_DATA = {
             subtitle: 'Государственная монетная корпорация — ICMC',
             founded: 'Основан в 1952',
             location: 'Иерусалим, Израиль',
-            website: 'coins.gov.il',
+            website: 'en.israelmint.com',
             history: [
                 {
                     title: 'Основание и исторический фон',
@@ -1266,7 +1277,7 @@ const MINT_DATA = {
             subtitle: 'Bayerisches Hauptmünzamt — מינכן',
             founded: 'נוסד 1158',
             location: 'מינכן, בוואריה, גרמניה',
-            website: 'bayerisches-hauptmuenzamt.de',
+            website: 'hauptmuenzamt.bayern',
             history: [
                 {
                     title: 'ייסוד ימי הביניים',
@@ -1289,7 +1300,7 @@ const MINT_DATA = {
             subtitle: 'Bayerisches Hauptmünzamt — Munich',
             founded: 'Founded 1158',
             location: 'Munich, Bavaria, Germany',
-            website: 'bayerisches-hauptmuenzamt.de',
+            website: 'hauptmuenzamt.bayern',
             history: [
                 {
                     title: 'Medieval Foundation',
@@ -1312,7 +1323,7 @@ const MINT_DATA = {
             subtitle: 'Bayerisches Hauptmünzamt — Мюнхен',
             founded: 'Основан в 1158',
             location: 'Мюнхен, Бавария, Германия',
-            website: 'bayerisches-hauptmuenzamt.de',
+            website: 'hauptmuenzamt.bayern',
             history: [
                 {
                     title: 'Средневековое основание',
@@ -1341,7 +1352,7 @@ const MINT_DATA = {
             subtitle: 'The Royal Mint — לנטריסנט, ויילס',
             founded: 'נוסד 886',
             location: 'לנטריסנט, ויילס, בריטניה',
-            website: 'royalmint.com',
+            website: 'www.royalmint.com',
             history: [
                 {
                     title: 'ייסוד ועידן המלוכה',
@@ -1364,7 +1375,7 @@ const MINT_DATA = {
             subtitle: 'The Royal Mint — Llantrisant, Wales',
             founded: 'Founded 886 AD',
             location: 'Llantrisant, Wales, United Kingdom',
-            website: 'royalmint.com',
+            website: 'www.royalmint.com',
             history: [
                 {
                     title: 'Foundation & Royal History',
@@ -1387,7 +1398,7 @@ const MINT_DATA = {
             subtitle: 'The Royal Mint — Лланттресант, Уэльс',
             founded: 'Основан в 886 г. н.э.',
             location: 'Лланттресант, Уэльс, Великобритания',
-            website: 'royalmint.com',
+            website: 'www.royalmint.com',
             history: [
                 {
                     title: 'Основание и королевская история',
@@ -1417,7 +1428,7 @@ const MINT_DATA = {
             subtitle: 'United States Mint — מייצר את American Silver Eagle',
             founded: 'נוסד 1792',
             location: 'פילדלפיה / ווסט פוינט, ארה"ב',
-            website: 'usmint.gov',
+            website: 'www.usmint.gov',
             history: [
                 {
                     title: 'ייסוד ומטבע הדולר',
@@ -1451,7 +1462,7 @@ const MINT_DATA = {
             subtitle: 'United States Mint — Home of the American Silver Eagle',
             founded: 'Founded 1792',
             location: 'Philadelphia / West Point, USA',
-            website: 'usmint.gov',
+            website: 'www.usmint.gov',
             history: [
                 { title: 'Foundation & the Dollar', text: 'The United States Mint was founded in 1792 in Philadelphia, then the nation\'s capital, under the first federal coinage act. Its purpose was to produce gold, silver and copper dollar coins for the young republic. The Philadelphia building was the first federal public building constructed in the United States, and has since stood as a symbol of American economic strength.' },
                 { title: 'American Silver Eagle — World\'s Best-Selling Bullion Coin', text: 'Since 1986, the US Mint has produced the American Silver Eagle — the best-selling investment coin in history. Struck in .999 fine silver (1 oz), its obverse features "Walking Liberty," a design from 1916 widely considered the finest American coin artwork ever created. In 2021, the reverse (Eagle side) was updated for the first time in 35 years.' },
@@ -1466,7 +1477,7 @@ const MINT_DATA = {
             subtitle: 'United States Mint — дом American Silver Eagle',
             founded: 'Основан в 1792',
             location: 'Филадельфия / Вест-Пойнт, США',
-            website: 'usmint.gov',
+            website: 'www.usmint.gov',
             history: [
                 { title: 'Основание и доллар', text: 'Монетный двор США был основан в 1792 году в Филадельфии — тогдашней столице страны — на основании первого федерального закона о чеканке монет. Его цель — производство золотых, серебряных и медных долларовых монет для молодой республики. Здание в Филадельфии стало первым федеральным общественным зданием, построенным в США.' },
                 { title: 'American Silver Eagle — самая продаваемая монета в мире', text: 'С 1986 года Монетный двор США выпускает American Silver Eagle — самую продаваемую инвестиционную монету в истории. Чеканится из серебра .999 (1 унция), на аверсе изображена «Идущая Свобода» — дизайн 1916 года, считающийся лучшим произведением монетного искусства США. В 2021 году реверс (орёл) был обновлён впервые за 35 лет.' },
@@ -1488,7 +1499,7 @@ const MINT_DATA = {
             subtitle: 'Royal Canadian Mint — מייצר את Silver Maple Leaf',
             founded: 'נוסד 1908',
             location: 'אוטווה (אספנות) / ויניפג (השקעות), קנדה',
-            website: 'mint.ca',
+            website: 'www.mint.ca',
             history: [
                 { title: 'ייסוד ומסורת קנדית', text: 'בית המטבע המלכותי הקנדי נוסד ב-1908 באוטווה, כשקנדה ביקשה עצמאות מוניטרית מבריטניה. עד אז מטבעות קנדיים הוטבעו בלונדון. הבניין ההיסטורי המרהיב באוטווה, שנבנה בסגנון גותי, הפך לאחד מסמלי העיר. בשנת 1988 נפתח מפעל שני בויניפג לייצור מטבעות השקעה בהיקפים גדולים.' },
                 { title: 'Silver Maple Leaf — שיא הטוהר', text: 'Silver Maple Leaf הוכנס לשוק ב-1988 כמטבע ההשקעה הקנדי המרכזי. המטבע עשוי כסף 9999 (99.99% טהור) — טוהר גבוה יותר מרוב מתחריו. עלה על עלה מייפל האיקוני של קנדה מקשט את פניו, ואת גב המטבע מקשט דיוקן המלכה. הוא הילך חוקי בשווי 5 דולר קנדי.' },
@@ -1502,7 +1513,7 @@ const MINT_DATA = {
             subtitle: 'Royal Canadian Mint — Home of the Silver Maple Leaf',
             founded: 'Founded 1908',
             location: 'Ottawa (collectibles) / Winnipeg (bullion), Canada',
-            website: 'mint.ca',
+            website: 'www.mint.ca',
             history: [
                 { title: 'Foundation & Canadian Tradition', text: 'The Royal Canadian Mint was founded in 1908 in Ottawa, as Canada sought monetary independence from Britain. Until then, Canadian coins were struck in London. The magnificent Gothic-style historic building in Ottawa became one of the city\'s landmarks. In 1988, a second facility opened in Winnipeg for large-scale bullion coin production.' },
                 { title: 'Silver Maple Leaf — Peak Purity', text: 'The Silver Maple Leaf was introduced in 1988 as Canada\'s flagship investment coin. Struck in .9999 fine silver (99.99% pure) — higher purity than most competitors. Canada\'s iconic maple leaf graces the obverse, while the monarch\'s portrait adorns the reverse. It is legal tender at C$5 face value.' },
@@ -1516,7 +1527,7 @@ const MINT_DATA = {
             subtitle: 'Royal Canadian Mint — дом Silver Maple Leaf',
             founded: 'Основан в 1908',
             location: 'Оттава (коллекционные) / Виннипег (инвестиционные), Канада',
-            website: 'mint.ca',
+            website: 'www.mint.ca',
             history: [
                 { title: 'Основание и канадская традиция', text: 'Королевский монетный двор Канады был основан в 1908 году в Оттаве, когда Канада стремилась к монетарной независимости от Великобритании. До этого канадские монеты чеканились в Лондоне. Великолепное историческое здание в готическом стиле в Оттаве стало одной из достопримечательностей города. В 1988 году в Виннипеге открылся второй завод для крупномасштабного производства инвестиционных монет.' },
                 { title: 'Silver Maple Leaf — вершина чистоты', text: 'Silver Maple Leaf был представлен в 1988 году как главная канадская инвестиционная монета. Чеканится из серебра .9999 (99,99% чистоты) — более высокая проба, чем у большинства конкурентов. Знаменитый кленовый лист Канады украшает аверс, а портрет монарха — реверс. Является законным платёжным средством номиналом C$5.' },
@@ -1537,7 +1548,7 @@ const MINT_DATA = {
             subtitle: 'Perth Mint — קנגרו, קוקאברה וסדרת הירח',
             founded: 'נוסד 1899',
             location: 'פרת\', מערב אוסטרליה',
-            website: 'perthmint.com',
+            website: 'www.perthmint.com',
             history: [
                 { title: 'ייסוד בעידן זהב', text: 'בית המטבע של פרת\' נוסד ב-1899 במהלך "בהלת הזהב" האוסטרלית, כסניף של בית המטבע המלכותי הבריטי. מטרתו הייתה עיבוד זהב המופק ממכרות ווסטרן אוסטרליה. לאחר שאוסטרליה הקימה את בית המטבע הלאומי שלה ב-1965, פרת\' המשיך לפעול כבית מטבע ממשלתי עצמאי של ווסטרן אוסטרליה, עם מוניטין עולמי.' },
                 { title: 'סדרות הכסף האיקוניות', text: 'Silver Kookaburra הופיעה ב-1990 כאחת מסדרות הכסף הראשונות בעולם עם עיצוב משתנה מדי שנה. Silver Kangaroo הושק ב-2016. סדרת "Lunar" (לוח שנה סיני) הוחלה על מטבעות כסף ב-1999, עם 12 מטבעות המייצגים בעלי חיים מהגלגל הסיני — אחת מסדרות האספנות הפופולריות בעולם. לפרת\' גם Silver Koala ו-Silver Swan.' },
@@ -1551,7 +1562,7 @@ const MINT_DATA = {
             subtitle: 'Perth Mint — Kangaroo, Kookaburra & Lunar Series',
             founded: 'Founded 1899',
             location: 'Perth, Western Australia',
-            website: 'perthmint.com',
+            website: 'www.perthmint.com',
             history: [
                 { title: 'Gold Rush Foundation', text: 'The Perth Mint was founded in 1899 during the Australian gold rush, as a branch of the British Royal Mint. Its purpose was to process gold extracted from Western Australian mines. After Australia established its national mint in 1965, Perth continued as an independent state government mint for Western Australia, building a world-class reputation.' },
                 { title: 'Iconic Silver Series', text: 'The Silver Kookaburra launched in 1990 as one of the world\'s first silver series with an annually changing design. The Silver Kangaroo launched in 2016. The "Lunar" series (Chinese calendar) was applied to silver coins in 1999, with 12 coins representing Chinese zodiac animals — one of the world\'s most popular collecting series. Perth also produces Silver Koala and Silver Swan.' },
@@ -1565,7 +1576,7 @@ const MINT_DATA = {
             subtitle: 'Perth Mint — Кенгуру, Кукабарра и Лунная серия',
             founded: 'Основан в 1899',
             location: 'Перт, Западная Австралия',
-            website: 'perthmint.com',
+            website: 'www.perthmint.com',
             history: [
                 { title: 'Основание в эпоху золотой лихорадки', text: 'Монетный двор Перта был основан в 1899 году во время австралийской золотой лихорадки как филиал британского Королевского монетного двора. Его задачей была переработка золота из шахт Западной Австралии. После создания национального монетного двора Австралии в 1965 году Перт продолжил работу как независимый государственный монетный двор штата.' },
                 { title: 'Легендарные серебряные серии', text: 'Silver Kookaburra запустили в 1990 году как одну из первых в мире серий серебра с меняющимся ежегодным дизайном. Silver Kangaroo появился в 2016 году. «Лунная» серия (китайский календарь) вышла на серебряных монетах в 1999 году — 12 монет с животными китайского зодиака, ставших одними из самых популярных в мире. Перт также выпускает Silver Koala и Silver Swan.' },
@@ -1586,7 +1597,7 @@ const MINT_DATA = {
             subtitle: 'Münze Österreich — מייצר את Wiener Philharmoniker',
             founded: 'נוסד 1194',
             location: 'וינה, אוסטריה',
-            website: 'muenzeoesterreich.at',
+            website: 'www.muenzeoesterreich.at',
             history: [
                 { title: 'ייסוד אימפריאלי', text: 'בית המטבע הווינאי (Münze Österreich) נוסד ב-1194 ביוזמת הדוכס לאופולד V ​​מאוסטריה, מכסף שנגבה מפדיון השבי של ריצ\'רד לב-הארי. זהו אחד מבתי המטבע הפעילים הוותיקים בעולם. לאורך מאות שנים שירת את האימפריה ההבסבורגית, ייצר מטבעות לקיסרים, ואת מורשת אירופה המלכותית.' },
                 { title: 'Wiener Philharmoniker — הנמכר ביותר באירופה', text: 'ב-1989 השיק בית המטבע הווינאי את Wiener Philharmoniker — מטבע כסף 999 שהפך לנמכר ביותר באירופה. המטבע מוקדש לתזמורת הפילהרמונית הווינאית, אחת הנודעות בעולם. פני המטבע מקשטים כלים מוזיקליים של התזמורת, ועל גבו האורגן ב"זאל מוזיקפרין". הוא הילך חוקי באוסטריה.' },
@@ -1600,7 +1611,7 @@ const MINT_DATA = {
             subtitle: 'Münze Österreich — Home of the Wiener Philharmoniker',
             founded: 'Founded 1194',
             location: 'Vienna, Austria',
-            website: 'muenzeoesterreich.at',
+            website: 'www.muenzeoesterreich.at',
             history: [
                 { title: 'Imperial Foundation', text: 'The Austrian Mint (Münze Österreich) was founded in 1194 at the initiative of Duke Leopold V of Austria, from silver raised through the ransom of Richard the Lionheart. It is one of the oldest continuously operating mints in the world. For centuries it served the Habsburg Empire, producing coins for emperors and carrying the legacy of European royal tradition.' },
                 { title: 'Wiener Philharmoniker — Europe\'s Best-Seller', text: 'In 1989, the Austrian Mint launched the Wiener Philharmoniker — a .999 fine silver coin that became Europe\'s best-selling bullion coin. The coin is dedicated to the Vienna Philharmonic Orchestra, one of the world\'s most renowned. The obverse features instruments of the orchestra, while the reverse shows the great organ of the Wiener Musikverein. It is legal tender in Austria.' },
@@ -1614,7 +1625,7 @@ const MINT_DATA = {
             subtitle: 'Münze Österreich — дом Wiener Philharmoniker',
             founded: 'Основан в 1194',
             location: 'Вена, Австрия',
-            website: 'muenzeoesterreich.at',
+            website: 'www.muenzeoesterreich.at',
             history: [
                 { title: 'Имперское основание', text: 'Австрийский монетный двор (Münze Österreich) был основан в 1194 году по инициативе герцога Леопольда V Австрийского — из серебра, полученного в качестве выкупа за Ричарда Львиное Сердце. Это один из старейших непрерывно действующих монетных дворов в мире. Столетиями он служил Габсбургской империи, чеканя монеты для императоров.' },
                 { title: 'Wiener Philharmoniker — лидер продаж Европы', text: 'В 1989 году Австрийский монетный двор выпустил Wiener Philharmoniker — монету из серебра .999, ставшую самой продаваемой инвестиционной монетой в Европе. Монета посвящена Венскому филармоническому оркестру. На аверсе изображены инструменты оркестра, на реверсе — орган Wiener Musikverein. Является законным платёжным средством в Австрии.' },
@@ -1635,7 +1646,7 @@ const MINT_DATA = {
             subtitle: 'Casa de Moneda de México — הוותיק באמריקה מאז 1535',
             founded: 'נוסד 1535',
             location: 'סן לואיס פוטוסי, מקסיקו',
-            website: 'casademoneda.gob.mx',
+            website: 'www.gob.mx/cmm',
             history: [
                 { title: 'הוותיק ביותר באמריקה', text: 'Casa de Moneda de México, הוקמה ב-1535 בצו המלך קרלוס הראשון של ספרד — בית המטבע הראשון והוותיק ביותר ביבשת אמריקה. כ-500 שנות פעולה רצופה. הבניין ההיסטורי בלב העיר מקסיקו (כיום מוזיאון נומיסמטי) הוא אתר מורשת עולמית של יונסק"ו. המינט הדף מטבעות כסף המפורסמים "Reales" שמימנו את הכלכלה הקולוניאלית של ספרד.' },
                 { title: 'Onza de Plata Libertad — כסף ההשקעה המקסיקני', text: 'ב-1982 הנפיק בית המטבע המקסיקני את ה-Onza de Plata Libertad — המטבע ההשקעה הרשמי של מקסיקו. על פני המטבע ניצבת "הניצחון המכונף" (מלאך העצמאות), אנדרטת העצמאות של מקסיקו סיטי. הגב מקשט נשר מקסיקני עם נחש — סמל המדינה. הוא מיוצר בכסף 999 ו-9999, בגדלים מ-1/20 אונקיה עד 5 אונקיות.' },
@@ -1649,7 +1660,7 @@ const MINT_DATA = {
             subtitle: 'Casa de Moneda de México — The Americas\' oldest mint since 1535',
             founded: 'Founded 1535',
             location: 'San Luis Potosí, Mexico',
-            website: 'casademoneda.gob.mx',
+            website: 'www.gob.mx/cmm',
             history: [
                 { title: 'Oldest Mint in the Americas', text: 'Casa de Moneda de México was established in 1535 by decree of King Charles I of Spain — the first and oldest mint in the entire American continent. Nearly 500 years of continuous operation. The historic building in Mexico City (now a numismatic museum) is a UNESCO World Heritage Site. The mint struck the famous silver "Reales" coins that financed Spain\'s colonial economy.' },
                 { title: 'Onza de Plata Libertad — Mexican Investment Silver', text: 'In 1982, the Mexican Mint issued the Onza de Plata Libertad — Mexico\'s official investment coin. The obverse features the "Winged Victory" (Angel of Independence), Mexico City\'s landmark monument. The reverse displays the Mexican eagle with a serpent — the national symbol. Produced in .999 and .9999 silver, in sizes from 1/20 oz to 5 oz.' },
@@ -1663,7 +1674,7 @@ const MINT_DATA = {
             subtitle: 'Casa de Moneda de México — старейший монетный двор Америки с 1535 г.',
             founded: 'Основан в 1535',
             location: 'Сан-Луис-Потоси, Мексика',
-            website: 'casademoneda.gob.mx',
+            website: 'www.gob.mx/cmm',
             history: [
                 { title: 'Старейший в Америке', text: 'Casa de Moneda de México был основан в 1535 году по указу короля Карла I Испанского — первый и старейший монетный двор на всём американском континенте. Почти 500 лет непрерывной работы. Историческое здание в Мехико (ныне нумизматический музей) — объект Всемирного наследия ЮНЕСКО. Двор чеканил знаменитые серебряные «Реалы», финансировавшие колониальную экономику Испании.' },
                 { title: 'Onza de Plata Libertad — мексиканское инвестиционное серебро', text: 'В 1982 году Мексиканский монетный двор выпустил Onza de Plata Libertad — официальную инвестиционную монету Мексики. На аверсе — «Крылатая победа» (Ангел Независимости), символ Мехико. Реверс украшен мексиканским орлом со змеёй — национальным гербом. Чеканится из серебра .999 и .9999 в размерах от 1/20 унции до 5 унций.' },
@@ -1786,8 +1797,8 @@ function renderMintDetail(mintId, lang) {
         </section>
         ` : ''}
 
-        <a class="mint-website-link" href="https://${escapeHtml(d.website)}" target="_blank" rel="noopener">
-            🌐 ${L.more}: ${escapeHtml(d.website)}
+        <a class="mint-website-link" href="${escapeHtml(mintWebsiteHref(d.website))}" target="_blank" rel="noopener noreferrer">
+            ${L.more}: ${escapeHtml(mintWebsiteLabel(d.website))}
         </a>
     `;
 }
