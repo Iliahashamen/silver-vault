@@ -1478,6 +1478,10 @@ const MINT_DATA = {
                     emoji: '🦬',
                     transparent: true
                 }
+            ]
+        },
+        en: {
+            name: 'United States Mint',
             subtitle: 'United States Mint — Home of the American Silver Eagle',
             founded: 'Founded 1792',
             location: 'Philadelphia / West Point, USA',
@@ -1490,6 +1494,9 @@ const MINT_DATA = {
             products: [
                 { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
                 { title: 'American Buffalo Commemorative (2001)', type: 'Commemorative', weight: '1 oz', year: '2001', purity: '.999 Silver', desc: 'The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913–1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876–1953) was also known for "The End of the Trail" and other major American medals.', img: AMERICAN_BUFFALO_2001_IMG, emoji: '🦬', transparent: true }
+            ]
+        },
+        ru: {
             name: 'Монетный двор США',
             subtitle: 'United States Mint — дом American Silver Eagle',
             founded: 'Основан в 1792',
