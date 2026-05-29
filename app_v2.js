@@ -545,16 +545,27 @@ function renderCandleChart(frame) {
 }
 
 // ── LINE CHART (Chart.js) ─────────────────────────────────────────────
+function _chartUiTheme() {
+    const isDark = document.body.classList.contains('dark-mode');
+    return {
+        textColor: isDark ? 'rgba(221,234,221,0.88)' : 'rgba(74,88,72,0.75)',
+        gridColor: isDark ? 'rgba(90,140,94,0.22)' : 'rgba(74,88,72,0.10)',
+        tooltipBg: isDark ? 'rgba(34,44,36,0.96)' : 'rgba(240,237,231,0.96)',
+        tooltipTitle: isDark ? '#edf5ee' : '#2C3028',
+        tooltipBody: isDark ? '#d49e7e' : '#C4845A',
+        tooltipBorder: isDark ? 'rgba(90,140,94,0.35)' : 'rgba(168,148,128,0.3)',
+    };
+}
+
 function _drawLineData(frame, data) {
     const canvas = document.getElementById('line-canvas');
     if (!canvas || !data?.length) return;
     const labels = data.map(c => formatCandleTime(c.ts, frame));
     const prices = data.map(c => c.close);
+    const theme = _chartUiTheme();
 
     const lineColor = 'rgba(196,132,90,1)';
     const fillColor = 'rgba(196,132,90,0.12)';
-    const gridColor = 'rgba(74,88,72,0.10)';
-    const textColor = 'rgba(74,88,72,0.75)';
 
     lineChart = new Chart(canvas, {
         type: 'line',
@@ -579,10 +590,10 @@ function _drawLineData(frame, data) {
             plugins: {
                 legend: { display: false },
                     tooltip: {
-                        backgroundColor: 'rgba(240,237,231,0.96)',
-                        titleColor:      '#2C3028',
-                        bodyColor:       '#C4845A',
-                        borderColor:     'rgba(168,148,128,0.3)',
+                        backgroundColor: theme.tooltipBg,
+                        titleColor:      theme.tooltipTitle,
+                        bodyColor:       theme.tooltipBody,
+                        borderColor:     theme.tooltipBorder,
                         borderWidth:     1,
                         cornerRadius:    10,
                         padding:         10,
@@ -599,7 +610,7 @@ function _drawLineData(frame, data) {
             scales: {
                 x: {
                     ticks: {
-                        color:          textColor,
+                        color:          theme.textColor,
                         font:           { size: 9 },
                         maxRotation:    40,
                         minRotation:    30,

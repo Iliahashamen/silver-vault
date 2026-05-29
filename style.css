@@ -1555,10 +1555,24 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 body.dark-mode .icon-btn-label {
-    color: #1a1a1a;
-    text-shadow:
-        0 0 6px rgba(0, 0, 0, 0.80),
-        0 0 14px rgba(0, 0, 0, 0.50);
+    color: var(--text-light);
+    text-shadow: none;
+}
+
+body.dark-mode .chart-time-btn,
+body.dark-mode .chart-type-btn {
+    color: var(--text);
+}
+
+body.dark-mode .chart-time-btn.active,
+body.dark-mode .chart-type-btn.active {
+    color: #fff;
+}
+
+body.dark-mode .main-switch-btn.active {
+    background: linear-gradient(135deg, var(--clay-dk) 0%, var(--clay) 100%);
+    color: var(--text-light);
+    outline-color: rgba(90, 140, 130, 0.35);
 }
 
 @media (max-width: 360px) {
@@ -1782,6 +1796,9 @@ body.dark-mode .icon-btn-label {
     box-shadow: var(--nm-raised);
     cursor: pointer;
     font-weight: 700;
+    color: var(--text-mid);
+    font-family: 'Assistant', sans-serif;
+    font-size: 13px;
 }
 
 .chart-time-btn.active {
