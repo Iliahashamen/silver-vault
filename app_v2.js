@@ -617,12 +617,12 @@ function _drawLineData(frame, data) {
                         autoSkip:       true,
                         maxTicksLimit:  10,   // never show more than 10 x-axis ticks
                     },
-                    grid:   { color: gridColor },
+                    grid:   { color: theme.gridColor },
                     border: { display: false },
                 },
                 y: {
-                    ticks:  { color: textColor, font: { size: 10 }, callback: v => `$${v.toFixed(0)}` },
-                    grid:   { color: gridColor },
+                    ticks:  { color: theme.textColor, font: { size: 10 }, callback: v => `$${v.toFixed(0)}` },
+                    grid:   { color: theme.gridColor },
                     border: { display: false },
                 }
             }
