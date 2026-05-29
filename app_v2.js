@@ -26,6 +26,14 @@ let dashboardInited = false;
 
 const uid = tg?.initDataUnsafe?.user?.id || Math.floor(Math.random() * 1_000_000);
 
+const DEV_PREVIEW_PASSCODES = ['123', 'DemoD69'];
+const DEV_PREVIEW_TOKEN = 'local-dev-preview-token';
+
+function isLocalDevHost() {
+    const host = location.hostname;
+    return host === 'localhost' || host === '127.0.0.1';
+}
+
 // ── SESSION ─────────────────────────────────────────────────────────
 function sessionToken() {
     try {
@@ -130,6 +138,12 @@ async function handleLogin() {
     if (msg) { msg.textContent = 'מתחבר...'; msg.style.color = '#888'; }
     if (btn)  btn.disabled = true;
     try {
+        if (isLocalDevHost() && DEV_PREVIEW_PASSCODES.includes(pass)) {
+            saveSession(DEV_PREVIEW_TOKEN);
+            if (msg) { msg.textContent = 'גישה אושרה ✓ (מצב פיתוח)'; msg.style.color = '#4AB882'; }
+            setTimeout(() => showDashboard(), 300);
+            return;
+        }
         const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -149,6 +163,7 @@ async function handleLogin() {
 }
 
 async function validateTokenWithServer(token) {
+    if (isLocalDevHost() && token === DEV_PREVIEW_TOKEN) return true;
     try {
         const res = await fetch(`${CONFIG.CHAT_API_URL}/api/auth-check`, {
             headers: { Authorization: `Bearer ${token}` },
@@ -1118,10 +1133,13 @@ function getUploadedMintProducts(products) {
     return (products || []).filter(p => p?.img && p.img.includes(MUSEUM_UPLOADED_IMG_HOST));
 }
 
-function mintHasUploadedProducts(mintId) {
-    const mint = MINT_DATA[mintId];
-    if (!mint) return false;
-    return ['he', 'en', 'ru'].some(lang => getUploadedMintProducts(mint[lang]?.products).length > 0);
+function formatProductDesc(p) {
+    const parts = [];
+    if (p.year) parts.push(p.year);
+    if (p.weight) parts.push(p.weight);
+    if (p.purity) parts.push(p.purity);
+    const prefix = parts.length ? `${parts.join(' · ')}. ` : '';
+    return prefix + (p.desc || '');
 }
 
 const MINT_DATA = {
@@ -1703,9 +1721,7 @@ function renderMintDetail(mintId, lang) {
             </div>
             <div class="mint-product-info">
                 <p class="mint-product-title">${escapeHtml(p.title)}</p>
-                <p class="mint-product-year">${escapeHtml(p.year)} · ${escapeHtml(p.weight)}</p>
-                <span class="mint-product-type">${escapeHtml(p.type)}</span>
-                <p class="mint-product-desc">${escapeHtml(p.desc)}</p>
+                <p class="mint-product-desc">${escapeHtml(formatProductDesc(p))}</p>
             </div>
         </div>
     `).join('');
@@ -1741,7 +1757,6 @@ function renderMintDetail(mintId, lang) {
     if (!content) return;
     content.innerHTML = `
         <div class="mint-hero">
-            <div class="mint-hero-flag">${mint.flag}</div>
             <div class="mint-hero-body">
                 <h1 class="mint-hero-name">${escapeHtml(d.name)}</h1>
                 <p class="mint-hero-subtitle">${escapeHtml(d.subtitle)}</p>
@@ -1750,14 +1765,6 @@ function renderMintDetail(mintId, lang) {
                     <span class="mint-meta-chip">📍 ${escapeHtml(d.location)}</span>
                 </div>
             </div>
-        </div>
-
-        <div class="mint-building-wrap">
-            <img class="mint-building-img"
-                 src="${escapeHtml(mint.buildingImg)}"
-                 alt="${escapeHtml(d.name)}"
-                 loading="lazy"
-                 onerror="this.parentElement.innerHTML='<div class=\\'mint-building-placeholder\\'>${mint.flag}</div>'">
         </div>
 
         <section class="mint-section">
@@ -1786,18 +1793,15 @@ function renderMintDetail(mintId, lang) {
 }
 
 function openMuseumMint(mintId) {
-    if (!mintHasUploadedProducts(mintId)) return;
+    if (!MINT_DATA[mintId]) return;
     renderMintDetail(mintId, _museumActiveLang);
     goToScreen('mint-detail-screen');
 }
 
 function initMuseum() {
-    // Mint hub cards — only mints with uploaded product images
     document.querySelectorAll('.mint-hub-card').forEach(btn => {
-        const mintId = btn.dataset.mint;
-        const visible = mintHasUploadedProducts(mintId);
-        btn.style.display = visible ? '' : 'none';
-        btn.onclick = visible ? () => openMuseumMint(mintId) : null;
+        btn.style.display = '';
+        btn.onclick = () => openMuseumMint(btn.dataset.mint);
     });
 
     // Language tabs on mint-detail-screen only
@@ -2434,7 +2438,22 @@ function boot() {
         if (e.key === 'Enter') handleLogin();
     });
     initSwipeBack();
+    initDevPreview();
     if (sessionToken()) showDashboard();
+}
+
+function initDevPreview() {
+    if (!isLocalDevHost()) return;
+
+    document.body.classList.add('dev-mode');
+    const banner = document.createElement('div');
+    banner.className = 'dev-preview-banner';
+    banner.innerHTML = `
+        <span class="dev-preview-label">🔧 מצב פיתוח מקומי</span>
+        <span class="dev-preview-note">השינויים כאן לא על האתר החי — רענון אוטומטי אחרי שמירה</span>
+        <button type="button" class="dev-preview-reload" onclick="location.reload()">רענון</button>
+    `;
+    document.body.prepend(banner);
 }
 
 if (document.readyState === 'loading') {
