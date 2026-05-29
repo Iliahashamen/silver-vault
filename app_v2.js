@@ -1136,6 +1136,7 @@ const DOVE_OF_PEACE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/o
 const DOVE_OF_PEACE_1KG_BAR_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace-1kg-bar.webp?v=2';
 const SILVER_GRAINS_300G_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp?v=2';
 const AMERICAN_SILVER_EAGLE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2';
+const AMERICAN_BUFFALO_2001_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3';
 
 const MUSEUM_UPLOADED_MINTS = new Set(['israel', 'usa']);
 const MUSEUM_UPLOADED_IMG_HOST = 'uftkmytmegszggtsrrhz.supabase.co';
@@ -1465,11 +1466,18 @@ const MINT_DATA = {
                     img: AMERICAN_SILVER_EAGLE_IMG,
                     emoji: '🦅',
                     transparent: true
+                },
+                {
+                    title: 'American Buffalo — מטבע זיכרון 2001',
+                    type: 'מטבע זיכרון',
+                    weight: '1 אונקיה',
+                    year: '2001',
+                    purity: 'כסף 999',
+                    desc: 'מטבע הזיכרון American Buffalo Commemorative Silver Dollar הוצע בבית המטבע האמריקאי מ-7 ביוני עד 21 ביוני 2001, עד גמר המלאי. ההנפקה המורשית: 500,000 מטבעות. המטבע מציין את פתיחת המוזיאון הלאומי לעם האינדיאני האמריקאי. העיצוב משחזר את Buffalo Nickel המפורסם (1913–1938) — פרופיל יליד אמריקאי בצד אחד וביזון בצד השני. שלושה ראשי שבטים — Chief Iron Tail, Chief Big Tree ו-Chief Two Moons — שימשו כדגם לפסל James Earle Fraser; המודל לביזון הגיע מגן החיות Central Park. Fraser (1876–1953) ידוע גם בפסל "The End of the Trail" ובעיצוב מדליות אמריקאיות נוספות.',
+                    img: AMERICAN_BUFFALO_2001_IMG,
+                    emoji: '🦬',
+                    transparent: true
                 }
-            ]
-        },
-        en: {
-            name: 'United States Mint',
             subtitle: 'United States Mint — Home of the American Silver Eagle',
             founded: 'Founded 1792',
             location: 'Philadelphia / West Point, USA',
@@ -1480,10 +1488,8 @@ const MINT_DATA = {
                 { title: 'Heritage & Special Products', text: 'In addition to the Silver Eagle, the Mint issued redesigned Morgan and Peace Dollars in 2021 — two iconic 20th-century coins now struck in .999 fine silver. The "America the Beautiful" series (2010–2021) comprised 56 five-ounce coins depicting national parks. The US Mint maintains a national strategic silver reserve at West Point.' }
             ],
             products: [
-                { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true }
-            ]
-        },
-        ru: {
+                { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
+                { title: 'American Buffalo Commemorative (2001)', type: 'Commemorative', weight: '1 oz', year: '2001', purity: '.999 Silver', desc: 'The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913–1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876–1953) was also known for "The End of the Trail" and other major American medals.', img: AMERICAN_BUFFALO_2001_IMG, emoji: '🦬', transparent: true }
             name: 'Монетный двор США',
             subtitle: 'United States Mint — дом American Silver Eagle',
             founded: 'Основан в 1792',
@@ -1495,7 +1501,8 @@ const MINT_DATA = {
                 { title: 'Наследие и специальные выпуски', text: 'В 2021 году монетный двор выпустил обновлённые Morgan Dollar и Peace Dollar из серебра .999. Серия «Красоты Америки» (2010–2021) включала 56 пятиунцевых монет с изображением национальных парков. Монетный двор США хранит национальный стратегический резерв серебра в Вест-Пойнте.' }
             ],
             products: [
-                { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986–', purity: 'Серебро 999', desc: 'American Silver Eagle — самая популярная инвестиционная монета в Северной Америке. Выпуск с 1986 года в золоте и серебре. Имеет статус законного платёжного средства США с номиналом $1. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true }
+                { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986–', purity: 'Серебро 999', desc: 'American Silver Eagle — самая популярная инвестиционная монета в Северной Америке. Выпуск с 1986 года в золоте и серебре. Имеет статус законного платёжного средства США с номиналом $1. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
+                { title: 'American Buffalo — памятная 2001', type: 'Памятная', weight: '1 унция', year: '2001', purity: 'Серебро 999', desc: 'Памятный серебряный доллар American Buffalo Commemorative продавался Монетным двором США с 7 по 21 июня 2001 года до полного распродажа. Авторизованный тираж: 500 000 монет. Монета посвящена открытию Национального музея американских индейцев. Дизайн воссоздаёт знаменитый Buffalo Nickel (1913–1938): профиль коренного американца и бизон. Chief Iron Tail, Chief Big Tree и Chief Two Moons позировали скульптору James Earle Fraser; модель бизона — из Central Park Zoo. Fraser (1876–1953) также известен скульптурой «The End of the Trail» и другими американскими медалями.', img: AMERICAN_BUFFALO_2001_IMG, emoji: '🦬', transparent: true }
             ]
         }
     },
