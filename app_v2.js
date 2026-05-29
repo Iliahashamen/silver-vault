@@ -1137,6 +1137,7 @@ const DOVE_OF_PEACE_1KG_BAR_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/stor
 const SILVER_GRAINS_300G_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp?v=2';
 const AMERICAN_SILVER_EAGLE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2';
 const AMERICAN_BUFFALO_2001_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3';
+const SUNSHINE_MINT_10OZ_BAR_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/sunshine-mint-10oz-bar.webp?v=3';
 
 const MUSEUM_UPLOADED_MINTS = new Set(['israel', 'usa']);
 const MUSEUM_UPLOADED_IMG_HOST = 'uftkmytmegszggtsrrhz.supabase.co';
@@ -1278,7 +1279,7 @@ const MINT_DATA = {
             products: [
                 { title: 'Буллион «Голубь мира»', type: 'Буллион', weight: 'Разные веса', year: '2014–', purity: 'Серебро 999 / Золото 999.9', desc: 'Израильский буллион «Голубь мира» от The Holy Land Mint, выпускается с 2014 года. Аверс: белый голубь с оливковой ветвью над стенами Старого города Иерусалима. Реверс: логотип Holy Land Mint, проба и вес; на слитках также знак Melter Assayer и серийный номер. Доступен в виде монет и слитков. С 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_IMG, emoji: '🕊️', transparent: true },
                 { title: 'Литой слиток 1 кг «Голубь мира»', type: 'Слиток', weight: '1 кг', year: '2014–', purity: 'Серебро 999', desc: 'Литой слиток из серебра 999 пробы весом 1 кг из серии «Голубь мира» от The Holy Land Mint. На слитке: логотип компании, голубь, SILVER .999, вес, знак ICMC и серийный номер. Выпускается с 2014 года; с 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: '🥈', transparent: true },
-                { title: '300 г серебряных гранул', type: 'Гранулы', weight: '300 г', year: 'Текущий', purity: 'Серебро 999', desc: '300 граммов серебряных гранул (shot) пробы 999 от The Holy Land Mint — Israel Coins & Medals Corp. Официальная герметичная пластиковая упаковка с маркировкой Fine Silver 999. Подходит для инвестиций в физическое серебро, производства и коллекционирования.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true }
+                { title: '300 г серебряных гранул', type: 'Гранулы', weight: '300 г', year: '', purity: 'Серебро 999', desc: '300 граммов серебряных гранул (shot) пробы 999 от The Holy Land Mint — Israel Coins & Medals Corp. Официальная герметичная пластиковая упаковка с маркировкой Fine Silver 999. Подходит для инвестиций в физическое серебро, производства и коллекционирования.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true }
             ]
         }
     },
@@ -1480,6 +1481,17 @@ const MINT_DATA = {
                     img: AMERICAN_BUFFALO_2001_IMG,
                     emoji: '🦬',
                     transparent: true
+                },
+                {
+                    title: 'Sunshine Mint — מטיל 10 אונקיות',
+                    type: 'מטיל',
+                    weight: '10 אונקיות',
+                    year: '',
+                    purity: 'כסף 999',
+                    desc: 'מטיל השקעה אמריקאי מ-Sunshine Minting — אחד מיצרני הכסף הפרטיים המובילים בארה"ב. על המטיל מוטבעים לוגו Sunshine Minting (נשר), .999 FINE SILVER ו-10 OUNCES. מטילים אלו נפוצים בקרב משקיעי כסף פיזי: פרמיה לרוב נמוכה יותר ממטבעות, משקל ברור, ונזילות טובה בשוק המשני. חלק מהמטילים כוללים MintMark SI — שכבת אבטחה מיקרוסקופית לאימות.',
+                    img: SUNSHINE_MINT_10OZ_BAR_IMG,
+                    emoji: '🥈',
+                    transparent: true
                 }
             ]
         },
@@ -1496,7 +1508,8 @@ const MINT_DATA = {
             ],
             products: [
                 { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
-                { title: 'American Buffalo Commemorative (2001)', type: 'Commemorative', weight: '1 oz', year: '2001', purity: '.999 Silver', desc: 'The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913–1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876–1953) was also known for "The End of the Trail" and other major American medals.', img: AMERICAN_BUFFALO_2001_IMG, emoji: '🦬', transparent: true }
+                { title: 'American Buffalo Commemorative (2001)', type: 'Commemorative', weight: '1 oz', year: '2001', purity: '.999 Silver', desc: 'The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913–1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876–1953) was also known for "The End of the Trail" and other major American medals.', img: AMERICAN_BUFFALO_2001_IMG, emoji: '🦬', transparent: true },
+                { title: 'Sunshine Mint 10 oz Silver Bar', type: 'Bar', weight: '10 oz', year: '', purity: '.999 Silver', desc: 'Investment silver bar from Sunshine Minting — one of America\'s leading private mints. Stamped with the Sunshine Minting eagle logo, .999 FINE SILVER, and 10 OUNCES. Popular with physical silver stackers: typically lower premium per ounce than coins, clear weight, and good secondary-market liquidity. Some bars include MintMark SI micro-engraving for authentication.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: '🥈', transparent: true }
             ]
         },
         ru: {
@@ -1512,7 +1525,8 @@ const MINT_DATA = {
             ],
             products: [
                 { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986–', purity: 'Серебро 999', desc: 'American Silver Eagle — самая популярная инвестиционная монета в Северной Америке. Выпуск с 1986 года в золоте и серебре. Имеет статус законного платёжного средства США с номиналом $1. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
-                { title: 'American Buffalo — памятная 2001', type: 'Памятная', weight: '1 унция', year: '2001', purity: 'Серебро 999', desc: 'Памятный серебряный доллар American Buffalo Commemorative продавался Монетным двором США с 7 по 21 июня 2001 года до полного распродажа. Авторизованный тираж: 500 000 монет. Монета посвящена открытию Национального музея американских индейцев. Дизайн воссоздаёт знаменитый Buffalo Nickel (1913–1938): профиль коренного американца и бизон. Chief Iron Tail, Chief Big Tree и Chief Two Moons позировали скульптору James Earle Fraser; модель бизона — из Central Park Zoo. Fraser (1876–1953) также известен скульптурой «The End of the Trail» и другими американскими медалями.', img: AMERICAN_BUFFALO_2001_IMG, emoji: '🦬', transparent: true }
+                { title: 'American Buffalo — памятная 2001', type: 'Памятная', weight: '1 унция', year: '2001', purity: 'Серебро 999', desc: 'Памятный серебряный доллар American Buffalo Commemorative продавался Монетным двором США с 7 по 21 июня 2001 года до полного распродажа. Авторизованный тираж: 500 000 монет. Монета посвящена открытию Национального музея американских индейцев. Дизайн воссоздаёт знаменитый Buffalo Nickel (1913–1938): профиль коренного американца и бизон. Chief Iron Tail, Chief Big Tree и Chief Two Moons позировали скульптору James Earle Fraser; модель бизона — из Central Park Zoo. Fraser (1876–1953) также известен скульптурой «The End of the Trail» и другими американскими медалями.', img: AMERICAN_BUFFALO_2001_IMG, emoji: '🦬', transparent: true },
+                { title: 'Sunshine Mint — слиток 10 унций', type: 'Слиток', weight: '10 унций', year: '', purity: 'Серебро 999', desc: 'Инвестиционный слиток от Sunshine Minting — одного из ведущих частных монетных дворов США. На слитке: логотип Sunshine Minting (орёл), .999 FINE SILVER и 10 OUNCES. Популярен у инвесторов в физическое серебро: обычно ниже премия за унцию, чем у монет, понятный вес и хорошая ликвидность на вторичном рынке. На некоторых слитках есть микрогравировка MintMark SI для проверки подлинности.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: '🥈', transparent: true }
             ]
         }
     },
