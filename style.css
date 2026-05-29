@@ -1002,6 +1002,20 @@ input, textarea, .chat-messages, .chat-message {
     box-shadow: var(--nm-inset);
 }
 
+.beta-badge {
+    display: inline-block;
+    margin-inline-start: 6px;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--clay);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
 .personal-space-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
