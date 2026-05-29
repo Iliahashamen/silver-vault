@@ -1146,12 +1146,15 @@ function getUploadedMintProducts(products) {
 }
 
 function formatProductDesc(p) {
-    const parts = [];
-    if (p.year) parts.push(p.year);
-    if (p.weight) parts.push(p.weight);
-    if (p.purity) parts.push(p.purity);
-    const prefix = parts.length ? `${parts.join(' · ')}. ` : '';
-    return prefix + (p.desc || '');
+    const desc = (p.desc || '').trim();
+    const weight = (p.weight || '').trim();
+    let year = (p.year || '').trim();
+    if (/^(שוטף|current|текущий|ongoing)$/i.test(year)) year = '';
+
+    if (year && weight) return `${year} - ${weight} - ${desc}`;
+    if (year) return `${year} - ${desc}`;
+    if (weight) return `${weight} - ${desc}`;
+    return desc;
 }
 
 function mintWebsiteHref(website) {
@@ -1217,7 +1220,7 @@ const MINT_DATA = {
                     title: '300 גרם גרגירי כסף',
                     type: 'גרגירים',
                     weight: '300 גרם',
-                    year: 'שוטף',
+                    year: '',
                     purity: 'כסף 999',
                     desc: 'גרגירי כסף טהור 999 (Fine Silver) במשקל 300 גרם מ-The Holy Land Mint — Israel Coins & Medals Corp. אריזה רשמית במיכל פластיק עם סימון טוהר ומשקל. מתאים להשקעה בכסף פיזי, ייצור ואספנות.',
                     img: SILVER_GRAINS_300G_IMG,
@@ -1249,7 +1252,7 @@ const MINT_DATA = {
             products: [
                 { title: 'Dove of Peace Bullion', type: 'Bullion', weight: 'Various weights', year: '2014–', purity: '.999 Silver / .9999 Gold', desc: 'Israeli "Dove of Peace" bullion by The Holy Land Mint, produced since 2014. Obverse: a white dove with an olive branch in flight above the Old City of Jerusalem walls. Reverse: Holy Land Mint logo, metal purity and weight; bars also carry the Melter Assayer mark and serial number. Available as rounds or bars. Gold .9999 versions since 2019.', img: DOVE_OF_PEACE_IMG, emoji: '🕊️', transparent: true },
                 { title: 'Dove of Peace 1 kg Cast Bar', type: 'Bar', weight: '1 kg', year: '2014–', purity: '.999 Silver', desc: 'Cast .999 fine silver bar from the "Dove of Peace" series by The Holy Land Mint. Stamped with the company logo, dove motif, SILVER .999, weight, ICMC mark and serial number. Produced since 2014; gold .9999 versions available since 2019.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: '🥈', transparent: true },
-                { title: '300g Fine Silver Grains', type: 'Grains', weight: '300g', year: 'Current', purity: '.999 Silver', desc: '300 grams of .999 fine silver grains (shot) from The Holy Land Mint — Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true }
+                { title: '300g Fine Silver Grains', type: 'Grains', weight: '300g', year: '', purity: '.999 Silver', desc: '300 grams of .999 fine silver grains (shot) from The Holy Land Mint — Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true }
             ]
         },
         ru: {

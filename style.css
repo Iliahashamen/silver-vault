@@ -2961,7 +2961,7 @@ body.dark-mode .mint-website-link { background: var(--card); color: var(--text-l
 
 .mint-product-desc {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--text);
     line-height: 1.6;
     margin: 0;
 }
