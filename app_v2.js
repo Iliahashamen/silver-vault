@@ -1138,8 +1138,11 @@ const SILVER_GRAINS_300G_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage
 const AMERICAN_SILVER_EAGLE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2';
 const AMERICAN_BUFFALO_2001_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3';
 const SUNSHINE_MINT_10OZ_BAR_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/sunshine-mint-10oz-bar.webp?v=3';
+const ROYAL_MINT_500G_CAST_BAR_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/royal-mint-500g-cast-bar.webp?v=1';
+const BRITANNIA_2026_REVERSE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-reverse.webp?v=1';
+const BRITANNIA_2026_OBVERSE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-obverse.webp?v=1';
 
-const MUSEUM_UPLOADED_MINTS = new Set(['israel', 'usa']);
+const MUSEUM_UPLOADED_MINTS = new Set(['israel', 'usa', 'uk']);
 const MUSEUM_UPLOADED_IMG_HOST = 'uftkmytmegszggtsrrhz.supabase.co';
 
 function getUploadedMintProducts(products) {
@@ -1384,6 +1387,39 @@ const MINT_DATA = {
                 }
             ],
             products: [
+                {
+                    title: 'מטיל כסף יצוק 500g',
+                    type: 'מטיל',
+                    weight: '500 גרם',
+                    year: '',
+                    purity: 'כסף 999',
+                    desc: 'מטיל השקעה יצוק (Cast Bar) מהמינט המלכותי — THE ROYAL MINT, 500g, 999 SILVER. מטילי יציקה נפוצים בקרב משקיעים שמחפשים כמות כסף גדולה במחיר פרמיה נמוך יחסית לאונקיה. על המטיל מוטבעים לוגו המינט, משקל, טוהר ומספר סידורי (למשל R000001). מטילים אינם נושאים דיוקן מלכותי — בניגוד למטבעות.',
+                    img: ROYAL_MINT_500G_CAST_BAR_IMG,
+                    emoji: '🥈',
+                    transparent: true
+                },
+                {
+                    title: 'Silver Britannia 2026',
+                    type: 'מטבע',
+                    weight: '1 אונקיה',
+                    year: '2026',
+                    purity: 'כסף 999.9',
+                    desc: 'מטבע הברבריאניה (Britannia) — אחד ממטבעות הכסף המוכרים בעולם, מיוצר על ידי המינט המלכותי מאז 1987. על הצד האחורי: ברבריאניה עם קסדה, חנית, מגן Union Jack וענף זית; חריטות BRITANNIA, 2026, 1 OZ, 999 FINE SILVER. כולל אבטחה מתקדמת: Latent Image (חנית/מנעול), Surface Animation, מיקרו-טקסט DECUS ET TUTAMEN, וקווי צבע על המגן. הילך חוקי בבריטניה.',
+                    img: BRITANNIA_2026_REVERSE_IMG,
+                    emoji: '🇬🇧',
+                    transparent: true
+                },
+                {
+                    title: 'Silver Britannia — המלך צ\'ארלס השלישי',
+                    type: 'מטבע',
+                    weight: '1 אונקיה',
+                    year: '2026',
+                    purity: 'כסף 999.9',
+                    desc: 'על פני המטבע (Obverse) מופיע דיוקן המלך צ\'ארלס השלישי — ללא כתר, בעיצוב מרטין ג\'נינגס (MJ). החריטה: CHARLES III • D • G • REX • F • D • 2 POUNDS (Dei Gratia Rex Fidei Defensor). מאז עלייתו לכס ב-2022, דיוקן המלך מופיע על רוב מטבעות המינט המלכותי — כולל Britannia, Sovereign ומטבעות זיכרון — במקום אליזבת השנייה. שדה הרקע עם טקסטורת אבטחה מיקרוסקופית.',
+                    img: BRITANNIA_2026_OBVERSE_IMG,
+                    emoji: '👑',
+                    transparent: true
+                }
             ]
         },
         en: {
@@ -1407,6 +1443,39 @@ const MINT_DATA = {
                 }
             ],
             products: [
+                {
+                    title: 'Royal Mint 500g Cast Silver Bar',
+                    type: 'Bar',
+                    weight: '500g',
+                    year: '',
+                    purity: '.999 Silver',
+                    desc: 'Cast investment bar from The Royal Mint — stamped THE ROYAL MINT, 500g, 999, SILVER, with a unique serial number (e.g. R000001). Cast bars are popular with stackers seeking larger silver weight at a typically lower premium per gram than coins. Bars carry no royal portrait — unlike Royal Mint coinage.',
+                    img: ROYAL_MINT_500G_CAST_BAR_IMG,
+                    emoji: '🥈',
+                    transparent: true
+                },
+                {
+                    title: 'Silver Britannia (2026) — Reverse',
+                    type: 'Coin',
+                    weight: '1 oz',
+                    year: '2026',
+                    purity: '.9999 Silver',
+                    desc: 'The Britannia is one of the world\'s most recognised silver bullion coins, struck by The Royal Mint since 1987. Reverse: Britannia with helmet, trident, Union Jack shield and olive branch; inscriptions BRITANNIA, 2026, 1 OZ, 999 FINE SILVER. Advanced security: Latent Image (trident/padlock), Surface Animation, micro-text DECUS ET TUTAMEN, and tincture lines on the shield. UK legal tender.',
+                    img: BRITANNIA_2026_REVERSE_IMG,
+                    emoji: '🇬🇧',
+                    transparent: true
+                },
+                {
+                    title: 'Silver Britannia — King Charles III Obverse',
+                    type: 'Coin',
+                    weight: '1 oz',
+                    year: '2026',
+                    purity: '.9999 Silver',
+                    desc: 'Obverse: portrait of King Charles III — uncrowned, by Martin Jennings (initials MJ). Inscription: CHARLES III • D • G • REX • F • D • 2 POUNDS. Since his accession in 2022, the King\'s effigy appears on most Royal Mint bullion and commemorative silver — including Britannia and Sovereign — replacing Queen Elizabeth II. Micro-textured security field on the background.',
+                    img: BRITANNIA_2026_OBVERSE_IMG,
+                    emoji: '👑',
+                    transparent: true
+                }
             ]
         },
         ru: {
@@ -1430,6 +1499,39 @@ const MINT_DATA = {
                 }
             ],
             products: [
+                {
+                    title: 'Литой слиток 500 г — Royal Mint',
+                    type: 'Слиток',
+                    weight: '500 г',
+                    year: '',
+                    purity: 'Серебро 999',
+                    desc: 'Инвестиционный литой слиток от The Royal Mint — штампы THE ROYAL MINT, 500g, 999, SILVER и уникальный серийный номер (например R000001). Литые слитки популярны у инвесторов, покупающих большой вес серебра с обычно более низкой премией за грамм, чем у монет. На слитках нет королевского портрета — в отличие от монет.',
+                    img: ROYAL_MINT_500G_CAST_BAR_IMG,
+                    emoji: '🥈',
+                    transparent: true
+                },
+                {
+                    title: 'Silver Britannia (2026) — реверс',
+                    type: 'Монета',
+                    weight: '1 унция',
+                    year: '2026',
+                    purity: 'Серебро 999.9',
+                    desc: 'Britannia — одна из самых узнаваемых инвестиционных серебряных монет мира, чеканится Royal Mint с 1987 года. Реверс: Britannia с шлемом, трезубцем, щитом Union Jack и оливковой ветвью; надписи BRITANNIA, 2026, 1 OZ, 999 FINE SILVER. Защита: Latent Image (трезубец/замок), Surface Animation, микротекст DECUS ET TUTAMEN, линии герба на щите. Законное платёжное средство Великобритании.',
+                    img: BRITANNIA_2026_REVERSE_IMG,
+                    emoji: '🇬🇧',
+                    transparent: true
+                },
+                {
+                    title: 'Silver Britannia — король Карл III (аверс)',
+                    type: 'Монета',
+                    weight: '1 унция',
+                    year: '2026',
+                    purity: 'Серебро 999.9',
+                    desc: 'Аверс: портрет короля Карла III — без короны, художник Martin Jennings (инициалы MJ). Надпись: CHARLES III • D • G • REX • F • D • 2 POUNDS. С 2022 года после восшествия на престол портрет короля появляется на большинстве инвестиционных и памятных серебряных монет Royal Mint — включая Britannia и Sovereign — вместо Елизаветы II. Микротекстурированное защитное поле фона.',
+                    img: BRITANNIA_2026_OBVERSE_IMG,
+                    emoji: '👑',
+                    transparent: true
+                }
             ]
         }
     },
