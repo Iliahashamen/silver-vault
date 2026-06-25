@@ -24,7 +24,21 @@ let activeChartType = 'candles'; // 'candles' | 'line'
 let lineChart     = null;
 let dashboardInited = false;
 
-const uid = tg?.initDataUnsafe?.user?.id || Math.floor(Math.random() * 1_000_000);
+// User id: prefer Telegram identity; otherwise a stable per-browser id (persisted),
+// so standalone web-app users keep one continuous Mr. D session across reloads.
+function _stableWebUid() {
+    try {
+        let id = localStorage.getItem('vault_web_uid');
+        if (!id) {
+            id = String(Math.floor(Math.random() * 1_000_000_000));
+            localStorage.setItem('vault_web_uid', id);
+        }
+        return Number(id);
+    } catch {
+        return Math.floor(Math.random() * 1_000_000);
+    }
+}
+const uid = tg?.initDataUnsafe?.user?.id || _stableWebUid();
 
 const DEV_PREVIEW_PASSCODES = ['123', 'DemoD69'];
 const DEV_PREVIEW_TOKEN = 'local-dev-preview-token';
@@ -840,6 +854,19 @@ function addMsg(author, rawText, type) {
     const box = document.getElementById('chat-messages');
     const el  = document.createElement('div');
     el.className = `chat-message ${type}`;
+
+    // Typing indicator: three animated floating dots (no author label, no text).
+    if (type.includes('typing')) {
+        el.innerHTML =
+            '<div class="msg-content typing-indicator" aria-label="מר ד׳ מקליד">' +
+            '<span class="typing-dot"></span>' +
+            '<span class="typing-dot"></span>' +
+            '<span class="typing-dot"></span>' +
+            '</div>';
+        box.appendChild(el);
+        box.scrollTop = box.scrollHeight;
+        return el;
+    }
 
     // Parse nav tokens only on final bot messages (not typing indicator / error)
     let displayText = rawText;
@@ -2343,6 +2370,23 @@ const GUIDE_DATA = {
 
 let _guideActiveLang = 'he';
 
+// Admin-managed guide chapters (fetched once from the content API, then cached).
+// These are ADDITIVE: built-in GUIDE_DATA stays as-is; admin items append after it,
+// so new guides are added/removed in the admin panel — never hardcoded.
+let _adminGuides = null;
+
+async function _fetchAdminGuides() {
+    if (_adminGuides !== null) return _adminGuides;
+    try {
+        const res = await fetch(`${CONFIG.CHAT_API_URL}/api/content`);
+        const data = await res.json();
+        _adminGuides = (data && data.success && Array.isArray(data.guides)) ? data.guides : [];
+    } catch {
+        _adminGuides = [];
+    }
+    return _adminGuides;
+}
+
 function renderGuide(lang) {
     _guideActiveLang = lang;
     const data = GUIDE_DATA[lang] || GUIDE_DATA.he;
@@ -2356,7 +2400,19 @@ function renderGuide(lang) {
         b.classList.toggle('active', b.dataset.lang === lang);
     });
 
-    container.innerHTML = data.chapters.map((ch, i) => `
+    // Built-in chapters (fallback / legacy content).
+    let chapters = data.chapters.slice();
+
+    // Append admin-managed chapters for this language (if any).
+    const admin = _adminGuides || [];
+    admin.forEach(it => {
+        const block = it[lang] || it.he || {};
+        if (block && (block.title || block.content)) {
+            chapters.push({ icon: it.icon || '📘', title: block.title || '', content: block.content || '' });
+        }
+    });
+
+    container.innerHTML = chapters.map((ch, i) => `
         <div class="guide-chapter" id="guide-ch-${i}">
             <button class="guide-chapter-header" onclick="toggleGuideChapter(${i})">
                 <span class="guide-chapter-icon">${ch.icon}</span>
@@ -2383,8 +2439,9 @@ function initGuide() {
     // Back button
     document.getElementById('back-guide')?.addEventListener('click', () => goBack());
 
-    // Render default
+    // Render default now, then re-render once admin-managed chapters are fetched.
     renderGuide('he');
+    _fetchAdminGuides().then(() => renderGuide(_guideActiveLang || 'he'));
 }
 
 // ── INIT DASHBOARD ────────────────────────────────────────────────────

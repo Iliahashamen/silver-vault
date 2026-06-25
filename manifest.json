@@ -1,0 +1,27 @@
+{
+  "name": "הכספת — The Vault",
+  "short_name": "הכספת",
+  "description": "סביבת מסחר לימודית לכסף פיזי — מחירים, גרפים, מדריכים וצ'אט עם מר D.",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#8EA89A",
+  "theme_color": "#8EA89A",
+  "icons": [
+    {
+      "src": "icons/v2_guide.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/v2_guide.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

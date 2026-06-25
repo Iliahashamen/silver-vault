@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>הכספת — ניהול תוכן</title>
+    <link rel="stylesheet" href="style.css?v=92">
+    <script src="config.js?v=43"></script>
+    <style>
+        .admin-wrap { max-width: 880px; margin: 0 auto; padding: 20px 16px 80px; }
+        .admin-h1 { font-size: 22px; font-weight: 800; margin: 8px 0 16px; }
+        .admin-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+        .admin-item { border-radius: var(--radius-md); background: var(--card); box-shadow: var(--nm-inner-raised); padding: 14px; margin-bottom: 14px; }
+        .admin-item-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+        .admin-item input[type="text"], .admin-item input[type="number"], .admin-item textarea {
+            width: 100%; box-sizing: border-box; margin: 4px 0; padding: 8px 10px;
+            border-radius: 10px; border: 1px solid rgba(0,0,0,0.12); font-family: inherit; font-size: 14px;
+        }
+        .admin-item textarea { min-height: 120px; resize: vertical; direction: ltr; text-align: left; }
+        .admin-lang-tabs { display: flex; gap: 6px; margin: 8px 0; }
+        .admin-lang-tabs button { padding: 5px 12px; border-radius: 8px; border: none; cursor: pointer; background: var(--card-inner); }
+        .admin-lang-tabs button.active { background: var(--teal); color: #fff; }
+        .admin-lang-pane { display: none; }
+        .admin-lang-pane.active { display: block; }
+        .admin-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .admin-row label { font-size: 13px; }
+        .admin-msg { margin: 10px 0; font-weight: 700; }
+        .btn-sm { padding: 8px 14px; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; }
+        .btn-primary { background: var(--teal); color: #fff; }
+        .btn-danger { background: #C04040; color: #fff; }
+        .btn-ghost { background: var(--card-inner); }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="admin-wrap">
+        <h1 class="admin-h1">הכספת — ניהול תוכן (מדריכים)</h1>
+
+        <!-- LOGIN -->
+        <div id="admin-login">
+            <p>הזן קוד מנהל כדי לערוך תוכן:</p>
+            <div class="admin-row">
+                <input type="password" id="admin-pass" placeholder="קוד מנהל" style="padding:9px 12px;border-radius:10px;border:1px solid #ccc;">
+                <button class="btn-sm btn-primary" id="admin-login-btn">כניסה</button>
+            </div>
+            <div class="admin-msg" id="admin-login-msg"></div>
+        </div>
+
+        <!-- EDITOR -->
+        <div id="admin-editor" class="hidden">
+            <div class="admin-bar">
+                <button class="btn-sm btn-ghost" id="add-item-btn">+ פריט חדש</button>
+                <button class="btn-sm btn-primary" id="save-btn">שמור הכל</button>
+                <button class="btn-sm btn-ghost" id="reload-btn">טען מחדש</button>
+                <span class="admin-msg" id="admin-save-msg"></span>
+            </div>
+            <div id="items-container"></div>
+        </div>
+    </div>
+
+    <script src="admin.js?v=1"></script>
+</body>
+</html>
