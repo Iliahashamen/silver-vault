@@ -24,25 +24,27 @@
             --green-dim: #6fbf8e;
             --beige: #ece2c0;
             --beige-dim: #b3a988;
-            /* accents kept green/beige only (no pink/purple) */
             --purple: #b3a988;
             --pink: #ece2c0;
             --cyan: #6fbf8e;
-            --bg: #05140d;
-            --bg2: #0a2016;
-            --panel: rgba(7, 26, 17, 0.66);
-            --line: rgba(43, 245, 160, 0.28);
+            --bg: #010a05;      /* much darker */
+            --bg2: #031209;
+            --panel: rgba(3, 14, 8, 0.82);
+            --line: rgba(43, 245, 160, 0.22);
             --danger: #cdaf6b;
+            /* retro mono for English/numbers */
+            --mono: "Courier New", "Lucida Console", ui-monospace, monospace;
         }
         * { box-sizing: border-box; }
         html, body { margin: 0; padding: 0; background: var(--bg); color: var(--green); }
         body {
             font-family: "ShimshonAgol", "Arial Hebrew", Arial, sans-serif;
-            font-size: 15px; letter-spacing: 0.3px; font-weight: 400;
+            /* more breathing room between letters and lines */
+            font-size: 15px; letter-spacing: 1.2px; word-spacing: 3px; font-weight: 400; line-height: 1.8;
             min-height: 100vh; overflow-x: hidden;
             background:
-                radial-gradient(circle at 50% -10%, rgba(43,245,160,0.18), transparent 55%),
-                radial-gradient(circle at 50% 120%, rgba(236,226,192,0.12), transparent 60%),
+                radial-gradient(circle at 50% -10%, rgba(43,245,160,0.10), transparent 55%),
+                radial-gradient(circle at 50% 120%, rgba(236,226,192,0.06), transparent 60%),
                 linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
         }
         /* retro horizon grid */
@@ -59,24 +61,32 @@
             content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.45;
             background: repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0px, rgba(0,0,0,0.16) 1px, transparent 2px, transparent 3px);
         }
-        #rain { position: fixed; inset: 0; z-index: 0; opacity: 0.06; pointer-events: none; }
-        /* pixel-art palm: sits BEHIND content, blended into the CRT screen.
-           'screen' blend drops the black, only the glowing palm shows; hue cycles blue→green→purple. */
+        #rain { position: fixed; inset: 0; z-index: 0; opacity: 0.05; pointer-events: none; }
+
+        /* Palm circle — outer wrapper handles color cycle via filter,
+           inner handles blend-mode so both work in all browsers */
         #palms {
             position: fixed; inset: 0; z-index: 0; pointer-events: none;
-            background: url("palm_circle.png?v=1") center 48% / min(380px, 48vw) auto no-repeat;
-            mix-blend-mode: screen;
-            opacity: 0.5;
+            display: flex; align-items: center; justify-content: center;
             animation: palmcycle 48s ease-in-out infinite;
             will-change: filter;
         }
+        #palms::after {
+            content: "";
+            display: block;
+            width: min(520px, 62vw);
+            aspect-ratio: 1;
+            background: url("palm_circle.png?v=2") center / contain no-repeat;
+            mix-blend-mode: screen;
+            opacity: 0.35;
+        }
         @keyframes palmcycle {
-            0%   { filter: hue-rotate(-75deg) saturate(0.45) brightness(1.25); } /* beige */
-            20%  { filter: hue-rotate(100deg) saturate(1.3); }                   /* blue */
-            40%  { filter: hue-rotate(0deg) saturate(1.15); }                    /* green */
-            60%  { filter: hue-rotate(160deg) saturate(1.35); }                  /* purple */
-            80%  { filter: hue-rotate(210deg) saturate(1.4) brightness(1.05); }  /* pink */
-            100% { filter: hue-rotate(-75deg) saturate(0.45) brightness(1.25); } /* beige */
+            0%   { filter: hue-rotate(-75deg) saturate(0.5) brightness(1.3); }  /* beige */
+            20%  { filter: hue-rotate(100deg) saturate(1.4) brightness(1.1); }  /* blue */
+            40%  { filter: hue-rotate(0deg)   saturate(1.2) brightness(1.0); }  /* green */
+            60%  { filter: hue-rotate(160deg) saturate(1.5) brightness(1.1); }  /* purple */
+            80%  { filter: hue-rotate(210deg) saturate(1.5) brightness(1.15); } /* pink */
+            100% { filter: hue-rotate(-75deg) saturate(0.5) brightness(1.3); }  /* beige */
         }
         @keyframes crtflicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.975; } }
         .wrap { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 26px 16px 90px; animation: crtflicker 4s steps(40) infinite; }
@@ -90,11 +100,11 @@
             -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 10px rgba(43,245,160,0.45));
         }
-        .sub { text-align: center; color: var(--green-dim); font-size: 16px; letter-spacing: 6px; margin-bottom: 24px; }
-        .syslog { font-family: "Courier New", ui-monospace, monospace; color: var(--green-dim); opacity: 0.7; font-size: 12px; letter-spacing: 2px; direction: ltr; text-align: left; margin: 0 0 6px 2px; }
+        .sub { text-align: center; color: var(--green-dim); font-size: 14px; letter-spacing: 8px; word-spacing: 6px; margin-bottom: 28px; }
+        .syslog { font-family: var(--mono); color: var(--green-dim); opacity: 0.65; font-size: 11px; letter-spacing: 2.5px; direction: ltr; text-align: left; margin: 0 0 8px 2px; }
 
         /* pixel window frame: square corners + double outline (beige over green) */
-        .panel { border: 2px solid var(--green-dim); border-radius: 3px; background: var(--panel); padding: 16px; margin-bottom: 14px; box-shadow: 0 0 0 1px rgba(236,226,192,0.18), 0 0 18px rgba(43,245,160,0.07) inset; }
+        .panel { border: 2px solid var(--green-dim); border-radius: 3px; background: var(--panel); padding: 20px 22px; margin-bottom: 18px; box-shadow: 0 0 0 1px rgba(236,226,192,0.18), 0 0 18px rgba(43,245,160,0.07) inset; }
 
         .prompt { font-size: 16px; color: var(--green); margin-bottom: 7px; }
         .inp {
@@ -121,13 +131,13 @@
         .login-box { max-width: 420px; margin: 8vh auto 0; }
 
         .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
-        .nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 16px; }
-        .nav button { background: rgba(0,0,0,0.34); border: 1px solid var(--line); color: var(--green-dim); font-family: inherit; font-size: 16px; letter-spacing: 1px; padding: 9px 15px; border-radius: 3px; cursor: pointer; }
+        .nav { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+        .nav button { background: rgba(0,0,0,0.34); border: 1px solid var(--line); color: var(--green-dim); font-family: inherit; font-size: 15px; letter-spacing: 2px; word-spacing: 2px; padding: 10px 18px; border-radius: 3px; cursor: pointer; }
         .nav button.active { background: var(--green); color: #06121a; border-color: var(--green); font-weight: 700; box-shadow: 0 0 10px rgba(43,245,160,0.45); }
 
         .section { display: none; } .section.active { display: block; }
 
-        .item { border: 1px solid var(--line); border-radius: 3px; background: rgba(0,0,0,0.3); padding: 12px; margin-bottom: 12px; }
+        .item { border: 1px solid var(--line); border-radius: 3px; background: rgba(0,0,0,0.3); padding: 16px; margin-bottom: 16px; }
         .item-head { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; margin-bottom: 9px; }
         .item-head label { font-size: 12px; color: var(--beige-dim); display: flex; align-items: center; gap: 5px; }
         .item .inp { margin: 4px 0; }
@@ -138,17 +148,23 @@
         .lang-tabs button { background: rgba(0,0,0,0.34); border: 1px solid var(--line); color: var(--beige-dim); padding: 4px 11px; border-radius: 5px; cursor: pointer; font-family: inherit; }
         .lang-tabs button.active { background: var(--purple); color: #0a2016; border-color: var(--purple); font-weight: 700; }
         .lang-pane { display: none; } .lang-pane.active { display: block; }
-        .hint { font-size: 15px; color: var(--beige-dim); margin: 0 0 12px; line-height: 1.6; letter-spacing: 0.5px; }
+        .hint { font-size: 14px; color: var(--beige-dim); margin: 0 0 14px; line-height: 2; letter-spacing: 1.5px; word-spacing: 3px; }
         textarea#mrd-note { min-height: 200px; }
         .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-        .card { border: 1px solid var(--line); border-radius: 3px; background: rgba(0,0,0,0.32); padding: 14px; text-align: center; }
-        .card .k { font-size: 15px; color: var(--beige-dim); }
-        .card .v { font-size: 34px; font-weight: 700; margin-top: 6px; color: var(--green); text-shadow: 0 0 8px rgba(43,245,160,0.4); }
+        .card { border: 1px solid var(--line); border-radius: 3px; background: rgba(0,0,0,0.32); padding: 18px; text-align: center; }
         .card .v.p { color: var(--beige); text-shadow: 0 0 8px rgba(236,226,192,0.4); }
-        .utable { width: 100%; border-collapse: collapse; font-size: 16px; }
-        .utable th, .utable td { text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--line); }
-        .utable th { color: var(--green); font-weight: 700; letter-spacing: 1px; }
+        /* users table + stats numbers — retro mono */
+        .utable { width: 100%; border-collapse: collapse; font-size: 14px; font-family: var(--mono); letter-spacing: 1px; }
+        .utable th, .utable td { text-align: right; padding: 10px 12px; border-bottom: 1px solid var(--line); line-height: 1.7; }
+        .utable th { color: var(--green); letter-spacing: 2px; }
         .utable tbody tr:hover { background: rgba(43,245,160,0.07); }
+        /* stat card numbers retro mono */
+        .card .v { font-family: var(--mono); font-size: 30px; font-weight: 700; margin-top: 6px; color: var(--green); text-shadow: 0 0 8px rgba(43,245,160,0.4); letter-spacing: 2px; }
+        .card .k { font-size: 13px; color: var(--beige-dim); letter-spacing: 1.5px; line-height: 1.8; }
+        /* login challenge ltr mono */
+        .prompt[style*="ltr"] { font-family: var(--mono) !important; letter-spacing: 2px; }
+        /* emails / user IDs inline */
+        [data-mono], td { font-family: var(--mono); }
     </style>
 </head>
 <body>
