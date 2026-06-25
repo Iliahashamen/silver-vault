@@ -40,7 +40,9 @@ function _stableWebUid() {
 }
 const uid = tg?.initDataUnsafe?.user?.id || _stableWebUid();
 
-const DEV_PREVIEW_PASSCODES = ['123', 'DemoD69'];
+// Local-only preview token. On localhost any passcode grants a preview session
+// so the app can be viewed offline without the backend. This NEVER works on the
+// live site (isLocalDevHost is false there) — no secret is exposed in public code.
 const DEV_PREVIEW_TOKEN = 'local-dev-preview-token';
 
 function isLocalDevHost() {
@@ -152,7 +154,7 @@ async function handleLogin() {
     if (msg) { msg.textContent = 'מתחבר...'; msg.style.color = '#888'; }
     if (btn)  btn.disabled = true;
     try {
-        if (isLocalDevHost() && DEV_PREVIEW_PASSCODES.includes(pass)) {
+        if (isLocalDevHost()) {
             saveSession(DEV_PREVIEW_TOKEN);
             if (msg) { msg.textContent = 'גישה אושרה ✓ (מצב פיתוח)'; msg.style.color = '#4AB882'; }
             setTimeout(() => showDashboard(), 300);
