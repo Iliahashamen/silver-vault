@@ -8,7 +8,7 @@
     <title>מסוף ניהול — הכספת</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400..700&family=Rubik+Pixels&display=swap" rel="stylesheet">
     <script src="config.js?v=43"></script>
     <style>
         :root {
@@ -51,16 +51,27 @@
             content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.45;
             background: repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0px, rgba(0,0,0,0.16) 1px, transparent 2px, transparent 3px);
         }
-        #rain { position: fixed; inset: 0; z-index: 0; opacity: 0.08; pointer-events: none; }
-        .wrap { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 26px 16px 90px; }
+        #rain { position: fixed; inset: 0; z-index: 0; opacity: 0.06; pointer-events: none; }
+        /* color-cycling palm trees (blue → green → purple) at 60% */
+        #palms { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.6; pointer-events: none; }
+        #palms path { fill: none; stroke-linecap: round; stroke-width: 9; animation: palmcycle 16s ease-in-out infinite; }
+        #palms .trunk { stroke-width: 13; }
+        @keyframes palmcycle {
+            0%, 100% { stroke: #3aa0ff; }
+            33%      { stroke: #2bf5a0; }
+            66%      { stroke: #b06bff; }
+        }
+        @keyframes crtflicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.975; } }
+        .wrap { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 26px 16px 90px; animation: crtflicker 4s steps(40) infinite; }
 
-        /* main title — centered pixel retro, mostly green with a synthwave tail */
+        /* main title — pixel-block retro font, centered, green */
         .brand {
-            text-align: center; font-size: 58px; font-weight: 700; letter-spacing: 3px; line-height: 1;
-            margin: 12px 0 4px;
-            background: linear-gradient(180deg, #ffffff 0%, var(--green) 42%, var(--cyan) 72%, var(--pink) 100%);
+            font-family: "Rubik Pixels", "Handjet", monospace;
+            text-align: center; font-size: 64px; font-weight: 400; letter-spacing: 2px; line-height: 1;
+            margin: 14px 0 6px;
+            background: linear-gradient(180deg, var(--beige) 0%, var(--green) 55%, var(--green-dim) 100%);
             -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 12px rgba(43,245,160,0.5));
+            filter: drop-shadow(0 0 10px rgba(43,245,160,0.45));
         }
         .sub { text-align: center; color: var(--green-dim); font-size: 16px; letter-spacing: 6px; margin-bottom: 24px; }
 
@@ -124,6 +135,22 @@
 </head>
 <body>
     <canvas id="rain"></canvas>
+    <svg id="palms" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+            <g id="palm">
+                <path class="trunk" d="M0 0 Q 18 150 6 320" />
+                <path class="frond" d="M0 0 Q -64 -34 -158 -4" />
+                <path class="frond" d="M0 0 Q -56 -56 -126 -90" />
+                <path class="frond" d="M0 0 Q -16 -66 -38 -158" />
+                <path class="frond" d="M0 0 Q 16 -66 42 -156" />
+                <path class="frond" d="M0 0 Q 56 -56 130 -88" />
+                <path class="frond" d="M0 0 Q 64 -32 160 -2" />
+            </g>
+        </defs>
+        <use href="#palm" transform="translate(190 470) scale(1.15)" />
+        <use href="#palm" transform="translate(1015 500) scale(0.95)" />
+        <use href="#palm" transform="translate(610 430) scale(0.7)" />
+    </svg>
     <div class="wrap">
         <div class="brand">הכספת</div>
         <div class="sub">מסוף ניהול</div>
@@ -157,8 +184,7 @@
             <div class="nav" id="nav">
                 <button data-sec="guides" class="active">מדריכים</button>
                 <button data-sec="quiz">חידון</button>
-                <button data-sec="mints">מוזיאון</button>
-                <button data-sec="mrd">מר ד׳</button>
+                <button data-sec="mrd">גרופבוט</button>
                 <button data-sec="users">משתמשים</button>
                 <button data-sec="data">נתונים</button>
             </div>
@@ -173,21 +199,33 @@
                 </div>
             </div>
 
-            <div class="section active" id="sec-guides"><p class="hint">מדריכים · שלוש שפות</p><div id="box-guides"></div></div>
-            <div class="section" id="sec-quiz"><p class="hint">חידון · סמן תשובה נכונה</p><div id="box-quiz"></div></div>
-            <div class="section" id="sec-mints">
-                <p class="hint">מוזיאון · עריכת JSON</p>
-                <textarea class="inp code" id="mints-json" placeholder='{ "items": [ ... ] }' dir="ltr"></textarea>
+            <div class="section active" id="sec-guides">
+                <div class="panel compose">
+                    <p class="hint">כתוב טקסט חופשי בעברית · גרופבוט יסדר לכותרת ותוכן ויוסיף אמוג'י · אפשר לערוך לפני שמירה</p>
+                    <textarea class="inp" id="guide-compose" placeholder="כתוב כאן בחופשיות, כמו בפנקס..."></textarea>
+                    <div class="bar mt"><button class="btn p" id="guide-format">סדר עם גרופבוט</button><span class="msg" id="guide-format-msg" style="margin-inline-start:auto;"></span></div>
+                </div>
+                <div id="box-guides"></div>
+            </div>
+            <div class="section" id="sec-quiz">
+                <div class="panel compose">
+                    <p class="hint">כתוב שאלה ותשובות בטקסט חופשי · סמן את הנכונה בכוכבית * · גרופבוט יסדר לשאלה וארבע תשובות</p>
+                    <textarea class="inp" id="quiz-compose" placeholder="לדוגמה: כמה גרם באונקיה? 31.10* / 28.35 / 33 / 30"></textarea>
+                    <div class="bar mt"><button class="btn p" id="quiz-format">סדר עם גרופבוט</button><span class="msg" id="quiz-format-msg" style="margin-inline-start:auto;"></span></div>
+                </div>
+                <div id="box-quiz"></div>
             </div>
 
-            <!-- MR. D — persona / instructions -->
+            <!-- groupBOT — add-on instructions (time-limited) -->
             <div class="section" id="sec-mrd">
                 <div class="panel">
-                    <p class="hint">הנחיות למר ד׳ · נכנס לתוקף תוך כשתי דקות</p>
-                    <textarea class="inp" id="mrd-note" placeholder="לדוגמה: הזכר השבוע את מבצע יום העצמאות. הימנע מהבטחות תשואה. תמיד הצע לפנות לדמיאן להחלטות סופיות."></textarea>
+                    <p class="hint">הנחיות תוספת לגרופבוט · זמניות · נכנס לתוקף תוך כשתי דקות</p>
+                    <textarea class="inp" id="mrd-note" placeholder="לדוגמה: הזכר השבוע את מבצע יום העצמאות. הימנע מהבטחות תשואה."></textarea>
+                    <div id="mrd-until" class="hint" style="text-align:center;"></div>
                     <div class="bar mt">
                         <button class="btn p" id="mrd-save">שמור הנחיות</button>
                         <button class="btn" id="mrd-reload">טען מחדש</button>
+                        <button class="btn danger" id="mrd-clear">נקה</button>
                         <span class="msg" id="mrd-msg" style="margin-inline-start:auto;"></span>
                     </div>
                 </div>
@@ -211,6 +249,6 @@
             </div>
         </div>
     </div>
-    <script src="admin.js?v=8"></script>
+    <script src="admin.js?v=9"></script>
 </body>
 </html>

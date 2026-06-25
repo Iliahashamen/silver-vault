@@ -63,7 +63,7 @@ async function adminLogin() {
 function authHeaders() { return { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` }; }
 
 // ── sections ───────────────────────────────────────────────────────
-const CONTENT_SECS = ['guides', 'quiz', 'mints'];
+const CONTENT_SECS = ['guides', 'quiz'];
 function showSection(sec) {
     if (CONTENT_SECS.includes(current)) syncSection(current);
     current = sec;
@@ -219,7 +219,13 @@ function addItem() {
     else if (current === 'quiz') { data.quiz.push(blankQuiz()); renderQuiz(); }
 }
 
-// ── MR. D persona note ─────────────────────────────────────────────
+// ── groupBOT add-on instructions (time-limited) ────────────────────
+function showUntil(until) {
+    const el = document.getElementById('mrd-until');
+    if (!until) { el.textContent = 'קבוע (ללא תפוגה)'; return; }
+    try { el.textContent = 'פעיל עד ' + new Date(until).toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' }); }
+    catch { el.textContent = 'פעיל עד ' + until; }
+}
 async function loadMrd() {
     const t = document.getElementById('mrd-msg'); t.textContent = 'טוען...'; t.className = 'msg ok';
     try {
@@ -227,18 +233,94 @@ async function loadMrd() {
         if (res.status === 401 || res.status === 503) { logout(); return; }
         const d = await res.json();
         document.getElementById('mrd-note').value = d.note || '';
-        t.textContent = '';
+        showUntil(d.until); t.textContent = '';
     } catch (e) { t.textContent = (e.message || 'טעינה נכשלה'); t.className = 'msg err'; }
 }
+// Parse a free-text duration (he/en) into milliseconds. Returns null if unrecognized.
+function parseDuration(str) {
+    const s = String(str || '').trim().toLowerCase();
+    if (!s) return null;
+    const dbl = /(יומיים)/.test(s) ? 2 * 864e5 : /(שבועיים)/.test(s) ? 14 * 864e5 : null;
+    if (dbl) return dbl;
+    const num = parseFloat((s.match(/[\d.]+/) || ['1'])[0]) || 1;
+    const U = [
+        [/(min|minute|דקה|דקות)/, 6e4],
+        [/(hour|hr|שעה|שעות)/, 36e5],
+        [/(day|יום|ימים)/, 864e5],
+        [/(week|שבוע|שבועות)/, 7 * 864e5],
+        [/(month|חודש|חודשים)/, 30 * 864e5],
+    ];
+    for (const [re, ms] of U) { if (re.test(s)) return num * ms; }
+    return null;
+}
 async function saveMrd() {
-    const t = document.getElementById('mrd-msg'); t.textContent = 'שומר...'; t.className = 'msg ok';
+    const t = document.getElementById('mrd-msg');
+    const note = document.getElementById('mrd-note').value;
+    let until = '';
+    if (note.trim()) {
+        const ans = prompt('לכמה זמן יפעלו ההנחיות? (לדוגמה: "3 ימים", "שבוע", "48 שעות"). השאר ריק = קבוע.');
+        if (ans === null) { t.textContent = 'בוטל'; t.className = 'msg warn'; return; }
+        if (ans.trim()) {
+            const ms = parseDuration(ans);
+            if (!ms) { t.textContent = 'לא הצלחתי להבין את משך הזמן'; t.className = 'msg err'; return; }
+            const end = new Date(Date.now() + ms);
+            if (!confirm('ההנחיות יפעלו עד ' + end.toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' }) + '. לאשר?')) {
+                t.textContent = 'בוטל'; t.className = 'msg warn'; return;
+            }
+            until = end.toISOString();
+        }
+    }
+    t.textContent = 'שומר...'; t.className = 'msg ok';
     try {
-        const note = document.getElementById('mrd-note').value;
-        const res = await fetch(`${API}/api/admin/mrd-config`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ note }) });
+        const res = await fetch(`${API}/api/admin/mrd-config`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ note, until }) });
         if (res.status === 401 || res.status === 503) { logout(); return; }
         const d = await res.json(); if (!d.success) throw new Error(d.error || 'שמירה נכשלה');
-        t.textContent = `נשמר (${d.length} תווים)`; t.className = 'msg ok';
+        showUntil(d.until); t.textContent = `נשמר (${d.length} תווים)`; t.className = 'msg ok';
     } catch (e) { t.textContent = (e.message || 'שגיאה'); t.className = 'msg err'; }
+}
+async function clearMrd() {
+    if (!confirm('לנקות את ההנחיות הזמניות?')) return;
+    document.getElementById('mrd-note').value = '';
+    const t = document.getElementById('mrd-msg'); t.textContent = 'מנקה...'; t.className = 'msg ok';
+    try {
+        const res = await fetch(`${API}/api/admin/mrd-config`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ note: '', until: '' }) });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        await res.json(); showUntil(null); t.textContent = 'נוקה'; t.className = 'msg ok';
+    } catch (e) { t.textContent = (e.message || 'שגיאה'); t.className = 'msg err'; }
+}
+
+// ── AI smart-format: plain text → structured guide/quiz item ───────
+async function formatContent(kind) {
+    const sec = kind === 'guide' ? 'guides' : 'quiz';
+    const textEl = document.getElementById(kind + '-compose');
+    const msg = document.getElementById(kind + '-format-msg');
+    const text = (textEl.value || '').trim();
+    if (!text) { msg.textContent = 'כתוב טקסט קודם'; msg.className = 'msg err'; return; }
+    msg.textContent = 'גרופבוט מסדר...'; msg.className = 'msg ok';
+    try {
+        const res = await fetch(`${API}/api/admin/format-content`, {
+            method: 'POST', headers: authHeaders(), body: JSON.stringify({ type: kind, text }),
+        });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        if (!d.success) throw new Error(d.error || 'הסידור נכשל');
+        syncSection(sec);
+        if (kind === 'guide') {
+            const it = blankGuide();
+            it.icon = d.item.icon || it.icon;
+            it.he = { title: d.item.title || '', content: d.item.content || '' };
+            data.guides.push(it); renderGuides();
+        } else {
+            const it = blankQuiz();
+            it.q = d.item.q || '';
+            it.a = (d.item.a || ['', '', '', '']).slice(0, 4);
+            while (it.a.length < 4) it.a.push('');
+            it.correct = d.item.correct || 0;
+            data.quiz.push(it); renderQuiz();
+        }
+        textEl.value = '';
+        msg.textContent = 'נוסף למטה · בדוק ולחץ שמור הכל'; msg.className = 'msg ok';
+    } catch (e) { msg.textContent = (e.message || 'שגיאה'); msg.className = 'msg err'; }
 }
 
 // ── Users (view-only) ──────────────────────────────────────────────
@@ -318,6 +400,9 @@ document.getElementById('reload-btn').onclick = () => loadSection(current);
 document.getElementById('seed-btn').onclick = seed;
 document.getElementById('mrd-save').onclick = saveMrd;
 document.getElementById('mrd-reload').onclick = loadMrd;
+document.getElementById('mrd-clear').onclick = clearMrd;
+document.getElementById('guide-format').onclick = () => formatContent('guide');
+document.getElementById('quiz-format').onclick = () => formatContent('quiz');
 document.getElementById('users-reload').onclick = loadUsers;
 document.getElementById('data-reload').onclick = loadStats;
 document.querySelectorAll('#nav button').forEach(b => b.onclick = () => openSection(b.dataset.sec));

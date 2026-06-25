@@ -860,7 +860,7 @@ function addMsg(author, rawText, type) {
     // Typing indicator: three animated floating dots (no author label, no text).
     if (type.includes('typing')) {
         el.innerHTML =
-            '<div class="msg-content typing-indicator" aria-label="מר ד׳ מקליד">' +
+            '<div class="msg-content typing-indicator" aria-label="גרופבוט מקליד">' +
             '<span class="typing-dot"></span>' +
             '<span class="typing-dot"></span>' +
             '<span class="typing-dot"></span>' +
@@ -908,7 +908,7 @@ async function sendMessage() {
     if (!text) return;
     addMsg('אתה', text, 'user');
     input.value = '';
-    const typing = addMsg('מר ד׳', 'מקליד...', 'bot typing');
+    const typing = addMsg('גרופבוט', 'מקליד...', 'bot typing');
     try {
         const token = sessionToken();
         const res = await fetch(`${CONFIG.CHAT_API_URL}/chat`, {
@@ -923,7 +923,7 @@ async function sendMessage() {
         // Server restarted → token invalidated → force re-login
         if (res.status === 401) {
             typing.remove();
-            addMsg('מר ד׳', 'החיבור פג תוקף. מתחבר מחדש...', 'bot error');
+            addMsg('גרופבוט', 'החיבור פג תוקף. מתחבר מחדש...', 'bot error');
             localStorage.removeItem(SESSION_KEY);
             setTimeout(() => {
                 document.getElementById('mr-d-modal').style.display = 'none';
@@ -936,10 +936,10 @@ async function sendMessage() {
 
         const data = await res.json();
         typing.remove();
-        addMsg('מר ד׳', data.response || 'אין כרגע מענה, נסה שוב.', 'bot');
+        addMsg('גרופבוט', data.response || 'אין כרגע מענה, נסה שוב.', 'bot');
     } catch {
         typing.remove();
-        addMsg('מר ד׳', 'יש כרגע תקלה זמנית. נסה שוב בעוד רגע.', 'bot error');
+        addMsg('גרופבוט', 'יש כרגע תקלה זמנית. נסה שוב בעוד רגע.', 'bot error');
     }
 }
 
