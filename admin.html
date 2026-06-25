@@ -89,6 +89,16 @@
         .lang-tabs button.active { background: var(--purple); color: #100020; border-color: var(--purple); font-weight: 700; }
         .lang-pane { display: none; } .lang-pane.active { display: block; }
         .hint { font-size: 12px; color: var(--green-dim); margin: 0 0 10px; line-height: 1.6; }
+        textarea#mrd-note { min-height: 200px; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+        .card { border: 1px solid var(--line); border-radius: 8px; background: rgba(0,0,0,0.3); padding: 14px; }
+        .card .k { font-size: 12px; color: var(--green-dim); }
+        .card .v { font-size: 26px; font-weight: 800; margin-top: 6px; color: var(--green); text-shadow: 0 0 8px rgba(0,255,156,0.4); }
+        .card .v.p { color: var(--purple); text-shadow: 0 0 8px rgba(192,97,255,0.4); }
+        .utable { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .utable th, .utable td { text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+        .utable th { color: var(--purple); font-weight: 700; }
+        .utable tbody tr:hover { background: rgba(192,97,255,0.07); }
     </style>
 </head>
 <body>
@@ -127,9 +137,12 @@
                 <button data-sec="guides" class="active">מדריכים</button>
                 <button data-sec="quiz">חידון</button>
                 <button data-sec="mints">מוזיאון</button>
+                <button data-sec="mrd">מר ד׳</button>
+                <button data-sec="users">משתמשים</button>
+                <button data-sec="data">נתונים</button>
             </div>
 
-            <div class="panel">
+            <div class="panel" id="content-toolbar">
                 <div class="bar">
                     <button class="btn" id="add-btn">+ פריט חדש</button>
                     <button class="btn p" id="save-btn">שמור הכל</button>
@@ -145,8 +158,38 @@
                 <p class="hint">נתוני המוזיאון (מבנה מורכב — עריכה כ-JSON). ערוך בזהירות ושמור. "טען מובנה" יטען את 8 בתי-המטבע הנוכחיים.</p>
                 <textarea class="inp code" id="mints-json" placeholder='{ "items": [ ... ] }' dir="ltr"></textarea>
             </div>
+
+            <!-- MR. D — persona / instructions -->
+            <div class="section" id="sec-mrd">
+                <div class="panel">
+                    <p class="hint">הנחיות נוספות למר ד׳ — כיצד לדבר ומה להדגיש. הטקסט מתווסף לאישיות שלו, והוא קורא אותו תוך ~2 דקות. השאר ריק כדי להשתמש בברירת המחדל.</p>
+                    <textarea class="inp" id="mrd-note" placeholder="לדוגמה: הזכר השבוע את מבצע יום העצמאות. הימנע מהבטחות תשואה. תמיד הצע לפנות לדמיאן להחלטות סופיות."></textarea>
+                    <div class="bar mt">
+                        <button class="btn p" id="mrd-save">שמור הנחיות</button>
+                        <button class="btn" id="mrd-reload">טען מחדש</button>
+                        <span class="msg" id="mrd-msg" style="margin-inline-start:auto;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- USERS — view only -->
+            <div class="section" id="sec-users">
+                <div class="panel">
+                    <div class="bar"><b style="color:var(--purple)">משתמשים</b><span id="users-count" style="color:var(--green-dim);font-size:13px;"></span><button class="btn" id="users-reload" style="margin-inline-start:auto;">רענון</button></div>
+                    <p class="hint">צפייה לתמיכה טכנית. <b>אימייל ואיפוס סיסמה</b> יופיעו לאחר הפעלת מערכת ההרשמה — וסיסמאות לעולם אינן מוצגות (גם לא למנהל), לבטיחות המשתמשים.</p>
+                    <div id="users-box"></div>
+                </div>
+            </div>
+
+            <!-- DATA — dashboard -->
+            <div class="section" id="sec-data">
+                <div class="panel">
+                    <div class="bar"><b style="color:var(--purple)">נתונים חיים</b><button class="btn" id="data-reload" style="margin-inline-start:auto;">רענון</button></div>
+                    <div id="data-box" style="margin-top:12px;"></div>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="admin.js?v=4"></script>
+    <script src="admin.js?v=5"></script>
 </body>
 </html>

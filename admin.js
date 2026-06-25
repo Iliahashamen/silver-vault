@@ -63,15 +63,20 @@ async function adminLogin() {
 function authHeaders() { return { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` }; }
 
 // ── sections ───────────────────────────────────────────────────────
+const CONTENT_SECS = ['guides', 'quiz', 'mints'];
 function showSection(sec) {
-    syncSection(current);
+    if (CONTENT_SECS.includes(current)) syncSection(current);
     current = sec;
     document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('active', b.dataset.sec === sec));
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById('sec-' + sec).classList.add('active');
-    document.getElementById('add-btn').style.display = (sec === 'mints') ? 'none' : '';
-    renderSection(sec);
-    saveMsg('');
+    const isContent = CONTENT_SECS.includes(sec);
+    document.getElementById('content-toolbar').style.display = isContent ? '' : 'none';
+    if (isContent) {
+        document.getElementById('add-btn').style.display = (sec === 'mints') ? 'none' : '';
+        renderSection(sec);
+        saveMsg('');
+    }
 }
 
 async function loadSection(sec) {
@@ -214,6 +219,77 @@ function addItem() {
     else if (current === 'quiz') { data.quiz.push(blankQuiz()); renderQuiz(); }
 }
 
+// ── MR. D persona note ─────────────────────────────────────────────
+async function loadMrd() {
+    const t = document.getElementById('mrd-msg'); t.textContent = 'טוען...'; t.className = 'msg ok';
+    try {
+        const res = await fetch(`${API}/api/admin/mrd-config`, { headers: authHeaders() });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        document.getElementById('mrd-note').value = d.note || '';
+        t.textContent = '';
+    } catch (e) { t.textContent = '✗ ' + (e.message || 'טעינה נכשלה'); t.className = 'msg err'; }
+}
+async function saveMrd() {
+    const t = document.getElementById('mrd-msg'); t.textContent = 'שומר...'; t.className = 'msg ok';
+    try {
+        const note = document.getElementById('mrd-note').value;
+        const res = await fetch(`${API}/api/admin/mrd-config`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ note }) });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json(); if (!d.success) throw new Error(d.error || 'שמירה נכשלה');
+        t.textContent = `✓ נשמר (${d.length} תווים) — ייכנס לתוקף תוך ~2 דקות`; t.className = 'msg ok';
+    } catch (e) { t.textContent = '✗ ' + (e.message || 'שגיאה'); t.className = 'msg err'; }
+}
+
+// ── Users (view-only) ──────────────────────────────────────────────
+function fmtDate(s) { if (!s) return '—'; try { return new Date(s).toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' }); } catch { return s; } }
+async function loadUsers() {
+    const box = document.getElementById('users-box'); box.innerHTML = '<p class="hint">טוען...</p>';
+    try {
+        const res = await fetch(`${API}/api/admin/users`, { headers: authHeaders() });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        document.getElementById('users-count').textContent = `סה"כ: ${d.count || 0}`;
+        const u = d.users || [];
+        if (!u.length) { box.innerHTML = '<p class="hint">אין משתמשים עדיין.</p>'; return; }
+        box.innerHTML = '<table class="utable"><thead><tr><th>שם</th><th>שם משתמש</th><th>מזהה</th><th>פעילות אחרונה</th></tr></thead><tbody>' +
+            u.map(x => `<tr><td>${escHtml(x.first_name) || '—'}</td><td>${x.username ? '@' + escHtml(x.username) : '—'}</td><td style="direction:ltr">${escHtml(String(x.user_id))}</td><td>${fmtDate(x.last_active)}</td></tr>`).join('') +
+            '</tbody></table>';
+    } catch (e) { box.innerHTML = '<p class="hint">✗ ' + escHtml(e.message || 'טעינה נכשלה') + '</p>'; }
+}
+
+// ── Data dashboard ─────────────────────────────────────────────────
+async function loadStats() {
+    const box = document.getElementById('data-box'); box.innerHTML = '<p class="hint">טוען...</p>';
+    try {
+        const res = await fetch(`${API}/api/admin/stats`, { headers: authHeaders() });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        const ai = d.ai || {}, b = ai.daily_ai_budget || {}, chat = d.chat || {}, c = d.content || {};
+        const card = (k, v, p) => `<div class="card"><div class="k">${k}</div><div class="v${p ? ' p' : ''}">${v}</div></div>`;
+        box.innerHTML = '<div class="cards">' +
+            card('משתמשים', d.users ?? '—') +
+            card('שיחות פעילות', ai.active_sessions ?? chat.active_sessions ?? '—', true) +
+            card('הודעות (סשן)', chat.total_messages ?? '—') +
+            card('AI נוצל היום', (b.used ?? '—') + ' / ' + (b.cap ?? '—'), true) +
+            card('AI נותר היום', b.remaining ?? '—') +
+            card('מודל', ai.model || '—') +
+            card('מדריכים', c.guides ?? '—') +
+            card('שאלות חידון', c.quiz ?? '—', true) +
+            card('בתי מטבע', c.mints ?? '—') +
+            '</div>';
+    } catch (e) { box.innerHTML = '<p class="hint">✗ ' + escHtml(e.message || 'טעינה נכשלה') + '</p>'; }
+}
+
+// ── Section router ─────────────────────────────────────────────────
+function openSection(sec) {
+    showSection(sec);
+    if (CONTENT_SECS.includes(sec)) loadSection(sec);
+    else if (sec === 'mrd') loadMrd();
+    else if (sec === 'users') loadUsers();
+    else if (sec === 'data') loadStats();
+}
+
 // ── helpers / lifecycle ────────────────────────────────────────────
 function escHtml(s) { const d = document.createElement('div'); d.textContent = String(s ?? ''); return d.innerHTML; }
 function escAttr(s) { return String(s ?? '').replace(/"/g, '&quot;'); }
@@ -221,7 +297,7 @@ function escAttr(s) { return String(s ?? '').replace(/"/g, '&quot;'); }
 function showEditor() {
     document.getElementById('admin-login').classList.add('hidden');
     document.getElementById('admin-editor').classList.remove('hidden');
-    showSection('guides'); loadSection('guides');
+    openSection('guides');
 }
 function logout() {
     adminToken = null; sessionStorage.removeItem('vault_admin_token');
@@ -240,6 +316,10 @@ document.getElementById('add-btn').onclick = addItem;
 document.getElementById('save-btn').onclick = save;
 document.getElementById('reload-btn').onclick = () => loadSection(current);
 document.getElementById('seed-btn').onclick = seed;
-document.querySelectorAll('#nav button').forEach(b => b.onclick = () => { showSection(b.dataset.sec); loadSection(b.dataset.sec); });
+document.getElementById('mrd-save').onclick = saveMrd;
+document.getElementById('mrd-reload').onclick = loadMrd;
+document.getElementById('users-reload').onclick = loadUsers;
+document.getElementById('data-reload').onclick = loadStats;
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => openSection(b.dataset.sec));
 
 if (adminToken) showEditor();
