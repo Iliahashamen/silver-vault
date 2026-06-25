@@ -1004,7 +1004,7 @@ const QUIZ_BANK = [
   { q: "מה החיסרון בהשקעה במניות חברות כרייה כחלופה לכסף פיזי?", a: ["ההצלחה תלויה בניהול ותפעול החברה ולא רק במחיר הכסף","לא ניתן לקנות בבורסה","הן לא עוקבות אחר מחיר הכסף בשום מצב","אין דיבידנד בחברות כרייה"] },
 ];
 
-const QUIZ_TOTAL = 15;
+let QUIZ_TOTAL = 15;   // capped per round; adapts if the store has fewer questions
 const QUIZ_SECS  = 600;
 
 let quizState = { questions: [], idx: 0, score: 0, timeLeft: QUIZ_SECS, timer: null, locked: false };
@@ -1019,6 +1019,7 @@ function _quizShuffle(arr) {
 }
 
 function _quizBuild() {
+    QUIZ_TOTAL = Math.min(15, QUIZ_BANK.length);
     return _quizShuffle(QUIZ_BANK).slice(0, QUIZ_TOTAL).map(({ q, a }) => {
         const order = _quizShuffle([0, 1, 2, 3]);
         return { q, answers: order.map(i => a[i]), correct: order.indexOf(0) };
@@ -2377,16 +2378,53 @@ let _guideActiveLang = 'he';
 // managed entirely in the admin panel — never hardcoded. Built-in is fallback only.
 let _adminGuides = null;
 
+// Generic content fetch for any collection (guides|quiz|mints|links).
+async function _fetchContent(type) {
+    try {
+        const res = await fetch(`${CONFIG.CHAT_API_URL}/api/content?type=${encodeURIComponent(type)}`);
+        const data = await res.json();
+        return (data && data.success && Array.isArray(data.items)) ? data.items : [];
+    } catch {
+        return [];
+    }
+}
+
 async function _fetchAdminGuides() {
     if (_adminGuides !== null) return _adminGuides;
-    try {
-        const res = await fetch(`${CONFIG.CHAT_API_URL}/api/content`);
-        const data = await res.json();
-        _adminGuides = (data && data.success && Array.isArray(data.guides)) ? data.guides : [];
-    } catch {
-        _adminGuides = [];
-    }
+    _adminGuides = await _fetchContent('guides');
     return _adminGuides;
+}
+
+// ── Store-first QUIZ + MUSEUM ──────────────────────────────────────────
+// When the admin store has items, they REPLACE the built-in data in place, so
+// existing render logic is untouched. Built-in stays as the offline fallback.
+let _storeContentLoaded = false;
+async function _loadStoreContent() {
+    if (_storeContentLoaded) return;
+    _storeContentLoaded = true;
+    try {
+        const [quiz, mints] = await Promise.all([_fetchContent('quiz'), _fetchContent('mints')]);
+        // Quiz: store items shaped {q, a:[4], correct}. Built-in QUIZ_BANK expects a[0]=correct.
+        if (Array.isArray(quiz) && quiz.length) {
+            const mapped = quiz.map(it => {
+                const a = Array.isArray(it.a) ? it.a.slice(0, 4) : [];
+                const c = Math.max(0, Math.min(3, Number(it.correct) || 0));
+                if (a.length < 2) return null;
+                return { q: String(it.q || ''), a: [a[c], ...a.filter((_, i) => i !== c)] };
+            }).filter(x => x && x.q);
+            if (mapped.length && typeof QUIZ_BANK !== 'undefined') {
+                QUIZ_BANK.length = 0; QUIZ_BANK.push(...mapped);
+            }
+        }
+        // Museum: store items are full mint objects keyed by id.
+        if (Array.isArray(mints) && mints.length && typeof MINT_DATA !== 'undefined') {
+            Object.keys(MINT_DATA).forEach(k => delete MINT_DATA[k]);
+            mints.sort((x, y) => (x.order || 100) - (y.order || 100))
+                 .forEach(m => { if (m && m.id) MINT_DATA[m.id] = m; });
+        }
+    } catch (e) {
+        console.warn('store content load failed (using built-in):', e);
+    }
 }
 
 function renderGuide(lang) {
@@ -2655,6 +2693,7 @@ function boot() {
     });
     initSwipeBack();
     initDevPreview();
+    _loadStoreContent();   // pull store-managed quiz/museum (built-in stays as fallback)
     if (sessionToken()) showDashboard();
 }
 

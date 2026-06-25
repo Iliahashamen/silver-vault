@@ -7,7 +7,7 @@
  * Bump CACHE_VERSION whenever shell files change to force an update.
  * ════════════════════════════════════════════════════════════════════ */
 
-const CACHE_VERSION = 'vault-shell-v2';
+const CACHE_VERSION = 'vault-shell-v3';
 const SHELL_ASSETS = [
   './',
   './index.html',

@@ -5,177 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta name="robots" content="noindex, nofollow">
-    <title>VAULT // CONTROL</title>
+    <title>מסוף ניהול — הכספת</title>
     <script src="config.js?v=43"></script>
     <style>
         :root {
-            --mx: #00ff41;          /* matrix green */
-            --mx-dim: #0a8f2c;
-            --mx-faint: rgba(0,255,65,0.35);
-            --mx-bg: #000600;
-            --danger: #ff3b3b;
-            --amber: #ffd166;
+            --green: #00ff9c;
+            --green-dim: #0aa86a;
+            --purple: #c061ff;
+            --purple-dim: #7a3ea8;
+            --bg: #0d0221;
+            --bg2: #14072e;
+            --panel: rgba(20, 7, 46, 0.72);
+            --line: rgba(0, 255, 156, 0.28);
+            --danger: #ff4d7d;
         }
         * { box-sizing: border-box; }
-        html, body { margin: 0; padding: 0; background: var(--mx-bg); color: var(--mx); }
+        html, body { margin: 0; padding: 0; background: var(--bg); color: var(--green); }
         body {
             font-family: "Courier New", ui-monospace, Menlo, Consolas, monospace;
             min-height: 100vh; overflow-x: hidden;
+            background:
+                radial-gradient(circle at 50% 120%, rgba(192,97,255,0.22), transparent 60%),
+                linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
         }
-        #matrix-rain {
-            position: fixed; inset: 0; z-index: 0; opacity: 0.22; pointer-events: none;
+        /* retro horizon grid */
+        body::before {
+            content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 42vh; z-index: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(0,255,156,0.18) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(192,97,255,0.18) 1px, transparent 1px);
+            background-size: 38px 38px;
+            transform: perspective(40vh) rotateX(62deg); transform-origin: bottom; opacity: 0.5;
         }
-        .scanlines::after {
-            content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0, rgba(0,0,0,0.15) 1px, transparent 2px, transparent 4px);
-        }
-        .wrap { position: relative; z-index: 2; max-width: 960px; margin: 0 auto; padding: 18px 16px 90px; }
-        .crt { text-shadow: 0 0 6px var(--mx-faint); }
-        .glow { box-shadow: 0 0 12px rgba(0,255,65,0.25), inset 0 0 12px rgba(0,255,65,0.06); }
+        #rain { position: fixed; inset: 0; z-index: 0; opacity: 0.10; pointer-events: none; }
+        .wrap { position: relative; z-index: 2; max-width: 920px; margin: 0 auto; padding: 22px 16px 90px; }
 
-        h1.brand {
-            font-size: 20px; letter-spacing: 3px; margin: 10px 0 4px; font-weight: 700;
-        }
-        .sub { color: var(--mx-dim); font-size: 12px; letter-spacing: 2px; margin-bottom: 18px; }
-        .cursor::after { content: "_"; animation: blink 1s steps(1) infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
+        .brand { font-size: 20px; letter-spacing: 2px; margin: 6px 0 2px; text-shadow: 0 0 10px rgba(0,255,156,0.45); }
+        .brand b { color: var(--purple); text-shadow: 0 0 10px rgba(192,97,255,0.55); }
+        .sub { color: var(--green-dim); font-size: 12px; letter-spacing: 1px; margin-bottom: 18px; }
 
-        .panel {
-            border: 1px solid var(--mx-faint); border-radius: 6px; background: rgba(0,20,4,0.72);
-            padding: 18px; margin-bottom: 16px; backdrop-filter: blur(2px);
-        }
+        .panel { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 16px; margin-bottom: 14px; box-shadow: 0 0 18px rgba(192,97,255,0.12) inset; }
 
-        /* Login */
-        .login-box { max-width: 460px; margin: 8vh auto 0; }
-        .prompt { font-size: 13px; color: var(--mx-dim); margin-bottom: 6px; letter-spacing: 1px; }
-        .mx-input {
-            width: 100%; background: #001a06; border: 1px solid var(--mx-faint); color: var(--mx);
-            font-family: inherit; font-size: 16px; padding: 11px 13px; border-radius: 4px; outline: none;
-            letter-spacing: 2px; text-shadow: 0 0 6px var(--mx-faint);
+        .prompt { font-size: 13px; color: var(--green-dim); margin-bottom: 7px; }
+        .inp {
+            width: 100%; background: rgba(0,0,0,0.35); border: 1px solid var(--line); color: var(--green);
+            font-family: inherit; font-size: 15px; padding: 10px 12px; border-radius: 6px; outline: none;
         }
-        .mx-input:focus { border-color: var(--mx); box-shadow: 0 0 10px rgba(0,255,65,0.4); }
-        textarea.mx-input { direction: ltr; text-align: left; letter-spacing: 0; min-height: 130px; resize: vertical; }
+        .inp:focus { border-color: var(--green); box-shadow: 0 0 10px rgba(0,255,156,0.35); }
+        textarea.inp { min-height: 120px; resize: vertical; line-height: 1.5; }
+        textarea.code { direction: ltr; text-align: left; min-height: 360px; font-size: 13px; }
 
-        .btn {
-            background: transparent; border: 1px solid var(--mx); color: var(--mx);
-            font-family: inherit; font-weight: 700; letter-spacing: 2px; padding: 9px 18px;
-            border-radius: 4px; cursor: pointer; transition: all .15s; text-transform: uppercase; font-size: 13px;
-        }
-        .btn:hover { background: var(--mx); color: #000; box-shadow: 0 0 14px rgba(0,255,65,0.6); }
+        .btn { background: transparent; border: 1px solid var(--green); color: var(--green); font-family: inherit; font-weight: 700; letter-spacing: 1px; padding: 9px 16px; border-radius: 6px; cursor: pointer; transition: all .15s; font-size: 13px; }
+        .btn:hover { background: var(--green); color: #06121a; box-shadow: 0 0 14px rgba(0,255,156,0.55); }
+        .btn.p { border-color: var(--purple); color: var(--purple); }
+        .btn.p:hover { background: var(--purple); color: #100020; box-shadow: 0 0 14px rgba(192,97,255,0.55); }
         .btn.danger { border-color: var(--danger); color: var(--danger); }
-        .btn.danger:hover { background: var(--danger); color: #000; box-shadow: 0 0 14px rgba(255,59,59,0.6); }
-        .btn.ghost { border-color: var(--mx-dim); color: var(--mx-dim); }
-        .btn.ghost:hover { background: var(--mx-dim); color: #000; }
-        .btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+        .btn.danger:hover { background: var(--danger); color: #100010; }
+        .bar { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; }
+        .bar.mt { margin-top: 12px; }
 
-        .msg { margin-top: 12px; font-size: 13px; min-height: 18px; letter-spacing: 1px; }
-        .msg.ok { color: var(--mx); }
-        .msg.err { color: var(--danger); }
-        .msg.warn { color: var(--amber); }
-
+        .msg { font-size: 13px; min-height: 18px; }
+        .msg.ok { color: var(--green); } .msg.err { color: var(--danger); } .msg.warn { color: var(--purple); }
         .hidden { display: none !important; }
 
-        /* Editor layout */
-        .editor-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-        .nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-        .nav button {
-            background: rgba(0,30,8,0.6); border: 1px solid var(--mx-faint); color: var(--mx-dim);
-            font-family: inherit; font-size: 12px; letter-spacing: 1px; padding: 8px 12px; border-radius: 4px; cursor: pointer;
-        }
-        .nav button.active { color: #000; background: var(--mx); border-color: var(--mx); box-shadow: 0 0 10px rgba(0,255,65,0.5); font-weight: 700; }
+        .login-box { max-width: 440px; margin: 9vh auto 0; }
 
-        .section { display: none; }
-        .section.active { display: block; }
+        .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+        .nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+        .nav button { background: rgba(0,0,0,0.3); border: 1px solid var(--line); color: var(--green-dim); font-family: inherit; font-size: 13px; padding: 9px 15px; border-radius: 6px; cursor: pointer; }
+        .nav button.active { background: var(--green); color: #06121a; border-color: var(--green); font-weight: 700; box-shadow: 0 0 10px rgba(0,255,156,0.5); }
 
-        .item {
-            border: 1px solid var(--mx-faint); border-radius: 5px; background: rgba(0,16,4,0.6);
-            padding: 13px; margin-bottom: 13px;
-        }
-        .item-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
-        .item-head label { font-size: 12px; color: var(--mx-dim); display: flex; align-items: center; gap: 5px; }
-        .item .mx-input { margin: 4px 0; }
+        .section { display: none; } .section.active { display: block; }
+
+        .item { border: 1px solid var(--line); border-radius: 7px; background: rgba(0,0,0,0.28); padding: 12px; margin-bottom: 12px; }
+        .item-head { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; margin-bottom: 9px; }
+        .item-head label { font-size: 12px; color: var(--green-dim); display: flex; align-items: center; gap: 5px; }
+        .item .inp { margin: 4px 0; }
+        .ans-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+        .ans-row input[type="radio"] { accent-color: var(--purple); width: 18px; height: 18px; }
+        .ans-row .inp { margin: 0; }
         .lang-tabs { display: flex; gap: 6px; margin: 8px 0; }
-        .lang-tabs button { background: #001a06; border: 1px solid var(--mx-faint); color: var(--mx-dim); padding: 4px 11px; border-radius: 4px; cursor: pointer; font-family: inherit; }
-        .lang-tabs button.active { background: var(--mx); color: #000; border-color: var(--mx); font-weight: 700; }
-        .lang-pane { display: none; }
-        .lang-pane.active { display: block; }
-
-        .stub { text-align: center; padding: 38px 16px; color: var(--mx-dim); }
-        .stub .big { font-size: 42px; opacity: 0.5; }
-        .stub h3 { color: var(--mx); letter-spacing: 2px; margin: 14px 0 6px; }
-        .stub p { font-size: 13px; max-width: 520px; margin: 6px auto; line-height: 1.6; }
-        .stub .tag { display: inline-block; margin-top: 12px; border: 1px solid var(--amber); color: var(--amber); padding: 4px 10px; border-radius: 4px; font-size: 11px; letter-spacing: 2px; }
+        .lang-tabs button { background: rgba(0,0,0,0.3); border: 1px solid var(--line); color: var(--green-dim); padding: 4px 11px; border-radius: 5px; cursor: pointer; font-family: inherit; }
+        .lang-tabs button.active { background: var(--purple); color: #100020; border-color: var(--purple); font-weight: 700; }
+        .lang-pane { display: none; } .lang-pane.active { display: block; }
+        .hint { font-size: 12px; color: var(--green-dim); margin: 0 0 10px; line-height: 1.6; }
     </style>
 </head>
-<body class="scanlines">
-    <canvas id="matrix-rain"></canvas>
+<body>
+    <canvas id="rain"></canvas>
     <div class="wrap">
-        <h1 class="brand crt">VAULT // CONTROL</h1>
-        <div class="sub crt">הכספת — מסוף ניהול // ACCESS RESTRICTED</div>
+        <div class="brand">מסוף ניהול <b>// הכספת</b></div>
+        <div class="sub">גישה מוגבלת — תוכן בלבד</div>
 
-        <!-- ══ LOGIN (two steps) ══ -->
+        <!-- LOGIN -->
         <div id="admin-login" class="login-box">
-            <div class="panel glow">
-                <!-- step 1: passcode -->
+            <div class="panel">
                 <div id="step-pass">
-                    <div class="prompt crt">&gt; ENTER ACCESS CODE // הזן קוד גישה</div>
-                    <input type="password" id="admin-pass" class="mx-input" placeholder="••••••••" autocomplete="off">
-                    <div class="btn-row">
-                        <button class="btn" id="step-pass-btn">CONTINUE &gt;</button>
-                    </div>
+                    <div class="prompt">קוד גישה:</div>
+                    <input type="password" id="admin-pass" class="inp" placeholder="••••••••" autocomplete="off">
+                    <div class="bar mt"><button class="btn" id="step-pass-btn">המשך</button></div>
                 </div>
-                <!-- step 2: challenge -->
                 <div id="step-challenge" class="hidden">
-                    <div class="prompt crt cursor">&gt; all gatos blackos?</div>
-                    <input type="text" id="admin-challenge" class="mx-input" placeholder="..." autocomplete="off">
-                    <div class="btn-row">
-                        <button class="btn" id="admin-login-btn">ENTER</button>
-                        <button class="btn ghost" id="step-back-btn">&lt; BACK</button>
+                    <div class="prompt" style="direction:ltr;text-align:right;">all gatos blackos?</div>
+                    <input type="text" id="admin-challenge" class="inp" placeholder="..." autocomplete="off">
+                    <div class="bar mt">
+                        <button class="btn p" id="admin-login-btn">כניסה</button>
+                        <button class="btn" id="step-back-btn">חזרה</button>
                     </div>
                 </div>
-                <div class="msg" id="admin-login-msg"></div>
+                <div class="msg" id="admin-login-msg" style="margin-top:12px;"></div>
             </div>
         </div>
 
-        <!-- ══ EDITOR ══ -->
+        <!-- EDITOR -->
         <div id="admin-editor" class="hidden">
-            <div class="editor-head">
-                <div class="prompt crt">&gt; SESSION ACTIVE // מחובר</div>
-                <button class="btn ghost" id="logout-btn">LOGOUT</button>
+            <div class="top">
+                <div class="prompt">מחובר ✓</div>
+                <button class="btn" id="logout-btn">יציאה</button>
+            </div>
+            <div class="nav" id="nav">
+                <button data-sec="guides" class="active">מדריכים</button>
+                <button data-sec="quiz">חידון</button>
+                <button data-sec="mints">מוזיאון</button>
             </div>
 
-            <div class="nav" id="section-nav">
-                <button data-sec="guides" class="active">// מדריכים</button>
-                <button data-sec="mrd">// מר D</button>
-                <button data-sec="users">// משתמשים</button>
-                <button data-sec="photos">// תמונות</button>
-                <button data-sec="links">// קישורים</button>
-                <button data-sec="prices">// מחירים</button>
-            </div>
-
-            <!-- GUIDES (LIVE) -->
-            <div class="section active" id="sec-guides">
-                <div class="panel">
-                    <div class="btn-row" style="margin-top:0;">
-                        <button class="btn" id="add-item-btn">+ פריט חדש</button>
-                        <button class="btn" id="save-btn">שמור הכל</button>
-                        <button class="btn ghost" id="reload-btn">טען מחדש</button>
-                        <button class="btn ghost" id="seed-btn" title="טוען 8 פרקי מדריך מובנים לעריכה (פעם אחת)">⬇ טען מדריך מובנה</button>
-                        <span class="msg" id="admin-save-msg"></span>
-                    </div>
+            <div class="panel">
+                <div class="bar">
+                    <button class="btn" id="add-btn">+ פריט חדש</button>
+                    <button class="btn p" id="save-btn">שמור הכל</button>
+                    <button class="btn" id="reload-btn">טען מחדש</button>
+                    <button class="btn" id="seed-btn" title="טוען את התוכן המובנה לעריכה (פעם אחת)">⬇ טען מובנה</button>
+                    <span class="msg" id="save-msg" style="margin-inline-start:auto;"></span>
                 </div>
-                <div id="items-container"></div>
             </div>
 
-            <!-- SCAFFOLDED SECTIONS -->
-            <div class="section" id="sec-mrd"></div>
-            <div class="section" id="sec-users"></div>
-            <div class="section" id="sec-photos"></div>
-            <div class="section" id="sec-links"></div>
-            <div class="section" id="sec-prices"></div>
+            <div class="section active" id="sec-guides"><p class="hint">פרקי מדריך. כל פריט: אייקון, סדר, פרסום, וכותרת+תוכן (HTML) בשלוש שפות.</p><div id="box-guides"></div></div>
+            <div class="section" id="sec-quiz"><p class="hint">שאלות טריוויה. סמן את התשובה הנכונה בעיגול הסגול. כל סבב מגריל עד 15 שאלות.</p><div id="box-quiz"></div></div>
+            <div class="section" id="sec-mints">
+                <p class="hint">נתוני המוזיאון (מבנה מורכב — עריכה כ-JSON). ערוך בזהירות ושמור. "טען מובנה" יטען את 8 בתי-המטבע הנוכחיים.</p>
+                <textarea class="inp code" id="mints-json" placeholder='{ "items": [ ... ] }' dir="ltr"></textarea>
+            </div>
         </div>
     </div>
-
-    <script src="admin.js?v=3"></script>
+    <script src="admin.js?v=4"></script>
 </body>
 </html>

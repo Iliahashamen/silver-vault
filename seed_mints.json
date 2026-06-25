@@ -1,0 +1,1710 @@
+{
+ "items": [
+  {
+   "id": "israel",
+   "flag": "🇮🇱",
+   "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg/800px-Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg",
+   "he": {
+    "name": "חברת מטבעות ישראל",
+    "subtitle": "Israel Coins and Medals Corp. — ICMC",
+    "founded": "נוסדה 1952",
+    "location": "ירושלים, ישראל",
+    "website": "en.israelmint.com",
+    "history": [
+     {
+      "title": "ייסוד ורקע היסטורי",
+      "text": "חברת מטבעות ישראל (ICMC) הוקמה בשנת 1952 כחברה ממשלתית מטעם בנק ישראל, כשלוש שנים לאחר הכרזת העצמאות. החברה הוקמה במטרה לייצר מטבעות זיכרון ומדליות המסמלים את ערכי ואירועי המדינה הצעירה. הטביעה הראשונה בוצעה בחו\"ל בעקבות מגבלות טכנולוגיות מקומיות."
+     },
+     {
+      "title": "פיתוח ומקום בזירה הבינלאומית",
+      "text": "לאורך העשורים הפכה ICMC לאחת מחברות המטבעות המוכרות ביותר בעולם. המטבעות שלה מופצים ב-60 מדינות ונחשבים לפריטי אספנות יוקרתיים. החברה עובדת עם אמנים ישראלים בולטים שמעצבים את פני המטבעות, ומשלבת ערכים יהודיים ולאומיים בכל יצירה."
+     },
+     {
+      "title": "כסף פיזי ומטבעות אספנות",
+      "text": "מדי שנה, לרגל יום העצמאות, מנפיקה החברה סדרות מוגבלות של מטבעות כסף טהור. בנוסף, מייצרת ICMC מטבעות כסף לנושאים כגון ירושלים, חנוכה, פסח ואישים היסטוריים. מטבעות אלה מוטבעים מכסף 999 ו-925, ורבים מהם הפכו לפריטים נדירים בשוק האספנות הבינלאומי."
+     },
+     {
+      "title": "מפעל הטביעה בירושלים (1962)",
+      "text": "בשנת 1962 הוקם מפעל הטביעה של ICMC בירושלים, והחברה החלה לייצר מטבעות בארץ לראשונה. המעבר איפשר ייצור מקומי של מטבעות זיכרון ומדליות מכסף וזהב תחת בקרת איכות ישירה. המפעל משלב טכנולוגיות הטבעה מתקדמות עם עיצוב אמנותי ישראלי. כיום הוא מייצר אלפי מטבעות כסף טהור מדי שנה לשוק המקומי והבינלאומי."
+     },
+     {
+      "title": "סדרות שקל ומורשת מקראית בכסף",
+      "text": "ICMC מנפיקה סדרות כסף על נושאים תנ״כיים והיסטוריים — שקל, חנוכה, פסח ומלכי ישראל. מטבעות אלה מוטבעים בדרך כלל מכסף 999, ולעיתים 925 בסטרלינג. הסדרות מוגבלות בטירז׳ ונחשבות לפריטי אספנות עם פרמיה מעל ערך המתכת. עיצובים מבוססי ממצאים ארכיאולוגיים מישראל מוסיפים ערך היסטורי לכל אונקיה."
+     },
+     {
+      "title": "מיקום בשוק הכסף הפיזי הישראלי",
+      "text": "בישראל, ICMC (המכונה גם The Holy Land Mint) היא המקור הממשלתי המוביל למטבעות כסף פיזי מוסמכים. משקיעים ישראלים רוכשים מטבעותיה לרוב עם פרמיה של 15%–25% מעל מחיר הספוט. המטבעות נמכרים בקלות יחסית בשוק המקומי בזכות המוניטין והעיצוב הלאומי. חשוב לשמור חשבוניות לצורכי מס רווח הון בעת מכירה."
+     }
+    ],
+    "products": [
+     {
+      "title": "בוליון יונת השלום",
+      "type": "בוליון",
+      "weight": "משקלים שונים",
+      "year": "2014–",
+      "purity": "כסף 999 / זהב 999.9",
+      "desc": "בוליון הכסף הישראלי \"יונת השלום\" של מטבעות ארץ הקודש, המיוצר החל משנת 2014. בחלקו הקדמי: יונה לבנה עם עלה זית במעופה מעל חומות ירושלים העתיקה. בחלקו האחורי: סמל החברה, טוהר המתכת ומשקלה; במטילים גם חותמת בודק ומספר סידורי. זמין כעיגול או מטיל. החל מ-2019 גם בזהב טהור 999.9.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2",
+      "emoji": "🕊️",
+      "transparent": true
+     },
+     {
+      "title": "מטיל כסף יצוק 1 ק\"ג — יונת השלום",
+      "type": "מטיל",
+      "weight": "1 ק\"ג",
+      "year": "2014–",
+      "purity": "כסף 999",
+      "desc": "מטיל כסף טהור יצוק במשקל 1 ק\"ג מסדרת \"יונת השלום\" של מטבעות ארץ הקודש. על המטיל מוטבעים סמל החברה, יונת השלום, טוהר המתכת, משקל, סימן ICMC ומספר סידורי. מיוצר החל מ-2014; החל מ-2019 זמין גם בזהב טהור 999.9.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace-1kg-bar.webp?v=2",
+      "emoji": "🥈",
+      "transparent": true
+     },
+     {
+      "title": "300 גרם גרגירי כסף",
+      "type": "גרגירים",
+      "weight": "300 גרם",
+      "year": "",
+      "purity": "כסף 999",
+      "desc": "גרגירי כסף טהור 999 במשקל 300 גרם ממטבעות ארץ הקודש. אריזה רשמית במיכל פластיק אטום עם סימון טוהר ומשקל. מתאים להשקעה בכסף פיזי, ייצור ואספנות.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp?v=2",
+      "emoji": "✨",
+      "transparent": true
+     }
+    ],
+    "records": [
+     {
+      "title": "נוסדה 1952",
+      "text": "הוקמה כחברה ממשלתית מטעם בנק ישראל — שלוש שנים לאחר הקמת המדינה."
+     },
+     {
+      "title": "60+ מדינות",
+      "text": "מטבעות ICMC מופצים ביותר מ-60 מדינות ברחבי העולם."
+     },
+     {
+      "title": "מפעל ירושלים 1962",
+      "text": "מאז 1962 מייצרת החברה מטבעות במפעל מקומי בירושלים."
+     },
+     {
+      "title": "כסף 999 ו-925",
+      "text": "מייצרת מטבעות השקעה ואספנות בטוהר 999, ומדליות סטרלינג 925."
+     },
+     {
+      "title": "יונת השלום 2014",
+      "text": "בוליון הדגל \"יונת השלום\" — כסף 999 מ-2014, וזהב 999.9 מ-2019, בראונדים ומטילים."
+     }
+    ]
+   },
+   "en": {
+    "name": "Israel Coins and Medals Corp.",
+    "subtitle": "State-owned coin authority — ICMC",
+    "founded": "Founded 1952",
+    "location": "Jerusalem, Israel",
+    "website": "en.israelmint.com",
+    "history": [
+     {
+      "title": "Foundation & Historical Background",
+      "text": "The Israel Coins and Medals Corporation (ICMC) was established in 1952 as a government-owned company under the Bank of Israel, just a few years after the Declaration of Independence. It was created to produce commemorative coins and medals representing the values and events of the young nation. The first coins were minted abroad due to local technical limitations."
+     },
+     {
+      "title": "Growth & International Standing",
+      "text": "Over the decades, ICMC has grown into one of the most recognized coin producers in the world. Its coins are distributed in over 60 countries and are considered prestigious collectibles. The company collaborates with leading Israeli artists who design coin faces, integrating Jewish and national values into every piece."
+     },
+     {
+      "title": "Physical Silver & Collector Coins",
+      "text": "Each year, to mark Israeli Independence Day, the company issues limited series of pure silver coins. ICMC also produces silver coins themed around Jerusalem, Hanukkah, Passover, and historical figures. These coins, struck from 999 and 925 silver, have become rare collectibles in the international numismatic market."
+     },
+     {
+      "title": "Jerusalem Minting Facility (1962)",
+      "text": "In 1962, ICMC established its minting plant in Jerusalem and began producing coins domestically for the first time. The move enabled local manufacture of commemorative coins and medals in silver and gold under direct quality control. The facility combines advanced striking technology with Israeli artistic design. Today it produces thousands of fine silver coins annually for domestic and international markets."
+     },
+     {
+      "title": "Shekel & Biblical Silver Series",
+      "text": "ICMC issues silver series on biblical and historical themes — Shekel, Hanukkah, Passover, and Kings of Israel. These coins are typically struck in .999 fine silver, sometimes in .925 sterling for medals. Limited mintages make them collectibles often trading above melt value. Designs based on Israeli archaeological finds add historical depth to every troy ounce."
+     },
+     {
+      "title": "Role in Israel's Physical Silver Market",
+      "text": "In Israel, ICMC (also known as The Holy Land Mint) is the leading government-backed source for certified physical silver coins. Israeli investors typically buy its products at premiums of roughly 15%–25% above spot. Coins resell relatively easily in the local market thanks to national branding and trust. Keeping purchase receipts is essential for capital-gains reporting when selling."
+     }
+    ],
+    "products": [
+     {
+      "title": "Dove of Peace Bullion",
+      "type": "Bullion",
+      "weight": "Various weights",
+      "year": "2014–",
+      "purity": ".999 Silver / .9999 Gold",
+      "desc": "Israeli \"Dove of Peace\" bullion by The Holy Land Mint, produced since 2014. Obverse: a white dove with an olive branch in flight above the Old City of Jerusalem walls. Reverse: Holy Land Mint logo, metal purity and weight; bars also carry the Melter Assayer mark and serial number. Available as rounds or bars. Gold .9999 versions since 2019.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2",
+      "emoji": "🕊️",
+      "transparent": true
+     },
+     {
+      "title": "Dove of Peace 1 kg Cast Bar",
+      "type": "Bar",
+      "weight": "1 kg",
+      "year": "2014–",
+      "purity": ".999 Silver",
+      "desc": "Cast .999 fine silver bar from the \"Dove of Peace\" series by The Holy Land Mint. Stamped with the company logo, dove motif, SILVER .999, weight, ICMC mark and serial number. Produced since 2014; gold .9999 versions available since 2019.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace-1kg-bar.webp?v=2",
+      "emoji": "🥈",
+      "transparent": true
+     },
+     {
+      "title": "300g Fine Silver Grains",
+      "type": "Grains",
+      "weight": "300g",
+      "year": "",
+      "purity": ".999 Silver",
+      "desc": "300 grams of .999 fine silver grains (shot) from The Holy Land Mint — Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp?v=2",
+      "emoji": "✨",
+      "transparent": true
+     }
+    ],
+    "records": [
+     {
+      "title": "Founded 1952",
+      "text": "Established as a government corporation under the Bank of Israel, three years after independence."
+     },
+     {
+      "title": "60+ Countries",
+      "text": "ICMC coins are distributed in more than 60 countries worldwide."
+     },
+     {
+      "title": "Jerusalem Plant 1962",
+      "text": "Has minted coins at its Jerusalem facility since 1962."
+     },
+     {
+      "title": ".999 & .925 Silver",
+      "text": "Produces investment and collector pieces in .999 fine and .925 sterling silver."
+     },
+     {
+      "title": "Dove of Peace 2014",
+      "text": "Flagship \"Dove of Peace\" bullion — .999 silver since 2014, .9999 gold since 2019, in rounds and bars."
+     }
+    ]
+   },
+   "ru": {
+    "name": "Израильский монетный двор",
+    "subtitle": "Государственная монетная корпорация — ICMC",
+    "founded": "Основан в 1952",
+    "location": "Иерусалим, Израиль",
+    "website": "en.israelmint.com",
+    "history": [
+     {
+      "title": "Основание и исторический фон",
+      "text": "Израильская корпорация монет и медалей (ICMC) была основана в 1952 году как государственная компания под управлением Банка Израиля, примерно через три года после провозглашения независимости. Она была создана для чеканки памятных монет и медалей, символизирующих ценности и события молодого государства. Первые монеты чеканились за рубежом из-за местных технических ограничений."
+     },
+     {
+      "title": "Развитие и международное признание",
+      "text": "На протяжении десятилетий ICMC стала одним из наиболее признанных производителей монет в мире. Её монеты распространяются более чем в 60 странах и считаются престижными предметами коллекционирования. Компания сотрудничает с ведущими израильскими художниками, создающими дизайн монет с интеграцией еврейских и национальных ценностей."
+     },
+     {
+      "title": "Физическое серебро и коллекционные монеты",
+      "text": "Ежегодно, в честь Дня независимости Израиля, компания выпускает ограниченные серии монет из чистого серебра. ICMC также производит серебряные монеты на темы Иерусалима, Хануки, Пасхи и исторических деятелей. Эти монеты из серебра 999 и 925 пробы стали редкими предметами коллекционирования на международном рынке нумизматики."
+     },
+     {
+      "title": "Монетный завод в Иерусалиме (1962)",
+      "text": "В 1962 году ICMC открыла чеканный завод в Иерусалиме и впервые начала производить монеты внутри страны. Это позволило выпускать памятные монеты и медали из серебра и золота под прямым контролем качества. Предприятие сочетает современные технологии чеканки с израильским художественным дизайном. Сегодня ежегодно производятся тысячи монет из чистого серебра для местного и мирового рынка."
+     },
+     {
+      "title": "Серии «Шекель» и библейское наследие",
+      "text": "ICMC выпускает серебряные серии на библейские и исторические темы — Шекель, Ханука, Пасха и «Цари Израиля». Монеты обычно чеканятся из серебра .999, медали иногда из серебра 925 пробы. Ограниченные тиражи делают их коллекционными предметами с надбавкой выше стоимости металла. Дизайны, основанные на археологических находках Израиля, добавляют историческую ценность каждой унции."
+     },
+     {
+      "title": "Место на рынке физического серебра Израиля",
+      "text": "В Израиле ICMC (также Holy Land Mint) — ведущий государственный источник сертифицированных серебряных монет. Инвесторы обычно покупают её продукцию с надбавкой около 15%–25% к спотовой цене. Монеты относительно легко перепродаются на местном рынке благодаря национальному бренду. Сохраняйте чеки покупки для налоговой отчётности при продаже."
+     }
+    ],
+    "products": [
+     {
+      "title": "Буллион «Голубь мира»",
+      "type": "Буллион",
+      "weight": "Разные веса",
+      "year": "2014–",
+      "purity": "Серебро 999 / Золото 999.9",
+      "desc": "Израильский буллион «Голубь мира» от монетного двора Святой Земли, выпускается с 2014 года. Лицевая сторона: белый голубь с оливковой ветвью над стенами Старого города Иерусалима. Оборотная: логотип монетного двора, проба и вес; на слитках также клеймо контролёра и серийный номер. Доступен в виде монет и слитков. С 2019 года также из золота 999.9 пробы.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2",
+      "emoji": "🕊️",
+      "transparent": true
+     },
+     {
+      "title": "Литой слиток 1 кг «Голубь мира»",
+      "type": "Слиток",
+      "weight": "1 кг",
+      "year": "2014–",
+      "purity": "Серебро 999",
+      "desc": "Литой слиток из серебра 999 пробы весом 1 кг из серии «Голубь мира» от монетного двора Святой Земли. На слитке: логотип компании, голубь, проба, вес, знак ICMC и серийный номер. Выпускается с 2014 года; с 2019 года также из золота 999.9 пробы.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace-1kg-bar.webp?v=2",
+      "emoji": "🥈",
+      "transparent": true
+     },
+     {
+      "title": "300 г серебряных гранул",
+      "type": "Гранулы",
+      "weight": "300 г",
+      "year": "",
+      "purity": "Серебро 999",
+      "desc": "300 граммов серебряных гранул пробы 999 от монетного двора Святой Земли. Официальная герметичная пластиковая упаковка с маркировкой пробы и веса. Подходит для инвестиций в физическое серебро, производства и коллекционирования.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp?v=2",
+      "emoji": "✨",
+      "transparent": true
+     }
+    ],
+    "records": [
+     {
+      "title": "Основана в 1952",
+      "text": "Создана как государственная корпорация при Банке Израиля через три года после независимости."
+     },
+     {
+      "title": "60+ стран",
+      "text": "Монеты ICMC распространяются более чем в 60 странах мира."
+     },
+     {
+      "title": "Завод в Иерусалиме 1962",
+      "text": "С 1962 года чеканит монеты на заводе в Иерусалиме."
+     },
+     {
+      "title": "Серебро 999 и 925",
+      "text": "Выпускает инвестиционные и коллекционные изделия из серебра .999 и .925."
+     },
+     {
+      "title": "«Голубь мира» 2014",
+      "text": "Флагманский буллион «Голубь мира» — серебро 999 с 2014, золото 999.9 с 2019, монеты и слитки."
+     }
+    ]
+   },
+   "order": 1,
+   "published": true
+  },
+  {
+   "id": "germany",
+   "flag": "🇩🇪",
+   "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg/800px-M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg",
+   "he": {
+    "name": "בית המטבע הבוורי",
+    "subtitle": "Bayerisches Hauptmünzamt — מינכן",
+    "founded": "נוסד 1158",
+    "location": "מינכן, בוואריה, גרמניה",
+    "website": "hauptmuenzamt.bayern",
+    "history": [
+     {
+      "title": "ייסוד ימי הביניים",
+      "text": "בית המטבע הבוורי (Bayerisches Hauptmünzamt) הוא אחד מבתי המטבע הוותיקים ביותר בעולם, עם תולדות המתחילות בשנת 1158 תחת הנסיך הנריך האריה ממינכן. לאורך מאות שנים שימש בית המטבע לייצור מטבעות לממלכת בוואריה, ומאוחר יותר לאימפריה הגרמנית. מיקומו ההיסטורי במינכן, בלב בוואריה, עיצב את זהותו הייחודית."
+     },
+     {
+      "title": "עידן מודרני ומוצרי כסף",
+      "text": "בעידן המודרני הפך בית המטבע הבוורי לגוף מוביל בייצור מטבעות אספנות ועיטורים מדינתיים. בית המטבע מתמחה במטבעות זיכרון כסף ברמה גבוהה, הכוללים סדרות היסטוריות, מוזיקה קלאסית ומורשת בוורית. כיום הוא אחד משמונה בתי מטבע גרמניים פעילים, כאשר כל בית מטבע מסמן מטבעותיו בסימן ייחודי (לבוואריה: D)."
+     },
+     {
+      "title": "מטילי כסף ואספנות",
+      "text": "בנוסף למטבעות הזיכרון, מייצר בית המטבע הבוורי מטילי כסף טהורים לשוק ההשקעות. מוצריו זוכים להכרה בינלאומית בשל דיוקן הטביעה הגבוה ועיצובים היסטוריים מפוארים. סדרת המטבעות הגרמנית \"Deutschland Silber Unze\" הפכה לאחת מהפופולריות ביותר בקרב משקיעי כסף באירופה."
+     },
+     {
+      "title": "מורשת הטאלר והסחר בכסף בווארי",
+      "text": "בית המטבע הבוורי שימש במשך מאות שנים לייצור טאלרים כספיים — מטבעות שהפכו לתקן סחר אירופי. בוואריה הייתה מרכז כלכלי חשוב באימפריה, והכסף שוטבע במינכן זרם לכל אירופה. מטבעות עתיקים עם סימן \"D\" (Drechsler/München) נחשבים היום לפריטי אספנות יקרים. המורשת הזו ממשיכה בסדרות כסף מודרניות כמו \"Deutschland Silber Unze\"."
+     },
+     {
+      "title": "תוכנית מטבעות הזיכרון בכסף של גרמניה",
+      "text": "גרמניה מנפיקה מטבעות זיכרון רשמיים בכסף 925 ו-999 במסגרת סדרות כמו \"גרמניה יפה\" (10 יורו) ו\"16 מדינות\" (20 יורו). כל מטבע מכיל כמות מתכת ידועה — לרוב 16–32 גרם כסף טהור. משקיעים אירופיים רוכשים אותם לעיתים מתחת לפרמיה של מטבעות בוליון קלאסיים, אך עם ערך אספנותי נוסף. בית המטבע הבוורי (סימן D) הוא אחד משמונה בתי מטבע פעילים בגרמניה."
+     },
+     {
+      "title": "דיוק טביעה ואיכות גרמנית",
+      "text": "בתי המטבע הגרמניים ידועים בדיוק הטביעה הגבוה ובסטנדרטים קפדניים של משקל וטוהר. מטילי כסף בווריים ומטבעות זיכרון עוברים בקרת איכות לפני יציאה לשוק. גרמניה היא גם מרכז עיבוד ומסחר במתכות יקרות באירופה, עם קשר הדוק לתקני LBMA. עבור משקיעי כסף פיזי, המוצרים הגרמניים מציעים שילוב של מורשת, אמינות ועיצוב."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "נוסד 1158",
+      "text": "אחד מבתי המטבע הפעילים הוותיקים בעולם — ייסוד על ידי הנסיך הנריך האריה במינכן."
+     },
+     {
+      "title": "סימן מטבע D",
+      "text": "כל מטבע ממינכן נושא את סימן המטבע \"D\" — מזהה בינלאומי לבוואריה."
+     },
+     {
+      "title": "8 בתי מטבע בגרמניה",
+      "text": "גרמניה מפעילה שמונה בתי מטבע ממשלתיים; בוואריה היא הגדול והמוכר ביותר."
+     },
+     {
+      "title": "850+ שנות פעילות",
+      "text": "חגג 850 שנה לייסוד ב-2008 — רצף ייצור מטבעות נדיר בהיסטוריה."
+     },
+     {
+      "title": "סדרת Deutschland Silber Unze",
+      "text": "סדרת אונקיית כסף גרמנית פופולרית בקרב משקיעי כסף פיזי באירופה."
+     }
+    ]
+   },
+   "en": {
+    "name": "Bavarian State Mint",
+    "subtitle": "Bayerisches Hauptmünzamt — Munich",
+    "founded": "Founded 1158",
+    "location": "Munich, Bavaria, Germany",
+    "website": "hauptmuenzamt.bayern",
+    "history": [
+     {
+      "title": "Medieval Foundation",
+      "text": "The Bavarian State Mint (Bayerisches Hauptmünzamt) is one of the oldest mints in the world, with origins dating to 1158 under Prince Henry the Lion in Munich. Over centuries it served as the coin-producing authority for the Kingdom of Bavaria and later the German Empire. Its historic location in the heart of Munich shaped its unique identity."
+     },
+     {
+      "title": "Modern Era & Silver Products",
+      "text": "In the modern era, the Bavarian Mint became a leader in high-quality commemorative coins and state decorations. It specializes in premium silver coins featuring historical series, classical music, and Bavarian heritage. Today it is one of eight active German mints, each identified by a unique mintmark (Bavaria uses the letter \"D\")."
+     },
+     {
+      "title": "Silver Bars & Collecting",
+      "text": "In addition to commemorative coins, the Bavarian Mint produces pure silver bars for the investment market. Its products are internationally recognized for precision striking and magnificent historical designs. The German \"Deutschland Silber Unze\" series has become one of the most popular among silver investors in Europe."
+     },
+     {
+      "title": "Thaler Legacy & Bavarian Silver Trade",
+      "text": "The Bavarian Mint served for centuries as a producer of silver Thalers — coins that became a European trade standard. Bavaria was an economic hub of the Empire, and silver struck in Munich circulated across the continent. Ancient coins bearing the \"D\" mintmark (Munich) are prized collectibles today. That heritage continues in modern silver series such as the \"Deutschland Silber Unze.\""
+     },
+     {
+      "title": "Germany's Official Silver Commemorative Program",
+      "text": "Germany issues official commemorative coins in .925 and .999 silver through series like \"Beautiful Germany\" (€10) and \"16 States\" (€20). Each coin contains a defined silver weight — typically 16–32 grams of fine silver. European investors sometimes acquire them at lower premiums than classic bullion, with added numismatic value. The Bavarian Mint (mintmark D) is one of eight active German mints."
+     },
+     {
+      "title": "Strike Precision & German Quality Standards",
+      "text": "German mints are renowned for high strike precision and strict weight and fineness standards. Bavarian silver bars and commemorative coins undergo quality control before market release. Germany is also a major European precious-metals processing hub with close ties to LBMA standards. For physical silver investors, German products combine heritage, reliability, and design."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Founded 1158",
+      "text": "One of the oldest continuously operating mints in the world — established by Henry the Lion in Munich."
+     },
+     {
+      "title": "Mintmark \"D\"",
+      "text": "Every Munich-struck coin bears the \"D\" mintmark — an international identifier for Bavaria."
+     },
+     {
+      "title": "8 German State Mints",
+      "text": "Germany operates eight government mints; Bavaria is the largest and best known."
+     },
+     {
+      "title": "850+ Years of Operation",
+      "text": "Celebrated 850 years since founding in 2008 — a rare continuity in minting history."
+     },
+     {
+      "title": "Deutschland Silber Unze",
+      "text": "Popular German silver-ounce series among European physical silver investors."
+     }
+    ]
+   },
+   "ru": {
+    "name": "Баварский монетный двор",
+    "subtitle": "Bayerisches Hauptmünzamt — Мюнхен",
+    "founded": "Основан в 1158",
+    "location": "Мюнхен, Бавария, Германия",
+    "website": "hauptmuenzamt.bayern",
+    "history": [
+     {
+      "title": "Средневековое основание",
+      "text": "Баварский государственный монетный двор (Bayerisches Hauptmünzamt) — один из старейших монетных дворов в мире, история которого восходит к 1158 году при принце Генрихе Льве в Мюнхене. На протяжении столетий он служил органом чеканки монет для Королевства Бавария, а впоследствии для Германской империи. Историческое расположение в сердце Мюнхена сформировало его уникальную идентичность."
+     },
+     {
+      "title": "Современная эпоха и серебряные изделия",
+      "text": "В современную эпоху Баварский монетный двор стал лидером в производстве высококачественных памятных монет и государственных наград. Он специализируется на коллекционных серебряных монетах: исторические серии, классическая музыка, баварское наследие. Сегодня это один из восьми действующих немецких монетных дворов, каждый из которых имеет уникальный знак (у Баварии — «D»)."
+     },
+     {
+      "title": "Серебряные слитки и коллекционирование",
+      "text": "В дополнение к памятным монетам, Баварский монетный двор производит слитки чистого серебра для инвестиционного рынка. Его продукция пользуется международным признанием благодаря высокоточной чеканке и великолепным историческим дизайнам. Серия «Deutschland Silber Unze» стала одной из наиболее популярных среди инвесторов в серебро по всей Европе."
+     },
+     {
+      "title": "Наследие талера и баварской торговли серебром",
+      "text": "Баварский монетный двор веками чеканил серебряные талеры — монеты, ставшие европейским торговым стандартом. Бавария была экономическим центром империи, и серебро из Мюнхена циркулировало по всей Европе. Древние монеты с клеймом «D» (Мюнхен) сегодня ценятся коллекционерами. Это наследие продолжается в современных сериях, таких как «Deutschland Silber Unze»."
+     },
+     {
+      "title": "Программа памятных серебряных монет Германии",
+      "text": "Германия выпускает официальные памятные монеты из серебра .925 и .999 в сериях «Красивая Германия» (10 евро) и «16 земель» (20 евро). Каждая монета содержит определённое количество чистого серебра — обычно 16–32 грамма. Европейские инвесторы иногда покупают их с меньшей надбавкой, чем классический буллион, с добавленной нумизматической ценностью. Баварский двор (клеймо D) — один из восьми действующих."
+     },
+     {
+      "title": "Точность чеканки и немецкие стандарты",
+      "text": "Немецкие монетные дворы известны высокой точностью чеканки и строгими стандартами веса и пробы. Баварские слитки и памятные монеты проходят контроль качества перед выпуском. Германия — крупный европейский центр обработки драгоценных металлов со связями со стандартами LBMA. Для инвесторов в физическое серебро немецкая продукция сочетает наследие, надёжность и дизайн."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Основан в 1158",
+      "text": "Один из старейших действующих монетных дворов мира — основан Генрихом Львом в Мюнхене."
+     },
+     {
+      "title": "Клеймо «D»",
+      "text": "Каждая монета из Мюнхена несёт клеймо «D» — международный идентификатор Баварии."
+     },
+     {
+      "title": "8 монетных дворов Германии",
+      "text": "В Германии действуют восемь государственных дворов; Баварский — крупнейший и известнейший."
+     },
+     {
+      "title": "850+ лет работы",
+      "text": "В 2008 году отметил 850-летие основания — редкая непрерывность в истории чеканки."
+     },
+     {
+      "title": "Серия Deutschland Silber Unze",
+      "text": "Популярная немецкая серия серебряных унций среди европейских инвесторов."
+     }
+    ]
+   },
+   "order": 2,
+   "published": true
+  },
+  {
+   "id": "uk",
+   "flag": "🇬🇧",
+   "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Llantrisant_Royal_Mint_Building.jpg/800px-Llantrisant_Royal_Mint_Building.jpg",
+   "he": {
+    "name": "המינט המלכותי",
+    "subtitle": "The Royal Mint — לנטריסנט, ויילס",
+    "founded": "נוסד 886",
+    "location": "לנטריסנט, ויילס, בריטניה",
+    "website": "www.royalmint.com",
+    "history": [
+     {
+      "title": "ייסוד ועידן המלוכה",
+      "text": "המינט המלכותי (The Royal Mint) הוא אחד הגופים הממשלתיים הוותיקים ביותר בעולם, עם מסורת טביעת מטבעות שמתחילה בשנת 886 לספירה תחת המלך אלפרד הגדול. במשך מאות שנים שכן המינט ב\"מגדל לונדון\", ולאחר מכן ברחוב Tower Hill בלונדון. בשנת 1968 עבר לאתרו הנוכחי בלנטריסנט, ויילס."
+     },
+     {
+      "title": "הברבריאניה — סמל הכסף הבריטי",
+      "text": "הסדרה הנחשבת ביותר של המינט המלכותי היא ללא ספק מטבע הברבריאניה (Britannia), שנטבע לראשונה כמטבע כסף השקעה בשנת 1987. ברבריאניה, המייצגת את בריטניה כדמות נשית לוחמת, הפכה לאחד הסמלים הנודעים ביותר של שוק הכסף הפיזי הבינלאומי. המטבע עשוי כסף 999.9 ומהווה הילך חוקי בממלכה המאוחדת."
+     },
+     {
+      "title": "חדשנות ומנהיגות בשוק",
+      "text": "המינט המלכותי מוביל בחדשנות: הוא היה הראשון להנפיק מטבעות כסף בצבעים (2016), ומטבעות עם אפקטים הולוגרפיים. סדרת \"חיות המלכה\" (Queen's Beasts, 2016–2021), שהכילה 10 מטבעות כסף תוך שנות ייצור, הפכה לפנומן אספנות עולמי. בנוסף, המינט מנפיק מטבעות זיכרון, שטרות זהב ומטילי כסף למשקיעים."
+     },
+     {
+      "title": "כסף בריטי לפני הברבריאניה",
+      "text": "לפני השקת מטבע הברבריאניה ב-1987, המינט המלכותי ייצר מטבעות כסף היסטוריים כמו Crown ומטבעות .500 (50% כסף) עד 1946. מטבעות כסף ותיקים נחשבים היום לפריטי אספנות עם ערך מעל המתכת. המעבר לכסף 999.9 בברבריאניה סימן שינוי בשוק ההשקעות הבריטי. משקיעים מחפשים לעיתים מטבעות Elizabeth II ו-Charles III כנקודות מעבר היסטוריות."
+     },
+     {
+      "title": "לנטריסנט — מפעל המטבעות הגדול בעולם",
+      "text": "מאז 1968, המינט המלכותי פועל בלנטריסנט, ויילס — אחד ממפעלי הטבעה הגדולים והמתקדמים בעולם. המתקן מייצר מיליארדי מטבעות מחוספסים בשנה לצד מטבעות כסף וזהב פרמיום. קווי ייצור אוטומטיים מאפשרים דיוק במשקל של עד שברירי גרם לאונקיה. כמעט כל מטבע הברבריאניה והסדרות המיוחדות נטבעים כאן."
+     },
+     {
+      "title": "סדרות כסף 2 אונקיות ושוק האספנות",
+      "text": "המינט המלכותי הוביל את שוק מטבעות הכסף בגודל 2 אונקיות — סדרת Queen's Beasts (2016–2021) כללה 10 מטבעות, כל אחד 62.2 גרם כסף 999.9. סדרות נוספות כוללות Shengxiao (לוח סיני) ומטבעות יובל מלכותי. מטבעות 2oz נפוצים בקרב \"סטאקרים\" שצוברים כסף פיזי במשקל גבוה יותר לאונקיה."
+     }
+    ],
+    "products": [
+     {
+      "title": "מטיל כסף יצוק 500 גרם",
+      "type": "מטיל",
+      "weight": "500 גרם",
+      "year": "",
+      "purity": "כסף 999",
+      "desc": "מטיל השקעה יצוק מהמינט המלכותי הבריטי. על המטיל: לוגו המינט, משקל 500 גרם, טוהר 999 ומספר סידורי ייחודי. מטילי יציקה פופולריים בקרב משקיעים שמחפשים כמות כסף גדולה בפרמיה נמוכה יחסית. מטילים אינם נושאים דיוקן מלכותי — בניגוד למטבעות.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/royal-mint-500g-cast-bar.webp?v=1",
+      "emoji": "🥈",
+      "transparent": true
+     },
+     {
+      "title": "ברבריאניה כסף 2026",
+      "type": "מטבע",
+      "weight": "1 אונקיה",
+      "year": "2026",
+      "purity": "כסף 999.9",
+      "desc": "מטבע הברבריאניה — אחד ממטבעות הכסף המוכרים בעולם, מיוצר על ידי המינט המלכותי מאז 1987. על הגב: ברבריאניה עם קסדה, חנית, מגן דגל בריטניה וענף זית. כולל אבטחה מתקדמת: תמונה נסתרת (חנית או מנעול), אנימציית משטח, מיקרו-טקסט «קישוט והגנה», וקווי צבע על המגן. הילך חוקי בבריטניה בערך נקוב של 2 לירות.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-reverse.webp?v=1",
+      "emoji": "🇬🇧",
+      "transparent": true
+     },
+     {
+      "title": "ברבריאניה — המלך צ'ארלס השלישי",
+      "type": "מטבע",
+      "weight": "1 אונקיה",
+      "year": "2026",
+      "purity": "כסף 999.9",
+      "desc": "על פני המטבע מופיע דיוקן המלך צ'ארלס השלישי — ללא כתר, בעיצוב האמן מרטין ג'נינגס. סביב הדיוקן: שם המלך, תארים מלכותיים וערך נקוב של 2 לירות. מאז עלייתו לכס ב-2022, דיוקן המלך מופיע על רוב מטבעות המינט המלכותי — כולל ברבריאניה, סוברין ומטבעות זיכרון — במקום אליזבת השנייה. שדה הרקע עם טקסטורת אבטחה מיקרוסקופית.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-obverse.webp?v=1",
+      "emoji": "👑",
+      "transparent": true
+     }
+    ],
+    "records": [
+     {
+      "title": "נוסד 886 לספירה",
+      "text": "מסורת טביעה רציפה של למעלה מ-1,100 שנה — החל מאלפרד הגדול."
+     },
+     {
+      "title": "ברבריאניה מ-1987",
+      "text": "מטבע הכסף ההשקעה הבריטי המרכזי — כסף 999.9, הילך חוקי £2."
+     },
+     {
+      "title": "999.9 — ארבעה תשעות",
+      "text": "ברבריאניה בין המטבעות הטהורים ביותר בשוק הבוליון העולמי."
+     },
+     {
+      "title": "מעבר ללנטריסנט 1968",
+      "text": "עבר ממגדל לונדון למתקן מודרני בוויילס — ייצור בקנה מידה עולמי."
+     },
+     {
+      "title": "Queen's Beasts — 10 מטבעות",
+      "text": "סדרת 2016–2021: 10×2oz כסף, כ-622 גרם כסף טהור בסט מלא."
+     }
+    ]
+   },
+   "en": {
+    "name": "The Royal Mint",
+    "subtitle": "The Royal Mint — Llantrisant, Wales",
+    "founded": "Founded 886 AD",
+    "location": "Llantrisant, Wales, United Kingdom",
+    "website": "www.royalmint.com",
+    "history": [
+     {
+      "title": "Foundation & Royal History",
+      "text": "The Royal Mint is one of the oldest government bodies in the world, with a coinage tradition dating to 886 AD under King Alfred the Great. For centuries it was housed in the Tower of London, then on Tower Hill. In 1968 it moved to its current site in Llantrisant, Wales, becoming a world-class coin manufacturing facility."
+     },
+     {
+      "title": "Britannia — Symbol of British Silver",
+      "text": "The most celebrated Royal Mint product is undoubtedly the Britannia silver coin, first struck as a silver bullion coin in 1987. Britannia, representing Britain as a female warrior figure, has become one of the most recognised symbols in the international physical silver market. The coin is struck in 999.9 fine silver and is legal tender in the United Kingdom."
+     },
+     {
+      "title": "Innovation & Market Leadership",
+      "text": "The Royal Mint leads in innovation: it was the first to issue coloured silver coins (2016) and coins with holographic effects. The \"Queen's Beasts\" series (2016–2021), comprising 10 silver coins over its production years, became a global collecting phenomenon. The Mint also issues commemorative coins, gold notes, and silver bars for investors."
+     },
+     {
+      "title": "British Silver Before Britannia",
+      "text": "Before the Britannia bullion coin launched in 1987, the Royal Mint produced historic silver such as Crowns and .500 fine (50% silver) coins until 1946. Vintage British silver is now valued as collectibles often above melt. The shift to .9999 fine Britannia marked a new era in UK investment silver. Investors seek Elizabeth II and Charles III issues as historical transition pieces."
+     },
+     {
+      "title": "Llantrisant — One of the World's Largest Mints",
+      "text": "Since 1968, the Royal Mint has operated at Llantrisant, Wales — among the largest and most advanced coin factories globally. The site strikes billions of circulation coins annually alongside premium silver and gold. Automated lines achieve weight precision to fractions of a gram per troy ounce. Nearly all Britannias and special silver series are struck here."
+     },
+     {
+      "title": "2oz Silver Series & the Stacking Market",
+      "text": "The Royal Mint pioneered the popular 2oz silver format — the Queen's Beasts series (2016–2021) comprised ten coins, each 62.2g of .9999 silver. Other series include the Shengxiao lunar line and royal jubilee issues. Two-ounce coins are favoured by stackers accumulating more silver weight per piece than standard 1oz bullion."
+     }
+    ],
+    "products": [
+     {
+      "title": "Royal Mint 500g Cast Silver Bar",
+      "type": "Bar",
+      "weight": "500g",
+      "year": "",
+      "purity": ".999 Silver",
+      "desc": "Cast investment bar from The Royal Mint — stamped THE ROYAL MINT, 500g, 999, SILVER, with a unique serial number (e.g. R000001). Cast bars are popular with stackers seeking larger silver weight at a typically lower premium per gram than coins. Bars carry no royal portrait — unlike Royal Mint coinage.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/royal-mint-500g-cast-bar.webp?v=1",
+      "emoji": "🥈",
+      "transparent": true
+     },
+     {
+      "title": "Silver Britannia (2026) — Reverse",
+      "type": "Coin",
+      "weight": "1 oz",
+      "year": "2026",
+      "purity": ".9999 Silver",
+      "desc": "The Britannia is one of the world's most recognised silver bullion coins, struck by The Royal Mint since 1987. Reverse: Britannia with helmet, trident, Union Jack shield and olive branch; inscriptions BRITANNIA, 2026, 1 OZ, 999 FINE SILVER. Advanced security: Latent Image (trident/padlock), Surface Animation, micro-text DECUS ET TUTAMEN, and tincture lines on the shield. UK legal tender.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-reverse.webp?v=1",
+      "emoji": "🇬🇧",
+      "transparent": true
+     },
+     {
+      "title": "Silver Britannia — King Charles III Obverse",
+      "type": "Coin",
+      "weight": "1 oz",
+      "year": "2026",
+      "purity": ".9999 Silver",
+      "desc": "Obverse: portrait of King Charles III — uncrowned, by Martin Jennings (initials MJ). Inscription: CHARLES III • D • G • REX • F • D • 2 POUNDS. Since his accession in 2022, the King's effigy appears on most Royal Mint bullion and commemorative silver — including Britannia and Sovereign — replacing Queen Elizabeth II. Micro-textured security field on the background.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-obverse.webp?v=1",
+      "emoji": "👑",
+      "transparent": true
+     }
+    ],
+    "records": [
+     {
+      "title": "Founded 886 AD",
+      "text": "Over 1,100 years of continuous minting tradition — from Alfred the Great onward."
+     },
+     {
+      "title": "Britannia Since 1987",
+      "text": "The UK's flagship silver bullion coin — .9999 fine, £2 legal tender face value."
+     },
+     {
+      "title": "Four-Nines Fineness",
+      "text": "Britannia ranks among the purest mainstream bullion coins on the global market."
+     },
+     {
+      "title": "Llantrisant Since 1968",
+      "text": "Moved from the Tower of London to a world-scale facility in Wales."
+     },
+     {
+      "title": "Queen's Beasts — 10 Coins",
+      "text": "2016–2021 series: ten 2oz silver coins, ~622g of fine silver in a full set."
+     }
+    ]
+   },
+   "ru": {
+    "name": "Королевский монетный двор",
+    "subtitle": "The Royal Mint — Лланттресант, Уэльс",
+    "founded": "Основан в 886 г. н.э.",
+    "location": "Лланттресант, Уэльс, Великобритания",
+    "website": "www.royalmint.com",
+    "history": [
+     {
+      "title": "Основание и королевская история",
+      "text": "Королевский монетный двор — один из старейших государственных органов в мире, с традицией чеканки монет, восходящей к 886 году н.э. при короле Альфреде Великом. Столетиями он располагался в Тауэре, затем на Тауэр-Хилл в Лондоне. В 1968 году двор переехал в нынешнее здание в Лланттресанте, Уэльс, став производственным объектом мирового класса."
+     },
+     {
+      "title": "Britannia — символ британского серебра",
+      "text": "Самым известным продуктом Королевского монетного двора, несомненно, является серебряная монета Britannia, впервые выпущенная как инвестиционная серебряная монета в 1987 году. Britannia, изображающая Британию в образе женщины-воина, стала одним из наиболее узнаваемых символов на мировом рынке физического серебра. Монета чеканится из серебра 999.9 пробы и является законным платёжным средством."
+     },
+     {
+      "title": "Инновации и лидерство на рынке",
+      "text": "Королевский монетный двор лидирует в инновациях: он первым выпустил цветные серебряные монеты (2016) и монеты с голографическими эффектами. Серия «Звери королевы» (2016–2021), состоящая из 10 серебряных монет, стала мировым коллекционным феноменом. Двор также выпускает памятные монеты, золотые ноты и серебряные слитки для инвесторов."
+     },
+     {
+      "title": "Британское серебро до Britannia",
+      "text": "До запуска инвестиционной Britannia в 1987 году Королевский двор чеканил историческое серебро — кроны и монеты из серебра .500 (50%) до 1946 года. Винтажное британское серебро ценится коллекционерами выше стоимости металла. Переход к серебру .9999 ознаменовал новую эру инвестиций в Великобритании. Инвесторы ищут монеты Елизаветы II и Карла III как исторические переходные выпуски."
+     },
+     {
+      "title": "Лланттресант — один из крупнейших дворов мира",
+      "text": "С 1968 года Королевский монетный двор работает в Лланттресанте, Уэльс — одном из крупнейших и самых современных монетных заводов в мире. Ежегодно чеканятся миллиарды монет для обращения наряду с премиальным серебром и золотом. Автоматизированные линии обеспечивают точность веса до долей грамма на унцию. Здесь чеканятся почти все Britannia и специальные серебряные серии."
+     },
+     {
+      "title": "Серебро 2 унции и рынок стекинга",
+      "text": "Королевский двор популяризировал формат 2 унций — серия «Звери королевы» (2016–2021) включала 10 монет по 62,2 г серебра .9999 каждая. Другие серии — лунный Shengxiao и юбилейные монархические выпуски. Монеты 2 унций популярны у «стекеров», накапливающих больше серебра на монету, чем стандартная 1 унция."
+     }
+    ],
+    "products": [
+     {
+      "title": "Литой слиток 500 г — Королевский монетный двор",
+      "type": "Слиток",
+      "weight": "500 г",
+      "year": "",
+      "purity": "Серебро 999",
+      "desc": "Инвестиционный литой слиток от Королевского монетного двора Великобритании. На слитке: логотип двора, вес 500 г, проба 999 и уникальный серийный номер. Популярен у инвесторов, покупающих большой вес серебра с более низкой премией за грамм. На слитках нет королевского портрета — в отличие от монет.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/royal-mint-500g-cast-bar.webp?v=1",
+      "emoji": "🥈",
+      "transparent": true
+     },
+     {
+      "title": "Серебряная Britannia 2026",
+      "type": "Монета",
+      "weight": "1 унция",
+      "year": "2026",
+      "purity": "Серебро 999.9",
+      "desc": "Britannia — одна из самых узнаваемых инвестиционных серебряных монет мира, чеканится Королевским монетным двором с 1987 года. Оборотная сторона: Britannia с шлемом, трезубцем, щитом с британским флагом и оливковой ветвью. Защита: скрытое изображение (трезубец или замок), анимация поверхности, микротекст «Украшение и защита», линии герба на щите. Законное платёжное средство Великобритании номиналом 2 фунта.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-reverse.webp?v=1",
+      "emoji": "🇬🇧",
+      "transparent": true
+     },
+     {
+      "title": "Britannia — король Карл III",
+      "type": "Монета",
+      "weight": "1 унция",
+      "year": "2026",
+      "purity": "Серебро 999.9",
+      "desc": "Лицевая сторона: портрет короля Карла III — без короны, работа художника Мартина Дженнингса. Вокруг портрета: имя короля, королевские титулы и номинал 2 фунта. С 2022 года после восшествия на престол портрет короля появляется на большинстве инвестиционных и памятных серебряных монет двора — включая Britannia и Sovereign — вместо Елизаветы II. Микротекстурированное защитное поле фона.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-obverse.webp?v=1",
+      "emoji": "👑",
+      "transparent": true
+     }
+    ],
+    "records": [
+     {
+      "title": "Основан в 886 г. н.э.",
+      "text": "Более 1100 лет непрерывной традиции чеканки — с времён Альфреда Великого."
+     },
+     {
+      "title": "Britannia с 1987",
+      "text": "Главная британская инвестиционная монета — серебро .9999, номинал £2."
+     },
+     {
+      "title": "Проба «четыре девятки»",
+      "text": "Britannia входит в число самых чистых буллион-монет мирового рынка."
+     },
+     {
+      "title": "Лланттресант с 1968",
+      "text": "Переезд из Тауэра в современный завод в Уэльсе мирового масштаба."
+     },
+     {
+      "title": "«Звери королевы» — 10 монет",
+      "text": "Серия 2016–2021: десять монет по 2 унции, ~622 г чистого серебра в полном наборе."
+     }
+    ]
+   },
+   "order": 3,
+   "published": true
+  },
+  {
+   "id": "usa",
+   "flag": "🇺🇸",
+   "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/United_States_Mint_Philadelphia.jpg/800px-United_States_Mint_Philadelphia.jpg",
+   "he": {
+    "name": "בית המטבע האמריקאי",
+    "subtitle": "United States Mint — מייצר את American Silver Eagle",
+    "founded": "נוסד 1792",
+    "location": "פילדלפיה / ווסט פוינט, ארה\"ב",
+    "website": "www.usmint.gov",
+    "history": [
+     {
+      "title": "ייסוד ומטבע הדולר",
+      "text": "בית המטבע האמריקאי נוסד ב-1792 בפילדלפיה, בירת ארה\"ב דאז, בחוק הטבעה פדרלי ראשון. מטרתו הייתה ייצור מטבעות דולר זהב, כסף ונחושת לרפובליקה הצעירה. הבניין בפילדלפיה הוא המבנה הציבורי הפדרלי הראשון שנבנה בארצות הברית, ומאז שמש כסמל הכלכלה האמריקאית."
+     },
+     {
+      "title": "American Silver Eagle — מטבע הכסף הנמכר בעולם",
+      "text": "מאז 1986, בית המטבע האמריקאי מייצר את ה-American Silver Eagle — המטבע ההשקעה הנמכר ביותר בהיסטוריה. המטבע עשוי כסף 999 (אונקיה), ועל פניו \"Walking Liberty\" — עיצוב מ-1916 שנחשב לציור המטבע הנפלא ביותר בהיסטוריה האמריקאית. ב-2021 עודכן צד הנשר (Reverse) לראשונה מאז 1986."
+     },
+     {
+      "title": "מורשת ומוצרים מיוחדים",
+      "text": "בנוסף ל-Silver Eagle, בית המטבע הנפיק ב-2021 גרסאות מחודשות של Morgan Dollar ו-Peace Dollar — שתי מטבעות איקוניות מהמאה ה-20. סדרת \"America the Beautiful\" (2010–2021) כללה 56 מטבעות 5 אונקיות של אתרים לאומיים. בית המטבע האמריקאי שומר על מלאי אסטרטגי לאומי של כסף ב-West Point."
+     },
+     {
+      "title": "ארבעה מיתקני מטבע פעילים",
+      "text": "בית המטבע האמריקאי מפעיל מיתקנים בפילדלפיה, דנבר, סן פרנסיסקו ו-West Point. מטבעות בוליון Silver Eagle נטבעים בעיקר ב-West Point (סימן W) וסן פרנסיסקו (S). סימני מטבע (P, D, S, W) מוסיפים ערך אספנותי למהדורות Proof. משקיעים בודקים את סימן המטבע בעת רכישת מטבעות ישנים או מיוחדים."
+     },
+     {
+      "title": "דולר כסף קלאסי (1878–1935)",
+      "text": "לפני ה-Silver Eagle, דולר הכסף Morgan (1878–1904, 1921) ו-Peace Dollar (1921–1935) היו עמודי התווך של הכסף האמריקאי. מטבעות אלו מכילים 90% כסף (0.7734 אונקיה טהורה למטבע). ב-2021 הוצאו מהדורות מחודשות ב-999 טהור — 175,000 יחידות לכל מיתקן. שוק האספנות האמריקאי נשען על מורשת דולרים אלו."
+     },
+     {
+      "title": "West Point ואספקת כסף לאומית",
+      "text": "מיתקן West Point בניו יורק מייצר את American Silver Eagle ושומר על מלאי אסטרטגי של כסף וזהב אמריקאי. המתקן הוקם במקור כמחסן זהב ב-1937 והפך למיתקן מטבע מלא ב-1988. כמות הכסף הפיזי שעובר דרך West Point משפיעה על אמון השוק האמריקאי. Monster Box רשמי של 500 אונקיות הוא יחידת הרכישה הסטנדרטית לסיטונאים."
+     }
+    ],
+    "products": [
+     {
+      "title": "נשר אמריקני",
+      "type": "מטבע",
+      "weight": "1 אונקיה",
+      "year": "1986–",
+      "purity": "כסף 999",
+      "desc": "הנשר האמריקני הוא מטבע הבוליון הנפוץ בצפון אמריקה, מיוצר מאז 1986. למטבע מעמד הילך חוקי בארה\"ב וערך נקוב סמלי של דולר אחד. נחשב לאחד המטבעות הנוחים למכירה מחדש ברחבי העולם.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2",
+      "emoji": "🦅",
+      "transparent": true
+     },
+     {
+      "title": "ביזון אמריקאי — מטבע זיכרון 2001",
+      "type": "מטבע זיכרון",
+      "weight": "1 אונקיה",
+      "year": "2001",
+      "purity": "כסף 999",
+      "desc": "מטבע זיכרון כסף של בית המטבע האמריקאי, הוצע בקיץ 2001 עד גמר המלאי (500,000 יחידות). המטבע מציין את פתיחת המוזיאון הלאומי לעם האינדיאני האמריקאי. העיצוב מבוסס על מטבע הביזון הקלאסי (1913–1938): פרופיל יליד אמריקאי בצד אחד וביזון בצד השני. עוצב על ידי הפסל ג'יימס ארל פרייזר.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3",
+      "emoji": "🦬",
+      "transparent": true
+     },
+     {
+      "title": "מטיל כסף 10 אונקיות — Sunshine Mint",
+      "type": "מטיל",
+      "weight": "10 אונקיות",
+      "year": "",
+      "purity": "כסף 999",
+      "desc": "מטיל השקעה אמריקאי מיצרן Sunshine Minting — אחד מיצרני הכסף הפרטיים המובילים בארה\"ב. על המטיל: לוגו הנשר, טוהר 999 ומשקל 10 אונקיות. מטילים אלו נפוצים בקרב משקיעי כסף פיזי: פרמיה לרוב נמוכה יותר ממטבעות, משקל ברור ונזילות טובה. חלק מהמטילים כוללים שכבת אבטחה מיקרוסקופית לאימות.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/sunshine-mint-10oz-bar.webp?v=3",
+      "emoji": "🥈",
+      "transparent": true
+     }
+    ],
+    "records": [
+     {
+      "title": "נוסד 1792",
+      "text": "מוסד בפילדלפיה — בניין המטבע הפדרלי הציבורי הראשון בארה\"ב."
+     },
+     {
+      "title": "500+ מיליון Silver Eagles",
+      "text": "נמכרו יותר מ-500 מיליון American Silver Eagle מאז 1986 — המטבע הנמכר ביותר בעולם."
+     },
+     {
+      "title": "Monster Box — 500oz",
+      "text": "ארגז רשמי: 25 צינורות × 20 מטבעות = 500 אונקיות כסף טהור."
+     },
+     {
+      "title": "כסף 999 מאז 1986",
+      "text": "Silver Eagle: 31.103 גרם כסף 999 לכל מטבע, הילך חוקי $1."
+     },
+     {
+      "title": "5 מיתקנים היסטוריים",
+      "text": "כולל קרסו, ניו אורלינס ודאלס — סימני P, D, S, W, O מזוהים ע\"י אספנים."
+     }
+    ]
+   },
+   "en": {
+    "name": "United States Mint",
+    "subtitle": "United States Mint — Home of the American Silver Eagle",
+    "founded": "Founded 1792",
+    "location": "Philadelphia / West Point, USA",
+    "website": "www.usmint.gov",
+    "history": [
+     {
+      "title": "Foundation & the Dollar",
+      "text": "The United States Mint was founded in 1792 in Philadelphia, then the nation's capital, under the first federal coinage act. Its purpose was to produce gold, silver and copper dollar coins for the young republic. The Philadelphia building was the first federal public building constructed in the United States, and has since stood as a symbol of American economic strength."
+     },
+     {
+      "title": "American Silver Eagle — World's Best-Selling Bullion Coin",
+      "text": "Since 1986, the US Mint has produced the American Silver Eagle — the best-selling investment coin in history. Struck in .999 fine silver (1 oz), its obverse features \"Walking Liberty,\" a design from 1916 widely considered the finest American coin artwork ever created. In 2021, the reverse (Eagle side) was updated for the first time in 35 years."
+     },
+     {
+      "title": "Heritage & Special Products",
+      "text": "In addition to the Silver Eagle, the Mint issued redesigned Morgan and Peace Dollars in 2021 — two iconic 20th-century coins now struck in .999 fine silver. The \"America the Beautiful\" series (2010–2021) comprised 56 five-ounce coins depicting national parks. The US Mint maintains a national strategic silver reserve at West Point."
+     },
+     {
+      "title": "Four Active Mint Facilities",
+      "text": "The US Mint operates facilities in Philadelphia, Denver, San Francisco, and West Point. Bullion Silver Eagles are primarily struck at West Point (W) and San Francisco (S). Mintmarks (P, D, S, W) add numismatic premium to Proof issues. Investors verify mintmarks when buying vintage or special-edition coins."
+     },
+     {
+      "title": "Classic Silver Dollars (1878–1935)",
+      "text": "Before the Silver Eagle, the Morgan Dollar (1878–1904, 1921) and Peace Dollar (1921–1935) anchored American silver. These coins contain 90% silver (0.7734 troy oz fine per coin). In 2021, redesigned .999 fine versions were issued — 175,000 per mint facility. The US numismatic market is built on this dollar heritage."
+     },
+     {
+      "title": "West Point & National Silver Supply",
+      "text": "West Point, New York produces the American Silver Eagle and holds US strategic silver and gold stockpiles. The site began as a gold bullion depository in 1937 and became a full mint in 1988. Physical silver flowing through West Point underpins American market confidence. The official 500-oz Monster Box is the standard wholesale unit."
+     }
+    ],
+    "products": [
+     {
+      "title": "American Silver Eagle",
+      "type": "Coin",
+      "weight": "1 oz",
+      "year": "1986–",
+      "purity": ".999 Silver",
+      "desc": "The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2",
+      "emoji": "🦅",
+      "transparent": true
+     },
+     {
+      "title": "American Buffalo Commemorative (2001)",
+      "type": "Commemorative",
+      "weight": "1 oz",
+      "year": "2001",
+      "purity": ".999 Silver",
+      "desc": "The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913–1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876–1953) was also known for \"The End of the Trail\" and other major American medals.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3",
+      "emoji": "🦬",
+      "transparent": true
+     },
+     {
+      "title": "Sunshine Mint 10 oz Silver Bar",
+      "type": "Bar",
+      "weight": "10 oz",
+      "year": "",
+      "purity": ".999 Silver",
+      "desc": "Investment silver bar from Sunshine Minting — one of America's leading private mints. Stamped with the Sunshine Minting eagle logo, .999 FINE SILVER, and 10 OUNCES. Popular with physical silver stackers: typically lower premium per ounce than coins, clear weight, and good secondary-market liquidity. Some bars include MintMark SI micro-engraving for authentication.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/sunshine-mint-10oz-bar.webp?v=3",
+      "emoji": "🥈",
+      "transparent": true
+     }
+    ],
+    "records": [
+     {
+      "title": "Founded 1792",
+      "text": "Established in Philadelphia — the first federal public building in the United States."
+     },
+     {
+      "title": "500+ Million Silver Eagles",
+      "text": "Over 500 million American Silver Eagles sold since 1986 — world's best-selling bullion coin."
+     },
+     {
+      "title": "Monster Box — 500 oz",
+      "text": "Official case: 25 tubes × 20 coins = 500 troy ounces of fine silver."
+     },
+     {
+      "title": ".999 Silver Since 1986",
+      "text": "Silver Eagle: 31.103g of .999 fine silver per coin, $1 legal tender face value."
+     },
+     {
+      "title": "5 Historic Mintmarks",
+      "text": "Including Carson City, New Orleans, and Dahlonega — P, D, S, W, O recognized by collectors."
+     }
+    ]
+   },
+   "ru": {
+    "name": "Монетный двор США",
+    "subtitle": "United States Mint — дом American Silver Eagle",
+    "founded": "Основан в 1792",
+    "location": "Филадельфия / Вест-Пойнт, США",
+    "website": "www.usmint.gov",
+    "history": [
+     {
+      "title": "Основание и доллар",
+      "text": "Монетный двор США был основан в 1792 году в Филадельфии — тогдашней столице страны — на основании первого федерального закона о чеканке монет. Его цель — производство золотых, серебряных и медных долларовых монет для молодой республики. Здание в Филадельфии стало первым федеральным общественным зданием, построенным в США."
+     },
+     {
+      "title": "American Silver Eagle — самая продаваемая монета в мире",
+      "text": "С 1986 года Монетный двор США выпускает American Silver Eagle — самую продаваемую инвестиционную монету в истории. Чеканится из серебра .999 (1 унция), на аверсе изображена «Идущая Свобода» — дизайн 1916 года, считающийся лучшим произведением монетного искусства США. В 2021 году реверс (орёл) был обновлён впервые за 35 лет."
+     },
+     {
+      "title": "Наследие и специальные выпуски",
+      "text": "В 2021 году монетный двор выпустил обновлённые Morgan Dollar и Peace Dollar из серебра .999. Серия «Красоты Америки» (2010–2021) включала 56 пятиунцевых монет с изображением национальных парков. Монетный двор США хранит национальный стратегический резерв серебра в Вест-Пойнте."
+     },
+     {
+      "title": "Четыре действующих монетных двора",
+      "text": "Монетный двор США управляет предприятиями в Филадельфии, Денвере, Сан-Франциско и Вест-Пойнте. Буллион Silver Eagle чеканятся в основном в Вест-Пойнте (W) и Сан-Франциско (S). Клейма (P, D, S, W) добавляют нумизматическую ценность к Proof-выпускам. Инвесторы проверяют клеймо при покупке старых или специальных монет."
+     },
+     {
+      "title": "Классические серебряные доллары (1878–1935)",
+      "text": "До Silver Eagle серебряный доллар Morgan (1878–1904, 1921) и Peace Dollar (1921–1935) были основой американского серебра. Монеты содержат 90% серебра (0,7734 тройской унции чистого серебра). В 2021 году выпущены обновлённые версии .999 — по 175 000 с каждого двора. Американский рынок нумизматики построен на этом наследии."
+     },
+     {
+      "title": "Вест-Пойнт и национальные запасы серебра",
+      "text": "Вест-Пойнт, Нью-Йорк, производит American Silver Eagle и хранит стратегические запасы серебра и золота США. Объект начинался как золотое хранилище в 1937 году и стал полноценным двором в 1988. Серебро, проходящее через Вест-Пойнт, поддерживает доверие рынка. Официальный Monster Box на 500 унций — стандартная оптовая единица."
+     }
+    ],
+    "products": [
+     {
+      "title": "Американский серебряный орёл",
+      "type": "Монета",
+      "weight": "1 унция",
+      "year": "1986–",
+      "purity": "Серебро 999",
+      "desc": "Американский серебряный орёл — самая популярная инвестиционная монета в Северной Америке, выпускается с 1986 года. Имеет статус законного платёжного средства США с номиналом 1 доллар. Широко известна и относительно легко продаётся по всему миру.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2",
+      "emoji": "🦅",
+      "transparent": true
+     },
+     {
+      "title": "Американский бизон — памятная 2001",
+      "type": "Памятная",
+      "weight": "1 унция",
+      "year": "2001",
+      "purity": "Серебро 999",
+      "desc": "Памятная серебряная монета Монетного двора США, продавалась летом 2001 года до полного распродажа (500 000 экземпляров). Посвящена открытию Национального музея американских индейцев. Дизайн основан на классической монете с бизоном (1913–1938): профиль коренного американца и бизон. Автор — скульптор Джеймс Эрл Фрейзер.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3",
+      "emoji": "🦬",
+      "transparent": true
+     },
+     {
+      "title": "Слиток 10 унций — Sunshine Mint",
+      "type": "Слиток",
+      "weight": "10 унций",
+      "year": "",
+      "purity": "Серебро 999",
+      "desc": "Инвестиционный слиток от частного монетного двора Sunshine Minting — одного из ведущих производителей серебра в США. На слитке: логотип орла, проба 999 и вес 10 унций. Популярен у инвесторов: обычно ниже премия за унцию, чем у монет, понятный вес и хорошая ликвидность. На некоторых слитках есть микрогравировка для проверки подлинности.",
+      "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/sunshine-mint-10oz-bar.webp?v=3",
+      "emoji": "🥈",
+      "transparent": true
+     }
+    ],
+    "records": [
+     {
+      "title": "Основан в 1792",
+      "text": "Создан в Филадельфии — первое федеральное общественное здание США."
+     },
+     {
+      "title": "500+ млн Silver Eagles",
+      "text": "Продано более 500 миллионов American Silver Eagle с 1986 — самая продаваемая буллион-монета."
+     },
+     {
+      "title": "Monster Box — 500 унций",
+      "text": "Официальная упаковка: 25 тюбиков × 20 монет = 500 тройских унций чистого серебра."
+     },
+     {
+      "title": "Серебро .999 с 1986",
+      "text": "Silver Eagle: 31,103 г серебра .999 на монету, номинал $1."
+     },
+     {
+      "title": "5 исторических клейм",
+      "text": "Включая Карсон-Сити, Новый Орлеан и Далонегу — P, D, S, W, O узнаваемы коллекционерами."
+     }
+    ]
+   },
+   "order": 4,
+   "published": true
+  },
+  {
+   "id": "canada",
+   "flag": "🇨🇦",
+   "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Royal_Canadian_Mint_main_fa%C3%A7ade.JPG/800px-Royal_Canadian_Mint_main_fa%C3%A7ade.JPG",
+   "he": {
+    "name": "בית המטבע המלכותי הקנדי",
+    "subtitle": "Royal Canadian Mint — מייצר את Silver Maple Leaf",
+    "founded": "נוסד 1908",
+    "location": "אוטווה (אספנות) / ויניפג (השקעות), קנדה",
+    "website": "www.mint.ca",
+    "history": [
+     {
+      "title": "ייסוד ומסורת קנדית",
+      "text": "בית המטבע המלכותי הקנדי נוסד ב-1908 באוטווה, כשקנדה ביקשה עצמאות מוניטרית מבריטניה. עד אז מטבעות קנדיים הוטבעו בלונדון. הבניין ההיסטורי המרהיב באוטווה, שנבנה בסגנון גותי, הפך לאחד מסמלי העיר. בשנת 1988 נפתח מפעל שני בויניפג לייצור מטבעות השקעה בהיקפים גדולים."
+     },
+     {
+      "title": "Silver Maple Leaf — שיא הטוהר",
+      "text": "Silver Maple Leaf הוכנס לשוק ב-1988 כמטבע ההשקעה הקנדי המרכזי. המטבע עשוי כסף 9999 (99.99% טהור) — טוהר גבוה יותר מרוב מתחריו. עלה על עלה מייפל האיקוני של קנדה מקשט את פניו, ואת גב המטבע מקשט דיוקן המלכה. הוא הילך חוקי בשווי 5 דולר קנדי."
+     },
+     {
+      "title": "חדשנות וסדרות מיוחדות",
+      "text": "בית המטבע הקנדי חלוץ טכנולוגי — הוא הנפיק את מטבע ה-\"25 קילוגרם\" הגדול בעולם (2007), ומטבעות עם הולוגרמה. סדרות \"Call of the Wild\", \"Predator Series\" ו-\"Birds of Prey\" הפכו לפנומן אספנות עולמי. הקנדים ייצרו גם מטבעות עם רובידיום — יסוד נדיר, בפעם הראשונה בהיסטוריית המטבעות."
+     },
+     {
+      "title": "מפעל ויניפג לבוליון כסף",
+      "text": "ב-1988 נפתח מפעל בית המטבע בויניפג, מניטובה, ייעודי לייצור מטבעות בוליון בקנה מידה גדול. בעוד שאוטווה מתמקדת במטבעות אספנות, ויניפג מייצרת את רוב מטבעות Maple Leaf הכספיים. המיקום המרכזי מאפשר הפצה יעילה לשוק האמריקאי והגלובלי. משקיעים מחפשים מטבעות עם סימן W (Winnipeg) על מהדורות מיוחדות."
+     },
+     {
+      "title": "חדשנות אבטחה — קווים רадиальיים",
+      "text": "מ-2015, מטבעות Maple Leaf כסף כוללים טכנולוגיית קווים רадиальיים מיקרו-מחוררים למניעת זיוף. ב-2014 נוספו הולוגרמות על גב המטבע. קנדה הייתה בין הראשונות להטמיע אמצעי אבטחה פיזיים על מטבעות בוליון. עבור משקיעים, שכבות האבטחה מפחיתות סיכון קניית כסף מזויף."
+     },
+     {
+      "title": "מורשת כריית הכסף הקנדי",
+      "text": "קנדה הייתה במשך עשורים מפיקת הכסף הגדולה בעולם — מכרות בקומבלק, אונטריו ובריטיש קולומביה אספקו עשרות מיליוני אונקיות. בית המטבע ממחזר ומעבד כסף ממקורות מקומיים לייצור מטבעות ומטילים. קשר הדוק בין כרייה, היתוך וטביעה מחזק את אמינות המותג הקנדי בשוק הכסף הפיזי."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "נוסד 1908",
+      "text": "בית המטבע המלכותי הקנדי — עצמאות מוניטרית מבריטניה."
+     },
+     {
+      "title": "9999 — 99.99% טוהר",
+      "text": "Silver Maple Leaf: אחד ממטבעות הבוליון הטהורים ביותר בשוק."
+     },
+     {
+      "title": "מפעל ויניפג 1988",
+      "text": "מייצר את עיקר מטבעות הבוליון הכספיים לשוק העולמי."
+     },
+     {
+      "title": "מטבע 100 ק\"ג זהב 2007",
+      "text": "הנפיק את המטבע החוקי הגדול בעולם — 100 ק\"ג זהב 99999 (שיא גינס)."
+     },
+     {
+      "title": "אבטחה מ-2015",
+      "text": "קווים רדיאליים מיקרו על Maple Leaf — חדשנות נגד זיוף."
+     }
+    ]
+   },
+   "en": {
+    "name": "Royal Canadian Mint",
+    "subtitle": "Royal Canadian Mint — Home of the Silver Maple Leaf",
+    "founded": "Founded 1908",
+    "location": "Ottawa (collectibles) / Winnipeg (bullion), Canada",
+    "website": "www.mint.ca",
+    "history": [
+     {
+      "title": "Foundation & Canadian Tradition",
+      "text": "The Royal Canadian Mint was founded in 1908 in Ottawa, as Canada sought monetary independence from Britain. Until then, Canadian coins were struck in London. The magnificent Gothic-style historic building in Ottawa became one of the city's landmarks. In 1988, a second facility opened in Winnipeg for large-scale bullion coin production."
+     },
+     {
+      "title": "Silver Maple Leaf — Peak Purity",
+      "text": "The Silver Maple Leaf was introduced in 1988 as Canada's flagship investment coin. Struck in .9999 fine silver (99.99% pure) — higher purity than most competitors. Canada's iconic maple leaf graces the obverse, while the monarch's portrait adorns the reverse. It is legal tender at C$5 face value."
+     },
+     {
+      "title": "Innovation & Special Series",
+      "text": "The Royal Canadian Mint is a technology pioneer — it issued the world's largest coin (25kg, 2007) and holographic coins. The \"Call of the Wild,\" \"Predator Series,\" and \"Birds of Prey\" series became global collecting phenomena. Canada also produced coins incorporating rubidium — a rare element — for the first time in coin history."
+     },
+     {
+      "title": "Winnipeg Bullion Facility",
+      "text": "In 1988, the Royal Canadian Mint opened its Winnipeg, Manitoba plant dedicated to large-scale bullion production. While Ottawa focuses on collector coins, Winnipeg strikes most silver Maple Leaf coins. The central location enables efficient distribution to US and global markets. Collectors seek coins with the W (Winnipeg) mintmark on special issues."
+     },
+     {
+      "title": "Security Innovation — Radial Lines",
+      "text": "Since 2015, silver Maple Leaf coins feature micro-engraved radial lines to deter counterfeiting. In 2014, holograms were added to the reverse. Canada was among the first to embed physical security features on bullion coins. For investors, these layers reduce the risk of buying fake silver."
+     },
+     {
+      "title": "Canadian Silver Mining Heritage",
+      "text": "For decades Canada ranked among the world's largest silver producers — mines in Quebec, Ontario, and British Columbia supplied tens of millions of ounces. The Mint refines and processes domestic silver for coins and bars. The link between mining, refining, and striking strengthens the Canadian brand in physical silver markets."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Founded 1908",
+      "text": "Royal Canadian Mint — Canada's monetary independence from Britain."
+     },
+     {
+      "title": ".9999 — 99.99% Pure",
+      "text": "Silver Maple Leaf: among the purest mainstream bullion coins available."
+     },
+     {
+      "title": "Winnipeg Plant 1988",
+      "text": "Produces the bulk of silver bullion coins for world markets."
+     },
+     {
+      "title": "100kg Gold Coin 2007",
+      "text": "Issued the world's largest legal-tender coin — 100kg of .99999 gold (Guinness record)."
+     },
+     {
+      "title": "Security Since 2015",
+      "text": "Micro radial lines on Maple Leaf — pioneering anti-counterfeit bullion tech."
+     }
+    ]
+   },
+   "ru": {
+    "name": "Королевский монетный двор Канады",
+    "subtitle": "Royal Canadian Mint — дом Silver Maple Leaf",
+    "founded": "Основан в 1908",
+    "location": "Оттава (коллекционные) / Виннипег (инвестиционные), Канада",
+    "website": "www.mint.ca",
+    "history": [
+     {
+      "title": "Основание и канадская традиция",
+      "text": "Королевский монетный двор Канады был основан в 1908 году в Оттаве, когда Канада стремилась к монетарной независимости от Великобритании. До этого канадские монеты чеканились в Лондоне. Великолепное историческое здание в готическом стиле в Оттаве стало одной из достопримечательностей города. В 1988 году в Виннипеге открылся второй завод для крупномасштабного производства инвестиционных монет."
+     },
+     {
+      "title": "Silver Maple Leaf — вершина чистоты",
+      "text": "Silver Maple Leaf был представлен в 1988 году как главная канадская инвестиционная монета. Чеканится из серебра .9999 (99,99% чистоты) — более высокая проба, чем у большинства конкурентов. Знаменитый кленовый лист Канады украшает аверс, а портрет монарха — реверс. Является законным платёжным средством номиналом C$5."
+     },
+     {
+      "title": "Инновации и специальные серии",
+      "text": "Королевский монетный двор Канады — технологический пионер. Он выпустил крупнейшую монету в мире (25 кг, 2007) и голографические монеты. Серии «Call of the Wild», «Predator Series» и «Birds of Prey» стали мировыми коллекционными феноменами. Канада также выпустила монеты с рубидием — редким элементом — впервые в истории монетного дела."
+     },
+     {
+      "title": "Завод в Виннипеге для буллиона",
+      "text": "В 1988 году Королевский монетный двор открыл завод в Виннипеге, Манитоба, для крупномасштабного производства буллиона. Оттава выпускает коллекционные монеты, Виннипег чеканит большинство серебряных Maple Leaf. Центральное расположение обеспечивает поставки на рынки США и мира. Коллекционеры ищут монеты с клеймом W (Виннипег) на специальных выпусках."
+     },
+     {
+      "title": "Инновации безопасности — радиальные линии",
+      "text": "С 2015 года серебряные Maple Leaf имеют микрогравированные радиальные линии против подделок. В 2014 году на реверс добавили голограммы. Канада была среди первых, кто внедрил физические защитные элементы на буллион. Для инвесторов это снижает риск покупки поддельного серебра."
+     },
+     {
+      "title": "Наследие канадской добычи серебра",
+      "text": "Десятилетиями Канада входила в крупнейшие производители серебра — шахты в Квебеке, Онтарио и Британской Колумбии давали десятки миллионов унций. Двор перерабатывает местное серебро для монет и слитков. Связь добычи, плавки и чеканки укрепляет канадский бренд на рынке физического серебра."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Основан в 1908",
+      "text": "Королевский монетный двор Канады — монетарная независимость от Британии."
+     },
+     {
+      "title": "Проба .9999",
+      "text": "Silver Maple Leaf — одна из самых чистых буллион-монет на рынке."
+     },
+     {
+      "title": "Завод Виннипега 1988",
+      "text": "Производит основную массу серебряных буллион-монет для мирового рынка."
+     },
+     {
+      "title": "Золотая монета 100 кг 2007",
+      "text": "Выпустил крупнейшую законное платёжное средство — 100 кг золота .99999 (рекорд Гиннесса)."
+     },
+     {
+      "title": "Защита с 2015",
+      "text": "Микрорадиальные линии на Maple Leaf — новаторская антиподделочная технология."
+     }
+    ]
+   },
+   "order": 5,
+   "published": true
+  },
+  {
+   "id": "perth",
+   "flag": "🇦🇺",
+   "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Perth_Mint%2C_WA%2C_2023.jpg/800px-Perth_Mint%2C_WA%2C_2023.jpg",
+   "he": {
+    "name": "בית המטבע של פרת'",
+    "subtitle": "Perth Mint — קנגרו, קוקאברה וסדרת הירח",
+    "founded": "נוסד 1899",
+    "location": "פרת', מערב אוסטרליה",
+    "website": "www.perthmint.com",
+    "history": [
+     {
+      "title": "ייסוד בעידן זהב",
+      "text": "בית המטבע של פרת' נוסד ב-1899 במהלך \"בהלת הזהב\" האוסטרלית, כסניף של בית המטבע המלכותי הבריטי. מטרתו הייתה עיבוד זהב המופק ממכרות ווסטרן אוסטרליה. לאחר שאוסטרליה הקימה את בית המטבע הלאומי שלה ב-1965, פרת' המשיך לפעול כבית מטבע ממשלתי עצמאי של ווסטרן אוסטרליה, עם מוניטין עולמי."
+     },
+     {
+      "title": "סדרות הכסף האיקוניות",
+      "text": "Silver Kookaburra הופיעה ב-1990 כאחת מסדרות הכסף הראשונות בעולם עם עיצוב משתנה מדי שנה. Silver Kangaroo הושק ב-2016. סדרת \"Lunar\" (לוח שנה סיני) הוחלה על מטבעות כסף ב-1999, עם 12 מטבעות המייצגים בעלי חיים מהגלגל הסיני — אחת מסדרות האספנות הפופולריות בעולם. לפרת' גם Silver Koala ו-Silver Swan."
+     },
+     {
+      "title": "טוהר ואמינות",
+      "text": "Perth Mint ידוע בייצור מטבעות עם טוהר 9999 ו-99999 (Five Nines — 99.999%). הוא מציע שירות \"סוכנות\" ייחודי המאפשר למשקיעים לרכוש ולאחסן כסף בכספת פרת' עצמה. בית המטבע גם מציע מוצרי כסף עם ציפוי זהב (gilded) ועם צבע. הוא גם מייצר מטבעות עבור ממשלות אחרות."
+     },
+     {
+      "title": "עיבוד וזיקוק כסף בקנה מידה עולמי",
+      "text": "Perth Mint הוא גם מפעל זיקוק מוביל — מעבד מאות טונות זהב וכסף מדי שנה, כולל סורבים ממכרות אוסטרליה. מטילי כסף Perth נושאים מספר סידורי ואימות הולוגרפי. משקיעים ברחבי אסיה רוכשים מטילים אלה כסטנדרט אמינות. הזיקוק המקומי מבטיח מעקב מלא מכרייה ועד מוצר סופי."
+     },
+     {
+      "title": "תוכנית Kookaburra — עיצוב שנתי",
+      "text": "מ-1990, סדרת Silver Kookaburra מציגה עיצוב קוקאברה חדש מדי שנה — חדשנות שיצרה שוק אספנות עצום. מטבעות 1oz ו-2oz (Proof) נחשבים לנדירים לאחר סגירת השנה. אספנים עוקבים אחר תאריכי הוצאה כדי לרכוש בפרמיה נמוכה יותר. הסדרה הוכיחה שמטבעות כסף פיזיים יכולים להיות גם השקעה וגם תחביב."
+     },
+     {
+      "title": "אחסון מוקצה (Allocated Storage)",
+      "text": "Perth Mint מציעה שירות אחסון מוקצה — כסף פיזי רשום על שם המשקיע בכספת המינט. זה מפחית סיכון צד נגדי לעומת חשבונות לא מוקצים. תוכניות Certificate וDepository פופולריות במיוחד באסיה. עבור משקיעים שלא רוצים אחסון ביתי, זהו פתרון ממשלתי ישיר לכסף פיזי."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "נוסד 1899",
+      "text": "נוסד בזהב האוסטרלי — סניף לשעבר של המינט המלכותי הבריטי."
+     },
+     {
+      "title": "99999 — Five Nines",
+      "text": "מייצר כסף בטוהר 99.999% — מהגבוהים בעולם."
+     },
+     {
+      "title": "Kookaburra מ-1990",
+      "text": "סדרת כסף עם עיצוב משתנה שנתית — חלוצה עולמית."
+     },
+     {
+      "title": "400+ טון זהב בשנה",
+      "text": "מעבד למעלה מ-400 טון זהב מדי שנה — מפעל זיקוק ענק."
+     },
+     {
+      "title": "Lunar Series מ-1999",
+      "text": "12 מטבעות לוח שנה סיני — מהסדרות הנמכרות ביותר באסיה."
+     }
+    ]
+   },
+   "en": {
+    "name": "Perth Mint",
+    "subtitle": "Perth Mint — Kangaroo, Kookaburra & Lunar Series",
+    "founded": "Founded 1899",
+    "location": "Perth, Western Australia",
+    "website": "www.perthmint.com",
+    "history": [
+     {
+      "title": "Gold Rush Foundation",
+      "text": "The Perth Mint was founded in 1899 during the Australian gold rush, as a branch of the British Royal Mint. Its purpose was to process gold extracted from Western Australian mines. After Australia established its national mint in 1965, Perth continued as an independent state government mint for Western Australia, building a world-class reputation."
+     },
+     {
+      "title": "Iconic Silver Series",
+      "text": "The Silver Kookaburra launched in 1990 as one of the world's first silver series with an annually changing design. The Silver Kangaroo launched in 2016. The \"Lunar\" series (Chinese calendar) was applied to silver coins in 1999, with 12 coins representing Chinese zodiac animals — one of the world's most popular collecting series. Perth also produces Silver Koala and Silver Swan."
+     },
+     {
+      "title": "Purity & Reliability",
+      "text": "Perth Mint is renowned for coins of .9999 and .99999 purity (Five Nines — 99.999%). It offers a unique \"Certificate\" storage service allowing investors to buy and store silver in Perth's own vault. The mint also offers gold-plated (gilded) and coloured silver products. It also strikes coins for other governments worldwide."
+     },
+     {
+      "title": "Global-Scale Silver Refining",
+      "text": "Perth Mint is also a leading refinery — processing hundreds of tonnes of gold and silver annually, including scrap from Australian mines. Perth silver bars carry serial numbers and holographic authentication. Investors across Asia buy these bars as a trust standard. Local refining ensures full traceability from mine to finished product."
+     },
+     {
+      "title": "Kookaburra Program — Annual Design Change",
+      "text": "Since 1990, the Silver Kookaburra series has featured a new kookaburra design each year — innovation that created a huge collector market. 1oz and 2oz Proof coins become scarce after the year closes. Collectors track release dates to buy at lower premiums. The series proved physical silver can be both investment and hobby."
+     },
+     {
+      "title": "Allocated Storage Program",
+      "text": "Perth Mint offers allocated storage — physical silver recorded in the investor's name in the mint vault. This reduces counterparty risk versus unallocated accounts. Certificate and Depository programs are especially popular in Asia. For investors avoiding home storage, it is direct government-backed physical silver custody."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Founded 1899",
+      "text": "Established during the Australian gold rush — former branch of Britain's Royal Mint."
+     },
+     {
+      "title": ".99999 — Five Nines",
+      "text": "Produces silver at 99.999% fineness — among the highest in the world."
+     },
+     {
+      "title": "Kookaburra Since 1990",
+      "text": "Silver series with annually changing design — a global pioneer."
+     },
+     {
+      "title": "400+ Tonnes Gold/Year",
+      "text": "Refines over 400 tonnes of gold annually — a major global refinery."
+     },
+     {
+      "title": "Lunar Series Since 1999",
+      "text": "12-coin Chinese zodiac series — among the best-selling in Asia."
+     }
+    ]
+   },
+   "ru": {
+    "name": "Монетный двор Перта",
+    "subtitle": "Perth Mint — Кенгуру, Кукабарра и Лунная серия",
+    "founded": "Основан в 1899",
+    "location": "Перт, Западная Австралия",
+    "website": "www.perthmint.com",
+    "history": [
+     {
+      "title": "Основание в эпоху золотой лихорадки",
+      "text": "Монетный двор Перта был основан в 1899 году во время австралийской золотой лихорадки как филиал британского Королевского монетного двора. Его задачей была переработка золота из шахт Западной Австралии. После создания национального монетного двора Австралии в 1965 году Перт продолжил работу как независимый государственный монетный двор штата."
+     },
+     {
+      "title": "Легендарные серебряные серии",
+      "text": "Silver Kookaburra запустили в 1990 году как одну из первых в мире серий серебра с меняющимся ежегодным дизайном. Silver Kangaroo появился в 2016 году. «Лунная» серия (китайский календарь) вышла на серебряных монетах в 1999 году — 12 монет с животными китайского зодиака, ставших одними из самых популярных в мире. Перт также выпускает Silver Koala и Silver Swan."
+     },
+     {
+      "title": "Чистота и надёжность",
+      "text": "Монетный двор Перта известен монетами с пробой .9999 и .99999 (Five Nines — 99,999%). Он предлагает уникальный сервис хранения, позволяющий инвесторам покупать и хранить серебро в собственном хранилище Перта. Двор также выпускает позолоченные и цветные серебряные изделия и чеканит монеты для правительств других стран."
+     },
+     {
+      "title": "Мировая переработка серебра",
+      "text": "Монетный двор Перта — также крупный аффинажный завод, перерабатывающий сотни тонн золота и серебра ежегодно, включая лом австралийских шахт. Серебряные слитки Perth имеют серийный номер и голографическую защиту. Инвесторы по всей Азии покупают их как стандарт надёжности. Местная переработка обеспечивает прослеживаемость от шахты до готового продукта."
+     },
+     {
+      "title": "Программа Kookaburra — ежегодный дизайн",
+      "text": "С 1990 года серия Silver Kookaburra каждый год получает новый дизайн кукабарры — инновация, создавшая огромный коллекционный рынок. Монеты 1 и 2 унций (Proof) становятся редкими после закрытия года. Коллекционеры отслеживают даты выпуска для покупки по меньшей надбавке. Серия доказала, что физическое серебро может быть и инвестицией, и хобби."
+     },
+     {
+      "title": "Программа аллокированного хранения",
+      "text": "Perth Mint предлагает аллокированное хранение — физическое серебро, зарегистрированное на имя инвестора в хранилище двора. Это снижает контрагентский риск по сравнению с неаллокированными счетами. Программы Certificate и Depository особенно популярны в Азии. Для инвесторов без домашнего хранения — прямое государственное хранение серебра."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Основан в 1899",
+      "text": "Создан в эпоху золотой лихорадки — бывший филиал британского Королевского двора."
+     },
+     {
+      "title": "Проба .99999",
+      "text": "Выпускает серебро 99,999% — одно из самых чистых в мире."
+     },
+     {
+      "title": "Kookaburra с 1990",
+      "text": "Серебряная серия с ежегодно меняющимся дизайном — мировой новатор."
+     },
+     {
+      "title": "400+ тонн золота в год",
+      "text": "Перерабатывает более 400 тонн золота ежегодно — крупный аффинажный завод."
+     },
+     {
+      "title": "Lunar Series с 1999",
+      "text": "12 монет китайского зодиака — одни из самых продаваемых в Азии."
+     }
+    ]
+   },
+   "order": 6,
+   "published": true
+  },
+  {
+   "id": "austria",
+   "flag": "🇦🇹",
+   "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Am_Heumarkt_1_Hauptmuenzamt_DSC_7408w.jpg/800px-Am_Heumarkt_1_Hauptmuenzamt_DSC_7408w.jpg",
+   "he": {
+    "name": "בית המטבע הווינאי",
+    "subtitle": "Münze Österreich — מייצר את Wiener Philharmoniker",
+    "founded": "נוסד 1194",
+    "location": "וינה, אוסטריה",
+    "website": "www.muenzeoesterreich.at",
+    "history": [
+     {
+      "title": "ייסוד אימפריאלי",
+      "text": "בית המטבע הווינאי (Münze Österreich) נוסד ב-1194 ביוזמת הדוכס לאופולד V ​​מאוסטריה, מכסף שנגבה מפדיון השבי של ריצ'רד לב-הארי. זהו אחד מבתי המטבע הפעילים הוותיקים בעולם. לאורך מאות שנים שירת את האימפריה ההבסבורגית, ייצר מטבעות לקיסרים, ואת מורשת אירופה המלכותית."
+     },
+     {
+      "title": "Wiener Philharmoniker — הנמכר ביותר באירופה",
+      "text": "ב-1989 השיק בית המטבע הווינאי את Wiener Philharmoniker — מטבע כסף 999 שהפך לנמכר ביותר באירופה. המטבע מוקדש לתזמורת הפילהרמונית הווינאית, אחת הנודעות בעולם. פני המטבע מקשטים כלים מוזיקליים של התזמורת, ועל גבו האורגן ב\"זאל מוזיקפרין\". הוא הילך חוקי באוסטריה."
+     },
+     {
+      "title": "הנבה ומדלי",
+      "text": "מעבר ל-Philharmoniker, בית המטבע הווינאי מנפיק את Vienna Mint Collection — כולל מטבעות כסף נדירים עם עיצובים של אמני וינה. מטבע ה-100 יורו זהב הוא אחד הגדולים שהנפיק. בית המטבע גם ידוע בייצור מדלי כסף ועיטורים מדינתיים למדינות אחרות. הוא שיתף פעולה עם אמנים עולמיים לסדרות מוגבלות."
+     },
+     {
+      "title": "כסף כופר ומקורות המימון (1194)",
+      "text": "בית המטבע הווינאי נוסד מכסף כופר ששולם על ידי ריצ'רד לב הארי — 15 טון כסף לפי המסורת. הכסף הוטבע למטבעות תלמי ומטבעות אימפריה. מקורות המימון הקשורים לכסף פיזי מדגישים את הקשר בין ערך מלחמתי לערך מטבעי. כיום, Münze Österreich ממשיך מסורת של יותר מ-800 שנה."
+     },
+     {
+      "title": "פילהרמוניקר — מכירות גלובליות",
+      "text": "מ-1989, Wiener Philharmoniker Silver הפך למטבע הבוליון הנמכר ביותר באירופה. המטבע מכיל בדיוק אונקיה טרוי (31.103 גרם) כסף 999. זמין בגדלים: 1oz, ½oz, ¼oz ו-10oz. עיצובו ללא תאריך — אותו עיצוב מ-1989. משקיעים באירופה רואים בו חלופה ישירה ל-Maple Leaf ו-Britannia."
+     },
+     {
+      "title": "הילך חוקי בשני מטבעות",
+      "text": "Philharmoniker כסף הוא הילך חוקי ב-1.50 יורו (אונקיה) ו-0.50 יורו (¼oz) — נדיר בקרב מטבעות בוליון. ערך נקוב זה מעניק הגנה משפטית מסוימת, אם כי ערך השוק נקבע לפי כסף. בית המטבע מייצר גם מדליות כסף לאומות אחרות ושיתופי פעולה אמנותיים. איכות הטביעה האוסטרית נחשבת מהגבוהות בעולם."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "נוסד 1194",
+      "text": "אחד מבתי המטבע הפעילים הוותיקים בעולם — מכסף כופר ריצ'רד לב הארי."
+     },
+     {
+      "title": "Philharmoniker מ-1989",
+      "text": "מטבע הכסף הנמכר ביותר באירופה — עיצוב קבוע של תזמורת וינה."
+     },
+     {
+      "title": "31.103 גרם לאונקיה",
+      "text": "כל מטבע 1oz מכיל בדיוק אונקיה טרוי כסף 999."
+     },
+     {
+      "title": "הילך 1.50 יורו",
+      "text": "ערך נקוב חוקי על מטבע בוליון — מגן מסוים בהחזקה פיזית."
+     },
+     {
+      "title": "800+ שנות פעילות",
+      "text": "רצף ייצור מטבעות נדיר — משירות האימפריה ההבסבורגית ועד היום."
+     }
+    ]
+   },
+   "en": {
+    "name": "Austrian Mint (Vienna)",
+    "subtitle": "Münze Österreich — Home of the Wiener Philharmoniker",
+    "founded": "Founded 1194",
+    "location": "Vienna, Austria",
+    "website": "www.muenzeoesterreich.at",
+    "history": [
+     {
+      "title": "Imperial Foundation",
+      "text": "The Austrian Mint (Münze Österreich) was founded in 1194 at the initiative of Duke Leopold V of Austria, from silver raised through the ransom of Richard the Lionheart. It is one of the oldest continuously operating mints in the world. For centuries it served the Habsburg Empire, producing coins for emperors and carrying the legacy of European royal tradition."
+     },
+     {
+      "title": "Wiener Philharmoniker — Europe's Best-Seller",
+      "text": "In 1989, the Austrian Mint launched the Wiener Philharmoniker — a .999 fine silver coin that became Europe's best-selling bullion coin. The coin is dedicated to the Vienna Philharmonic Orchestra, one of the world's most renowned. The obverse features instruments of the orchestra, while the reverse shows the great organ of the Wiener Musikverein. It is legal tender in Austria."
+     },
+     {
+      "title": "Innovation & Medals",
+      "text": "Beyond the Philharmoniker, the Austrian Mint issues the Vienna Mint Collection — including rare silver coins with designs by Viennese artists. Its 100 Euro gold coin is one of the largest ever issued. The mint also produces silver medals and state decorations for other countries, and has collaborated with international artists for limited series."
+     },
+     {
+      "title": "Ransom Silver & Mint Financing (1194)",
+      "text": "The Austrian Mint was founded from silver paid as ransom for Richard the Lionheart — traditionally 15 tonnes of silver. That silver was struck into coins for the realm. The physical-silver origins highlight the link between wartime value and monetary value. Today, Münze Österreich continues an 800+ year tradition."
+     },
+     {
+      "title": "Philharmoniker — Global Sales Leader",
+      "text": "Since 1989, the Wiener Philharmoniker Silver has been Europe's best-selling bullion coin. Each contains exactly one troy ounce (31.103g) of .999 fine silver. Available in 1oz, ½oz, ¼oz, and 10oz sizes. Its design is dateless — unchanged since 1989. European investors treat it as a direct alternative to Maple Leaf and Britannia."
+     },
+     {
+      "title": "Dual-Currency Legal Tender",
+      "text": "Silver Philharmoniker is legal tender at €1.50 (1oz) and €0.50 (¼oz) — rare among bullion coins. Face value offers limited legal protection, though market price follows silver content. The mint also strikes silver medals for other nations and artistic collaborations. Austrian strike quality ranks among the world's finest."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Founded 1194",
+      "text": "One of the oldest operating mints — financed by Richard the Lionheart's ransom silver."
+     },
+     {
+      "title": "Philharmoniker Since 1989",
+      "text": "Europe's best-selling silver bullion coin — fixed Vienna Orchestra design."
+     },
+     {
+      "title": "31.103g Per Ounce",
+      "text": "Every 1oz coin contains exactly one troy ounce of .999 fine silver."
+     },
+     {
+      "title": "€1.50 Face Value",
+      "text": "Legal tender on bullion — limited protection for physical holders."
+     },
+     {
+      "title": "800+ Years Operating",
+      "text": "Rare minting continuity — from the Habsburg Empire to the present."
+     }
+    ]
+   },
+   "ru": {
+    "name": "Австрийский монетный двор (Вена)",
+    "subtitle": "Münze Österreich — дом Wiener Philharmoniker",
+    "founded": "Основан в 1194",
+    "location": "Вена, Австрия",
+    "website": "www.muenzeoesterreich.at",
+    "history": [
+     {
+      "title": "Имперское основание",
+      "text": "Австрийский монетный двор (Münze Österreich) был основан в 1194 году по инициативе герцога Леопольда V Австрийского — из серебра, полученного в качестве выкупа за Ричарда Львиное Сердце. Это один из старейших непрерывно действующих монетных дворов в мире. Столетиями он служил Габсбургской империи, чеканя монеты для императоров."
+     },
+     {
+      "title": "Wiener Philharmoniker — лидер продаж Европы",
+      "text": "В 1989 году Австрийский монетный двор выпустил Wiener Philharmoniker — монету из серебра .999, ставшую самой продаваемой инвестиционной монетой в Европе. Монета посвящена Венскому филармоническому оркестру. На аверсе изображены инструменты оркестра, на реверсе — орган Wiener Musikverein. Является законным платёжным средством в Австрии."
+     },
+     {
+      "title": "Инновации и медали",
+      "text": "Помимо Philharmoniker, Австрийский монетный двор выпускает Vienna Mint Collection — редкие серебряные монеты с дизайном венских художников. Его золотая монета номиналом 100 евро — одна из крупнейших когда-либо выпускавшихся. Двор также производит серебряные медали и государственные награды для других стран."
+     },
+     {
+      "title": "Выкупное серебро и основание (1194)",
+      "text": "Австрийский монетный двор основан на серебре, выплаченном за выкуп Ричарда Львиное Сердце — по преданию 15 тонн. Серебро было перечеканено в монеты для государства. Происхождение из физического серебра подчёркивает связь военной и монетарной ценности. Сегодня Münze Österreich продолжает традицию более 800 лет."
+     },
+     {
+      "title": "Philharmoniker — мировые продажи",
+      "text": "С 1989 года Wiener Philharmoniker Silver — самая продаваемая буллион-монета Европы. Содержит ровно одну тройскую унцию (31,103 г) серебра .999. Доступна в размерах 1, ½, ¼ и 10 унций. Дизайн без даты — неизменен с 1989 года. Европейские инвесторы считают её альтернативой Maple Leaf и Britannia."
+     },
+     {
+      "title": "Двойной законный номинал",
+      "text": "Серебряный Philharmoniker — законное платёжное средство номиналом €1,50 (1 унция) и €0,50 (¼ унции) — редкость среди буллиона. Номинал даёт ограниченную правовую защиту, хотя рыночная цена следует за серебром. Двор также чеканит медали для других стран. Австрийское качество чеканки — одно из лучших в мире."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Основан в 1194",
+      "text": "Один из старейших дворов — на серебре выкупа Ричарда Львиное Сердце."
+     },
+     {
+      "title": "Philharmoniker с 1989",
+      "text": "Самая продаваемая серебряная буллион-монета Европы — дизайн Венского оркестра."
+     },
+     {
+      "title": "31,103 г на унцию",
+      "text": "Каждая монета 1 унции содержит ровно одну тройскую унцию серебра .999."
+     },
+     {
+      "title": "Номинал €1,50",
+      "text": "Законное платёжное средство на буллионе — ограниченная защита при хранении."
+     },
+     {
+      "title": "800+ лет работы",
+      "text": "Редкая непрерывность — от Габсбургской империи до наших дней."
+     }
+    ]
+   },
+   "order": 7,
+   "published": true
+  },
+  {
+   "id": "mexico",
+   "flag": "🇲🇽",
+   "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antigua_Casa_de_Moneda.JPG/800px-Antigua_Casa_de_Moneda.JPG",
+   "he": {
+    "name": "בית המטבע המקסיקני",
+    "subtitle": "Casa de Moneda de México — הוותיק באמריקה מאז 1535",
+    "founded": "נוסד 1535",
+    "location": "סן לואיס פוטוסי, מקסיקו",
+    "website": "www.gob.mx/cmm",
+    "history": [
+     {
+      "title": "הוותיק ביותר באמריקה",
+      "text": "Casa de Moneda de México, הוקמה ב-1535 בצו המלך קרלוס הראשון של ספרד — בית המטבע הראשון והוותיק ביותר ביבשת אמריקה. כ-500 שנות פעולה רצופה. הבניין ההיסטורי בלב העיר מקסיקו (כיום מוזיאון נומיסמטי) הוא אתר מורשת עולמית של יונסק\"ו. המינט הדף מטבעות כסף המפורסמים \"Reales\" שמימנו את הכלכלה הקולוניאלית של ספרד."
+     },
+     {
+      "title": "Onza de Plata Libertad — כסף ההשקעה המקסיקני",
+      "text": "ב-1982 הנפיק בית המטבע המקסיקני את ה-Onza de Plata Libertad — המטבע ההשקעה הרשמי של מקסיקו. על פני המטבע ניצבת \"הניצחון המכונף\" (מלאך העצמאות), אנדרטת העצמאות של מקסיקו סיטי. הגב מקשט נשר מקסיקני עם נחש — סמל המדינה. הוא מיוצר בכסף 999 ו-9999, בגדלים מ-1/20 אונקיה עד 5 אונקיות."
+     },
+     {
+      "title": "מורשת אמנותית ועושר",
+      "text": "מקסיקו הייתה בעל מכרות הכסף הגדולים בעולם — מכרות גואנחוואטו וסאקאטקאס סיפקו לאורך מאות שנים חלק ניכר מהכסף הגלובלי. Libertad נחשב לאחד המטבעות עם העיצוב הנחשב ביותר בשוק העולמי. המינט מייצר גם מטבעות זיכרון עם עיצובים פרה-קולומביאניים — אצטקים, מאיה ועוד."
+     },
+     {
+      "title": "ריאל ספרדי וכסף קולוניאלי",
+      "text": "בית המטבע המקסיקני (1535) הטביע את ה-Real de a Ocho — \"דולר הספרדי\" ששימש סחר עולמי. כסף ממכרות גואנחואטו וסקטקס אספק חלק עצום מהעולם. מטבעות אלו הפכו לבסיס למערכות מטבע באמריקה ואסיה. מורשת זו ממשיכה ב-Libertad כסף מודרני."
+     },
+     {
+      "title": "אבולוציית עיצוב Libertad",
+      "text": "מ-1982, Onza de Plata Libertad מציגה את \"הניצחון המכנף\" (Angel of Independence) על רקע הרי הפופוקטפטל. ב-1996 עברה לטוהר 9999; ב-1991 נוספו גדלים מ-1/20oz עד 5oz. עיצוב ללא תאריך על פני המטבע — כמו Philharmoniker. Libertad נחשב לאחד המטבעות היפים ביותר בשוק הכסף."
+     },
+     {
+      "title": "מתקן סן לואיס פוטוסי המודרני",
+      "text": "כיום בית המטבע פועל בעיקר בסן לואיס פוטוסי — מפעל מודרני לייצור מטבעות בוליון וזיכרון. הבניין ההיסטורי במקסיקו סיטי (מוזיאון, אתר מורשת UNESCO) מספר את סיפור 500 השנות כסף מקסיקני. מטבעות Libertad נמכרים בבנקים מקסיקניים ובשוק הבינלאומי. מקסיקו נותרה בין 10 המפיקים הגדולים של כסף בעולם."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "נוסד 1535",
+      "text": "בית המטבע הוותיק ביותר באמריקה — כמעט 500 שנות פעילות."
+     },
+     {
+      "title": "Libertad מ-1982",
+      "text": "מטבע הכסף ההשקעה הרשמי של מקסיקו — עיצוב Angel of Independence."
+     },
+     {
+      "title": "5 גדלים",
+      "text": "Libertad זמין מ-1/20oz עד 5oz — גמישות לכל תקציב."
+     },
+     {
+      "title": "UNESCO מורשת",
+      "text": "הבניין ההיסטורי במקסיקו סיטי — אתר מורשת עולמית של אונסק\"ו."
+     },
+     {
+      "title": "כסף 9999",
+      "text": "גרסאות Libertad בטוהר 99.99% — בין הטהורים בשוק."
+     }
+    ]
+   },
+   "en": {
+    "name": "Casa de Moneda de México",
+    "subtitle": "Casa de Moneda de México — The Americas' oldest mint since 1535",
+    "founded": "Founded 1535",
+    "location": "San Luis Potosí, Mexico",
+    "website": "www.gob.mx/cmm",
+    "history": [
+     {
+      "title": "Oldest Mint in the Americas",
+      "text": "Casa de Moneda de México was established in 1535 by decree of King Charles I of Spain — the first and oldest mint in the entire American continent. Nearly 500 years of continuous operation. The historic building in Mexico City (now a numismatic museum) is a UNESCO World Heritage Site. The mint struck the famous silver \"Reales\" coins that financed Spain's colonial economy."
+     },
+     {
+      "title": "Onza de Plata Libertad — Mexican Investment Silver",
+      "text": "In 1982, the Mexican Mint issued the Onza de Plata Libertad — Mexico's official investment coin. The obverse features the \"Winged Victory\" (Angel of Independence), Mexico City's landmark monument. The reverse displays the Mexican eagle with a serpent — the national symbol. Produced in .999 and .9999 silver, in sizes from 1/20 oz to 5 oz."
+     },
+     {
+      "title": "Artistic Heritage & Wealth",
+      "text": "Mexico was home to the world's largest silver mines — the Guanajuato and Zacatecas mines supplied a significant portion of global silver for centuries. The Libertad is considered one of the most beautifully designed coins in the world market. The mint also produces commemorative coins with Pre-Columbian designs — Aztec, Maya and more."
+     },
+     {
+      "title": "Spanish Real & Colonial Silver",
+      "text": "The Mexican Mint (1535) struck the Real de a Ocho — the \"Spanish dollar\" used in global trade. Silver from Guanajuato and Zacatecas mines supplied a huge share of world output. These coins underpinned monetary systems across the Americas and Asia. That legacy continues in the modern silver Libertad."
+     },
+     {
+      "title": "Libertad Design Evolution",
+      "text": "Since 1982, the Onza de Plata Libertad has featured the Winged Victory (Angel of Independence) against the Popocatépetl mountains. In 1996 it moved to .9999 fineness; since 1991 sizes range from 1/20oz to 5oz. The obverse design is dateless — like the Philharmoniker. Libertad is widely considered among the most beautiful bullion coins."
+     },
+     {
+      "title": "Modern San Luis Potosí Facility",
+      "text": "Today the mint operates mainly at San Luis Potosí — a modern plant for bullion and commemorative coins. The historic Mexico City building (museum, UNESCO World Heritage Site) tells 500 years of Mexican silver history. Libertad coins sell through Mexican banks and global dealers. Mexico remains among the world's top ten silver producers."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Founded 1535",
+      "text": "Oldest mint in the Americas — nearly 500 years of continuous operation."
+     },
+     {
+      "title": "Libertad Since 1982",
+      "text": "Mexico's official silver investment coin — Angel of Independence design."
+     },
+     {
+      "title": "5 Size Options",
+      "text": "Libertad available from 1/20oz to 5oz — flexibility for every budget."
+     },
+     {
+      "title": "UNESCO Heritage",
+      "text": "Historic Mexico City mint building — UNESCO World Heritage Site."
+     },
+     {
+      "title": ".9999 Silver",
+      "text": "Libertad issues in 99.99% fineness — among the purest on the market."
+     }
+    ]
+   },
+   "ru": {
+    "name": "Монетный двор Мексики",
+    "subtitle": "Casa de Moneda de México — старейший монетный двор Америки с 1535 г.",
+    "founded": "Основан в 1535",
+    "location": "Сан-Луис-Потоси, Мексика",
+    "website": "www.gob.mx/cmm",
+    "history": [
+     {
+      "title": "Старейший в Америке",
+      "text": "Casa de Moneda de México был основан в 1535 году по указу короля Карла I Испанского — первый и старейший монетный двор на всём американском континенте. Почти 500 лет непрерывной работы. Историческое здание в Мехико (ныне нумизматический музей) — объект Всемирного наследия ЮНЕСКО. Двор чеканил знаменитые серебряные «Реалы», финансировавшие колониальную экономику Испании."
+     },
+     {
+      "title": "Onza de Plata Libertad — мексиканское инвестиционное серебро",
+      "text": "В 1982 году Мексиканский монетный двор выпустил Onza de Plata Libertad — официальную инвестиционную монету Мексики. На аверсе — «Крылатая победа» (Ангел Независимости), символ Мехико. Реверс украшен мексиканским орлом со змеёй — национальным гербом. Чеканится из серебра .999 и .9999 в размерах от 1/20 унции до 5 унций."
+     },
+     {
+      "title": "Художественное наследие и богатство",
+      "text": "Мексика была родиной крупнейших серебряных рудников мира — шахты Гуанахуато и Сакатекас веками снабжали значительную часть мирового серебра. Libertad считается одной из красивейших монет на мировом рынке. Монетный двор также выпускает памятные монеты с доколумбийскими дизайнами — ацтекскими, майя и другими."
+     },
+     {
+      "title": "Испанский реал и колониальное серебро",
+      "text": "Мексиканский монетный двор (1535) чеканил Real de a Ocho — «испанский доллар» мировой торговли. Серебро из шахт Гуанахуато и Сакатекас составляло огромную долю мирового производства. Эти монеты легли в основу денежных систем Америки и Азии. Наследие продолжается в современной серебряной Libertad."
+     },
+     {
+      "title": "Эволюция дизайна Libertad",
+      "text": "С 1982 года Onza de Plata Libertad изображает «Крылатую победу» (Ангел Независимости) на фоне вулканов. В 1996 году проба повышена до .9999; с 1991 года размеры от 1/20 до 5 унций. Аверс без даты — как у Philharmoniker. Libertad считается одной из красивейших буллион-монет."
+     },
+     {
+      "title": "Современный завод в Сан-Луис-Потоси",
+      "text": "Сегодня двор работает в основном в Сан-Луис-Потоси — современный завод буллиона и памятных монет. Историческое здание в Мехико (музей, объект ЮНЕСКО) рассказывает 500 лет мексиканского серебра. Libertad продаётся в мексиканских банках и у мировых дилеров. Мексика остаётся в десятке крупнейших производителей серебра."
+     }
+    ],
+    "products": [],
+    "records": [
+     {
+      "title": "Основан в 1535",
+      "text": "Старейший монетный двор Америки — почти 500 лет непрерывной работы."
+     },
+     {
+      "title": "Libertad с 1982",
+      "text": "Официальная инвестиционная монета Мексики — дизайн Ангела Независимости."
+     },
+     {
+      "title": "5 размеров",
+      "text": "Libertad от 1/20 до 5 унций — гибкость для любого бюджета."
+     },
+     {
+      "title": "Наследие ЮНЕСКО",
+      "text": "Историческое здание двора в Мехико — объект Всемирного наследия ЮНЕСКО."
+     },
+     {
+      "title": "Серебро .9999",
+      "text": "Выпуски Libertad 99,99% пробы — среди самых чистых на рынке."
+     }
+    ]
+   },
+   "order": 8,
+   "published": true
+  }
+ ]
+}
