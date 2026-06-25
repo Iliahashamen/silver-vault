@@ -22,7 +22,7 @@ const LANGS = ['he', 'en', 'ru'];
         x.fillStyle = 'rgba(13,2,33,0.10)'; x.fillRect(0, 0, c.width, c.height);
         x.font = fs + 'px monospace';
         for (let i = 0; i < drops.length; i++) {
-            x.fillStyle = i % 7 === 0 ? '#ff5fae' : '#2bf5a0';
+            x.fillStyle = i % 6 === 0 ? '#ece2c0' : '#2bf5a0';
             x.fillText(g[Math.floor(Math.random() * g.length)], i * fs, drops[i] * fs);
             if (drops[i] * fs > c.height && Math.random() > 0.975) drops[i] = 0;
             drops[i]++;

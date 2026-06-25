@@ -13,17 +13,18 @@
     <style>
         :root {
             --green: #2bf5a0;
-            --green-dim: #79d7a8;
+            --green-dim: #6fbf8e;
             --beige: #ece2c0;
             --beige-dim: #b3a988;
-            --purple: #c061ff;
-            --pink: #ff5fae;
-            --cyan: #4fe9ff;
-            --bg: #0d0221;
-            --bg2: #1b0a3a;
-            --panel: rgba(20, 7, 46, 0.66);
-            --line: rgba(43, 245, 160, 0.30);
-            --danger: #ff4d7d;
+            /* accents kept green/beige only (no pink/purple) */
+            --purple: #b3a988;
+            --pink: #ece2c0;
+            --cyan: #6fbf8e;
+            --bg: #05140d;
+            --bg2: #0a2016;
+            --panel: rgba(7, 26, 17, 0.66);
+            --line: rgba(43, 245, 160, 0.28);
+            --danger: #cdaf6b;
         }
         * { box-sizing: border-box; }
         html, body { margin: 0; padding: 0; background: var(--bg); color: var(--green); }
@@ -32,16 +33,16 @@
             font-size: 18px; letter-spacing: 0.5px; font-weight: 500;
             min-height: 100vh; overflow-x: hidden;
             background:
-                radial-gradient(circle at 50% -10%, rgba(255,95,174,0.30), transparent 55%),
-                radial-gradient(circle at 50% 120%, rgba(192,97,255,0.24), transparent 60%),
+                radial-gradient(circle at 50% -10%, rgba(43,245,160,0.18), transparent 55%),
+                radial-gradient(circle at 50% 120%, rgba(236,226,192,0.12), transparent 60%),
                 linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
         }
         /* retro horizon grid */
         body::before {
             content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 42vh; z-index: 0; pointer-events: none;
             background-image:
-                linear-gradient(rgba(79,233,255,0.22) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,95,174,0.20) 1px, transparent 1px);
+                linear-gradient(rgba(43,245,160,0.20) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(236,226,192,0.14) 1px, transparent 1px);
             background-size: 40px 40px;
             transform: perspective(40vh) rotateX(62deg); transform-origin: bottom; opacity: 0.55;
         }
@@ -78,7 +79,7 @@
         .btn { background: transparent; border: 1px solid var(--green); color: var(--green); font-family: inherit; font-weight: 700; letter-spacing: 1px; padding: 9px 16px; border-radius: 3px; cursor: pointer; transition: all .15s; font-size: 15px; }
         .btn:hover { background: var(--green); color: #06121a; box-shadow: 0 0 14px rgba(43,245,160,0.5); }
         .btn.p { border-color: var(--pink); color: var(--pink); }
-        .btn.p:hover { background: var(--pink); color: #1a0010; box-shadow: 0 0 14px rgba(255,95,174,0.55); }
+        .btn.p:hover { background: var(--pink); color: #0a2016; box-shadow: 0 0 14px rgba(236,226,192,0.45); }
         .btn.danger { border-color: var(--danger); color: var(--danger); }
         .btn.danger:hover { background: var(--danger); color: #100010; }
         .bar { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; }
@@ -102,11 +103,11 @@
         .item-head label { font-size: 12px; color: var(--beige-dim); display: flex; align-items: center; gap: 5px; }
         .item .inp { margin: 4px 0; }
         .ans-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
-        .ans-row input[type="radio"] { accent-color: var(--pink); width: 18px; height: 18px; }
+        .ans-row input[type="radio"] { accent-color: var(--green); width: 18px; height: 18px; }
         .ans-row .inp { margin: 0; }
         .lang-tabs { display: flex; gap: 6px; margin: 8px 0; }
         .lang-tabs button { background: rgba(0,0,0,0.34); border: 1px solid var(--line); color: var(--beige-dim); padding: 4px 11px; border-radius: 5px; cursor: pointer; font-family: inherit; }
-        .lang-tabs button.active { background: var(--purple); color: #100020; border-color: var(--purple); font-weight: 700; }
+        .lang-tabs button.active { background: var(--purple); color: #0a2016; border-color: var(--purple); font-weight: 700; }
         .lang-pane { display: none; } .lang-pane.active { display: block; }
         .hint { font-size: 15px; color: var(--beige-dim); margin: 0 0 12px; line-height: 1.6; letter-spacing: 0.5px; }
         textarea#mrd-note { min-height: 200px; }
@@ -114,7 +115,7 @@
         .card { border: 1px solid var(--line); border-radius: 3px; background: rgba(0,0,0,0.32); padding: 14px; text-align: center; }
         .card .k { font-size: 15px; color: var(--beige-dim); }
         .card .v { font-size: 34px; font-weight: 700; margin-top: 6px; color: var(--green); text-shadow: 0 0 8px rgba(43,245,160,0.4); }
-        .card .v.p { color: var(--pink); text-shadow: 0 0 8px rgba(255,95,174,0.4); }
+        .card .v.p { color: var(--beige); text-shadow: 0 0 8px rgba(236,226,192,0.4); }
         .utable { width: 100%; border-collapse: collapse; font-size: 16px; }
         .utable th, .utable td { text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--line); }
         .utable th { color: var(--green); font-weight: 700; letter-spacing: 1px; }
@@ -210,6 +211,6 @@
             </div>
         </div>
     </div>
-    <script src="admin.js?v=7"></script>
+    <script src="admin.js?v=8"></script>
 </body>
 </html>
