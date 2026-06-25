@@ -2371,8 +2371,8 @@ const GUIDE_DATA = {
 let _guideActiveLang = 'he';
 
 // Admin-managed guide chapters (fetched once from the content API, then cached).
-// These are ADDITIVE: built-in GUIDE_DATA stays as-is; admin items append after it,
-// so new guides are added/removed in the admin panel — never hardcoded.
+// Store-first: when present, these REPLACE the built-in GUIDE_DATA so guides are
+// managed entirely in the admin panel — never hardcoded. Built-in is fallback only.
 let _adminGuides = null;
 
 async function _fetchAdminGuides() {
@@ -2400,17 +2400,19 @@ function renderGuide(lang) {
         b.classList.toggle('active', b.dataset.lang === lang);
     });
 
-    // Built-in chapters (fallback / legacy content).
-    let chapters = data.chapters.slice();
-
-    // Append admin-managed chapters for this language (if any).
-    const admin = _adminGuides || [];
-    admin.forEach(it => {
+    // Store-first: once the admin content store has guides, it is the single
+    // source of truth (hardcode-free). The built-in GUIDE_DATA is used ONLY as
+    // an offline fallback when the store is empty or unreachable.
+    const admin = (_adminGuides || []).slice().sort((a, b) => (a.order || 100) - (b.order || 100));
+    let chapters = admin.map(it => {
         const block = it[lang] || it.he || {};
-        if (block && (block.title || block.content)) {
-            chapters.push({ icon: it.icon || '📘', title: block.title || '', content: block.content || '' });
-        }
-    });
+        return { icon: it.icon || '📘', title: block.title || '', content: block.content || '' };
+    }).filter(ch => ch.title || ch.content);
+
+    if (chapters.length === 0) {
+        // Fallback only — no managed content yet.
+        chapters = data.chapters.slice();
+    }
 
     container.innerHTML = chapters.map((ch, i) => `
         <div class="guide-chapter" id="guide-ch-${i}">

@@ -1,0 +1,148 @@
+{
+  "guides": [
+    {
+      "id": "builtin_g0",
+      "icon": "🔰",
+      "order": 10,
+      "published": true,
+      "he": {
+        "title": "מה זה כסף פיזי — מבוא למתחיל",
+        "content": "\n                    <p>כסף פיזי הוא כסף טהור בצורת <strong>מטבעות</strong> או <strong>מטילים</strong> שאתה מחזיק בידיך ממש — לא נייר, לא מניה, לא ETF. אתה הבעלים המוחלט.</p>\n                    <p><strong>מה ההבדל בין מטבע למטיל?</strong></p>\n                    <ul>\n                        <li><strong>מטבע (Coin):</strong> מוטבע ע\"י מינט ממשלתי (כמו מינט ישראל, ה-Royal Mint). יש לו ערך נקוב רשמי, עיצוב אמנותי, ולעיתים ערך קולקטיבי מעל מחיר הכסף.</li>\n                        <li><strong>מטיל (Bar):</strong> גוש כסף פשוט, לרוב זול יותר לאונקיה, מיוצר ע\"י מפעלים פרטיים (כמו Heraeus, Umicore). אין לו ערך קולקטיבי.</li>\n                    </ul>\n                    <div class=\"guide-tip-box\">💡 <strong>טיפ:</strong> לרוב מטילים זולים יותר לאונקיה. מטבעות מוכרים מהר יותר וקל יותר לאמת את אמיתותם.</div>\n                    <p><strong>גדלים נפוצים:</strong> ¼ אונקיה, ½ אונקיה, 1 אונקיה (הנפוץ ביותר), 5 אונקיות, 10 אונקיות, 1 ק\"ג, 5 ק\"ג.</p>\n                    <p><strong>טוהר:</strong> כסף טהור הוא .999 (99.9%) או .9999 (99.99%). מטבעות ישנים כמו Morgan Dollar הם .900 — לא כסף השקעה.</p>\n                "
+      },
+      "en": {
+        "title": "What Is Physical Silver — A Beginner's Introduction",
+        "content": "\n                    <p>Physical silver means owning actual <strong>coins</strong> or <strong>bars</strong> in your hands — not paper, not a stock, not an ETF. You are the outright owner.</p>\n                    <p><strong>Coin vs Bar — what's the difference?</strong></p>\n                    <ul>\n                        <li><strong>Coin:</strong> Minted by a government mint (e.g. Royal Mint, Israel Mint). Has a legal face value, artistic design, and sometimes collectible value above the silver price.</li>\n                        <li><strong>Bar:</strong> A simple silver block, usually cheaper per ounce, produced by private refiners (Heraeus, Umicore, Valcambi). No collectible premium.</li>\n                    </ul>\n                    <div class=\"guide-tip-box\">💡 <strong>Tip:</strong> Bars are usually cheaper per ounce. Coins sell faster and are easier to verify as authentic.</div>\n                    <p><strong>Common sizes:</strong> ¼ oz, ½ oz, 1 oz (most popular), 5 oz, 10 oz, 1 kg, 5 kg.</p>\n                    <p><strong>Purity:</strong> Investment silver is .999 (99.9%) or .9999 (99.99%). Old coins like Morgan Dollars are .900 — not investment grade.</p>\n                "
+      },
+      "ru": {
+        "title": "Что такое физическое серебро — введение для начинающих",
+        "content": "\n                    <p>Физическое серебро — это реальные <strong>монеты</strong> или <strong>слитки</strong>, которые вы держите в руках, а не бумага, акция или ETF. Вы — полноправный владелец.</p>\n                    <p><strong>Монета vs Слиток — в чём разница?</strong></p>\n                    <ul>\n                        <li><strong>Монета (Coin):</strong> Чеканится государственным монетным двором (Royal Mint, Israel Mint). Имеет номинал, художественный дизайн и иногда коллекционную ценность сверх цены серебра.</li>\n                        <li><strong>Слиток (Bar):</strong> Простой кусок серебра, обычно дешевле за унцию, производится частными аффинажными заводами (Heraeus, Umicore). Без коллекционной надбавки.</li>\n                    </ul>\n                    <div class=\"guide-tip-box\">💡 <strong>Совет:</strong> Слитки дешевле за унцию. Монеты продаются быстрее и легче проверяются на подлинность.</div>\n                    <p><strong>Популярные размеры:</strong> ¼ oz, ½ oz, 1 oz (самый популярный), 5 oz, 10 oz, 1 кг, 5 кг.</p>\n                    <p><strong>Чистота:</strong> Инвестиционное серебро — .999 (99,9%) или .9999 (99,99%). Старые монеты типа Morgan Dollar — .900, не инвестиционного уровня.</p>\n                "
+      }
+    },
+    {
+      "id": "builtin_g1",
+      "icon": "🛒",
+      "order": 20,
+      "published": true,
+      "he": {
+        "title": "איפה קונים כסף בישראל — 2026",
+        "content": "\n                    <p><strong>אפשרויות עיקריות לרכישה בארץ:</strong></p>\n                    <ul>\n                        <li><strong>מינט ישראל (החברה הישראלית למדליות ולמטבעות):</strong> האתר הרשמי <em>coins.co.il</em>. מטבעות מוכרים ומאומתים לחלוטין. פרמיום גבוה יחסית.</li>\n                        <li><strong>חנויות מטבעות פרטיות:</strong> ישנן חנויות מומחיות במרכז ובצפון. בדוק ביקורות ואמינות לפני קנייה.</li>\n                        <li><strong>פלטפורמות מקוונות בינלאומיות:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em>, <em>Europäisches Münzhaus</em> — משלוח לישראל אפשרי, שים לב לעמלות מכס ו-VAT.</li>\n                        <li><strong>שוק אפור / יחידים:</strong> פורומים, קבוצות טלגרם — <strong>סיכון גבוה לזיופים! מומלץ רק עם בדיקה מקצועית.</strong></li>\n                    </ul>\n                    <div class=\"guide-warn-box\">⚠️ <strong>אזהרה:</strong> מכס ישראלי — ייבוא אישי של כסף מזכה בפטור ממע\"מ אם הוא מוגדר כ\"מטיל כסף השקעה\". בדוק עם המוכר לפני הזמנה.</div>\n                "
+      },
+      "en": {
+        "title": "Where to Buy Silver in Israel — 2026",
+        "content": "\n                    <p><strong>Main options for buying in Israel:</strong></p>\n                    <ul>\n                        <li><strong>Israel Mint (ICMC):</strong> Official site <em>coins.co.il</em>. Fully verified coins. Higher premium.</li>\n                        <li><strong>Private coin dealers:</strong> Specialist shops in Tel Aviv and the north. Always check reviews.</li>\n                        <li><strong>International online dealers:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em>, <em>Europäisches Münzhaus</em> — shipping to Israel is possible; watch for customs duties.</li>\n                        <li><strong>P2P / private sellers:</strong> Telegram groups, forums — <strong>high counterfeit risk! Only recommended with professional verification.</strong></li>\n                    </ul>\n                    <div class=\"guide-warn-box\">⚠️ <strong>Customs note:</strong> Personal imports of investment-grade silver bars may be VAT-exempt in Israel. Verify with the seller before ordering.</div>\n                "
+      },
+      "ru": {
+        "title": "Где купить серебро в Израиле — 2026",
+        "content": "\n                    <p><strong>Основные варианты покупки в Израиле:</strong></p>\n                    <ul>\n                        <li><strong>Israel Mint (ICMC):</strong> Официальный сайт <em>coins.co.il</em>. Полностью проверенные монеты. Высокая надбавка.</li>\n                        <li><strong>Частные нумизматические магазины:</strong> Специализированные магазины в Тель-Авиве и на севере. Всегда проверяйте отзывы.</li>\n                        <li><strong>Международные онлайн-дилеры:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em> — доставка в Израиль возможна; следите за таможней.</li>\n                        <li><strong>Частные продавцы (P2P):</strong> Telegram-группы — <strong>высокий риск подделок! Только с профессиональной проверкой.</strong></li>\n                    </ul>\n                    <div class=\"guide-warn-box\">⚠️ <strong>Таможня:</strong> Ввоз инвестиционных серебряных слитков может быть освобождён от НДС в Израиле. Уточните у продавца до заказа.</div>\n                "
+      }
+    },
+    {
+      "id": "builtin_g2",
+      "icon": "💰",
+      "order": 30,
+      "published": true,
+      "he": {
+        "title": "איפה מוכרים כסף בישראל — 2026",
+        "content": "\n                    <p>מכירה בארץ מוגבלת יותר מקנייה. עיקר האפשרויות:</p>\n                    <ul>\n                        <li><strong>חנויות מטבעות מורשות:</strong> הן הדרך הכי מהירה לפדיון. מצפות לקנות ממך מתחת למחיר ספוט — זה הרווח שלהן.</li>\n                        <li><strong>מינט ישראל:</strong> מקבל מטבעות ישראלים לפדיון בתנאים מסוימים.</li>\n                        <li><strong>פלטפורמות P2P (יחיד-ליחיד):</strong> קבוצות פייסבוק וטלגרם ייעודיות. מחיר טוב יותר אך תהליך ארוך יותר.</li>\n                        <li><strong>בינלאומי:</strong> מכירה לחנויות אירופיות / אמריקאיות — רלוונטי לכמויות גדולות.</li>\n                    </ul>\n                    <div class=\"guide-tip-box\">💡 <strong>טיפ:</strong> מטבעות של מינטים מוכרים (Britannia, Maple Leaf, American Eagle) נמכרים <strong>הרבה יותר מהר</strong> ובמחיר טוב יותר מאשר מטבעות לא מוכרים.</div>\n                "
+      },
+      "en": {
+        "title": "Where to Sell Silver in Israel — 2026",
+        "content": "\n                    <p>Selling locally is more limited than buying. Main options:</p>\n                    <ul>\n                        <li><strong>Licensed coin dealers:</strong> Fastest route to cash. Expect to sell below spot — that's their margin.</li>\n                        <li><strong>Israel Mint:</strong> Accepts Israeli coins for redemption under certain conditions.</li>\n                        <li><strong>P2P platforms:</strong> Dedicated Facebook/Telegram groups — better price but longer process.</li>\n                        <li><strong>International buyers:</strong> Selling to European/US dealers — relevant for larger quantities.</li>\n                    </ul>\n                    <div class=\"guide-tip-box\">💡 <strong>Tip:</strong> Recognized coins (Britannia, Maple Leaf, American Eagle) sell <strong>much faster</strong> and at better prices than obscure coins.</div>\n                "
+      },
+      "ru": {
+        "title": "Где продать серебро в Израиле — 2026",
+        "content": "\n                    <p>Продажа в стране ограниченнее, чем покупка. Основные варианты:</p>\n                    <ul>\n                        <li><strong>Лицензированные дилеры монет:</strong> Самый быстрый способ. Ожидайте продажу ниже спота — это их маржа.</li>\n                        <li><strong>Israel Mint:</strong> Принимает израильские монеты на выкуп на определённых условиях.</li>\n                        <li><strong>P2P платформы:</strong> Группы Facebook/Telegram — лучшая цена, но процесс длиннее.</li>\n                        <li><strong>Международные покупатели:</strong> Продажа европейским/американским дилерам — актуально для больших объёмов.</li>\n                    </ul>\n                    <div class=\"guide-tip-box\">💡 <strong>Совет:</strong> Монеты известных монетных дворов (Britannia, Maple Leaf, American Eagle) продаются <strong>намного быстрее</strong> по лучшей цене.</div>\n                "
+      }
+    },
+    {
+      "id": "builtin_g3",
+      "icon": "💸",
+      "order": 40,
+      "published": true,
+      "he": {
+        "title": "כמה לקנות — אסטרטגיית כניסה למתחיל",
+        "content": "\n                    <p>אין כמות \"נכונה\" — הכל תלוי במטרה שלך.</p>\n                    <p><strong>עקרונות בסיס:</strong></p>\n                    <ul>\n                        <li>מרבית המומחים ממליצים <strong>5%–15%</strong> מהחסכונות בנכסים קשים (כסף + זהב + מטח).</li>\n                        <li>התחל עם <strong>כמות קטנה</strong> (1–5 אונקיות) כדי להבין את התהליך לפני שמשקיעים סכומים גדולים.</li>\n                        <li>קנה בקביעות (<strong>Dollar Cost Averaging</strong>) — כל חודש כמות קבועה, בלי לנחש את השוק.</li>\n                        <li>שמור תמיד <strong>נזילות</strong> — אל תשקיע כסף שאתה עלול לצטרך בחירום.</li>\n                    </ul>\n                    <div class=\"guide-tip-box\">💡 מינימום מוצלח להתחיל: <strong>10 אונקיות כסף טהור (.999)</strong> — שווה לך בניהול, אחסון ופיזור.</div>\n                "
+      },
+      "en": {
+        "title": "How Much to Buy — Entry Strategy for Beginners",
+        "content": "\n                    <p>There is no single \"right\" amount — it depends on your goals.</p>\n                    <p><strong>Core principles:</strong></p>\n                    <ul>\n                        <li>Most experts suggest <strong>5%–15%</strong> of savings in hard assets (silver + gold + foreign currency).</li>\n                        <li>Start <strong>small</strong> (1–5 oz) to understand the process before committing larger sums.</li>\n                        <li>Buy regularly using <strong>Dollar Cost Averaging</strong> — a fixed amount monthly, without timing the market.</li>\n                        <li>Always maintain <strong>liquidity</strong> — never invest money you might need in an emergency.</li>\n                    </ul>\n                    <div class=\"guide-tip-box\">💡 A good starting milestone: <strong>10 oz of .999 fine silver</strong> — meaningful for management, storage, and diversification.</div>\n                "
+      },
+      "ru": {
+        "title": "Сколько покупать — стратегия входа для новичка",
+        "content": "\n                    <p>Нет единственно правильной суммы — всё зависит от ваших целей.</p>\n                    <p><strong>Основные принципы:</strong></p>\n                    <ul>\n                        <li>Большинство экспертов рекомендуют <strong>5%–15%</strong> сбережений в твёрдых активах (серебро + золото + иностранная валюта).</li>\n                        <li>Начните с <strong>малого</strong> (1–5 oz), чтобы понять процесс, прежде чем вкладывать крупные суммы.</li>\n                        <li>Покупайте регулярно (<strong>усреднение стоимости</strong>) — фиксированная сумма ежемесячно, без угадывания рынка.</li>\n                        <li>Всегда сохраняйте <strong>ликвидность</strong> — не инвестируйте деньги, которые могут понадобиться в экстренной ситуации.</li>\n                    </ul>\n                    <div class=\"guide-tip-box\">💡 Хорошая стартовая позиция: <strong>10 oz серебра .999</strong> — достаточно для управления, хранения и диверсификации.</div>\n                "
+      }
+    },
+    {
+      "id": "builtin_g4",
+      "icon": "❌",
+      "order": 50,
+      "published": true,
+      "he": {
+        "title": "טעויות של מתחילים — הדברים שכולם עושים בפעם הראשונה",
+        "content": "\n                    <ul>\n                        <li>🚫 <strong>קונים ממקור לא מוכר</strong> — זיוף כסף נפוץ. הכלל הברזל: קנה רק ממינטים מוכרים או דילרים מורשים.</li>\n                        <li>🚫 <strong>לא בודקים את הפרמיום</strong> — מחיר ה-\"כסף\" שאתה קונה כולל פרמיום מעל ספוט. פרמיום גבוה מדי = נזק ברווחיות.</li>\n                        <li>🚫 <strong>מאחסנים בבית ללא ביטוח</strong> — גנב אחד, ופרידה מההשקעה. שקול כספת ביטחון או שירות אחסון.</li>\n                        <li>🚫 <strong>קונים \"כסף ישן\" מוזל</strong> — מטבעות .900 (כמו Morgan Dollars) אינם כסף השקעה. בדוק תמיד את הטוהר.</li>\n                        <li>🚫 <strong>ציפייה לרווח מהיר</strong> — כסף הוא חיסכון לטווח ארוך, לא מסחר. מי שקנה ב-2011 בשיא חיכה 10 שנים.</li>\n                        <li>🚫 <strong>קניית כסף \"מוכסף\" (silver plated)</strong> — ציפוי כסף בלבד. ערך אפסי. תמיד בדוק: .999 Fine Silver.</li>\n                    </ul>\n                    <div class=\"guide-warn-box\">⚠️ <strong>בדיקת אמיתות:</strong> מגנט, מבחן קול, מכשיר Sigma Metalytics — זה ההשקעה הכי חכמה לפני כל קנייה גדולה.</div>\n                "
+      },
+      "en": {
+        "title": "Beginner Mistakes — What Everyone Does the First Time",
+        "content": "\n                    <ul>\n                        <li>🚫 <strong>Buying from unknown sources</strong> — silver counterfeits are common. Golden rule: buy only from recognized mints or licensed dealers.</li>\n                        <li>🚫 <strong>Ignoring the premium</strong> — the price you pay includes a markup over spot. Too high a premium = poor profitability.</li>\n                        <li>🚫 <strong>Storing at home without insurance</strong> — one theft, and the investment is gone. Consider a secured safe or storage service.</li>\n                        <li>🚫 <strong>Buying cheap \"old silver\"</strong> — .900 coins (Morgan Dollars etc.) are not investment silver. Always verify purity.</li>\n                        <li>🚫 <strong>Expecting quick profits</strong> — silver is a long-term store of value, not a trade. Those who bought at the 2011 peak waited 10 years.</li>\n                        <li>🚫 <strong>Buying silver-plated items</strong> — just a thin coating. Zero investment value. Always check: .999 Fine Silver.</li>\n                    </ul>\n                    <div class=\"guide-warn-box\">⚠️ <strong>Authentication:</strong> Use a magnet, sound test, or Sigma Metalytics device — the smartest investment before any large purchase.</div>\n                "
+      },
+      "ru": {
+        "title": "Ошибки новичков — то, что все делают в первый раз",
+        "content": "\n                    <ul>\n                        <li>🚫 <strong>Покупка из неизвестных источников</strong> — подделки серебра распространены. Правило: покупайте только у известных монетных дворов или лицензированных дилеров.</li>\n                        <li>🚫 <strong>Игнорирование надбавки</strong> — цена включает наценку над спотом. Слишком высокая надбавка = плохая доходность.</li>\n                        <li>🚫 <strong>Хранение дома без страховки</strong> — одна кража, и инвестиция потеряна. Рассмотрите сейф или профессиональное хранение.</li>\n                        <li>🚫 <strong>Покупка дешёвого \"старого серебра\"</strong> — монеты .900 не являются инвестиционным серебром. Всегда проверяйте чистоту.</li>\n                        <li>🚫 <strong>Ожидание быстрой прибыли</strong> — серебро — долгосрочное хранилище ценности. Купившие в 2011 году на пике ждали 10 лет.</li>\n                        <li>🚫 <strong>Покупка \"посеребрённых\" предметов</strong> — только напыление. Нулевая инвестиционная ценность. Всегда проверяйте: .999 Fine Silver.</li>\n                    </ul>\n                    <div class=\"guide-warn-box\">⚠️ <strong>Проверка подлинности:</strong> Магнит, звуковой тест, устройство Sigma Metalytics — самая умная инвестиция перед любой крупной покупкой.</div>\n                "
+      }
+    },
+    {
+      "id": "builtin_g5",
+      "icon": "🏦",
+      "order": 60,
+      "published": true,
+      "he": {
+        "title": "אחסון בטוח — איך שומרים את הכסף",
+        "content": "\n                    <p>אחסון נכון שווה כסף. אפשרויות נפוצות:</p>\n                    <ul>\n                        <li><strong>כספת ביתית:</strong> נוחה, זמינה. חייבת להיות מחוברת לקיר/רצפה. ביטוח נפרד מומלץ.</li>\n                        <li><strong>תא בנקאי (Safe Deposit Box):</strong> בטוח מגנבה. לא מכוסה על ידי ביטוח הבנק — צריך ביטוח נפרד.</li>\n                        <li><strong>שירות אחסון מקצועי (Vault Storage):</strong> חברות כמו Brinks, Loomis — מבוטח ומנוטר. פתרון לכמויות גדולות.</li>\n                    </ul>\n                    <p><strong>כלל חשוב:</strong> אל תספר לכולם שיש לך כסף פיזי. OPSEC (אבטחת מידע אישי) חשוב כמו אבטחת הכסף עצמו.</p>\n                    <div class=\"guide-tip-box\">💡 <strong>אחסון:</strong> הימנע מחשיפה לאוויר לח. שקיות ניילון עם silica gel שומרות על הברק ומונעות חמצון.</div>\n                "
+      },
+      "en": {
+        "title": "Safe Storage — How to Keep Your Silver",
+        "content": "\n                    <p>Proper storage is part of the investment. Common options:</p>\n                    <ul>\n                        <li><strong>Home safe:</strong> Convenient, accessible. Must be bolted to wall/floor. Separate insurance recommended.</li>\n                        <li><strong>Bank safe deposit box:</strong> Secure from theft. NOT covered by bank insurance — get a separate policy.</li>\n                        <li><strong>Professional vault storage:</strong> Companies like Brinks, Loomis — insured and monitored. Best for large quantities.</li>\n                    </ul>\n                    <p><strong>Key rule:</strong> Don't tell everyone you own physical silver. OPSEC (operational security) matters as much as physical security.</p>\n                    <div class=\"guide-tip-box\">💡 <strong>Storage:</strong> Keep silver away from humid air. Plastic bags with silica gel preserve the shine and prevent tarnishing.</div>\n                "
+      },
+      "ru": {
+        "title": "Безопасное хранение — как хранить серебро",
+        "content": "\n                    <p>Правильное хранение — часть инвестиции. Варианты:</p>\n                    <ul>\n                        <li><strong>Домашний сейф:</strong> Удобно и доступно. Должен быть прикручен к стене/полу. Рекомендуется отдельная страховка.</li>\n                        <li><strong>Банковская ячейка:</strong> Надёжно от кражи. Банковская страховка НЕ покрывает — нужна отдельная.</li>\n                        <li><strong>Профессиональное хранилище:</strong> Brinks, Loomis — застраховано и охраняется. Лучшее решение для больших объёмов.</li>\n                    </ul>\n                    <p><strong>Важное правило:</strong> Не рассказывайте всем о своём серебре. OPSEC (информационная безопасность) так же важна, как физическая защита.</p>\n                    <div class=\"guide-tip-box\">💡 <strong>Хранение:</strong> Избегайте влажного воздуха. Пакеты с силикагелем сохраняют блеск и предотвращают окисление.</div>\n                "
+      }
+    },
+    {
+      "id": "builtin_g6",
+      "icon": "📊",
+      "order": 70,
+      "published": true,
+      "he": {
+        "title": "הבנת מחיר הכסף — ספוט, פרמיום ומחזורים",
+        "content": "\n                    <p><strong>מחיר ספוט (Spot Price):</strong> המחיר הגלובלי של אונקיה כסף 999 פיור בשוק הסחורות (COMEX). זה המחיר \"הבסיסי\".</p>\n                    <p><strong>פרמיום (Premium):</strong> הסכום הנוסף שאתה משלם מעל הספוט. מכסה ייצור, הפצה ורווח הדילר.</p>\n                    <ul>\n                        <li>מטבע Britannia 1oz = ספוט + 10%–18%</li>\n                        <li>מטיל 1kg = ספוט + 3%–8%</li>\n                        <li>מטבע ישראל מינט = ספוט + 15%–25%</li>\n                    </ul>\n                    <p><strong>מחזורים היסטוריים:</strong> כסף נסק ב-2011 ל-$49 לאונקיה ואז צנח. ב-2020 שוב עלה בחדות ל-$29. ב-2024–2025 עלה מעל $30 ושמר יציבות.</p>\n                    <div class=\"guide-tip-box\">💡 <strong>יחס זהב-כסף (Gold/Silver Ratio):</strong> כשהיחס גבוה (>80), כסף \"זול\" יחסית לזהב. יחס היסטורי: ~60:1. נכון לשנת 2026: עוקב אחר הגרף שלנו בלשונית \"גרפים\".</div>\n                "
+      },
+      "en": {
+        "title": "Understanding Silver Price — Spot, Premium & Cycles",
+        "content": "\n                    <p><strong>Spot price:</strong> The global price of one troy ounce of .999 fine silver on the commodities market (COMEX). This is the baseline.</p>\n                    <p><strong>Premium:</strong> The extra amount you pay over spot. Covers manufacturing, distribution, and dealer profit.</p>\n                    <ul>\n                        <li>Britannia 1oz coin = spot + 10%–18%</li>\n                        <li>1 kg bar = spot + 3%–8%</li>\n                        <li>Israel Mint coin = spot + 15%–25%</li>\n                    </ul>\n                    <p><strong>Historical cycles:</strong> Silver surged to $49/oz in 2011 then crashed. Rose sharply again in 2020 to $29. In 2024–2025 it stabilized above $30.</p>\n                    <div class=\"guide-tip-box\">💡 <strong>Gold/Silver Ratio:</strong> When the ratio is high (>80), silver is \"cheap\" relative to gold. Historical average: ~60:1. Track it live in our Charts tab.</div>\n                "
+      },
+      "ru": {
+        "title": "Понимание цены серебра — спот, надбавка и циклы",
+        "content": "\n                    <p><strong>Спот-цена:</strong> Мировая цена одной тройской унции чистого серебра .999 на товарном рынке (COMEX). Это базовая цена.</p>\n                    <p><strong>Надбавка (Premium):</strong> Дополнительная сумма сверх спота. Покрывает производство, дистрибуцию и прибыль дилера.</p>\n                    <ul>\n                        <li>Монета Britannia 1 oz = спот + 10%–18%</li>\n                        <li>Слиток 1 кг = спот + 3%–8%</li>\n                        <li>Монета Israel Mint = спот + 15%–25%</li>\n                    </ul>\n                    <p><strong>Исторические циклы:</strong> Серебро достигло $49/oz в 2011 году, затем упало. В 2020 снова выросло до $29. В 2024–2025 стабилизировалось выше $30.</p>\n                    <div class=\"guide-tip-box\">💡 <strong>Соотношение золото/серебро:</strong> Когда оно высокое (>80), серебро \"дёшево\" относительно золота. Исторически ~60:1. Отслеживайте в разделе \"Графики\".</div>\n                "
+      }
+    },
+    {
+      "id": "builtin_g7",
+      "icon": "⚖️",
+      "order": 80,
+      "published": true,
+      "he": {
+        "title": "מיסוי ורגולציה בישראל — 2026",
+        "content": "\n                    <p>מס רווח הון על מכירת כסף פיזי בישראל:</p>\n                    <ul>\n                        <li><strong>יחידים:</strong> 25% מס רווח הון על הרווח (מחיר מכירה פחות מחיר קנייה).</li>\n                        <li><strong>מע\"מ:</strong> כסף פיזי לצורך השקעה פטור ממע\"מ בישראל (בניגוד לתכשיטים).</li>\n                        <li><strong>דיווח:</strong> עסקאות מעל סף מסוים (בדרך כלל 50,000 ₪) עשויות לדרוש דיווח לרשות המסים.</li>\n                    </ul>\n                    <div class=\"guide-warn-box\">⚠️ <strong>חשוב:</strong> שמור תיעוד של כל קנייה ומכירה (תאריך, מחיר, כמות). זה ישמש אותך בעת חישוב המס. מידע זה הוא לימודי בלבד — התייעץ עם רואה חשבון.</div>\n                "
+      },
+      "en": {
+        "title": "Taxation & Regulation in Israel — 2026",
+        "content": "\n                    <p>Capital gains tax on selling physical silver in Israel:</p>\n                    <ul>\n                        <li><strong>Individuals:</strong> 25% capital gains tax on the profit (sale price minus purchase price).</li>\n                        <li><strong>VAT:</strong> Investment silver is VAT-exempt in Israel (unlike jewelry).</li>\n                        <li><strong>Reporting:</strong> Transactions above a certain threshold (usually ₪50,000) may require reporting to the tax authority.</li>\n                    </ul>\n                    <div class=\"guide-warn-box\">⚠️ <strong>Important:</strong> Keep records of every purchase and sale (date, price, quantity). This is for educational purposes only — consult a certified accountant for personal tax advice.</div>\n                "
+      },
+      "ru": {
+        "title": "Налогообложение в Израиле — 2026",
+        "content": "\n                    <p>Налог на прирост капитала при продаже физического серебра в Израиле:</p>\n                    <ul>\n                        <li><strong>Физические лица:</strong> 25% налог на прирост капитала с прибыли (цена продажи минус цена покупки).</li>\n                        <li><strong>НДС:</strong> Инвестиционное серебро освобождено от НДС в Израиле (в отличие от ювелирных украшений).</li>\n                        <li><strong>Отчётность:</strong> Сделки выше определённого порога (обычно ₪50,000) могут потребовать отчётности в налоговую службу.</li>\n                    </ul>\n                    <div class=\"guide-warn-box\">⚠️ <strong>Важно:</strong> Сохраняйте документы о каждой покупке и продаже (дата, цена, количество). Эта информация носит образовательный характер — проконсультируйтесь с бухгалтером.</div>\n                "
+      }
+    }
+  ]
+}

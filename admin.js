@@ -113,6 +113,30 @@ function syncFromDom() {
     });
 }
 
+// ── One-time seed: load the built-in guide chapters for editing ────
+// Pulls seed_guides.json (the built-in content, exported from the app) into the
+// editor so the admin can review and Save it into the store. After this, guides
+// live entirely in the store and the built-in copy is just an offline fallback.
+async function seedBuiltin() {
+    const msg = document.getElementById('admin-save-msg');
+    if (items.length > 0 && !confirm('פעולה זו תוסיף את פרקי המדריך המובנים לרשימה הנוכחית. להמשיך?')) return;
+    msg.textContent = 'טוען מדריך מובנה...'; msg.style.color = '';
+    try {
+        const res = await fetch(`seed_guides.json?ts=${Date.now()}`);
+        const data = await res.json();
+        const seed = Array.isArray(data.guides) ? data.guides : [];
+        if (!seed.length) throw new Error('לא נמצא תוכן מובנה');
+        const existing = new Set(items.map(it => it.id));
+        let added = 0;
+        seed.forEach(it => { if (!existing.has(it.id)) { items.push(it); added++; } });
+        items.sort((a, b) => (a.order || 100) - (b.order || 100));
+        renderItems();
+        msg.textContent = `✓ נטענו ${added} פרקים — בדוק ולחץ "שמור הכל"`; msg.style.color = '#2e8b57';
+    } catch (e) {
+        msg.textContent = '✗ ' + (e.message || 'טעינה נכשלה'); msg.style.color = '#C04040';
+    }
+}
+
 async function save() {
     syncFromDom();
     const msg = document.getElementById('admin-save-msg');
@@ -153,5 +177,6 @@ document.getElementById('admin-pass').addEventListener('keypress', e => { if (e.
 document.getElementById('add-item-btn').onclick = () => { syncFromDom(); items.push(blankItem()); renderItems(); };
 document.getElementById('save-btn').onclick = save;
 document.getElementById('reload-btn').onclick = loadContent;
+document.getElementById('seed-btn').onclick = seedBuiltin;
 
 if (adminToken) showEditor();
