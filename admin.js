@@ -15,7 +15,7 @@ const LANGS = ['he', 'en', 'ru'];
 (function rain() {
     const c = document.getElementById('rain'); if (!c) return;
     const x = c.getContext('2d'); let cols, drops, fs = 14;
-    const g = 'アイウエオ01﻿$£¥₿▲▼◆<>/\\'.split('');
+    const g = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789'.split('');
     function rs() { c.width = innerWidth; c.height = innerHeight; cols = Math.floor(c.width / fs); drops = Array(cols).fill(1); }
     rs(); addEventListener('resize', rs);
     setInterval(() => {
@@ -58,7 +58,7 @@ async function adminLogin() {
         if (!d.success) throw new Error(res.status === 503 ? 'הפאנל אינו מוגדר' : 'הגישה נדחתה');
         adminToken = d.token; sessionStorage.setItem('vault_admin_token', adminToken); pendingPass = '';
         showEditor();
-    } catch (e) { setMsg('✗ ' + (e.message || 'שגיאת חיבור'), 'err'); document.getElementById('admin-challenge').value = ''; }
+    } catch (e) { setMsg((e.message || 'שגיאת חיבור'), 'err'); document.getElementById('admin-challenge').value = ''; }
 }
 function authHeaders() { return { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` }; }
 
@@ -88,7 +88,7 @@ async function loadSection(sec) {
         data[sec] = Array.isArray(d.items) ? d.items : [];
         if (sec === 'guides' || sec === 'quiz') data[sec].sort((a, b) => (a.order || 100) - (b.order || 100));
         renderSection(sec); saveMsg('');
-    } catch (e) { saveMsg('✗ ' + (e.message || 'טעינה נכשלה'), 'err'); }
+    } catch (e) { saveMsg((e.message || 'טעינה נכשלה'), 'err'); }
 }
 
 function renderSection(sec) {
@@ -104,7 +104,7 @@ function syncSection(sec) {
 }
 
 // ── GUIDES (structured) ────────────────────────────────────────────
-function blankGuide() { const it = { id: 'g_' + Date.now().toString(36), icon: '📘', order: (data.guides.length + 1) * 10, published: true }; LANGS.forEach(l => it[l] = { title: '', content: '' }); return it; }
+function blankGuide() { const it = { id: 'g_' + Date.now().toString(36), icon: '', order: (data.guides.length + 1) * 10, published: true }; LANGS.forEach(l => it[l] = { title: '', content: '' }); return it; }
 function renderGuides() {
     const box = document.getElementById('box-guides'); box.innerHTML = '';
     data.guides.forEach((it, idx) => {
@@ -182,8 +182,8 @@ async function save() {
     let items;
     if (current === 'mints') {
         try { const parsed = JSON.parse(document.getElementById('mints-json').value); items = Array.isArray(parsed) ? parsed : parsed.items; }
-        catch (e) { saveMsg('✗ JSON לא תקין: ' + e.message, 'err'); return; }
-        if (!Array.isArray(items)) { saveMsg('✗ נדרש מערך items', 'err'); return; }
+        catch (e) { saveMsg('JSON לא תקין: ' + e.message, 'err'); return; }
+        if (!Array.isArray(items)) { saveMsg('נדרש מערך items', 'err'); return; }
         data.mints = items;
     } else { items = data[current]; }
     saveMsg('שומר...', 'ok');
@@ -192,8 +192,8 @@ async function save() {
         if (res.status === 401 || res.status === 503) { logout(); return; }
         const d = await res.json();
         if (!d.success) throw new Error(d.error || 'שמירה נכשלה');
-        saveMsg(`✓ נשמר (${d.count} פריטים)`, 'ok');
-    } catch (e) { saveMsg('✗ ' + (e.message || 'שגיאה'), 'err'); }
+        saveMsg(`נשמר (${d.count} פריטים)`, 'ok');
+    } catch (e) { saveMsg((e.message || 'שגיאה'), 'err'); }
 }
 
 async function seed() {
@@ -203,14 +203,14 @@ async function seed() {
         const res = await fetch(file); const d = await res.json();
         const items = Array.isArray(d.items) ? d.items : (Array.isArray(d.guides) ? d.guides : []);
         if (!items.length) throw new Error('אין תוכן מובנה');
-        if (current === 'mints') { data.mints = items; renderSection('mints'); saveMsg(`✓ נטענו ${items.length} — בדוק ולחץ שמור`, 'ok'); return; }
+        if (current === 'mints') { data.mints = items; renderSection('mints'); saveMsg(`נטענו ${items.length} · לחץ שמור`, 'ok'); return; }
         syncSection(current);
         const existing = new Set(data[current].map(it => it.id)); let added = 0;
         items.forEach(it => { if (!existing.has(it.id)) { data[current].push(it); added++; } });
         data[current].sort((a, b) => (a.order || 100) - (b.order || 100));
         renderSection(current);
-        saveMsg(`✓ נטענו ${added} — בדוק ולחץ שמור`, 'ok');
-    } catch (e) { saveMsg('✗ ' + (e.message || 'טעינה נכשלה'), 'err'); }
+        saveMsg(`נטענו ${added} · לחץ שמור`, 'ok');
+    } catch (e) { saveMsg((e.message || 'טעינה נכשלה'), 'err'); }
 }
 
 function addItem() {
@@ -228,7 +228,7 @@ async function loadMrd() {
         const d = await res.json();
         document.getElementById('mrd-note').value = d.note || '';
         t.textContent = '';
-    } catch (e) { t.textContent = '✗ ' + (e.message || 'טעינה נכשלה'); t.className = 'msg err'; }
+    } catch (e) { t.textContent = (e.message || 'טעינה נכשלה'); t.className = 'msg err'; }
 }
 async function saveMrd() {
     const t = document.getElementById('mrd-msg'); t.textContent = 'שומר...'; t.className = 'msg ok';
@@ -237,8 +237,8 @@ async function saveMrd() {
         const res = await fetch(`${API}/api/admin/mrd-config`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ note }) });
         if (res.status === 401 || res.status === 503) { logout(); return; }
         const d = await res.json(); if (!d.success) throw new Error(d.error || 'שמירה נכשלה');
-        t.textContent = `✓ נשמר (${d.length} תווים) — ייכנס לתוקף תוך ~2 דקות`; t.className = 'msg ok';
-    } catch (e) { t.textContent = '✗ ' + (e.message || 'שגיאה'); t.className = 'msg err'; }
+        t.textContent = `נשמר (${d.length} תווים)`; t.className = 'msg ok';
+    } catch (e) { t.textContent = (e.message || 'שגיאה'); t.className = 'msg err'; }
 }
 
 // ── Users (view-only) ──────────────────────────────────────────────
@@ -255,7 +255,7 @@ async function loadUsers() {
         box.innerHTML = '<table class="utable"><thead><tr><th>שם</th><th>שם משתמש</th><th>מזהה</th><th>פעילות אחרונה</th></tr></thead><tbody>' +
             u.map(x => `<tr><td>${escHtml(x.first_name) || '—'}</td><td>${x.username ? '@' + escHtml(x.username) : '—'}</td><td style="direction:ltr">${escHtml(String(x.user_id))}</td><td>${fmtDate(x.last_active)}</td></tr>`).join('') +
             '</tbody></table>';
-    } catch (e) { box.innerHTML = '<p class="hint">✗ ' + escHtml(e.message || 'טעינה נכשלה') + '</p>'; }
+    } catch (e) { box.innerHTML = '<p class="hint">' + escHtml(e.message || 'טעינה נכשלה') + '</p>'; }
 }
 
 // ── Data dashboard ─────────────────────────────────────────────────
@@ -278,7 +278,7 @@ async function loadStats() {
             card('שאלות חידון', c.quiz ?? '—', true) +
             card('בתי מטבע', c.mints ?? '—') +
             '</div>';
-    } catch (e) { box.innerHTML = '<p class="hint">✗ ' + escHtml(e.message || 'טעינה נכשלה') + '</p>'; }
+    } catch (e) { box.innerHTML = '<p class="hint">' + escHtml(e.message || 'טעינה נכשלה') + '</p>'; }
 }
 
 // ── Section router ─────────────────────────────────────────────────
