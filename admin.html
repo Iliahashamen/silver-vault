@@ -63,30 +63,26 @@
         }
         #rain { position: fixed; inset: 0; z-index: 0; opacity: 0.05; pointer-events: none; }
 
-        /* Palm circle — outer wrapper handles color cycle via filter,
-           inner handles blend-mode so both work in all browsers */
+        /* Palm: single <img> carries both mix-blend-mode and the filter animation
+           on the SAME element — no parent stacking context, no visible bounding box */
         #palms {
             position: fixed; inset: 0; z-index: 0; pointer-events: none;
             display: flex; align-items: center; justify-content: center;
-            animation: palmcycle 48s ease-in-out infinite;
-            will-change: filter;
+            /* no transform/animation/will-change here — keeps parent transparent */
         }
-        #palms::after {
-            content: "";
-            display: block;
-            width: min(520px, 62vw);
-            aspect-ratio: 1;
-            background: url("palm_circle.png?v=2") center / contain no-repeat;
+        #palm-img {
+            width: min(540px, 64vw);
             mix-blend-mode: screen;
-            opacity: 0.35;
+            opacity: 0.38;
+            animation: palmcycle 48s ease-in-out infinite;
         }
         @keyframes palmcycle {
-            0%   { filter: hue-rotate(-75deg) saturate(0.5) brightness(1.3); }  /* beige */
-            20%  { filter: hue-rotate(100deg) saturate(1.4) brightness(1.1); }  /* blue */
-            40%  { filter: hue-rotate(0deg)   saturate(1.2) brightness(1.0); }  /* green */
-            60%  { filter: hue-rotate(160deg) saturate(1.5) brightness(1.1); }  /* purple */
-            80%  { filter: hue-rotate(210deg) saturate(1.5) brightness(1.15); } /* pink */
-            100% { filter: hue-rotate(-75deg) saturate(0.5) brightness(1.3); }  /* beige */
+            0%   { filter: hue-rotate(-75deg) saturate(0.5)  brightness(1.3);  } /* beige  */
+            20%  { filter: hue-rotate(100deg) saturate(1.4)  brightness(1.1);  } /* blue   */
+            40%  { filter: hue-rotate(0deg)   saturate(1.2)  brightness(1.05); } /* green  */
+            60%  { filter: hue-rotate(160deg) saturate(1.5)  brightness(1.1);  } /* purple */
+            80%  { filter: hue-rotate(210deg) saturate(1.5)  brightness(1.15); } /* pink   */
+            100% { filter: hue-rotate(-75deg) saturate(0.5)  brightness(1.3);  } /* beige  */
         }
         @keyframes crtflicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.975; } }
         .wrap { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 26px 16px 90px; animation: crtflicker 4s steps(40) infinite; }
@@ -169,7 +165,7 @@
 </head>
 <body>
     <canvas id="rain"></canvas>
-    <div id="palms" aria-hidden="true"></div>
+    <div id="palms" aria-hidden="true"><img src="palm_circle.png?v=2" id="palm-img" alt=""></div>
     <div class="wrap">
         <div class="syslog">SYSTEM LOG V2.5.1 — 04/23/1986</div>
         <div class="brand">הכספת</div>
