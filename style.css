@@ -843,7 +843,7 @@ input, textarea, .chat-messages, .chat-message {
 .chat-message.user .msg-content { color: var(--text-light); }
 .chat-message.user .msg-inline-author { color: rgba(240,238,232,0.78); }
 
-/* Typing indicator — three floating dots while Mr. D "types" */
+/* Typing indicator — three floating dots while groupBOT "types" */
 .chat-message.typing { min-width: 0; padding: 14px 18px; }
 .typing-indicator {
     display: flex;
