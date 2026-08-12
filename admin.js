@@ -5,13 +5,14 @@
 // ═══════════════════════════════════════════════════════════════════
 
 const API = CONFIG.CHAT_API_URL;
+const IS_LOCAL_SANDBOX = ['localhost', '127.0.0.1'].includes(location.hostname);
 let adminToken = sessionStorage.getItem('vault_admin_token') || null;
 let pendingPass = '';
 let current = 'guides';
 const data = { guides: [], quiz: [], mints: [] };
 const LANGS = ['he', 'en', 'ru'];
 
-// ── synthwave rain (green + purple) ────────────────────────────────
+// ── restrained retro rain (green + beige) ─────────────────────────
 (function rain() {
     const c = document.getElementById('rain'); if (!c) return;
     const x = c.getContext('2d'); let cols, drops, fs = 14;
@@ -19,7 +20,7 @@ const LANGS = ['he', 'en', 'ru'];
     function rs() { c.width = innerWidth; c.height = innerHeight; cols = Math.floor(c.width / fs); drops = Array(cols).fill(1); }
     rs(); addEventListener('resize', rs);
     setInterval(() => {
-        x.fillStyle = 'rgba(13,2,33,0.10)'; x.fillRect(0, 0, c.width, c.height);
+        x.fillStyle = 'rgba(3,10,8,0.12)'; x.fillRect(0, 0, c.width, c.height);
         x.font = fs + 'px monospace';
         for (let i = 0; i < drops.length; i++) {
             x.fillStyle = i % 6 === 0 ? '#ece2c0' : '#2bf5a0';
@@ -37,6 +38,11 @@ function saveMsg(t, cls) { const m = document.getElementById('save-msg'); m.text
 function gotoChallenge() {
     pendingPass = document.getElementById('admin-pass').value.trim();
     if (!pendingPass) { setMsg('לא הוזן קוד', 'err'); return; }
+    if (IS_LOCAL_SANDBOX) {
+        document.getElementById('admin-challenge').value = '';
+        adminLogin();
+        return;
+    }
     document.getElementById('step-pass').classList.add('hidden');
     document.getElementById('step-challenge').classList.remove('hidden');
     setMsg(''); setTimeout(() => document.getElementById('admin-challenge').focus(), 50);
@@ -406,5 +412,11 @@ document.getElementById('quiz-format').onclick = () => formatContent('quiz');
 document.getElementById('users-reload').onclick = loadUsers;
 document.getElementById('data-reload').onclick = loadStats;
 document.querySelectorAll('#nav button').forEach(b => b.onclick = () => openSection(b.dataset.sec));
+
+if (IS_LOCAL_SANDBOX) {
+    const prompt = document.querySelector('#step-pass .prompt');
+    prompt.textContent = 'קוד כניסה';
+    document.getElementById('admin-pass').placeholder = '•••••';
+}
 
 if (adminToken) showEditor();

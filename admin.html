@@ -8,6 +8,7 @@
     <title>מסוף ניהול — הכספת</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         @font-face {
             font-family: "ShimshonAgol";
@@ -162,15 +163,12 @@
         /* emails / user IDs inline */
         [data-mono], td { font-family: var(--mono); }
     </style>
+    <link rel="stylesheet" href="admin-theme.css?v=4">
 </head>
 <body>
     <canvas id="rain"></canvas>
-    <div id="palms" aria-hidden="true"><img src="palm_circle.png?v=2" id="palm-img" alt=""></div>
+    <div id="palms" aria-hidden="true"><div id="palm-img"></div></div>
     <div class="wrap">
-        <div class="syslog">SYSTEM LOG V2.5.1 — 04/23/1986</div>
-        <div class="brand">הכספת</div>
-        <div class="sub">מסוף ניהול</div>
-
         <!-- LOGIN -->
         <div id="admin-login" class="login-box">
             <div class="panel">
@@ -265,6 +263,6 @@
             </div>
         </div>
     </div>
-    <script src="admin.js?v=10"></script>
+    <script src="admin.js?v=12"></script>
 </body>
 </html>

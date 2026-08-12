@@ -42,5 +42,11 @@ const CONFIG = {
     VERSION: '1.7.0'
 };
 
+// Local sandbox: when served from localhost, talk to the local API (not Railway).
+if (typeof location !== 'undefined' &&
+    (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+    CONFIG.CHAT_API_URL = 'http://localhost:8082';
+}
+
 // Passcode is validated server-side for security
 // Do not store sensitive credentials in frontend code
