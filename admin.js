@@ -9,7 +9,7 @@ const IS_LOCAL_SANDBOX = ['localhost', '127.0.0.1'].includes(location.hostname);
 let adminToken = sessionStorage.getItem('vault_admin_token') || null;
 let pendingPass = '';
 let current = 'guides';
-const data = { guides: [], quiz: [], mints: [] };
+const data = { guides: [], quiz: [], mints: [], links: [] };
 const LANGS = ['he', 'en', 'ru'];
 
 // ── restrained retro rain (green + beige) ─────────────────────────
@@ -69,7 +69,7 @@ async function adminLogin() {
 function authHeaders() { return { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` }; }
 
 // ── sections ───────────────────────────────────────────────────────
-const CONTENT_SECS = ['guides', 'quiz'];
+const CONTENT_SECS = ['guides', 'quiz', 'links'];
 function showSection(sec) {
     if (CONTENT_SECS.includes(current)) syncSection(current);
     current = sec;
@@ -80,6 +80,7 @@ function showSection(sec) {
     document.getElementById('content-toolbar').style.display = isContent ? '' : 'none';
     if (isContent) {
         document.getElementById('add-btn').style.display = (sec === 'mints') ? 'none' : '';
+        document.getElementById('seed-btn').style.display = (sec === 'links') ? 'none' : '';
         renderSection(sec);
         saveMsg('');
     }
@@ -92,7 +93,7 @@ async function loadSection(sec) {
         if (res.status === 401 || res.status === 503) { logout(); return; }
         const d = await res.json();
         data[sec] = Array.isArray(d.items) ? d.items : [];
-        if (sec === 'guides' || sec === 'quiz') data[sec].sort((a, b) => (a.order || 100) - (b.order || 100));
+        if (sec === 'guides' || sec === 'quiz' || sec === 'links') data[sec].sort((a, b) => (a.order || 100) - (b.order || 100));
         renderSection(sec); saveMsg('');
     } catch (e) { saveMsg((e.message || 'טעינה נכשלה'), 'err'); }
 }
@@ -100,12 +101,14 @@ async function loadSection(sec) {
 function renderSection(sec) {
     if (sec === 'guides') renderGuides();
     else if (sec === 'quiz') renderQuiz();
+    else if (sec === 'links') renderLinks();
     else if (sec === 'mints') document.getElementById('mints-json').value = JSON.stringify(data.mints || [], null, 2);
 }
 
 function syncSection(sec) {
     if (sec === 'guides') syncGuides();
     else if (sec === 'quiz') syncQuiz();
+    else if (sec === 'links') syncLinks();
     else if (sec === 'mints') { /* parsed on save */ }
 }
 
@@ -182,6 +185,71 @@ function syncQuiz() {
     });
 }
 
+// ── LEARNING VIDEOS (title + private YouTube URL) ─────────────────
+function blankLink() {
+    return {
+        id: 'v_' + Date.now().toString(36),
+        title: '',
+        url: '',
+        order: (data.links.length + 1) * 10,
+        published: true,
+    };
+}
+
+function renderLinks() {
+    const box = document.getElementById('box-links');
+    box.innerHTML = '';
+    data.links.forEach((it, idx) => {
+        const el = document.createElement('div');
+        el.className = 'item';
+        el.innerHTML = `
+            <div class="item-head">
+                <strong style="color:var(--green)">סרטון ${idx + 1}</strong>
+                <label>סדר <input type="number" class="inp" style="width:78px" value="${Number(it.order) || 100}" data-v="order" data-i="${idx}"></label>
+                <label><input type="checkbox" data-v="published" data-i="${idx}" ${it.published !== false ? 'checked' : ''}> מפורסם</label>
+                <button type="button" class="btn danger" data-delv="${idx}" style="margin-inline-start:auto;">מחק</button>
+            </div>
+            <input type="text" class="inp" placeholder="שם הסרטון, לדוגמה: הכסף בשנים האחרונות" value="${escAttr(it.title)}" data-v="title" data-i="${idx}">
+            <input type="url" class="inp" dir="ltr" placeholder="https://youtu.be/..." value="${escAttr(it.url)}" data-v="url" data-i="${idx}">`;
+        el.querySelector(`[data-delv="${idx}"]`).onclick = () => {
+            if (confirm('למחוק את הסרטון?')) {
+                syncLinks();
+                data.links.splice(idx, 1);
+                renderLinks();
+            }
+        };
+        box.appendChild(el);
+    });
+}
+
+function syncLinks() {
+    document.querySelectorAll('[data-v]').forEach(n => {
+        const i = +n.dataset.i;
+        const field = n.dataset.v;
+        const it = data.links[i];
+        if (!it) return;
+        if (field === 'published') it.published = n.checked;
+        else if (field === 'order') it.order = +n.value || 100;
+        else it[field] = n.value.trim();
+    });
+}
+
+function isYouTubeUrl(value) {
+    try {
+        const u = new URL(value);
+        const host = u.hostname.toLowerCase();
+        return u.protocol === 'https:' && (
+            host === 'youtu.be' ||
+            host === 'youtube.com' ||
+            host.endsWith('.youtube.com') ||
+            host === 'youtube-nocookie.com' ||
+            host.endsWith('.youtube-nocookie.com')
+        );
+    } catch {
+        return false;
+    }
+}
+
 // ── save / reload / seed ───────────────────────────────────────────
 async function save() {
     syncSection(current);
@@ -192,6 +260,12 @@ async function save() {
         if (!Array.isArray(items)) { saveMsg('נדרש מערך items', 'err'); return; }
         data.mints = items;
     } else { items = data[current]; }
+    if (current === 'links') {
+        const incomplete = items.find(it => !String(it.title || '').trim() || !String(it.url || '').trim());
+        if (incomplete) { saveMsg('יש למלא שם וקישור לכל סרטון', 'err'); return; }
+        const invalid = items.find(it => !isYouTubeUrl(it.url));
+        if (invalid) { saveMsg('יש להזין קישור YouTube תקין שמתחיל ב־https', 'err'); return; }
+    }
     saveMsg('שומר...', 'ok');
     try {
         const res = await fetch(`${API}/api/admin/content?type=${current}`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ items }) });
@@ -223,6 +297,7 @@ function addItem() {
     syncSection(current);
     if (current === 'guides') { data.guides.push(blankGuide()); renderGuides(); }
     else if (current === 'quiz') { data.quiz.push(blankQuiz()); renderQuiz(); }
+    else if (current === 'links') { data.links.push(blankLink()); renderLinks(); }
 }
 
 // ── groupBOT add-on instructions (time-limited) ────────────────────

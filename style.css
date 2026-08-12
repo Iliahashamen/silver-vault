@@ -2506,6 +2506,96 @@ body.dark-mode .news-section-body      { color: var(--text-mid, rgba(220,220,220
     display: block;
 }
 
+/* Learning videos — titles are the links; raw YouTube URLs stay hidden. */
+.learning-videos-head {
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.learning-videos-head h3 {
+    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-size: 20px;
+    color: var(--purple);
+    margin-bottom: 5px;
+}
+
+.learning-videos-head p {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.learning-videos-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+}
+
+.learning-video-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 72px;
+    padding: 14px 16px;
+    border-radius: var(--radius-lg);
+    background: var(--card);
+    color: var(--text);
+    text-decoration: none;
+    box-shadow: var(--nm-raised);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.learning-video-link:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--nm-raised-hover);
+}
+
+.learning-video-link:active {
+    transform: translateY(1px);
+    box-shadow: var(--nm-inset);
+}
+
+.learning-video-play {
+    display: grid;
+    place-items: center;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #d9534f;
+    color: #fff;
+    font-size: 17px;
+    box-shadow: 3px 4px 9px rgba(130, 55, 45, .35);
+}
+
+.learning-video-title {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.45;
+}
+
+.learning-video-arrow {
+    color: var(--clay);
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.learning-videos-state {
+    grid-column: 1 / -1;
+    padding: 38px 16px;
+    color: var(--text-muted);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+body.dark-mode .learning-video-link { background: var(--card); }
+
+@media (max-width: 520px) {
+    .learning-videos-list { grid-template-columns: 1fr; }
+}
+
 /* Legacy row (kept for other potential uses) */
 .hw-features-row {
     display: flex;

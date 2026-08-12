@@ -1008,6 +1008,7 @@ let QUIZ_TOTAL = 15;   // capped per round; adapts if the store has fewer questi
 const QUIZ_SECS  = 600;
 
 let quizState = { questions: [], idx: 0, score: 0, timeLeft: QUIZ_SECS, timer: null, locked: false };
+let _learningVideos = null;
 
 function _quizShuffle(arr) {
     const a = [...arr];
@@ -1136,26 +1137,97 @@ function quizReset() {
 function _hwShowMenu() {
     const menu = document.getElementById('hw-menu');
     const wrap = document.getElementById('hw-quiz-wrap');
+    const videosWrap = document.getElementById('hw-videos-wrap');
     if (menu) menu.style.display = '';
     if (wrap) wrap.style.display = 'none';
+    if (videosWrap) videosWrap.style.display = 'none';
     _quizPanel('quiz-start'); // reset quiz panels for next time
 }
 
 function _hwOpenQuiz() {
     const menu = document.getElementById('hw-menu');
     const wrap = document.getElementById('hw-quiz-wrap');
+    const videosWrap = document.getElementById('hw-videos-wrap');
     if (menu) menu.style.display = 'none';
     if (wrap) wrap.style.display = '';
+    if (videosWrap) videosWrap.style.display = 'none';
     _quizPanel('quiz-start');
+}
+
+function _safeYouTubeUrl(raw) {
+    try {
+        const url = new URL(String(raw || '').trim());
+        if (url.protocol !== 'https:') return '';
+        const host = url.hostname.toLowerCase();
+        const allowed = host === 'youtu.be' ||
+            host === 'youtube.com' ||
+            host.endsWith('.youtube.com') ||
+            host === 'youtube-nocookie.com' ||
+            host.endsWith('.youtube-nocookie.com');
+        return allowed ? url.href : '';
+    } catch {
+        return '';
+    }
+}
+
+async function _loadLearningVideos() {
+    const list = document.getElementById('learning-videos-list');
+    if (!list) return;
+    list.innerHTML = '<p class="learning-videos-state">טוען סרטונים...</p>';
+
+    if (_learningVideos === null) {
+        _learningVideos = await _fetchContent('links');
+    }
+
+    const videos = (_learningVideos || [])
+        .map(item => ({
+            title: String(item.title || '').trim(),
+            url: _safeYouTubeUrl(item.url),
+            order: Number(item.order) || 100,
+        }))
+        .filter(item => item.title && item.url)
+        .sort((a, b) => a.order - b.order);
+
+    if (!videos.length) {
+        list.innerHTML = '<p class="learning-videos-state">סרטוני הלימוד יעלו כאן בקרוב.</p>';
+        return;
+    }
+
+    list.innerHTML = videos.map(video => `
+        <a class="learning-video-link" href="${escapeHtml(video.url)}" target="_blank" rel="noopener noreferrer">
+            <span class="learning-video-play" aria-hidden="true">▶</span>
+            <span class="learning-video-title">${escapeHtml(video.title)}</span>
+            <span class="learning-video-arrow" aria-hidden="true">←</span>
+        </a>
+    `).join('');
+}
+
+function _hwOpenVideos() {
+    const menu = document.getElementById('hw-menu');
+    const quizWrap = document.getElementById('hw-quiz-wrap');
+    const videosWrap = document.getElementById('hw-videos-wrap');
+    if (menu) menu.style.display = 'none';
+    if (quizWrap) quizWrap.style.display = 'none';
+    if (videosWrap) videosWrap.style.display = '';
+    _loadLearningVideos();
+}
+
+function _hwSubViewOpen() {
+    return ['hw-quiz-wrap', 'hw-videos-wrap'].some(id => {
+        const el = document.getElementById(id);
+        return el && el.style.display !== 'none';
+    });
 }
 
 function initQuiz() {
     document.getElementById('quiz-start-btn')?.addEventListener('click', quizStart);
     document.getElementById('quiz-restart-btn')?.addEventListener('click', quizReset);
     document.getElementById('quiz-menu-btn')?.addEventListener('click', _hwOpenQuiz);
+    document.getElementById('videos-menu-btn')?.addEventListener('click', _hwOpenVideos);
     document.getElementById('back-to-hw-menu')?.addEventListener('click', () => {
         quizReset(); // stops timer, resets state, shows menu
     });
+    document.getElementById('back-to-hw-menu-videos')?.addEventListener('click', _hwShowMenu);
 }
 
 // ══════════════════════════════════════════════════════════════════════
@@ -2509,8 +2581,7 @@ function initDashboard() {
         const btn = document.getElementById(`back-${name}`);
         if (btn) btn.onclick = () => {
             if (name === 'homework') {
-                const quizWrap = document.getElementById('hw-quiz-wrap');
-                if (quizWrap && quizWrap.style.display !== 'none') {
+                if (_hwSubViewOpen()) {
                     quizReset();
                     return;
                 }
@@ -2662,8 +2733,7 @@ function initSwipeBack() {
         switch (active.id) {
             case 'pnl-screen':          goToScreen('personal-screen'); break;
             case 'homework-screen': {
-                const qw = document.getElementById('hw-quiz-wrap');
-                if (qw && qw.style.display !== 'none') { quizReset(); }
+                if (_hwSubViewOpen()) { quizReset(); }
                 else { quizReset(); goBack(); }
                 break;
             }
