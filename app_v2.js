@@ -92,8 +92,39 @@ function saveSession(token) {
     }));
 }
 
+
+// ── BROWSER HISTORY (system/back button stays inside the app) ────────
+const APP_NAV_ID = 'vault';
+
+function _screenUrl(screenId) {
+    return `${location.pathname}${location.search}#${screenId}`;
+}
+
+function _pushScreenHistory(screenId, replace) {
+    const state = { app: APP_NAV_ID, screen: screenId };
+    const url = _screenUrl(screenId);
+    try {
+        if (replace) history.replaceState(state, '', url);
+        else history.pushState(state, '', url);
+    } catch (e) {}
+}
+
+function _applyScreenFromHistory(screenId) {
+    goToScreen(screenId, { skipHistory: true });
+    // Close homework sub-views when leaving that screen via system back
+    if (screenId !== 'homework-screen') {
+        try { quizReset(); } catch (e) {}
+    }
+}
+
+window.addEventListener('popstate', (e) => {
+    const st = e.state;
+    const screen = (st && st.app === APP_NAV_ID && st.screen) ? st.screen : 'dashboard-screen';
+    _applyScreenFromHistory(screen);
+});
+
 // ── SCREEN NAVIGATION ────────────────────────────────────────────────
-function goToScreen(screenId) {
+function goToScreen(screenId, opts = {}) {
     // Hub is the only login — never show the old passcode screen
     if (screenId === 'login-screen') {
         location.replace('hub.html');
@@ -131,10 +162,19 @@ function goToScreen(screenId) {
     }
 
     if (screenId === 'updates-screen') loadNews();
+
+    if (!opts.skipHistory) {
+        _pushScreenHistory(screenId, !!opts.replace);
+    }
 }
 
 function goBack() {
-    goToScreen('dashboard-screen');
+    // System/in-app back: pop browser history so OS/browser back matches UI back
+    if (history.state && history.state.app === APP_NAV_ID) {
+        history.back();
+        return;
+    }
+    goToScreen('dashboard-screen', { replace: true });
 }
 
 function openDailyLineChart() {
@@ -215,6 +255,7 @@ async function showDashboard() {
     if (dash) {
         dash.classList.add('active');
     }
+    _pushScreenHistory('dashboard-screen', true);
 
     const token = sessionToken();
     if (token) {
@@ -2096,7 +2137,7 @@ function initMuseum() {
 
     // Back from mint detail → museum hub
     document.getElementById('back-mint-detail')?.addEventListener('click', () => {
-        goToScreen('museum-screen');
+        goBack();
     });
 }
 
@@ -2620,7 +2661,7 @@ function initDashboard() {
     // ── Personal area sub-navigation ──
     document.getElementById('dark-mode-btn')?.addEventListener('click', toggleDarkMode);
     document.getElementById('pnl-open-btn')?.addEventListener('click', () => goToScreen('pnl-screen'));
-    document.getElementById('back-pnl')?.addEventListener('click', () => goToScreen('personal-screen'));
+    document.getElementById('back-pnl')?.addEventListener('click', () => goBack());
 
     // ── P&L form (async — auto-fetches FX rate) ──
     document.getElementById('pnl-form').onsubmit = async (e) => {
@@ -2752,14 +2793,14 @@ function initSwipeBack() {
         const active = document.querySelector('.screen.active');
         if (!active) return;
         switch (active.id) {
-            case 'pnl-screen':          goToScreen('personal-screen'); break;
+            case 'pnl-screen':          goBack(); break;
             case 'homework-screen': {
                 if (_hwSubViewOpen()) { quizReset(); }
                 else { quizReset(); goBack(); }
                 break;
             }
             case 'museum-screen':       goBack();                      break;
-            case 'mint-detail-screen':  goToScreen('museum-screen');   break;
+            case 'mint-detail-screen':  goBack();                      break;
             case 'guide-screen':        goBack();                      break;
             case 'personal-screen':
             case 'updates-screen':
