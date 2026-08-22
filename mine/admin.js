@@ -1,0 +1,501 @@
+﻿// ═══════════════════════════════════════════════════════════════════
+// מסוף ניהול // המכרה — gold content panel (Hebrew only)
+// Collections: guides (structured) · quiz (structured) · mints (JSON).
+// Two-step gate (code + challenge), both validated server-side.
+// ═══════════════════════════════════════════════════════════════════
+
+const API = CONFIG.CHAT_API_URL;
+const IS_LOCAL_SANDBOX = ['localhost', '127.0.0.1'].includes(location.hostname);
+let adminToken = sessionStorage.getItem('mine_admin_token') || null;
+let pendingPass = '';
+let current = 'guides';
+const data = { guides: [], quiz: [], mints: [], links: [] };
+const LANGS = ['he', 'en', 'ru'];
+
+// ── restrained retro rain (green + beige) ─────────────────────────
+(function rain() {
+    const c = document.getElementById('rain'); if (!c) return;
+    const x = c.getContext('2d'); let cols, drops, fs = 14;
+    const g = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789'.split('');
+    function rs() { c.width = innerWidth; c.height = innerHeight; cols = Math.floor(c.width / fs); drops = Array(cols).fill(1); }
+    rs(); addEventListener('resize', rs);
+    setInterval(() => {
+        x.fillStyle = 'rgba(3,10,8,0.12)'; x.fillRect(0, 0, c.width, c.height);
+        x.font = fs + 'px monospace';
+        for (let i = 0; i < drops.length; i++) {
+            x.fillStyle = i % 6 === 0 ? '#ece2c0' : '#2bf5a0';
+            x.fillText(g[Math.floor(Math.random() * g.length)], i * fs, drops[i] * fs);
+            if (drops[i] * fs > c.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        }
+    }, 60);
+})();
+
+// ── auth ───────────────────────────────────────────────────────────
+function setMsg(t, cls) { const m = document.getElementById('admin-login-msg'); m.textContent = t || ''; m.className = 'msg' + (cls ? ' ' + cls : ''); }
+function saveMsg(t, cls) { const m = document.getElementById('save-msg'); m.textContent = t || ''; m.className = 'msg' + (cls ? ' ' + cls : ''); }
+
+function gotoChallenge() {
+    pendingPass = document.getElementById('admin-pass').value.trim();
+    if (!pendingPass) { setMsg('לא הוזן קוד', 'err'); return; }
+    if (IS_LOCAL_SANDBOX) {
+        document.getElementById('admin-challenge').value = '';
+        adminLogin();
+        return;
+    }
+    document.getElementById('step-pass').classList.add('hidden');
+    document.getElementById('step-challenge').classList.remove('hidden');
+    setMsg(''); setTimeout(() => document.getElementById('admin-challenge').focus(), 50);
+}
+function backToPass() {
+    document.getElementById('step-challenge').classList.add('hidden');
+    document.getElementById('step-pass').classList.remove('hidden');
+    document.getElementById('admin-challenge').value = ''; setMsg('');
+}
+async function adminLogin() {
+    const challenge = document.getElementById('admin-challenge').value.trim();
+    setMsg('מאמת...', 'ok');
+    try {
+        const res = await fetch(`${API}/api/admin/login`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ passcode: pendingPass, challenge }),
+        });
+        const d = await res.json();
+        if (!d.success) throw new Error(res.status === 503 ? 'הפאנל אינו מוגדר' : 'הגישה נדחתה');
+        adminToken = d.token; sessionStorage.setItem('mine_admin_token', adminToken); pendingPass = '';
+        showEditor();
+    } catch (e) { setMsg((e.message || 'שגיאת חיבור'), 'err'); document.getElementById('admin-challenge').value = ''; }
+}
+function authHeaders() { return { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` }; }
+
+// ── sections ───────────────────────────────────────────────────────
+const CONTENT_SECS = ['guides', 'quiz', 'links'];
+// Mine uses prefixed collection names on the backend
+const MINE_TYPE_MAP = { 'guides': 'mine-guides', 'quiz': 'mine-quiz', 'links': 'mine-links' };
+function showSection(sec) {
+    if (CONTENT_SECS.includes(current)) syncSection(current);
+    current = sec;
+    document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('active', b.dataset.sec === sec));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + sec).classList.add('active');
+    const isContent = CONTENT_SECS.includes(sec);
+    document.getElementById('content-toolbar').style.display = isContent ? '' : 'none';
+    if (isContent) {
+        document.getElementById('add-btn').style.display = (sec === 'mints') ? 'none' : '';
+        document.getElementById('seed-btn').style.display = (sec === 'links') ? 'none' : '';
+        renderSection(sec);
+        saveMsg('');
+    }
+}
+
+async function loadSection(sec) {
+    saveMsg('טוען...', 'ok');
+    try {
+        const apiType = MINE_TYPE_MAP[sec] || sec;
+        const res = await fetch(`${API}/api/admin/content?type=${apiType}`, { headers: authHeaders() });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        data[sec] = Array.isArray(d.items) ? d.items : [];
+        if (sec === 'guides' || sec === 'quiz' || sec === 'links') data[sec].sort((a, b) => (a.order || 100) - (b.order || 100));
+        renderSection(sec); saveMsg('');
+    } catch (e) { saveMsg((e.message || 'טעינה נכשלה'), 'err'); }
+}
+
+function renderSection(sec) {
+    if (sec === 'guides') renderGuides();
+    else if (sec === 'quiz') renderQuiz();
+    else if (sec === 'links') renderLinks();
+    else if (sec === 'mints') document.getElementById('mints-json').value = JSON.stringify(data.mints || [], null, 2);
+}
+
+function syncSection(sec) {
+    if (sec === 'guides') syncGuides();
+    else if (sec === 'quiz') syncQuiz();
+    else if (sec === 'links') syncLinks();
+    else if (sec === 'mints') { /* parsed on save */ }
+}
+
+// ── GUIDES (structured) ────────────────────────────────────────────
+function blankGuide() { const it = { id: 'g_' + Date.now().toString(36), icon: '', order: (data.guides.length + 1) * 10, published: true }; LANGS.forEach(l => it[l] = { title: '', content: '' }); return it; }
+function renderGuides() {
+    const box = document.getElementById('box-guides'); box.innerHTML = '';
+    data.guides.forEach((it, idx) => {
+        const el = document.createElement('div'); el.className = 'item';
+        const tabs = LANGS.map((l, i) => `<button type="button" class="${i === 0 ? 'active' : ''}" data-tab="${idx}-${l}">${l.toUpperCase()}</button>`).join('');
+        const panes = LANGS.map((l, i) => `
+            <div class="lang-pane ${i === 0 ? 'active' : ''}" id="gp-${idx}-${l}">
+                <input type="text" class="inp" placeholder="כותרת (${l})" value="${escAttr(it[l]?.title)}" data-g="title" data-i="${idx}" data-l="${l}">
+                <textarea class="inp" placeholder="תוכן HTML (${l})" data-g="content" data-i="${idx}" data-l="${l}">${escHtml(it[l]?.content)}</textarea>
+            </div>`).join('');
+        el.innerHTML = `
+            <div class="item-head">
+                <input type="text" class="inp" style="width:60px" value="${escAttr(it.icon)}" data-g="icon" data-i="${idx}" title="אייקון">
+                <label>סדר <input type="number" class="inp" style="width:78px" value="${it.order}" data-g="order" data-i="${idx}"></label>
+                <label><input type="checkbox" data-g="published" data-i="${idx}" ${it.published ? 'checked' : ''}> מפורסם</label>
+                <button type="button" class="btn danger" data-delg="${idx}" style="margin-inline-start:auto;">מחק</button>
+            </div>
+            <div class="lang-tabs">${tabs}</div>${panes}`;
+        el.querySelectorAll('.lang-tabs button').forEach(b => b.onclick = () => {
+            const [i, l] = b.dataset.tab.split('-');
+            el.querySelectorAll('.lang-tabs button').forEach(x => x.classList.remove('active')); b.classList.add('active');
+            el.querySelectorAll('.lang-pane').forEach(p => p.classList.remove('active'));
+            document.getElementById(`gp-${i}-${l}`).classList.add('active');
+        });
+        el.querySelector(`[data-delg="${idx}"]`).onclick = () => { if (confirm('למחוק את הפריט?')) { syncGuides(); data.guides.splice(idx, 1); renderGuides(); } };
+        box.appendChild(el);
+    });
+}
+function syncGuides() {
+    document.querySelectorAll('[data-g]').forEach(n => {
+        const i = +n.dataset.i, f = n.dataset.g, it = data.guides[i]; if (!it) return;
+        if (f === 'published') it.published = n.checked;
+        else if (f === 'order') it.order = +n.value || 100;
+        else if (f === 'icon') it.icon = n.value;
+        else { const l = n.dataset.l; it[l] = it[l] || {}; it[l][f] = n.value; }
+    });
+}
+
+// ── QUIZ (structured) ──────────────────────────────────────────────
+function blankQuiz() { return { id: 'q_' + Date.now().toString(36), q: '', a: ['', '', '', ''], correct: 0, published: true, order: data.quiz.length + 1 }; }
+function renderQuiz() {
+    const box = document.getElementById('box-quiz'); box.innerHTML = '';
+    data.quiz.forEach((it, idx) => {
+        const el = document.createElement('div'); el.className = 'item';
+        const ans = [0, 1, 2, 3].map(j => `
+            <div class="ans-row">
+                <input type="radio" name="correct-${idx}" value="${j}" ${(+it.correct === j) ? 'checked' : ''} data-q="correct" data-i="${idx}" title="התשובה הנכונה">
+                <input type="text" class="inp" placeholder="תשובה ${j + 1}" value="${escAttr((it.a || [])[j])}" data-q="a" data-i="${idx}" data-j="${j}">
+            </div>`).join('');
+        el.innerHTML = `
+            <div class="item-head">
+                <span style="color:var(--green-dim);font-size:12px;">שאלה ${idx + 1}</span>
+                <label style="margin-inline-start:auto;"><input type="checkbox" data-q="published" data-i="${idx}" ${it.published !== false ? 'checked' : ''}> מפורסם</label>
+                <button type="button" class="btn danger" data-delq="${idx}">מחק</button>
+            </div>
+            <input type="text" class="inp" placeholder="נוסח השאלה" value="${escAttr(it.q)}" data-q="q" data-i="${idx}">
+            ${ans}`;
+        el.querySelector(`[data-delq="${idx}"]`).onclick = () => { if (confirm('למחוק את השאלה?')) { syncQuiz(); data.quiz.splice(idx, 1); renderQuiz(); } };
+        box.appendChild(el);
+    });
+}
+function syncQuiz() {
+    document.querySelectorAll('[data-q]').forEach(n => {
+        const i = +n.dataset.i, f = n.dataset.q, it = data.quiz[i]; if (!it) return;
+        if (f === 'q') it.q = n.value;
+        else if (f === 'published') it.published = n.checked;
+        else if (f === 'correct') { if (n.checked) it.correct = +n.value; }
+        else if (f === 'a') { it.a = it.a || ['', '', '', '']; it.a[+n.dataset.j] = n.value; }
+    });
+}
+
+// ── LEARNING VIDEOS (title + private YouTube URL) ─────────────────
+function blankLink() {
+    return {
+        id: 'v_' + Date.now().toString(36),
+        title: '',
+        url: '',
+        order: (data.links.length + 1) * 10,
+        published: true,
+    };
+}
+
+function renderLinks() {
+    const box = document.getElementById('box-links');
+    box.innerHTML = '';
+    data.links.forEach((it, idx) => {
+        const el = document.createElement('div');
+        el.className = 'item';
+        el.innerHTML = `
+            <div class="item-head">
+                <strong style="color:var(--green)">סרטון ${idx + 1}</strong>
+                <label>סדר <input type="number" class="inp" style="width:78px" value="${Number(it.order) || 100}" data-v="order" data-i="${idx}"></label>
+                <label><input type="checkbox" data-v="published" data-i="${idx}" ${it.published !== false ? 'checked' : ''}> מפורסם</label>
+                <button type="button" class="btn danger" data-delv="${idx}" style="margin-inline-start:auto;">מחק</button>
+            </div>
+            <input type="text" class="inp" placeholder="שם הסרטון, לדוגמה: הכסף בשנים האחרונות" value="${escAttr(it.title)}" data-v="title" data-i="${idx}">
+            <input type="url" class="inp" dir="ltr" placeholder="https://youtu.be/..." value="${escAttr(it.url)}" data-v="url" data-i="${idx}">`;
+        el.querySelector(`[data-delv="${idx}"]`).onclick = () => {
+            if (confirm('למחוק את הסרטון?')) {
+                syncLinks();
+                data.links.splice(idx, 1);
+                renderLinks();
+            }
+        };
+        box.appendChild(el);
+    });
+}
+
+function syncLinks() {
+    document.querySelectorAll('[data-v]').forEach(n => {
+        const i = +n.dataset.i;
+        const field = n.dataset.v;
+        const it = data.links[i];
+        if (!it) return;
+        if (field === 'published') it.published = n.checked;
+        else if (field === 'order') it.order = +n.value || 100;
+        else it[field] = n.value.trim();
+    });
+}
+
+function isYouTubeUrl(value) {
+    try {
+        const u = new URL(value);
+        const host = u.hostname.toLowerCase();
+        return u.protocol === 'https:' && (
+            host === 'youtu.be' ||
+            host === 'youtube.com' ||
+            host.endsWith('.youtube.com') ||
+            host === 'youtube-nocookie.com' ||
+            host.endsWith('.youtube-nocookie.com')
+        );
+    } catch {
+        return false;
+    }
+}
+
+// ── save / reload / seed ───────────────────────────────────────────
+async function save() {
+    syncSection(current);
+    let items;
+    if (current === 'mints') {
+        try { const parsed = JSON.parse(document.getElementById('mints-json').value); items = Array.isArray(parsed) ? parsed : parsed.items; }
+        catch (e) { saveMsg('JSON לא תקין: ' + e.message, 'err'); return; }
+        if (!Array.isArray(items)) { saveMsg('נדרש מערך items', 'err'); return; }
+        data.mints = items;
+    } else { items = data[current]; }
+    if (current === 'links') {
+        const incomplete = items.find(it => !String(it.title || '').trim() || !String(it.url || '').trim());
+        if (incomplete) { saveMsg('יש למלא שם וקישור לכל סרטון', 'err'); return; }
+        const invalid = items.find(it => !isYouTubeUrl(it.url));
+        if (invalid) { saveMsg('יש להזין קישור YouTube תקין שמתחיל ב־https', 'err'); return; }
+    }
+    saveMsg('שומר...', 'ok');
+    try {
+        const saveType = MINE_TYPE_MAP[current] || current;
+        const res = await fetch(`${API}/api/admin/content?type=${saveType}`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ items }) });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        if (!d.success) throw new Error(d.error || 'שמירה נכשלה');
+        saveMsg(`נשמר (${d.count} פריטים)`, 'ok');
+    } catch (e) { saveMsg((e.message || 'שגיאה'), 'err'); }
+}
+
+async function seed() {
+    const file = `seed_${current}.json?ts=${Date.now()}`;
+    saveMsg('טוען מובנה...', 'ok');
+    try {
+        const res = await fetch(file); const d = await res.json();
+        const items = Array.isArray(d.items) ? d.items : (Array.isArray(d.guides) ? d.guides : []);
+        if (!items.length) throw new Error('אין תוכן מובנה');
+        if (current === 'mints') { data.mints = items; renderSection('mints'); saveMsg(`נטענו ${items.length} · לחץ שמור`, 'ok'); return; }
+        syncSection(current);
+        const existing = new Set(data[current].map(it => it.id)); let added = 0;
+        items.forEach(it => { if (!existing.has(it.id)) { data[current].push(it); added++; } });
+        data[current].sort((a, b) => (a.order || 100) - (b.order || 100));
+        renderSection(current);
+        saveMsg(`נטענו ${added} · לחץ שמור`, 'ok');
+    } catch (e) { saveMsg((e.message || 'טעינה נכשלה'), 'err'); }
+}
+
+function addItem() {
+    syncSection(current);
+    if (current === 'guides') { data.guides.push(blankGuide()); renderGuides(); }
+    else if (current === 'quiz') { data.quiz.push(blankQuiz()); renderQuiz(); }
+    else if (current === 'links') { data.links.push(blankLink()); renderLinks(); }
+}
+
+// ── groupBOT add-on instructions (time-limited) ────────────────────
+function showUntil(until) {
+    const el = document.getElementById('mrd-until');
+    if (!until) { el.textContent = 'קבוע (ללא תפוגה)'; return; }
+    try { el.textContent = 'פעיל עד ' + new Date(until).toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' }); }
+    catch { el.textContent = 'פעיל עד ' + until; }
+}
+async function loadMrd() {
+    const t = document.getElementById('mrd-msg'); t.textContent = 'טוען...'; t.className = 'msg ok';
+    try {
+        const res = await fetch(`${API}/api/admin/mrd-config`, { headers: authHeaders() });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        document.getElementById('mrd-note').value = d.note || '';
+        showUntil(d.until); t.textContent = '';
+    } catch (e) { t.textContent = (e.message || 'טעינה נכשלה'); t.className = 'msg err'; }
+}
+// Parse a free-text duration (he/en) into milliseconds. Returns null if unrecognized.
+function parseDuration(str) {
+    const s = String(str || '').trim().toLowerCase();
+    if (!s) return null;
+    const dbl = /(יומיים)/.test(s) ? 2 * 864e5 : /(שבועיים)/.test(s) ? 14 * 864e5 : null;
+    if (dbl) return dbl;
+    const num = parseFloat((s.match(/[\d.]+/) || ['1'])[0]) || 1;
+    const U = [
+        [/(min|minute|דקה|דקות)/, 6e4],
+        [/(hour|hr|שעה|שעות)/, 36e5],
+        [/(day|יום|ימים)/, 864e5],
+        [/(week|שבוע|שבועות)/, 7 * 864e5],
+        [/(month|חודש|חודשים)/, 30 * 864e5],
+    ];
+    for (const [re, ms] of U) { if (re.test(s)) return num * ms; }
+    return null;
+}
+async function saveMrd() {
+    const t = document.getElementById('mrd-msg');
+    const note = document.getElementById('mrd-note').value;
+    let until = '';
+    if (note.trim()) {
+        const ans = prompt('לכמה זמן יפעלו ההנחיות? (לדוגמה: "3 ימים", "שבוע", "48 שעות"). השאר ריק = קבוע.');
+        if (ans === null) { t.textContent = 'בוטל'; t.className = 'msg warn'; return; }
+        if (ans.trim()) {
+            const ms = parseDuration(ans);
+            if (!ms) { t.textContent = 'לא הצלחתי להבין את משך הזמן'; t.className = 'msg err'; return; }
+            const end = new Date(Date.now() + ms);
+            if (!confirm('ההנחיות יפעלו עד ' + end.toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' }) + '. לאשר?')) {
+                t.textContent = 'בוטל'; t.className = 'msg warn'; return;
+            }
+            until = end.toISOString();
+        }
+    }
+    t.textContent = 'שומר...'; t.className = 'msg ok';
+    try {
+        const res = await fetch(`${API}/api/admin/mrd-config`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ note, until }) });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json(); if (!d.success) throw new Error(d.error || 'שמירה נכשלה');
+        showUntil(d.until); t.textContent = `נשמר (${d.length} תווים)`; t.className = 'msg ok';
+    } catch (e) { t.textContent = (e.message || 'שגיאה'); t.className = 'msg err'; }
+}
+async function clearMrd() {
+    if (!confirm('לנקות את ההנחיות הזמניות?')) return;
+    document.getElementById('mrd-note').value = '';
+    const t = document.getElementById('mrd-msg'); t.textContent = 'מנקה...'; t.className = 'msg ok';
+    try {
+        const res = await fetch(`${API}/api/admin/mrd-config`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ note: '', until: '' }) });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        await res.json(); showUntil(null); t.textContent = 'נוקה'; t.className = 'msg ok';
+    } catch (e) { t.textContent = (e.message || 'שגיאה'); t.className = 'msg err'; }
+}
+
+// ── AI smart-format: plain text → structured guide/quiz item ───────
+async function formatContent(kind) {
+    const sec = kind === 'guide' ? 'guides' : 'quiz';
+    const textEl = document.getElementById(kind + '-compose');
+    const msg = document.getElementById(kind + '-format-msg');
+    const text = (textEl.value || '').trim();
+    if (!text) { msg.textContent = 'כתוב טקסט קודם'; msg.className = 'msg err'; return; }
+    msg.textContent = 'גרופבוט מסדר...'; msg.className = 'msg ok';
+    try {
+        const res = await fetch(`${API}/api/admin/format-content`, {
+            method: 'POST', headers: authHeaders(), body: JSON.stringify({ type: kind, text }),
+        });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        if (!d.success) throw new Error(d.error || 'הסידור נכשל');
+        syncSection(sec);
+        if (kind === 'guide') {
+            const it = blankGuide();
+            it.icon = d.item.icon || it.icon;
+            it.he = { title: d.item.title || '', content: d.item.content || '' };
+            data.guides.push(it); renderGuides();
+        } else {
+            const it = blankQuiz();
+            it.q = d.item.q || '';
+            it.a = (d.item.a || ['', '', '', '']).slice(0, 4);
+            while (it.a.length < 4) it.a.push('');
+            it.correct = d.item.correct || 0;
+            data.quiz.push(it); renderQuiz();
+        }
+        textEl.value = '';
+        msg.textContent = 'נוסף למטה · בדוק ולחץ שמור הכל'; msg.className = 'msg ok';
+    } catch (e) { msg.textContent = (e.message || 'שגיאה'); msg.className = 'msg err'; }
+}
+
+// ── Users (view-only) ──────────────────────────────────────────────
+function fmtDate(s) { if (!s) return '—'; try { return new Date(s).toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' }); } catch { return s; } }
+async function loadUsers() {
+    const box = document.getElementById('users-box'); box.innerHTML = '<p class="hint">טוען...</p>';
+    try {
+        const res = await fetch(`${API}/api/admin/users`, { headers: authHeaders() });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        document.getElementById('users-count').textContent = `סה"כ: ${d.count || 0}`;
+        const u = d.users || [];
+        if (!u.length) { box.innerHTML = '<p class="hint">אין משתמשים עדיין.</p>'; return; }
+        box.innerHTML = '<table class="utable"><thead><tr><th>שם</th><th>שם משתמש</th><th>מזהה</th><th>פעילות אחרונה</th></tr></thead><tbody>' +
+            u.map(x => `<tr><td>${escHtml(x.first_name) || '—'}</td><td>${x.username ? '@' + escHtml(x.username) : '—'}</td><td style="direction:ltr">${escHtml(String(x.user_id))}</td><td>${fmtDate(x.last_active)}</td></tr>`).join('') +
+            '</tbody></table>';
+    } catch (e) { box.innerHTML = '<p class="hint">' + escHtml(e.message || 'טעינה נכשלה') + '</p>'; }
+}
+
+// ── Data dashboard ─────────────────────────────────────────────────
+async function loadStats() {
+    const box = document.getElementById('data-box'); box.innerHTML = '<p class="hint">טוען...</p>';
+    try {
+        const res = await fetch(`${API}/api/admin/stats`, { headers: authHeaders() });
+        if (res.status === 401 || res.status === 503) { logout(); return; }
+        const d = await res.json();
+        const ai = d.ai || {}, b = ai.daily_ai_budget || {}, chat = d.chat || {}, c = d.content || {};
+        const card = (k, v, p) => `<div class="card"><div class="k">${k}</div><div class="v${p ? ' p' : ''}">${v}</div></div>`;
+        box.innerHTML = '<div class="cards">' +
+            card('משתמשים', d.users ?? '—') +
+            card('שיחות פעילות', ai.active_sessions ?? chat.active_sessions ?? '—', true) +
+            card('הודעות (סשן)', chat.total_messages ?? '—') +
+            card('AI נוצל היום', (b.used ?? '—') + ' / ' + (b.cap ?? '—'), true) +
+            card('AI נותר היום', b.remaining ?? '—') +
+            card('מודל', ai.model || '—') +
+            card('מדריכים', c.guides ?? '—') +
+            card('שאלות חידון', c.quiz ?? '—', true) +
+            card('בתי מטבע', c.mints ?? '—') +
+            '</div>';
+    } catch (e) { box.innerHTML = '<p class="hint">' + escHtml(e.message || 'טעינה נכשלה') + '</p>'; }
+}
+
+// ── Section router ─────────────────────────────────────────────────
+function openSection(sec) {
+    showSection(sec);
+    if (CONTENT_SECS.includes(sec)) loadSection(sec);
+    else if (sec === 'mrd') loadMrd();
+    else if (sec === 'users') loadUsers();
+    else if (sec === 'data') loadStats();
+}
+
+// ── helpers / lifecycle ────────────────────────────────────────────
+function escHtml(s) { const d = document.createElement('div'); d.textContent = String(s ?? ''); return d.innerHTML; }
+function escAttr(s) { return String(s ?? '').replace(/"/g, '&quot;'); }
+
+function showEditor() {
+    document.getElementById('admin-login').classList.add('hidden');
+    document.getElementById('admin-editor').classList.remove('hidden');
+    openSection('guides');
+}
+function logout() {
+    adminToken = null; sessionStorage.removeItem('mine_admin_token');
+    document.getElementById('admin-editor').classList.add('hidden');
+    document.getElementById('admin-login').classList.remove('hidden');
+    backToPass(); document.getElementById('admin-pass').value = ''; setMsg('ההתחברות הסתיימה', 'warn');
+}
+
+document.getElementById('step-pass-btn').onclick = gotoChallenge;
+document.getElementById('admin-pass').addEventListener('keypress', e => { if (e.key === 'Enter') gotoChallenge(); });
+document.getElementById('admin-login-btn').onclick = adminLogin;
+document.getElementById('admin-challenge').addEventListener('keypress', e => { if (e.key === 'Enter') adminLogin(); });
+document.getElementById('step-back-btn').onclick = backToPass;
+document.getElementById('logout-btn').onclick = logout;
+document.getElementById('add-btn').onclick = addItem;
+document.getElementById('save-btn').onclick = save;
+document.getElementById('reload-btn').onclick = () => loadSection(current);
+document.getElementById('seed-btn').onclick = seed;
+document.getElementById('mrd-save').onclick = saveMrd;
+document.getElementById('mrd-reload').onclick = loadMrd;
+document.getElementById('mrd-clear').onclick = clearMrd;
+document.getElementById('guide-format').onclick = () => formatContent('guide');
+document.getElementById('quiz-format').onclick = () => formatContent('quiz');
+document.getElementById('users-reload').onclick = loadUsers;
+document.getElementById('data-reload').onclick = loadStats;
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => openSection(b.dataset.sec));
+
+if (IS_LOCAL_SANDBOX) {
+    const prompt = document.querySelector('#step-pass .prompt');
+    prompt.textContent = 'קוד כניסה';
+    document.getElementById('admin-pass').placeholder = '•••••';
+}
+
+if (adminToken) showEditor();

@@ -1,19 +1,18 @@
 /* ════════════════════════════════════════════════════════════════════
- * The Vault — Service Worker (PWA)
+ * The Mine — Service Worker (PWA)
  * Strategy:
  *   - Same-origin GET (the app shell): cache-first, refreshed in background.
  *   - Cross-origin (Railway API, CDNs): always bypass → straight to network.
- *     (We never cache live prices, chat, or news — they must be fresh.)
  * Bump CACHE_VERSION whenever shell files change to force an update.
  * ════════════════════════════════════════════════════════════════════ */
 
-const CACHE_VERSION = 'vault-shell-v7';
+const CACHE_VERSION = 'mine-shell-v2';
 const SHELL_ASSETS = [
   './',
   './index.html',
   './style.css',
   './config.js',
-  './app_v2.js',
+  './app.js',
   './mint_expansion.js',
   './icons/v2_guide.png',
   './icons/v2_charts.png',
@@ -44,28 +43,21 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const req = event.request;
 
-  // Only handle same-origin GET requests. Everything else (API, CDN, POST) → network.
   if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) {
     return;
   }
 
-  const path = new URL(req.url).pathname;
-  if (/\.html?$/i.test(path) || (req.headers.get('accept') || '').includes('text/html')) {
-    event.respondWith(fetch(req, { cache: 'no-store' }));
-    return;
-  }
   event.respondWith(
     caches.match(req).then((cached) => {
       const network = fetch(req)
         .then((res) => {
-          // Refresh the cache copy in the background for next time.
           if (res && res.status === 200 && res.type === 'basic') {
             const clone = res.clone();
             caches.open(CACHE_VERSION).then((cache) => cache.put(req, clone));
           }
           return res;
         })
-        .catch(() => cached); // offline → fall back to cache
+        .catch(() => cached);
       return cached || network;
     })
   );

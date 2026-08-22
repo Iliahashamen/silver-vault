@@ -1,44 +1,48 @@
-/* ===========================
-   THE SILVER VAULT — TRUE 3D CLAY
-   Technique: Neumorphism + Organic terrain blobs
-   Reference: 3D clay dashboard moodboard
+﻿/* ===========================
+   THE MINE — GOLD INVESTMENT (המכרה)
+   Base: Silver Vault clay neumorphism
+   Gold overlay: Serif warm palette (Burnished Gold + Ivory)
    =========================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Comfortaa:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&family=Assistant:wght@400;600;700;800&family=Comfortaa:wght@600;700&display=swap');
 
-/* ── PALETTE & TOKENS ───────────────────────────────────────────── */
+/* ── GOLD SERIF DESIGN TOKENS ───────────────────────────────────── */
 :root {
-    /* ---- Background base ---- */
-    --bg:            #8EA89A;   /* mid sage for body */
+    /* ---- Background — warm ivory instead of sage ---- */
+    --bg:            #B09060;   /* warm gold-brown for body bg */
 
-    /* ---- Blob / terrain colors ---- */
-    --blob-dk:       #3D5A4A;   /* darkest organic mass */
-    --blob-md:       #4E6E5C;
-    --blob-lt:       #5E8070;
+    /* ---- Blob / terrain — warm amber-browns ---- */
+    --blob-dk:       #5A3E1E;   /* dark amber-brown */
+    --blob-md:       #7A5628;
+    --blob-lt:       #9A6E38;
 
-    /* ---- Cards — near-white, very light so they "float" ---- */
-    --card:          #F0EDE7;
-    --card-inner:    #E6E2DB;   /* inner surfaces / input bg */
-    --card-deep:     #D8D3CA;   /* deepest inset */
+    /* ---- Cards — warm ivory, very light so they "float" ---- */
+    --card:          #FAFAF8;   /* Serif ivory */
+    --card-inner:    #F5F2EE;
+    --card-deep:     #EDE9E2;
 
-    /* ---- Clay accent ---- */
-    --clay:          #C4845A;
-    --clay-lt:       #D49E7E;
-    --clay-dk:       #A26840;
+    /* ---- Gold accent (replaces clay) ---- */
+    --clay:          #B8860B;   /* burnished gold */
+    --clay-lt:       #D4A84B;   /* lighter gold */
+    --clay-dk:       #8B6400;   /* deep gold */
 
-    /* ---- Teal accent ---- */
-    --teal:          #7AAAA0;
-    --teal-dk:       #548A80;
+    /* ---- Warm amber (replaces teal) ---- */
+    --teal:          #C4903A;
+    --teal-dk:       #A07020;
 
     /* ---- Text ---- */
-    --text:          #2C3028;
-    --text-mid:      #4A5848;
-    --text-muted:    rgba(44, 48, 40, 0.48);
-    --text-light:    #F5F2EC;
+    --text:          #1A1A1A;   /* Serif rich black */
+    --text-mid:      #4A3E28;
+    --text-muted:    rgba(26, 26, 26, 0.48);
+    --text-light:    #FAFAF8;
 
     /* ---- Accents ---- */
-    --purple:        #9880CC;
-    --green:         #4AB882;
+    --purple:        #C4903A;   /* map to gold */
+    --green:         #B8860B;   /* map to gold */
+
+    /* ---- Display font for headlines (Serif system) ---- */
+    --font-display:  'Playfair Display', Georgia, serif;
+    --font-body:     'Source Sans 3', 'Assistant', system-ui, sans-serif;
 
     /* ====================================================
        NEUMORPHIC SHADOW SYSTEM
@@ -83,30 +87,30 @@
     --radius-pill: 100px;
 }
 
-/* ── DARK MODE ──────────────────────────────────────────────────── */
+/* ── DARK MODE (Gold warm dark) ──────────────────────────────── */
 body.dark-mode {
-    --bg:            #181d19;
-    --blob-dk:       #0c1110;
-    --blob-md:       #141a15;
-    --blob-lt:       #1c251e;
+    --bg:            #1A1208;
+    --blob-dk:       #0e0a02;
+    --blob-md:       #1a1206;
+    --blob-lt:       #261c0a;
 
-    --card:          #222c24;
-    --card-inner:    #1a2219;
-    --card-deep:     #141b14;
+    --card:          #2A220E;
+    --card-inner:    #221a08;
+    --card-deep:     #1a1206;
 
-    --clay:          #b87550;
-    --clay-lt:       #cc8f68;
-    --clay-dk:       #9a5e38;
+    --clay:          #C9A227;
+    --clay-lt:       #E2BF50;
+    --clay-dk:       #A07C12;
 
-    --teal:          #5a8c82;
-    --teal-dk:       #3e726a;
+    --teal:          #C4903A;
+    --teal-dk:       #A07020;
 
-    --text:          #ddeadd;
-    --text-mid:      #9db89e;
-    --text-muted:    rgba(185, 215, 186, 0.42);
-    --text-light:    #edf5ee;
+    --text:          #F5EDD0;
+    --text-mid:      #C8A96A;
+    --text-muted:    rgba(245, 237, 208, 0.42);
+    --text-light:    #FAFAF8;
 
-    --purple:        #a896d8;
+    --purple:        #D4A84B;
 
     --nm-raised:
         5px 5px 12px rgba(0, 0, 0, 0.60),
@@ -400,7 +404,7 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 .title-he {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Playfair Display', 'Comfortaa', serif;
     font-size: 50px;
     font-weight: 700;
     color: var(--purple);
@@ -575,7 +579,7 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 .dashboard-title {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Playfair Display', 'Comfortaa', serif;
     font-size: 26px;
     font-weight: 700;
     margin-bottom: 1px;
@@ -604,7 +608,7 @@ input, textarea, .chat-messages, .chat-message {
     font-size: 22px;
     color: var(--green);
     font-weight: 800;
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Playfair Display', 'Comfortaa', serif;
     background: var(--card);
     padding: 4px 18px;
     border-radius: var(--radius-pill);
@@ -669,7 +673,7 @@ input, textarea, .chat-messages, .chat-message {
     margin-bottom: 22px;
     font-size: 19px;
     font-weight: 800;
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-family: 'Playfair Display', 'Assistant', serif;
 }
 
 /* ── ARCHIVES ───────────────────────────────────────────────────── */
@@ -976,7 +980,7 @@ input, textarea, .chat-messages, .chat-message {
 
 .personal-space-heading {
     margin: 0;
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-family: 'Playfair Display', 'Assistant', serif;
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--purple);
@@ -1118,7 +1122,7 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 .modal-title {
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-family: 'Playfair Display', 'Assistant', serif;
     font-size: 1.45rem;
     color: var(--clay-dk);
     margin-bottom: 18px;
@@ -1302,7 +1306,7 @@ input, textarea, .chat-messages, .chat-message {
     font-size: 14px;
     font-weight: 800;
     color: var(--text);
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Playfair Display', 'Comfortaa', serif;
 }
 
 .chart-stat-val.positive { color: var(--green); }
@@ -1446,7 +1450,7 @@ input, textarea, .chat-messages, .chat-message {
 .price-strip-value {
     font-size: 22px;
     color: var(--clay-dk);
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Playfair Display', 'Comfortaa', serif;
     font-weight: 700;
 }
 
@@ -1962,7 +1966,7 @@ body.dark-mode .main-switch-btn.active {
 }
 
 .section-screen-title {
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-family: 'Playfair Display', 'Assistant', serif;
     font-size: 18px;
     font-weight: 700;
     color: var(--purple);
@@ -2007,7 +2011,7 @@ body.dark-mode .main-switch-btn.active {
 }
 
 .coming-soon-badge {
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-family: 'Playfair Display', 'Assistant', serif;
     font-size: 42px;
     font-weight: 700;
     color: var(--purple);
@@ -2157,7 +2161,7 @@ body.dark-mode .main-switch-btn.active {
 }
 
 .quiz-stat-box strong {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Playfair Display', 'Comfortaa', serif;
     font-size: 20px;
     color: var(--clay-dk);
 }
@@ -2194,7 +2198,7 @@ body.dark-mode .main-switch-btn.active {
 }
 
 .quiz-timer-txt {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Playfair Display', 'Comfortaa', serif;
     font-size: 14px;
     color: var(--teal-dk);
 }
@@ -2281,7 +2285,7 @@ body.dark-mode .main-switch-btn.active {
 /* ── Done screen ── */
 .quiz-done-head {
     text-align: center;
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-family: 'Playfair Display', 'Assistant', serif;
     font-size: 1.3rem;
     color: var(--clay-dk);
     margin-bottom: 16px;
@@ -2289,7 +2293,7 @@ body.dark-mode .main-switch-btn.active {
 
 .quiz-done-score {
     text-align: center;
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Playfair Display', 'Comfortaa', serif;
     font-size: 52px;
     font-weight: 700;
     color: var(--clay);
@@ -2513,7 +2517,7 @@ body.dark-mode .news-section-body      { color: var(--text-mid, rgba(220,220,220
 }
 
 .learning-videos-head h3 {
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-family: 'Playfair Display', 'Assistant', serif;
     font-size: 20px;
     color: var(--purple);
     margin-bottom: 5px;
@@ -2835,7 +2839,7 @@ body.dev-mode { padding-top: 42px; }
 .mint-hero-body { flex: 1; }
 
 .mint-hero-name {
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-family: 'Playfair Display', 'Assistant', serif;
     font-size: 20px;
     font-weight: 700;
     color: var(--purple);
@@ -2920,7 +2924,7 @@ body.dark-mode .mint-website-link { background: var(--card); color: var(--text-l
 }
 
 .mint-section-title {
-    font-family: 'Comfortaa', 'Assistant', sans-serif;
+    font-family: 'Playfair Display', 'Assistant', serif;
     font-size: 16px;
     font-weight: 700;
     color: var(--clay-dk);
@@ -3250,19 +3254,103 @@ body.dark-mode .guide-chapter-body { border-top-color: rgba(255,255,255,0.08); }
 body.dark-mode .guide-warn-box { background: rgba(220,100,50,0.13); }
 body.dark-mode .guide-tip-box  { background: rgba(50,140,100,0.13); }
 
+/* ═══════════════════════════════════════════════════════════════════
+   THE MINE — GOLD SPECIFIC OVERRIDES
+   Serif editorial typography + gold accent enhancements
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Section labels — small caps style ──────────────────────────── */
+.mine-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.mine-label::before,
+.mine-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--clay-lt);
+    opacity: 0.4;
+}
+
+/* ── Gold price display — Playfair Display ───────────────────────── */
+.price-value,
+.dashboard-title {
+    font-family: 'Playfair Display', Georgia, serif !important;
+}
+
+/* ── Gold accent for active states ─────────────────────────────── */
+.nav-icon.active .nav-icon-img {
+    filter: drop-shadow(0 0 6px rgba(184, 134, 11, 0.5));
+}
+
+/* ── Gold shimmer on price strip ───────────────────────────────── */
+.price-strip::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(212, 168, 75, 0.06) 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+}
+
+/* ── Gold rule lines (Serif system signature) ──────────────────── */
+.screen-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--clay), transparent);
+    margin-top: 6px;
+    border-radius: 1px;
+}
+
+/* ── Mine Bot FAB — gold gradient ──────────────────────────────── */
+#mr-d-fab {
+    background: linear-gradient(135deg, #C9A227 0%, #8B6400 100%) !important;
+}
+
+/* ── Chat modal gold accent ─────────────────────────────────────── */
+.mr-d-modal-header {
+    background: linear-gradient(135deg, rgba(184,134,11,0.12) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(184,134,11,0.2);
+}
+
+/* ── Gold quiz correct answer ───────────────────────────────────── */
+.quiz-opt.correct { border-color: var(--clay) !important; }
+
+/* ── Price strip — back to hub link ────────────────────────────── */
+.back-to-hub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: rgba(184,134,11,0.08);
+    border: 1px solid rgba(184,134,11,0.2);
+    border-radius: 10px;
+    color: var(--clay);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    margin: 8px 16px 0;
+    transition: background 0.2s ease;
+}
+.back-to-hub:hover {
+    background: rgba(184,134,11,0.14);
+}
+
+
 /* Hub-only auth: never show legacy login */
 #login-screen{display:none!important;visibility:hidden!important;pointer-events:none!important;}
-
-
-/* LOGIN DELETED — never show legacy passcode UI */
-#login-screen,
-.terminal-container,
-.terminal-header,
-.vault-title,
-.neon-button {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-  height: 0 !important;
-  overflow: hidden !important;
-}

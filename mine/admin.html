@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta name="robots" content="noindex, nofollow">
+    <title>מסוף ניהול — המכרה</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: "ShimshonAgol";
+            src: url("Shimshon%20Agol.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+    <script src="config.js?v=1"></script>
+    <style>
+        :root {
+            --green: #2bf5a0;
+            --green-dim: #6fbf8e;
+            --beige: #ece2c0;
+            --beige-dim: #b3a988;
+            --purple: #b3a988;
+            --pink: #ece2c0;
+            --cyan: #6fbf8e;
+            --bg: #010a05;      /* much darker */
+            --bg2: #031209;
+            --panel: rgba(3, 14, 8, 0.82);
+            --line: rgba(43, 245, 160, 0.22);
+            --danger: #cdaf6b;
+            /* retro mono for English/numbers */
+            --mono: "Courier New", "Lucida Console", ui-monospace, monospace;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; background: var(--bg); color: var(--green); }
+        body {
+            font-family: "ShimshonAgol", "Arial Hebrew", Arial, sans-serif;
+            /* more breathing room between letters and lines */
+            font-size: 15px; letter-spacing: 1.2px; word-spacing: 3px; font-weight: 400; line-height: 1.8;
+            min-height: 100vh; overflow-x: hidden;
+            background:
+                radial-gradient(circle at 50% -10%, rgba(43,245,160,0.10), transparent 55%),
+                radial-gradient(circle at 50% 120%, rgba(236,226,192,0.06), transparent 60%),
+                linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+        }
+        /* retro horizon grid */
+        body::before {
+            content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 42vh; z-index: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(43,245,160,0.20) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(236,226,192,0.14) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: perspective(40vh) rotateX(62deg); transform-origin: bottom; opacity: 0.55;
+        }
+        /* CRT scanlines */
+        body::after {
+            content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.45;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0px, rgba(0,0,0,0.16) 1px, transparent 2px, transparent 3px);
+        }
+        #rain { position: fixed; inset: 0; z-index: 0; opacity: 0.05; pointer-events: none; }
+
+        /* Palm: single <img> carries both mix-blend-mode and the filter animation
+           on the SAME element — no parent stacking context, no visible bounding box */
+        #palms {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            display: flex; align-items: center; justify-content: center;
+            /* no transform/animation/will-change here — keeps parent transparent */
+        }
+        #palm-img {
+            width: min(540px, 64vw);
+            mix-blend-mode: screen;
+            opacity: 0.38;
+            animation: palmcycle 48s ease-in-out infinite;
+        }
+        @keyframes palmcycle {
+            0%   { filter: hue-rotate(-75deg) saturate(0.5)  brightness(1.3);  } /* beige  */
+            20%  { filter: hue-rotate(100deg) saturate(1.4)  brightness(1.1);  } /* blue   */
+            40%  { filter: hue-rotate(0deg)   saturate(1.2)  brightness(1.05); } /* green  */
+            60%  { filter: hue-rotate(160deg) saturate(1.5)  brightness(1.1);  } /* purple */
+            80%  { filter: hue-rotate(210deg) saturate(1.5)  brightness(1.15); } /* pink   */
+            100% { filter: hue-rotate(-75deg) saturate(0.5)  brightness(1.3);  } /* beige  */
+        }
+        @keyframes crtflicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.975; } }
+        .wrap { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 26px 16px 90px; animation: crtflicker 4s steps(40) infinite; }
+
+        /* main title — pixel-block retro font, centered, green */
+        .brand {
+            font-family: "ShimshonAgol", "Arial Hebrew", Arial, sans-serif;
+            text-align: center; font-size: 52px; font-weight: 400; letter-spacing: 4px; line-height: 1;
+            margin: 14px 0 6px;
+            background: linear-gradient(180deg, var(--beige) 0%, var(--green) 55%, var(--green-dim) 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(43,245,160,0.45));
+        }
+        .sub { text-align: center; color: var(--green-dim); font-size: 14px; letter-spacing: 8px; word-spacing: 6px; margin-bottom: 28px; }
+        .syslog { font-family: var(--mono); color: var(--green-dim); opacity: 0.65; font-size: 11px; letter-spacing: 2.5px; direction: ltr; text-align: left; margin: 0 0 8px 2px; }
+
+        /* pixel window frame: square corners + double outline (beige over green) */
+        .panel { border: 2px solid var(--green-dim); border-radius: 3px; background: var(--panel); padding: 20px 22px; margin-bottom: 18px; box-shadow: 0 0 0 1px rgba(236,226,192,0.18), 0 0 18px rgba(43,245,160,0.07) inset; }
+
+        .prompt { font-size: 16px; color: var(--green); margin-bottom: 7px; }
+        .inp {
+            width: 100%; background: rgba(0,0,0,0.45); border: 1px solid var(--line); color: var(--beige);
+            font-family: inherit; font-size: 17px; padding: 10px 12px; border-radius: 3px; outline: none; letter-spacing: 0.5px;
+        }
+        .inp:focus { border-color: var(--green); box-shadow: 0 0 10px rgba(43,245,160,0.35); }
+        textarea.inp { min-height: 120px; resize: vertical; line-height: 1.5; }
+        textarea.code { direction: ltr; text-align: left; min-height: 360px; font-size: 13px; font-family: "Courier New", monospace; letter-spacing: 0; }
+
+        .btn { background: transparent; border: 1px solid var(--green); color: var(--green); font-family: inherit; font-weight: 700; letter-spacing: 1px; padding: 9px 16px; border-radius: 3px; cursor: pointer; transition: all .15s; font-size: 15px; }
+        .btn:hover { background: var(--green); color: #06121a; box-shadow: 0 0 14px rgba(43,245,160,0.5); }
+        .btn.p { border-color: var(--pink); color: var(--pink); }
+        .btn.p:hover { background: var(--pink); color: #0a2016; box-shadow: 0 0 14px rgba(236,226,192,0.45); }
+        .btn.danger { border-color: var(--danger); color: var(--danger); }
+        .btn.danger:hover { background: var(--danger); color: #100010; }
+        .bar { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; }
+        .bar.mt { margin-top: 12px; }
+
+        .msg { font-size: 15px; min-height: 18px; letter-spacing: 0.5px; }
+        .msg.ok { color: var(--green); } .msg.err { color: var(--danger); } .msg.warn { color: var(--pink); }
+        .hidden { display: none !important; }
+
+        .login-box { max-width: 420px; margin: 8vh auto 0; }
+
+        .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+        .nav { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+        .nav button { background: rgba(0,0,0,0.34); border: 1px solid var(--line); color: var(--green-dim); font-family: inherit; font-size: 15px; letter-spacing: 2px; word-spacing: 2px; padding: 10px 18px; border-radius: 3px; cursor: pointer; }
+        .nav button.active { background: var(--green); color: #06121a; border-color: var(--green); font-weight: 700; box-shadow: 0 0 10px rgba(43,245,160,0.45); }
+
+        .section { display: none; } .section.active { display: block; }
+
+        .item { border: 1px solid var(--line); border-radius: 3px; background: rgba(0,0,0,0.3); padding: 16px; margin-bottom: 16px; }
+        .item-head { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; margin-bottom: 9px; }
+        .item-head label { font-size: 12px; color: var(--beige-dim); display: flex; align-items: center; gap: 5px; }
+        .item .inp { margin: 4px 0; }
+        .ans-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+        .ans-row input[type="radio"] { accent-color: var(--green); width: 18px; height: 18px; }
+        .ans-row .inp { margin: 0; }
+        .lang-tabs { display: flex; gap: 6px; margin: 8px 0; }
+        .lang-tabs button { background: rgba(0,0,0,0.34); border: 1px solid var(--line); color: var(--beige-dim); padding: 4px 11px; border-radius: 5px; cursor: pointer; font-family: inherit; }
+        .lang-tabs button.active { background: var(--purple); color: #0a2016; border-color: var(--purple); font-weight: 700; }
+        .lang-pane { display: none; } .lang-pane.active { display: block; }
+        .hint { font-size: 14px; color: var(--beige-dim); margin: 0 0 14px; line-height: 2; letter-spacing: 1.5px; word-spacing: 3px; }
+        textarea#mrd-note { min-height: 200px; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+        .card { border: 1px solid var(--line); border-radius: 3px; background: rgba(0,0,0,0.32); padding: 18px; text-align: center; }
+        .card .v.p { color: var(--beige); text-shadow: 0 0 8px rgba(236,226,192,0.4); }
+        /* users table + stats numbers — retro mono */
+        .utable { width: 100%; border-collapse: collapse; font-size: 14px; font-family: var(--mono); letter-spacing: 1px; }
+        .utable th, .utable td { text-align: right; padding: 10px 12px; border-bottom: 1px solid var(--line); line-height: 1.7; }
+        .utable th { color: var(--green); letter-spacing: 2px; }
+        .utable tbody tr:hover { background: rgba(43,245,160,0.07); }
+        /* stat card numbers retro mono */
+        .card .v { font-family: var(--mono); font-size: 30px; font-weight: 700; margin-top: 6px; color: var(--green); text-shadow: 0 0 8px rgba(43,245,160,0.4); letter-spacing: 2px; }
+        .card .k { font-size: 13px; color: var(--beige-dim); letter-spacing: 1.5px; line-height: 1.8; }
+        /* login challenge ltr mono */
+        .prompt[style*="ltr"] { font-family: var(--mono) !important; letter-spacing: 2px; }
+        /* emails / user IDs inline */
+        [data-mono], td { font-family: var(--mono); }
+    </style>
+    <link rel="stylesheet" href="admin-theme.css?v=1">
+</head>
+<body>
+    <canvas id="rain"></canvas>
+    <div id="palms" aria-hidden="true"><div id="palm-img"></div></div>
+    <div class="wrap">
+        <!-- LOGIN -->
+        <div id="admin-login" class="login-box">
+            <div class="panel">
+                <div id="step-pass">
+                    <div class="prompt">קוד גישה:</div>
+                    <input type="password" id="admin-pass" class="inp" placeholder="••••••••" autocomplete="off">
+                    <div class="bar mt"><button class="btn" id="step-pass-btn">המשך</button></div>
+                </div>
+                <div id="step-challenge" class="hidden">
+                    <div class="prompt" style="direction:ltr;text-align:right;">all gatos blackos?</div>
+                    <input type="text" id="admin-challenge" class="inp" placeholder="..." autocomplete="off">
+                    <div class="bar mt">
+                        <button class="btn p" id="admin-login-btn">כניסה</button>
+                        <button class="btn" id="step-back-btn">חזרה</button>
+                    </div>
+                </div>
+                <div class="msg" id="admin-login-msg" style="margin-top:12px;"></div>
+            </div>
+        </div>
+
+        <!-- EDITOR -->
+        <div id="admin-editor" class="hidden">
+            <div class="top">
+                <div class="prompt">מחובר</div>
+                <button class="btn" id="logout-btn">יציאה</button>
+            </div>
+            <div class="nav" id="nav">
+                <button data-sec="guides" class="active">מדריכים</button>
+                <button data-sec="quiz">חידון</button>
+                <button data-sec="links">סרטוני לימוד</button>
+                <button data-sec="mrd">גרופבוט</button>
+                <button data-sec="users">משתמשים</button>
+                <button data-sec="data">נתונים</button>
+            </div>
+
+            <div class="panel" id="content-toolbar">
+                <div class="bar">
+                    <button class="btn" id="add-btn">+ פריט חדש</button>
+                    <button class="btn p" id="save-btn">שמור הכל</button>
+                    <button class="btn" id="reload-btn">טען מחדש</button>
+                    <button class="btn" id="seed-btn" title="טוען את התוכן המובנה לעריכה (פעם אחת)">טען מובנה</button>
+                    <span class="msg" id="save-msg" style="margin-inline-start:auto;"></span>
+                </div>
+            </div>
+
+            <div class="section active" id="sec-guides">
+                <div class="panel compose">
+                    <p class="hint">כתוב טקסט חופשי בעברית · גרופבוט יסדר לכותרת ותוכן ויוסיף אמוג'י · אפשר לערוך לפני שמירה</p>
+                    <textarea class="inp" id="guide-compose" placeholder="כתוב כאן בחופשיות, כמו בפנקס..."></textarea>
+                    <div class="bar mt"><button class="btn p" id="guide-format">סדר עם גרופבוט</button><span class="msg" id="guide-format-msg" style="margin-inline-start:auto;"></span></div>
+                </div>
+                <div id="box-guides"></div>
+            </div>
+            <div class="section" id="sec-quiz">
+                <div class="panel compose">
+                    <p class="hint">כתוב שאלה ותשובות בטקסט חופשי · סמן את הנכונה בכוכבית * · גרופבוט יסדר לשאלה וארבע תשובות</p>
+                    <textarea class="inp" id="quiz-compose" placeholder="לדוגמה: כמה גרם באונקיה? 31.10* / 28.35 / 33 / 30"></textarea>
+                    <div class="bar mt"><button class="btn p" id="quiz-format">סדר עם גרופבוט</button><span class="msg" id="quiz-format-msg" style="margin-inline-start:auto;"></span></div>
+                </div>
+                <div id="box-quiz"></div>
+            </div>
+
+            <div class="section" id="sec-links">
+                <div class="panel">
+                    <p class="hint">הוסף שם ברור לסרטון וקישור YouTube פרטי של דמיאן · התלמידים יראו רק את שם הסרטון כקישור לחיץ</p>
+                    <div id="box-links"></div>
+                </div>
+            </div>
+
+            <!-- groupBOT — add-on instructions (time-limited) -->
+            <div class="section" id="sec-mrd">
+                <div class="panel">
+                    <p class="hint">הנחיות תוספת לגרופבוט · זמניות · נכנס לתוקף תוך כשתי דקות</p>
+                    <textarea class="inp" id="mrd-note" placeholder="לדוגמה: הזכר השבוע את מבצע יום העצמאות. הימנע מהבטחות תשואה."></textarea>
+                    <div id="mrd-until" class="hint" style="text-align:center;"></div>
+                    <div class="bar mt">
+                        <button class="btn p" id="mrd-save">שמור הנחיות</button>
+                        <button class="btn" id="mrd-reload">טען מחדש</button>
+                        <button class="btn danger" id="mrd-clear">נקה</button>
+                        <span class="msg" id="mrd-msg" style="margin-inline-start:auto;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- USERS — view only -->
+            <div class="section" id="sec-users">
+                <div class="panel">
+                    <div class="bar"><b style="color:var(--purple)">משתמשים</b><span id="users-count" style="color:var(--green-dim);font-size:13px;"></span><button class="btn" id="users-reload" style="margin-inline-start:auto;">רענון</button></div>
+                    <p class="hint">צפייה בלבד · אימייל ואיפוס סיסמה יתווספו עם מערכת ההרשמה · סיסמאות לעולם לא מוצגות</p>
+                    <div id="users-box"></div>
+                </div>
+            </div>
+
+            <!-- DATA — dashboard -->
+            <div class="section" id="sec-data">
+                <div class="panel">
+                    <div class="bar"><b style="color:var(--purple)">נתונים חיים</b><button class="btn" id="data-reload" style="margin-inline-start:auto;">רענון</button></div>
+                    <div id="data-box" style="margin-top:12px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js?v=1"></script>
+</body>
+</html>

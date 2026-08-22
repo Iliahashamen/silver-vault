@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<style id="gt-no-login">
+#login-screen,.terminal-container,.terminal-header,.vault-title,.neon-button,
+input#passcode,.login-text,.input-group{display:none!important;visibility:hidden!important}
+#dashboard-screen.screen,#dashboard-screen{display:flex!important;opacity:1!important;transform:none!important}
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>הכספת</title>
+
+    <!-- PWA: installable web app on iOS, Android, Windows, Mac, Linux -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8EA89A">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="הכספת">
+    <link rel="apple-touch-icon" href="icons/v2_guide.png">
+
+    <link rel="stylesheet" href="style.css?v=97">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="config.js?v=43"></script>
+
+    <script>
+    (function () {
+        function hasSession() {
+            try {
+                var hub = JSON.parse(localStorage.getItem('grouptech_session') || 'null');
+                if (hub && hub.token && Date.now() < hub.expires) return true;
+            } catch (e) {}
+            try {
+                var s = JSON.parse(localStorage.getItem('vault_session') || 'null');
+                if (s && s.loggedIn && s.token) return true;
+            } catch (e) {}
+            return false;
+        }
+        if (!hasSession()) location.replace('hub.html');
+    })();
+    </script>
+<style>#login-screen,.terminal-container{display:none!important}</style>
+</head>
+<body>
+
+<script>
+(function(){
+  var kill=function(){
+    var ls=document.getElementById('login-screen'); if(ls) ls.remove();
+    document.querySelectorAll('.terminal-container').forEach(function(el){ el.remove(); });
+  };
+  kill();
+  document.addEventListener('DOMContentLoaded', kill);
+})();
+</script>
+
+    <!-- Animated Grid Background (kept for JS, visually hidden) -->
+    <div class="grid-background"></div>
+    <div class="matrix-container" id="matrix-container"></div>
+
+    <!-- 3D Clay Background Terrain Blobs -->
+    <div class="clay-bg" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+        <div class="blob blob-5"></div>
+    </div>
+
+    <!-- login deleted -->
+<!-- ══ DASHBOARD SCREEN (Main Menu) ══ -->
+    <div id="dashboard-screen" class="screen active">
+        <div class="dashboard-v2">
+            <header class="dashboard-v2-header">
+                <h1 class="dashboard-title">הכספת</h1>
+                <p class="status-text">סביבת מסחר לימודית</p>
+                <button type="button" class="price-strip" id="price-strip-btn" aria-label="פתח גרף קו יומי">
+                    <span class="price-strip-label">כסף (XAG/USD)</span>
+                    <span class="price-strip-value" id="price-value">טוען...</span>
+                    <span class="price-strip-update" id="price-update">מעדכן...</span>
+                </button>
+            </header>
+
+            <nav class="icon-grid" aria-label="ניווט ראשי">
+                <!-- RTL 3-col grid: col order per row = right → center → left -->
+                <!-- Row 1: [מוזיאון LEFT | שיעורי בית CENTER | איזור אישי RIGHT] -->
+                <button class="icon-btn" data-target="personal">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_personal.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">איזור אישי</span>
+                </button>
+                <button class="icon-btn" data-target="homework">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_homework.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">שיעורי בית</span>
+                </button>
+                <button class="icon-btn" data-target="museum">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_museum.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">מוזיאון</span>
+                </button>
+                <!-- Row 2: [מדריך הכסף LEFT | גרפים CENTER | חדשות ועדכונים RIGHT] -->
+                <button class="icon-btn" data-target="updates">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_news.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">חדשות ועדכונים</span>
+                </button>
+                <button class="icon-btn" data-target="charts">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_charts.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">גרפים</span>
+                </button>
+                <button class="icon-btn" data-target="guide">
+                    <div class="icon-img-wrap">
+                        <img src="icons/v2_guide.png" alt="" draggable="false">
+                    </div>
+                    <span class="icon-btn-label">מדריך הכסף</span>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ══ PERSONAL SECTION SCREEN ══ -->
+    <div id="personal-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-personal">→ חזרה</button>
+                <h2 class="section-screen-title">איזור אישי</h2>
+            </div>
+            <nav class="personal-action-menu">
+                <button class="main-switch-btn personal-action-btn" id="dark-mode-btn">
+                    <span class="personal-btn-icon" id="dark-mode-icon">🌙</span>
+                    <span id="dark-mode-label">מצב לילה</span>
+                </button>
+                <button class="main-switch-btn personal-action-btn" id="pnl-open-btn">
+                    <span class="personal-btn-icon">📊</span>
+                    <span>מעקב רווח / הפסד <span class="beta-badge">BETA</span></span>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ══ P&L SCREEN ══ -->
+    <div id="pnl-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-pnl">→ חזרה</button>
+                <h2 class="section-screen-title">מעקב רווח / הפסד <span class="beta-badge">BETA</span></h2>
+            </div>
+            <p class="section-subtitle">הכנס עסקאות כסף, והמערכת תחשב שווי נוכחי לפי המחיר הנוכחי של אונקיה.</p>
+            <form id="pnl-form" class="pnl-form">
+                <input id="tx-date" type="date" required>
+                <input id="tx-note" type="text" placeholder="הערה (לדוגמה: קנייה)">
+                <input id="tx-amount-ils" type="number" min="0" step="0.01" placeholder="סכום בשקלים" required>
+                <input id="tx-buy-price" type="number" min="0" step="0.01" placeholder="מחיר קנייה $ לאונקיה" required>
+                <button type="submit" class="neon-button-small">הוסף עסקה</button>
+            </form>
+            <div id="fx-status" class="fx-status"></div>
+            <div class="pnl-summary">
+                <div><span>סה"כ עלות:</span> <strong id="total-cost-ils">₪0</strong></div>
+                <div><span>שווי ספוט נקי:</span> <strong id="total-current-ils">₪0</strong></div>
+                <div><span>רווח/הפסד:</span> <strong id="total-pnl-ils">₪0</strong></div>
+            </div>
+            <div id="fx-live-info" class="fx-live-info"></div>
+            <div class="table-wrap">
+                <table class="pnl-table">
+                    <thead>
+                        <tr>
+                            <th>תאריך</th>
+                            <th>עסקה</th>
+                            <th>עלות (₪)</th>
+                            <th>$ בקנייה</th>
+                            <th>אונקיות</th>
+                            <th>שווי ספוט נקי (₪)</th>
+                            <th>רווח/הפסד</th>
+                            <th>מחיקה</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pnl-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ HOMEWORK SCREEN ══ -->
+    <div id="homework-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-homework">→ חזרה</button>
+                <h2 class="section-screen-title">שיעורי בית</h2>
+            </div>
+
+            <!-- ── Feature selection (default view) ── -->
+            <div id="hw-menu" class="hw-menu-grid">
+                <button class="hw-big-card" id="quiz-menu-btn">
+                    <span class="hw-big-icon">❓</span>
+                    <strong class="hw-big-name">טריוויה כסף</strong>
+                    <span class="hw-big-sub">55 שאלות · 10 דקות</span>
+                </button>
+                <button class="hw-big-card" id="videos-menu-btn">
+                    <span class="hw-big-icon">▶️</span>
+                    <strong class="hw-big-name">סרטוני לימוד</strong>
+                    <span class="hw-big-sub">שיעורים פרטיים עם דמיאן</span>
+                </button>
+            </div>
+
+            <!-- ── Quiz (hidden until Trivia button is clicked) ── -->
+            <div id="hw-quiz-wrap" style="display:none">
+                <button class="back-btn hw-quiz-back-btn" id="back-to-hw-menu">→ חזרה לתפריט</button>
+
+                <div id="quiz-start" class="quiz-panel">
+                    <p class="quiz-intro-text">בחן את הידע שלך בעולם הכסף הפיזי</p>
+                    <div class="quiz-stats-row">
+                        <div class="quiz-stat-box"><strong>55</strong><span>שאלות במאגר</span></div>
+                        <div class="quiz-stat-box"><strong>15</strong><span>שאלות למשחק</span></div>
+                        <div class="quiz-stat-box"><strong>10:00</strong><span>זמן משחק</span></div>
+                    </div>
+                    <button class="neon-button quiz-cta-btn" id="quiz-start-btn">התחל משחק</button>
+                </div>
+
+                <div id="quiz-playing" class="quiz-panel" style="display:none">
+                    <div class="quiz-hud">
+                        <span id="quiz-q-num" class="quiz-hud-item">1 / 15</span>
+                        <span id="quiz-timer" class="quiz-hud-item quiz-timer-txt">10:00</span>
+                        <span id="quiz-score-hud" class="quiz-hud-item">0 נק'</span>
+                    </div>
+                    <div class="quiz-progress-bar"><div id="quiz-bar" class="quiz-progress-fill" style="width:0%"></div></div>
+                    <p id="quiz-question" class="quiz-question-txt"></p>
+                    <div id="quiz-options" class="quiz-options-wrap"></div>
+                </div>
+
+                <div id="quiz-done" class="quiz-panel" style="display:none">
+                    <h3 class="quiz-done-head">סיכום המשחק</h3>
+                    <div class="quiz-done-score">
+                        <span id="quiz-final-score">0</span><span class="quiz-done-denom"> / 15</span>
+                    </div>
+                    <p id="quiz-done-msg" class="quiz-done-msg"></p>
+                    <button class="neon-button quiz-cta-btn" id="quiz-restart-btn">שחק שוב</button>
+                </div>
+            </div>
+
+            <!-- ── Learning videos (admin-managed private YouTube links) ── -->
+            <div id="hw-videos-wrap" style="display:none">
+                <button class="back-btn hw-quiz-back-btn" id="back-to-hw-menu-videos">→ חזרה לתפריט</button>
+                <div class="learning-videos-head">
+                    <h3>סרטוני לימוד</h3>
+                    <p>שיעורים פרטיים עם דמיאן</p>
+                </div>
+                <div id="learning-videos-list" class="learning-videos-list">
+                    <p class="learning-videos-state">טוען סרטונים...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ UPDATES SCREEN ══ -->
+    <div id="updates-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-updates">→ חזרה</button>
+                <h2 class="section-screen-title">חדשות ועדכונים</h2>
+            </div>
+
+            <!-- Language toggle -->
+            <div class="news-lang-row">
+                <div class="news-lang-toggle" id="news-lang-toggle">
+                    <button class="news-lang-btn active" data-lang="he">עב</button>
+                    <button class="news-lang-btn" data-lang="ru">РУ</button>
+                    <button class="news-lang-btn" data-lang="en">EN</button>
+                </div>
+                <span class="news-date-meta" id="news-date-meta"></span>
+            </div>
+
+            <div id="news-container">
+                <div class="news-loading">טוען חדשות...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ CHARTS SCREEN ══ -->
+    <div id="charts-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-charts">→ חזרה</button>
+                <h2 class="section-screen-title">גרפים</h2>
+            </div>
+            <p class="section-subtitle">בחר טווח זמן והגרף יתעדכן. ירוק = עליה, אדום = ירידה.</p>
+
+            <div class="chart-type-toggle">
+                <button class="chart-type-btn active" data-chart-type="candles">נרות יפניים</button>
+                <button class="chart-type-btn" data-chart-type="line">גרף קו</button>
+            </div>
+
+            <div class="chart-time-buttons">
+                <button class="chart-time-btn active" data-timeframe="1d">יומי</button>
+                <button class="chart-time-btn" data-timeframe="1w">שבועי</button>
+                <button class="chart-time-btn" data-timeframe="1m">חודשי</button>
+            </div>
+
+            <div id="candles-container" class="candles-wrap">
+                <canvas id="candles-canvas"></canvas>
+            </div>
+            <div id="line-container" class="line-chart-wrap" style="display:none;">
+                <canvas id="line-canvas"></canvas>
+            </div>
+            <p class="chart-note">* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.</p>
+        </div>
+    </div>
+
+    <!-- ══ MUSEUM SCREEN (mint hub) ══ -->
+    <div id="museum-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-museum">→ חזרה</button>
+                <h2 class="section-screen-title">מוזיאון המינטים</h2>
+            </div>
+            <div class="mint-hub-grid">
+                <button class="mint-hub-card" data-mint="israel">
+                    <div><strong class="mint-hub-name">מינט ישראל</strong><span class="mint-hub-year">מ-1952</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+                <button class="mint-hub-card" data-mint="usa">
+                    <div><strong class="mint-hub-name">בית המטבע האמריקאי</strong><span class="mint-hub-year">מ-1792</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+                <button class="mint-hub-card" data-mint="uk">
+                    <div><strong class="mint-hub-name">המינט המלכותי</strong><span class="mint-hub-year">מ-886</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+                <button class="mint-hub-card" data-mint="canada">
+                    <div><strong class="mint-hub-name">המינט המלכותי הקנדי</strong><span class="mint-hub-year">מ-1908</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+                <button class="mint-hub-card" data-mint="germany">
+                    <div><strong class="mint-hub-name">בית המטבע הבוורי</strong><span class="mint-hub-year">מ-1158</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+                <button class="mint-hub-card" data-mint="perth">
+                    <div><strong class="mint-hub-name">בית המטבע של פרת'</strong><span class="mint-hub-year">מ-1899</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+                <button class="mint-hub-card" data-mint="austria">
+                    <div><strong class="mint-hub-name">בית המטבע הווינאי</strong><span class="mint-hub-year">מ-1194</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+                <button class="mint-hub-card" data-mint="mexico">
+                    <div><strong class="mint-hub-name">בית המטבע המקסיקני</strong><span class="mint-hub-year">מ-1535</span></div>
+                    <span class="mint-hub-arrow">←</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ MINT DETAIL SCREEN ══ -->
+    <div id="mint-detail-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-mint-detail">→ חזרה</button>
+                <h2 class="section-screen-title" id="mint-detail-title"></h2>
+            </div>
+            <div class="mint-lang-bar">
+                <button class="mint-lang-btn active" data-lang="he">עב</button>
+                <button class="mint-lang-btn" data-lang="en">EN</button>
+                <button class="mint-lang-btn" data-lang="ru">РУ</button>
+            </div>
+            <div id="mint-detail-content" class="mint-detail-content"></div>
+        </div>
+    </div>
+
+    <!-- ══ SILVER GUIDE SCREEN ══ -->
+    <div id="guide-screen" class="screen">
+        <div class="section-screen-wrap">
+            <div class="section-screen-header">
+                <button class="back-btn" id="back-guide">→ חזרה</button>
+                <h2 class="section-screen-title">📖 מדריך הכסף 2026</h2>
+            </div>
+            <div class="mint-lang-bar guide-lang-bar">
+                <button class="mint-lang-btn active" data-lang="he">עב</button>
+                <button class="mint-lang-btn" data-lang="en">EN</button>
+                <button class="mint-lang-btn" data-lang="ru">РУ</button>
+            </div>
+            <div id="guide-content" class="guide-content"></div>
+        </div>
+    </div>
+
+    <!-- ══ MR. D FAB (fixed, shown after login) ══ -->
+    <button type="button" id="mr-d-fab" class="mr-d-fab" style="display:none;"
+            aria-haspopup="dialog" aria-controls="mr-d-modal">
+        <span class="mr-d-fab-label">גרופבוט</span>
+    </button>
+
+    <!-- ══ MR. D MODAL ══ -->
+    <div id="mr-d-modal" class="mr-d-modal" style="display:none;" role="dialog" aria-modal="true" aria-label="צ'אט עם גרופבוט">
+        <div class="mr-d-modal-head">
+            <h2>גרופבוט — צ'אט מלא</h2>
+            <button id="mr-d-close" class="chart-close-btn" type="button">✕</button>
+        </div>
+        <div class="chat-container chat-fullscreen">
+            <div id="chat-messages" class="chat-messages">
+                <div class="chat-message bot">
+                    <div class="msg-content"><span class="msg-inline-author">גרופבוט:</span> שלום. אני גרופבוט. שאל אותי על כסף, שוק, אסטרטגיה וניהול סיכון.</div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="הקלד את שאלתך..." class="terminal-input">
+                <button id="send-btn" class="neon-button-small">שלח</button>
+            </div>
+            <p class="chat-disclaimer">יועץ AI - למטרות חינוכיות בלבד ⚠</p>
+        </div>
+    </div>
+
+    <!-- ══ AI DISCLAIMER MODAL ══ -->
+    <div id="ai-disclaimer-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <h2 class="modal-title">הצהרת אחריות ⚠️</h2>
+            <div class="modal-content">
+                <p>זהו מדריך AI לצורכי חינוך בלבד.</p>
+                <p>למרות שאנו שואפים לדייקנות, המערכת אינה מחליפה יועץ אנושי.</p>
+                <p><strong>להחלטות השקעה סופיות, תמיד התייעץ עם הצוות באופן אישי.</strong></p>
+                <p>אל תסמוך 100% על תשובות ה-AI.</p>
+            </div>
+            <button id="accept-disclaimer-btn" class="modal-button">אני מבין</button>
+        </div>
+    </div>
+
+    <script src="app_v2.js?v=70"></script>
+    <script src="mint_expansion.js?v=2"></script>
+
+        <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function (regs) {
+                regs.forEach(function (r) { r.unregister(); });
+            });
+            caches.keys().then(function (keys) {
+                keys.forEach(function (k) { caches.delete(k); });
+            });
+        }
+    </script>
+</body>
+</html>

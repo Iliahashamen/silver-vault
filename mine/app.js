@@ -1,4 +1,4 @@
-// ═══════════════════════════════════════════
+﻿// ═══════════════════════════════════════════
 // THE SILVER VAULT — App v3
 // ═══════════════════════════════════════════
 
@@ -9,13 +9,13 @@ if (tg) { tg.ready(); tg.expand(); }
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('dragstart',   e => e.preventDefault());
 
-const SESSION_KEY    = 'vault_session';
+const SESSION_KEY    = 'mine_session';
 const SESSION_DURATION = 3 * 60 * 60 * 1000;
 const PNL_KEY        = 'vault_pnl_entries_v1';
 const DARK_MODE_KEY  = 'vault_dark_mode';
 const DEFAULT_FX     = 3.65;
 
-let silverPrice   = 32;
+let goldPrice     = 2300;
 let currentFx     = 3.65;        // today's USD→ILS rate, fetched on startup
 let pnlRows       = [];
 const chartCache  = {};          // { frame: [{open,close,high,low,ts}, …] }
@@ -25,7 +25,7 @@ let lineChart     = null;
 let dashboardInited = false;
 
 // User id: prefer Telegram identity; otherwise a stable per-browser id (persisted),
-// so standalone web-app users keep one continuous Mr. D session across reloads.
+// so standalone web-app users keep one continuous Mine Bot session across reloads.
 function _stableWebUid() {
     try {
         let id = localStorage.getItem('vault_web_uid');
@@ -43,24 +43,6 @@ const uid = tg?.initDataUnsafe?.user?.id || _stableWebUid();
 // Local-only preview token. On localhost any passcode grants a preview session
 // so the app can be viewed offline without the backend. This NEVER works on the
 // live site (isLocalDevHost is false there) — no secret is exposed in public code.
-
-// Nuke legacy passcode screen the instant this script runs (before boot)
-(function _killLegacyLogin() {
-    try {
-        document.getElementById('login-screen')?.remove();
-        document.querySelectorAll('.terminal-container').forEach((el) => el.remove());
-        const dash = document.getElementById('dashboard-screen');
-        if (dash) {
-            document.querySelectorAll('.screen').forEach((s) => {
-                if (s !== dash) { s.classList.remove('active'); s.style.display = 'none'; }
-            });
-            dash.classList.add('active');
-            dash.style.display = 'flex';
-            dash.style.opacity = '1';
-        }
-    } catch (e) {}
-})();
-
 const DEV_PREVIEW_TOKEN = 'local-dev-preview-token';
 
 function isLocalDevHost() {
@@ -74,11 +56,11 @@ function sessionToken() {
         const s = JSON.parse(localStorage.getItem(SESSION_KEY));
         if (s?.loggedIn && (Date.now() - s.timestamp <= SESSION_DURATION)) return s.token || null;
     } catch {}
-    // Accept hub-level grouptech_session so vault can be entered directly from hub
+    // Accept hub-level grouptech_session so mine can be entered directly from hub
     try {
         const hub = JSON.parse(localStorage.getItem('grouptech_session'));
         if (hub?.token && Date.now() < hub.expires) {
-            saveSession(hub.token); // promote to vault session
+            saveSession(hub.token); // promote to mine session
             return hub.token;
         }
     } catch {}
@@ -95,7 +77,7 @@ function saveSession(token) {
 function goToScreen(screenId) {
     // Hub is the only login — never show the old passcode screen
     if (screenId === 'login-screen') {
-        location.replace('hub.html');
+        location.replace('../hub.html');
         return;
     }
     const current = document.querySelector('.screen.active');
@@ -177,7 +159,7 @@ function toggleDarkMode() {
 
 // ── LOGIN ────────────────────────────────────────────────────────────
 async function handleLogin() {
-    location.replace('hub.html');
+    location.replace('../hub.html');
 }
 
 async function validateTokenWithServer(token) {
@@ -193,37 +175,20 @@ async function validateTokenWithServer(token) {
 }
 
 async function showDashboard() {
-    // Kill legacy login UI immediately (even if cached HTML still has it)
-    document.getElementById('login-screen')?.remove();
-    document.querySelectorAll('.terminal-container, .terminal-header, .vault-title').forEach((el) => el.remove());
-
-    // Show dashboard BEFORE any network await — prevents 1s login flash
-    document.querySelectorAll('.screen').forEach((s) => {
-        s.classList.remove('active', 'screen-leaving');
-        s.style.display = 'none';
-    });
-    const dash = document.getElementById('dashboard-screen');
-    if (dash) {
-        dash.classList.add('active');
-        dash.style.display = 'flex';
-        dash.style.opacity = '1';
-        dash.style.transform = 'none';
-    }
-
     const token = sessionToken();
     if (token) {
         const valid = await validateTokenWithServer(token);
         if (!valid) {
             localStorage.removeItem(SESSION_KEY);
             localStorage.removeItem('grouptech_session');
-            location.replace('hub.html');
+            location.replace('../hub.html');
             return;
         }
     }
+    goToScreen('dashboard-screen');
     const footer = document.querySelector('.footer');
     if (footer) footer.style.display = 'none';
-    const fab = document.getElementById('mr-d-fab');
-    if (fab) fab.style.display = '';
+    document.getElementById('mr-d-fab').style.display = '';
     initDashboard();
 }
 
@@ -239,14 +204,18 @@ function escapeHtml(text) {
 }
 
 // ── SILVER PRICE + CURRENT FX ────────────────────────────────────────
-async function updateSilverPrice() {
+async function updateGoldPrice() {
     let priceOk = false;
     try {
-        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/silver-price`);
+        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/gold-price`);
         const data = await res.json();
         if (!data.success) throw new Error();
-        silverPrice = Number(data.xag_usd);
-        document.getElementById('price-value').textContent  = `$${silverPrice.toFixed(2)}`;
+        goldPrice = Number(data.xau_usd);
+        const perGram = (goldPrice / 31.1035).toFixed(2);
+        document.getElementById('price-value').textContent  = `$${goldPrice.toFixed(2)}`;
+        // Show per-gram in subtitle if element exists
+        const perGramEl = document.getElementById('price-per-gram');
+        if (perGramEl) perGramEl.textContent = `$${perGram}/גרם`;
         document.getElementById('price-update').textContent =
             `עודכן לפני ${Math.floor((data.cache_age_seconds || 0) / 60)} דקות`;
         priceOk = true;
@@ -304,7 +273,7 @@ function calcRow(r) {
     const buy    = Number(r.buy  || 0);
     const oz     = buy > 0 ? cost / (buy * histFx) : 0;
     // Net spot value = ounces × today's spot × today's FX rate (no premium)
-    const now    = oz * silverPrice * currentFx;
+    const now    = oz * goldPrice * currentFx;
     return { ...r, histFx, cost, buy, oz, now, pnl: now - cost };
 }
 
@@ -312,7 +281,7 @@ function renderPnl() {
     // Show live FX rate used for spot valuation
     const fxInfo = document.getElementById('fx-live-info');
     if (fxInfo) {
-        fxInfo.textContent = `שווי ספוט מחושב לפי: כסף $${silverPrice.toFixed(2)}/oz × שער ₪${currentFx.toFixed(4)}/$`;
+        fxInfo.textContent = `שווי ספוט מחושב לפי: זהב $${goldPrice.toFixed(2)}/oz × שער ₪${currentFx.toFixed(4)}/$`;
     }
 
     const body = document.getElementById('pnl-table-body');
@@ -356,7 +325,7 @@ const FRAME_CONF = {
 function genCandles(frame) {
     const conf = FRAME_CONF[frame];
     const now  = Date.now();
-    let close  = silverPrice || 32;
+    let close  = goldPrice || 2300;
     const out  = [];
     for (let i = 0; i < conf.count; i++) {
         const ts   = now - (conf.count - i) * conf.intervalMs;
@@ -369,12 +338,12 @@ function genCandles(frame) {
     return out;
 }
 
-// Fetch real historical silver price data from backend (Yahoo Finance via /api/silver-history)
+// Fetch real historical silver price data from backend (Yahoo Finance via /api/gold-history)
 async function fetchRealChartData(frame) {
     const periodMap = { '1d': 'daily', '1w': 'weekly', '1m': 'yearly' };
     const period    = periodMap[frame] || 'daily';
     try {
-        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/silver-history?period=${period}`);
+        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/gold-history?period=${period}`);
         if (!res.ok) return null;
         const json = await res.json();
         if (!json.success || !Array.isArray(json.data) || json.data.length < 3) return null;
@@ -562,7 +531,7 @@ function _drawCandleData(frame, data) {
     const note = document.querySelector('.chart-note');
     if (note) {
         note.textContent = _lastDataReal
-            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (SI=F)'
+            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (GC=F)'
             : '* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.';
     }
 }
@@ -666,7 +635,7 @@ function _drawLineData(frame, data) {
     const note = document.querySelector('.chart-note');
     if (note) {
         note.textContent = _lastDataReal
-            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (SI=F)'
+            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (GC=F)'
             : '* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.';
     }
 }
@@ -877,7 +846,7 @@ function addMsg(author, rawText, type) {
     // Typing indicator: three animated floating dots (no author label, no text).
     if (type.includes('typing')) {
         el.innerHTML =
-            '<div class="msg-content typing-indicator" aria-label="גרופבוט מקליד">' +
+            '<div class="msg-content typing-indicator" aria-label="מכרה-BOT מקליד">' +
             '<span class="typing-dot"></span>' +
             '<span class="typing-dot"></span>' +
             '<span class="typing-dot"></span>' +
@@ -925,10 +894,10 @@ async function sendMessage() {
     if (!text) return;
     addMsg('אתה', text, 'user');
     input.value = '';
-    const typing = addMsg('גרופבוט', 'מקליד...', 'bot typing');
+    const typing = addMsg('מכרה-BOT', 'מקליד...', 'bot typing');
     try {
         const token = sessionToken();
-        const res = await fetch(`${CONFIG.CHAT_API_URL}/chat`, {
+        const res = await fetch(`${CONFIG.CHAT_API_URL}/chat/mine`, {
             method:  'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -940,21 +909,21 @@ async function sendMessage() {
         // Server restarted → token invalidated → force re-login
         if (res.status === 401) {
             typing.remove();
-            addMsg('גרופבוט', 'החיבור פג תוקף. מתחבר מחדש...', 'bot error');
+            addMsg('מכרה-BOT', 'החיבור פג תוקף. מתחבר מחדש...', 'bot error');
             localStorage.removeItem(SESSION_KEY);
             localStorage.removeItem('grouptech_session');
             setTimeout(() => {
-                location.replace('hub.html');
+                location.replace('../hub.html');
             }, 1200);
             return;
         }
 
         const data = await res.json();
         typing.remove();
-        addMsg('גרופבוט', data.response || 'אין כרגע מענה, נסה שוב.', 'bot');
+        addMsg('מכרה-BOT', data.response || 'אין כרגע מענה, נסה שוב.', 'bot');
     } catch {
         typing.remove();
-        addMsg('גרופבוט', 'יש כרגע תקלה זמנית. נסה שוב בעוד רגע.', 'bot error');
+        addMsg('מכרה-BOT', 'יש כרגע תקלה זמנית. נסה שוב בעוד רגע.', 'bot error');
     }
 }
 
@@ -2578,8 +2547,8 @@ function initDashboard() {
     if (dashboardInited) return;
     dashboardInited = true;
 
-    updateSilverPrice();
-    setInterval(updateSilverPrice, 30 * 60 * 1000);
+    updateGoldPrice();
+    setInterval(updateGoldPrice, 30 * 60 * 1000);
 
     document.getElementById('price-strip-btn')?.addEventListener('click', openDailyLineChart);
 
@@ -2776,11 +2745,11 @@ function boot() {
     initDevPreview();
     _loadStoreContent();   // pull store-managed quiz/museum (built-in stays as fallback)
 
-    // Only hub login — vault never shows its own passcode screen
+    // Only hub login — mine never shows its own passcode screen
     if (sessionToken()) {
         showDashboard();
     } else {
-        location.replace('hub.html');
+        location.replace('../hub.html');
     }
 }
 

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "gg_001",
+    "icon": "⚜️",
+    "order": 10,
+    "published": true,
+    "he": {
+      "title": "למה זהב? הסיבות המרכזיות",
+      "content": "<p>זהב הוא אחד מנכסי השמירה הוותיקים בהיסטוריה. הנה למה:</p><ul><li><strong>ללא מע\"מ בישראל</strong> — זהב השקעה פטור ממע\"מ, בניגוד לכסף.</li><li><strong>נזילות גבוהה</strong> — ניתן למכור כמעט בכל מקום בעולם.</li><li><strong>גידור אינפלציה</strong> — שמר ערך לאורך אלפי שנים.</li><li><strong>ללא סיכון צד שלישי</strong> — זהב פיזי אינו תלוי בחברה כלשהי.</li><li><strong>ביקוש עולמי יציב</strong> — תכשיטים, טכנולוגיה, בנקים מרכזיים.</li></ul><p>עבור משקיע ישראלי, היתרון הגדול הוא <strong>פטור ממע\"מ</strong> — זה כבר 17% יתרון מהיום הראשון.</p>"
+    },
+    "en": {
+      "title": "Why Gold? The Core Case",
+      "content": "<p>Gold is one of the oldest wealth preservation assets in history:</p><ul><li><strong>No VAT in Israel</strong> — investment gold is VAT-exempt, unlike silver.</li><li><strong>High liquidity</strong> — can be sold almost anywhere in the world.</li><li><strong>Inflation hedge</strong> — preserved value for thousands of years.</li><li><strong>No counterparty risk</strong> — physical gold doesn't depend on any company.</li><li><strong>Stable global demand</strong> — jewelry, technology, central banks.</li></ul>"
+    },
+    "ru": {
+      "title": "Почему золото? Основные причины",
+      "content": "<p>Золото — один из старейших активов сохранения капитала:</p><ul><li><strong>Без НДС в Израиле</strong> — инвестиционное золото освобождено от НДС.</li><li><strong>Высокая ликвидность</strong> — можно продать почти в любой точке мира.</li><li><strong>Защита от инфляции</strong> — сохраняло ценность тысячелетиями.</li></ul>"
+    }
+  },
+  {
+    "id": "gg_002",
+    "icon": "📏",
+    "order": 20,
+    "published": true,
+    "he": {
+      "title": "מה לקנות: מטבע או מטיל?",
+      "content": "<p>השאלה הנפוצה ביותר אצל משקיעים חדשים:</p><ul><li><strong>מטיל (Bar)</strong> — פרמיה נמוכה יותר, עדיף לכמויות גדולות. מתאים למי שרוצה מקסימום מתכת על כל שקל.</li><li><strong>מטבע (Coin)</strong> — פרמיה גבוהה יותר, אבל ביקוש גבוה יותר גם ממשקיעים אחרים. קל יותר למכור ביחידות קטנות.</li></ul><p><strong>המלצה כללית:</strong> אם מטרתך השקעה טהורה — לך על מטילים. אם אוהב את הרגשת המטבע — קרוגרנד, מייפל ליף וויניאי הם בחירות מעולות.</p><div class='guide-tip-box'><strong>טיפ:</strong> מטבעות 22K כמו קרוגרנד קשים יותר ועמידים לשריטות — יתרון לאחסון ארוך טווח.</div>"
+    },
+    "en": {
+      "title": "Bar vs Coin: What to Buy?",
+      "content": "<p>The most common question for new gold investors:</p><ul><li><strong>Bars</strong> — lower premium, better for large quantities. Maximum metal per dollar.</li><li><strong>Coins</strong> — higher premium but also higher demand from other investors. Easier to sell in small quantities.</li></ul><p><strong>General advice:</strong> Pure investment? Go for bars. Love the collectible feel? Krugerrand, Maple Leaf, or Philharmonics are excellent choices.</p>"
+    },
+    "ru": {
+      "title": "Слитки vs Монеты: что выбрать?",
+      "content": "<p><ul><li><strong>Слитки</strong> — меньшая наценка, лучше для больших объёмов.</li><li><strong>Монеты</strong> — выше наценка, но и легче продать поштучно.</li></ul></p>"
+    }
+  },
+  {
+    "id": "gg_003",
+    "icon": "🏅",
+    "order": 30,
+    "published": true,
+    "he": {
+      "title": "מטבעות הזהב הגדולים: מדריך קצר",
+      "content": "<p>המטבעות הנפוצים בישראל ובעולם:</p><ul><li><strong>קרוגרנד (Krugerrand)</strong> — דרום אפריקה, 22K (91.67%), 1oz. אחד המוכרים ביותר.</li><li><strong>Maple Leaf</strong> — קנדה, 24K (99.99%), 1oz. טוהרות הגבוהה ביותר בין מטבעות הגדולים.</li><li><strong>Vienna Philharmonic</strong> — אוסטריה, 24K, 1oz. הנמכר ביותר באירופה.</li><li><strong>American Gold Eagle</strong> — ארה\"ב, 22K, 1oz. אחד האמינים ביותר.</li><li><strong>Australian Kangaroo</strong> — אוסטרליה, 24K, עיצוב שנתי משתנה.</li><li><strong>Britannia</strong> — בריטניה, 24K, 1oz.</li></ul><p>כל המטבעות האלו מוכרים בינלאומית ונזילים מאוד.</p>"
+    },
+    "en": {
+      "title": "Major Gold Coins: Quick Guide",
+      "content": "<p>The most popular gold coins globally:</p><ul><li><strong>Krugerrand</strong> — South Africa, 22K, 1oz. One of the most recognized worldwide.</li><li><strong>Maple Leaf</strong> — Canada, 24K (99.99%), 1oz. Highest purity among major coins.</li><li><strong>Vienna Philharmonic</strong> — Austria, 24K, 1oz. Best-selling in Europe.</li><li><strong>American Gold Eagle</strong> — USA, 22K, 1oz.</li><li><strong>Australian Kangaroo</strong> — Australia, 24K, annual design.</li></ul>"
+    },
+    "ru": {
+      "title": "Главные золотые монеты: краткий справочник",
+      "content": "<p><ul><li><strong>Крюгерранд</strong> — ЮАР, 22K.</li><li><strong>Кленовый лист</strong> — Канада, 24K (99.99%).</li><li><strong>Венская Филармония</strong> — Австрия, 24K.</li><li><strong>Gold Eagle</strong> — США, 22K.</li></ul></p>"
+    }
+  },
+  {
+    "id": "gg_004",
+    "icon": "🇮🇱",
+    "order": 40,
+    "published": true,
+    "he": {
+      "title": "קניית זהב בישראל — כל מה שצריך לדעת",
+      "content": "<p>מדריך ספציפי לשוק הישראלי:</p><ul><li><strong>פטור ממע\"מ</strong> — זהב השקעה (מטבעות ומטילים מוכרים) פטור ממע\"מ לפי חוק. זו זכות — לא מתנה מהממשלה.</li><li><strong>מס רווח הון</strong> — ~25% על רווח ממכירה (חינוכי; היוועץ ברואה חשבון).</li><li><strong>יבוא</strong> — ייבוא אישי עד €10,000 ללא הצהרה מיוחדת. מעל זה — צריך להצהיר.</li><li><strong>איפה לקנות</strong> — מוכרים מוסמכים, בתי שוהם, ודילרים מוכרים. הכי בטוח — מקום עם ניירת.</li><li><strong>אחסון</strong> — כספת ביתית, כספת בנק, או שירות אחסון מאובטח.</li></ul><div class='guide-warn-box'><strong>שים לב:</strong> קניית זהב ב\"שוק שחור\" ללא קבלה — סיכון לזיוף ובעיות מס עתידיות. תמיד קנה ממקור רשמי עם ניירת.</div>"
+    },
+    "en": {
+      "title": "Buying Gold in Israel — Everything You Need",
+      "content": "<p>Israel-specific guide:</p><ul><li><strong>VAT Exempt</strong> — Investment gold is exempt from VAT under Israeli law.</li><li><strong>Capital Gains Tax</strong> — ~25% on realized profit (educational; consult an accountant).</li><li><strong>Import</strong> — Personal imports up to €10,000 require no special declaration.</li><li><strong>Where to Buy</strong> — Authorized dealers, jewelry stores, recognized dealers with proper paperwork.</li><li><strong>Storage</strong> — Home safe, bank safe deposit box, or professional secured storage.</li></ul>"
+    },
+    "ru": {
+      "title": "Покупка золота в Израиле — всё необходимое",
+      "content": "<p><ul><li><strong>Освобождение от НДС</strong> — инвестиционное золото освобождено от НДС.</li><li><strong>Налог на прирост капитала</strong> — ~25% от прибыли при продаже.</li><li><strong>Импорт</strong> — до €10,000 без специальной декларации.</li></ul></p>"
+    }
+  },
+  {
+    "id": "gg_005",
+    "icon": "📊",
+    "order": 50,
+    "published": true,
+    "he": {
+      "title": "GSR — יחס זהב-כסף כאינדיקטור",
+      "content": "<p>GSR (Gold-Silver Ratio) מציין כמה אונקיות כסף שוות לאונקיית זהב:</p><ul><li><strong>GSR גבוה (80+)</strong> — זהב יקר ביחס לכסף; לכסף יש פוטנציאל להצמיח יותר %-טית.</li><li><strong>GSR נמוך (מתחת ל-50)</strong> — זהב זול ביחס לכסף; לזהב פוטנציאל גבוה יחסית.</li><li>HSR ההיסטורי: בין 15:1 ל-100:1 לאורך ההיסטוריה.</li></ul><p>זה <strong>לא אינדיקטור מדויק</strong> — אלא כלי חינוכי לראות תמחור יחסי. לא להסתמך עליו לבדו.</p><div class='guide-tip-box'><strong>כיצד להשתמש:</strong> כש-GSR גבוה מאוד — שקול לנסות לצבור יותר כסף; כש-GSR נמוך מאוד — זהב נראה זול יחסית.</div>"
+    },
+    "en": {
+      "title": "GSR — Gold-to-Silver Ratio as an Indicator",
+      "content": "<p>The GSR shows how many ounces of silver equal one ounce of gold:</p><ul><li><strong>High GSR (80+)</strong> — gold is expensive relative to silver.</li><li><strong>Low GSR (below 50)</strong> — gold is cheap relative to silver.</li></ul><p>This is an <strong>educational tool</strong>, not a precise signal. Don't rely on it alone.</p>"
+    },
+    "ru": {
+      "title": "GSR — соотношение золота к серебру",
+      "content": "<p>GSR показывает, сколько унций серебра равны одной унции золота. Высокий GSR (80+) — золото дорого относительно серебра. Низкий GSR (ниже 50) — золото дёшево относительно серебра.</p>"
+    }
+  },
+  {
+    "id": "gg_006",
+    "icon": "🔒",
+    "order": 60,
+    "published": true,
+    "he": {
+      "title": "אחסון זהב — אפשרויות ושיקולים",
+      "content": "<p>אחסון הוא אחד הנושאים החשובים ביותר לכל מחזיק זהב פיזי:</p><ul><li><strong>כספת ביתית</strong> — זמינה, פרטית, אבל דורשת כספת איכותית ומקום בטוח.</li><li><strong>כספת בנק</strong> — בטוחה, אבל יש עלויות שנתיות ופחות גישה מיידית.</li><li><strong>שירות אחסון מקצועי</strong> (Vault) — עלות שנתית בד\"כ 0.1-0.5% מהשווי, ביטוח כולל.</li></ul><div class='guide-warn-box'><strong>אל תשמור כמויות גדולות בבית ללא כספת איכותית ובלי ביטוח ייעודי. גניבה של מטבעות ומטילים קשה מאוד לשחזר.</strong></div><p>בחירה סבירה: עד כמה עשרות אונקיות — כספת ביתית טובה. כמויות גדולות יותר — שירות אחסון מקצועי.</p>"
+    },
+    "en": {
+      "title": "Gold Storage — Options & Considerations",
+      "content": "<p>Storage is one of the most critical aspects of physical gold ownership:</p><ul><li><strong>Home Safe</strong> — immediate access, private, but requires quality safe and secure location.</li><li><strong>Bank Safe Deposit Box</strong> — secure, annual fee, limited access hours.</li><li><strong>Professional Vault</strong> — typically 0.1-0.5% annual fee, insurance included.</li></ul>"
+    },
+    "ru": {
+      "title": "Хранение золота — варианты и соображения",
+      "content": "<p><ul><li><strong>Домашний сейф</strong> — мгновенный доступ, требует качественного сейфа.</li><li><strong>Банковская ячейка</strong> — безопасно, ежегодная плата.</li><li><strong>Профессиональный хранилище</strong> — 0.1-0.5% в год, обычно включает страховку.</li></ul></p>"
+    }
+  },
+  {
+    "id": "gg_007",
+    "icon": "⚖️",
+    "order": 70,
+    "published": true,
+    "he": {
+      "title": "זהב מול כסף — מה ההבדל להשקעה?",
+      "content": "<p>שני המתכות הן 'נכסים קשים' אבל שונות בכמה נקודות מרכזיות:</p><ul><li><strong>מע\"מ</strong> — זהב פטור, כסף חייב (יתרון ברור לזהב בישראל).</li><li><strong>תנודתיות</strong> — כסף תנודתי יותר מזהב; עולה חזק יותר בשוורי, יורד חזק יותר בדובי.</li><li><strong>ביקוש תעשייתי</strong> — לכסף יש ביקוש תעשייתי גבוה יותר (אלקטרוניקה, סולאר).</li><li><strong>נגישות</strong> — כסף זול יותר לאונקיה, קל יותר להתחיל.</li><li><strong>GSR</strong> — כשהיחס גבוה, כסף זול יחסית לזהב.</li></ul><p>אסטרטגיה פופולרית: <strong>שניהם</strong> — חלק זהב כעוגן יציב, חלק כסף כ\"מנוף\" עם פוטנציאל גבוה יותר.</p>"
+    },
+    "en": {
+      "title": "Gold vs Silver — Investment Comparison",
+      "content": "<p>Both are 'hard assets' but differ in key areas:</p><ul><li><strong>VAT</strong> — Gold is exempt; silver is taxed (clear advantage for gold in Israel).</li><li><strong>Volatility</strong> — Silver is more volatile; rises harder in bull markets, falls harder in bear.</li><li><strong>Industrial demand</strong> — Silver has higher industrial demand (electronics, solar).</li><li><strong>Accessibility</strong> — Silver is cheaper per ounce, easier entry point.</li></ul>"
+    },
+    "ru": {
+      "title": "Золото против серебра — инвестиционное сравнение",
+      "content": "<p><ul><li><strong>НДС</strong> — золото освобождено, серебро облагается (преимущество золота).</li><li><strong>Волатильность</strong> — серебро более волатильно.</li><li><strong>Промышленный спрос</strong> — у серебра выше.</li></ul></p>"
+    }
+  }
+]

@@ -1,0 +1,357 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   GROUPTECH Hub — Dark Navy Design
+   Matches GT logo palette: deep navy #0A1628 + burnished gold #C9A227
+   ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --navy:        #0A1628;
+  --navy-mid:    #0F1F3A;
+  --navy-card:   #132041;
+  --navy-border: rgba(201, 162, 39, 0.18);
+  --gold:        #C9A227;
+  --gold-light:  #E2BF50;
+  --gold-dim:    rgba(201, 162, 39, 0.55);
+  --gold-glow:   rgba(201, 162, 39, 0.12);
+  --white:       #FFFFFF;
+  --muted:       rgba(255,255,255,0.55);
+  --muted2:      rgba(255,255,255,0.30);
+  --radius:      14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  direction: rtl;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Canvas background ─────────────────────────────────────────────────── */
+#hub-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.65;
+}
+
+/* ── Main layout ────────────────────────────────────────────────────────── */
+.hub-root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 40px;
+  gap: 0;
+}
+
+/* ── Logo section ────────────────────────────────────────────────────────── */
+.hub-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.hub-logo {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 22px rgba(201,162,39,0.35));
+  transition: filter 0.3s ease;
+}
+
+.hub-logo:hover {
+  filter: drop-shadow(0 0 32px rgba(201,162,39,0.55));
+}
+
+.hub-brand {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 60%, #a07c12 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 2px;
+}
+
+.hub-tagline {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+  text-align: center;
+  max-width: 280px;
+  line-height: 1.45;
+}
+
+/* ── Divider rule ─────────────────────────────────────────────────────────── */
+.hub-rule {
+  width: 180px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  margin: 20px auto;
+}
+
+/* ── Login section ───────────────────────────────────────────────────────── */
+.hub-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 280px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hub-login.is-leaving {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+.hub-login-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hub-passcode-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+}
+
+.hub-passcode-input {
+  width: 100%;
+  height: 48px;
+  background: var(--navy-card);
+  border: 1px solid var(--navy-border);
+  border-radius: var(--radius);
+  color: var(--white);
+  font-size: 18px;
+  letter-spacing: 0.25em;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-text-security: disc;
+}
+
+.hub-passcode-input:focus {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+
+.hub-passcode-input.error {
+  border-color: #e05252;
+  box-shadow: 0 0 0 3px rgba(224,82,82,0.15);
+  animation: shake 0.35s ease;
+}
+
+.hub-enter-btn {
+  width: 100%;
+  height: 48px;
+  min-height: 48px;
+  padding: 0 18px;
+  background: linear-gradient(135deg, var(--gold) 0%, #a07c12 100%);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  touch-action: manipulation;
+}
+
+.hub-enter-btn:active {
+  transform: scale(0.98);
+}
+
+.hub-enter-btn:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+.hub-error-msg {
+  font-size: 12px;
+  color: #e05252;
+  letter-spacing: 0.04em;
+  min-height: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.hub-error-msg.visible {
+  opacity: 1;
+}
+
+/* ── Systems selector ────────────────────────────────────────────────────── */
+.hub-systems {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 280px;
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hub-systems[hidden] {
+  display: none !important;
+}
+
+.hub-systems.is-entering {
+  display: flex;
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.hub-systems.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ── System Card — name only ──────────────────────────────────────────────── */
+.system-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 20px;
+  background: var(--navy-card);
+  border: 1px solid var(--navy-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 56px;
+  touch-action: manipulation;
+}
+
+.system-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--gold-glow) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.system-card:hover::before,
+.system-card:active::before {
+  opacity: 1;
+}
+
+.system-card:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 20px var(--gold-glow);
+}
+
+.system-card:active {
+  transform: translateY(0);
+}
+
+.system-card.locked {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.system-card.locked:hover {
+  transform: none;
+  border-color: var(--navy-border);
+  box-shadow: none;
+}
+
+.system-card.locked::before {
+  display: none;
+}
+
+.system-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.hub-footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--muted2);
+  letter-spacing: 0.1em;
+}
+
+/* ── Loading spinner on enter button ─────────────────────────────────────── */
+.hub-enter-btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hub-logo-wrap {
+  animation: fadeInUp 0.7s ease both;
+}
+
+.hub-rule {
+  animation: fadeInUp 0.7s 0.1s ease both;
+}
+
+.hub-login {
+  animation: fadeInUp 0.7s 0.2s ease both;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 400px) {
+  .hub-logo {
+    width: 100px;
+    height: 100px;
+  }
+  .hub-brand {
+    font-size: 18px;
+  }
+  .system-card {
+    padding: 13px 16px;
+  }
+  .system-name {
+    font-size: 16px;
+  }
+}

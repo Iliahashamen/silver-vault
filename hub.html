@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0A1628" />
+  <title>GROUPTECH — בחר מערכת</title>
+  <link rel="stylesheet" href="hub.css?v=6" />
+</head>
+<body>
+
+<canvas id="hub-canvas" aria-hidden="true"></canvas>
+
+<main class="hub-root">
+
+  <div class="hub-logo-wrap">
+    <img
+      class="hub-logo"
+      src="icons/gt_logo.png"
+      alt="GROUPTECH logo"
+      width="130"
+      height="130"
+      draggable="false"
+    />
+    <span class="hub-brand">GROUPTECH</span>
+    <span class="hub-tagline">פלטפורמת הלמידה והחקירה שלך</span>
+  </div>
+
+  <div class="hub-rule" aria-hidden="true"></div>
+
+  <!-- Login gate -->
+  <section id="hub-login" class="hub-login" aria-label="כניסה">
+    <span class="hub-login-label">הזן קוד גישה</span>
+
+    <div class="hub-passcode-col">
+      <input
+        id="hub-passcode"
+        class="hub-passcode-input"
+        type="password"
+        inputmode="text"
+        maxlength="20"
+        placeholder="••••••"
+        autocomplete="current-password"
+        enterkeyhint="go"
+        aria-label="קוד גישה"
+      />
+      <button id="hub-enter-btn" class="hub-enter-btn" type="button">כניסה</button>
+    </div>
+
+    <p id="hub-error" class="hub-error-msg" role="alert" aria-live="polite"></p>
+  </section>
+
+  <!-- Systems selector -->
+  <section
+    id="hub-systems"
+    class="hub-systems"
+    aria-label="בחר מערכת"
+    hidden
+  >
+    <a class="system-card" href="silver-app.html" data-system="vault" aria-label="הכספת">
+      <span class="system-name">הכספת</span>
+    </a>
+
+    <a class="system-card" href="mine/home.html" data-system="mine" aria-label="המכרה">
+      <span class="system-name">המכרה</span>
+    </a>
+
+    <div class="system-card locked" role="button" aria-label="הענן — בקרוב" tabindex="0">
+      <span class="system-name">הענן</span>
+    </div>
+  </section>
+
+  <footer class="hub-footer">GROUPTECH © 2026</footer>
+
+</main>
+
+<script src="hub.js?v=6"></script>
+</body>
+</html>

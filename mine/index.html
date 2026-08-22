@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<title>המכרה</title>
+<script>
+(function(){
+  try{
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister();});});
+    }
+    if(window.caches) caches.keys().then(function(k){k.forEach(function(x){caches.delete(x);});});
+  }catch(e){}
+  var ok=false;
+  try{var h=JSON.parse(localStorage.getItem('grouptech_session')||'null'); if(h&&h.token&&Date.now()<h.expires) ok=true;}catch(e){}
+  try{var v=JSON.parse(localStorage.getItem('mine_session')||'null'); if(v&&v.loggedIn&&v.token) ok=true;}catch(e){}
+  location.replace(ok ? ('home.html?t='+Date.now()) : '../hub.html');
+})();
+</script>
+</head><body style="margin:0;background:#B09060"></body></html>
