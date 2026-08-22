@@ -1540,7 +1540,7 @@ input, textarea, .chat-messages, .chat-message {
 
 /* Square image area — label is BELOW, not overlapping.
    padding: 8% keeps icons large while staying consistent across all PNGs.
-   mix-blend-mode: multiply removes any white fill — only the green strokes
+   mix-blend-mode: multiply removes any white fill — only the gold-brown strokes
    are visible, blending seamlessly with the beige button background. */
 .icon-img-wrap {
     position: relative;
