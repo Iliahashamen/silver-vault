@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon" href="icons/v2_guide.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=9">
+    <link rel="stylesheet" href="style.css?v=10">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="config.js?v=1"></script>
@@ -126,7 +126,7 @@
     <div id="personal-screen" class="screen">
         <div class="section-screen-wrap">
             <div class="section-screen-header">
-                <button class="back-btn" id="back-personal">→ חזרה</button>
+                <button class="back-btn" id="back-personal">חזרה</button>
                 <h2 class="section-screen-title">איזור אישי</h2>
             </div>
             <nav class="personal-action-menu">
@@ -146,7 +146,7 @@
     <div id="pnl-screen" class="screen">
         <div class="section-screen-wrap">
             <div class="section-screen-header">
-                <button class="back-btn" id="back-pnl">→ חזרה</button>
+                <button class="back-btn" id="back-pnl">חזרה</button>
                 <h2 class="section-screen-title">מעקב רווח / הפסד <span class="beta-badge">BETA</span></h2>
             </div>
             <p class="section-subtitle">הכנס עסקאות כסף, והמערכת תחשב שווי נוכחי לפי המחיר הנוכחי של אונקיה.</p>
@@ -188,7 +188,7 @@
     <div id="homework-screen" class="screen">
         <div class="section-screen-wrap">
             <div class="section-screen-header">
-                <button class="back-btn" id="back-homework">→ חזרה</button>
+                <button class="back-btn" id="back-homework">חזרה</button>
                 <h2 class="section-screen-title">שיעורי בית</h2>
             </div>
 
@@ -208,7 +208,7 @@
 
             <!-- ── Quiz (hidden until Trivia button is clicked) ── -->
             <div id="hw-quiz-wrap" style="display:none">
-                <button class="back-btn hw-quiz-back-btn" id="back-to-hw-menu">→ חזרה לתפריט</button>
+                <button class="back-btn hw-quiz-back-btn" id="back-to-hw-menu">חזרה לתפריט</button>
 
                 <div id="quiz-start" class="quiz-panel">
                     <p class="quiz-intro-text">בחן את הידע שלך בעולם הכסף הפיזי</p>
@@ -243,7 +243,7 @@
 
             <!-- ── Learning videos (admin-managed private YouTube links) ── -->
             <div id="hw-videos-wrap" style="display:none">
-                <button class="back-btn hw-quiz-back-btn" id="back-to-hw-menu-videos">→ חזרה לתפריט</button>
+                <button class="back-btn hw-quiz-back-btn" id="back-to-hw-menu-videos">חזרה לתפריט</button>
                 <div class="learning-videos-head">
                     <h3>סרטוני לימוד</h3>
                     <p>שיעורים פרטיים עם דמיאן</p>
@@ -259,7 +259,7 @@
     <div id="updates-screen" class="screen">
         <div class="section-screen-wrap">
             <div class="section-screen-header">
-                <button class="back-btn" id="back-updates">→ חזרה</button>
+                <button class="back-btn" id="back-updates">חזרה</button>
                 <h2 class="section-screen-title">חדשות ועדכונים</h2>
             </div>
 
@@ -283,7 +283,7 @@
     <div id="charts-screen" class="screen">
         <div class="section-screen-wrap">
             <div class="section-screen-header">
-                <button class="back-btn" id="back-charts">→ חזרה</button>
+                <button class="back-btn" id="back-charts">חזרה</button>
                 <h2 class="section-screen-title">גרפים</h2>
             </div>
             <p class="section-subtitle">בחר טווח זמן והגרף יתעדכן. ירוק = עליה, אדום = ירידה.</p>
@@ -313,41 +313,41 @@
     <div id="museum-screen" class="screen">
         <div class="section-screen-wrap">
             <div class="section-screen-header">
-                <button class="back-btn" id="back-museum">→ חזרה</button>
+                <button class="back-btn" id="back-museum">חזרה</button>
                 <h2 class="section-screen-title">מוזיאון המינטים</h2>
             </div>
             <div class="mint-hub-grid">
                 <button class="mint-hub-card" data-mint="israel">
                     <div><strong class="mint-hub-name">מינט ישראל</strong><span class="mint-hub-year">מ-1952</span></div>
-                    <span class="mint-hub-arrow">←</span>
+                    <span class="mint-hub-arrow" aria-hidden="true"></span>
                 </button>
                 <button class="mint-hub-card" data-mint="usa">
                     <div><strong class="mint-hub-name">בית המטבע האמריקאי</strong><span class="mint-hub-year">מ-1792</span></div>
-                    <span class="mint-hub-arrow">←</span>
+                    <span class="mint-hub-arrow" aria-hidden="true"></span>
                 </button>
                 <button class="mint-hub-card" data-mint="uk">
                     <div><strong class="mint-hub-name">המינט המלכותי</strong><span class="mint-hub-year">מ-886</span></div>
-                    <span class="mint-hub-arrow">←</span>
+                    <span class="mint-hub-arrow" aria-hidden="true"></span>
                 </button>
                 <button class="mint-hub-card" data-mint="canada">
                     <div><strong class="mint-hub-name">המינט המלכותי הקנדי</strong><span class="mint-hub-year">מ-1908</span></div>
-                    <span class="mint-hub-arrow">←</span>
+                    <span class="mint-hub-arrow" aria-hidden="true"></span>
                 </button>
                 <button class="mint-hub-card" data-mint="germany">
                     <div><strong class="mint-hub-name">בית המטבע הבוורי</strong><span class="mint-hub-year">מ-1158</span></div>
-                    <span class="mint-hub-arrow">←</span>
+                    <span class="mint-hub-arrow" aria-hidden="true"></span>
                 </button>
                 <button class="mint-hub-card" data-mint="perth">
                     <div><strong class="mint-hub-name">בית המטבע של פרת'</strong><span class="mint-hub-year">מ-1899</span></div>
-                    <span class="mint-hub-arrow">←</span>
+                    <span class="mint-hub-arrow" aria-hidden="true"></span>
                 </button>
                 <button class="mint-hub-card" data-mint="austria">
                     <div><strong class="mint-hub-name">בית המטבע הווינאי</strong><span class="mint-hub-year">מ-1194</span></div>
-                    <span class="mint-hub-arrow">←</span>
+                    <span class="mint-hub-arrow" aria-hidden="true"></span>
                 </button>
                 <button class="mint-hub-card" data-mint="mexico">
                     <div><strong class="mint-hub-name">בית המטבע המקסיקני</strong><span class="mint-hub-year">מ-1535</span></div>
-                    <span class="mint-hub-arrow">←</span>
+                    <span class="mint-hub-arrow" aria-hidden="true"></span>
                 </button>
             </div>
         </div>
@@ -357,7 +357,7 @@
     <div id="mint-detail-screen" class="screen">
         <div class="section-screen-wrap">
             <div class="section-screen-header">
-                <button class="back-btn" id="back-mint-detail">→ חזרה</button>
+                <button class="back-btn" id="back-mint-detail">חזרה</button>
                 <h2 class="section-screen-title" id="mint-detail-title"></h2>
             </div>
             <div class="mint-lang-bar">
@@ -373,7 +373,7 @@
     <div id="guide-screen" class="screen">
         <div class="section-screen-wrap">
             <div class="section-screen-header">
-                <button class="back-btn" id="back-guide">→ חזרה</button>
+                <button class="back-btn" id="back-guide">חזרה</button>
                 <h2 class="section-screen-title">מדריך הזהב 2026</h2>
             </div>
             <div class="mint-lang-bar guide-lang-bar">
@@ -425,7 +425,7 @@
         </div>
     </div>
 
-    <script src="app.js?v=9"></script>
+    <script src="app.js?v=10"></script>
     <script src="mint_expansion.js?v=2"></script>
 
         <script>

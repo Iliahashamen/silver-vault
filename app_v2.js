@@ -1210,9 +1210,9 @@ async function _loadLearningVideos() {
 
     list.innerHTML = videos.map(video => `
         <a class="learning-video-link" href="${escapeHtml(video.url)}" target="_blank" rel="noopener noreferrer">
-            <span class="learning-video-play" aria-hidden="true">▶</span>
+            <span class="learning-video-play" aria-hidden="true"></span>
             <span class="learning-video-title">${escapeHtml(video.title)}</span>
-            <span class="learning-video-arrow" aria-hidden="true">←</span>
+            <span class="learning-video-arrow" aria-hidden="true"></span>
         </a>
     `).join('');
 }
@@ -2546,7 +2546,7 @@ function renderGuide(lang) {
             <button class="guide-chapter-header" onclick="toggleGuideChapter(${i})">
                 <span class="guide-chapter-icon">${ch.icon}</span>
                 <span class="guide-chapter-title">${ch.title}</span>
-                <span class="guide-chapter-arrow">←</span>
+                <span class="guide-chapter-arrow" aria-hidden="true"></span>
             </button>
             <div class="guide-chapter-body">${ch.content}</div>
         </div>

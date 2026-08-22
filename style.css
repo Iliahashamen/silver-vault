@@ -3271,3 +3271,9 @@ body.dark-mode .guide-tip-box  { background: rgba(50,140,100,0.13); }
 .guide-chapter-icon:empty,
 .personal-btn-icon:empty,
 .hw-big-icon:empty { display: none; }
+
+/* Hide empty arrow slots after arrow removal */
+.guide-chapter-arrow:empty,
+.mint-hub-arrow:empty,
+.learning-video-arrow:empty,
+.learning-video-play:empty { display: none; }
