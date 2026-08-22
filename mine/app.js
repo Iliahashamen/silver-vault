@@ -25,7 +25,7 @@ let lineChart     = null;
 let dashboardInited = false;
 
 // User id: prefer Telegram identity; otherwise a stable per-browser id (persisted),
-// so standalone web-app users keep one continuous Mine Bot session across reloads.
+// so standalone web-app users keep one continuous groupBOT session across reloads.
 function _stableWebUid() {
     try {
         let id = localStorage.getItem('vault_web_uid');
@@ -846,7 +846,7 @@ function addMsg(author, rawText, type) {
     // Typing indicator: three animated floating dots (no author label, no text).
     if (type.includes('typing')) {
         el.innerHTML =
-            '<div class="msg-content typing-indicator" aria-label="מכרה-BOT מקליד">' +
+            '<div class="msg-content typing-indicator" aria-label="גרופבוט מקליד">' +
             '<span class="typing-dot"></span>' +
             '<span class="typing-dot"></span>' +
             '<span class="typing-dot"></span>' +
@@ -894,7 +894,7 @@ async function sendMessage() {
     if (!text) return;
     addMsg('אתה', text, 'user');
     input.value = '';
-    const typing = addMsg('מכרה-BOT', 'מקליד...', 'bot typing');
+    const typing = addMsg('גרופבוט', 'מקליד...', 'bot typing');
     try {
         const token = sessionToken();
         const res = await fetch(`${CONFIG.CHAT_API_URL}/chat/mine`, {
@@ -909,7 +909,7 @@ async function sendMessage() {
         // Server restarted → token invalidated → force re-login
         if (res.status === 401) {
             typing.remove();
-            addMsg('מכרה-BOT', 'החיבור פג תוקף. מתחבר מחדש...', 'bot error');
+            addMsg('גרופבוט', 'החיבור פג תוקף. מתחבר מחדש...', 'bot error');
             localStorage.removeItem(SESSION_KEY);
             localStorage.removeItem('grouptech_session');
             setTimeout(() => {
@@ -920,10 +920,10 @@ async function sendMessage() {
 
         const data = await res.json();
         typing.remove();
-        addMsg('מכרה-BOT', data.response || 'אין כרגע מענה, נסה שוב.', 'bot');
+        addMsg('גרופבוט', data.response || 'אין כרגע מענה, נסה שוב.', 'bot');
     } catch {
         typing.remove();
-        addMsg('מכרה-BOT', 'יש כרגע תקלה זמנית. נסה שוב בעוד רגע.', 'bot error');
+        addMsg('גרופבוט', 'יש כרגע תקלה זמנית. נסה שוב בעוד רגע.', 'bot error');
     }
 }
 
