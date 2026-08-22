@@ -1362,7 +1362,7 @@ input, textarea, .chat-messages, .chat-message {
 }
 
 .dashboard-v2 {
-    width: min(400px, 100%);
+    width: min(370px, 100%);
     background: rgba(240, 237, 231, 0.92);
     border-radius: var(--radius-xl);
     box-shadow: var(--float-card);
@@ -1386,7 +1386,7 @@ input, textarea, .chat-messages, .chat-message {
     }
 
     .dashboard-v2 {
-        width: clamp(380px, 60vw, 900px);
+        width: clamp(340px, 52vw, 780px);
         padding: 22px 22px 26px;
     }
 
@@ -1898,7 +1898,7 @@ body.dark-mode .main-switch-btn.active {
 }
 
 .mr-d-modal-head {
-    width: min(980px, 100%);
+    width: min(860px, 100%);
     margin: 0 auto 8px;
     display: flex;
     align-items: center;
@@ -3276,3 +3276,20 @@ body.dark-mode .guide-tip-box  { background: rgba(50,140,100,0.13); }
 .mint-hub-arrow:empty,
 .learning-video-arrow:empty,
 .learning-video-play:empty { display: none; }
+
+
+/* Slight overall UI shrink — Vault / Mine screens */
+html {
+    zoom: 0.92;
+}
+@supports not (zoom: 1) {
+    html { font-size: 92%; }
+}
+@media (min-width: 600px) {
+    .dashboard-v2 {
+        width: clamp(340px, 52vw, 780px);
+    }
+}
+.section-screen-wrap {
+    width: min(860px, 100%);
+}
