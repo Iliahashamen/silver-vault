@@ -13,26 +13,26 @@ const CONFIG = {
     
     // File Categories (Hebrew)
     CATEGORIES: {
-        'PDFS': '📄 מסמכי PDF',
-        'VIDEOS': '🎥 סרטונים',
-        'PHOTOS': '📸 תמונות',
-        'DOCUMENTS': '📁 מסמכים'
+        'PDFS': ' מסמכי PDF',
+        'VIDEOS': ' סרטונים',
+        'PHOTOS': ' תמונות',
+        'DOCUMENTS': ' מסמכים'
     },
     
     // File Icons
     ICONS: {
-        'pdf': '📄',
-        'video': '🎥',
-        'photo': '📸',
-        'document': '📁'
+        'pdf': '',
+        'video': '',
+        'photo': '',
+        'document': ''
     },
     
     // UI Messages (Hebrew)
     MESSAGES: {
-        loginSuccess: '✓ גישה אושרה',
-        loginError: '✗ קוד שגוי',
+        loginSuccess: ' גישה אושרה',
+        loginError: ' קוד שגוי',
         loading: 'טוען ארכיון...',
-        loadError: '⚠ שגיאה בטעינת הארכיון',
+        loadError: ' שגיאה בטעינת הארכיון',
         noFiles: 'אין קבצים בכספת',
         chatPlaceholder: 'שאל משהו על כסף...',
         sendButton: 'שלח'

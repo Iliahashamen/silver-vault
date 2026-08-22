@@ -15,10 +15,10 @@ const CONFIG = {
     CHAT_PATH:         '/chat/mine',
 
     MESSAGES: {
-        loginSuccess: '✓ גישה אושרה',
-        loginError: '✗ קוד שגוי',
+        loginSuccess: ' גישה אושרה',
+        loginError: ' קוד שגוי',
         loading: 'טוען מכרה...',
-        loadError: '⚠ שגיאה בטעינת המכרה',
+        loadError: ' שגיאה בטעינת המכרה',
         noFiles: 'אין נתונים',
         chatPlaceholder: 'שאל משהו על זהב...',
         sendButton: 'שלח',

@@ -139,7 +139,7 @@ function applyDarkMode(dark) {
     requestAnimationFrame(() => document.body.classList.add('dark-mode-animating'));
     const icon  = document.getElementById('dark-mode-icon');
     const label = document.getElementById('dark-mode-label');
-    if (icon)  icon.textContent  = dark ? '☀️' : '🌙';
+    if (icon)  icon.textContent = dark ? 'יום' : 'לילה';
     if (label) label.textContent = dark ? 'חזרה למצב יום' : 'מצב לילה';
 }
 
@@ -294,7 +294,7 @@ function renderPnl() {
                 <td>${Number(r.oz).toFixed(4)}</td>
                 <td>${formatIls(r.now)}</td>
                 <td class="${r.pnl >= 0 ? 'pnl-positive' : 'pnl-negative'}">${formatIls(r.pnl)}</td>
-                <td><button class="row-delete-btn" data-id="${r.id}">✕</button></td>
+                <td><button class="row-delete-btn" data-id="${r.id}">×</button></td>
             </tr>
         `).join('');
     }
@@ -1093,7 +1093,7 @@ function _quizEnd() {
     const pct = Math.round((s / QUIZ_TOTAL) * 100);
     document.getElementById('quiz-final-score').textContent = s;
     document.getElementById('quiz-done-msg').textContent =
-        pct >= 90 ? 'מעולה! אתה מומחה כסף אמיתי 🏆' :
+        pct >= 90 ? 'מעולה! אתה מומחה כסף אמיתי ' :
         pct >= 70 ? 'תוצאה מצוינת! ידע מרשים של שוק הכסף.' :
         pct >= 50 ? 'לא רע! כדאי לחזור על חומר הלמידה.' :
                     'יש מקום לשיפור — חזור ולמד שוב!';
@@ -1257,7 +1257,7 @@ function mintWebsiteLabel(website) {
 const MINT_DATA = {
     israel: {
         id: 'israel',
-        flag: '🇮🇱',
+        flag: "",
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg/800px-Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg',
         he: {
             name: 'חברת מטבעות ישראל',
@@ -1288,7 +1288,7 @@ const MINT_DATA = {
                     purity: 'כסף 999 / זהב 999.9',
                     desc: 'בוליון הכסף הישראלי "יונת השלום" של מטבעות ארץ הקודש, המיוצר החל משנת 2014. בחלקו הקדמי: יונה לבנה עם עלה זית במעופה מעל חומות ירושלים העתיקה. בחלקו האחורי: סמל החברה, טוהר המתכת ומשקלה; במטילים גם חותמת בודק ומספר סידורי. זמין כעיגול או מטיל. החל מ-2019 גם בזהב טהור 999.9.',
                     img: DOVE_OF_PEACE_IMG,
-                    emoji: '🕊️',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1299,7 +1299,7 @@ const MINT_DATA = {
                     purity: 'כסף 999',
                     desc: 'מטיל כסף טהור יצוק במשקל 1 ק"ג מסדרת "יונת השלום" של מטבעות ארץ הקודש. על המטיל מוטבעים סמל החברה, יונת השלום, טוהר המתכת, משקל, סימן ICMC ומספר סידורי. מיוצר החל מ-2014; החל מ-2019 זמין גם בזהב טהור 999.9.',
                     img: DOVE_OF_PEACE_1KG_BAR_IMG,
-                    emoji: '🥈',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1310,7 +1310,7 @@ const MINT_DATA = {
                     purity: 'כסף 999',
                     desc: 'גרגירי כסף טהור 999 במשקל 300 גרם ממטבעות ארץ הקודש. אריזה רשמית במיכל פластיק אטום עם סימון טוהר ומשקל. מתאים להשקעה בכסף פיזי, ייצור ואספנות.',
                     img: SILVER_GRAINS_300G_IMG,
-                    emoji: '✨',
+                    emoji: "",
                     transparent: true
                 }
             ]
@@ -1336,9 +1336,9 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'Dove of Peace Bullion', type: 'Bullion', weight: 'Various weights', year: '2014–', purity: '.999 Silver / .9999 Gold', desc: 'Israeli "Dove of Peace" bullion by The Holy Land Mint, produced since 2014. Obverse: a white dove with an olive branch in flight above the Old City of Jerusalem walls. Reverse: Holy Land Mint logo, metal purity and weight; bars also carry the Melter Assayer mark and serial number. Available as rounds or bars. Gold .9999 versions since 2019.', img: DOVE_OF_PEACE_IMG, emoji: '🕊️', transparent: true },
-                { title: 'Dove of Peace 1 kg Cast Bar', type: 'Bar', weight: '1 kg', year: '2014–', purity: '.999 Silver', desc: 'Cast .999 fine silver bar from the "Dove of Peace" series by The Holy Land Mint. Stamped with the company logo, dove motif, SILVER .999, weight, ICMC mark and serial number. Produced since 2014; gold .9999 versions available since 2019.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: '🥈', transparent: true },
-                { title: '300g Fine Silver Grains', type: 'Grains', weight: '300g', year: '', purity: '.999 Silver', desc: '300 grams of .999 fine silver grains (shot) from The Holy Land Mint — Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true }
+                { title: 'Dove of Peace Bullion', type: 'Bullion', weight: 'Various weights', year: '2014–', purity: '.999 Silver / .9999 Gold', desc: 'Israeli "Dove of Peace" bullion by The Holy Land Mint, produced since 2014. Obverse: a white dove with an olive branch in flight above the Old City of Jerusalem walls. Reverse: Holy Land Mint logo, metal purity and weight; bars also carry the Melter Assayer mark and serial number. Available as rounds or bars. Gold .9999 versions since 2019.', img: DOVE_OF_PEACE_IMG, emoji: "", transparent: true },
+                { title: 'Dove of Peace 1 kg Cast Bar', type: 'Bar', weight: '1 kg', year: '2014–', purity: '.999 Silver', desc: 'Cast .999 fine silver bar from the "Dove of Peace" series by The Holy Land Mint. Stamped with the company logo, dove motif, SILVER .999, weight, ICMC mark and serial number. Produced since 2014; gold .9999 versions available since 2019.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: "", transparent: true },
+                { title: '300g Fine Silver Grains', type: 'Grains', weight: '300g', year: '', purity: '.999 Silver', desc: '300 grams of .999 fine silver grains (shot) from The Holy Land Mint — Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.', img: SILVER_GRAINS_300G_IMG, emoji: "", transparent: true }
             ]
         },
         ru: {
@@ -1362,16 +1362,16 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'Буллион «Голубь мира»', type: 'Буллион', weight: 'Разные веса', year: '2014–', purity: 'Серебро 999 / Золото 999.9', desc: 'Израильский буллион «Голубь мира» от монетного двора Святой Земли, выпускается с 2014 года. Лицевая сторона: белый голубь с оливковой ветвью над стенами Старого города Иерусалима. Оборотная: логотип монетного двора, проба и вес; на слитках также клеймо контролёра и серийный номер. Доступен в виде монет и слитков. С 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_IMG, emoji: '🕊️', transparent: true },
-                { title: 'Литой слиток 1 кг «Голубь мира»', type: 'Слиток', weight: '1 кг', year: '2014–', purity: 'Серебро 999', desc: 'Литой слиток из серебра 999 пробы весом 1 кг из серии «Голубь мира» от монетного двора Святой Земли. На слитке: логотип компании, голубь, проба, вес, знак ICMC и серийный номер. Выпускается с 2014 года; с 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: '🥈', transparent: true },
-                { title: '300 г серебряных гранул', type: 'Гранулы', weight: '300 г', year: '', purity: 'Серебро 999', desc: '300 граммов серебряных гранул пробы 999 от монетного двора Святой Земли. Официальная герметичная пластиковая упаковка с маркировкой пробы и веса. Подходит для инвестиций в физическое серебро, производства и коллекционирования.', img: SILVER_GRAINS_300G_IMG, emoji: '✨', transparent: true }
+                { title: 'Буллион «Голубь мира»', type: 'Буллион', weight: 'Разные веса', year: '2014–', purity: 'Серебро 999 / Золото 999.9', desc: 'Израильский буллион «Голубь мира» от монетного двора Святой Земли, выпускается с 2014 года. Лицевая сторона: белый голубь с оливковой ветвью над стенами Старого города Иерусалима. Оборотная: логотип монетного двора, проба и вес; на слитках также клеймо контролёра и серийный номер. Доступен в виде монет и слитков. С 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_IMG, emoji: "", transparent: true },
+                { title: 'Литой слиток 1 кг «Голубь мира»', type: 'Слиток', weight: '1 кг', year: '2014–', purity: 'Серебро 999', desc: 'Литой слиток из серебра 999 пробы весом 1 кг из серии «Голубь мира» от монетного двора Святой Земли. На слитке: логотип компании, голубь, проба, вес, знак ICMC и серийный номер. Выпускается с 2014 года; с 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: "", transparent: true },
+                { title: '300 г серебряных гранул', type: 'Гранулы', weight: '300 г', year: '', purity: 'Серебро 999', desc: '300 граммов серебряных гранул пробы 999 от монетного двора Святой Земли. Официальная герметичная пластиковая упаковка с маркировкой пробы и веса. Подходит для инвестиций в физическое серебро, производства и коллекционирования.', img: SILVER_GRAINS_300G_IMG, emoji: "", transparent: true }
             ]
         }
     },
 
     germany: {
         id: 'germany',
-        flag: '🇩🇪',
+        flag: "",
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg/800px-M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg',
         he: {
             name: 'בית המטבע הבוורי',
@@ -1446,7 +1446,7 @@ const MINT_DATA = {
 
     uk: {
         id: 'uk',
-        flag: '🇬🇧',
+        flag: "",
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Llantrisant_Royal_Mint_Building.jpg/800px-Llantrisant_Royal_Mint_Building.jpg',
         he: {
             name: 'המינט המלכותי',
@@ -1477,7 +1477,7 @@ const MINT_DATA = {
                     purity: 'כסף 999',
                     desc: 'מטיל השקעה יצוק מהמינט המלכותי הבריטי. על המטיל: לוגו המינט, משקל 500 גרם, טוהר 999 ומספר סידורי ייחודי. מטילי יציקה פופולריים בקרב משקיעים שמחפשים כמות כסף גדולה בפרמיה נמוכה יחסית. מטילים אינם נושאים דיוקן מלכותי — בניגוד למטבעות.',
                     img: ROYAL_MINT_500G_CAST_BAR_IMG,
-                    emoji: '🥈',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1488,7 +1488,7 @@ const MINT_DATA = {
                     purity: 'כסף 999.9',
                     desc: 'מטבע הברבריאניה — אחד ממטבעות הכסף המוכרים בעולם, מיוצר על ידי המינט המלכותי מאז 1987. על הגב: ברבריאניה עם קסדה, חנית, מגן דגל בריטניה וענף זית. כולל אבטחה מתקדמת: תמונה נסתרת (חנית או מנעול), אנימציית משטח, מיקרו-טקסט «קישוט והגנה», וקווי צבע על המגן. הילך חוקי בבריטניה בערך נקוב של 2 לירות.',
                     img: BRITANNIA_2026_REVERSE_IMG,
-                    emoji: '🇬🇧',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1499,7 +1499,7 @@ const MINT_DATA = {
                     purity: 'כסף 999.9',
                     desc: 'על פני המטבע מופיע דיוקן המלך צ\'ארלס השלישי — ללא כתר, בעיצוב האמן מרטין ג\'נינגס. סביב הדיוקן: שם המלך, תארים מלכותיים וערך נקוב של 2 לירות. מאז עלייתו לכס ב-2022, דיוקן המלך מופיע על רוב מטבעות המינט המלכותי — כולל ברבריאניה, סוברין ומטבעות זיכרון — במקום אליזבת השנייה. שדה הרקע עם טקסטורת אבטחה מיקרוסקופית.',
                     img: BRITANNIA_2026_OBVERSE_IMG,
-                    emoji: '👑',
+                    emoji: "",
                     transparent: true
                 }
             ]
@@ -1533,7 +1533,7 @@ const MINT_DATA = {
                     purity: '.999 Silver',
                     desc: 'Cast investment bar from The Royal Mint — stamped THE ROYAL MINT, 500g, 999, SILVER, with a unique serial number (e.g. R000001). Cast bars are popular with stackers seeking larger silver weight at a typically lower premium per gram than coins. Bars carry no royal portrait — unlike Royal Mint coinage.',
                     img: ROYAL_MINT_500G_CAST_BAR_IMG,
-                    emoji: '🥈',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1544,7 +1544,7 @@ const MINT_DATA = {
                     purity: '.9999 Silver',
                     desc: 'The Britannia is one of the world\'s most recognised silver bullion coins, struck by The Royal Mint since 1987. Reverse: Britannia with helmet, trident, Union Jack shield and olive branch; inscriptions BRITANNIA, 2026, 1 OZ, 999 FINE SILVER. Advanced security: Latent Image (trident/padlock), Surface Animation, micro-text DECUS ET TUTAMEN, and tincture lines on the shield. UK legal tender.',
                     img: BRITANNIA_2026_REVERSE_IMG,
-                    emoji: '🇬🇧',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1555,7 +1555,7 @@ const MINT_DATA = {
                     purity: '.9999 Silver',
                     desc: 'Obverse: portrait of King Charles III — uncrowned, by Martin Jennings (initials MJ). Inscription: CHARLES III • D • G • REX • F • D • 2 POUNDS. Since his accession in 2022, the King\'s effigy appears on most Royal Mint bullion and commemorative silver — including Britannia and Sovereign — replacing Queen Elizabeth II. Micro-textured security field on the background.',
                     img: BRITANNIA_2026_OBVERSE_IMG,
-                    emoji: '👑',
+                    emoji: "",
                     transparent: true
                 }
             ]
@@ -1589,7 +1589,7 @@ const MINT_DATA = {
                     purity: 'Серебро 999',
                     desc: 'Инвестиционный литой слиток от Королевского монетного двора Великобритании. На слитке: логотип двора, вес 500 г, проба 999 и уникальный серийный номер. Популярен у инвесторов, покупающих большой вес серебра с более низкой премией за грамм. На слитках нет королевского портрета — в отличие от монет.',
                     img: ROYAL_MINT_500G_CAST_BAR_IMG,
-                    emoji: '🥈',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1600,7 +1600,7 @@ const MINT_DATA = {
                     purity: 'Серебро 999.9',
                     desc: 'Britannia — одна из самых узнаваемых инвестиционных серебряных монет мира, чеканится Королевским монетным двором с 1987 года. Оборотная сторона: Britannia с шлемом, трезубцем, щитом с британским флагом и оливковой ветвью. Защита: скрытое изображение (трезубец или замок), анимация поверхности, микротекст «Украшение и защита», линии герба на щите. Законное платёжное средство Великобритании номиналом 2 фунта.',
                     img: BRITANNIA_2026_REVERSE_IMG,
-                    emoji: '🇬🇧',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1611,7 +1611,7 @@ const MINT_DATA = {
                     purity: 'Серебро 999.9',
                     desc: 'Лицевая сторона: портрет короля Карла III — без короны, работа художника Мартина Дженнингса. Вокруг портрета: имя короля, королевские титулы и номинал 2 фунта. С 2022 года после восшествия на престол портрет короля появляется на большинстве инвестиционных и памятных серебряных монет двора — включая Britannia и Sovereign — вместо Елизаветы II. Микротекстурированное защитное поле фона.',
                     img: BRITANNIA_2026_OBVERSE_IMG,
-                    emoji: '👑',
+                    emoji: "",
                     transparent: true
                 }
             ]
@@ -1621,7 +1621,7 @@ const MINT_DATA = {
     // ─────────────────────────────────────────────────────────────────
     usa: {
         id: 'usa',
-        flag: '🇺🇸',
+        flag: "",
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/United_States_Mint_Philadelphia.jpg/800px-United_States_Mint_Philadelphia.jpg',
         he: {
             name: 'בית המטבע האמריקאי',
@@ -1652,7 +1652,7 @@ const MINT_DATA = {
                     purity: 'כסף 999',
                     desc: 'הנשר האמריקני הוא מטבע הבוליון הנפוץ בצפון אמריקה, מיוצר מאז 1986. למטבע מעמד הילך חוקי בארה"ב וערך נקוב סמלי של דולר אחד. נחשב לאחד המטבעות הנוחים למכירה מחדש ברחבי העולם.',
                     img: AMERICAN_SILVER_EAGLE_IMG,
-                    emoji: '🦅',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1663,7 +1663,7 @@ const MINT_DATA = {
                     purity: 'כסף 999',
                     desc: 'מטבע זיכרון כסף של בית המטבע האמריקאי, הוצע בקיץ 2001 עד גמר המלאי (500,000 יחידות). המטבע מציין את פתיחת המוזיאון הלאומי לעם האינדיאני האמריקאי. העיצוב מבוסס על מטבע הביזון הקלאסי (1913–1938): פרופיל יליד אמריקאי בצד אחד וביזון בצד השני. עוצב על ידי הפסל ג\'יימס ארל פרייזר.',
                     img: AMERICAN_BUFFALO_2001_IMG,
-                    emoji: '🦬',
+                    emoji: "",
                     transparent: true
                 },
                 {
@@ -1674,7 +1674,7 @@ const MINT_DATA = {
                     purity: 'כסף 999',
                     desc: 'מטיל השקעה אמריקאי מיצרן Sunshine Minting — אחד מיצרני הכסף הפרטיים המובילים בארה"ב. על המטיל: לוגו הנשר, טוהר 999 ומשקל 10 אונקיות. מטילים אלו נפוצים בקרב משקיעי כסף פיזי: פרמיה לרוב נמוכה יותר ממטבעות, משקל ברור ונזילות טובה. חלק מהמטילים כוללים שכבת אבטחה מיקרוסקופית לאימות.',
                     img: SUNSHINE_MINT_10OZ_BAR_IMG,
-                    emoji: '🥈',
+                    emoji: "",
                     transparent: true
                 }
             ]
@@ -1691,9 +1691,9 @@ const MINT_DATA = {
                 { title: 'Heritage & Special Products', text: 'In addition to the Silver Eagle, the Mint issued redesigned Morgan and Peace Dollars in 2021 — two iconic 20th-century coins now struck in .999 fine silver. The "America the Beautiful" series (2010–2021) comprised 56 five-ounce coins depicting national parks. The US Mint maintains a national strategic silver reserve at West Point.' }
             ],
             products: [
-                { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
-                { title: 'American Buffalo Commemorative (2001)', type: 'Commemorative', weight: '1 oz', year: '2001', purity: '.999 Silver', desc: 'The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913–1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876–1953) was also known for "The End of the Trail" and other major American medals.', img: AMERICAN_BUFFALO_2001_IMG, emoji: '🦬', transparent: true },
-                { title: 'Sunshine Mint 10 oz Silver Bar', type: 'Bar', weight: '10 oz', year: '', purity: '.999 Silver', desc: 'Investment silver bar from Sunshine Minting — one of America\'s leading private mints. Stamped with the Sunshine Minting eagle logo, .999 FINE SILVER, and 10 OUNCES. Popular with physical silver stackers: typically lower premium per ounce than coins, clear weight, and good secondary-market liquidity. Some bars include MintMark SI micro-engraving for authentication.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: '🥈', transparent: true }
+                { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: "", transparent: true },
+                { title: 'American Buffalo Commemorative (2001)', type: 'Commemorative', weight: '1 oz', year: '2001', purity: '.999 Silver', desc: 'The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913–1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876–1953) was also known for "The End of the Trail" and other major American medals.', img: AMERICAN_BUFFALO_2001_IMG, emoji: "", transparent: true },
+                { title: 'Sunshine Mint 10 oz Silver Bar', type: 'Bar', weight: '10 oz', year: '', purity: '.999 Silver', desc: 'Investment silver bar from Sunshine Minting — one of America\'s leading private mints. Stamped with the Sunshine Minting eagle logo, .999 FINE SILVER, and 10 OUNCES. Popular with physical silver stackers: typically lower premium per ounce than coins, clear weight, and good secondary-market liquidity. Some bars include MintMark SI micro-engraving for authentication.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: "", transparent: true }
             ]
         },
         ru: {
@@ -1708,9 +1708,9 @@ const MINT_DATA = {
                 { title: 'Наследие и специальные выпуски', text: 'В 2021 году монетный двор выпустил обновлённые Morgan Dollar и Peace Dollar из серебра .999. Серия «Красоты Америки» (2010–2021) включала 56 пятиунцевых монет с изображением национальных парков. Монетный двор США хранит национальный стратегический резерв серебра в Вест-Пойнте.' }
             ],
             products: [
-                { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986–', purity: 'Серебро 999', desc: 'Американский серебряный орёл — самая популярная инвестиционная монета в Северной Америке, выпускается с 1986 года. Имеет статус законного платёжного средства США с номиналом 1 доллар. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: '🦅', transparent: true },
-                { title: 'Американский бизон — памятная 2001', type: 'Памятная', weight: '1 унция', year: '2001', purity: 'Серебро 999', desc: 'Памятная серебряная монета Монетного двора США, продавалась летом 2001 года до полного распродажа (500 000 экземпляров). Посвящена открытию Национального музея американских индейцев. Дизайн основан на классической монете с бизоном (1913–1938): профиль коренного американца и бизон. Автор — скульптор Джеймс Эрл Фрейзер.', img: AMERICAN_BUFFALO_2001_IMG, emoji: '🦬', transparent: true },
-                { title: 'Слиток 10 унций — Sunshine Mint', type: 'Слиток', weight: '10 унций', year: '', purity: 'Серебро 999', desc: 'Инвестиционный слиток от частного монетного двора Sunshine Minting — одного из ведущих производителей серебра в США. На слитке: логотип орла, проба 999 и вес 10 унций. Популярен у инвесторов: обычно ниже премия за унцию, чем у монет, понятный вес и хорошая ликвидность. На некоторых слитках есть микрогравировка для проверки подлинности.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: '🥈', transparent: true }
+                { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986–', purity: 'Серебро 999', desc: 'Американский серебряный орёл — самая популярная инвестиционная монета в Северной Америке, выпускается с 1986 года. Имеет статус законного платёжного средства США с номиналом 1 доллар. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: "", transparent: true },
+                { title: 'Американский бизон — памятная 2001', type: 'Памятная', weight: '1 унция', year: '2001', purity: 'Серебро 999', desc: 'Памятная серебряная монета Монетного двора США, продавалась летом 2001 года до полного распродажа (500 000 экземпляров). Посвящена открытию Национального музея американских индейцев. Дизайн основан на классической монете с бизоном (1913–1938): профиль коренного американца и бизон. Автор — скульптор Джеймс Эрл Фрейзер.', img: AMERICAN_BUFFALO_2001_IMG, emoji: "", transparent: true },
+                { title: 'Слиток 10 унций — Sunshine Mint', type: 'Слиток', weight: '10 унций', year: '', purity: 'Серебро 999', desc: 'Инвестиционный слиток от частного монетного двора Sunshine Minting — одного из ведущих производителей серебра в США. На слитке: логотип орла, проба 999 и вес 10 унций. Популярен у инвесторов: обычно ниже премия за унцию, чем у монет, понятный вес и хорошая ликвидность. На некоторых слитках есть микрогравировка для проверки подлинности.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: "", transparent: true }
             ]
         }
     },
@@ -1718,7 +1718,7 @@ const MINT_DATA = {
     // ─────────────────────────────────────────────────────────────────
     canada: {
         id: 'canada',
-        flag: '🇨🇦',
+        flag: "",
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Royal_Canadian_Mint_main_fa%C3%A7ade.JPG/800px-Royal_Canadian_Mint_main_fa%C3%A7ade.JPG',
         he: {
             name: 'בית המטבע המלכותי הקנדי',
@@ -1767,7 +1767,7 @@ const MINT_DATA = {
     // ─────────────────────────────────────────────────────────────────
     perth: {
         id: 'perth',
-        flag: '🇦🇺',
+        flag: "",
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Perth_Mint%2C_WA%2C_2023.jpg/800px-Perth_Mint%2C_WA%2C_2023.jpg',
         he: {
             name: 'בית המטבע של פרת\'',
@@ -1816,7 +1816,7 @@ const MINT_DATA = {
     // ─────────────────────────────────────────────────────────────────
     austria: {
         id: 'austria',
-        flag: '🇦🇹',
+        flag: "",
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Am_Heumarkt_1_Hauptmuenzamt_DSC_7408w.jpg/800px-Am_Heumarkt_1_Hauptmuenzamt_DSC_7408w.jpg',
         he: {
             name: 'בית המטבע הווינאי',
@@ -1865,7 +1865,7 @@ const MINT_DATA = {
     // ─────────────────────────────────────────────────────────────────
     mexico: {
         id: 'mexico',
-        flag: '🇲🇽',
+        flag: "",
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antigua_Casa_de_Moneda.JPG/800px-Antigua_Casa_de_Moneda.JPG',
         he: {
             name: 'בית המטבע המקסיקני',
@@ -1974,7 +1974,7 @@ function renderMintDetail(mintId, lang) {
     // Records / highlights HTML
     const recordsHtml = (d.records || []).map(r => `
         <div class="mint-record-item">
-            <span class="mint-record-icon" aria-hidden="true">🏆</span>
+            <span class="mint-record-icon" aria-hidden="true"></span>
             <div class="mint-record-body">
                 <h4>${escapeHtml(r.title)}</h4>
                 <p>${escapeHtml(r.text)}</p>
@@ -1984,9 +1984,9 @@ function renderMintDetail(mintId, lang) {
 
     // Products section label by lang
     const labels = {
-        he: { history: '📖 היסטוריה', records: '🏆 שיאים ועובדות', products: '🪙 מוצרי כסף', purity: 'טוהר', more: 'אתר רשמי' },
-        en: { history: '📖 History', records: '🏆 Records & Highlights', products: '🪙 Silver Products', purity: 'Purity', more: 'Official Website' },
-        ru: { history: '📖 История', records: '🏆 Рекорды и факты', products: '🪙 Серебряные изделия', purity: 'Проба', more: 'Официальный сайт' }
+        he: { history: ' היסטוריה', records: ' שיאים ועובדות', products: ' מוצרי כסף', purity: 'טוהר', more: 'אתר רשמי' },
+        en: { history: ' History', records: ' Records & Highlights', products: ' Silver Products', purity: 'Purity', more: 'Official Website' },
+        ru: { history: ' История', records: ' Рекорды и факты', products: ' Серебряные изделия', purity: 'Проба', more: 'Официальный сайт' }
     };
     const L = labels[_museumActiveLang] || labels.he;
 
@@ -1998,8 +1998,8 @@ function renderMintDetail(mintId, lang) {
                 <h1 class="mint-hero-name">${escapeHtml(d.name)}</h1>
                 <p class="mint-hero-subtitle">${escapeHtml(d.subtitle)}</p>
                 <div class="mint-meta-row">
-                    <span class="mint-meta-chip">📅 ${escapeHtml(d.founded)}</span>
-                    <span class="mint-meta-chip">📍 ${escapeHtml(d.location)}</span>
+                    <span class="mint-meta-chip"> ${escapeHtml(d.founded)}</span>
+                    <span class="mint-meta-chip"> ${escapeHtml(d.location)}</span>
                 </div>
             </div>
         </div>
@@ -2065,37 +2065,37 @@ const GUIDE_DATA = {
         dir: 'rtl',
         chapters: [
             {
-                icon: "⚜️",
+                icon: "",
                 title: "למה זהב? הסיבות המרכזיות",
                 content: `<p>זהב הוא אחד מנכסי השמירה הוותיקים בהיסטוריה. הנה למה:</p><ul><li><strong>ללא מע"מ בישראל</strong> — זהב השקעה פטור ממע"מ, בניגוד לכסף.</li><li><strong>נזילות גבוהה</strong> — ניתן למכור כמעט בכל מקום בעולם.</li><li><strong>גידור אינפלציה</strong> — שמר ערך לאורך אלפי שנים.</li><li><strong>ללא סיכון צד שלישי</strong> — זהב פיזי אינו תלוי בחברה כלשהי.</li><li><strong>ביקוש עולמי יציב</strong> — תכשיטים, טכנולוגיה, בנקים מרכזיים.</li></ul><p>עבור משקיע ישראלי, היתרון הגדול הוא <strong>פטור ממע"מ</strong> — זה כבר 17% יתרון מהיום הראשון.</p>`
             },
             {
-                icon: "📏",
+                icon: "",
                 title: "מה לקנות: מטבע או מטיל?",
                 content: `<p>השאלה הנפוצה ביותר אצל משקיעים חדשים:</p><ul><li><strong>מטיל (Bar)</strong> — פרמיה נמוכה יותר, עדיף לכמויות גדולות. מתאים למי שרוצה מקסימום מתכת על כל שקל.</li><li><strong>מטבע (Coin)</strong> — פרמיה גבוהה יותר, אבל ביקוש גבוה יותר גם ממשקיעים אחרים. קל יותר למכור ביחידות קטנות.</li></ul><p><strong>המלצה כללית:</strong> אם מטרתך השקעה טהורה — לך על מטילים. אם אוהב את הרגשת המטבע — קרוגרנד, מייפל ליף וויניאי הם בחירות מעולות.</p><div class='guide-tip-box'><strong>טיפ:</strong> מטבעות 22K כמו קרוגרנד קשים יותר ועמידים לשריטות — יתרון לאחסון ארוך טווח.</div>`
             },
             {
-                icon: "🏅",
+                icon: "",
                 title: "מטבעות הזהב הגדולים: מדריך קצר",
                 content: `<p>המטבעות הנפוצים בישראל ובעולם:</p><ul><li><strong>קרוגרנד (Krugerrand)</strong> — דרום אפריקה, 22K (91.67%), 1oz. אחד המוכרים ביותר.</li><li><strong>Maple Leaf</strong> — קנדה, 24K (99.99%), 1oz. טוהרות הגבוהה ביותר בין מטבעות הגדולים.</li><li><strong>Vienna Philharmonic</strong> — אוסטריה, 24K, 1oz. הנמכר ביותר באירופה.</li><li><strong>American Gold Eagle</strong> — ארה"ב, 22K, 1oz. אחד האמינים ביותר.</li><li><strong>Australian Kangaroo</strong> — אוסטרליה, 24K, עיצוב שנתי משתנה.</li><li><strong>Britannia</strong> — בריטניה, 24K, 1oz.</li></ul><p>כל המטבעות האלו מוכרים בינלאומית ונזילים מאוד.</p>`
             },
             {
-                icon: "🇮🇱",
+                icon: "",
                 title: "קניית זהב בישראל — כל מה שצריך לדעת",
                 content: `<p>מדריך ספציפי לשוק הישראלי:</p><ul><li><strong>פטור ממע"מ</strong> — זהב השקעה (מטבעות ומטילים מוכרים) פטור ממע"מ לפי חוק. זו זכות — לא מתנה מהממשלה.</li><li><strong>מס רווח הון</strong> — ~25% על רווח ממכירה (חינוכי; היוועץ ברואה חשבון).</li><li><strong>יבוא</strong> — ייבוא אישי עד €10,000 ללא הצהרה מיוחדת. מעל זה — צריך להצהיר.</li><li><strong>איפה לקנות</strong> — מוכרים מוסמכים, בתי שוהם, ודילרים מוכרים. הכי בטוח — מקום עם ניירת.</li><li><strong>אחסון</strong> — כספת ביתית, כספת בנק, או שירות אחסון מאובטח.</li></ul><div class='guide-warn-box'><strong>שים לב:</strong> קניית זהב ב"שוק שחור" ללא קבלה — סיכון לזיוף ובעיות מס עתידיות. תמיד קנה ממקור רשמי עם ניירת.</div>`
             },
             {
-                icon: "📊",
+                icon: "",
                 title: "GSR — יחס זהב-כסף כאינדיקטור",
                 content: `<p>GSR (Gold-Silver Ratio) מציין כמה אונקיות כסף שוות לאונקיית זהב:</p><ul><li><strong>GSR גבוה (80+)</strong> — זהב יקר ביחס לכסף; לכסף יש פוטנציאל להצמיח יותר %-טית.</li><li><strong>GSR נמוך (מתחת ל-50)</strong> — זהב זול ביחס לכסף; לזהב פוטנציאל גבוה יחסית.</li><li>HSR ההיסטורי: בין 15:1 ל-100:1 לאורך ההיסטוריה.</li></ul><p>זה <strong>לא אינדיקטור מדויק</strong> — אלא כלי חינוכי לראות תמחור יחסי. לא להסתמך עליו לבדו.</p><div class='guide-tip-box'><strong>כיצד להשתמש:</strong> כש-GSR גבוה מאוד — שקול לנסות לצבור יותר כסף; כש-GSR נמוך מאוד — זהב נראה זול יחסית.</div>`
             },
             {
-                icon: "🔒",
+                icon: "",
                 title: "אחסון זהב — אפשרויות ושיקולים",
                 content: `<p>אחסון הוא אחד הנושאים החשובים ביותר לכל מחזיק זהב פיזי:</p><ul><li><strong>כספת ביתית</strong> — זמינה, פרטית, אבל דורשת כספת איכותית ומקום בטוח.</li><li><strong>כספת בנק</strong> — בטוחה, אבל יש עלויות שנתיות ופחות גישה מיידית.</li><li><strong>שירות אחסון מקצועי</strong> (Vault) — עלות שנתית בד"כ 0.1-0.5% מהשווי, ביטוח כולל.</li></ul><div class='guide-warn-box'><strong>אל תשמור כמויות גדולות בבית ללא כספת איכותית ובלי ביטוח ייעודי. גניבה של מטבעות ומטילים קשה מאוד לשחזר.</strong></div><p>בחירה סבירה: עד כמה עשרות אונקיות — כספת ביתית טובה. כמויות גדולות יותר — שירות אחסון מקצועי.</p>`
             },
             {
-                icon: "⚖️",
+                icon: "",
                 title: "זהב מול כסף — מה ההבדל להשקעה?",
                 content: `<p>שני המתכות הן 'נכסים קשים' אבל שונות בכמה נקודות מרכזיות:</p><ul><li><strong>מע"מ</strong> — זהב פטור, כסף חייב (יתרון ברור לזהב בישראל).</li><li><strong>תנודתיות</strong> — כסף תנודתי יותר מזהב; עולה חזק יותר בשוורי, יורד חזק יותר בדובי.</li><li><strong>ביקוש תעשייתי</strong> — לכסף יש ביקוש תעשייתי גבוה יותר (אלקטרוניקה, סולאר).</li><li><strong>נגישות</strong> — כסף זול יותר לאונקיה, קל יותר להתחיל.</li><li><strong>GSR</strong> — כשהיחס גבוה, כסף זול יחסית לזהב.</li></ul><p>אסטרטגיה פופולרית: <strong>שניהם</strong> — חלק זהב כעוגן יציב, חלק כסף כ"מנוף" עם פוטנציאל גבוה יותר.</p>`
             },
@@ -2105,37 +2105,37 @@ const GUIDE_DATA = {
         dir: 'ltr',
         chapters: [
             {
-                icon: "⚜️",
+                icon: "",
                 title: "Why Gold? The Core Case",
                 content: `<p>Gold is one of the oldest wealth preservation assets in history:</p><ul><li><strong>No VAT in Israel</strong> — investment gold is VAT-exempt, unlike silver.</li><li><strong>High liquidity</strong> — can be sold almost anywhere in the world.</li><li><strong>Inflation hedge</strong> — preserved value for thousands of years.</li><li><strong>No counterparty risk</strong> — physical gold doesn't depend on any company.</li><li><strong>Stable global demand</strong> — jewelry, technology, central banks.</li></ul>`
             },
             {
-                icon: "📏",
+                icon: "",
                 title: "Bar vs Coin: What to Buy?",
                 content: `<p>The most common question for new gold investors:</p><ul><li><strong>Bars</strong> — lower premium, better for large quantities. Maximum metal per dollar.</li><li><strong>Coins</strong> — higher premium but also higher demand from other investors. Easier to sell in small quantities.</li></ul><p><strong>General advice:</strong> Pure investment? Go for bars. Love the collectible feel? Krugerrand, Maple Leaf, or Philharmonics are excellent choices.</p>`
             },
             {
-                icon: "🏅",
+                icon: "",
                 title: "Major Gold Coins: Quick Guide",
                 content: `<p>The most popular gold coins globally:</p><ul><li><strong>Krugerrand</strong> — South Africa, 22K, 1oz. One of the most recognized worldwide.</li><li><strong>Maple Leaf</strong> — Canada, 24K (99.99%), 1oz. Highest purity among major coins.</li><li><strong>Vienna Philharmonic</strong> — Austria, 24K, 1oz. Best-selling in Europe.</li><li><strong>American Gold Eagle</strong> — USA, 22K, 1oz.</li><li><strong>Australian Kangaroo</strong> — Australia, 24K, annual design.</li></ul>`
             },
             {
-                icon: "🇮🇱",
+                icon: "",
                 title: "Buying Gold in Israel — Everything You Need",
                 content: `<p>Israel-specific guide:</p><ul><li><strong>VAT Exempt</strong> — Investment gold is exempt from VAT under Israeli law.</li><li><strong>Capital Gains Tax</strong> — ~25% on realized profit (educational; consult an accountant).</li><li><strong>Import</strong> — Personal imports up to €10,000 require no special declaration.</li><li><strong>Where to Buy</strong> — Authorized dealers, jewelry stores, recognized dealers with proper paperwork.</li><li><strong>Storage</strong> — Home safe, bank safe deposit box, or professional secured storage.</li></ul>`
             },
             {
-                icon: "📊",
+                icon: "",
                 title: "GSR — Gold-to-Silver Ratio as an Indicator",
                 content: `<p>The GSR shows how many ounces of silver equal one ounce of gold:</p><ul><li><strong>High GSR (80+)</strong> — gold is expensive relative to silver.</li><li><strong>Low GSR (below 50)</strong> — gold is cheap relative to silver.</li></ul><p>This is an <strong>educational tool</strong>, not a precise signal. Don't rely on it alone.</p>`
             },
             {
-                icon: "🔒",
+                icon: "",
                 title: "Gold Storage — Options & Considerations",
                 content: `<p>Storage is one of the most critical aspects of physical gold ownership:</p><ul><li><strong>Home Safe</strong> — immediate access, private, but requires quality safe and secure location.</li><li><strong>Bank Safe Deposit Box</strong> — secure, annual fee, limited access hours.</li><li><strong>Professional Vault</strong> — typically 0.1-0.5% annual fee, insurance included.</li></ul>`
             },
             {
-                icon: "⚖️",
+                icon: "",
                 title: "Gold vs Silver — Investment Comparison",
                 content: `<p>Both are 'hard assets' but differ in key areas:</p><ul><li><strong>VAT</strong> — Gold is exempt; silver is taxed (clear advantage for gold in Israel).</li><li><strong>Volatility</strong> — Silver is more volatile; rises harder in bull markets, falls harder in bear.</li><li><strong>Industrial demand</strong> — Silver has higher industrial demand (electronics, solar).</li><li><strong>Accessibility</strong> — Silver is cheaper per ounce, easier entry point.</li></ul>`
             },
@@ -2145,37 +2145,37 @@ const GUIDE_DATA = {
         dir: 'ltr',
         chapters: [
             {
-                icon: "⚜️",
+                icon: "",
                 title: "Почему золото? Основные причины",
                 content: `<p>Золото — один из старейших активов сохранения капитала:</p><ul><li><strong>Без НДС в Израиле</strong> — инвестиционное золото освобождено от НДС.</li><li><strong>Высокая ликвидность</strong> — можно продать почти в любой точке мира.</li><li><strong>Защита от инфляции</strong> — сохраняло ценность тысячелетиями.</li></ul>`
             },
             {
-                icon: "📏",
+                icon: "",
                 title: "Слитки vs Монеты: что выбрать?",
                 content: `<p><ul><li><strong>Слитки</strong> — меньшая наценка, лучше для больших объёмов.</li><li><strong>Монеты</strong> — выше наценка, но и легче продать поштучно.</li></ul></p>`
             },
             {
-                icon: "🏅",
+                icon: "",
                 title: "Главные золотые монеты: краткий справочник",
                 content: `<p><ul><li><strong>Крюгерранд</strong> — ЮАР, 22K.</li><li><strong>Кленовый лист</strong> — Канада, 24K (99.99%).</li><li><strong>Венская Филармония</strong> — Австрия, 24K.</li><li><strong>Gold Eagle</strong> — США, 22K.</li></ul></p>`
             },
             {
-                icon: "🇮🇱",
+                icon: "",
                 title: "Покупка золота в Израиле — всё необходимое",
                 content: `<p><ul><li><strong>Освобождение от НДС</strong> — инвестиционное золото освобождено от НДС.</li><li><strong>Налог на прирост капитала</strong> — ~25% от прибыли при продаже.</li><li><strong>Импорт</strong> — до €10,000 без специальной декларации.</li></ul></p>`
             },
             {
-                icon: "📊",
+                icon: "",
                 title: "GSR — соотношение золота к серебру",
                 content: `<p>GSR показывает, сколько унций серебра равны одной унции золота. Высокий GSR (80+) — золото дорого относительно серебра. Низкий GSR (ниже 50) — золото дёшево относительно серебра.</p>`
             },
             {
-                icon: "🔒",
+                icon: "",
                 title: "Хранение золота — варианты и соображения",
                 content: `<p><ul><li><strong>Домашний сейф</strong> — мгновенный доступ, требует качественного сейфа.</li><li><strong>Банковская ячейка</strong> — безопасно, ежегодная плата.</li><li><strong>Профессиональный хранилище</strong> — 0.1-0.5% в год, обычно включает страховку.</li></ul></p>`
             },
             {
-                icon: "⚖️",
+                icon: "",
                 title: "Золото против серебра — инвестиционное сравнение",
                 content: `<p><ul><li><strong>НДС</strong> — золото освобождено, серебро облагается (преимущество золота).</li><li><strong>Волатильность</strong> — серебро более волатильно.</li><li><strong>Промышленный спрос</strong> — у серебра выше.</li></ul></p>`
             },
@@ -2258,7 +2258,7 @@ function renderGuide(lang) {
     const admin = (_adminGuides || []).slice().sort((a, b) => (a.order || 100) - (b.order || 100));
     let chapters = admin.map(it => {
         const block = it[lang] || it.he || {};
-        return { icon: it.icon || '📘', title: block.title || '', content: block.content || '' };
+        return { icon: it.icon || '', title: block.title || '', content: block.content || '' };
     }).filter(ch => ch.title || ch.content);
 
     if (chapters.length === 0) {
@@ -2355,14 +2355,14 @@ function initDashboard() {
 
         const fxStatus = document.getElementById('fx-status');
         if (fxStatus) {
-            fxStatus.textContent = '🔍 מחפש שער דולר לתאריך...';
+            fxStatus.textContent = ' מחפש שער דולר לתאריך...';
             fxStatus.className   = 'fx-status fx-loading';
         }
 
         const fx = await fetchFxRate(date);
 
         if (fxStatus) {
-            fxStatus.textContent = `✓ שער דולר לתאריך ${date}: ₪${fx.toFixed(4)}`;
+            fxStatus.textContent = ` שער דולר לתאריך ${date}: ₪${fx.toFixed(4)}`;
             fxStatus.className   = 'fx-status fx-ok';
             setTimeout(() => { fxStatus.textContent = ''; fxStatus.className = 'fx-status'; }, 6000);
         }
@@ -2516,7 +2516,7 @@ function initDevPreview() {
     const banner = document.createElement('div');
     banner.className = 'dev-preview-banner';
     banner.innerHTML = `
-        <span class="dev-preview-label">🔧 מצב פיתוח מקומי</span>
+        <span class="dev-preview-label"> מצב פיתוח מקומי</span>
         <span class="dev-preview-note">השינויים כאן לא על האתר החי — רענון אוטומטי אחרי שמירה</span>
         <button type="button" class="dev-preview-reload" onclick="location.reload()">רענון</button>
     `;

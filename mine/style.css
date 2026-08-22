@@ -3350,3 +3350,8 @@ body.dark-mode .guide-tip-box  { background: rgba(50,140,100,0.13); }
 
 /* Hub-only auth: never show legacy login */
 #login-screen{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+
+/* Hide empty decorative icon slots after emoji removal */
+.guide-chapter-icon:empty,
+.personal-btn-icon:empty,
+.hw-big-icon:empty { display: none; }

@@ -2,7 +2,7 @@
  "items": [
   {
    "id": "israel",
-   "flag": "🇮🇱",
+   "flag": "",
    "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg/800px-Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg",
    "he": {
     "name": "חברת מטבעות ישראל",
@@ -45,7 +45,7 @@
       "purity": "כסף 999 / זהב 999.9",
       "desc": "בוליון הכסף הישראלי \"יונת השלום\" של מטבעות ארץ הקודש, המיוצר החל משנת 2014. בחלקו הקדמי: יונה לבנה עם עלה זית במעופה מעל חומות ירושלים העתיקה. בחלקו האחורי: סמל החברה, טוהר המתכת ומשקלה; במטילים גם חותמת בודק ומספר סידורי. זמין כעיגול או מטיל. החל מ-2019 גם בזהב טהור 999.9.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2",
-      "emoji": "🕊️",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -56,7 +56,7 @@
       "purity": "כסף 999",
       "desc": "מטיל כסף טהור יצוק במשקל 1 ק\"ג מסדרת \"יונת השלום\" של מטבעות ארץ הקודש. על המטיל מוטבעים סמל החברה, יונת השלום, טוהר המתכת, משקל, סימן ICMC ומספר סידורי. מיוצר החל מ-2014; החל מ-2019 זמין גם בזהב טהור 999.9.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace-1kg-bar.webp?v=2",
-      "emoji": "🥈",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -67,7 +67,7 @@
       "purity": "כסף 999",
       "desc": "גרגירי כסף טהור 999 במשקל 300 גרם ממטבעות ארץ הקודש. אריזה רשמית במיכל פластיק אטום עם סימון טוהר ומשקל. מתאים להשקעה בכסף פיזי, ייצור ואספנות.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp?v=2",
-      "emoji": "✨",
+      "emoji": "",
       "transparent": true
      }
     ],
@@ -135,7 +135,7 @@
       "purity": ".999 Silver / .9999 Gold",
       "desc": "Israeli \"Dove of Peace\" bullion by The Holy Land Mint, produced since 2014. Obverse: a white dove with an olive branch in flight above the Old City of Jerusalem walls. Reverse: Holy Land Mint logo, metal purity and weight; bars also carry the Melter Assayer mark and serial number. Available as rounds or bars. Gold .9999 versions since 2019.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2",
-      "emoji": "🕊️",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -146,7 +146,7 @@
       "purity": ".999 Silver",
       "desc": "Cast .999 fine silver bar from the \"Dove of Peace\" series by The Holy Land Mint. Stamped with the company logo, dove motif, SILVER .999, weight, ICMC mark and serial number. Produced since 2014; gold .9999 versions available since 2019.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace-1kg-bar.webp?v=2",
-      "emoji": "🥈",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -157,7 +157,7 @@
       "purity": ".999 Silver",
       "desc": "300 grams of .999 fine silver grains (shot) from The Holy Land Mint — Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp?v=2",
-      "emoji": "✨",
+      "emoji": "",
       "transparent": true
      }
     ],
@@ -225,7 +225,7 @@
       "purity": "Серебро 999 / Золото 999.9",
       "desc": "Израильский буллион «Голубь мира» от монетного двора Святой Земли, выпускается с 2014 года. Лицевая сторона: белый голубь с оливковой ветвью над стенами Старого города Иерусалима. Оборотная: логотип монетного двора, проба и вес; на слитках также клеймо контролёра и серийный номер. Доступен в виде монет и слитков. С 2019 года также из золота 999.9 пробы.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2",
-      "emoji": "🕊️",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -236,7 +236,7 @@
       "purity": "Серебро 999",
       "desc": "Литой слиток из серебра 999 пробы весом 1 кг из серии «Голубь мира» от монетного двора Святой Земли. На слитке: логотип компании, голубь, проба, вес, знак ICMC и серийный номер. Выпускается с 2014 года; с 2019 года также из золота 999.9 пробы.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace-1kg-bar.webp?v=2",
-      "emoji": "🥈",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -247,7 +247,7 @@
       "purity": "Серебро 999",
       "desc": "300 граммов серебряных гранул пробы 999 от монетного двора Святой Земли. Официальная герметичная пластиковая упаковка с маркировкой пробы и веса. Подходит для инвестиций в физическое серебро, производства и коллекционирования.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/silver-grains-300g.webp?v=2",
-      "emoji": "✨",
+      "emoji": "",
       "transparent": true
      }
     ],
@@ -279,7 +279,7 @@
   },
   {
    "id": "germany",
-   "flag": "🇩🇪",
+   "flag": "",
    "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg/800px-M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg",
    "he": {
     "name": "בית המטבע הבוורי",
@@ -454,7 +454,7 @@
   },
   {
    "id": "uk",
-   "flag": "🇬🇧",
+   "flag": "",
    "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Llantrisant_Royal_Mint_Building.jpg/800px-Llantrisant_Royal_Mint_Building.jpg",
    "he": {
     "name": "המינט המלכותי",
@@ -497,7 +497,7 @@
       "purity": "כסף 999",
       "desc": "מטיל השקעה יצוק מהמינט המלכותי הבריטי. על המטיל: לוגו המינט, משקל 500 גרם, טוהר 999 ומספר סידורי ייחודי. מטילי יציקה פופולריים בקרב משקיעים שמחפשים כמות כסף גדולה בפרמיה נמוכה יחסית. מטילים אינם נושאים דיוקן מלכותי — בניגוד למטבעות.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/royal-mint-500g-cast-bar.webp?v=1",
-      "emoji": "🥈",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -508,7 +508,7 @@
       "purity": "כסף 999.9",
       "desc": "מטבע הברבריאניה — אחד ממטבעות הכסף המוכרים בעולם, מיוצר על ידי המינט המלכותי מאז 1987. על הגב: ברבריאניה עם קסדה, חנית, מגן דגל בריטניה וענף זית. כולל אבטחה מתקדמת: תמונה נסתרת (חנית או מנעול), אנימציית משטח, מיקרו-טקסט «קישוט והגנה», וקווי צבע על המגן. הילך חוקי בבריטניה בערך נקוב של 2 לירות.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-reverse.webp?v=1",
-      "emoji": "🇬🇧",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -519,7 +519,7 @@
       "purity": "כסף 999.9",
       "desc": "על פני המטבע מופיע דיוקן המלך צ'ארלס השלישי — ללא כתר, בעיצוב האמן מרטין ג'נינגס. סביב הדיוקן: שם המלך, תארים מלכותיים וערך נקוב של 2 לירות. מאז עלייתו לכס ב-2022, דיוקן המלך מופיע על רוב מטבעות המינט המלכותי — כולל ברבריאניה, סוברין ומטבעות זיכרון — במקום אליזבת השנייה. שדה הרקע עם טקסטורת אבטחה מיקרוסקופית.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-obverse.webp?v=1",
-      "emoji": "👑",
+      "emoji": "",
       "transparent": true
      }
     ],
@@ -587,7 +587,7 @@
       "purity": ".999 Silver",
       "desc": "Cast investment bar from The Royal Mint — stamped THE ROYAL MINT, 500g, 999, SILVER, with a unique serial number (e.g. R000001). Cast bars are popular with stackers seeking larger silver weight at a typically lower premium per gram than coins. Bars carry no royal portrait — unlike Royal Mint coinage.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/royal-mint-500g-cast-bar.webp?v=1",
-      "emoji": "🥈",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -598,7 +598,7 @@
       "purity": ".9999 Silver",
       "desc": "The Britannia is one of the world's most recognised silver bullion coins, struck by The Royal Mint since 1987. Reverse: Britannia with helmet, trident, Union Jack shield and olive branch; inscriptions BRITANNIA, 2026, 1 OZ, 999 FINE SILVER. Advanced security: Latent Image (trident/padlock), Surface Animation, micro-text DECUS ET TUTAMEN, and tincture lines on the shield. UK legal tender.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-reverse.webp?v=1",
-      "emoji": "🇬🇧",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -609,7 +609,7 @@
       "purity": ".9999 Silver",
       "desc": "Obverse: portrait of King Charles III — uncrowned, by Martin Jennings (initials MJ). Inscription: CHARLES III • D • G • REX • F • D • 2 POUNDS. Since his accession in 2022, the King's effigy appears on most Royal Mint bullion and commemorative silver — including Britannia and Sovereign — replacing Queen Elizabeth II. Micro-textured security field on the background.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-obverse.webp?v=1",
-      "emoji": "👑",
+      "emoji": "",
       "transparent": true
      }
     ],
@@ -677,7 +677,7 @@
       "purity": "Серебро 999",
       "desc": "Инвестиционный литой слиток от Королевского монетного двора Великобритании. На слитке: логотип двора, вес 500 г, проба 999 и уникальный серийный номер. Популярен у инвесторов, покупающих большой вес серебра с более низкой премией за грамм. На слитках нет королевского портрета — в отличие от монет.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/royal-mint-500g-cast-bar.webp?v=1",
-      "emoji": "🥈",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -688,7 +688,7 @@
       "purity": "Серебро 999.9",
       "desc": "Britannia — одна из самых узнаваемых инвестиционных серебряных монет мира, чеканится Королевским монетным двором с 1987 года. Оборотная сторона: Britannia с шлемом, трезубцем, щитом с британским флагом и оливковой ветвью. Защита: скрытое изображение (трезубец или замок), анимация поверхности, микротекст «Украшение и защита», линии герба на щите. Законное платёжное средство Великобритании номиналом 2 фунта.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-reverse.webp?v=1",
-      "emoji": "🇬🇧",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -699,7 +699,7 @@
       "purity": "Серебро 999.9",
       "desc": "Лицевая сторона: портрет короля Карла III — без короны, работа художника Мартина Дженнингса. Вокруг портрета: имя короля, королевские титулы и номинал 2 фунта. С 2022 года после восшествия на престол портрет короля появляется на большинстве инвестиционных и памятных серебряных монет двора — включая Britannia и Sovereign — вместо Елизаветы II. Микротекстурированное защитное поле фона.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/uk/silver-britannia-2026-obverse.webp?v=1",
-      "emoji": "👑",
+      "emoji": "",
       "transparent": true
      }
     ],
@@ -731,7 +731,7 @@
   },
   {
    "id": "usa",
-   "flag": "🇺🇸",
+   "flag": "",
    "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/United_States_Mint_Philadelphia.jpg/800px-United_States_Mint_Philadelphia.jpg",
    "he": {
     "name": "בית המטבע האמריקאי",
@@ -774,7 +774,7 @@
       "purity": "כסף 999",
       "desc": "הנשר האמריקני הוא מטבע הבוליון הנפוץ בצפון אמריקה, מיוצר מאז 1986. למטבע מעמד הילך חוקי בארה\"ב וערך נקוב סמלי של דולר אחד. נחשב לאחד המטבעות הנוחים למכירה מחדש ברחבי העולם.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2",
-      "emoji": "🦅",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -785,7 +785,7 @@
       "purity": "כסף 999",
       "desc": "מטבע זיכרון כסף של בית המטבע האמריקאי, הוצע בקיץ 2001 עד גמר המלאי (500,000 יחידות). המטבע מציין את פתיחת המוזיאון הלאומי לעם האינדיאני האמריקאי. העיצוב מבוסס על מטבע הביזון הקלאסי (1913–1938): פרופיל יליד אמריקאי בצד אחד וביזון בצד השני. עוצב על ידי הפסל ג'יימס ארל פרייזר.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3",
-      "emoji": "🦬",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -796,7 +796,7 @@
       "purity": "כסף 999",
       "desc": "מטיל השקעה אמריקאי מיצרן Sunshine Minting — אחד מיצרני הכסף הפרטיים המובילים בארה\"ב. על המטיל: לוגו הנשר, טוהר 999 ומשקל 10 אונקיות. מטילים אלו נפוצים בקרב משקיעי כסף פיזי: פרמיה לרוב נמוכה יותר ממטבעות, משקל ברור ונזילות טובה. חלק מהמטילים כוללים שכבת אבטחה מיקרוסקופית לאימות.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/sunshine-mint-10oz-bar.webp?v=3",
-      "emoji": "🥈",
+      "emoji": "",
       "transparent": true
      }
     ],
@@ -864,7 +864,7 @@
       "purity": ".999 Silver",
       "desc": "The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2",
-      "emoji": "🦅",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -875,7 +875,7 @@
       "purity": ".999 Silver",
       "desc": "The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913–1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876–1953) was also known for \"The End of the Trail\" and other major American medals.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3",
-      "emoji": "🦬",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -886,7 +886,7 @@
       "purity": ".999 Silver",
       "desc": "Investment silver bar from Sunshine Minting — one of America's leading private mints. Stamped with the Sunshine Minting eagle logo, .999 FINE SILVER, and 10 OUNCES. Popular with physical silver stackers: typically lower premium per ounce than coins, clear weight, and good secondary-market liquidity. Some bars include MintMark SI micro-engraving for authentication.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/sunshine-mint-10oz-bar.webp?v=3",
-      "emoji": "🥈",
+      "emoji": "",
       "transparent": true
      }
     ],
@@ -954,7 +954,7 @@
       "purity": "Серебро 999",
       "desc": "Американский серебряный орёл — самая популярная инвестиционная монета в Северной Америке, выпускается с 1986 года. Имеет статус законного платёжного средства США с номиналом 1 доллар. Широко известна и относительно легко продаётся по всему миру.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-silver-eagle.webp?v=2",
-      "emoji": "🦅",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -965,7 +965,7 @@
       "purity": "Серебро 999",
       "desc": "Памятная серебряная монета Монетного двора США, продавалась летом 2001 года до полного распродажа (500 000 экземпляров). Посвящена открытию Национального музея американских индейцев. Дизайн основан на классической монете с бизоном (1913–1938): профиль коренного американца и бизон. Автор — скульптор Джеймс Эрл Фрейзер.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3",
-      "emoji": "🦬",
+      "emoji": "",
       "transparent": true
      },
      {
@@ -976,7 +976,7 @@
       "purity": "Серебро 999",
       "desc": "Инвестиционный слиток от частного монетного двора Sunshine Minting — одного из ведущих производителей серебра в США. На слитке: логотип орла, проба 999 и вес 10 унций. Популярен у инвесторов: обычно ниже премия за унцию, чем у монет, понятный вес и хорошая ликвидность. На некоторых слитках есть микрогравировка для проверки подлинности.",
       "img": "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/sunshine-mint-10oz-bar.webp?v=3",
-      "emoji": "🥈",
+      "emoji": "",
       "transparent": true
      }
     ],
@@ -1008,7 +1008,7 @@
   },
   {
    "id": "canada",
-   "flag": "🇨🇦",
+   "flag": "",
    "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Royal_Canadian_Mint_main_fa%C3%A7ade.JPG/800px-Royal_Canadian_Mint_main_fa%C3%A7ade.JPG",
    "he": {
     "name": "בית המטבע המלכותי הקנדי",
@@ -1183,7 +1183,7 @@
   },
   {
    "id": "perth",
-   "flag": "🇦🇺",
+   "flag": "",
    "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Perth_Mint%2C_WA%2C_2023.jpg/800px-Perth_Mint%2C_WA%2C_2023.jpg",
    "he": {
     "name": "בית המטבע של פרת'",
@@ -1358,7 +1358,7 @@
   },
   {
    "id": "austria",
-   "flag": "🇦🇹",
+   "flag": "",
    "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Am_Heumarkt_1_Hauptmuenzamt_DSC_7408w.jpg/800px-Am_Heumarkt_1_Hauptmuenzamt_DSC_7408w.jpg",
    "he": {
     "name": "בית המטבע הווינאי",
@@ -1533,7 +1533,7 @@
   },
   {
    "id": "mexico",
-   "flag": "🇲🇽",
+   "flag": "",
    "buildingImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antigua_Casa_de_Moneda.JPG/800px-Antigua_Casa_de_Moneda.JPG",
    "he": {
     "name": "בית המטבע המקסיקני",

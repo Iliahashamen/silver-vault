@@ -1,7 +1,7 @@
 [
   {
     "id": "gg_001",
-    "icon": "⚜️",
+    "icon": "",
     "order": 10,
     "published": true,
     "he": {
@@ -19,7 +19,7 @@
   },
   {
     "id": "gg_002",
-    "icon": "📏",
+    "icon": "",
     "order": 20,
     "published": true,
     "he": {
@@ -37,7 +37,7 @@
   },
   {
     "id": "gg_003",
-    "icon": "🏅",
+    "icon": "",
     "order": 30,
     "published": true,
     "he": {
@@ -55,7 +55,7 @@
   },
   {
     "id": "gg_004",
-    "icon": "🇮🇱",
+    "icon": "",
     "order": 40,
     "published": true,
     "he": {
@@ -73,7 +73,7 @@
   },
   {
     "id": "gg_005",
-    "icon": "📊",
+    "icon": "",
     "order": 50,
     "published": true,
     "he": {
@@ -91,7 +91,7 @@
   },
   {
     "id": "gg_006",
-    "icon": "🔒",
+    "icon": "",
     "order": 60,
     "published": true,
     "he": {
@@ -109,7 +109,7 @@
   },
   {
     "id": "gg_007",
-    "icon": "⚖️",
+    "icon": "",
     "order": 70,
     "published": true,
     "he": {
