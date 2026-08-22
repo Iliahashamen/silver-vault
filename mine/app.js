@@ -211,11 +211,7 @@ async function updateGoldPrice() {
         const data = await res.json();
         if (!data.success) throw new Error();
         goldPrice = Number(data.xau_usd);
-        const perGram = (goldPrice / 31.1035).toFixed(2);
         document.getElementById('price-value').textContent  = `$${goldPrice.toFixed(2)}`;
-        // Show per-gram in subtitle if element exists
-        const perGramEl = document.getElementById('price-per-gram');
-        if (perGramEl) perGramEl.textContent = `$${perGram}/גרם`;
         document.getElementById('price-update').textContent =
             `עודכן לפני ${Math.floor((data.cache_age_seconds || 0) / 60)} דקות`;
         priceOk = true;

@@ -608,7 +608,7 @@ input, textarea, .chat-messages, .chat-message {
     font-size: 22px;
     color: var(--green);
     font-weight: 800;
-    font-family: 'Playfair Display', 'Comfortaa', serif;
+    font-family: 'Comfortaa', sans-serif;
     background: var(--card);
     padding: 4px 18px;
     border-radius: var(--radius-pill);
@@ -1450,7 +1450,7 @@ input, textarea, .chat-messages, .chat-message {
 .price-strip-value {
     font-size: 22px;
     color: var(--clay-dk);
-    font-family: 'Playfair Display', 'Comfortaa', serif;
+    font-family: 'Comfortaa', sans-serif;
     font-weight: 700;
 }
 
@@ -3279,11 +3279,7 @@ body.dark-mode .guide-tip-box  { background: rgba(50,140,100,0.13); }
     opacity: 0.4;
 }
 
-/* ── Gold price display — Playfair Display ───────────────────────── */
-.price-value,
-.dashboard-title {
-    font-family: 'Playfair Display', Georgia, serif !important;
-}
+/* Price strip matches The Vault (Comfortaa) — set on .price-strip-value above */
 
 /* ── Gold accent for active states ─────────────────────────────── */
 .nav-icon.active .nav-icon-img {
