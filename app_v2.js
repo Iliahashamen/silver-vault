@@ -52,11 +52,12 @@ const uid = tg?.initDataUnsafe?.user?.id || _stableWebUid();
         const dash = document.getElementById('dashboard-screen');
         if (dash) {
             document.querySelectorAll('.screen').forEach((s) => {
-                if (s !== dash) { s.classList.remove('active'); s.style.display = 'none'; }
+                s.classList.remove('active', 'screen-leaving');
+                s.style.display = '';
+                s.style.opacity = '';
+                s.style.transform = '';
             });
             dash.classList.add('active');
-            dash.style.display = 'flex';
-            dash.style.opacity = '1';
         }
     } catch (e) {}
 })();
@@ -101,6 +102,13 @@ function goToScreen(screenId) {
     const current = document.querySelector('.screen.active');
     const target = document.getElementById(screenId);
     if (!target || (current && current.id === screenId)) return;
+
+    // Clear anti-flash inline styles so .screen.active can show again
+    document.querySelectorAll('.screen').forEach((s) => {
+        s.style.display = '';
+        s.style.opacity = '';
+        s.style.transform = '';
+    });
 
     function activateTarget() {
         target.classList.add('active');
@@ -155,10 +163,8 @@ function applyDarkMode(dark) {
     // Restart opacity flash via rAF — avoids synchronous forced reflow
     document.body.classList.remove('dark-mode-animating');
     requestAnimationFrame(() => document.body.classList.add('dark-mode-animating'));
-    const icon  = document.getElementById('dark-mode-icon');
     const label = document.getElementById('dark-mode-label');
-    if (icon)  icon.textContent = dark ? 'יום' : 'לילה';
-    if (label) label.textContent = dark ? 'חזרה למצב יום' : 'מצב לילה';
+    if (label) label.textContent = dark ? 'מצב בהיר/כהה - כהה' : 'מצב בהיר/כהה - בהיר';
 }
 
 function toggleDarkMode() {
@@ -198,16 +204,16 @@ async function showDashboard() {
     document.querySelectorAll('.terminal-container, .terminal-header, .vault-title').forEach((el) => el.remove());
 
     // Show dashboard BEFORE any network await — prevents 1s login flash
+    // (do not pin inline display:none — that blocks later goToScreen navigation)
     document.querySelectorAll('.screen').forEach((s) => {
         s.classList.remove('active', 'screen-leaving');
-        s.style.display = 'none';
+        s.style.display = '';
+        s.style.opacity = '';
+        s.style.transform = '';
     });
     const dash = document.getElementById('dashboard-screen');
     if (dash) {
         dash.classList.add('active');
-        dash.style.display = 'flex';
-        dash.style.opacity = '1';
-        dash.style.transform = 'none';
     }
 
     const token = sessionToken();
@@ -2586,8 +2592,8 @@ function initDashboard() {
     loadPnl();
     renderPnl();
 
-    // ── Main menu navigation ──
-    document.querySelectorAll('.main-switch-btn, .icon-btn').forEach(b => {
+    // ── Main menu navigation (only buttons that declare a target screen) ──
+    document.querySelectorAll('.icon-btn[data-target], .main-switch-btn[data-target]').forEach(b => {
         b.onclick = () => goToScreen(`${b.dataset.target}-screen`);
     });
 

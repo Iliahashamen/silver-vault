@@ -137,10 +137,8 @@ function applyDarkMode(dark) {
     // Restart opacity flash via rAF — avoids synchronous forced reflow
     document.body.classList.remove('dark-mode-animating');
     requestAnimationFrame(() => document.body.classList.add('dark-mode-animating'));
-    const icon  = document.getElementById('dark-mode-icon');
     const label = document.getElementById('dark-mode-label');
-    if (icon)  icon.textContent = dark ? 'יום' : 'לילה';
-    if (label) label.textContent = dark ? 'חזרה למצב יום' : 'מצב לילה';
+    if (label) label.textContent = dark ? 'מצב בהיר/כהה - כהה' : 'מצב בהיר/כהה - בהיר';
 }
 
 function toggleDarkMode() {
@@ -2312,7 +2310,7 @@ function initDashboard() {
     renderPnl();
 
     // ── Main menu navigation ──
-    document.querySelectorAll('.main-switch-btn, .icon-btn').forEach(b => {
+    document.querySelectorAll('.icon-btn[data-target], .main-switch-btn[data-target]').forEach(b => {
         b.onclick = () => goToScreen(`${b.dataset.target}-screen`);
     });
 

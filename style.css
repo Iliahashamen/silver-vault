@@ -3258,8 +3258,7 @@ body.dark-mode .guide-tip-box  { background: rgba(50,140,100,0.13); }
 #login-screen,
 .terminal-container,
 .terminal-header,
-.vault-title,
-.neon-button {
+.vault-title {
   display: none !important;
   visibility: hidden !important;
   pointer-events: none !important;
