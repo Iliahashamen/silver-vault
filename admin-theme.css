@@ -93,7 +93,7 @@ body::before {
     width: min(620px, 78vw);
     aspect-ratio: 1.5;
     background: linear-gradient(135deg, var(--beige), var(--green) 58%, var(--magenta));
-    mask-image: url("palm_circle.png?v=2");
+    mask-image: url("assets/images/palm_circle.png?v=3");
     mask-mode: luminance;
     mask-position: center;
     mask-repeat: no-repeat;

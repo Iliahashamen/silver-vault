@@ -277,7 +277,7 @@ async function save() {
 }
 
 async function seed() {
-    const file = `seed_${current}.json?ts=${Date.now()}`;
+    const file = `data/seeds/seed_${current}.json?ts=${Date.now()}`;
     saveMsg('טוען מובנה...', 'ok');
     try {
         const res = await fetch(file); const d = await res.json();
