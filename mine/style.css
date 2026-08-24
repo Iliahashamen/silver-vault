@@ -8,13 +8,15 @@
 
 /* ── GOLD SERIF DESIGN TOKENS ───────────────────────────────────── */
 :root {
-    /* ---- Background — warm ivory instead of sage ---- */
-    --bg:            #B09060;   /* warm gold-brown for body bg */
+    /* ---- Background — warm sand & cocoa ---- */
+    --bg:            #B89868;
 
-    /* ---- Blob / terrain — warm amber-browns ---- */
-    --blob-dk:       #5A3E1E;   /* dark amber-brown */
-    --blob-md:       #7A5628;
-    --blob-lt:       #9A6E38;
+    /* ---- Bubble palette — beige & brown only ---- */
+    --bubble-cream:  #F0E2C8;
+    --bubble-beige:  #D4B88E;
+    --bubble-tan:    #A88458;
+    --bubble-brown:  #6B4828;
+    --bubble-deep:   #3D2812;
 
     /* ---- Cards — warm ivory, very light so they "float" ---- */
     --card:          #FAFAF8;   /* Serif ivory */
@@ -90,9 +92,11 @@
 /* ── DARK MODE (Gold warm dark) ──────────────────────────────── */
 body.dark-mode {
     --bg:            #1A1208;
-    --blob-dk:       #0e0a02;
-    --blob-md:       #1a1206;
-    --blob-lt:       #261c0a;
+    --bubble-cream:  #3A3020;
+    --bubble-beige:  #2A2216;
+    --bubble-tan:    #1E180E;
+    --bubble-brown:  #120E08;
+    --bubble-deep:   #080604;
 
     --card:          #2A220E;
     --card-inner:    #221a08;
@@ -172,8 +176,6 @@ body.dark-mode .mr-d-modal {
     background: rgba(8, 12, 8, 0.72);
 }
 
-body.dark-mode .blob { opacity: 0.35; }
-
 /* Dark mode active state for dark-mode-btn */
 body.dark-mode #dark-mode-btn {
     background: var(--teal);
@@ -195,6 +197,10 @@ body.dark-mode #dark-mode-btn {
 /* ── BODY ───────────────────────────────────────────────────────── */
 body {
     font-family: 'Assistant', sans-serif;
+    background:
+        radial-gradient(ellipse 130% 90% at 50% 110%, rgba(61, 40, 18, 0.55) 0%, transparent 58%),
+        radial-gradient(ellipse 80% 55% at 12% 8%, rgba(240, 226, 200, 0.42) 0%, transparent 52%),
+        linear-gradient(155deg, #D4BC94 0%, #C4A878 32%, #A88858 68%, #8B7048 100%);
     background-color: var(--bg);
     color: var(--text);
     overflow-x: hidden;
@@ -205,6 +211,12 @@ body {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+}
+
+body.dark-mode {
+    background:
+        radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0, 0, 0, 0.65) 0%, transparent 55%),
+        linear-gradient(160deg, #221808 0%, #1A1208 45%, #0E0A04 100%);
 }
 
 /* Allow text selection only in inputs and chat */
@@ -218,9 +230,7 @@ input, textarea, .chat-messages, .chat-message {
 .matrix-container { display: none; }
 
 /* ════════════════════════════════════════════
-   3D CLAY TERRAIN BLOBS
-   Each blob is an organic shape with a flat-top
-   highlight + bottom shadow to sell the 3D hill look
+   SOFT BEIGE / BROWN BUBBLES — bokeh-style depth
    ════════════════════════════════════════════ */
 .clay-bg {
     position: fixed;
@@ -228,84 +238,166 @@ input, textarea, .chat-messages, .chat-message {
     overflow: hidden;
     z-index: 0;
     pointer-events: none;
+    isolation: isolate;
+}
+
+.clay-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    mix-blend-mode: multiply;
 }
 
 .blob {
     position: absolute;
-    background: var(--blob-dk);
+    border-radius: 50%;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
 }
 
-/* ---- BLOB 1: massive bottom-left mountain ---- */
+/* Large bottom-left sphere */
 .blob-1 {
-    width: 85vw;
-    height: 75vw;
-    bottom: -38vw;
-    left: -25vw;
-    background: radial-gradient(ellipse at 45% 30%, var(--blob-md) 0%, var(--blob-dk) 55%, #2A3E30 100%);
-    border-radius: 55% 45% 30% 70% / 60% 30% 70% 40%;
+    width: min(78vw, 760px);
+    height: min(78vw, 760px);
+    bottom: -22%;
+    left: -14%;
+    background:
+        radial-gradient(circle at 34% 28%,
+            rgba(255, 248, 235, 0.98) 0%,
+            rgba(232, 210, 175, 0.92) 16%,
+            rgba(196, 158, 108, 0.88) 38%,
+            rgba(139, 96, 58, 0.94) 62%,
+            rgba(74, 48, 26, 0.98) 100%);
     box-shadow:
-        0  30px 80px rgba(20, 38, 28, 0.70),   /* ground shadow */
-        inset 0 -20px 60px rgba(20,38,28,0.35), /* inner bottom dark */
-        inset 0  15px 40px rgba(110,160,130,0.25); /* top highlight */
-    filter: blur(0.5px);
+        0 40px 90px rgba(48, 30, 14, 0.28),
+        inset -18px -28px 52px rgba(48, 28, 12, 0.22),
+        inset 14px 18px 36px rgba(255, 240, 215, 0.28);
+    filter: blur(1px);
+    animation: mineBubbleDrift1 26s ease-in-out infinite;
 }
 
-/* ---- BLOB 2: top-right terrain mass ---- */
+/* Top-right sphere */
 .blob-2 {
-    width: 65vw;
-    height: 60vw;
-    top: -28vw;
-    right: -22vw;
-    background: radial-gradient(ellipse at 50% 65%, var(--blob-md) 0%, var(--blob-dk) 55%, #2A3E30 100%);
-    border-radius: 45% 55% 70% 30% / 40% 65% 35% 60%;
+    width: min(62vw, 580px);
+    height: min(62vw, 580px);
+    top: -16%;
+    right: -12%;
+    background:
+        radial-gradient(circle at 38% 32%,
+            rgba(248, 236, 214, 0.96) 0%,
+            rgba(214, 184, 142, 0.90) 22%,
+            rgba(168, 124, 78, 0.88) 48%,
+            rgba(96, 64, 36, 0.96) 100%);
     box-shadow:
-        0  20px 60px rgba(20, 38, 28, 0.60),
-        inset 0 -15px 45px rgba(20,38,28,0.30),
-        inset 0  12px 35px rgba(110,160,130,0.20);
-    filter: blur(0.5px);
+        0 32px 70px rgba(48, 30, 14, 0.24),
+        inset -14px -22px 44px rgba(48, 28, 12, 0.18),
+        inset 12px 14px 30px rgba(255, 240, 215, 0.24);
+    filter: blur(1px);
+    animation: mineBubbleDrift2 32s ease-in-out infinite;
 }
 
-/* ---- BLOB 3: bottom-right secondary shape ---- */
+/* Bottom-right accent bubble */
 .blob-3 {
-    width: 55vw;
-    height: 48vw;
-    bottom: -22vw;
-    right: -18vw;
-    background: radial-gradient(ellipse at 40% 35%, var(--blob-lt) 0%, var(--blob-md) 50%, var(--blob-dk) 100%);
-    border-radius: 65% 35% 50% 50% / 35% 55% 45% 65%;
+    width: min(48vw, 440px);
+    height: min(48vw, 440px);
+    bottom: 6%;
+    right: -6%;
+    background:
+        radial-gradient(circle at 36% 30%,
+            rgba(245, 228, 198, 0.94) 0%,
+            rgba(201, 168, 120, 0.88) 30%,
+            rgba(122, 82, 48, 0.92) 68%,
+            rgba(61, 40, 22, 0.96) 100%);
     box-shadow:
-        0  18px 50px rgba(20, 38, 28, 0.55),
-        inset 0 -10px 35px rgba(20,38,28,0.28),
-        inset 0  10px 28px rgba(110,160,130,0.18);
-    filter: blur(0.8px);
+        0 24px 56px rgba(48, 30, 14, 0.22),
+        inset -10px -18px 36px rgba(48, 28, 12, 0.16),
+        inset 10px 12px 24px rgba(255, 240, 215, 0.20);
+    filter: blur(0.5px);
+    animation: mineBubbleDrift3 24s ease-in-out infinite;
 }
 
-/* ---- BLOB 4: mid-left accent ---- */
+/* Mid-left soft glow */
 .blob-4 {
-    width: 30vw;
-    height: 30vw;
-    top: 35%;
-    left: -12vw;
-    background: radial-gradient(ellipse at 55% 40%, var(--blob-lt) 0%, var(--blob-dk) 80%);
-    border-radius: 50% 50% 65% 35% / 55% 45% 55% 45%;
-    box-shadow:
-        0 12px 35px rgba(20, 38, 28, 0.45),
-        inset 0 8px 20px rgba(110,160,130,0.15);
-    filter: blur(1px);
+    width: min(36vw, 340px);
+    height: min(36vw, 340px);
+    top: 38%;
+    left: -8%;
+    background:
+        radial-gradient(circle at 42% 38%,
+            rgba(255, 246, 230, 0.82) 0%,
+            rgba(212, 184, 142, 0.72) 35%,
+            rgba(139, 96, 58, 0.78) 72%,
+            rgba(74, 48, 26, 0.85) 100%);
+    filter: blur(28px);
+    opacity: 0.88;
+    animation: mineBubbleDrift4 20s ease-in-out infinite;
 }
 
-/* ---- BLOB 5: top-left small hill ---- */
+/* Top-left highlight orb */
 .blob-5 {
-    width: 28vw;
-    height: 26vw;
-    top: -10vw;
-    left: 10%;
-    background: radial-gradient(ellipse at 50% 60%, var(--blob-md) 0%, var(--blob-dk) 75%);
-    border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%;
-    box-shadow:
-        0 10px 28px rgba(20, 38, 28, 0.40),
-        inset 0 6px 18px rgba(110,160,130,0.12);
-    filter: blur(1px);
+    width: min(32vw, 300px);
+    height: min(32vw, 300px);
+    top: 8%;
+    left: 14%;
+    background:
+        radial-gradient(circle at 40% 35%,
+            rgba(255, 250, 240, 0.90) 0%,
+            rgba(228, 206, 168, 0.78) 28%,
+            rgba(168, 124, 78, 0.70) 62%,
+            rgba(96, 64, 36, 0.82) 100%);
+    filter: blur(24px);
+    opacity: 0.82;
+    animation: mineBubbleDrift5 18s ease-in-out infinite;
+}
+
+@keyframes mineBubbleDrift1 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50%      { transform: translate3d(2.5%, -1.5%, 0) scale(1.03); }
+}
+
+@keyframes mineBubbleDrift2 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50%      { transform: translate3d(-2%, 2%, 0) scale(1.04); }
+}
+
+@keyframes mineBubbleDrift3 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50%      { transform: translate3d(-1.5%, -2%, 0) scale(1.02); }
+}
+
+@keyframes mineBubbleDrift4 {
+    0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.88; }
+    50%      { transform: translate3d(3%, 1.5%, 0); opacity: 0.94; }
+}
+
+@keyframes mineBubbleDrift5 {
+    0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.82; }
+    50%      { transform: translate3d(-2%, 2.5%, 0); opacity: 0.90; }
+}
+
+body.dark-mode .blob-1,
+body.dark-mode .blob-2,
+body.dark-mode .blob-3 {
+    background:
+        radial-gradient(circle at 36% 30%,
+            rgba(80, 64, 40, 0.55) 0%,
+            rgba(48, 36, 20, 0.72) 40%,
+            rgba(24, 18, 10, 0.88) 100%);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .blob-4,
+body.dark-mode .blob-5 {
+    background:
+        radial-gradient(circle at 40% 35%,
+            rgba(60, 48, 28, 0.40) 0%,
+            rgba(28, 22, 12, 0.65) 100%);
+    filter: blur(36px);
+    opacity: 0.55;
 }
 
 /* All content sits on top of blobs */
