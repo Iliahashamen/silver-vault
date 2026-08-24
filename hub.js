@@ -108,8 +108,9 @@ function trendClass(current, prior) {
 
 function metalTickerSpan(label, quote, value, trend) {
     return (
-        '<span class="' + trend + '">' +
-        label + ' ' + quote + ' ' + formatUsd(value) +
+        '<span class="tick-metal">' +
+        '<span class="tick-label">' + label + ' ' + quote + ' </span>' +
+        '<span class="tick-price ' + trend + '">' + formatUsd(value) + '</span>' +
         '</span>'
     );
 }
@@ -119,9 +120,9 @@ function buildTickerHtml(silver, gold) {
     const goldPart = metalTickerSpan('GOLD', 'XAU/USD', gold.current, gold.trend);
     return (
         silverPart +
-        '<span class="tick-sep">◆</span>' +
+        '<span class="tick-sep">■</span>' +
         goldPart +
-        '<span class="tick-sep">◆</span>'
+        '<span class="tick-sep">■</span>'
     );
 }
 
