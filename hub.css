@@ -110,42 +110,36 @@ html, body {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.hub-ticker-segment .tick-label {
-  color: rgba(255, 255, 255, 0.88);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
-}
-
-.hub-ticker-segment .tick-price.tick-up {
+.hub-ticker-segment .tick-metal.tick-up {
   color: #6bdc6b;
   text-shadow:
     0 0 6px rgba(107, 220, 107, 0.55),
     0 0 14px rgba(107, 220, 107, 0.22);
 }
 
-.hub-ticker-segment .tick-price.tick-down {
+.hub-ticker-segment .tick-metal.tick-down {
   color: #ff5c5c;
   text-shadow:
     0 0 6px rgba(255, 92, 92, 0.55),
     0 0 14px rgba(255, 92, 92, 0.22);
 }
 
-.hub-ticker-segment .tick-price.tick-flat {
+.hub-ticker-segment .tick-metal.tick-flat {
   color: rgba(255, 255, 255, 0.75);
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.12);
 }
 
 .hub-ticker-segment .tick-sep {
   color: #ffffff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
-  padding: 0 14px;
+  font-size: 16px;
+  line-height: 1;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  padding: 0 12px;
 }
 
-.hub-ticker.is-loading .hub-ticker-segment {
+.hub-ticker.is-loading .hub-ticker-segment .tick-metal {
   color: rgba(255, 255, 255, 0.45);
-}
-
-.hub-ticker.is-loading .hub-ticker-segment .tick-price {
-  color: rgba(255, 255, 255, 0.45);
+  text-shadow: none;
 }
 
 @keyframes hubTickerScroll {
