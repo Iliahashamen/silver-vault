@@ -1404,7 +1404,7 @@ input, textarea, .chat-messages, .chat-message {
         margin-top: 14px;
     }
 
-    .icon-btn-label { font-size: clamp(11px, 1.1vw, 14px); padding: 6px 6px 8px; }
+    .icon-btn-label { font-size: clamp(14px, 1.35vw, 17px); padding: 7px 6px 9px; }
 }
 
 @media (min-width: 900px) {
@@ -1575,12 +1575,12 @@ input, textarea, .chat-messages, .chat-message {
     z-index: 2;
     flex-shrink: 0;
     font-family: 'Assistant', sans-serif;
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 800;
     color: var(--text);
     text-align: center;
-    line-height: 1.2;
-    padding: 5px 4px 7px;
+    line-height: 1.25;
+    padding: 7px 6px 9px;
     background: none;
 }
 
@@ -1607,7 +1607,7 @@ body.dark-mode .main-switch-btn.active {
 
 @media (max-width: 360px) {
     .icon-grid { gap: 8px; }
-    .icon-btn-label { font-size: 10px; padding: 4px 4px 6px; }
+    .icon-btn-label { font-size: 13px; padding: 6px 5px 8px; }
 }
 
 /* Personal area sub-menu */
