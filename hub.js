@@ -110,6 +110,7 @@ async function doLogin(passcode) {
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ passcode }),
     });
+    if (res.status === 503) throw new Error('unavailable');
     if (!res.ok) throw new Error('bad_status');
     const data = await res.json();
     if (!data.success || !data.token) throw new Error('denied');
@@ -200,8 +201,10 @@ async function boot() {
             const token = await doLogin(passcode);
             saveSession(token);
             showSystems();
-        } catch {
-            showError('קוד שגוי — נסה שוב');
+        } catch (err) {
+            showError(err && err.message === 'unavailable'
+                ? 'השרת לא מוגדר — נסה שוב בעוד דקה'
+                : 'קוד שגוי — נסה שוב');
             if (btn) { btn.classList.remove('loading'); btn.textContent = 'כניסה'; btn.disabled = false; }
             busy = false;
             inp && inp.focus();
