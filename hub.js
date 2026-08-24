@@ -28,8 +28,9 @@ function initGridCanvas() {
     window.addEventListener('resize', resize);
 
     const CELL = 52;
-    const GOLD = 'rgba(201, 162, 39, 0.09)';
-    const BLUE = 'rgba(80, 140, 220, 0.055)';
+    const GOLD_MAIN = 'rgba(201, 162, 39, 0.14)';
+    const GOLD_BRIGHT = 'rgba(226, 191, 80, 0.22)';
+    const GOLD_DIAG = 'rgba(201, 162, 39, 0.08)';
     let offset = 0;
 
     function draw() {
@@ -38,23 +39,23 @@ function initGridCanvas() {
         const rows = Math.ceil(canvas.height / CELL) + 2;
         const ox   = (offset % CELL);
 
-        ctx.lineWidth = 0.6;
-        ctx.strokeStyle = BLUE;
+        ctx.lineWidth = 0.65;
+        ctx.strokeStyle = GOLD_MAIN;
         for (let c = -1; c < cols; c++) {
             ctx.beginPath();
             ctx.moveTo(c * CELL - ox, 0);
             ctx.lineTo(c * CELL - ox, canvas.height);
             ctx.stroke();
         }
-        ctx.strokeStyle = GOLD;
+        ctx.strokeStyle = GOLD_BRIGHT;
         for (let r = -1; r < rows; r++) {
             ctx.beginPath();
             ctx.moveTo(0, r * CELL - ox);
             ctx.lineTo(canvas.width, r * CELL - ox);
             ctx.stroke();
         }
-        ctx.strokeStyle = 'rgba(201, 162, 39, 0.035)';
-        ctx.lineWidth = 0.4;
+        ctx.strokeStyle = GOLD_DIAG;
+        ctx.lineWidth = 0.45;
         for (let c = -1; c < cols + rows; c++) {
             ctx.beginPath();
             ctx.moveTo(c * CELL - ox, 0);
