@@ -768,15 +768,15 @@ function _switchNewsLang(lang) {
 async function loadNews() {
     const container = document.getElementById('news-container');
     if (!container) return;
-    if (_newsData) { _renderNewsDigest(_newsLang); return; }
 
     container.innerHTML = '<div class="news-loading">טוען חדשות...</div>';
 
     try {
-        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/news`);
+        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/news`, { cache: 'no-store' });
         const data = await res.json();
 
         if (!data.success || !Array.isArray(data.items) || !data.items.length) {
+            _newsData = null;
             container.innerHTML = '<p class="news-empty">אין חדשות זמינות כרגע. נסה שוב מאוחר יותר.</p>';
             return;
         }
