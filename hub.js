@@ -76,23 +76,57 @@ function formatUsd(value) {
     });
 }
 
-function buildTickerHtml(gold, silver) {
-    const goldStr = formatUsd(gold);
-    const silverStr = formatUsd(silver);
+function parseHistoryTime(dateStr) {
+    const t = Date.parse(String(dateStr).replace(' ', 'T'));
+    return Number.isNaN(t) ? null : t;
+}
+
+function priceOneHourAgo(points) {
+    if (!Array.isArray(points) || points.length < 2) return null;
+    const last = points[points.length - 1];
+    const lastTime = parseHistoryTime(last.date);
+    if (lastTime == null) return points[points.length - 2].price;
+
+    for (let i = points.length - 2; i >= 0; i--) {
+        const t = parseHistoryTime(points[i].date);
+        if (t == null) continue;
+        if (lastTime - t >= 50 * 60 * 1000) {
+            return Number(points[i].price);
+        }
+    }
+    return Number(points[0].price);
+}
+
+function trendClass(current, prior) {
+    if (current == null || prior == null || Number.isNaN(current) || Number.isNaN(prior)) {
+        return 'tick-flat';
+    }
+    if (current > prior) return 'tick-up';
+    if (current < prior) return 'tick-down';
+    return 'tick-flat';
+}
+
+function metalTickerSpan(label, quote, value, trend) {
     return (
-        '<span class="tick-gold">GOLD XAU/USD ' + goldStr + '</span>' +
+        '<span class="' + trend + '">' +
+        label + ' ' + quote + ' ' + formatUsd(value) +
+        '</span>'
+    );
+}
+
+function buildTickerHtml(silver, gold) {
+    const silverPart = metalTickerSpan('SILVER', 'XAG/USD', silver.current, silver.trend);
+    const goldPart = metalTickerSpan('GOLD', 'XAU/USD', gold.current, gold.trend);
+    return (
+        silverPart +
         '<span class="tick-sep">◆</span>' +
-        '<span class="tick-silver">SILVER XAG/USD ' + silverStr + '</span>' +
-        '<span class="tick-sep">◆</span>' +
-        '<span class="tick-live">LIVE</span>' +
-        '<span class="tick-sep">◆</span>' +
-        '<span class="tick-gold">GROUPTECH MARKETS</span>' +
+        goldPart +
         '<span class="tick-sep">◆</span>'
     );
 }
 
-function renderHubTicker(gold, silver) {
-    const html = buildTickerHtml(gold, silver);
+function renderHubTicker(silver, gold) {
+    const html = buildTickerHtml(silver, gold);
     const a = document.getElementById('hub-ticker-a');
     const b = document.getElementById('hub-ticker-b');
     const wrap = document.querySelector('.hub-ticker');
@@ -101,33 +135,59 @@ function renderHubTicker(gold, silver) {
     if (wrap) wrap.classList.remove('is-loading');
 }
 
-async function refreshHubTickerPrices() {
-    let gold = null;
-    let silver = null;
+async function fetchMetalQuote(priceUrl, historyUrl, priceKey) {
+    let current = null;
+    let hourAgo = null;
 
     try {
-        const [goldRes, silverRes] = await Promise.all([
-            fetch(`${HUB_API_URL}/api/gold-price`, { cache: 'no-store' }),
-            fetch(`${HUB_API_URL}/api/silver-price`, { cache: 'no-store' }),
+        const [priceRes, histRes] = await Promise.all([
+            fetch(priceUrl, { cache: 'no-store' }),
+            fetch(historyUrl, { cache: 'no-store' }),
         ]);
-        const goldData = await goldRes.json();
-        const silverData = await silverRes.json();
-        if (goldData.success && goldData.xau_usd != null) {
-            gold = Number(goldData.xau_usd);
+        const priceData = await priceRes.json();
+        const histData = await histRes.json();
+
+        if (priceData.success && priceData[priceKey] != null) {
+            current = Number(priceData[priceKey]);
         }
-        if (silverData.success && silverData.xag_usd != null) {
-            silver = Number(silverData.xag_usd);
+
+        if (histData.success && Array.isArray(histData.data) && histData.data.length) {
+            const points = histData.data;
+            if (current == null || Number.isNaN(current)) {
+                current = Number(points[points.length - 1].price);
+            }
+            hourAgo = priceOneHourAgo(points);
         }
     } catch (_) { /* keep placeholders */ }
 
-    renderHubTicker(gold, silver);
-    return { gold, silver };
+    return {
+        current,
+        trend: trendClass(current, hourAgo),
+    };
+}
+
+async function refreshHubTickerPrices() {
+    const [silver, gold] = await Promise.all([
+        fetchMetalQuote(
+            `${HUB_API_URL}/api/silver-price`,
+            `${HUB_API_URL}/api/silver-history?period=daily`,
+            'xag_usd'
+        ),
+        fetchMetalQuote(
+            `${HUB_API_URL}/api/gold-price`,
+            `${HUB_API_URL}/api/gold-history?period=daily`,
+            'xau_usd'
+        ),
+    ]);
+
+    renderHubTicker(silver, gold);
+    return { silver, gold };
 }
 
 function initHubTicker() {
     const wrap = document.querySelector('.hub-ticker');
     if (wrap) wrap.classList.add('is-loading');
-    renderHubTicker(null, null);
+    renderHubTicker({ current: null, trend: 'tick-flat' }, { current: null, trend: 'tick-flat' });
     refreshHubTickerPrices();
     setInterval(refreshHubTickerPrices, 2 * 60 * 1000);
 }
