@@ -54,6 +54,125 @@ html, body {
   gap: 0;
 }
 
+/* ── Live price ticker ─────────────────────────────────────────────────── */
+.hub-ticker {
+  width: 100%;
+  max-width: 280px;
+  margin-bottom: 18px;
+  animation: fadeInUp 0.7s ease both;
+}
+
+.hub-ticker-window {
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(4, 10, 18, 0.88) 100%);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 8px;
+  padding: 10px 0;
+  box-shadow:
+    inset 0 0 18px rgba(0, 0, 0, 0.65),
+    0 0 14px rgba(201, 162, 39, 0.08);
+  position: relative;
+}
+
+.hub-ticker-window::before,
+.hub-ticker-window::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 28px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hub-ticker-window::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(4, 10, 18, 0.95), transparent);
+}
+
+.hub-ticker-window::after {
+  right: 0;
+  background: linear-gradient(-90deg, rgba(4, 10, 18, 0.95), transparent);
+}
+
+.hub-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: hubTickerScroll 32s linear infinite;
+  will-change: transform;
+}
+
+.hub-ticker-segment {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  padding: 0 28px;
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6bdc6b;
+  text-shadow:
+    0 0 6px rgba(107, 220, 107, 0.45),
+    0 0 14px rgba(107, 220, 107, 0.18);
+}
+
+.hub-ticker-segment .tick-gold {
+  color: var(--gold-light);
+  text-shadow:
+    0 0 8px rgba(226, 191, 80, 0.55),
+    0 0 16px rgba(201, 162, 39, 0.25);
+}
+
+.hub-ticker-segment .tick-silver {
+  color: #d8e4ef;
+  text-shadow:
+    0 0 8px rgba(200, 220, 240, 0.45),
+    0 0 14px rgba(180, 200, 220, 0.2);
+}
+
+.hub-ticker-segment .tick-sep {
+  color: rgba(201, 162, 39, 0.55);
+  padding: 0 14px;
+}
+
+.hub-ticker-segment .tick-live {
+  color: #ff6b6b;
+  animation: hubTickerBlink 1.4s step-end infinite;
+}
+
+.hub-ticker.is-loading .hub-ticker-segment {
+  color: rgba(107, 220, 107, 0.55);
+}
+
+@keyframes hubTickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes hubTickerBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-ticker-track {
+    animation: none;
+    justify-content: center;
+    width: 100%;
+  }
+  .hub-ticker-segment:last-child {
+    display: none;
+  }
+  .hub-ticker-segment .tick-live {
+    animation: none;
+  }
+}
+
 /* ── Logo section ────────────────────────────────────────────────────────── */
 .hub-logo-wrap {
   display: flex;
@@ -341,6 +460,10 @@ html, body {
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 400px) {
+  .hub-ticker-segment {
+    font-size: 20px;
+    padding: 0 20px;
+  }
   .hub-logo {
     width: 100px;
     height: 100px;

@@ -68,6 +68,70 @@ function initGridCanvas() {
     draw();
 }
 
+function formatUsd(value) {
+    if (value == null || Number.isNaN(value)) return '$—';
+    return '$' + Number(value).toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    });
+}
+
+function buildTickerHtml(gold, silver) {
+    const goldStr = formatUsd(gold);
+    const silverStr = formatUsd(silver);
+    return (
+        '<span class="tick-gold">GOLD XAU/USD ' + goldStr + '</span>' +
+        '<span class="tick-sep">◆</span>' +
+        '<span class="tick-silver">SILVER XAG/USD ' + silverStr + '</span>' +
+        '<span class="tick-sep">◆</span>' +
+        '<span class="tick-live">LIVE</span>' +
+        '<span class="tick-sep">◆</span>' +
+        '<span class="tick-gold">GROUPTECH MARKETS</span>' +
+        '<span class="tick-sep">◆</span>'
+    );
+}
+
+function renderHubTicker(gold, silver) {
+    const html = buildTickerHtml(gold, silver);
+    const a = document.getElementById('hub-ticker-a');
+    const b = document.getElementById('hub-ticker-b');
+    const wrap = document.querySelector('.hub-ticker');
+    if (a) a.innerHTML = html;
+    if (b) b.innerHTML = html;
+    if (wrap) wrap.classList.remove('is-loading');
+}
+
+async function refreshHubTickerPrices() {
+    let gold = null;
+    let silver = null;
+
+    try {
+        const [goldRes, silverRes] = await Promise.all([
+            fetch(`${HUB_API_URL}/api/gold-price`, { cache: 'no-store' }),
+            fetch(`${HUB_API_URL}/api/silver-price`, { cache: 'no-store' }),
+        ]);
+        const goldData = await goldRes.json();
+        const silverData = await silverRes.json();
+        if (goldData.success && goldData.xau_usd != null) {
+            gold = Number(goldData.xau_usd);
+        }
+        if (silverData.success && silverData.xag_usd != null) {
+            silver = Number(silverData.xag_usd);
+        }
+    } catch (_) { /* keep placeholders */ }
+
+    renderHubTicker(gold, silver);
+    return { gold, silver };
+}
+
+function initHubTicker() {
+    const wrap = document.querySelector('.hub-ticker');
+    if (wrap) wrap.classList.add('is-loading');
+    renderHubTicker(null, null);
+    refreshHubTickerPrices();
+    setInterval(refreshHubTickerPrices, 2 * 60 * 1000);
+}
+
 function saveSession(token) {
     localStorage.setItem(SESSION_KEY, JSON.stringify({
         token,
@@ -158,6 +222,7 @@ function showError(msg) {
 
 async function boot() {
     initGridCanvas();
+    initHubTicker();
     // Drop stale PWA caches that still hold the old vault login HTML
     try {
         if ('serviceWorker' in navigator) {
