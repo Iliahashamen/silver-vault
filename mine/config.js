@@ -1,5 +1,5 @@
 /**
- * Configuration for The Mine — Gold Investment App
+ * Configuration for GROUPTECH — The Mine module (gold)
  */
 
 const CONFIG = {

@@ -1,5 +1,5 @@
 /**
- * Configuration for Silver Vault Mini App
+ * Configuration for GROUPTECH Mini App (The Vault module)
  * PUBLIC CONFIGURATION ONLY - No secrets here!
  */
 

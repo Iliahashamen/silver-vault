@@ -1,7 +1,7 @@
 {
   "name": "המכרה — The Mine",
   "short_name": "המכרה",
-  "description": "מערכת השקעות בזהב פיזי — מחירים, גרפים, מדריכים וצ'אט עם גרופבוט.",
+  "description": "GROUPTECH — מערכת השקעות בזהב פיזי. מחירים, גרפים, מדריכים וגרופבוט.",
   "lang": "he",
   "dir": "rtl",
   "start_url": "./index.html",

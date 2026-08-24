@@ -1,3 +1,3 @@
-# הכספת — The Vault
+# GROUPTECH
 
 https://iliahashamen.github.io/silver-vault/
