@@ -1186,9 +1186,6 @@ function initQuiz() {
     document.getElementById('quiz-restart-btn')?.addEventListener('click', quizReset);
     document.getElementById('quiz-menu-btn')?.addEventListener('click', _hwOpenQuiz);
     document.getElementById('videos-menu-btn')?.addEventListener('click', _hwOpenVideos);
-    document.getElementById('back-to-hw-menu')?.addEventListener('click', () => {
-        quizReset(); // stops timer, resets state, shows menu
-    });
     document.getElementById('back-to-hw-menu-videos')?.addEventListener('click', _hwShowMenu);
 }
 
