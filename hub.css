@@ -12,6 +12,9 @@
   --gold-light:  #E2BF50;
   --gold-dim:    rgba(201, 162, 39, 0.62);
   --gold-glow:   rgba(201, 162, 39, 0.16);
+  --silver-dim:  rgba(210, 220, 232, 0.58);
+  --silver-glow: rgba(220, 230, 242, 0.20);
+  --silver-shine:rgba(245, 248, 252, 0.14);
   --white:       #FFFFFF;
   --muted:       rgba(255,255,255,0.55);
   --muted2:      rgba(255,255,255,0.30);
@@ -363,6 +366,10 @@ html, body {
   transition: opacity 0.2s ease;
 }
 
+.system-card[data-system="vault"]::before {
+  background: linear-gradient(135deg, var(--silver-shine) 0%, transparent 72%);
+}
+
 .system-card:hover::before,
 .system-card:active::before {
   opacity: 1;
@@ -372,6 +379,24 @@ html, body {
   border-color: var(--gold-dim);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 20px var(--gold-glow);
+}
+
+.system-card[data-system="vault"]:hover,
+.system-card[data-system="vault"]:active {
+  border-color: var(--silver-dim);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 22px var(--silver-glow);
+}
+
+.system-card[data-system="vault"]:hover .system-name,
+.system-card[data-system="vault"]:active .system-name {
+  color: #EEF2F7;
+  text-shadow: 0 0 14px rgba(220, 230, 242, 0.45);
+}
+
+.system-card[data-system="mine"]:hover .system-name,
+.system-card[data-system="mine"]:active .system-name {
+  color: var(--gold-light);
+  text-shadow: 0 0 14px rgba(201, 162, 39, 0.35);
 }
 
 .system-card:active {
