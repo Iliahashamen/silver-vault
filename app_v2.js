@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════
-// THE SILVER VAULT — App v3
+// THE SILVER VAULT - App v3
 // ═══════════════════════════════════════════
 
 let tg = window.Telegram?.WebApp;
@@ -42,7 +42,7 @@ const uid = tg?.initDataUnsafe?.user?.id || _stableWebUid();
 
 // Local-only preview token. On localhost any passcode grants a preview session
 // so the app can be viewed offline without the backend. This NEVER works on the
-// live site (isLocalDevHost is false there) — no secret is exposed in public code.
+// live site (isLocalDevHost is false there) - no secret is exposed in public code.
 
 // Nuke legacy passcode screen the instant this script runs (before boot)
 (function _killLegacyLogin() {
@@ -125,7 +125,7 @@ window.addEventListener('popstate', (e) => {
 
 // ── SCREEN NAVIGATION ────────────────────────────────────────────────
 function goToScreen(screenId, opts = {}) {
-    // Hub is the only login — never show the old passcode screen
+    // Hub is the only login - never show the old passcode screen
     if (screenId === 'login-screen') {
         location.replace('hub.html');
         return;
@@ -200,7 +200,7 @@ function openDailyLineChart() {
 // ── DARK MODE ────────────────────────────────────────────────────────
 function applyDarkMode(dark) {
     document.body.classList.toggle('dark-mode', dark);
-    // Restart opacity flash via rAF — avoids synchronous forced reflow
+    // Restart opacity flash via rAF - avoids synchronous forced reflow
     document.body.classList.remove('dark-mode-animating');
     requestAnimationFrame(() => document.body.classList.add('dark-mode-animating'));
     const label = document.getElementById('dark-mode-label');
@@ -210,7 +210,7 @@ function applyDarkMode(dark) {
 function toggleDarkMode() {
     const dark = !document.body.classList.contains('dark-mode');
     localStorage.setItem(DARK_MODE_KEY, dark ? '1' : '0');
-    // setTimeout(0) yields to the macro-task queue — click event fully
+    // setTimeout(0) yields to the macro-task queue - click event fully
     // completes and the browser can process any pending paint before the
     // CSS variable cascade fires, keeping the UI responsive.
     setTimeout(() => {
@@ -234,7 +234,7 @@ async function validateTokenWithServer(token) {
         });
         return res.status !== 401;
     } catch {
-        return true; // network error — don't kick user out
+        return true; // network error - don't kick user out
     }
 }
 
@@ -243,8 +243,8 @@ async function showDashboard() {
     document.getElementById('login-screen')?.remove();
     document.querySelectorAll('.terminal-container, .terminal-header, .vault-title').forEach((el) => el.remove());
 
-    // Show dashboard BEFORE any network await — prevents 1s login flash
-    // (do not pin inline display:none — that blocks later goToScreen navigation)
+    // Show dashboard BEFORE any network await - prevents 1s login flash
+    // (do not pin inline display:none - that blocks later goToScreen navigation)
     document.querySelectorAll('.screen').forEach((s) => {
         s.classList.remove('active', 'screen-leaving');
         s.style.display = '';
@@ -299,7 +299,7 @@ async function updateSilverPrice() {
         priceOk = true;
     } catch {
         if (!priceOk) {
-            document.getElementById('price-value').textContent  = '$—';
+            document.getElementById('price-value').textContent  = '$-';
             document.getElementById('price-update').textContent = 'אין חיבור';
         }
     }
@@ -321,7 +321,7 @@ async function refreshCurrentFx() {
 }
 
 // ── EXCHANGE RATE AUTO-FETCH ─────────────────────────────────────────
-// Uses the free Frankfurter API — no API key required
+// Uses the free Frankfurter API - no API key required
 async function fetchFxRate(date) {
     try {
         const res = await fetch(`https://api.frankfurter.app/${date}?from=USD&to=ILS`);
@@ -609,7 +609,7 @@ function _drawCandleData(frame, data) {
     const note = document.querySelector('.chart-note');
     if (note) {
         note.textContent = _lastDataReal
-            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (SI=F)'
+            ? '* נתוני מחיר אמיתיים - סילבר פיוצ\'רס (SI=F)'
             : '* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.';
     }
 }
@@ -713,7 +713,7 @@ function _drawLineData(frame, data) {
     const note = document.querySelector('.chart-note');
     if (note) {
         note.textContent = _lastDataReal
-            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (SI=F)'
+            ? '* נתוני מחיר אמיתיים - סילבר פיוצ\'רס (SI=F)'
             : '* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.';
     }
 }
@@ -768,7 +768,7 @@ function _renderNewsDigest(lang) {
     const pubDate     = _newsData.published_date || '';
     const nextUpdate  = _newsData.next_update    || '';
 
-    // Date meta line — only "as of" date, no next-update
+    // Date meta line - only "as of" date, no next-update
     if (meta) {
         meta.textContent = lang === 'he' ? `נכון ל-${_formatNewsDate(pubDate, 'he')}` : '';
     }
@@ -827,7 +827,7 @@ async function loadNews() {
         _newsData = data;
         _renderNewsDigest(_newsLang);
     } catch {
-        container.innerHTML = '<p class="news-empty">שגיאת חיבור — נסה שוב מאוחר יותר.</p>';
+        container.innerHTML = '<p class="news-empty">שגיאת חיבור - נסה שוב מאוחר יותר.</p>';
     }
 }
 
@@ -1040,27 +1040,27 @@ const QUIZ_BANK = [
   { q: "איזה מטבע כסף מנפיקה אוסטריה?", a: ["Philharmoniker","Silver Eagle","Maple Leaf","Britannia"] },
   { q: "מה הוא 'Numismatic Premium'?", a: ["תוספת מחיר על מטבעות אספנות מעבר לערך המתכת","פרמיה על כמות גדולה","הנחה על רכישת מטילים","עלות האריזה של המטבע"] },
   { q: "כיצד ריבית נמוכה של הפד האמריקאי משפיעה על מחיר הכסף?", a: ["נוטה להעלות את מחיר הכסף","מוריד את מחיר הכסף","אין השפעה","גורם לייסוף הדולר בלבד"] },
-  { q: "כמה כניסות שוק מינימום מומלצות לכסף פיזי?", a: ["3–5 כניסות נפרדות","כניסה אחת מלאה","2 כניסות מקסימום","עד 10 כניסות קטנות בלבד"] },
+  { q: "כמה כניסות שוק מינימום מומלצות לכסף פיזי?", a: ["3-5 כניסות נפרדות","כניסה אחת מלאה","2 כניסות מקסימום","עד 10 כניסות קטנות בלבד"] },
   { q: "מה ההמלצה לגבי קנייה חודשית מינימלית בכסף?", a: ["אונקיה אחת לפחות בחודש","5 אונקיות לחודש","100 גרם לחודש","תלוי לחלוטין בתקציב"] },
   { q: "מה אחד מהסיכונים הייחודיים לכסף לעומת זהב?", a: ["תנודתיות גבוהה יותר","לא ניתן לאחסן אותו","אין ביקוש תעשייתי","קשה יותר לזיוף"] },
-  { q: "מה פירוש 'Bid Price' לעומת 'Ask Price'?", a: ["Bid – מחיר שקונה מוכן לשלם; Ask – מחיר שמוכר מוכן לקבל","Bid – מחיר שמוכר מוכן למכור; Ask – מחיר שקונה מוכן לשלם","שניהם זהים תמיד","Bid מחיר כסף, Ask מחיר זהב"] },
+  { q: "מה פירוש 'Bid Price' לעומת 'Ask Price'?", a: ["Bid - מחיר שקונה מוכן לשלם; Ask - מחיר שמוכר מוכן לקבל","Bid - מחיר שמוכר מוכן למכור; Ask - מחיר שקונה מוכן לשלם","שניהם זהים תמיד","Bid מחיר כסף, Ask מחיר זהב"] },
   { q: "מה יתרון כסף פיזי על פני ETF של כסף?", a: ["ללא סיכון צד שלישי ובעלות ישירה על המתכת","נזיל יותר מ-ETF","זול יותר לרכישה","אין הבדל מהותי"] },
-  { q: "מה מציין יחס זהב-כסף מעל 80?", a: ["כסף זול יחסית לזהב – הזדמנות פוטנציאלית לקנייה","כסף יקר מדי לעומת זהב","עודף היצע של כסף בשוק","שוק דובי בכסף"] },
-  { q: "מה כדאי לעשות כשמחיר הכסף יורד בחדות?", a: ["לצבור בהדרגה לפי תקציב – ירידה יכולה להיות הזדמנות","למכור מיד לפני שמאבדים יותר","לחכות שהמחיר יחזור לשיא","לקנות הכל בבת אחת"] },
-  { q: "מה הוא 'Unallocated' בניגוד ל-'Allocated'?", a: ["Unallocated – דרישה כללית ללא מתכת ספציפית; Allocated – מתכת ספציפית שלך","אין הבדל מהותי","Unallocated תמיד בטוח יותר","Allocated זמין רק לבנקים"] },
-  { q: "למה מומלץ לפצל קנייה ל-3–5 כניסות נפרדות?", a: ["להוריד סיכון תזמון שגוי ולנצל ירידות בדרך","כי הפרמיה נמוכה יותר כך","בגלל חוק ישראלי שמגביל קנייה בסכום אחד","כדי לחסוך בעמלות בנק"] },
+  { q: "מה מציין יחס זהב-כסף מעל 80?", a: ["כסף זול יחסית לזהב - הזדמנות פוטנציאלית לקנייה","כסף יקר מדי לעומת זהב","עודף היצע של כסף בשוק","שוק דובי בכסף"] },
+  { q: "מה כדאי לעשות כשמחיר הכסף יורד בחדות?", a: ["לצבור בהדרגה לפי תקציב - ירידה יכולה להיות הזדמנות","למכור מיד לפני שמאבדים יותר","לחכות שהמחיר יחזור לשיא","לקנות הכל בבת אחת"] },
+  { q: "מה הוא 'Unallocated' בניגוד ל-'Allocated'?", a: ["Unallocated - דרישה כללית ללא מתכת ספציפית; Allocated - מתכת ספציפית שלך","אין הבדל מהותי","Unallocated תמיד בטוח יותר","Allocated זמין רק לבנקים"] },
+  { q: "למה מומלץ לפצל קנייה ל-3-5 כניסות נפרדות?", a: ["להוריד סיכון תזמון שגוי ולנצל ירידות בדרך","כי הפרמיה נמוכה יותר כך","בגלל חוק ישראלי שמגביל קנייה בסכום אחד","כדי לחסוך בעמלות בנק"] },
   { q: "מה ה-'Spot' מחושב לפי?", a: ["מחיר המסחר הנוכחי בשוק הסחורות הבינלאומי","ממוצע מחירים של השנה האחרונה","מחיר שקובעת ממשלת ארה\"ב","מחיר קבוע שמתעדכן פעם בשבוע"] },
   { q: "מה הוא המוליך החשמלי הטוב ביותר מבין כל המתכות?", a: ["כסף (Silver)","זהב","נחושת","פלטינה"] },
   { q: "כמה אחוז מהתיק מומלץ להקצות למתכות יקרות למשקיע מתחיל?", a: ["עד 15%","עד 50%","עד 5%","עד 30%"] },
-  { q: "מה החיסרון הייחודי של קרן סל (ETF) כסף לעומת כסף פיזי?", a: ["סיכון צד נגדי — אינכם הבעלים הישירים של הכסף","לא ניתן לקנות בסכומים קטנים","אין שקיפות על ביצועי הקרן","מחיר הקנייה גבוה יותר"] },
+  { q: "מה החיסרון הייחודי של קרן סל (ETF) כסף לעומת כסף פיזי?", a: ["סיכון צד נגדי - אינכם הבעלים הישירים של הכסף","לא ניתן לקנות בסכומים קטנים","אין שקיפות על ביצועי הקרן","מחיר הקנייה גבוה יותר"] },
   { q: "מה ייחודי בכסף לעומת זהב בהקשר מהפכת האנרגיה הירוקה?", a: ["כסף הוא רכיב קריטי בפאנלים סולאריים וברכבים חשמליים","כסף זול יותר לייצור פאנלים","זהב אינו בשימוש תעשייתי כלל","כסף נפוץ יותר מזהב בקרום כדור הארץ"] },
   { q: "מהי הדרך הזולה והנגישה ביותר למשקיע מתחיל להיחשף לכסף?", a: ["קרנות סל (ETF)","רכישת מטילים פיזיים","חוזים עתידיים","מניות חברות כרייה"] },
-  { q: "מה הסיכון המרכזי של חוזים עתידיים (Futures) על כסף?", a: ["מינוף גבוה — ההפסד יכול לעלות על ההשקעה הראשונית","לא ניתן למכור לפני הפקיעה","אין חשיפה לשינויי מחיר","דמי ניהול גבוהים מאוד"] },
+  { q: "מה הסיכון המרכזי של חוזים עתידיים (Futures) על כסף?", a: ["מינוף גבוה - ההפסד יכול לעלות על ההשקעה הראשונית","לא ניתן למכור לפני הפקיעה","אין חשיפה לשינויי מחיר","דמי ניהול גבוהים מאוד"] },
   { q: "מה כולל מחיר ה'פרמיה' על כסף פיזי?", a: ["עלויות ייצור, שינוע וביטוח של המתכת","מע\"מ בלבד","רווח המוכר בלבד","עלות האחסון השנתית"] },
   { q: "מה שם הגוף הישראלי המפורסם שמוכר כסף ומטבעות מקומיים?", a: ["The Holy Land Mint (החברה הישראלית למדליות ומטבעות)","בנק ישראל","Israel Coins Ltd","המטבעה הישראלית הרשמית"] },
   { q: "מה המשמעות של 'סיכון צד נגדי' (Counterparty Risk)?", a: ["סיכון שמנהל הקרן לא יוכל לעמוד בהתחייבויותיו","סיכון נפילת מחיר כסף בשוק","סיכון גניבת כסף פיזי","סיכון מטבע חוץ"] },
   { q: "מה ייחד את ביקוש הכסף לעומת זהב בשוק הגלובלי?", a: ["לכסף יש ביקוש תעשייתי נרחב בנוסף לביקוש להשקעה","לזהב ביקוש תעשייתי גדול יותר","ביקוש הכסף נובע בעיקר מתכשיטים","אין הבדל בין הביקושים"] },
-  { q: "מה אחד מחסרונות ההשקעה בכסף פיזי?", a: ["נזילות נמוכה — מכירה עלולה להיות איטית","אין הגנה מול אינפלציה","לא ניתן לאחסן בכספות","המחיר קבוע ולא מגיב לשוק"] },
+  { q: "מה אחד מחסרונות ההשקעה בכסף פיזי?", a: ["נזילות נמוכה - מכירה עלולה להיות איטית","אין הגנה מול אינפלציה","לא ניתן לאחסן בכספות","המחיר קבוע ולא מגיב לשוק"] },
   { q: "מה ההבדל בין 'Ask price' ל-'Bid price' בשוק המתכות?", a: ["Ask הוא המחיר שהמוכרים מבקשים, Bid הוא המחיר שהקונים מוכנים לשלם","Ask תמיד גבוה מ-Bid באחוז קבוע","Bid הוא המחיר הרשמי, Ask הוא ספקולטיבי","שניהם זהים בשוק סחורות"] },
   { q: "לאיזה סוג משקיע מתאימים חוזים עתידיים (Futures) על כסף?", a: ["משקיעים מנוסים עם סבילות גבוהה לסיכון","משקיעים פסיביים לטווח ארוך","משקיעים מתחילים עם תקציב קטן","כל משקיע ללא הבדל"] },
   { q: "מה החיסרון בהשקעה במניות חברות כרייה כחלופה לכסף פיזי?", a: ["ההצלחה תלויה בניהול ותפעול החברה ולא רק במחיר הכסף","לא ניתן לקנות בבורסה","הן לא עוקבות אחר מחיר הכסף בשום מצב","אין דיבידנד בחברות כרייה"] },
@@ -1178,7 +1178,7 @@ function _quizEnd() {
         pct >= 90 ? 'מעולה! אתה מומחה כסף אמיתי ' :
         pct >= 70 ? 'תוצאה מצוינת! ידע מרשים של שוק הכסף.' :
         pct >= 50 ? 'לא רע! כדאי לחזור על חומר הלמידה.' :
-                    'יש מקום לשיפור — חזור ולמד שוב!';
+                    'יש מקום לשיפור - חזור ולמד שוב!';
     _quizPanel('quiz-done');
 }
 
@@ -1293,7 +1293,7 @@ function initQuiz() {
 }
 
 // ══════════════════════════════════════════════════════════════════════
-// MUSEUM — Mint data + logic
+// MUSEUM - Mint data + logic
 // ══════════════════════════════════════════════════════════════════════
 
 const DOVE_OF_PEACE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2';
@@ -1343,7 +1343,7 @@ const MINT_DATA = {
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg/800px-Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg',
         he: {
             name: 'חברת מטבעות ישראל',
-            subtitle: 'Israel Coins and Medals Corp. — ICMC',
+            subtitle: 'Israel Coins and Medals Corp. - ICMC',
             founded: 'נוסדה 1952',
             location: 'ירושלים, ישראל',
             website: 'en.israelmint.com',
@@ -1366,7 +1366,7 @@ const MINT_DATA = {
                     title: 'בוליון יונת השלום',
                     type: 'בוליון',
                     weight: 'משקלים שונים',
-                    year: '2014–',
+                    year: '2014-',
                     purity: 'כסף 999 / זהב 999.9',
                     desc: 'בוליון הכסף הישראלי "יונת השלום" של מטבעות ארץ הקודש, המיוצר החל משנת 2014. בחלקו הקדמי: יונה לבנה עם עלה זית במעופה מעל חומות ירושלים העתיקה. בחלקו האחורי: סמל החברה, טוהר המתכת ומשקלה; במטילים גם חותמת בודק ומספר סידורי. זמין כעיגול או מטיל. החל מ-2019 גם בזהב טהור 999.9.',
                     img: DOVE_OF_PEACE_IMG,
@@ -1374,10 +1374,10 @@ const MINT_DATA = {
                     transparent: true
                 },
                 {
-                    title: 'מטיל כסף יצוק 1 ק"ג — יונת השלום',
+                    title: 'מטיל כסף יצוק 1 ק"ג - יונת השלום',
                     type: 'מטיל',
                     weight: '1 ק"ג',
-                    year: '2014–',
+                    year: '2014-',
                     purity: 'כסף 999',
                     desc: 'מטיל כסף טהור יצוק במשקל 1 ק"ג מסדרת "יונת השלום" של מטבעות ארץ הקודש. על המטיל מוטבעים סמל החברה, יונת השלום, טוהר המתכת, משקל, סימן ICMC ומספר סידורי. מיוצר החל מ-2014; החל מ-2019 זמין גם בזהב טהור 999.9.',
                     img: DOVE_OF_PEACE_1KG_BAR_IMG,
@@ -1399,7 +1399,7 @@ const MINT_DATA = {
         },
         en: {
             name: 'Israel Coins and Medals Corp.',
-            subtitle: 'State-owned coin authority — ICMC',
+            subtitle: 'State-owned coin authority - ICMC',
             founded: 'Founded 1952',
             location: 'Jerusalem, Israel',
             website: 'en.israelmint.com',
@@ -1418,14 +1418,14 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'Dove of Peace Bullion', type: 'Bullion', weight: 'Various weights', year: '2014–', purity: '.999 Silver / .9999 Gold', desc: 'Israeli "Dove of Peace" bullion by The Holy Land Mint, produced since 2014. Obverse: a white dove with an olive branch in flight above the Old City of Jerusalem walls. Reverse: Holy Land Mint logo, metal purity and weight; bars also carry the Melter Assayer mark and serial number. Available as rounds or bars. Gold .9999 versions since 2019.', img: DOVE_OF_PEACE_IMG, emoji: "", transparent: true },
-                { title: 'Dove of Peace 1 kg Cast Bar', type: 'Bar', weight: '1 kg', year: '2014–', purity: '.999 Silver', desc: 'Cast .999 fine silver bar from the "Dove of Peace" series by The Holy Land Mint. Stamped with the company logo, dove motif, SILVER .999, weight, ICMC mark and serial number. Produced since 2014; gold .9999 versions available since 2019.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: "", transparent: true },
-                { title: '300g Fine Silver Grains', type: 'Grains', weight: '300g', year: '', purity: '.999 Silver', desc: '300 grams of .999 fine silver grains (shot) from The Holy Land Mint — Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.', img: SILVER_GRAINS_300G_IMG, emoji: "", transparent: true }
+                { title: 'Dove of Peace Bullion', type: 'Bullion', weight: 'Various weights', year: '2014-', purity: '.999 Silver / .9999 Gold', desc: 'Israeli "Dove of Peace" bullion by The Holy Land Mint, produced since 2014. Obverse: a white dove with an olive branch in flight above the Old City of Jerusalem walls. Reverse: Holy Land Mint logo, metal purity and weight; bars also carry the Melter Assayer mark and serial number. Available as rounds or bars. Gold .9999 versions since 2019.', img: DOVE_OF_PEACE_IMG, emoji: "", transparent: true },
+                { title: 'Dove of Peace 1 kg Cast Bar', type: 'Bar', weight: '1 kg', year: '2014-', purity: '.999 Silver', desc: 'Cast .999 fine silver bar from the "Dove of Peace" series by The Holy Land Mint. Stamped with the company logo, dove motif, SILVER .999, weight, ICMC mark and serial number. Produced since 2014; gold .9999 versions available since 2019.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: "", transparent: true },
+                { title: '300g Fine Silver Grains', type: 'Grains', weight: '300g', year: '', purity: '.999 Silver', desc: '300 grams of .999 fine silver grains (shot) from The Holy Land Mint - Israel Coins & Medals Corp. Official sealed plastic jar labeled Fine Silver 999. Suitable for physical silver investment, manufacturing and collecting.', img: SILVER_GRAINS_300G_IMG, emoji: "", transparent: true }
             ]
         },
         ru: {
             name: 'Израильский монетный двор',
-            subtitle: 'Государственная монетная корпорация — ICMC',
+            subtitle: 'Государственная монетная корпорация - ICMC',
             founded: 'Основан в 1952',
             location: 'Иерусалим, Израиль',
             website: 'en.israelmint.com',
@@ -1444,8 +1444,8 @@ const MINT_DATA = {
                 }
             ],
             products: [
-                { title: 'Буллион «Голубь мира»', type: 'Буллион', weight: 'Разные веса', year: '2014–', purity: 'Серебро 999 / Золото 999.9', desc: 'Израильский буллион «Голубь мира» от монетного двора Святой Земли, выпускается с 2014 года. Лицевая сторона: белый голубь с оливковой ветвью над стенами Старого города Иерусалима. Оборотная: логотип монетного двора, проба и вес; на слитках также клеймо контролёра и серийный номер. Доступен в виде монет и слитков. С 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_IMG, emoji: "", transparent: true },
-                { title: 'Литой слиток 1 кг «Голубь мира»', type: 'Слиток', weight: '1 кг', year: '2014–', purity: 'Серебро 999', desc: 'Литой слиток из серебра 999 пробы весом 1 кг из серии «Голубь мира» от монетного двора Святой Земли. На слитке: логотип компании, голубь, проба, вес, знак ICMC и серийный номер. Выпускается с 2014 года; с 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: "", transparent: true },
+                { title: 'Буллион «Голубь мира»', type: 'Буллион', weight: 'Разные веса', year: '2014-', purity: 'Серебро 999 / Золото 999.9', desc: 'Израильский буллион «Голубь мира» от монетного двора Святой Земли, выпускается с 2014 года. Лицевая сторона: белый голубь с оливковой ветвью над стенами Старого города Иерусалима. Оборотная: логотип монетного двора, проба и вес; на слитках также клеймо контролёра и серийный номер. Доступен в виде монет и слитков. С 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_IMG, emoji: "", transparent: true },
+                { title: 'Литой слиток 1 кг «Голубь мира»', type: 'Слиток', weight: '1 кг', year: '2014-', purity: 'Серебро 999', desc: 'Литой слиток из серебра 999 пробы весом 1 кг из серии «Голубь мира» от монетного двора Святой Земли. На слитке: логотип компании, голубь, проба, вес, знак ICMC и серийный номер. Выпускается с 2014 года; с 2019 года также из золота 999.9 пробы.', img: DOVE_OF_PEACE_1KG_BAR_IMG, emoji: "", transparent: true },
                 { title: '300 г серебряных гранул', type: 'Гранулы', weight: '300 г', year: '', purity: 'Серебро 999', desc: '300 граммов серебряных гранул пробы 999 от монетного двора Святой Земли. Официальная герметичная пластиковая упаковка с маркировкой пробы и веса. Подходит для инвестиций в физическое серебро, производства и коллекционирования.', img: SILVER_GRAINS_300G_IMG, emoji: "", transparent: true }
             ]
         }
@@ -1457,7 +1457,7 @@ const MINT_DATA = {
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg/800px-M%C3%BCnchen_Bayerisches_Hauptm%C3%BCnzamt_1.jpg',
         he: {
             name: 'בית המטבע הבוורי',
-            subtitle: 'Bayerisches Hauptmünzamt — מינכן',
+            subtitle: 'Bayerisches Hauptmünzamt - מינכן',
             founded: 'נוסד 1158',
             location: 'מינכן, בוואריה, גרמניה',
             website: 'hauptmuenzamt.bayern',
@@ -1480,7 +1480,7 @@ const MINT_DATA = {
         },
         en: {
             name: 'Bavarian State Mint',
-            subtitle: 'Bayerisches Hauptmünzamt — Munich',
+            subtitle: 'Bayerisches Hauptmünzamt - Munich',
             founded: 'Founded 1158',
             location: 'Munich, Bavaria, Germany',
             website: 'hauptmuenzamt.bayern',
@@ -1503,18 +1503,18 @@ const MINT_DATA = {
         },
         ru: {
             name: 'Баварский монетный двор',
-            subtitle: 'Bayerisches Hauptmünzamt — Мюнхен',
+            subtitle: 'Bayerisches Hauptmünzamt - Мюнхен',
             founded: 'Основан в 1158',
             location: 'Мюнхен, Бавария, Германия',
             website: 'hauptmuenzamt.bayern',
             history: [
                 {
                     title: 'Средневековое основание',
-                    text: 'Баварский государственный монетный двор (Bayerisches Hauptmünzamt) — один из старейших монетных дворов в мире, история которого восходит к 1158 году при принце Генрихе Льве в Мюнхене. На протяжении столетий он служил органом чеканки монет для Королевства Бавария, а впоследствии для Германской империи. Историческое расположение в сердце Мюнхена сформировало его уникальную идентичность.'
+                    text: 'Баварский государственный монетный двор (Bayerisches Hauptmünzamt) - один из старейших монетных дворов в мире, история которого восходит к 1158 году при принце Генрихе Льве в Мюнхене. На протяжении столетий он служил органом чеканки монет для Королевства Бавария, а впоследствии для Германской империи. Историческое расположение в сердце Мюнхена сформировало его уникальную идентичность.'
                 },
                 {
                     title: 'Современная эпоха и серебряные изделия',
-                    text: 'В современную эпоху Баварский монетный двор стал лидером в производстве высококачественных памятных монет и государственных наград. Он специализируется на коллекционных серебряных монетах: исторические серии, классическая музыка, баварское наследие. Сегодня это один из восьми действующих немецких монетных дворов, каждый из которых имеет уникальный знак (у Баварии — «D»).'
+                    text: 'В современную эпоху Баварский монетный двор стал лидером в производстве высококачественных памятных монет и государственных наград. Он специализируется на коллекционных серебряных монетах: исторические серии, классическая музыка, баварское наследие. Сегодня это один из восьми действующих немецких монетных дворов, каждый из которых имеет уникальный знак (у Баварии - «D»).'
                 },
                 {
                     title: 'Серебряные слитки и коллекционирование',
@@ -1532,7 +1532,7 @@ const MINT_DATA = {
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Llantrisant_Royal_Mint_Building.jpg/800px-Llantrisant_Royal_Mint_Building.jpg',
         he: {
             name: 'המינט המלכותי',
-            subtitle: 'The Royal Mint — לנטריסנט, ויילס',
+            subtitle: 'The Royal Mint - לנטריסנט, ויילס',
             founded: 'נוסד 886',
             location: 'לנטריסנט, ויילס, בריטניה',
             website: 'www.royalmint.com',
@@ -1542,12 +1542,12 @@ const MINT_DATA = {
                     text: 'המינט המלכותי (The Royal Mint) הוא אחד הגופים הממשלתיים הוותיקים ביותר בעולם, עם מסורת טביעת מטבעות שמתחילה בשנת 886 לספירה תחת המלך אלפרד הגדול. במשך מאות שנים שכן המינט ב"מגדל לונדון", ולאחר מכן ברחוב Tower Hill בלונדון. בשנת 1968 עבר לאתרו הנוכחי בלנטריסנט, ויילס.'
                 },
                 {
-                    title: 'הברבריאניה — סמל הכסף הבריטי',
+                    title: 'הברבריאניה - סמל הכסף הבריטי',
                     text: 'הסדרה הנחשבת ביותר של המינט המלכותי היא ללא ספק מטבע הברבריאניה (Britannia), שנטבע לראשונה כמטבע כסף השקעה בשנת 1987. ברבריאניה, המייצגת את בריטניה כדמות נשית לוחמת, הפכה לאחד הסמלים הנודעים ביותר של שוק הכסף הפיזי הבינלאומי. המטבע עשוי כסף 999.9 ומהווה הילך חוקי בממלכה המאוחדת.'
                 },
                 {
                     title: 'חדשנות ומנהיגות בשוק',
-                    text: 'המינט המלכותי מוביל בחדשנות: הוא היה הראשון להנפיק מטבעות כסף בצבעים (2016), ומטבעות עם אפקטים הולוגרפיים. סדרת "חיות המלכה" (Queen\'s Beasts, 2016–2021), שהכילה 10 מטבעות כסף תוך שנות ייצור, הפכה לפנומן אספנות עולמי. בנוסף, המינט מנפיק מטבעות זיכרון, שטרות זהב ומטילי כסף למשקיעים.'
+                    text: 'המינט המלכותי מוביל בחדשנות: הוא היה הראשון להנפיק מטבעות כסף בצבעים (2016), ומטבעות עם אפקטים הולוגרפיים. סדרת "חיות המלכה" (Queen\'s Beasts, 2016-2021), שהכילה 10 מטבעות כסף תוך שנות ייצור, הפכה לפנומן אספנות עולמי. בנוסף, המינט מנפיק מטבעות זיכרון, שטרות זהב ומטילי כסף למשקיעים.'
                 }
             ],
             products: [
@@ -1557,7 +1557,7 @@ const MINT_DATA = {
                     weight: '500 גרם',
                     year: '',
                     purity: 'כסף 999',
-                    desc: 'מטיל השקעה יצוק מהמינט המלכותי הבריטי. על המטיל: לוגו המינט, משקל 500 גרם, טוהר 999 ומספר סידורי ייחודי. מטילי יציקה פופולריים בקרב משקיעים שמחפשים כמות כסף גדולה בפרמיה נמוכה יחסית. מטילים אינם נושאים דיוקן מלכותי — בניגוד למטבעות.',
+                    desc: 'מטיל השקעה יצוק מהמינט המלכותי הבריטי. על המטיל: לוגו המינט, משקל 500 גרם, טוהר 999 ומספר סידורי ייחודי. מטילי יציקה פופולריים בקרב משקיעים שמחפשים כמות כסף גדולה בפרמיה נמוכה יחסית. מטילים אינם נושאים דיוקן מלכותי - בניגוד למטבעות.',
                     img: ROYAL_MINT_500G_CAST_BAR_IMG,
                     emoji: "",
                     transparent: true
@@ -1568,18 +1568,18 @@ const MINT_DATA = {
                     weight: '1 אונקיה',
                     year: '2026',
                     purity: 'כסף 999.9',
-                    desc: 'מטבע הברבריאניה — אחד ממטבעות הכסף המוכרים בעולם, מיוצר על ידי המינט המלכותי מאז 1987. על הגב: ברבריאניה עם קסדה, חנית, מגן דגל בריטניה וענף זית. כולל אבטחה מתקדמת: תמונה נסתרת (חנית או מנעול), אנימציית משטח, מיקרו-טקסט «קישוט והגנה», וקווי צבע על המגן. הילך חוקי בבריטניה בערך נקוב של 2 לירות.',
+                    desc: 'מטבע הברבריאניה - אחד ממטבעות הכסף המוכרים בעולם, מיוצר על ידי המינט המלכותי מאז 1987. על הגב: ברבריאניה עם קסדה, חנית, מגן דגל בריטניה וענף זית. כולל אבטחה מתקדמת: תמונה נסתרת (חנית או מנעול), אנימציית משטח, מיקרו-טקסט «קישוט והגנה», וקווי צבע על המגן. הילך חוקי בבריטניה בערך נקוב של 2 לירות.',
                     img: BRITANNIA_2026_REVERSE_IMG,
                     emoji: "",
                     transparent: true
                 },
                 {
-                    title: 'ברבריאניה — המלך צ\'ארלס השלישי',
+                    title: 'ברבריאניה - המלך צ\'ארלס השלישי',
                     type: 'מטבע',
                     weight: '1 אונקיה',
                     year: '2026',
                     purity: 'כסף 999.9',
-                    desc: 'על פני המטבע מופיע דיוקן המלך צ\'ארלס השלישי — ללא כתר, בעיצוב האמן מרטין ג\'נינגס. סביב הדיוקן: שם המלך, תארים מלכותיים וערך נקוב של 2 לירות. מאז עלייתו לכס ב-2022, דיוקן המלך מופיע על רוב מטבעות המינט המלכותי — כולל ברבריאניה, סוברין ומטבעות זיכרון — במקום אליזבת השנייה. שדה הרקע עם טקסטורת אבטחה מיקרוסקופית.',
+                    desc: 'על פני המטבע מופיע דיוקן המלך צ\'ארלס השלישי - ללא כתר, בעיצוב האמן מרטין ג\'נינגס. סביב הדיוקן: שם המלך, תארים מלכותיים וערך נקוב של 2 לירות. מאז עלייתו לכס ב-2022, דיוקן המלך מופיע על רוב מטבעות המינט המלכותי - כולל ברבריאניה, סוברין ומטבעות זיכרון - במקום אליזבת השנייה. שדה הרקע עם טקסטורת אבטחה מיקרוסקופית.',
                     img: BRITANNIA_2026_OBVERSE_IMG,
                     emoji: "",
                     transparent: true
@@ -1588,7 +1588,7 @@ const MINT_DATA = {
         },
         en: {
             name: 'The Royal Mint',
-            subtitle: 'The Royal Mint — Llantrisant, Wales',
+            subtitle: 'The Royal Mint - Llantrisant, Wales',
             founded: 'Founded 886 AD',
             location: 'Llantrisant, Wales, United Kingdom',
             website: 'www.royalmint.com',
@@ -1598,12 +1598,12 @@ const MINT_DATA = {
                     text: 'The Royal Mint is one of the oldest government bodies in the world, with a coinage tradition dating to 886 AD under King Alfred the Great. For centuries it was housed in the Tower of London, then on Tower Hill. In 1968 it moved to its current site in Llantrisant, Wales, becoming a world-class coin manufacturing facility.'
                 },
                 {
-                    title: 'Britannia — Symbol of British Silver',
+                    title: 'Britannia - Symbol of British Silver',
                     text: 'The most celebrated Royal Mint product is undoubtedly the Britannia silver coin, first struck as a silver bullion coin in 1987. Britannia, representing Britain as a female warrior figure, has become one of the most recognised symbols in the international physical silver market. The coin is struck in 999.9 fine silver and is legal tender in the United Kingdom.'
                 },
                 {
                     title: 'Innovation & Market Leadership',
-                    text: 'The Royal Mint leads in innovation: it was the first to issue coloured silver coins (2016) and coins with holographic effects. The "Queen\'s Beasts" series (2016–2021), comprising 10 silver coins over its production years, became a global collecting phenomenon. The Mint also issues commemorative coins, gold notes, and silver bars for investors.'
+                    text: 'The Royal Mint leads in innovation: it was the first to issue coloured silver coins (2016) and coins with holographic effects. The "Queen\'s Beasts" series (2016-2021), comprising 10 silver coins over its production years, became a global collecting phenomenon. The Mint also issues commemorative coins, gold notes, and silver bars for investors.'
                 }
             ],
             products: [
@@ -1613,13 +1613,13 @@ const MINT_DATA = {
                     weight: '500g',
                     year: '',
                     purity: '.999 Silver',
-                    desc: 'Cast investment bar from The Royal Mint — stamped THE ROYAL MINT, 500g, 999, SILVER, with a unique serial number (e.g. R000001). Cast bars are popular with stackers seeking larger silver weight at a typically lower premium per gram than coins. Bars carry no royal portrait — unlike Royal Mint coinage.',
+                    desc: 'Cast investment bar from The Royal Mint - stamped THE ROYAL MINT, 500g, 999, SILVER, with a unique serial number (e.g. R000001). Cast bars are popular with stackers seeking larger silver weight at a typically lower premium per gram than coins. Bars carry no royal portrait - unlike Royal Mint coinage.',
                     img: ROYAL_MINT_500G_CAST_BAR_IMG,
                     emoji: "",
                     transparent: true
                 },
                 {
-                    title: 'Silver Britannia (2026) — Reverse',
+                    title: 'Silver Britannia (2026) - Reverse',
                     type: 'Coin',
                     weight: '1 oz',
                     year: '2026',
@@ -1630,12 +1630,12 @@ const MINT_DATA = {
                     transparent: true
                 },
                 {
-                    title: 'Silver Britannia — King Charles III Obverse',
+                    title: 'Silver Britannia - King Charles III Obverse',
                     type: 'Coin',
                     weight: '1 oz',
                     year: '2026',
                     purity: '.9999 Silver',
-                    desc: 'Obverse: portrait of King Charles III — uncrowned, by Martin Jennings (initials MJ). Inscription: CHARLES III • D • G • REX • F • D • 2 POUNDS. Since his accession in 2022, the King\'s effigy appears on most Royal Mint bullion and commemorative silver — including Britannia and Sovereign — replacing Queen Elizabeth II. Micro-textured security field on the background.',
+                    desc: 'Obverse: portrait of King Charles III - uncrowned, by Martin Jennings (initials MJ). Inscription: CHARLES III • D • G • REX • F • D • 2 POUNDS. Since his accession in 2022, the King\'s effigy appears on most Royal Mint bullion and commemorative silver - including Britannia and Sovereign - replacing Queen Elizabeth II. Micro-textured security field on the background.',
                     img: BRITANNIA_2026_OBVERSE_IMG,
                     emoji: "",
                     transparent: true
@@ -1644,32 +1644,32 @@ const MINT_DATA = {
         },
         ru: {
             name: 'Королевский монетный двор',
-            subtitle: 'The Royal Mint — Лланттресант, Уэльс',
+            subtitle: 'The Royal Mint - Лланттресант, Уэльс',
             founded: 'Основан в 886 г. н.э.',
             location: 'Лланттресант, Уэльс, Великобритания',
             website: 'www.royalmint.com',
             history: [
                 {
                     title: 'Основание и королевская история',
-                    text: 'Королевский монетный двор — один из старейших государственных органов в мире, с традицией чеканки монет, восходящей к 886 году н.э. при короле Альфреде Великом. Столетиями он располагался в Тауэре, затем на Тауэр-Хилл в Лондоне. В 1968 году двор переехал в нынешнее здание в Лланттресанте, Уэльс, став производственным объектом мирового класса.'
+                    text: 'Королевский монетный двор - один из старейших государственных органов в мире, с традицией чеканки монет, восходящей к 886 году н.э. при короле Альфреде Великом. Столетиями он располагался в Тауэре, затем на Тауэр-Хилл в Лондоне. В 1968 году двор переехал в нынешнее здание в Лланттресанте, Уэльс, став производственным объектом мирового класса.'
                 },
                 {
-                    title: 'Britannia — символ британского серебра',
+                    title: 'Britannia - символ британского серебра',
                     text: 'Самым известным продуктом Королевского монетного двора, несомненно, является серебряная монета Britannia, впервые выпущенная как инвестиционная серебряная монета в 1987 году. Britannia, изображающая Британию в образе женщины-воина, стала одним из наиболее узнаваемых символов на мировом рынке физического серебра. Монета чеканится из серебра 999.9 пробы и является законным платёжным средством.'
                 },
                 {
                     title: 'Инновации и лидерство на рынке',
-                    text: 'Королевский монетный двор лидирует в инновациях: он первым выпустил цветные серебряные монеты (2016) и монеты с голографическими эффектами. Серия «Звери королевы» (2016–2021), состоящая из 10 серебряных монет, стала мировым коллекционным феноменом. Двор также выпускает памятные монеты, золотые ноты и серебряные слитки для инвесторов.'
+                    text: 'Королевский монетный двор лидирует в инновациях: он первым выпустил цветные серебряные монеты (2016) и монеты с голографическими эффектами. Серия «Звери королевы» (2016-2021), состоящая из 10 серебряных монет, стала мировым коллекционным феноменом. Двор также выпускает памятные монеты, золотые ноты и серебряные слитки для инвесторов.'
                 }
             ],
             products: [
                 {
-                    title: 'Литой слиток 500 г — Королевский монетный двор',
+                    title: 'Литой слиток 500 г - Королевский монетный двор',
                     type: 'Слиток',
                     weight: '500 г',
                     year: '',
                     purity: 'Серебро 999',
-                    desc: 'Инвестиционный литой слиток от Королевского монетного двора Великобритании. На слитке: логотип двора, вес 500 г, проба 999 и уникальный серийный номер. Популярен у инвесторов, покупающих большой вес серебра с более низкой премией за грамм. На слитках нет королевского портрета — в отличие от монет.',
+                    desc: 'Инвестиционный литой слиток от Королевского монетного двора Великобритании. На слитке: логотип двора, вес 500 г, проба 999 и уникальный серийный номер. Популярен у инвесторов, покупающих большой вес серебра с более низкой премией за грамм. На слитках нет королевского портрета - в отличие от монет.',
                     img: ROYAL_MINT_500G_CAST_BAR_IMG,
                     emoji: "",
                     transparent: true
@@ -1680,18 +1680,18 @@ const MINT_DATA = {
                     weight: '1 унция',
                     year: '2026',
                     purity: 'Серебро 999.9',
-                    desc: 'Britannia — одна из самых узнаваемых инвестиционных серебряных монет мира, чеканится Королевским монетным двором с 1987 года. Оборотная сторона: Britannia с шлемом, трезубцем, щитом с британским флагом и оливковой ветвью. Защита: скрытое изображение (трезубец или замок), анимация поверхности, микротекст «Украшение и защита», линии герба на щите. Законное платёжное средство Великобритании номиналом 2 фунта.',
+                    desc: 'Britannia - одна из самых узнаваемых инвестиционных серебряных монет мира, чеканится Королевским монетным двором с 1987 года. Оборотная сторона: Britannia с шлемом, трезубцем, щитом с британским флагом и оливковой ветвью. Защита: скрытое изображение (трезубец или замок), анимация поверхности, микротекст «Украшение и защита», линии герба на щите. Законное платёжное средство Великобритании номиналом 2 фунта.',
                     img: BRITANNIA_2026_REVERSE_IMG,
                     emoji: "",
                     transparent: true
                 },
                 {
-                    title: 'Britannia — король Карл III',
+                    title: 'Britannia - король Карл III',
                     type: 'Монета',
                     weight: '1 унция',
                     year: '2026',
                     purity: 'Серебро 999.9',
-                    desc: 'Лицевая сторона: портрет короля Карла III — без короны, работа художника Мартина Дженнингса. Вокруг портрета: имя короля, королевские титулы и номинал 2 фунта. С 2022 года после восшествия на престол портрет короля появляется на большинстве инвестиционных и памятных серебряных монет двора — включая Britannia и Sovereign — вместо Елизаветы II. Микротекстурированное защитное поле фона.',
+                    desc: 'Лицевая сторона: портрет короля Карла III - без короны, работа художника Мартина Дженнингса. Вокруг портрета: имя короля, королевские титулы и номинал 2 фунта. С 2022 года после восшествия на престол портрет короля появляется на большинстве инвестиционных и памятных серебряных монет двора - включая Britannia и Sovereign - вместо Елизаветы II. Микротекстурированное защитное поле фона.',
                     img: BRITANNIA_2026_OBVERSE_IMG,
                     emoji: "",
                     transparent: true
@@ -1707,7 +1707,7 @@ const MINT_DATA = {
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/United_States_Mint_Philadelphia.jpg/800px-United_States_Mint_Philadelphia.jpg',
         he: {
             name: 'בית המטבע האמריקאי',
-            subtitle: 'United States Mint — מייצר את American Silver Eagle',
+            subtitle: 'United States Mint - מייצר את American Silver Eagle',
             founded: 'נוסד 1792',
             location: 'פילדלפיה / ווסט פוינט, ארה"ב',
             website: 'www.usmint.gov',
@@ -1717,12 +1717,12 @@ const MINT_DATA = {
                     text: 'בית המטבע האמריקאי נוסד ב-1792 בפילדלפיה, בירת ארה"ב דאז, בחוק הטבעה פדרלי ראשון. מטרתו הייתה ייצור מטבעות דולר זהב, כסף ונחושת לרפובליקה הצעירה. הבניין בפילדלפיה הוא המבנה הציבורי הפדרלי הראשון שנבנה בארצות הברית, ומאז שמש כסמל הכלכלה האמריקאית.'
                 },
                 {
-                    title: 'American Silver Eagle — מטבע הכסף הנמכר בעולם',
-                    text: 'מאז 1986, בית המטבע האמריקאי מייצר את ה-American Silver Eagle — המטבע ההשקעה הנמכר ביותר בהיסטוריה. המטבע עשוי כסף 999 (אונקיה), ועל פניו "Walking Liberty" — עיצוב מ-1916 שנחשב לציור המטבע הנפלא ביותר בהיסטוריה האמריקאית. ב-2021 עודכן צד הנשר (Reverse) לראשונה מאז 1986.'
+                    title: 'American Silver Eagle - מטבע הכסף הנמכר בעולם',
+                    text: 'מאז 1986, בית המטבע האמריקאי מייצר את ה-American Silver Eagle - המטבע ההשקעה הנמכר ביותר בהיסטוריה. המטבע עשוי כסף 999 (אונקיה), ועל פניו "Walking Liberty" - עיצוב מ-1916 שנחשב לציור המטבע הנפלא ביותר בהיסטוריה האמריקאית. ב-2021 עודכן צד הנשר (Reverse) לראשונה מאז 1986.'
                 },
                 {
                     title: 'מורשת ומוצרים מיוחדים',
-                    text: 'בנוסף ל-Silver Eagle, בית המטבע הנפיק ב-2021 גרסאות מחודשות של Morgan Dollar ו-Peace Dollar — שתי מטבעות איקוניות מהמאה ה-20. סדרת "America the Beautiful" (2010–2021) כללה 56 מטבעות 5 אונקיות של אתרים לאומיים. בית המטבע האמריקאי שומר על מלאי אסטרטגי לאומי של כסף ב-West Point.'
+                    text: 'בנוסף ל-Silver Eagle, בית המטבע הנפיק ב-2021 גרסאות מחודשות של Morgan Dollar ו-Peace Dollar - שתי מטבעות איקוניות מהמאה ה-20. סדרת "America the Beautiful" (2010-2021) כללה 56 מטבעות 5 אונקיות של אתרים לאומיים. בית המטבע האמריקאי שומר על מלאי אסטרטגי לאומי של כסף ב-West Point.'
                 }
             ],
             products: [
@@ -1730,7 +1730,7 @@ const MINT_DATA = {
                     title: 'נשר אמריקני',
                     type: 'מטבע',
                     weight: '1 אונקיה',
-                    year: '1986–',
+                    year: '1986-',
                     purity: 'כסף 999',
                     desc: 'הנשר האמריקני הוא מטבע הבוליון הנפוץ בצפון אמריקה, מיוצר מאז 1986. למטבע מעמד הילך חוקי בארה"ב וערך נקוב סמלי של דולר אחד. נחשב לאחד המטבעות הנוחים למכירה מחדש ברחבי העולם.',
                     img: AMERICAN_SILVER_EAGLE_IMG,
@@ -1738,23 +1738,23 @@ const MINT_DATA = {
                     transparent: true
                 },
                 {
-                    title: 'ביזון אמריקאי — מטבע זיכרון 2001',
+                    title: 'ביזון אמריקאי - מטבע זיכרון 2001',
                     type: 'מטבע זיכרון',
                     weight: '1 אונקיה',
                     year: '2001',
                     purity: 'כסף 999',
-                    desc: 'מטבע זיכרון כסף של בית המטבע האמריקאי, הוצע בקיץ 2001 עד גמר המלאי (500,000 יחידות). המטבע מציין את פתיחת המוזיאון הלאומי לעם האינדיאני האמריקאי. העיצוב מבוסס על מטבע הביזון הקלאסי (1913–1938): פרופיל יליד אמריקאי בצד אחד וביזון בצד השני. עוצב על ידי הפסל ג\'יימס ארל פרייזר.',
+                    desc: 'מטבע זיכרון כסף של בית המטבע האמריקאי, הוצע בקיץ 2001 עד גמר המלאי (500,000 יחידות). המטבע מציין את פתיחת המוזיאון הלאומי לעם האינדיאני האמריקאי. העיצוב מבוסס על מטבע הביזון הקלאסי (1913-1938): פרופיל יליד אמריקאי בצד אחד וביזון בצד השני. עוצב על ידי הפסל ג\'יימס ארל פרייזר.',
                     img: AMERICAN_BUFFALO_2001_IMG,
                     emoji: "",
                     transparent: true
                 },
                 {
-                    title: 'מטיל כסף 10 אונקיות — Sunshine Mint',
+                    title: 'מטיל כסף 10 אונקיות - Sunshine Mint',
                     type: 'מטיל',
                     weight: '10 אונקיות',
                     year: '',
                     purity: 'כסף 999',
-                    desc: 'מטיל השקעה אמריקאי מיצרן Sunshine Minting — אחד מיצרני הכסף הפרטיים המובילים בארה"ב. על המטיל: לוגו הנשר, טוהר 999 ומשקל 10 אונקיות. מטילים אלו נפוצים בקרב משקיעי כסף פיזי: פרמיה לרוב נמוכה יותר ממטבעות, משקל ברור ונזילות טובה. חלק מהמטילים כוללים שכבת אבטחה מיקרוסקופית לאימות.',
+                    desc: 'מטיל השקעה אמריקאי מיצרן Sunshine Minting - אחד מיצרני הכסף הפרטיים המובילים בארה"ב. על המטיל: לוגו הנשר, טוהר 999 ומשקל 10 אונקיות. מטילים אלו נפוצים בקרב משקיעי כסף פיזי: פרמיה לרוב נמוכה יותר ממטבעות, משקל ברור ונזילות טובה. חלק מהמטילים כוללים שכבת אבטחה מיקרוסקופית לאימות.',
                     img: SUNSHINE_MINT_10OZ_BAR_IMG,
                     emoji: "",
                     transparent: true
@@ -1763,36 +1763,36 @@ const MINT_DATA = {
         },
         en: {
             name: 'United States Mint',
-            subtitle: 'United States Mint — Home of the American Silver Eagle',
+            subtitle: 'United States Mint - Home of the American Silver Eagle',
             founded: 'Founded 1792',
             location: 'Philadelphia / West Point, USA',
             website: 'www.usmint.gov',
             history: [
                 { title: 'Foundation & the Dollar', text: 'The United States Mint was founded in 1792 in Philadelphia, then the nation\'s capital, under the first federal coinage act. Its purpose was to produce gold, silver and copper dollar coins for the young republic. The Philadelphia building was the first federal public building constructed in the United States, and has since stood as a symbol of American economic strength.' },
-                { title: 'American Silver Eagle — World\'s Best-Selling Bullion Coin', text: 'Since 1986, the US Mint has produced the American Silver Eagle — the best-selling investment coin in history. Struck in .999 fine silver (1 oz), its obverse features "Walking Liberty," a design from 1916 widely considered the finest American coin artwork ever created. In 2021, the reverse (Eagle side) was updated for the first time in 35 years.' },
-                { title: 'Heritage & Special Products', text: 'In addition to the Silver Eagle, the Mint issued redesigned Morgan and Peace Dollars in 2021 — two iconic 20th-century coins now struck in .999 fine silver. The "America the Beautiful" series (2010–2021) comprised 56 five-ounce coins depicting national parks. The US Mint maintains a national strategic silver reserve at West Point.' }
+                { title: 'American Silver Eagle - World\'s Best-Selling Bullion Coin', text: 'Since 1986, the US Mint has produced the American Silver Eagle - the best-selling investment coin in history. Struck in .999 fine silver (1 oz), its obverse features "Walking Liberty," a design from 1916 widely considered the finest American coin artwork ever created. In 2021, the reverse (Eagle side) was updated for the first time in 35 years.' },
+                { title: 'Heritage & Special Products', text: 'In addition to the Silver Eagle, the Mint issued redesigned Morgan and Peace Dollars in 2021 - two iconic 20th-century coins now struck in .999 fine silver. The "America the Beautiful" series (2010-2021) comprised 56 five-ounce coins depicting national parks. The US Mint maintains a national strategic silver reserve at West Point.' }
             ],
             products: [
-                { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986–', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: "", transparent: true },
-                { title: 'American Buffalo Commemorative (2001)', type: 'Commemorative', weight: '1 oz', year: '2001', purity: '.999 Silver', desc: 'The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913–1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876–1953) was also known for "The End of the Trail" and other major American medals.', img: AMERICAN_BUFFALO_2001_IMG, emoji: "", transparent: true },
-                { title: 'Sunshine Mint 10 oz Silver Bar', type: 'Bar', weight: '10 oz', year: '', purity: '.999 Silver', desc: 'Investment silver bar from Sunshine Minting — one of America\'s leading private mints. Stamped with the Sunshine Minting eagle logo, .999 FINE SILVER, and 10 OUNCES. Popular with physical silver stackers: typically lower premium per ounce than coins, clear weight, and good secondary-market liquidity. Some bars include MintMark SI micro-engraving for authentication.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: "", transparent: true }
+                { title: 'American Silver Eagle', type: 'Coin', weight: '1 oz', year: '1986-', purity: '.999 Silver', desc: 'The American Silver Eagle is the most popular bullion coin in North America. Minting began in 1986 in both gold and silver. It holds legal tender status in the US with a symbolic face value of $1. Widely recognized and relatively easy to redeem worldwide.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: "", transparent: true },
+                { title: 'American Buffalo Commemorative (2001)', type: 'Commemorative', weight: '1 oz', year: '2001', purity: '.999 Silver', desc: 'The American Buffalo Commemorative Silver Dollar was offered by the U.S. Mint from June 7 to June 21, 2001, until it sold out. Authorized mintage: 500,000 coins. It commemorates the opening of the National Museum of the American Indian. The design recreates the famous Buffalo Nickel (1913-1938) with two American icons: a Native American profile and an American buffalo. Chief Iron Tail, Chief Big Tree, and Chief Two Moons modeled for sculptor James Earle Fraser; the buffalo model came from the Central Park Zoo. Fraser (1876-1953) was also known for "The End of the Trail" and other major American medals.', img: AMERICAN_BUFFALO_2001_IMG, emoji: "", transparent: true },
+                { title: 'Sunshine Mint 10 oz Silver Bar', type: 'Bar', weight: '10 oz', year: '', purity: '.999 Silver', desc: 'Investment silver bar from Sunshine Minting - one of America\'s leading private mints. Stamped with the Sunshine Minting eagle logo, .999 FINE SILVER, and 10 OUNCES. Popular with physical silver stackers: typically lower premium per ounce than coins, clear weight, and good secondary-market liquidity. Some bars include MintMark SI micro-engraving for authentication.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: "", transparent: true }
             ]
         },
         ru: {
             name: 'Монетный двор США',
-            subtitle: 'United States Mint — дом American Silver Eagle',
+            subtitle: 'United States Mint - дом American Silver Eagle',
             founded: 'Основан в 1792',
             location: 'Филадельфия / Вест-Пойнт, США',
             website: 'www.usmint.gov',
             history: [
-                { title: 'Основание и доллар', text: 'Монетный двор США был основан в 1792 году в Филадельфии — тогдашней столице страны — на основании первого федерального закона о чеканке монет. Его цель — производство золотых, серебряных и медных долларовых монет для молодой республики. Здание в Филадельфии стало первым федеральным общественным зданием, построенным в США.' },
-                { title: 'American Silver Eagle — самая продаваемая монета в мире', text: 'С 1986 года Монетный двор США выпускает American Silver Eagle — самую продаваемую инвестиционную монету в истории. Чеканится из серебра .999 (1 унция), на аверсе изображена «Идущая Свобода» — дизайн 1916 года, считающийся лучшим произведением монетного искусства США. В 2021 году реверс (орёл) был обновлён впервые за 35 лет.' },
-                { title: 'Наследие и специальные выпуски', text: 'В 2021 году монетный двор выпустил обновлённые Morgan Dollar и Peace Dollar из серебра .999. Серия «Красоты Америки» (2010–2021) включала 56 пятиунцевых монет с изображением национальных парков. Монетный двор США хранит национальный стратегический резерв серебра в Вест-Пойнте.' }
+                { title: 'Основание и доллар', text: 'Монетный двор США был основан в 1792 году в Филадельфии - тогдашней столице страны - на основании первого федерального закона о чеканке монет. Его цель - производство золотых, серебряных и медных долларовых монет для молодой республики. Здание в Филадельфии стало первым федеральным общественным зданием, построенным в США.' },
+                { title: 'American Silver Eagle - самая продаваемая монета в мире', text: 'С 1986 года Монетный двор США выпускает American Silver Eagle - самую продаваемую инвестиционную монету в истории. Чеканится из серебра .999 (1 унция), на аверсе изображена «Идущая Свобода» - дизайн 1916 года, считающийся лучшим произведением монетного искусства США. В 2021 году реверс (орёл) был обновлён впервые за 35 лет.' },
+                { title: 'Наследие и специальные выпуски', text: 'В 2021 году монетный двор выпустил обновлённые Morgan Dollar и Peace Dollar из серебра .999. Серия «Красоты Америки» (2010-2021) включала 56 пятиунцевых монет с изображением национальных парков. Монетный двор США хранит национальный стратегический резерв серебра в Вест-Пойнте.' }
             ],
             products: [
-                { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986–', purity: 'Серебро 999', desc: 'Американский серебряный орёл — самая популярная инвестиционная монета в Северной Америке, выпускается с 1986 года. Имеет статус законного платёжного средства США с номиналом 1 доллар. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: "", transparent: true },
-                { title: 'Американский бизон — памятная 2001', type: 'Памятная', weight: '1 унция', year: '2001', purity: 'Серебро 999', desc: 'Памятная серебряная монета Монетного двора США, продавалась летом 2001 года до полного распродажа (500 000 экземпляров). Посвящена открытию Национального музея американских индейцев. Дизайн основан на классической монете с бизоном (1913–1938): профиль коренного американца и бизон. Автор — скульптор Джеймс Эрл Фрейзер.', img: AMERICAN_BUFFALO_2001_IMG, emoji: "", transparent: true },
-                { title: 'Слиток 10 унций — Sunshine Mint', type: 'Слиток', weight: '10 унций', year: '', purity: 'Серебро 999', desc: 'Инвестиционный слиток от частного монетного двора Sunshine Minting — одного из ведущих производителей серебра в США. На слитке: логотип орла, проба 999 и вес 10 унций. Популярен у инвесторов: обычно ниже премия за унцию, чем у монет, понятный вес и хорошая ликвидность. На некоторых слитках есть микрогравировка для проверки подлинности.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: "", transparent: true }
+                { title: 'Американский серебряный орёл', type: 'Монета', weight: '1 унция', year: '1986-', purity: 'Серебро 999', desc: 'Американский серебряный орёл - самая популярная инвестиционная монета в Северной Америке, выпускается с 1986 года. Имеет статус законного платёжного средства США с номиналом 1 доллар. Широко известна и относительно легко продаётся по всему миру.', img: AMERICAN_SILVER_EAGLE_IMG, emoji: "", transparent: true },
+                { title: 'Американский бизон - памятная 2001', type: 'Памятная', weight: '1 унция', year: '2001', purity: 'Серебро 999', desc: 'Памятная серебряная монета Монетного двора США, продавалась летом 2001 года до полного распродажа (500 000 экземпляров). Посвящена открытию Национального музея американских индейцев. Дизайн основан на классической монете с бизоном (1913-1938): профиль коренного американца и бизон. Автор - скульптор Джеймс Эрл Фрейзер.', img: AMERICAN_BUFFALO_2001_IMG, emoji: "", transparent: true },
+                { title: 'Слиток 10 унций - Sunshine Mint', type: 'Слиток', weight: '10 унций', year: '', purity: 'Серебро 999', desc: 'Инвестиционный слиток от частного монетного двора Sunshine Minting - одного из ведущих производителей серебра в США. На слитке: логотип орла, проба 999 и вес 10 унций. Популярен у инвесторов: обычно ниже премия за унцию, чем у монет, понятный вес и хорошая ликвидность. На некоторых слитках есть микрогравировка для проверки подлинности.', img: SUNSHINE_MINT_10OZ_BAR_IMG, emoji: "", transparent: true }
             ]
         }
     },
@@ -1804,42 +1804,42 @@ const MINT_DATA = {
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Royal_Canadian_Mint_main_fa%C3%A7ade.JPG/800px-Royal_Canadian_Mint_main_fa%C3%A7ade.JPG',
         he: {
             name: 'בית המטבע המלכותי הקנדי',
-            subtitle: 'Royal Canadian Mint — מייצר את Silver Maple Leaf',
+            subtitle: 'Royal Canadian Mint - מייצר את Silver Maple Leaf',
             founded: 'נוסד 1908',
             location: 'אוטווה (אספנות) / ויניפג (השקעות), קנדה',
             website: 'www.mint.ca',
             history: [
                 { title: 'ייסוד ומסורת קנדית', text: 'בית המטבע המלכותי הקנדי נוסד ב-1908 באוטווה, כשקנדה ביקשה עצמאות מוניטרית מבריטניה. עד אז מטבעות קנדיים הוטבעו בלונדון. הבניין ההיסטורי המרהיב באוטווה, שנבנה בסגנון גותי, הפך לאחד מסמלי העיר. בשנת 1988 נפתח מפעל שני בויניפג לייצור מטבעות השקעה בהיקפים גדולים.' },
-                { title: 'Silver Maple Leaf — שיא הטוהר', text: 'Silver Maple Leaf הוכנס לשוק ב-1988 כמטבע ההשקעה הקנדי המרכזי. המטבע עשוי כסף 9999 (99.99% טהור) — טוהר גבוה יותר מרוב מתחריו. עלה על עלה מייפל האיקוני של קנדה מקשט את פניו, ואת גב המטבע מקשט דיוקן המלכה. הוא הילך חוקי בשווי 5 דולר קנדי.' },
-                { title: 'חדשנות וסדרות מיוחדות', text: 'בית המטבע הקנדי חלוץ טכנולוגי — הוא הנפיק את מטבע ה-"25 קילוגרם" הגדול בעולם (2007), ומטבעות עם הולוגרמה. סדרות "Call of the Wild", "Predator Series" ו-"Birds of Prey" הפכו לפנומן אספנות עולמי. הקנדים ייצרו גם מטבעות עם רובידיום — יסוד נדיר, בפעם הראשונה בהיסטוריית המטבעות.' }
+                { title: 'Silver Maple Leaf - שיא הטוהר', text: 'Silver Maple Leaf הוכנס לשוק ב-1988 כמטבע ההשקעה הקנדי המרכזי. המטבע עשוי כסף 9999 (99.99% טהור) - טוהר גבוה יותר מרוב מתחריו. עלה על עלה מייפל האיקוני של קנדה מקשט את פניו, ואת גב המטבע מקשט דיוקן המלכה. הוא הילך חוקי בשווי 5 דולר קנדי.' },
+                { title: 'חדשנות וסדרות מיוחדות', text: 'בית המטבע הקנדי חלוץ טכנולוגי - הוא הנפיק את מטבע ה-"25 קילוגרם" הגדול בעולם (2007), ומטבעות עם הולוגרמה. סדרות "Call of the Wild", "Predator Series" ו-"Birds of Prey" הפכו לפנומן אספנות עולמי. הקנדים ייצרו גם מטבעות עם רובידיום - יסוד נדיר, בפעם הראשונה בהיסטוריית המטבעות.' }
             ],
             products: [
             ]
         },
         en: {
             name: 'Royal Canadian Mint',
-            subtitle: 'Royal Canadian Mint — Home of the Silver Maple Leaf',
+            subtitle: 'Royal Canadian Mint - Home of the Silver Maple Leaf',
             founded: 'Founded 1908',
             location: 'Ottawa (collectibles) / Winnipeg (bullion), Canada',
             website: 'www.mint.ca',
             history: [
                 { title: 'Foundation & Canadian Tradition', text: 'The Royal Canadian Mint was founded in 1908 in Ottawa, as Canada sought monetary independence from Britain. Until then, Canadian coins were struck in London. The magnificent Gothic-style historic building in Ottawa became one of the city\'s landmarks. In 1988, a second facility opened in Winnipeg for large-scale bullion coin production.' },
-                { title: 'Silver Maple Leaf — Peak Purity', text: 'The Silver Maple Leaf was introduced in 1988 as Canada\'s flagship investment coin. Struck in .9999 fine silver (99.99% pure) — higher purity than most competitors. Canada\'s iconic maple leaf graces the obverse, while the monarch\'s portrait adorns the reverse. It is legal tender at C$5 face value.' },
-                { title: 'Innovation & Special Series', text: 'The Royal Canadian Mint is a technology pioneer — it issued the world\'s largest coin (25kg, 2007) and holographic coins. The "Call of the Wild," "Predator Series," and "Birds of Prey" series became global collecting phenomena. Canada also produced coins incorporating rubidium — a rare element — for the first time in coin history.' }
+                { title: 'Silver Maple Leaf - Peak Purity', text: 'The Silver Maple Leaf was introduced in 1988 as Canada\'s flagship investment coin. Struck in .9999 fine silver (99.99% pure) - higher purity than most competitors. Canada\'s iconic maple leaf graces the obverse, while the monarch\'s portrait adorns the reverse. It is legal tender at C$5 face value.' },
+                { title: 'Innovation & Special Series', text: 'The Royal Canadian Mint is a technology pioneer - it issued the world\'s largest coin (25kg, 2007) and holographic coins. The "Call of the Wild," "Predator Series," and "Birds of Prey" series became global collecting phenomena. Canada also produced coins incorporating rubidium - a rare element - for the first time in coin history.' }
             ],
             products: [
             ]
         },
         ru: {
             name: 'Королевский монетный двор Канады',
-            subtitle: 'Royal Canadian Mint — дом Silver Maple Leaf',
+            subtitle: 'Royal Canadian Mint - дом Silver Maple Leaf',
             founded: 'Основан в 1908',
             location: 'Оттава (коллекционные) / Виннипег (инвестиционные), Канада',
             website: 'www.mint.ca',
             history: [
                 { title: 'Основание и канадская традиция', text: 'Королевский монетный двор Канады был основан в 1908 году в Оттаве, когда Канада стремилась к монетарной независимости от Великобритании. До этого канадские монеты чеканились в Лондоне. Великолепное историческое здание в готическом стиле в Оттаве стало одной из достопримечательностей города. В 1988 году в Виннипеге открылся второй завод для крупномасштабного производства инвестиционных монет.' },
-                { title: 'Silver Maple Leaf — вершина чистоты', text: 'Silver Maple Leaf был представлен в 1988 году как главная канадская инвестиционная монета. Чеканится из серебра .9999 (99,99% чистоты) — более высокая проба, чем у большинства конкурентов. Знаменитый кленовый лист Канады украшает аверс, а портрет монарха — реверс. Является законным платёжным средством номиналом C$5.' },
-                { title: 'Инновации и специальные серии', text: 'Королевский монетный двор Канады — технологический пионер. Он выпустил крупнейшую монету в мире (25 кг, 2007) и голографические монеты. Серии «Call of the Wild», «Predator Series» и «Birds of Prey» стали мировыми коллекционными феноменами. Канада также выпустила монеты с рубидием — редким элементом — впервые в истории монетного дела.' }
+                { title: 'Silver Maple Leaf - вершина чистоты', text: 'Silver Maple Leaf был представлен в 1988 году как главная канадская инвестиционная монета. Чеканится из серебра .9999 (99,99% чистоты) - более высокая проба, чем у большинства конкурентов. Знаменитый кленовый лист Канады украшает аверс, а портрет монарха - реверс. Является законным платёжным средством номиналом C$5.' },
+                { title: 'Инновации и специальные серии', text: 'Королевский монетный двор Канады - технологический пионер. Он выпустил крупнейшую монету в мире (25 кг, 2007) и голографические монеты. Серии «Call of the Wild», «Predator Series» и «Birds of Prey» стали мировыми коллекционными феноменами. Канада также выпустила монеты с рубидием - редким элементом - впервые в истории монетного дела.' }
             ],
             products: [
             ]
@@ -1853,42 +1853,42 @@ const MINT_DATA = {
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Perth_Mint%2C_WA%2C_2023.jpg/800px-Perth_Mint%2C_WA%2C_2023.jpg',
         he: {
             name: 'בית המטבע של פרת\'',
-            subtitle: 'Perth Mint — קנגרו, קוקאברה וסדרת הירח',
+            subtitle: 'Perth Mint - קנגרו, קוקאברה וסדרת הירח',
             founded: 'נוסד 1899',
             location: 'פרת\', מערב אוסטרליה',
             website: 'www.perthmint.com',
             history: [
                 { title: 'ייסוד בעידן זהב', text: 'בית המטבע של פרת\' נוסד ב-1899 במהלך "בהלת הזהב" האוסטרלית, כסניף של בית המטבע המלכותי הבריטי. מטרתו הייתה עיבוד זהב המופק ממכרות ווסטרן אוסטרליה. לאחר שאוסטרליה הקימה את בית המטבע הלאומי שלה ב-1965, פרת\' המשיך לפעול כבית מטבע ממשלתי עצמאי של ווסטרן אוסטרליה, עם מוניטין עולמי.' },
-                { title: 'סדרות הכסף האיקוניות', text: 'Silver Kookaburra הופיעה ב-1990 כאחת מסדרות הכסף הראשונות בעולם עם עיצוב משתנה מדי שנה. Silver Kangaroo הושק ב-2016. סדרת "Lunar" (לוח שנה סיני) הוחלה על מטבעות כסף ב-1999, עם 12 מטבעות המייצגים בעלי חיים מהגלגל הסיני — אחת מסדרות האספנות הפופולריות בעולם. לפרת\' גם Silver Koala ו-Silver Swan.' },
-                { title: 'טוהר ואמינות', text: 'Perth Mint ידוע בייצור מטבעות עם טוהר 9999 ו-99999 (Five Nines — 99.999%). הוא מציע שירות "סוכנות" ייחודי המאפשר למשקיעים לרכוש ולאחסן כסף בכספת פרת\' עצמה. בית המטבע גם מציע מוצרי כסף עם ציפוי זהב (gilded) ועם צבע. הוא גם מייצר מטבעות עבור ממשלות אחרות.' }
+                { title: 'סדרות הכסף האיקוניות', text: 'Silver Kookaburra הופיעה ב-1990 כאחת מסדרות הכסף הראשונות בעולם עם עיצוב משתנה מדי שנה. Silver Kangaroo הושק ב-2016. סדרת "Lunar" (לוח שנה סיני) הוחלה על מטבעות כסף ב-1999, עם 12 מטבעות המייצגים בעלי חיים מהגלגל הסיני - אחת מסדרות האספנות הפופולריות בעולם. לפרת\' גם Silver Koala ו-Silver Swan.' },
+                { title: 'טוהר ואמינות', text: 'Perth Mint ידוע בייצור מטבעות עם טוהר 9999 ו-99999 (Five Nines - 99.999%). הוא מציע שירות "סוכנות" ייחודי המאפשר למשקיעים לרכוש ולאחסן כסף בכספת פרת\' עצמה. בית המטבע גם מציע מוצרי כסף עם ציפוי זהב (gilded) ועם צבע. הוא גם מייצר מטבעות עבור ממשלות אחרות.' }
             ],
             products: [
             ]
         },
         en: {
             name: 'Perth Mint',
-            subtitle: 'Perth Mint — Kangaroo, Kookaburra & Lunar Series',
+            subtitle: 'Perth Mint - Kangaroo, Kookaburra & Lunar Series',
             founded: 'Founded 1899',
             location: 'Perth, Western Australia',
             website: 'www.perthmint.com',
             history: [
                 { title: 'Gold Rush Foundation', text: 'The Perth Mint was founded in 1899 during the Australian gold rush, as a branch of the British Royal Mint. Its purpose was to process gold extracted from Western Australian mines. After Australia established its national mint in 1965, Perth continued as an independent state government mint for Western Australia, building a world-class reputation.' },
-                { title: 'Iconic Silver Series', text: 'The Silver Kookaburra launched in 1990 as one of the world\'s first silver series with an annually changing design. The Silver Kangaroo launched in 2016. The "Lunar" series (Chinese calendar) was applied to silver coins in 1999, with 12 coins representing Chinese zodiac animals — one of the world\'s most popular collecting series. Perth also produces Silver Koala and Silver Swan.' },
-                { title: 'Purity & Reliability', text: 'Perth Mint is renowned for coins of .9999 and .99999 purity (Five Nines — 99.999%). It offers a unique "Certificate" storage service allowing investors to buy and store silver in Perth\'s own vault. The mint also offers gold-plated (gilded) and coloured silver products. It also strikes coins for other governments worldwide.' }
+                { title: 'Iconic Silver Series', text: 'The Silver Kookaburra launched in 1990 as one of the world\'s first silver series with an annually changing design. The Silver Kangaroo launched in 2016. The "Lunar" series (Chinese calendar) was applied to silver coins in 1999, with 12 coins representing Chinese zodiac animals - one of the world\'s most popular collecting series. Perth also produces Silver Koala and Silver Swan.' },
+                { title: 'Purity & Reliability', text: 'Perth Mint is renowned for coins of .9999 and .99999 purity (Five Nines - 99.999%). It offers a unique "Certificate" storage service allowing investors to buy and store silver in Perth\'s own vault. The mint also offers gold-plated (gilded) and coloured silver products. It also strikes coins for other governments worldwide.' }
             ],
             products: [
             ]
         },
         ru: {
             name: 'Монетный двор Перта',
-            subtitle: 'Perth Mint — Кенгуру, Кукабарра и Лунная серия',
+            subtitle: 'Perth Mint - Кенгуру, Кукабарра и Лунная серия',
             founded: 'Основан в 1899',
             location: 'Перт, Западная Австралия',
             website: 'www.perthmint.com',
             history: [
                 { title: 'Основание в эпоху золотой лихорадки', text: 'Монетный двор Перта был основан в 1899 году во время австралийской золотой лихорадки как филиал британского Королевского монетного двора. Его задачей была переработка золота из шахт Западной Австралии. После создания национального монетного двора Австралии в 1965 году Перт продолжил работу как независимый государственный монетный двор штата.' },
-                { title: 'Легендарные серебряные серии', text: 'Silver Kookaburra запустили в 1990 году как одну из первых в мире серий серебра с меняющимся ежегодным дизайном. Silver Kangaroo появился в 2016 году. «Лунная» серия (китайский календарь) вышла на серебряных монетах в 1999 году — 12 монет с животными китайского зодиака, ставших одними из самых популярных в мире. Перт также выпускает Silver Koala и Silver Swan.' },
-                { title: 'Чистота и надёжность', text: 'Монетный двор Перта известен монетами с пробой .9999 и .99999 (Five Nines — 99,999%). Он предлагает уникальный сервис хранения, позволяющий инвесторам покупать и хранить серебро в собственном хранилище Перта. Двор также выпускает позолоченные и цветные серебряные изделия и чеканит монеты для правительств других стран.' }
+                { title: 'Легендарные серебряные серии', text: 'Silver Kookaburra запустили в 1990 году как одну из первых в мире серий серебра с меняющимся ежегодным дизайном. Silver Kangaroo появился в 2016 году. «Лунная» серия (китайский календарь) вышла на серебряных монетах в 1999 году - 12 монет с животными китайского зодиака, ставших одними из самых популярных в мире. Перт также выпускает Silver Koala и Silver Swan.' },
+                { title: 'Чистота и надёжность', text: 'Монетный двор Перта известен монетами с пробой .9999 и .99999 (Five Nines - 99,999%). Он предлагает уникальный сервис хранения, позволяющий инвесторам покупать и хранить серебро в собственном хранилище Перта. Двор также выпускает позолоченные и цветные серебряные изделия и чеканит монеты для правительств других стран.' }
             ],
             products: [
             ]
@@ -1902,42 +1902,42 @@ const MINT_DATA = {
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Am_Heumarkt_1_Hauptmuenzamt_DSC_7408w.jpg/800px-Am_Heumarkt_1_Hauptmuenzamt_DSC_7408w.jpg',
         he: {
             name: 'בית המטבע הווינאי',
-            subtitle: 'Münze Österreich — מייצר את Wiener Philharmoniker',
+            subtitle: 'Münze Österreich - מייצר את Wiener Philharmoniker',
             founded: 'נוסד 1194',
             location: 'וינה, אוסטריה',
             website: 'www.muenzeoesterreich.at',
             history: [
                 { title: 'ייסוד אימפריאלי', text: 'בית המטבע הווינאי (Münze Österreich) נוסד ב-1194 ביוזמת הדוכס לאופולד V ​​מאוסטריה, מכסף שנגבה מפדיון השבי של ריצ\'רד לב-הארי. זהו אחד מבתי המטבע הפעילים הוותיקים בעולם. לאורך מאות שנים שירת את האימפריה ההבסבורגית, ייצר מטבעות לקיסרים, ואת מורשת אירופה המלכותית.' },
-                { title: 'Wiener Philharmoniker — הנמכר ביותר באירופה', text: 'ב-1989 השיק בית המטבע הווינאי את Wiener Philharmoniker — מטבע כסף 999 שהפך לנמכר ביותר באירופה. המטבע מוקדש לתזמורת הפילהרמונית הווינאית, אחת הנודעות בעולם. פני המטבע מקשטים כלים מוזיקליים של התזמורת, ועל גבו האורגן ב"זאל מוזיקפרין". הוא הילך חוקי באוסטריה.' },
-                { title: 'הנבה ומדלי', text: 'מעבר ל-Philharmoniker, בית המטבע הווינאי מנפיק את Vienna Mint Collection — כולל מטבעות כסף נדירים עם עיצובים של אמני וינה. מטבע ה-100 יורו זהב הוא אחד הגדולים שהנפיק. בית המטבע גם ידוע בייצור מדלי כסף ועיטורים מדינתיים למדינות אחרות. הוא שיתף פעולה עם אמנים עולמיים לסדרות מוגבלות.' }
+                { title: 'Wiener Philharmoniker - הנמכר ביותר באירופה', text: 'ב-1989 השיק בית המטבע הווינאי את Wiener Philharmoniker - מטבע כסף 999 שהפך לנמכר ביותר באירופה. המטבע מוקדש לתזמורת הפילהרמונית הווינאית, אחת הנודעות בעולם. פני המטבע מקשטים כלים מוזיקליים של התזמורת, ועל גבו האורגן ב"זאל מוזיקפרין". הוא הילך חוקי באוסטריה.' },
+                { title: 'הנבה ומדלי', text: 'מעבר ל-Philharmoniker, בית המטבע הווינאי מנפיק את Vienna Mint Collection - כולל מטבעות כסף נדירים עם עיצובים של אמני וינה. מטבע ה-100 יורו זהב הוא אחד הגדולים שהנפיק. בית המטבע גם ידוע בייצור מדלי כסף ועיטורים מדינתיים למדינות אחרות. הוא שיתף פעולה עם אמנים עולמיים לסדרות מוגבלות.' }
             ],
             products: [
             ]
         },
         en: {
             name: 'Austrian Mint (Vienna)',
-            subtitle: 'Münze Österreich — Home of the Wiener Philharmoniker',
+            subtitle: 'Münze Österreich - Home of the Wiener Philharmoniker',
             founded: 'Founded 1194',
             location: 'Vienna, Austria',
             website: 'www.muenzeoesterreich.at',
             history: [
                 { title: 'Imperial Foundation', text: 'The Austrian Mint (Münze Österreich) was founded in 1194 at the initiative of Duke Leopold V of Austria, from silver raised through the ransom of Richard the Lionheart. It is one of the oldest continuously operating mints in the world. For centuries it served the Habsburg Empire, producing coins for emperors and carrying the legacy of European royal tradition.' },
-                { title: 'Wiener Philharmoniker — Europe\'s Best-Seller', text: 'In 1989, the Austrian Mint launched the Wiener Philharmoniker — a .999 fine silver coin that became Europe\'s best-selling bullion coin. The coin is dedicated to the Vienna Philharmonic Orchestra, one of the world\'s most renowned. The obverse features instruments of the orchestra, while the reverse shows the great organ of the Wiener Musikverein. It is legal tender in Austria.' },
-                { title: 'Innovation & Medals', text: 'Beyond the Philharmoniker, the Austrian Mint issues the Vienna Mint Collection — including rare silver coins with designs by Viennese artists. Its 100 Euro gold coin is one of the largest ever issued. The mint also produces silver medals and state decorations for other countries, and has collaborated with international artists for limited series.' }
+                { title: 'Wiener Philharmoniker - Europe\'s Best-Seller', text: 'In 1989, the Austrian Mint launched the Wiener Philharmoniker - a .999 fine silver coin that became Europe\'s best-selling bullion coin. The coin is dedicated to the Vienna Philharmonic Orchestra, one of the world\'s most renowned. The obverse features instruments of the orchestra, while the reverse shows the great organ of the Wiener Musikverein. It is legal tender in Austria.' },
+                { title: 'Innovation & Medals', text: 'Beyond the Philharmoniker, the Austrian Mint issues the Vienna Mint Collection - including rare silver coins with designs by Viennese artists. Its 100 Euro gold coin is one of the largest ever issued. The mint also produces silver medals and state decorations for other countries, and has collaborated with international artists for limited series.' }
             ],
             products: [
             ]
         },
         ru: {
             name: 'Австрийский монетный двор (Вена)',
-            subtitle: 'Münze Österreich — дом Wiener Philharmoniker',
+            subtitle: 'Münze Österreich - дом Wiener Philharmoniker',
             founded: 'Основан в 1194',
             location: 'Вена, Австрия',
             website: 'www.muenzeoesterreich.at',
             history: [
-                { title: 'Имперское основание', text: 'Австрийский монетный двор (Münze Österreich) был основан в 1194 году по инициативе герцога Леопольда V Австрийского — из серебра, полученного в качестве выкупа за Ричарда Львиное Сердце. Это один из старейших непрерывно действующих монетных дворов в мире. Столетиями он служил Габсбургской империи, чеканя монеты для императоров.' },
-                { title: 'Wiener Philharmoniker — лидер продаж Европы', text: 'В 1989 году Австрийский монетный двор выпустил Wiener Philharmoniker — монету из серебра .999, ставшую самой продаваемой инвестиционной монетой в Европе. Монета посвящена Венскому филармоническому оркестру. На аверсе изображены инструменты оркестра, на реверсе — орган Wiener Musikverein. Является законным платёжным средством в Австрии.' },
-                { title: 'Инновации и медали', text: 'Помимо Philharmoniker, Австрийский монетный двор выпускает Vienna Mint Collection — редкие серебряные монеты с дизайном венских художников. Его золотая монета номиналом 100 евро — одна из крупнейших когда-либо выпускавшихся. Двор также производит серебряные медали и государственные награды для других стран.' }
+                { title: 'Имперское основание', text: 'Австрийский монетный двор (Münze Österreich) был основан в 1194 году по инициативе герцога Леопольда V Австрийского - из серебра, полученного в качестве выкупа за Ричарда Львиное Сердце. Это один из старейших непрерывно действующих монетных дворов в мире. Столетиями он служил Габсбургской империи, чеканя монеты для императоров.' },
+                { title: 'Wiener Philharmoniker - лидер продаж Европы', text: 'В 1989 году Австрийский монетный двор выпустил Wiener Philharmoniker - монету из серебра .999, ставшую самой продаваемой инвестиционной монетой в Европе. Монета посвящена Венскому филармоническому оркестру. На аверсе изображены инструменты оркестра, на реверсе - орган Wiener Musikverein. Является законным платёжным средством в Австрии.' },
+                { title: 'Инновации и медали', text: 'Помимо Philharmoniker, Австрийский монетный двор выпускает Vienna Mint Collection - редкие серебряные монеты с дизайном венских художников. Его золотая монета номиналом 100 евро - одна из крупнейших когда-либо выпускавшихся. Двор также производит серебряные медали и государственные награды для других стран.' }
             ],
             products: [
             ]
@@ -1951,42 +1951,42 @@ const MINT_DATA = {
         buildingImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antigua_Casa_de_Moneda.JPG/800px-Antigua_Casa_de_Moneda.JPG',
         he: {
             name: 'בית המטבע המקסיקני',
-            subtitle: 'Casa de Moneda de México — הוותיק באמריקה מאז 1535',
+            subtitle: 'Casa de Moneda de México - הוותיק באמריקה מאז 1535',
             founded: 'נוסד 1535',
             location: 'סן לואיס פוטוסי, מקסיקו',
             website: 'www.gob.mx/cmm',
             history: [
-                { title: 'הוותיק ביותר באמריקה', text: 'Casa de Moneda de México, הוקמה ב-1535 בצו המלך קרלוס הראשון של ספרד — בית המטבע הראשון והוותיק ביותר ביבשת אמריקה. כ-500 שנות פעולה רצופה. הבניין ההיסטורי בלב העיר מקסיקו (כיום מוזיאון נומיסמטי) הוא אתר מורשת עולמית של יונסק"ו. המינט הדף מטבעות כסף המפורסמים "Reales" שמימנו את הכלכלה הקולוניאלית של ספרד.' },
-                { title: 'Onza de Plata Libertad — כסף ההשקעה המקסיקני', text: 'ב-1982 הנפיק בית המטבע המקסיקני את ה-Onza de Plata Libertad — המטבע ההשקעה הרשמי של מקסיקו. על פני המטבע ניצבת "הניצחון המכונף" (מלאך העצמאות), אנדרטת העצמאות של מקסיקו סיטי. הגב מקשט נשר מקסיקני עם נחש — סמל המדינה. הוא מיוצר בכסף 999 ו-9999, בגדלים מ-1/20 אונקיה עד 5 אונקיות.' },
-                { title: 'מורשת אמנותית ועושר', text: 'מקסיקו הייתה בעל מכרות הכסף הגדולים בעולם — מכרות גואנחוואטו וסאקאטקאס סיפקו לאורך מאות שנים חלק ניכר מהכסף הגלובלי. Libertad נחשב לאחד המטבעות עם העיצוב הנחשב ביותר בשוק העולמי. המינט מייצר גם מטבעות זיכרון עם עיצובים פרה-קולומביאניים — אצטקים, מאיה ועוד.' }
+                { title: 'הוותיק ביותר באמריקה', text: 'Casa de Moneda de México, הוקמה ב-1535 בצו המלך קרלוס הראשון של ספרד - בית המטבע הראשון והוותיק ביותר ביבשת אמריקה. כ-500 שנות פעולה רצופה. הבניין ההיסטורי בלב העיר מקסיקו (כיום מוזיאון נומיסמטי) הוא אתר מורשת עולמית של יונסק"ו. המינט הדף מטבעות כסף המפורסמים "Reales" שמימנו את הכלכלה הקולוניאלית של ספרד.' },
+                { title: 'Onza de Plata Libertad - כסף ההשקעה המקסיקני', text: 'ב-1982 הנפיק בית המטבע המקסיקני את ה-Onza de Plata Libertad - המטבע ההשקעה הרשמי של מקסיקו. על פני המטבע ניצבת "הניצחון המכונף" (מלאך העצמאות), אנדרטת העצמאות של מקסיקו סיטי. הגב מקשט נשר מקסיקני עם נחש - סמל המדינה. הוא מיוצר בכסף 999 ו-9999, בגדלים מ-1/20 אונקיה עד 5 אונקיות.' },
+                { title: 'מורשת אמנותית ועושר', text: 'מקסיקו הייתה בעל מכרות הכסף הגדולים בעולם - מכרות גואנחוואטו וסאקאטקאס סיפקו לאורך מאות שנים חלק ניכר מהכסף הגלובלי. Libertad נחשב לאחד המטבעות עם העיצוב הנחשב ביותר בשוק העולמי. המינט מייצר גם מטבעות זיכרון עם עיצובים פרה-קולומביאניים - אצטקים, מאיה ועוד.' }
             ],
             products: [
             ]
         },
         en: {
             name: 'Casa de Moneda de México',
-            subtitle: 'Casa de Moneda de México — The Americas\' oldest mint since 1535',
+            subtitle: 'Casa de Moneda de México - The Americas\' oldest mint since 1535',
             founded: 'Founded 1535',
             location: 'San Luis Potosí, Mexico',
             website: 'www.gob.mx/cmm',
             history: [
-                { title: 'Oldest Mint in the Americas', text: 'Casa de Moneda de México was established in 1535 by decree of King Charles I of Spain — the first and oldest mint in the entire American continent. Nearly 500 years of continuous operation. The historic building in Mexico City (now a numismatic museum) is a UNESCO World Heritage Site. The mint struck the famous silver "Reales" coins that financed Spain\'s colonial economy.' },
-                { title: 'Onza de Plata Libertad — Mexican Investment Silver', text: 'In 1982, the Mexican Mint issued the Onza de Plata Libertad — Mexico\'s official investment coin. The obverse features the "Winged Victory" (Angel of Independence), Mexico City\'s landmark monument. The reverse displays the Mexican eagle with a serpent — the national symbol. Produced in .999 and .9999 silver, in sizes from 1/20 oz to 5 oz.' },
-                { title: 'Artistic Heritage & Wealth', text: 'Mexico was home to the world\'s largest silver mines — the Guanajuato and Zacatecas mines supplied a significant portion of global silver for centuries. The Libertad is considered one of the most beautifully designed coins in the world market. The mint also produces commemorative coins with Pre-Columbian designs — Aztec, Maya and more.' }
+                { title: 'Oldest Mint in the Americas', text: 'Casa de Moneda de México was established in 1535 by decree of King Charles I of Spain - the first and oldest mint in the entire American continent. Nearly 500 years of continuous operation. The historic building in Mexico City (now a numismatic museum) is a UNESCO World Heritage Site. The mint struck the famous silver "Reales" coins that financed Spain\'s colonial economy.' },
+                { title: 'Onza de Plata Libertad - Mexican Investment Silver', text: 'In 1982, the Mexican Mint issued the Onza de Plata Libertad - Mexico\'s official investment coin. The obverse features the "Winged Victory" (Angel of Independence), Mexico City\'s landmark monument. The reverse displays the Mexican eagle with a serpent - the national symbol. Produced in .999 and .9999 silver, in sizes from 1/20 oz to 5 oz.' },
+                { title: 'Artistic Heritage & Wealth', text: 'Mexico was home to the world\'s largest silver mines - the Guanajuato and Zacatecas mines supplied a significant portion of global silver for centuries. The Libertad is considered one of the most beautifully designed coins in the world market. The mint also produces commemorative coins with Pre-Columbian designs - Aztec, Maya and more.' }
             ],
             products: [
             ]
         },
         ru: {
             name: 'Монетный двор Мексики',
-            subtitle: 'Casa de Moneda de México — старейший монетный двор Америки с 1535 г.',
+            subtitle: 'Casa de Moneda de México - старейший монетный двор Америки с 1535 г.',
             founded: 'Основан в 1535',
             location: 'Сан-Луис-Потоси, Мексика',
             website: 'www.gob.mx/cmm',
             history: [
-                { title: 'Старейший в Америке', text: 'Casa de Moneda de México был основан в 1535 году по указу короля Карла I Испанского — первый и старейший монетный двор на всём американском континенте. Почти 500 лет непрерывной работы. Историческое здание в Мехико (ныне нумизматический музей) — объект Всемирного наследия ЮНЕСКО. Двор чеканил знаменитые серебряные «Реалы», финансировавшие колониальную экономику Испании.' },
-                { title: 'Onza de Plata Libertad — мексиканское инвестиционное серебро', text: 'В 1982 году Мексиканский монетный двор выпустил Onza de Plata Libertad — официальную инвестиционную монету Мексики. На аверсе — «Крылатая победа» (Ангел Независимости), символ Мехико. Реверс украшен мексиканским орлом со змеёй — национальным гербом. Чеканится из серебра .999 и .9999 в размерах от 1/20 унции до 5 унций.' },
-                { title: 'Художественное наследие и богатство', text: 'Мексика была родиной крупнейших серебряных рудников мира — шахты Гуанахуато и Сакатекас веками снабжали значительную часть мирового серебра. Libertad считается одной из красивейших монет на мировом рынке. Монетный двор также выпускает памятные монеты с доколумбийскими дизайнами — ацтекскими, майя и другими.' }
+                { title: 'Старейший в Америке', text: 'Casa de Moneda de México был основан в 1535 году по указу короля Карла I Испанского - первый и старейший монетный двор на всём американском континенте. Почти 500 лет непрерывной работы. Историческое здание в Мехико (ныне нумизматический музей) - объект Всемирного наследия ЮНЕСКО. Двор чеканил знаменитые серебряные «Реалы», финансировавшие колониальную экономику Испании.' },
+                { title: 'Onza de Plata Libertad - мексиканское инвестиционное серебро', text: 'В 1982 году Мексиканский монетный двор выпустил Onza de Plata Libertad - официальную инвестиционную монету Мексики. На аверсе - «Крылатая победа» (Ангел Независимости), символ Мехико. Реверс украшен мексиканским орлом со змеёй - национальным гербом. Чеканится из серебра .999 и .9999 в размерах от 1/20 унции до 5 унций.' },
+                { title: 'Художественное наследие и богатство', text: 'Мексика была родиной крупнейших серебряных рудников мира - шахты Гуанахуато и Сакатекас веками снабжали значительную часть мирового серебра. Libertad считается одной из красивейших монет на мировом рынке. Монетный двор также выпускает памятные монеты с доколумбийскими дизайнами - ацтекскими, майя и другими.' }
             ],
             products: [
             ]
@@ -2014,7 +2014,7 @@ function renderMintDetail(mintId, lang) {
     const titleEl = document.getElementById('mint-detail-title');
     if (titleEl) titleEl.textContent = `${mint.flag} ${d.name}`;
 
-    // Update lang tabs — scope to mint-detail-screen only to avoid bleeding into guide tabs
+    // Update lang tabs - scope to mint-detail-screen only to avoid bleeding into guide tabs
     document.querySelectorAll('#mint-detail-screen .mint-lang-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.lang === _museumActiveLang);
     });
@@ -2027,7 +2027,7 @@ function renderMintDetail(mintId, lang) {
         detailWrap.style.textAlign = isRtl ? 'right' : 'left';
     }
 
-    // Products HTML — only user-uploaded Supabase images
+    // Products HTML - only user-uploaded Supabase images
     const uploadedProducts = getUploadedMintProducts(d.products);
     const productsHtml = uploadedProducts.map(p => `
         <div class="mint-product-card">
@@ -2148,9 +2148,9 @@ const GUIDE_DATA = {
         chapters: [
             {
                 icon: "",
-                title: 'מה זה כסף פיזי — מבוא למתחיל',
+                title: 'מה זה כסף פיזי - מבוא למתחיל',
                 content: `
-                    <p>כסף פיזי הוא כסף טהור בצורת <strong>מטבעות</strong> או <strong>מטילים</strong> שאתה מחזיק בידיך ממש — לא נייר, לא מניה, לא ETF. אתה הבעלים המוחלט.</p>
+                    <p>כסף פיזי הוא כסף טהור בצורת <strong>מטבעות</strong> או <strong>מטילים</strong> שאתה מחזיק בידיך ממש - לא נייר, לא מניה, לא ETF. אתה הבעלים המוחלט.</p>
                     <p><strong>מה ההבדל בין מטבע למטיל?</strong></p>
                     <ul>
                         <li><strong>מטבע (Coin):</strong> מוטבע ע"י מינט ממשלתי (כמו מינט ישראל, ה-Royal Mint). יש לו ערך נקוב רשמי, עיצוב אמנותי, ולעיתים ערך קולקטיבי מעל מחיר הכסף.</li>
@@ -2158,76 +2158,76 @@ const GUIDE_DATA = {
                     </ul>
                     <div class="guide-tip-box"> <strong>טיפ:</strong> לרוב מטילים זולים יותר לאונקיה. מטבעות מוכרים מהר יותר וקל יותר לאמת את אמיתותם.</div>
                     <p><strong>גדלים נפוצים:</strong> ¼ אונקיה, ½ אונקיה, 1 אונקיה (הנפוץ ביותר), 5 אונקיות, 10 אונקיות, 1 ק"ג, 5 ק"ג.</p>
-                    <p><strong>טוהר:</strong> כסף טהור הוא .999 (99.9%) או .9999 (99.99%). מטבעות ישנים כמו Morgan Dollar הם .900 — לא כסף השקעה.</p>
+                    <p><strong>טוהר:</strong> כסף טהור הוא .999 (99.9%) או .9999 (99.99%). מטבעות ישנים כמו Morgan Dollar הם .900 - לא כסף השקעה.</p>
                 `
             },
             {
                 icon: "",
-                title: 'איפה קונים כסף בישראל — 2026',
+                title: 'איפה קונים כסף בישראל - 2026',
                 content: `
                     <p><strong>אפשרויות עיקריות לרכישה בארץ:</strong></p>
                     <ul>
                         <li><strong>מינט ישראל (החברה הישראלית למדליות ולמטבעות):</strong> האתר הרשמי <em>coins.co.il</em>. מטבעות מוכרים ומאומתים לחלוטין. פרמיום גבוה יחסית.</li>
                         <li><strong>חנויות מטבעות פרטיות:</strong> ישנן חנויות מומחיות במרכז ובצפון. בדוק ביקורות ואמינות לפני קנייה.</li>
-                        <li><strong>פלטפורמות מקוונות בינלאומיות:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em>, <em>Europäisches Münzhaus</em> — משלוח לישראל אפשרי, שים לב לעמלות מכס ו-VAT.</li>
-                        <li><strong>שוק אפור / יחידים:</strong> פורומים, קבוצות טלגרם — <strong>סיכון גבוה לזיופים! מומלץ רק עם בדיקה מקצועית.</strong></li>
+                        <li><strong>פלטפורמות מקוונות בינלאומיות:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em>, <em>Europäisches Münzhaus</em> - משלוח לישראל אפשרי, שים לב לעמלות מכס ו-VAT.</li>
+                        <li><strong>שוק אפור / יחידים:</strong> פורומים, קבוצות טלגרם - <strong>סיכון גבוה לזיופים! מומלץ רק עם בדיקה מקצועית.</strong></li>
                     </ul>
-                    <div class="guide-warn-box"> <strong>אזהרה:</strong> מכס ישראלי — ייבוא אישי של כסף מזכה בפטור ממע"מ אם הוא מוגדר כ"מטיל כסף השקעה". בדוק עם המוכר לפני הזמנה.</div>
+                    <div class="guide-warn-box"> <strong>אזהרה:</strong> מכס ישראלי - ייבוא אישי של כסף מזכה בפטור ממע"מ אם הוא מוגדר כ"מטיל כסף השקעה". בדוק עם המוכר לפני הזמנה.</div>
                 `
             },
             {
                 icon: "",
-                title: 'איפה מוכרים כסף בישראל — 2026',
+                title: 'איפה מוכרים כסף בישראל - 2026',
                 content: `
                     <p>מכירה בארץ מוגבלת יותר מקנייה. עיקר האפשרויות:</p>
                     <ul>
-                        <li><strong>חנויות מטבעות מורשות:</strong> הן הדרך הכי מהירה לפדיון. מצפות לקנות ממך מתחת למחיר ספוט — זה הרווח שלהן.</li>
+                        <li><strong>חנויות מטבעות מורשות:</strong> הן הדרך הכי מהירה לפדיון. מצפות לקנות ממך מתחת למחיר ספוט - זה הרווח שלהן.</li>
                         <li><strong>מינט ישראל:</strong> מקבל מטבעות ישראלים לפדיון בתנאים מסוימים.</li>
                         <li><strong>פלטפורמות P2P (יחיד-ליחיד):</strong> קבוצות פייסבוק וטלגרם ייעודיות. מחיר טוב יותר אך תהליך ארוך יותר.</li>
-                        <li><strong>בינלאומי:</strong> מכירה לחנויות אירופיות / אמריקאיות — רלוונטי לכמויות גדולות.</li>
+                        <li><strong>בינלאומי:</strong> מכירה לחנויות אירופיות / אמריקאיות - רלוונטי לכמויות גדולות.</li>
                     </ul>
                     <div class="guide-tip-box"> <strong>טיפ:</strong> מטבעות של מינטים מוכרים (Britannia, Maple Leaf, American Eagle) נמכרים <strong>הרבה יותר מהר</strong> ובמחיר טוב יותר מאשר מטבעות לא מוכרים.</div>
                 `
             },
             {
                 icon: "",
-                title: 'כמה לקנות — אסטרטגיית כניסה למתחיל',
+                title: 'כמה לקנות - אסטרטגיית כניסה למתחיל',
                 content: `
-                    <p>אין כמות "נכונה" — הכל תלוי במטרה שלך.</p>
+                    <p>אין כמות "נכונה" - הכל תלוי במטרה שלך.</p>
                     <p><strong>עקרונות בסיס:</strong></p>
                     <ul>
-                        <li>מרבית המומחים ממליצים <strong>5%–15%</strong> מהחסכונות בנכסים קשים (כסף + זהב + מטח).</li>
-                        <li>התחל עם <strong>כמות קטנה</strong> (1–5 אונקיות) כדי להבין את התהליך לפני שמשקיעים סכומים גדולים.</li>
-                        <li>קנה בקביעות (<strong>Dollar Cost Averaging</strong>) — כל חודש כמות קבועה, בלי לנחש את השוק.</li>
-                        <li>שמור תמיד <strong>נזילות</strong> — אל תשקיע כסף שאתה עלול לצטרך בחירום.</li>
+                        <li>מרבית המומחים ממליצים <strong>5%-15%</strong> מהחסכונות בנכסים קשים (כסף + זהב + מטח).</li>
+                        <li>התחל עם <strong>כמות קטנה</strong> (1-5 אונקיות) כדי להבין את התהליך לפני שמשקיעים סכומים גדולים.</li>
+                        <li>קנה בקביעות (<strong>Dollar Cost Averaging</strong>) - כל חודש כמות קבועה, בלי לנחש את השוק.</li>
+                        <li>שמור תמיד <strong>נזילות</strong> - אל תשקיע כסף שאתה עלול לצטרך בחירום.</li>
                     </ul>
-                    <div class="guide-tip-box"> מינימום מוצלח להתחיל: <strong>10 אונקיות כסף טהור (.999)</strong> — שווה לך בניהול, אחסון ופיזור.</div>
+                    <div class="guide-tip-box"> מינימום מוצלח להתחיל: <strong>10 אונקיות כסף טהור (.999)</strong> - שווה לך בניהול, אחסון ופיזור.</div>
                 `
             },
             {
                 icon: "",
-                title: 'טעויות של מתחילים — הדברים שכולם עושים בפעם הראשונה',
+                title: 'טעויות של מתחילים - הדברים שכולם עושים בפעם הראשונה',
                 content: `
                     <ul>
-                        <li> <strong>קונים ממקור לא מוכר</strong> — זיוף כסף נפוץ. הכלל הברזל: קנה רק ממינטים מוכרים או דילרים מורשים.</li>
-                        <li> <strong>לא בודקים את הפרמיום</strong> — מחיר ה-"כסף" שאתה קונה כולל פרמיום מעל ספוט. פרמיום גבוה מדי = נזק ברווחיות.</li>
-                        <li> <strong>מאחסנים בבית ללא ביטוח</strong> — גנב אחד, ופרידה מההשקעה. שקול כספת ביטחון או שירות אחסון.</li>
-                        <li> <strong>קונים "כסף ישן" מוזל</strong> — מטבעות .900 (כמו Morgan Dollars) אינם כסף השקעה. בדוק תמיד את הטוהר.</li>
-                        <li> <strong>ציפייה לרווח מהיר</strong> — כסף הוא חיסכון לטווח ארוך, לא מסחר. מי שקנה ב-2011 בשיא חיכה 10 שנים.</li>
-                        <li> <strong>קניית כסף "מוכסף" (silver plated)</strong> — ציפוי כסף בלבד. ערך אפסי. תמיד בדוק: .999 Fine Silver.</li>
+                        <li> <strong>קונים ממקור לא מוכר</strong> - זיוף כסף נפוץ. הכלל הברזל: קנה רק ממינטים מוכרים או דילרים מורשים.</li>
+                        <li> <strong>לא בודקים את הפרמיום</strong> - מחיר ה-"כסף" שאתה קונה כולל פרמיום מעל ספוט. פרמיום גבוה מדי = נזק ברווחיות.</li>
+                        <li> <strong>מאחסנים בבית ללא ביטוח</strong> - גנב אחד, ופרידה מההשקעה. שקול כספת ביטחון או שירות אחסון.</li>
+                        <li> <strong>קונים "כסף ישן" מוזל</strong> - מטבעות .900 (כמו Morgan Dollars) אינם כסף השקעה. בדוק תמיד את הטוהר.</li>
+                        <li> <strong>ציפייה לרווח מהיר</strong> - כסף הוא חיסכון לטווח ארוך, לא מסחר. מי שקנה ב-2011 בשיא חיכה 10 שנים.</li>
+                        <li> <strong>קניית כסף "מוכסף" (silver plated)</strong> - ציפוי כסף בלבד. ערך אפסי. תמיד בדוק: .999 Fine Silver.</li>
                     </ul>
-                    <div class="guide-warn-box"> <strong>בדיקת אמיתות:</strong> מגנט, מבחן קול, מכשיר Sigma Metalytics — זה ההשקעה הכי חכמה לפני כל קנייה גדולה.</div>
+                    <div class="guide-warn-box"> <strong>בדיקת אמיתות:</strong> מגנט, מבחן קול, מכשיר Sigma Metalytics - זה ההשקעה הכי חכמה לפני כל קנייה גדולה.</div>
                 `
             },
             {
                 icon: "",
-                title: 'אחסון בטוח — איך שומרים את הכסף',
+                title: 'אחסון בטוח - איך שומרים את הכסף',
                 content: `
                     <p>אחסון נכון שווה כסף. אפשרויות נפוצות:</p>
                     <ul>
                         <li><strong>כספת ביתית:</strong> נוחה, זמינה. חייבת להיות מחוברת לקיר/רצפה. ביטוח נפרד מומלץ.</li>
-                        <li><strong>תא בנקאי (Safe Deposit Box):</strong> בטוח מגנבה. לא מכוסה על ידי ביטוח הבנק — צריך ביטוח נפרד.</li>
-                        <li><strong>שירות אחסון מקצועי (Vault Storage):</strong> חברות כמו Brinks, Loomis — מבוטח ומנוטר. פתרון לכמויות גדולות.</li>
+                        <li><strong>תא בנקאי (Safe Deposit Box):</strong> בטוח מגנבה. לא מכוסה על ידי ביטוח הבנק - צריך ביטוח נפרד.</li>
+                        <li><strong>שירות אחסון מקצועי (Vault Storage):</strong> חברות כמו Brinks, Loomis - מבוטח ומנוטר. פתרון לכמויות גדולות.</li>
                     </ul>
                     <p><strong>כלל חשוב:</strong> אל תספר לכולם שיש לך כסף פיזי. OPSEC (אבטחת מידע אישי) חשוב כמו אבטחת הכסף עצמו.</p>
                     <div class="guide-tip-box"> <strong>אחסון:</strong> הימנע מחשיפה לאוויר לח. שקיות ניילון עם silica gel שומרות על הברק ומונעות חמצון.</div>
@@ -2235,22 +2235,22 @@ const GUIDE_DATA = {
             },
             {
                 icon: "",
-                title: 'הבנת מחיר הכסף — ספוט, פרמיום ומחזורים',
+                title: 'הבנת מחיר הכסף - ספוט, פרמיום ומחזורים',
                 content: `
                     <p><strong>מחיר ספוט (Spot Price):</strong> המחיר הגלובלי של אונקיה כסף 999 פיור בשוק הסחורות (COMEX). זה המחיר "הבסיסי".</p>
                     <p><strong>פרמיום (Premium):</strong> הסכום הנוסף שאתה משלם מעל הספוט. מכסה ייצור, הפצה ורווח הדילר.</p>
                     <ul>
-                        <li>מטבע Britannia 1oz = ספוט + 10%–18%</li>
-                        <li>מטיל 1kg = ספוט + 3%–8%</li>
-                        <li>מטבע ישראל מינט = ספוט + 15%–25%</li>
+                        <li>מטבע Britannia 1oz = ספוט + 10%-18%</li>
+                        <li>מטיל 1kg = ספוט + 3%-8%</li>
+                        <li>מטבע ישראל מינט = ספוט + 15%-25%</li>
                     </ul>
-                    <p><strong>מחזורים היסטוריים:</strong> כסף נסק ב-2011 ל-$49 לאונקיה ואז צנח. ב-2020 שוב עלה בחדות ל-$29. ב-2024–2025 עלה מעל $30 ושמר יציבות.</p>
+                    <p><strong>מחזורים היסטוריים:</strong> כסף נסק ב-2011 ל-$49 לאונקיה ואז צנח. ב-2020 שוב עלה בחדות ל-$29. ב-2024-2025 עלה מעל $30 ושמר יציבות.</p>
                     <div class="guide-tip-box"> <strong>יחס זהב-כסף (Gold/Silver Ratio):</strong> כשהיחס גבוה (>80), כסף "זול" יחסית לזהב. יחס היסטורי: ~60:1. נכון לשנת 2026: עוקב אחר הגרף שלנו בלשונית "גרפים".</div>
                 `
             },
             {
                 icon: "",
-                title: 'מיסוי ורגולציה בישראל — 2026',
+                title: 'מיסוי ורגולציה בישראל - 2026',
                 content: `
                     <p>מס רווח הון על מכירת כסף פיזי בישראל:</p>
                     <ul>
@@ -2258,7 +2258,7 @@ const GUIDE_DATA = {
                         <li><strong>מע"מ:</strong> כסף פיזי לצורך השקעה פטור ממע"מ בישראל (בניגוד לתכשיטים).</li>
                         <li><strong>דיווח:</strong> עסקאות מעל סף מסוים (בדרך כלל 50,000 ₪) עשויות לדרוש דיווח לרשות המסים.</li>
                     </ul>
-                    <div class="guide-warn-box"> <strong>חשוב:</strong> שמור תיעוד של כל קנייה ומכירה (תאריך, מחיר, כמות). זה ישמש אותך בעת חישוב המס. מידע זה הוא לימודי בלבד — התייעץ עם רואה חשבון.</div>
+                    <div class="guide-warn-box"> <strong>חשוב:</strong> שמור תיעוד של כל קנייה ומכירה (תאריך, מחיר, כמות). זה ישמש אותך בעת חישוב המס. מידע זה הוא לימודי בלבד - התייעץ עם רואה חשבון.</div>
                 `
             }
         ]
@@ -2268,86 +2268,86 @@ const GUIDE_DATA = {
         chapters: [
             {
                 icon: "",
-                title: 'What Is Physical Silver — A Beginner\'s Introduction',
+                title: 'What Is Physical Silver - A Beginner\'s Introduction',
                 content: `
-                    <p>Physical silver means owning actual <strong>coins</strong> or <strong>bars</strong> in your hands — not paper, not a stock, not an ETF. You are the outright owner.</p>
-                    <p><strong>Coin vs Bar — what's the difference?</strong></p>
+                    <p>Physical silver means owning actual <strong>coins</strong> or <strong>bars</strong> in your hands - not paper, not a stock, not an ETF. You are the outright owner.</p>
+                    <p><strong>Coin vs Bar - what's the difference?</strong></p>
                     <ul>
                         <li><strong>Coin:</strong> Minted by a government mint (e.g. Royal Mint, Israel Mint). Has a legal face value, artistic design, and sometimes collectible value above the silver price.</li>
                         <li><strong>Bar:</strong> A simple silver block, usually cheaper per ounce, produced by private refiners (Heraeus, Umicore, Valcambi). No collectible premium.</li>
                     </ul>
                     <div class="guide-tip-box"> <strong>Tip:</strong> Bars are usually cheaper per ounce. Coins sell faster and are easier to verify as authentic.</div>
                     <p><strong>Common sizes:</strong> ¼ oz, ½ oz, 1 oz (most popular), 5 oz, 10 oz, 1 kg, 5 kg.</p>
-                    <p><strong>Purity:</strong> Investment silver is .999 (99.9%) or .9999 (99.99%). Old coins like Morgan Dollars are .900 — not investment grade.</p>
+                    <p><strong>Purity:</strong> Investment silver is .999 (99.9%) or .9999 (99.99%). Old coins like Morgan Dollars are .900 - not investment grade.</p>
                 `
             },
             {
                 icon: "",
-                title: 'Where to Buy Silver in Israel — 2026',
+                title: 'Where to Buy Silver in Israel - 2026',
                 content: `
                     <p><strong>Main options for buying in Israel:</strong></p>
                     <ul>
                         <li><strong>Israel Mint (ICMC):</strong> Official site <em>coins.co.il</em>. Fully verified coins. Higher premium.</li>
                         <li><strong>Private coin dealers:</strong> Specialist shops in Tel Aviv and the north. Always check reviews.</li>
-                        <li><strong>International online dealers:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em>, <em>Europäisches Münzhaus</em> — shipping to Israel is possible; watch for customs duties.</li>
-                        <li><strong>P2P / private sellers:</strong> Telegram groups, forums — <strong>high counterfeit risk! Only recommended with professional verification.</strong></li>
+                        <li><strong>International online dealers:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em>, <em>Europäisches Münzhaus</em> - shipping to Israel is possible; watch for customs duties.</li>
+                        <li><strong>P2P / private sellers:</strong> Telegram groups, forums - <strong>high counterfeit risk! Only recommended with professional verification.</strong></li>
                     </ul>
                     <div class="guide-warn-box"> <strong>Customs note:</strong> Personal imports of investment-grade silver bars may be VAT-exempt in Israel. Verify with the seller before ordering.</div>
                 `
             },
             {
                 icon: "",
-                title: 'Where to Sell Silver in Israel — 2026',
+                title: 'Where to Sell Silver in Israel - 2026',
                 content: `
                     <p>Selling locally is more limited than buying. Main options:</p>
                     <ul>
-                        <li><strong>Licensed coin dealers:</strong> Fastest route to cash. Expect to sell below spot — that's their margin.</li>
+                        <li><strong>Licensed coin dealers:</strong> Fastest route to cash. Expect to sell below spot - that's their margin.</li>
                         <li><strong>Israel Mint:</strong> Accepts Israeli coins for redemption under certain conditions.</li>
-                        <li><strong>P2P platforms:</strong> Dedicated Facebook/Telegram groups — better price but longer process.</li>
-                        <li><strong>International buyers:</strong> Selling to European/US dealers — relevant for larger quantities.</li>
+                        <li><strong>P2P platforms:</strong> Dedicated Facebook/Telegram groups - better price but longer process.</li>
+                        <li><strong>International buyers:</strong> Selling to European/US dealers - relevant for larger quantities.</li>
                     </ul>
                     <div class="guide-tip-box"> <strong>Tip:</strong> Recognized coins (Britannia, Maple Leaf, American Eagle) sell <strong>much faster</strong> and at better prices than obscure coins.</div>
                 `
             },
             {
                 icon: "",
-                title: 'How Much to Buy — Entry Strategy for Beginners',
+                title: 'How Much to Buy - Entry Strategy for Beginners',
                 content: `
-                    <p>There is no single "right" amount — it depends on your goals.</p>
+                    <p>There is no single "right" amount - it depends on your goals.</p>
                     <p><strong>Core principles:</strong></p>
                     <ul>
-                        <li>Most experts suggest <strong>5%–15%</strong> of savings in hard assets (silver + gold + foreign currency).</li>
-                        <li>Start <strong>small</strong> (1–5 oz) to understand the process before committing larger sums.</li>
-                        <li>Buy regularly using <strong>Dollar Cost Averaging</strong> — a fixed amount monthly, without timing the market.</li>
-                        <li>Always maintain <strong>liquidity</strong> — never invest money you might need in an emergency.</li>
+                        <li>Most experts suggest <strong>5%-15%</strong> of savings in hard assets (silver + gold + foreign currency).</li>
+                        <li>Start <strong>small</strong> (1-5 oz) to understand the process before committing larger sums.</li>
+                        <li>Buy regularly using <strong>Dollar Cost Averaging</strong> - a fixed amount monthly, without timing the market.</li>
+                        <li>Always maintain <strong>liquidity</strong> - never invest money you might need in an emergency.</li>
                     </ul>
-                    <div class="guide-tip-box"> A good starting milestone: <strong>10 oz of .999 fine silver</strong> — meaningful for management, storage, and diversification.</div>
+                    <div class="guide-tip-box"> A good starting milestone: <strong>10 oz of .999 fine silver</strong> - meaningful for management, storage, and diversification.</div>
                 `
             },
             {
                 icon: "",
-                title: 'Beginner Mistakes — What Everyone Does the First Time',
+                title: 'Beginner Mistakes - What Everyone Does the First Time',
                 content: `
                     <ul>
-                        <li> <strong>Buying from unknown sources</strong> — silver counterfeits are common. Golden rule: buy only from recognized mints or licensed dealers.</li>
-                        <li> <strong>Ignoring the premium</strong> — the price you pay includes a markup over spot. Too high a premium = poor profitability.</li>
-                        <li> <strong>Storing at home without insurance</strong> — one theft, and the investment is gone. Consider a secured safe or storage service.</li>
-                        <li> <strong>Buying cheap "old silver"</strong> — .900 coins (Morgan Dollars etc.) are not investment silver. Always verify purity.</li>
-                        <li> <strong>Expecting quick profits</strong> — silver is a long-term store of value, not a trade. Those who bought at the 2011 peak waited 10 years.</li>
-                        <li> <strong>Buying silver-plated items</strong> — just a thin coating. Zero investment value. Always check: .999 Fine Silver.</li>
+                        <li> <strong>Buying from unknown sources</strong> - silver counterfeits are common. Golden rule: buy only from recognized mints or licensed dealers.</li>
+                        <li> <strong>Ignoring the premium</strong> - the price you pay includes a markup over spot. Too high a premium = poor profitability.</li>
+                        <li> <strong>Storing at home without insurance</strong> - one theft, and the investment is gone. Consider a secured safe or storage service.</li>
+                        <li> <strong>Buying cheap "old silver"</strong> - .900 coins (Morgan Dollars etc.) are not investment silver. Always verify purity.</li>
+                        <li> <strong>Expecting quick profits</strong> - silver is a long-term store of value, not a trade. Those who bought at the 2011 peak waited 10 years.</li>
+                        <li> <strong>Buying silver-plated items</strong> - just a thin coating. Zero investment value. Always check: .999 Fine Silver.</li>
                     </ul>
-                    <div class="guide-warn-box"> <strong>Authentication:</strong> Use a magnet, sound test, or Sigma Metalytics device — the smartest investment before any large purchase.</div>
+                    <div class="guide-warn-box"> <strong>Authentication:</strong> Use a magnet, sound test, or Sigma Metalytics device - the smartest investment before any large purchase.</div>
                 `
             },
             {
                 icon: "",
-                title: 'Safe Storage — How to Keep Your Silver',
+                title: 'Safe Storage - How to Keep Your Silver',
                 content: `
                     <p>Proper storage is part of the investment. Common options:</p>
                     <ul>
                         <li><strong>Home safe:</strong> Convenient, accessible. Must be bolted to wall/floor. Separate insurance recommended.</li>
-                        <li><strong>Bank safe deposit box:</strong> Secure from theft. NOT covered by bank insurance — get a separate policy.</li>
-                        <li><strong>Professional vault storage:</strong> Companies like Brinks, Loomis — insured and monitored. Best for large quantities.</li>
+                        <li><strong>Bank safe deposit box:</strong> Secure from theft. NOT covered by bank insurance - get a separate policy.</li>
+                        <li><strong>Professional vault storage:</strong> Companies like Brinks, Loomis - insured and monitored. Best for large quantities.</li>
                     </ul>
                     <p><strong>Key rule:</strong> Don't tell everyone you own physical silver. OPSEC (operational security) matters as much as physical security.</p>
                     <div class="guide-tip-box"> <strong>Storage:</strong> Keep silver away from humid air. Plastic bags with silica gel preserve the shine and prevent tarnishing.</div>
@@ -2355,22 +2355,22 @@ const GUIDE_DATA = {
             },
             {
                 icon: "",
-                title: 'Understanding Silver Price — Spot, Premium & Cycles',
+                title: 'Understanding Silver Price - Spot, Premium & Cycles',
                 content: `
                     <p><strong>Spot price:</strong> The global price of one troy ounce of .999 fine silver on the commodities market (COMEX). This is the baseline.</p>
                     <p><strong>Premium:</strong> The extra amount you pay over spot. Covers manufacturing, distribution, and dealer profit.</p>
                     <ul>
-                        <li>Britannia 1oz coin = spot + 10%–18%</li>
-                        <li>1 kg bar = spot + 3%–8%</li>
-                        <li>Israel Mint coin = spot + 15%–25%</li>
+                        <li>Britannia 1oz coin = spot + 10%-18%</li>
+                        <li>1 kg bar = spot + 3%-8%</li>
+                        <li>Israel Mint coin = spot + 15%-25%</li>
                     </ul>
-                    <p><strong>Historical cycles:</strong> Silver surged to $49/oz in 2011 then crashed. Rose sharply again in 2020 to $29. In 2024–2025 it stabilized above $30.</p>
+                    <p><strong>Historical cycles:</strong> Silver surged to $49/oz in 2011 then crashed. Rose sharply again in 2020 to $29. In 2024-2025 it stabilized above $30.</p>
                     <div class="guide-tip-box"> <strong>Gold/Silver Ratio:</strong> When the ratio is high (>80), silver is "cheap" relative to gold. Historical average: ~60:1. Track it live in our Charts tab.</div>
                 `
             },
             {
                 icon: "",
-                title: 'Taxation & Regulation in Israel — 2026',
+                title: 'Taxation & Regulation in Israel - 2026',
                 content: `
                     <p>Capital gains tax on selling physical silver in Israel:</p>
                     <ul>
@@ -2378,7 +2378,7 @@ const GUIDE_DATA = {
                         <li><strong>VAT:</strong> Investment silver is VAT-exempt in Israel (unlike jewelry).</li>
                         <li><strong>Reporting:</strong> Transactions above a certain threshold (usually ₪50,000) may require reporting to the tax authority.</li>
                     </ul>
-                    <div class="guide-warn-box"> <strong>Important:</strong> Keep records of every purchase and sale (date, price, quantity). This is for educational purposes only — consult a certified accountant for personal tax advice.</div>
+                    <div class="guide-warn-box"> <strong>Important:</strong> Keep records of every purchase and sale (date, price, quantity). This is for educational purposes only - consult a certified accountant for personal tax advice.</div>
                 `
             }
         ]
@@ -2388,86 +2388,86 @@ const GUIDE_DATA = {
         chapters: [
             {
                 icon: "",
-                title: 'Что такое физическое серебро — введение для начинающих',
+                title: 'Что такое физическое серебро - введение для начинающих',
                 content: `
-                    <p>Физическое серебро — это реальные <strong>монеты</strong> или <strong>слитки</strong>, которые вы держите в руках, а не бумага, акция или ETF. Вы — полноправный владелец.</p>
-                    <p><strong>Монета vs Слиток — в чём разница?</strong></p>
+                    <p>Физическое серебро - это реальные <strong>монеты</strong> или <strong>слитки</strong>, которые вы держите в руках, а не бумага, акция или ETF. Вы - полноправный владелец.</p>
+                    <p><strong>Монета vs Слиток - в чём разница?</strong></p>
                     <ul>
                         <li><strong>Монета (Coin):</strong> Чеканится государственным монетным двором (Royal Mint, Israel Mint). Имеет номинал, художественный дизайн и иногда коллекционную ценность сверх цены серебра.</li>
                         <li><strong>Слиток (Bar):</strong> Простой кусок серебра, обычно дешевле за унцию, производится частными аффинажными заводами (Heraeus, Umicore). Без коллекционной надбавки.</li>
                     </ul>
                     <div class="guide-tip-box"> <strong>Совет:</strong> Слитки дешевле за унцию. Монеты продаются быстрее и легче проверяются на подлинность.</div>
                     <p><strong>Популярные размеры:</strong> ¼ oz, ½ oz, 1 oz (самый популярный), 5 oz, 10 oz, 1 кг, 5 кг.</p>
-                    <p><strong>Чистота:</strong> Инвестиционное серебро — .999 (99,9%) или .9999 (99,99%). Старые монеты типа Morgan Dollar — .900, не инвестиционного уровня.</p>
+                    <p><strong>Чистота:</strong> Инвестиционное серебро - .999 (99,9%) или .9999 (99,99%). Старые монеты типа Morgan Dollar - .900, не инвестиционного уровня.</p>
                 `
             },
             {
                 icon: "",
-                title: 'Где купить серебро в Израиле — 2026',
+                title: 'Где купить серебро в Израиле - 2026',
                 content: `
                     <p><strong>Основные варианты покупки в Израиле:</strong></p>
                     <ul>
                         <li><strong>Israel Mint (ICMC):</strong> Официальный сайт <em>coins.co.il</em>. Полностью проверенные монеты. Высокая надбавка.</li>
                         <li><strong>Частные нумизматические магазины:</strong> Специализированные магазины в Тель-Авиве и на севере. Всегда проверяйте отзывы.</li>
-                        <li><strong>Международные онлайн-дилеры:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em> — доставка в Израиль возможна; следите за таможней.</li>
-                        <li><strong>Частные продавцы (P2P):</strong> Telegram-группы — <strong>высокий риск подделок! Только с профессиональной проверкой.</strong></li>
+                        <li><strong>Международные онлайн-дилеры:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em> - доставка в Израиль возможна; следите за таможней.</li>
+                        <li><strong>Частные продавцы (P2P):</strong> Telegram-группы - <strong>высокий риск подделок! Только с профессиональной проверкой.</strong></li>
                     </ul>
                     <div class="guide-warn-box"> <strong>Таможня:</strong> Ввоз инвестиционных серебряных слитков может быть освобождён от НДС в Израиле. Уточните у продавца до заказа.</div>
                 `
             },
             {
                 icon: "",
-                title: 'Где продать серебро в Израиле — 2026',
+                title: 'Где продать серебро в Израиле - 2026',
                 content: `
                     <p>Продажа в стране ограниченнее, чем покупка. Основные варианты:</p>
                     <ul>
-                        <li><strong>Лицензированные дилеры монет:</strong> Самый быстрый способ. Ожидайте продажу ниже спота — это их маржа.</li>
+                        <li><strong>Лицензированные дилеры монет:</strong> Самый быстрый способ. Ожидайте продажу ниже спота - это их маржа.</li>
                         <li><strong>Israel Mint:</strong> Принимает израильские монеты на выкуп на определённых условиях.</li>
-                        <li><strong>P2P платформы:</strong> Группы Facebook/Telegram — лучшая цена, но процесс длиннее.</li>
-                        <li><strong>Международные покупатели:</strong> Продажа европейским/американским дилерам — актуально для больших объёмов.</li>
+                        <li><strong>P2P платформы:</strong> Группы Facebook/Telegram - лучшая цена, но процесс длиннее.</li>
+                        <li><strong>Международные покупатели:</strong> Продажа европейским/американским дилерам - актуально для больших объёмов.</li>
                     </ul>
                     <div class="guide-tip-box"> <strong>Совет:</strong> Монеты известных монетных дворов (Britannia, Maple Leaf, American Eagle) продаются <strong>намного быстрее</strong> по лучшей цене.</div>
                 `
             },
             {
                 icon: "",
-                title: 'Сколько покупать — стратегия входа для новичка',
+                title: 'Сколько покупать - стратегия входа для новичка',
                 content: `
-                    <p>Нет единственно правильной суммы — всё зависит от ваших целей.</p>
+                    <p>Нет единственно правильной суммы - всё зависит от ваших целей.</p>
                     <p><strong>Основные принципы:</strong></p>
                     <ul>
-                        <li>Большинство экспертов рекомендуют <strong>5%–15%</strong> сбережений в твёрдых активах (серебро + золото + иностранная валюта).</li>
-                        <li>Начните с <strong>малого</strong> (1–5 oz), чтобы понять процесс, прежде чем вкладывать крупные суммы.</li>
-                        <li>Покупайте регулярно (<strong>усреднение стоимости</strong>) — фиксированная сумма ежемесячно, без угадывания рынка.</li>
-                        <li>Всегда сохраняйте <strong>ликвидность</strong> — не инвестируйте деньги, которые могут понадобиться в экстренной ситуации.</li>
+                        <li>Большинство экспертов рекомендуют <strong>5%-15%</strong> сбережений в твёрдых активах (серебро + золото + иностранная валюта).</li>
+                        <li>Начните с <strong>малого</strong> (1-5 oz), чтобы понять процесс, прежде чем вкладывать крупные суммы.</li>
+                        <li>Покупайте регулярно (<strong>усреднение стоимости</strong>) - фиксированная сумма ежемесячно, без угадывания рынка.</li>
+                        <li>Всегда сохраняйте <strong>ликвидность</strong> - не инвестируйте деньги, которые могут понадобиться в экстренной ситуации.</li>
                     </ul>
-                    <div class="guide-tip-box"> Хорошая стартовая позиция: <strong>10 oz серебра .999</strong> — достаточно для управления, хранения и диверсификации.</div>
+                    <div class="guide-tip-box"> Хорошая стартовая позиция: <strong>10 oz серебра .999</strong> - достаточно для управления, хранения и диверсификации.</div>
                 `
             },
             {
                 icon: "",
-                title: 'Ошибки новичков — то, что все делают в первый раз',
+                title: 'Ошибки новичков - то, что все делают в первый раз',
                 content: `
                     <ul>
-                        <li> <strong>Покупка из неизвестных источников</strong> — подделки серебра распространены. Правило: покупайте только у известных монетных дворов или лицензированных дилеров.</li>
-                        <li> <strong>Игнорирование надбавки</strong> — цена включает наценку над спотом. Слишком высокая надбавка = плохая доходность.</li>
-                        <li> <strong>Хранение дома без страховки</strong> — одна кража, и инвестиция потеряна. Рассмотрите сейф или профессиональное хранение.</li>
-                        <li> <strong>Покупка дешёвого "старого серебра"</strong> — монеты .900 не являются инвестиционным серебром. Всегда проверяйте чистоту.</li>
-                        <li> <strong>Ожидание быстрой прибыли</strong> — серебро — долгосрочное хранилище ценности. Купившие в 2011 году на пике ждали 10 лет.</li>
-                        <li> <strong>Покупка "посеребрённых" предметов</strong> — только напыление. Нулевая инвестиционная ценность. Всегда проверяйте: .999 Fine Silver.</li>
+                        <li> <strong>Покупка из неизвестных источников</strong> - подделки серебра распространены. Правило: покупайте только у известных монетных дворов или лицензированных дилеров.</li>
+                        <li> <strong>Игнорирование надбавки</strong> - цена включает наценку над спотом. Слишком высокая надбавка = плохая доходность.</li>
+                        <li> <strong>Хранение дома без страховки</strong> - одна кража, и инвестиция потеряна. Рассмотрите сейф или профессиональное хранение.</li>
+                        <li> <strong>Покупка дешёвого "старого серебра"</strong> - монеты .900 не являются инвестиционным серебром. Всегда проверяйте чистоту.</li>
+                        <li> <strong>Ожидание быстрой прибыли</strong> - серебро - долгосрочное хранилище ценности. Купившие в 2011 году на пике ждали 10 лет.</li>
+                        <li> <strong>Покупка "посеребрённых" предметов</strong> - только напыление. Нулевая инвестиционная ценность. Всегда проверяйте: .999 Fine Silver.</li>
                     </ul>
-                    <div class="guide-warn-box"> <strong>Проверка подлинности:</strong> Магнит, звуковой тест, устройство Sigma Metalytics — самая умная инвестиция перед любой крупной покупкой.</div>
+                    <div class="guide-warn-box"> <strong>Проверка подлинности:</strong> Магнит, звуковой тест, устройство Sigma Metalytics - самая умная инвестиция перед любой крупной покупкой.</div>
                 `
             },
             {
                 icon: "",
-                title: 'Безопасное хранение — как хранить серебро',
+                title: 'Безопасное хранение - как хранить серебро',
                 content: `
-                    <p>Правильное хранение — часть инвестиции. Варианты:</p>
+                    <p>Правильное хранение - часть инвестиции. Варианты:</p>
                     <ul>
                         <li><strong>Домашний сейф:</strong> Удобно и доступно. Должен быть прикручен к стене/полу. Рекомендуется отдельная страховка.</li>
-                        <li><strong>Банковская ячейка:</strong> Надёжно от кражи. Банковская страховка НЕ покрывает — нужна отдельная.</li>
-                        <li><strong>Профессиональное хранилище:</strong> Brinks, Loomis — застраховано и охраняется. Лучшее решение для больших объёмов.</li>
+                        <li><strong>Банковская ячейка:</strong> Надёжно от кражи. Банковская страховка НЕ покрывает - нужна отдельная.</li>
+                        <li><strong>Профессиональное хранилище:</strong> Brinks, Loomis - застраховано и охраняется. Лучшее решение для больших объёмов.</li>
                     </ul>
                     <p><strong>Важное правило:</strong> Не рассказывайте всем о своём серебре. OPSEC (информационная безопасность) так же важна, как физическая защита.</p>
                     <div class="guide-tip-box"> <strong>Хранение:</strong> Избегайте влажного воздуха. Пакеты с силикагелем сохраняют блеск и предотвращают окисление.</div>
@@ -2475,22 +2475,22 @@ const GUIDE_DATA = {
             },
             {
                 icon: "",
-                title: 'Понимание цены серебра — спот, надбавка и циклы',
+                title: 'Понимание цены серебра - спот, надбавка и циклы',
                 content: `
                     <p><strong>Спот-цена:</strong> Мировая цена одной тройской унции чистого серебра .999 на товарном рынке (COMEX). Это базовая цена.</p>
                     <p><strong>Надбавка (Premium):</strong> Дополнительная сумма сверх спота. Покрывает производство, дистрибуцию и прибыль дилера.</p>
                     <ul>
-                        <li>Монета Britannia 1 oz = спот + 10%–18%</li>
-                        <li>Слиток 1 кг = спот + 3%–8%</li>
-                        <li>Монета Israel Mint = спот + 15%–25%</li>
+                        <li>Монета Britannia 1 oz = спот + 10%-18%</li>
+                        <li>Слиток 1 кг = спот + 3%-8%</li>
+                        <li>Монета Israel Mint = спот + 15%-25%</li>
                     </ul>
-                    <p><strong>Исторические циклы:</strong> Серебро достигло $49/oz в 2011 году, затем упало. В 2020 снова выросло до $29. В 2024–2025 стабилизировалось выше $30.</p>
+                    <p><strong>Исторические циклы:</strong> Серебро достигло $49/oz в 2011 году, затем упало. В 2020 снова выросло до $29. В 2024-2025 стабилизировалось выше $30.</p>
                     <div class="guide-tip-box"> <strong>Соотношение золото/серебро:</strong> Когда оно высокое (>80), серебро "дёшево" относительно золота. Исторически ~60:1. Отслеживайте в разделе "Графики".</div>
                 `
             },
             {
                 icon: "",
-                title: 'Налогообложение в Израиле — 2026',
+                title: 'Налогообложение в Израиле - 2026',
                 content: `
                     <p>Налог на прирост капитала при продаже физического серебра в Израиле:</p>
                     <ul>
@@ -2498,7 +2498,7 @@ const GUIDE_DATA = {
                         <li><strong>НДС:</strong> Инвестиционное серебро освобождено от НДС в Израиле (в отличие от ювелирных украшений).</li>
                         <li><strong>Отчётность:</strong> Сделки выше определённого порога (обычно ₪50,000) могут потребовать отчётности в налоговую службу.</li>
                     </ul>
-                    <div class="guide-warn-box"> <strong>Важно:</strong> Сохраняйте документы о каждой покупке и продаже (дата, цена, количество). Эта информация носит образовательный характер — проконсультируйтесь с бухгалтером.</div>
+                    <div class="guide-warn-box"> <strong>Важно:</strong> Сохраняйте документы о каждой покупке и продаже (дата, цена, количество). Эта информация носит образовательный характер - проконсультируйтесь с бухгалтером.</div>
                 `
             }
         ]
@@ -2509,7 +2509,7 @@ let _guideActiveLang = 'he';
 
 // Admin-managed guide chapters (fetched once from the content API, then cached).
 // Store-first: when present, these REPLACE the built-in GUIDE_DATA so guides are
-// managed entirely in the admin panel — never hardcoded. Built-in is fallback only.
+// managed entirely in the admin panel - never hardcoded. Built-in is fallback only.
 let _adminGuides = null;
 
 // Generic content fetch for any collection (guides|quiz|mints|links).
@@ -2584,7 +2584,7 @@ function renderGuide(lang) {
     }).filter(ch => ch.title || ch.content);
 
     if (chapters.length === 0) {
-        // Fallback only — no managed content yet.
+        // Fallback only - no managed content yet.
         chapters = data.chapters.slice();
     }
 
@@ -2663,7 +2663,7 @@ function initDashboard() {
     document.getElementById('pnl-open-btn')?.addEventListener('click', () => goToScreen('pnl-screen'));
     document.getElementById('back-pnl')?.addEventListener('click', () => goBack());
 
-    // ── P&L form (async — auto-fetches FX rate) ──
+    // ── P&L form (async - auto-fetches FX rate) ──
     document.getElementById('pnl-form').onsubmit = async (e) => {
         e.preventDefault();
         const date  = document.getElementById('tx-date').value;
@@ -2823,7 +2823,7 @@ function boot() {
     initDevPreview();
     _loadStoreContent();   // pull store-managed quiz/museum (built-in stays as fallback)
 
-    // Only hub login — vault never shows its own passcode screen
+    // Only hub login - vault never shows its own passcode screen
     if (sessionToken()) {
         showDashboard();
     } else {
@@ -2839,7 +2839,7 @@ function initDevPreview() {
     banner.className = 'dev-preview-banner';
     banner.innerHTML = `
         <span class="dev-preview-label"> מצב פיתוח מקומי</span>
-        <span class="dev-preview-note">השינויים כאן לא על האתר החי — רענון אוטומטי אחרי שמירה</span>
+        <span class="dev-preview-note">השינויים כאן לא על האתר החי - רענון אוטומטי אחרי שמירה</span>
         <button type="button" class="dev-preview-reload" onclick="location.reload()">רענון</button>
     `;
     document.body.prepend(banner);

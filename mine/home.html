@@ -8,7 +8,7 @@
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>המכרה — The Mine</title>
+    <title>המכרה - The Mine</title>
 
     <!-- PWA: installable web app on iOS, Android, Windows, Mac, Linux -->
     <link rel="manifest" href="manifest.json">
@@ -25,7 +25,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="config.js?v=1"></script>
     <script>
-    // Single login lives on GROUPTECH hub — never show mine passcode screen
+    // Single login lives on GROUPTECH hub - never show mine passcode screen
     (function () {
         function hasSession() {
             try {
@@ -59,7 +59,7 @@
         <div class="blob blob-5"></div>
     </div>
 
-    <!-- LOGIN removed — hub auth only -->
+    <!-- LOGIN removed - hub auth only -->
     <div id="login-screen" class="screen" hidden aria-hidden="true" style="display:none!important"></div>
     <input type="hidden" id="passcode" value="">
     <div id="error-msg" hidden></div>
@@ -195,8 +195,8 @@
             <div id="hw-menu" class="hw-menu-grid">
                 <button class="hw-big-card" id="quiz-menu-btn">
                     <span class="hw-big-icon" aria-hidden="true"></span>
-                    <strong class="hw-big-name">טריוויה כסף</strong>
-                    <span class="hw-big-sub">55 שאלות · 10 דקות</span>
+                    <strong class="hw-big-name">טריוויה זהב</strong>
+                    <span class="hw-big-sub">15 שאלות · 10 דקות</span>
                 </button>
                 <button class="hw-big-card" id="videos-menu-btn">
                     <span class="hw-big-icon" aria-hidden="true"></span>
@@ -210,12 +210,8 @@
                 <button class="back-btn hw-quiz-back-btn" id="back-to-hw-menu">חזרה לתפריט</button>
 
                 <div id="quiz-start" class="quiz-panel">
-                    <p class="quiz-intro-text">בחן את הידע שלך בעולם הכסף הפיזי</p>
-                    <div class="quiz-stats-row">
-                        <div class="quiz-stat-box"><strong>55</strong><span>שאלות במאגר</span></div>
-                        <div class="quiz-stat-box"><strong>15</strong><span>שאלות למשחק</span></div>
-                        <div class="quiz-stat-box"><strong>10:00</strong><span>זמן משחק</span></div>
-                    </div>
+                    <p class="quiz-intro-text">בחן את הידע שלך בזהב פיזי.</p>
+                    <p class="quiz-rules-text">15 שאלות אקראיות, 10 דקות. בחר תשובה אחת לכל שאלה - כל תשובה נכונה שווה נקודה.</p>
                     <button class="neon-button quiz-cta-btn" id="quiz-start-btn">התחל משחק</button>
                 </div>
 
@@ -393,7 +389,7 @@
     <!-- ══ MR. D MODAL ══ -->
     <div id="mr-d-modal" class="mr-d-modal" style="display:none;" role="dialog" aria-modal="true" aria-label="צ'אט עם גרופבוט">
         <div class="mr-d-modal-head">
-            <h2>גרופבוט — צ'אט מלא</h2>
+            <h2>גרופבוט - צ'אט מלא</h2>
             <button id="mr-d-close" class="chart-close-btn" type="button">×</button>
         </div>
         <div class="chat-container chat-fullscreen">
@@ -424,7 +420,8 @@
         </div>
     </div>
 
-    <script src="app.js?v=15"></script>
+    <script src="gold_quiz_bank.js?v=1"></script>
+    <script src="app.js?v=16"></script>
     <script src="mint_expansion.js?v=3"></script>
 
         <script>

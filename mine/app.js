@@ -1,5 +1,5 @@
 ﻿// ═══════════════════════════════════════════
-// THE SILVER VAULT — App v3
+// THE MINE - App v3 (physical gold)
 // ═══════════════════════════════════════════
 
 let tg = window.Telegram?.WebApp;
@@ -42,7 +42,7 @@ const uid = tg?.initDataUnsafe?.user?.id || _stableWebUid();
 
 // Local-only preview token. On localhost any passcode grants a preview session
 // so the app can be viewed offline without the backend. This NEVER works on the
-// live site (isLocalDevHost is false there) — no secret is exposed in public code.
+// live site (isLocalDevHost is false there) - no secret is exposed in public code.
 const DEV_PREVIEW_TOKEN = 'local-dev-preview-token';
 
 function isLocalDevHost() {
@@ -106,7 +106,7 @@ window.addEventListener('popstate', (e) => {
 
 // ── SCREEN NAVIGATION ────────────────────────────────────────────────
 function goToScreen(screenId, opts = {}) {
-    // Hub is the only login — never show the old passcode screen
+    // Hub is the only login - never show the old passcode screen
     if (screenId === 'login-screen') {
         location.replace('../hub.html');
         return;
@@ -174,7 +174,7 @@ function openDailyLineChart() {
 // ── DARK MODE ────────────────────────────────────────────────────────
 function applyDarkMode(dark) {
     document.body.classList.toggle('dark-mode', dark);
-    // Restart opacity flash via rAF — avoids synchronous forced reflow
+    // Restart opacity flash via rAF - avoids synchronous forced reflow
     document.body.classList.remove('dark-mode-animating');
     requestAnimationFrame(() => document.body.classList.add('dark-mode-animating'));
     const label = document.getElementById('dark-mode-label');
@@ -184,7 +184,7 @@ function applyDarkMode(dark) {
 function toggleDarkMode() {
     const dark = !document.body.classList.contains('dark-mode');
     localStorage.setItem(DARK_MODE_KEY, dark ? '1' : '0');
-    // setTimeout(0) yields to the macro-task queue — click event fully
+    // setTimeout(0) yields to the macro-task queue - click event fully
     // completes and the browser can process any pending paint before the
     // CSS variable cascade fires, keeping the UI responsive.
     setTimeout(() => {
@@ -208,7 +208,7 @@ async function validateTokenWithServer(token) {
         });
         return res.status !== 401;
     } catch {
-        return true; // network error — don't kick user out
+        return true; // network error - don't kick user out
     }
 }
 
@@ -241,7 +241,7 @@ function escapeHtml(text) {
     return d.innerHTML;
 }
 
-// ── SILVER PRICE + CURRENT FX ────────────────────────────────────────
+// ── GOLD PRICE + CURRENT FX ────────────────────────────────────────
 async function updateGoldPrice() {
     let priceOk = false;
     try {
@@ -255,7 +255,7 @@ async function updateGoldPrice() {
         priceOk = true;
     } catch {
         if (!priceOk) {
-            document.getElementById('price-value').textContent  = '$—';
+            document.getElementById('price-value').textContent  = '$-';
             document.getElementById('price-update').textContent = 'אין חיבור';
         }
     }
@@ -277,7 +277,7 @@ async function refreshCurrentFx() {
 }
 
 // ── EXCHANGE RATE AUTO-FETCH ─────────────────────────────────────────
-// Uses the free Frankfurter API — no API key required
+// Uses the free Frankfurter API - no API key required
 async function fetchFxRate(date) {
     try {
         const res = await fetch(`https://api.frankfurter.app/${date}?from=USD&to=ILS`);
@@ -372,7 +372,7 @@ function genCandles(frame) {
     return out;
 }
 
-// Fetch real historical silver price data from backend (Yahoo Finance via /api/gold-history)
+// Fetch real historical gold price data from backend (Yahoo Finance via /api/gold-history)
 async function fetchRealChartData(frame) {
     const periodMap = { '1d': 'daily', '1w': 'weekly', '1m': 'yearly' };
     const period    = periodMap[frame] || 'daily';
@@ -565,7 +565,7 @@ function _drawCandleData(frame, data) {
     const note = document.querySelector('.chart-note');
     if (note) {
         note.textContent = _lastDataReal
-            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (GC=F)'
+            ? '* נתוני מחיר אמיתיים - חוזים עתידיים על זהב (GC=F)'
             : '* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.';
     }
 }
@@ -669,7 +669,7 @@ function _drawLineData(frame, data) {
     const note = document.querySelector('.chart-note');
     if (note) {
         note.textContent = _lastDataReal
-            ? '* נתוני מחיר אמיתיים — סילבר פיוצ\'רס (GC=F)'
+            ? '* נתוני מחיר אמיתיים - חוזים עתידיים על זהב (GC=F)'
             : '* גרף דמו לימודי המחושב על סמך מחיר נוכחי וסימולציית תנודתיות.';
     }
 }
@@ -724,7 +724,7 @@ function _renderNewsDigest(lang) {
     const pubDate     = _newsData.published_date || '';
     const nextUpdate  = _newsData.next_update    || '';
 
-    // Date meta line — only "as of" date, no next-update
+    // Date meta line - only "as of" date, no next-update
     if (meta) {
         meta.textContent = lang === 'he' ? `נכון ל-${_formatNewsDate(pubDate, 'he')}` : '';
     }
@@ -783,7 +783,7 @@ async function loadNews() {
         _newsData = data;
         _renderNewsDigest(_newsLang);
     } catch {
-        container.innerHTML = '<p class="news-empty">שגיאת חיבור — נסה שוב מאוחר יותר.</p>';
+        container.innerHTML = '<p class="news-empty">שגיאת חיבור - נסה שוב מאוחר יותר.</p>';
     }
 }
 
@@ -817,7 +817,7 @@ const NAV_CHIP_DEFS = {
                         action: ['mint', 'austria'] },
     'museum:mexico':  { he: '🇲🇽 מינט מקסיקו',        en: '🇲🇽 Mexico Mint',               ru: '🇲🇽 Монетный двор Мексики',
                         action: ['mint', 'mexico'] },
-    'quiz':           { he: '❓ טריוויה כסף',        en: '❓ Silver Quiz',                ru: '❓ Викторина',
+    'quiz':           { he: '❓ טריוויה זהב',        en: '❓ Gold Quiz',                  ru: '❓ Викторина',
                         action: ['quiz', ''] },
     'pnl':            { he: '📈 מעקב רווח / הפסד',  en: '📈 P&L Tracker',               ru: '📈 Трекер прибыли/убытков',
                         action: ['screen', 'pnl-screen'] },
@@ -962,65 +962,9 @@ async function sendMessage() {
 }
 
 // ══════════════════════════════════════════════════════════════════════
-// SILVER TRIVIA QUIZ
+// GOLD TRIVIA QUIZ (QUIZ_BANK in gold_quiz_bank.js)
 // ══════════════════════════════════════════════════════════════════════
-const QUIZ_BANK = [
-  { q: "כמה גרם יש באונקיה טרויה של כסף?", a: ["31.10 גרם","28.35 גרם","33.00 גרם","29.58 גרם"] },
-  { q: "מה הסמל הבינלאומי של כסף בשוק הסחורות?", a: ["XAG","AG","SL","SIL"] },
-  { q: "מה נחשב 'כסף טהור' (Fine Silver)?", a: ["999 חלקים מאלף","925 חלקים מאלף","990 חלקים מאלף","970 חלקים מאלף"] },
-  { q: "מה עדיף לרכוש כשרוצים לשלם פרמיה נמוכה יותר?", a: ["מטיל","מטבע","הפרמיה זהה","תלוי בגודל בלבד"] },
-  { q: "מה הוא 'יחס זהב-כסף' (Gold-Silver Ratio)?", a: ["כמה אונקיות כסף שוות אונקיה אחת של זהב","כמה גרם כסף יש לעומת זהב בעולם","היחס בין מחיר זהב לכסף ב-1900","אחוז הכסף בסגסוגת זהב"] },
-  { q: "מה הוא 'פרמיה' בשוק הכסף הפיזי?", a: ["ההפרש בין מחיר הספוט למחיר הקמעונאי","מס על רכישת כסף","עלות האחסון השנתית","עמלת הברוקר"] },
-  { q: "איזה מטבע כסף מנפיקה ארצות הברית?", a: ["Silver Eagle","Maple Leaf","Britannia","Philharmoniker"] },
-  { q: "מה הוא 'ספוט' (Spot Price) של כסף?", a: ["המחיר העדכני לאונקיה בשוק הבינלאומי","מחיר כסף ישן","המחיר המינימלי שמוכרים מוכנים לקבל","מחיר עתידי ידוע מראש"] },
-  { q: "מה הוא 'כסף 999.9' (ארבעה תשעות)?", a: ["כסף עם 99.99% טוהר","כסף מיוצר בשנת 1999","סוג מיוחד של כסף קולוידלי","כסף שעומד בתקן אירופאי בלבד"] },
-  { q: "איזה יחס זהב-כסף (GSR) נחשב 'גבוה' ומציין כסף זול יחסית?", a: ["מעל 80","מעל 50","מעל 30","מעל 100"] },
-  { q: "מה היא 'אסטרטגיית DCA' (Dollar Cost Averaging)?", a: ["קנייה בכמות קבועה בתדירות קבועה ללא קשר למחיר","לקנות הכל פעם אחת כשהמחיר נמוך","למכור חלק מהאחזקות בעלייה","לשמור מזומן ולחכות לירידות"] },
-  { q: "מה מס רווח הון משוער על כסף בישראל?", a: ["כ-25%","10%","17%","33%"] },
-  { q: "מה ההבדל בין 'כסף פיזי' ל'כסף נייר'?", a: ["כסף פיזי הוא מתכת אמיתית, כסף נייר הוא חוזה או ETF","כסף פיזי הוא מטבעות ישנים בלבד","כסף נייר שווה יותר","אין הבדל"] },
-  { q: "מה הם 'מטבעות נומיסמטיים'?", a: ["מטבעות אספנות עם ערך מעבר לתוכן המתכת","מטבעות לסחר יומיומי","מטבעות עם ערך נקוב גבוה","מטבעות שנוצרו לפני 1950 בלבד"] },
-  { q: "מה הוא 'Sterling Silver' (כסף 925)?", a: ["כסף עם 925 חלקים מאלף טוהר","כסף עם 99.9% טוהר","כסף שנוצר בבריטניה בלבד","כסף שאינו מתאים להשקעה"] },
-  { q: "באיזה תחום תעשייתי חשוב משתמשים בכסף?", a: ["לוחות סולאריים ואלקטרוניקה","רק בתכשיטים","רק במטבעות ושטרות","בתעשיית הנפט בלבד"] },
-  { q: "מה שיא המחיר ההיסטורי המשוער של כסף?", a: ["כ-$50 לאונקיה","כ-$30 לאונקיה","כ-$70 לאונקיה","כ-$100 לאונקיה"] },
-  { q: "מה יתרון מטיל כסף גדול על פני מטיל קטן?", a: ["פרמיה נמוכה יותר לאונקיה","קל יותר לאחסן","יותר נזיל","טוהר גבוה יותר"] },
-  { q: "מה הוא 'Silver ETF'?", a: ["קרן סל שעוקבת אחר מחיר הכסף ללא החזקת מתכת פיזית","מטיל כסף גדול במיוחד","כסף שנמכר בבורסה ישראלית","חוזה עתידי על כסף"] },
-  { q: "כמה אונקיות טרוי יש בקילוגרם כסף?", a: ["32.15 אונקיות","28 אונקיות","35 אונקיות","40 אונקיות"] },
-  { q: "מה הוא ה-LBMA?", a: ["גוף שמגדיר תקני איכות בינלאומיים למתכות יקרות","בנק מרכזי לכסף","חברת ביטוח למתכות","מדד כסף אירופאי"] },
-  { q: "איזה מטבע כסף מנפיקה קנדה?", a: ["Maple Leaf","Silver Eagle","Britannia","Philharmoniker"] },
-  { q: "מה הוא ה-COMEX?", a: ["בורסת הסחורות בניו יורק המשפיעה על מחיר הכסף","חברת ייצור כסף אמריקאית","תקן בינלאומי לטוהר כסף","מועדון משקיעי כסף"] },
-  { q: "מה הוא 'Allocated Storage' (אחסון מוקצה)?", a: ["כסף ספציפי שנאגר בנפרד ושייך לך לחלוטין","כסף שנאגר ביחד עם מתכות של אחרים","כסף שמאוחסן בבנק","שירות ממשלתי לאחסון מתכות"] },
-  { q: "מה הוא 'בוליון' (Bullion)?", a: ["מטילים ומטבעות המוערכים לפי משקל המתכת שלהם","מטבעות עם ערך נקוב גבוה","כסף שנוצר לפני 1900","שם של חברת כסף בינלאומית"] },
-  { q: "מתי עדיף להחזיק מטבעות על פני מטילים?", a: ["כשרוצים נזילות קלה יותר","כשרוצים לשלם פרמיה נמוכה","כשקונים כמויות גדולות","כשהאחסון הוא הגורם המרכזי"] },
-  { q: "מה הם 'Silver Stackers'?", a: ["אנשים שצוברים כסף פיזי לאורך זמן","מוכרי כסף מקצועיים","מנהלי קרנות כסף","יצרני מטילי כסף"] },
-  { q: "מה הסיכון העיקרי ברכישת כסף ממוכר לא מוכר?", a: ["קבלת כסף מזויף","מחיר גבוה מדי","בעיות מס","בעיות אחסון"] },
-  { q: "איזה מטבע כסף מנפיקה אוסטריה?", a: ["Philharmoniker","Silver Eagle","Maple Leaf","Britannia"] },
-  { q: "מה הוא 'Numismatic Premium'?", a: ["תוספת מחיר על מטבעות אספנות מעבר לערך המתכת","פרמיה על כמות גדולה","הנחה על רכישת מטילים","עלות האריזה של המטבע"] },
-  { q: "כיצד ריבית נמוכה של הפד האמריקאי משפיעה על מחיר הכסף?", a: ["נוטה להעלות את מחיר הכסף","מוריד את מחיר הכסף","אין השפעה","גורם לייסוף הדולר בלבד"] },
-  { q: "כמה כניסות שוק מינימום מומלצות לכסף פיזי?", a: ["3–5 כניסות נפרדות","כניסה אחת מלאה","2 כניסות מקסימום","עד 10 כניסות קטנות בלבד"] },
-  { q: "מה ההמלצה לגבי קנייה חודשית מינימלית בכסף?", a: ["אונקיה אחת לפחות בחודש","5 אונקיות לחודש","100 גרם לחודש","תלוי לחלוטין בתקציב"] },
-  { q: "מה אחד מהסיכונים הייחודיים לכסף לעומת זהב?", a: ["תנודתיות גבוהה יותר","לא ניתן לאחסן אותו","אין ביקוש תעשייתי","קשה יותר לזיוף"] },
-  { q: "מה פירוש 'Bid Price' לעומת 'Ask Price'?", a: ["Bid – מחיר שקונה מוכן לשלם; Ask – מחיר שמוכר מוכן לקבל","Bid – מחיר שמוכר מוכן למכור; Ask – מחיר שקונה מוכן לשלם","שניהם זהים תמיד","Bid מחיר כסף, Ask מחיר זהב"] },
-  { q: "מה יתרון כסף פיזי על פני ETF של כסף?", a: ["ללא סיכון צד שלישי ובעלות ישירה על המתכת","נזיל יותר מ-ETF","זול יותר לרכישה","אין הבדל מהותי"] },
-  { q: "מה מציין יחס זהב-כסף מעל 80?", a: ["כסף זול יחסית לזהב – הזדמנות פוטנציאלית לקנייה","כסף יקר מדי לעומת זהב","עודף היצע של כסף בשוק","שוק דובי בכסף"] },
-  { q: "מה כדאי לעשות כשמחיר הכסף יורד בחדות?", a: ["לצבור בהדרגה לפי תקציב – ירידה יכולה להיות הזדמנות","למכור מיד לפני שמאבדים יותר","לחכות שהמחיר יחזור לשיא","לקנות הכל בבת אחת"] },
-  { q: "מה הוא 'Unallocated' בניגוד ל-'Allocated'?", a: ["Unallocated – דרישה כללית ללא מתכת ספציפית; Allocated – מתכת ספציפית שלך","אין הבדל מהותי","Unallocated תמיד בטוח יותר","Allocated זמין רק לבנקים"] },
-  { q: "למה מומלץ לפצל קנייה ל-3–5 כניסות נפרדות?", a: ["להוריד סיכון תזמון שגוי ולנצל ירידות בדרך","כי הפרמיה נמוכה יותר כך","בגלל חוק ישראלי שמגביל קנייה בסכום אחד","כדי לחסוך בעמלות בנק"] },
-  { q: "מה ה-'Spot' מחושב לפי?", a: ["מחיר המסחר הנוכחי בשוק הסחורות הבינלאומי","ממוצע מחירים של השנה האחרונה","מחיר שקובעת ממשלת ארה\"ב","מחיר קבוע שמתעדכן פעם בשבוע"] },
-  { q: "מה הוא המוליך החשמלי הטוב ביותר מבין כל המתכות?", a: ["כסף (Silver)","זהב","נחושת","פלטינה"] },
-  { q: "כמה אחוז מהתיק מומלץ להקצות למתכות יקרות למשקיע מתחיל?", a: ["עד 15%","עד 50%","עד 5%","עד 30%"] },
-  { q: "מה החיסרון הייחודי של קרן סל (ETF) כסף לעומת כסף פיזי?", a: ["סיכון צד נגדי — אינכם הבעלים הישירים של הכסף","לא ניתן לקנות בסכומים קטנים","אין שקיפות על ביצועי הקרן","מחיר הקנייה גבוה יותר"] },
-  { q: "מה ייחודי בכסף לעומת זהב בהקשר מהפכת האנרגיה הירוקה?", a: ["כסף הוא רכיב קריטי בפאנלים סולאריים וברכבים חשמליים","כסף זול יותר לייצור פאנלים","זהב אינו בשימוש תעשייתי כלל","כסף נפוץ יותר מזהב בקרום כדור הארץ"] },
-  { q: "מהי הדרך הזולה והנגישה ביותר למשקיע מתחיל להיחשף לכסף?", a: ["קרנות סל (ETF)","רכישת מטילים פיזיים","חוזים עתידיים","מניות חברות כרייה"] },
-  { q: "מה הסיכון המרכזי של חוזים עתידיים (Futures) על כסף?", a: ["מינוף גבוה — ההפסד יכול לעלות על ההשקעה הראשונית","לא ניתן למכור לפני הפקיעה","אין חשיפה לשינויי מחיר","דמי ניהול גבוהים מאוד"] },
-  { q: "מה כולל מחיר ה'פרמיה' על כסף פיזי?", a: ["עלויות ייצור, שינוע וביטוח של המתכת","מע\"מ בלבד","רווח המוכר בלבד","עלות האחסון השנתית"] },
-  { q: "מה שם הגוף הישראלי המפורסם שמוכר כסף ומטבעות מקומיים?", a: ["The Holy Land Mint (החברה הישראלית למדליות ומטבעות)","בנק ישראל","Israel Coins Ltd","המטבעה הישראלית הרשמית"] },
-  { q: "מה המשמעות של 'סיכון צד נגדי' (Counterparty Risk)?", a: ["סיכון שמנהל הקרן לא יוכל לעמוד בהתחייבויותיו","סיכון נפילת מחיר כסף בשוק","סיכון גניבת כסף פיזי","סיכון מטבע חוץ"] },
-  { q: "מה ייחד את ביקוש הכסף לעומת זהב בשוק הגלובלי?", a: ["לכסף יש ביקוש תעשייתי נרחב בנוסף לביקוש להשקעה","לזהב ביקוש תעשייתי גדול יותר","ביקוש הכסף נובע בעיקר מתכשיטים","אין הבדל בין הביקושים"] },
-  { q: "מה אחד מחסרונות ההשקעה בכסף פיזי?", a: ["נזילות נמוכה — מכירה עלולה להיות איטית","אין הגנה מול אינפלציה","לא ניתן לאחסן בכספות","המחיר קבוע ולא מגיב לשוק"] },
-  { q: "מה ההבדל בין 'Ask price' ל-'Bid price' בשוק המתכות?", a: ["Ask הוא המחיר שהמוכרים מבקשים, Bid הוא המחיר שהקונים מוכנים לשלם","Ask תמיד גבוה מ-Bid באחוז קבוע","Bid הוא המחיר הרשמי, Ask הוא ספקולטיבי","שניהם זהים בשוק סחורות"] },
-  { q: "לאיזה סוג משקיע מתאימים חוזים עתידיים (Futures) על כסף?", a: ["משקיעים מנוסים עם סבילות גבוהה לסיכון","משקיעים פסיביים לטווח ארוך","משקיעים מתחילים עם תקציב קטן","כל משקיע ללא הבדל"] },
-  { q: "מה החיסרון בהשקעה במניות חברות כרייה כחלופה לכסף פיזי?", a: ["ההצלחה תלויה בניהול ותפעול החברה ולא רק במחיר הכסף","לא ניתן לקנות בבורסה","הן לא עוקבות אחר מחיר הכסף בשום מצב","אין דיבידנד בחברות כרייה"] },
-];
+
 
 let QUIZ_TOTAL = 15;   // capped per round; adapts if the store has fewer questions
 const QUIZ_SECS  = 600;
@@ -1131,10 +1075,10 @@ function _quizEnd() {
     const pct = Math.round((s / QUIZ_TOTAL) * 100);
     document.getElementById('quiz-final-score').textContent = s;
     document.getElementById('quiz-done-msg').textContent =
-        pct >= 90 ? 'מעולה! אתה מומחה כסף אמיתי ' :
-        pct >= 70 ? 'תוצאה מצוינת! ידע מרשים של שוק הכסף.' :
+        pct >= 90 ? 'מעולה! אתה מומחה זהב פיזי!' :
+        pct >= 70 ? 'תוצאה מצוינת! ידע מרשים של שוק הזהב.' :
         pct >= 50 ? 'לא רע! כדאי לחזור על חומר הלמידה.' :
-                    'יש מקום לשיפור — חזור ולמד שוב!';
+                    'יש מקום לשיפור - חזור ולמד שוב!';
     _quizPanel('quiz-done');
 }
 
@@ -1249,7 +1193,7 @@ function initQuiz() {
 }
 
 // ══════════════════════════════════════════════════════════════════════
-// MUSEUM — Mint data + logic
+// MUSEUM - Mint data + logic
 // ══════════════════════════════════════════════════════════════════════
 
 const DOVE_OF_PEACE_IMG = 'https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2';
@@ -1299,14 +1243,14 @@ const MINT_DATA = {
         buildingImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg/800px-Jerusalem_skyline_from_armon_hanatziv_panoramic.jpg",
         he: {
             name: "מינט ישראל",
-            subtitle: "Israel Coins and Medals Corp. — ICMC",
+            subtitle: "Israel Coins and Medals Corp. - ICMC",
             founded: "נוסד 1952",
             location: "ירושלים, ישראל",
             website: "en.israelmint.com",
             history: [
                 {
                     title: "יסוד ומעמד לאומי",
-                    text: "מינט ישראל (ICMC) הוקם ב-1952 כגוף הרשמי להנפקת מטבעות ומדליות. לצד הנפקות אספנות הוא מציע גם בוליון זהב — כולל סדרת יונת השלום."
+                    text: "מינט ישראל (ICMC) הוקם ב-1952 כגוף הרשמי להנפקת מטבעות ומדליות. לצד הנפקות אספנות הוא מציע גם בוליון זהב - כולל סדרת יונת השלום."
                 },
                 {
                     title: "זהב השקעה ישראלי",
@@ -1314,17 +1258,17 @@ const MINT_DATA = {
                 },
                 {
                     title: "פטור ממע״מ",
-                    text: "זהב השקעה מוכר בישראל נהנה מפטור ממע״מ — יתרון משמעותי למשקיע המקומי לעומת כסף."
+                    text: "זהב השקעה מוכר בישראל נהנה מפטור ממע״מ - יתרון משמעותי למשקיע המקומי לעומת כסף."
                 }
             ],
             products: [
                 {
-                    title: "יונת השלום — זהב",
+                    title: "יונת השלום - זהב",
                     type: "בוליון",
                     weight: "משקלים שונים",
-                    year: "2019–",
+                    year: "2019-",
                     purity: "זהב 999.9",
-                    desc: "סדרת יונת השלום בזהב טהור — סמל ישראלי מוכר, נזילות טובה בשוק המקומי.",
+                    desc: "סדרת יונת השלום בזהב טהור - סמל ישראלי מוכר, נזילות טובה בשוק המקומי.",
                     img: "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2",
                     emoji: "",
                     transparent: true
@@ -1334,8 +1278,8 @@ const MINT_DATA = {
                     type: "מטבע",
                     weight: "1oz / חצאים",
                     year: "משתנה",
-                    purity: "זהב 999–999.9",
-                    desc: "הנפקות זהב רשמיות ונושאיות של ICMC — מתאימות להשקעה ולאספנות.",
+                    purity: "זהב 999-999.9",
+                    desc: "הנפקות זהב רשמיות ונושאיות של ICMC - מתאימות להשקעה ולאספנות.",
                     img: "",
                     emoji: "",
                     transparent: true
@@ -1358,7 +1302,7 @@ const MINT_DATA = {
         },
         en: {
             name: "Israel Mint",
-            subtitle: "Israel Coins and Medals Corp. — ICMC",
+            subtitle: "Israel Coins and Medals Corp. - ICMC",
             founded: "Founded 1952",
             location: "Jerusalem, Israel",
             website: "en.israelmint.com",
@@ -1373,17 +1317,17 @@ const MINT_DATA = {
                 },
                 {
                     title: "VAT advantage",
-                    text: "Recognized investment gold in Israel is VAT-exempt — a major edge versus silver."
+                    text: "Recognized investment gold in Israel is VAT-exempt - a major edge versus silver."
                 }
             ],
             products: [
                 {
-                    title: "Dove of Peace — Gold",
+                    title: "Dove of Peace - Gold",
                     type: "Bullion",
                     weight: "Various",
-                    year: "2019–",
+                    year: "2019-",
                     purity: "Gold 999.9",
-                    desc: "Israel’s signature gold bullion line — recognizable and liquid in the local market.",
+                    desc: "Israel’s signature gold bullion line - recognizable and liquid in the local market.",
                     img: "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2",
                     emoji: "",
                     transparent: true
@@ -1393,7 +1337,7 @@ const MINT_DATA = {
                     type: "Coin",
                     weight: "1oz / fractions",
                     year: "Varies",
-                    purity: "Gold 999–999.9",
+                    purity: "Gold 999-999.9",
                     desc: "Official ICMC gold issues for investment and collecting.",
                     img: "",
                     emoji: "",
@@ -1417,7 +1361,7 @@ const MINT_DATA = {
         },
         ru: {
             name: "Монетный двор Израиля",
-            subtitle: "Israel Coins and Medals Corp. — ICMC",
+            subtitle: "Israel Coins and Medals Corp. - ICMC",
             founded: "Основан в 1952",
             location: "Иерусалим, Израиль",
             website: "en.israelmint.com",
@@ -1437,10 +1381,10 @@ const MINT_DATA = {
             ],
             products: [
                 {
-                    title: "«Голубь мира» — золото",
+                    title: "«Голубь мира» - золото",
                     type: "Буллион",
                     weight: "Разные веса",
-                    year: "2019–",
+                    year: "2019-",
                     purity: "Золото 999.9",
                     desc: "Флагманская золотая серия Израиля.",
                     img: "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/israel/dove-of-peace.webp?v=2",
@@ -1452,7 +1396,7 @@ const MINT_DATA = {
                     type: "Монета",
                     weight: "1oz / доли",
                     year: "Разное",
-                    purity: "Золото 999–999.9",
+                    purity: "Золото 999-999.9",
                     desc: "Официальные золотые выпуски ICMC.",
                     img: "",
                     emoji: "",
@@ -1484,7 +1428,7 @@ const MINT_DATA = {
             history: [
                 {
                     title: "מסורת זהב אמריקאית",
-                    text: "ה-US Mint מנפיק את מטבעות הזהב המוכרים בעולם — בראשם American Gold Eagle ו-American Buffalo."
+                    text: "ה-US Mint מנפיק את מטבעות הזהב המוכרים בעולם - בראשם American Gold Eagle ו-American Buffalo."
                 },
                 {
                     title: "סטנדרט השקעה",
@@ -1500,9 +1444,9 @@ const MINT_DATA = {
                     title: "American Gold Eagle",
                     type: "מטבע",
                     weight: "1oz / חצאים",
-                    year: "1986–",
+                    year: "1986-",
                     purity: "זהב 22K (91.67%)",
-                    desc: "מטבע הזהב הנמכר ביותר בארה״ב — עמיד, מוכר ונזיל מאוד.",
+                    desc: "מטבע הזהב הנמכר ביותר בארה״ב - עמיד, מוכר ונזיל מאוד.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/2016_American_Gold_Eagle_Obverse.jpg/640px-2016_American_Gold_Eagle_Obverse.jpg",
                     emoji: "",
                     transparent: true
@@ -1511,9 +1455,9 @@ const MINT_DATA = {
                     title: "American Buffalo Gold",
                     type: "מטבע",
                     weight: "1oz",
-                    year: "2006–",
+                    year: "2006-",
                     purity: "זהב 24K (99.99%)",
-                    desc: "מטבע זהב טהור בעיצוב אייקוני — מועדף על משקיעים שרוצים טוהר מקסימלי.",
+                    desc: "מטבע זהב טהור בעיצוב אייקוני - מועדף על משקיעים שרוצים טוהר מקסימלי.",
                     img: "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3",
                     emoji: "",
                     transparent: true
@@ -1543,7 +1487,7 @@ const MINT_DATA = {
             history: [
                 {
                     title: "American gold tradition",
-                    text: "The US Mint issues the world’s most recognized gold bullion coins — the American Gold Eagle and American Buffalo."
+                    text: "The US Mint issues the world’s most recognized gold bullion coins - the American Gold Eagle and American Buffalo."
                 },
                 {
                     title: "Investment standard",
@@ -1559,9 +1503,9 @@ const MINT_DATA = {
                     title: "American Gold Eagle",
                     type: "Coin",
                     weight: "1oz / fractions",
-                    year: "1986–",
+                    year: "1986-",
                     purity: "Gold 22K (91.67%)",
-                    desc: "America’s best-known gold bullion coin — durable and highly liquid.",
+                    desc: "America’s best-known gold bullion coin - durable and highly liquid.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/2016_American_Gold_Eagle_Obverse.jpg/640px-2016_American_Gold_Eagle_Obverse.jpg",
                     emoji: "",
                     transparent: true
@@ -1570,7 +1514,7 @@ const MINT_DATA = {
                     title: "American Buffalo Gold",
                     type: "Coin",
                     weight: "1oz",
-                    year: "2006–",
+                    year: "2006-",
                     purity: "Gold 24K (99.99%)",
                     desc: "Iconic pure-gold bullion coin for maximum purity.",
                     img: "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3",
@@ -1602,7 +1546,7 @@ const MINT_DATA = {
             history: [
                 {
                     title: "Американское золото",
-                    text: "US Mint выпускает American Gold Eagle и American Buffalo — эталоны инвестиционного золота."
+                    text: "US Mint выпускает American Gold Eagle и American Buffalo - эталоны инвестиционного золота."
                 },
                 {
                     title: "Ликвидность",
@@ -1614,7 +1558,7 @@ const MINT_DATA = {
                     title: "American Gold Eagle",
                     type: "Монета",
                     weight: "1oz / доли",
-                    year: "1986–",
+                    year: "1986-",
                     purity: "Золото 22K",
                     desc: "Самая известная золотая инвестиционная монета США.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/2016_American_Gold_Eagle_Obverse.jpg/640px-2016_American_Gold_Eagle_Obverse.jpg",
@@ -1625,7 +1569,7 @@ const MINT_DATA = {
                     title: "American Buffalo",
                     type: "Монета",
                     weight: "1oz",
-                    year: "2006–",
+                    year: "2006-",
                     purity: "Золото 24K",
                     desc: "Чистое золото 99.99%.",
                     img: "https://uftkmytmegszggtsrrhz.supabase.co/storage/v1/object/public/vault-files/museum/usa/american-buffalo-commemorative-2001.webp?v=3",
@@ -1651,14 +1595,14 @@ const MINT_DATA = {
         buildingImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Royal_Mint_Llantrisant.jpg/800px-Royal_Mint_Llantrisant.jpg",
         he: {
             name: "המינט המלכותי",
-            subtitle: "The Royal Mint — בריטניה",
+            subtitle: "The Royal Mint - בריטניה",
             founded: "מסורת מ-886",
             location: "לנטריסנט, ויילס",
             website: "royalmint.com",
             history: [
                 {
                     title: "מורשת זהב בריטית",
-                    text: "המינט המלכותי אחראי לסוברן ולהנפקת Britannia בזהב — מהמטבעות המוכרים באירופה."
+                    text: "המינט המלכותי אחראי לסוברן ולהנפקת Britannia בזהב - מהמטבעות המוכרים באירופה."
                 },
                 {
                     title: "Britannia זהב",
@@ -1674,9 +1618,9 @@ const MINT_DATA = {
                     title: "Gold Britannia",
                     type: "מטבע",
                     weight: "1oz / חצאים",
-                    year: "1987–",
+                    year: "1987-",
                     purity: "זהב 999.9",
-                    desc: "מטבע זהב בריטי מוביל — נפוץ באירופה ובישראל.",
+                    desc: "מטבע זהב בריטי מוביל - נפוץ באירופה ובישראל.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/2023_Britannia_1oz_Gold_Coin.png/640px-2023_Britannia_1oz_Gold_Coin.png",
                     emoji: "",
                     transparent: true
@@ -1685,9 +1629,9 @@ const MINT_DATA = {
                     title: "Sovereign",
                     type: "מטבע",
                     weight: "~7.98g",
-                    year: "היסטורי–היום",
+                    year: "היסטורי-היום",
                     purity: "זהב 22K",
-                    desc: "הסוברן — מטבע זהב קלאסי עם היסטוריה ארוכה וביקוש יציב.",
+                    desc: "הסוברן - מטבע זהב קלאסי עם היסטוריה ארוכה וביקוש יציב.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Elizabeth_II_gold_sovereign_1958_obverse.jpg/640px-Elizabeth_II_gold_sovereign_1958_obverse.jpg",
                     emoji: "",
                     transparent: true
@@ -1717,7 +1661,7 @@ const MINT_DATA = {
             history: [
                 {
                     title: "British gold heritage",
-                    text: "Home of the Sovereign and Gold Britannia — cornerstones of European bullion."
+                    text: "Home of the Sovereign and Gold Britannia - cornerstones of European bullion."
                 },
                 {
                     title: "Modern purity",
@@ -1729,7 +1673,7 @@ const MINT_DATA = {
                     title: "Gold Britannia",
                     type: "Coin",
                     weight: "1oz / fractions",
-                    year: "1987–",
+                    year: "1987-",
                     purity: "Gold 999.9",
                     desc: "Leading UK gold bullion coin.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/2023_Britannia_1oz_Gold_Coin.png/640px-2023_Britannia_1oz_Gold_Coin.png",
@@ -1740,7 +1684,7 @@ const MINT_DATA = {
                     title: "Sovereign",
                     type: "Coin",
                     weight: "~7.98g",
-                    year: "Historic–present",
+                    year: "Historic-present",
                     purity: "Gold 22K",
                     desc: "Classic British gold coin with enduring demand.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Elizabeth_II_gold_sovereign_1958_obverse.jpg/640px-Elizabeth_II_gold_sovereign_1958_obverse.jpg",
@@ -1761,7 +1705,7 @@ const MINT_DATA = {
         },
         ru: {
             name: "Королевский монетный двор",
-            subtitle: "The Royal Mint — Великобритания",
+            subtitle: "The Royal Mint - Великобритания",
             founded: "С IX века",
             location: "Ллантрисант, Уэльс",
             website: "royalmint.com",
@@ -1776,7 +1720,7 @@ const MINT_DATA = {
                     title: "Gold Britannia",
                     type: "Монета",
                     weight: "1oz",
-                    year: "1987–",
+                    year: "1987-",
                     purity: "Золото 999.9",
                     desc: "Ведущая британская золотая монета.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/2023_Britannia_1oz_Gold_Coin.png/640px-2023_Britannia_1oz_Gold_Coin.png",
@@ -1787,7 +1731,7 @@ const MINT_DATA = {
                     title: "Sovereign",
                     type: "Монета",
                     weight: "~7.98g",
-                    year: "История–сегодня",
+                    year: "История-сегодня",
                     purity: "Золото 22K",
                     desc: "Классическая британская золотая монета.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Elizabeth_II_gold_sovereign_1958_obverse.jpg/640px-Elizabeth_II_gold_sovereign_1958_obverse.jpg",
@@ -1816,7 +1760,7 @@ const MINT_DATA = {
             history: [
                 {
                     title: "Maple Leaf זהב",
-                    text: "המינט הקנדי מפורסם ב-Gold Maple Leaf — מהמטבעות הטהורים והמוכרים בעולם."
+                    text: "המינט הקנדי מפורסם ב-Gold Maple Leaf - מהמטבעות הטהורים והמוכרים בעולם."
                 },
                 {
                     title: "חדשנות ואבטחה",
@@ -1832,9 +1776,9 @@ const MINT_DATA = {
                     title: "Gold Maple Leaf",
                     type: "מטבע",
                     weight: "1oz / חצאים",
-                    year: "1979–",
+                    year: "1979-",
                     purity: "זהב 999.9",
-                    desc: "מטבע זהב קנדי אייקוני — טוהר גבוה ונזילות מצוינת.",
+                    desc: "מטבע זהב קנדי אייקוני - טוהר גבוה ונזילות מצוינת.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Gold_Maple_Leaf_1oz_2015_obverse.png/640px-Gold_Maple_Leaf_1oz_2015_obverse.png",
                     emoji: "",
                     transparent: true
@@ -1872,7 +1816,7 @@ const MINT_DATA = {
                     title: "Gold Maple Leaf",
                     type: "Coin",
                     weight: "1oz / fractions",
-                    year: "1979–",
+                    year: "1979-",
                     purity: "Gold 999.9",
                     desc: "Iconic Canadian gold bullion coin.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Gold_Maple_Leaf_1oz_2015_obverse.png/640px-Gold_Maple_Leaf_1oz_2015_obverse.png",
@@ -1908,7 +1852,7 @@ const MINT_DATA = {
                     title: "Gold Maple Leaf",
                     type: "Монета",
                     weight: "1oz",
-                    year: "1979–",
+                    year: "1979-",
                     purity: "Золото 999.9",
                     desc: "Икона канадского инвестиционного золота.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Gold_Maple_Leaf_1oz_2015_obverse.png/640px-Gold_Maple_Leaf_1oz_2015_obverse.png",
@@ -1930,18 +1874,18 @@ const MINT_DATA = {
         buildingImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Muenchen_Residenz_Brunnenhof.jpg/800px-Muenchen_Residenz_Brunnenhof.jpg",
         he: {
             name: "מינט בוואריה",
-            subtitle: "Bayerisches Hauptmünzamt — מינכן",
+            subtitle: "Bayerisches Hauptmünzamt - מינכן",
             founded: "מסורת מאות שנים",
             location: "מינכן, גרמניה",
             website: "hauptmuenzamt.bayern.de",
             history: [
                 {
                     title: "זהב גרמני ואיכות אירופית",
-                    text: "המינט הבווארי מנפיק מטבעות זהב איכותיים — כולל הנפקות הנצחה והשקעה הנפוצות בשוק האירופי."
+                    text: "המינט הבווארי מנפיק מטבעות זהב איכותיים - כולל הנפקות הנצחה והשקעה הנפוצות בשוק האירופי."
                 },
                 {
                     title: "חותמת D",
-                    text: "מוצרים ממינכן נושאים את סימן המטבעה D — סימן הכרה בינלאומי."
+                    text: "מוצרים ממינכן נושאים את סימן המטבעה D - סימן הכרה בינלאומי."
                 },
                 {
                     title: "אמון משקיעים",
@@ -1954,8 +1898,8 @@ const MINT_DATA = {
                     type: "מטבע",
                     weight: "1oz / משקלים אירופיים",
                     year: "מודרני",
-                    purity: "זהב 999–999.9",
-                    desc: "הנפקות זהב ממינט מינכן — פופולריות בקרב משקיעים באירופה.",
+                    purity: "זהב 999-999.9",
+                    desc: "הנפקות זהב ממינט מינכן - פופולריות בקרב משקיעים באירופה.",
                     img: "",
                     emoji: "",
                     transparent: true
@@ -1963,7 +1907,7 @@ const MINT_DATA = {
                 {
                     title: "מטילי זהב אירופיים",
                     type: "מטיל",
-                    weight: "10g–100g / 1oz",
+                    weight: "10g-100g / 1oz",
                     year: "מודרני",
                     purity: "זהב 999.9",
                     desc: "פורמטים נוחים להשקעה הדרגתית בזהב פיזי.",
@@ -1985,7 +1929,7 @@ const MINT_DATA = {
         },
         en: {
             name: "Bavarian State Mint",
-            subtitle: "Bayerisches Hauptmünzamt — Munich",
+            subtitle: "Bayerisches Hauptmünzamt - Munich",
             founded: "Centuries of minting",
             location: "Munich, Germany",
             website: "hauptmuenzamt.bayern.de",
@@ -1996,7 +1940,7 @@ const MINT_DATA = {
                 },
                 {
                     title: "Mintmark D",
-                    text: "Munich issues carry the D mintmark — a trusted identifier."
+                    text: "Munich issues carry the D mintmark - a trusted identifier."
                 }
             ],
             products: [
@@ -2005,7 +1949,7 @@ const MINT_DATA = {
                     type: "Coin",
                     weight: "1oz / EU weights",
                     year: "Modern",
-                    purity: "Gold 999–999.9",
+                    purity: "Gold 999-999.9",
                     desc: "Munich gold issues favored by European investors.",
                     img: "",
                     emoji: "",
@@ -2014,7 +1958,7 @@ const MINT_DATA = {
                 {
                     title: "European gold bars",
                     type: "Bar",
-                    weight: "10g–100g / 1oz",
+                    weight: "10g-100g / 1oz",
                     year: "Modern",
                     purity: "Gold 999.9",
                     desc: "Convenient formats for stacking physical gold.",
@@ -2036,7 +1980,7 @@ const MINT_DATA = {
         },
         ru: {
             name: "Баварский монетный двор",
-            subtitle: "Bayerisches Hauptmünzamt — Мюнхен",
+            subtitle: "Bayerisches Hauptmünzamt - Мюнхен",
             founded: "Многовековая традиция",
             location: "Мюнхен, Германия",
             website: "hauptmuenzamt.bayern.de",
@@ -2052,7 +1996,7 @@ const MINT_DATA = {
                     type: "Монета",
                     weight: "1oz",
                     year: "Современные",
-                    purity: "Золото 999–999.9",
+                    purity: "Золото 999-999.9",
                     desc: "Выпуски Мюнхена популярны в Европе.",
                     img: "",
                     emoji: "",
@@ -2061,7 +2005,7 @@ const MINT_DATA = {
                 {
                     title: "Европейские слитки",
                     type: "Слиток",
-                    weight: "10g–100g",
+                    weight: "10g-100g",
                     year: "Современные",
                     purity: "Золото 999.9",
                     desc: "Удобные форматы для накопления.",
@@ -2084,18 +2028,18 @@ const MINT_DATA = {
         buildingImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Perth_Mint_building.jpg/800px-Perth_Mint_building.jpg",
         he: {
             name: "מינט פרת׳",
-            subtitle: "The Perth Mint — אוסטרליה",
+            subtitle: "The Perth Mint - אוסטרליה",
             founded: "נוסד 1899",
             location: "פרת׳, אוסטרליה המערבית",
             website: "perthmint.com",
             history: [
                 {
                     title: "זהב אוסטרלי",
-                    text: "Perth Mint הוא מהשמות החזקים בעולם בזהב פיזי — Kangaroo, Lunar ועוד."
+                    text: "Perth Mint הוא מהשמות החזקים בעולם בזהב פיזי - Kangaroo, Lunar ועוד."
                 },
                 {
                     title: "ממשלתי ואמין",
-                    text: "בבעלות מדינת אוסטרליה המערבית — מוניטין גבוה של אמינות ואספקה."
+                    text: "בבעלות מדינת אוסטרליה המערבית - מוניטין גבוה של אמינות ואספקה."
                 },
                 {
                     title: "עיצובים מתחלפים",
@@ -2107,7 +2051,7 @@ const MINT_DATA = {
                     title: "Australian Gold Kangaroo",
                     type: "מטבע",
                     weight: "1oz / חצאים",
-                    year: "1989–",
+                    year: "1989-",
                     purity: "זהב 999.9",
                     desc: "מטבע זהב אוסטרלי מוביל עם עיצוב שנתי משתנה.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/2016_Australian_Gold_Kangaroo_1oz_Obverse.png/640px-2016_Australian_Gold_Kangaroo_1oz_Obverse.png",
@@ -2118,9 +2062,9 @@ const MINT_DATA = {
                     title: "Lunar Gold Series",
                     type: "מטבע",
                     weight: "1oz / חצאים",
-                    year: "1996–",
+                    year: "1996-",
                     purity: "זהב 999.9",
-                    desc: "סדרת הירח הסיני בזהב — ביקוש חזק באסיה ובעולם.",
+                    desc: "סדרת הירח הסיני בזהב - ביקוש חזק באסיה ובעולם.",
                     img: "",
                     emoji: "",
                     transparent: true
@@ -2150,7 +2094,7 @@ const MINT_DATA = {
                 },
                 {
                     title: "Government-backed",
-                    text: "Owned by the State of Western Australia — strong trust and supply reputation."
+                    text: "Owned by the State of Western Australia - strong trust and supply reputation."
                 }
             ],
             products: [
@@ -2158,7 +2102,7 @@ const MINT_DATA = {
                     title: "Australian Gold Kangaroo",
                     type: "Coin",
                     weight: "1oz / fractions",
-                    year: "1989–",
+                    year: "1989-",
                     purity: "Gold 999.9",
                     desc: "Flagship Australian gold bullion coin.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/2016_Australian_Gold_Kangaroo_1oz_Obverse.png/640px-2016_Australian_Gold_Kangaroo_1oz_Obverse.png",
@@ -2169,7 +2113,7 @@ const MINT_DATA = {
                     title: "Lunar Gold Series",
                     type: "Coin",
                     weight: "1oz / fractions",
-                    year: "1996–",
+                    year: "1996-",
                     purity: "Gold 999.9",
                     desc: "Chinese lunar-themed gold series with strong Asian demand.",
                     img: "",
@@ -2190,7 +2134,7 @@ const MINT_DATA = {
         },
         ru: {
             name: "Монетный двор Перта",
-            subtitle: "The Perth Mint — Австралия",
+            subtitle: "The Perth Mint - Австралия",
             founded: "Основан в 1899",
             location: "Перт, Австралия",
             website: "perthmint.com",
@@ -2205,7 +2149,7 @@ const MINT_DATA = {
                     title: "Gold Kangaroo",
                     type: "Монета",
                     weight: "1oz",
-                    year: "1989–",
+                    year: "1989-",
                     purity: "Золото 999.9",
                     desc: "Главная австралийская золотая монета.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/2016_Australian_Gold_Kangaroo_1oz_Obverse.png/640px-2016_Australian_Gold_Kangaroo_1oz_Obverse.png",
@@ -2216,7 +2160,7 @@ const MINT_DATA = {
                     title: "Lunar Gold",
                     type: "Монета",
                     weight: "1oz",
-                    year: "1996–",
+                    year: "1996-",
                     purity: "Золото 999.9",
                     desc: "Лунная серия с высоким спросом в Азии.",
                     img: "",
@@ -2238,14 +2182,14 @@ const MINT_DATA = {
         buildingImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Muenze_Oesterreich_Wien.jpg/800px-Muenze_Oesterreich_Wien.jpg",
         he: {
             name: "מינט וינה",
-            subtitle: "Münze Österreich — אוסטריה",
+            subtitle: "Münze Österreich - אוסטריה",
             founded: "מסורת ארוכה",
             location: "וינה, אוסטריה",
             website: "muenzeoesterreich.at",
             history: [
                 {
                     title: "Vienna Philharmonic זהב",
-                    text: "מטבע הפילהרמונית הווינאית בזהב הוא מהנמכרים באירופה — עיצוב מוזיקלי ייחודי."
+                    text: "מטבע הפילהרמונית הווינאית בזהב הוא מהנמכרים באירופה - עיצוב מוזיקלי ייחודי."
                 },
                 {
                     title: "טוהר ואיכות",
@@ -2261,9 +2205,9 @@ const MINT_DATA = {
                     title: "Vienna Philharmonic Gold",
                     type: "מטבע",
                     weight: "1oz / חצאים",
-                    year: "1989–",
+                    year: "1989-",
                     purity: "זהב 999.9",
-                    desc: "מטבע הזהב האירופי האייקוני — נזיל ומבוקש.",
+                    desc: "מטבע הזהב האירופי האייקוני - נזיל ומבוקש.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Vienna_Philharmonic_coin_gold_obverse.jpg/640px-Vienna_Philharmonic_coin_gold_obverse.jpg",
                     emoji: "",
                     transparent: true
@@ -2301,7 +2245,7 @@ const MINT_DATA = {
                     title: "Vienna Philharmonic Gold",
                     type: "Coin",
                     weight: "1oz / fractions",
-                    year: "1989–",
+                    year: "1989-",
                     purity: "Gold 999.9",
                     desc: "Iconic European gold bullion coin.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Vienna_Philharmonic_coin_gold_obverse.jpg/640px-Vienna_Philharmonic_coin_gold_obverse.jpg",
@@ -2333,7 +2277,7 @@ const MINT_DATA = {
                     title: "Philharmonic Gold",
                     type: "Монета",
                     weight: "1oz",
-                    year: "1989–",
+                    year: "1989-",
                     purity: "Золото 999.9",
                     desc: "Икона европейского инвестиционного золота.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Vienna_Philharmonic_coin_gold_obverse.jpg/640px-Vienna_Philharmonic_coin_gold_obverse.jpg",
@@ -2366,7 +2310,7 @@ const MINT_DATA = {
                 },
                 {
                     title: "Libertad זהב",
-                    text: "מטבע ללא ערך נקוב רשמי בחלק מהשנים — מבוקש בקרב אספנים ומשקיעים."
+                    text: "מטבע ללא ערך נקוב רשמי בחלק מהשנים - מבוקש בקרב אספנים ומשקיעים."
                 },
                 {
                     title: "עיצוב ייחודי",
@@ -2378,9 +2322,9 @@ const MINT_DATA = {
                     title: "Gold Libertad",
                     type: "מטבע",
                     weight: "1oz / חצאים",
-                    year: "1981–",
+                    year: "1981-",
                     purity: "זהב 999",
-                    desc: "מטבע הזהב המקסיקני האייקוני — עיצוב ייחודי ונזילות טובה.",
+                    desc: "מטבע הזהב המקסיקני האייקוני - עיצוב ייחודי ונזילות טובה.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Mexican_Gold_Libertad_1oz_2015_obverse.png/640px-Mexican_Gold_Libertad_1oz_2015_obverse.png",
                     emoji: "",
                     transparent: true
@@ -2406,7 +2350,7 @@ const MINT_DATA = {
             history: [
                 {
                     title: "Mexican gold",
-                    text: "One of the oldest mints in the Americas — issuer of the Gold Libertad."
+                    text: "One of the oldest mints in the Americas - issuer of the Gold Libertad."
                 },
                 {
                     title: "Distinctive design",
@@ -2418,7 +2362,7 @@ const MINT_DATA = {
                     title: "Gold Libertad",
                     type: "Coin",
                     weight: "1oz / fractions",
-                    year: "1981–",
+                    year: "1981-",
                     purity: "Gold 999",
                     desc: "Mexico’s flagship gold bullion coin.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Mexican_Gold_Libertad_1oz_2015_obverse.png/640px-Mexican_Gold_Libertad_1oz_2015_obverse.png",
@@ -2454,7 +2398,7 @@ const MINT_DATA = {
                     title: "Gold Libertad",
                     type: "Монета",
                     weight: "1oz",
-                    year: "1981–",
+                    year: "1981-",
                     purity: "Золото 999",
                     desc: "Главная золотая монета Мексики.",
                     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Mexican_Gold_Libertad_1oz_2015_obverse.png/640px-Mexican_Gold_Libertad_1oz_2015_obverse.png",
@@ -2493,7 +2437,7 @@ function renderMintDetail(mintId, lang) {
     const titleEl = document.getElementById('mint-detail-title');
     if (titleEl) titleEl.textContent = `${mint.flag} ${d.name}`;
 
-    // Update lang tabs — scope to mint-detail-screen only to avoid bleeding into guide tabs
+    // Update lang tabs - scope to mint-detail-screen only to avoid bleeding into guide tabs
     document.querySelectorAll('#mint-detail-screen .mint-lang-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.lang === _museumActiveLang);
     });
@@ -2506,7 +2450,7 @@ function renderMintDetail(mintId, lang) {
         detailWrap.style.textAlign = isRtl ? 'right' : 'left';
     }
 
-    // Products HTML — only user-uploaded Supabase images
+    // Products HTML - only user-uploaded Supabase images
     const uploadedProducts = getUploadedMintProducts(d.products);
     const productsHtml = uploadedProducts.map(p => `
         <div class="mint-product-card">
@@ -2545,8 +2489,8 @@ function renderMintDetail(mintId, lang) {
 
     // Products section label by lang
     const labels = {
-        he: { history: ' היסטוריה', records: ' שיאים ועובדות', products: ' מוצרי כסף', purity: 'טוהר', more: 'אתר רשמי' },
-        en: { history: ' History', records: ' Records & Highlights', products: ' Silver Products', purity: 'Purity', more: 'Official Website' },
+        he: { history: ' היסטוריה', records: ' שיאים ועובדות', products: ' מוצרי זהב', purity: 'טוהר', more: 'אתר רשמי' },
+        en: { history: ' History', records: ' Records & Highlights', products: ' Gold Products', purity: 'Purity', more: 'Official Website' },
         ru: { history: ' История', records: ' Рекорды и факты', products: ' Серебряные изделия', purity: 'Проба', more: 'Официальный сайт' }
     };
     const L = labels[_museumActiveLang] || labels.he;
@@ -2628,37 +2572,37 @@ const GUIDE_DATA = {
             {
                 icon: "",
                 title: "למה זהב? הסיבות המרכזיות",
-                content: `<p>זהב הוא אחד מנכסי השמירה הוותיקים בהיסטוריה. הנה למה:</p><ul><li><strong>ללא מע"מ בישראל</strong> — זהב השקעה פטור ממע"מ, בניגוד לכסף.</li><li><strong>נזילות גבוהה</strong> — ניתן למכור כמעט בכל מקום בעולם.</li><li><strong>גידור אינפלציה</strong> — שמר ערך לאורך אלפי שנים.</li><li><strong>ללא סיכון צד שלישי</strong> — זהב פיזי אינו תלוי בחברה כלשהי.</li><li><strong>ביקוש עולמי יציב</strong> — תכשיטים, טכנולוגיה, בנקים מרכזיים.</li></ul><p>עבור משקיע ישראלי, היתרון הגדול הוא <strong>פטור ממע"מ</strong> — זה כבר 17% יתרון מהיום הראשון.</p>`
+                content: `<p>זהב הוא אחד מנכסי השמירה הוותיקים בהיסטוריה. הנה למה:</p><ul><li><strong>ללא מע"מ בישראל</strong> - זהב השקעה פטור ממע"מ, בניגוד לכסף.</li><li><strong>נזילות גבוהה</strong> - ניתן למכור כמעט בכל מקום בעולם.</li><li><strong>גידור אינפלציה</strong> - שמר ערך לאורך אלפי שנים.</li><li><strong>ללא סיכון צד שלישי</strong> - זהב פיזי אינו תלוי בחברה כלשהי.</li><li><strong>ביקוש עולמי יציב</strong> - תכשיטים, טכנולוגיה, בנקים מרכזיים.</li></ul><p>עבור משקיע ישראלי, היתרון הגדול הוא <strong>פטור ממע"מ</strong> - זה כבר 17% יתרון מהיום הראשון.</p>`
             },
             {
                 icon: "",
                 title: "מה לקנות: מטבע או מטיל?",
-                content: `<p>השאלה הנפוצה ביותר אצל משקיעים חדשים:</p><ul><li><strong>מטיל (Bar)</strong> — פרמיה נמוכה יותר, עדיף לכמויות גדולות. מתאים למי שרוצה מקסימום מתכת על כל שקל.</li><li><strong>מטבע (Coin)</strong> — פרמיה גבוהה יותר, אבל ביקוש גבוה יותר גם ממשקיעים אחרים. קל יותר למכור ביחידות קטנות.</li></ul><p><strong>המלצה כללית:</strong> אם מטרתך השקעה טהורה — לך על מטילים. אם אוהב את הרגשת המטבע — קרוגרנד, מייפל ליף וויניאי הם בחירות מעולות.</p><div class='guide-tip-box'><strong>טיפ:</strong> מטבעות 22K כמו קרוגרנד קשים יותר ועמידים לשריטות — יתרון לאחסון ארוך טווח.</div>`
+                content: `<p>השאלה הנפוצה ביותר אצל משקיעים חדשים:</p><ul><li><strong>מטיל (Bar)</strong> - פרמיה נמוכה יותר, עדיף לכמויות גדולות. מתאים למי שרוצה מקסימום מתכת על כל שקל.</li><li><strong>מטבע (Coin)</strong> - פרמיה גבוהה יותר, אבל ביקוש גבוה יותר גם ממשקיעים אחרים. קל יותר למכור ביחידות קטנות.</li></ul><p><strong>המלצה כללית:</strong> אם מטרתך השקעה טהורה - לך על מטילים. אם אוהב את הרגשת המטבע - קרוגרנד, מייפל ליף וויניאי הם בחירות מעולות.</p><div class='guide-tip-box'><strong>טיפ:</strong> מטבעות 22K כמו קרוגרנד קשים יותר ועמידים לשריטות - יתרון לאחסון ארוך טווח.</div>`
             },
             {
                 icon: "",
                 title: "מטבעות הזהב הגדולים: מדריך קצר",
-                content: `<p>המטבעות הנפוצים בישראל ובעולם:</p><ul><li><strong>קרוגרנד (Krugerrand)</strong> — דרום אפריקה, 22K (91.67%), 1oz. אחד המוכרים ביותר.</li><li><strong>Maple Leaf</strong> — קנדה, 24K (99.99%), 1oz. טוהרות הגבוהה ביותר בין מטבעות הגדולים.</li><li><strong>Vienna Philharmonic</strong> — אוסטריה, 24K, 1oz. הנמכר ביותר באירופה.</li><li><strong>American Gold Eagle</strong> — ארה"ב, 22K, 1oz. אחד האמינים ביותר.</li><li><strong>Australian Kangaroo</strong> — אוסטרליה, 24K, עיצוב שנתי משתנה.</li><li><strong>Britannia</strong> — בריטניה, 24K, 1oz.</li></ul><p>כל המטבעות האלו מוכרים בינלאומית ונזילים מאוד.</p>`
+                content: `<p>המטבעות הנפוצים בישראל ובעולם:</p><ul><li><strong>קרוגרנד (Krugerrand)</strong> - דרום אפריקה, 22K (91.67%), 1oz. אחד המוכרים ביותר.</li><li><strong>Maple Leaf</strong> - קנדה, 24K (99.99%), 1oz. טוהרות הגבוהה ביותר בין מטבעות הגדולים.</li><li><strong>Vienna Philharmonic</strong> - אוסטריה, 24K, 1oz. הנמכר ביותר באירופה.</li><li><strong>American Gold Eagle</strong> - ארה"ב, 22K, 1oz. אחד האמינים ביותר.</li><li><strong>Australian Kangaroo</strong> - אוסטרליה, 24K, עיצוב שנתי משתנה.</li><li><strong>Britannia</strong> - בריטניה, 24K, 1oz.</li></ul><p>כל המטבעות האלו מוכרים בינלאומית ונזילים מאוד.</p>`
             },
             {
                 icon: "",
-                title: "קניית זהב בישראל — כל מה שצריך לדעת",
-                content: `<p>מדריך ספציפי לשוק הישראלי:</p><ul><li><strong>פטור ממע"מ</strong> — זהב השקעה (מטבעות ומטילים מוכרים) פטור ממע"מ לפי חוק. זו זכות — לא מתנה מהממשלה.</li><li><strong>מס רווח הון</strong> — ~25% על רווח ממכירה (חינוכי; היוועץ ברואה חשבון).</li><li><strong>יבוא</strong> — ייבוא אישי עד €10,000 ללא הצהרה מיוחדת. מעל זה — צריך להצהיר.</li><li><strong>איפה לקנות</strong> — מוכרים מוסמכים, בתי שוהם, ודילרים מוכרים. הכי בטוח — מקום עם ניירת.</li><li><strong>אחסון</strong> — כספת ביתית, כספת בנק, או שירות אחסון מאובטח.</li></ul><div class='guide-warn-box'><strong>שים לב:</strong> קניית זהב ב"שוק שחור" ללא קבלה — סיכון לזיוף ובעיות מס עתידיות. תמיד קנה ממקור רשמי עם ניירת.</div>`
+                title: "קניית זהב בישראל - כל מה שצריך לדעת",
+                content: `<p>מדריך ספציפי לשוק הישראלי:</p><ul><li><strong>פטור ממע"מ</strong> - זהב השקעה (מטבעות ומטילים מוכרים) פטור ממע"מ לפי חוק. זו זכות - לא מתנה מהממשלה.</li><li><strong>מס רווח הון</strong> - ~25% על רווח ממכירה (חינוכי; היוועץ ברואה חשבון).</li><li><strong>יבוא</strong> - ייבוא אישי עד €10,000 ללא הצהרה מיוחדת. מעל זה - צריך להצהיר.</li><li><strong>איפה לקנות</strong> - מוכרים מוסמכים, בתי שוהם, ודילרים מוכרים. הכי בטוח - מקום עם ניירת.</li><li><strong>אחסון</strong> - כספת ביתית, כספת בנק, או שירות אחסון מאובטח.</li></ul><div class='guide-warn-box'><strong>שים לב:</strong> קניית זהב ב"שוק שחור" ללא קבלה - סיכון לזיוף ובעיות מס עתידיות. תמיד קנה ממקור רשמי עם ניירת.</div>`
             },
             {
                 icon: "",
-                title: "GSR — יחס זהב-כסף כאינדיקטור",
-                content: `<p>GSR (Gold-Silver Ratio) מציין כמה אונקיות כסף שוות לאונקיית זהב:</p><ul><li><strong>GSR גבוה (80+)</strong> — זהב יקר ביחס לכסף; לכסף יש פוטנציאל להצמיח יותר %-טית.</li><li><strong>GSR נמוך (מתחת ל-50)</strong> — זהב זול ביחס לכסף; לזהב פוטנציאל גבוה יחסית.</li><li>HSR ההיסטורי: בין 15:1 ל-100:1 לאורך ההיסטוריה.</li></ul><p>זה <strong>לא אינדיקטור מדויק</strong> — אלא כלי חינוכי לראות תמחור יחסי. לא להסתמך עליו לבדו.</p><div class='guide-tip-box'><strong>כיצד להשתמש:</strong> כש-GSR גבוה מאוד — שקול לנסות לצבור יותר כסף; כש-GSR נמוך מאוד — זהב נראה זול יחסית.</div>`
+                title: "GSR - יחס זהב-כסף כאינדיקטור",
+                content: `<p>GSR (Gold-Silver Ratio) מציין כמה אונקיות כסף שוות לאונקיית זהב:</p><ul><li><strong>GSR גבוה (80+)</strong> - זהב יקר ביחס לכסף; לכסף יש פוטנציאל להצמיח יותר %-טית.</li><li><strong>GSR נמוך (מתחת ל-50)</strong> - זהב זול ביחס לכסף; לזהב פוטנציאל גבוה יחסית.</li><li>HSR ההיסטורי: בין 15:1 ל-100:1 לאורך ההיסטוריה.</li></ul><p>זה <strong>לא אינדיקטור מדויק</strong> - אלא כלי חינוכי לראות תמחור יחסי. לא להסתמך עליו לבדו.</p><div class='guide-tip-box'><strong>כיצד להשתמש:</strong> כש-GSR גבוה מאוד - שקול לנסות לצבור יותר כסף; כש-GSR נמוך מאוד - זהב נראה זול יחסית.</div>`
             },
             {
                 icon: "",
-                title: "אחסון זהב — אפשרויות ושיקולים",
-                content: `<p>אחסון הוא אחד הנושאים החשובים ביותר לכל מחזיק זהב פיזי:</p><ul><li><strong>כספת ביתית</strong> — זמינה, פרטית, אבל דורשת כספת איכותית ומקום בטוח.</li><li><strong>כספת בנק</strong> — בטוחה, אבל יש עלויות שנתיות ופחות גישה מיידית.</li><li><strong>שירות אחסון מקצועי</strong> (Vault) — עלות שנתית בד"כ 0.1-0.5% מהשווי, ביטוח כולל.</li></ul><div class='guide-warn-box'><strong>אל תשמור כמויות גדולות בבית ללא כספת איכותית ובלי ביטוח ייעודי. גניבה של מטבעות ומטילים קשה מאוד לשחזר.</strong></div><p>בחירה סבירה: עד כמה עשרות אונקיות — כספת ביתית טובה. כמויות גדולות יותר — שירות אחסון מקצועי.</p>`
+                title: "אחסון זהב - אפשרויות ושיקולים",
+                content: `<p>אחסון הוא אחד הנושאים החשובים ביותר לכל מחזיק זהב פיזי:</p><ul><li><strong>כספת ביתית</strong> - זמינה, פרטית, אבל דורשת כספת איכותית ומקום בטוח.</li><li><strong>כספת בנק</strong> - בטוחה, אבל יש עלויות שנתיות ופחות גישה מיידית.</li><li><strong>שירות אחסון מקצועי</strong> (Vault) - עלות שנתית בד"כ 0.1-0.5% מהשווי, ביטוח כולל.</li></ul><div class='guide-warn-box'><strong>אל תשמור כמויות גדולות בבית ללא כספת איכותית ובלי ביטוח ייעודי. גניבה של מטבעות ומטילים קשה מאוד לשחזר.</strong></div><p>בחירה סבירה: עד כמה עשרות אונקיות - כספת ביתית טובה. כמויות גדולות יותר - שירות אחסון מקצועי.</p>`
             },
             {
                 icon: "",
-                title: "זהב מול כסף — מה ההבדל להשקעה?",
-                content: `<p>שני המתכות הן 'נכסים קשים' אבל שונות בכמה נקודות מרכזיות:</p><ul><li><strong>מע"מ</strong> — זהב פטור, כסף חייב (יתרון ברור לזהב בישראל).</li><li><strong>תנודתיות</strong> — כסף תנודתי יותר מזהב; עולה חזק יותר בשוורי, יורד חזק יותר בדובי.</li><li><strong>ביקוש תעשייתי</strong> — לכסף יש ביקוש תעשייתי גבוה יותר (אלקטרוניקה, סולאר).</li><li><strong>נגישות</strong> — כסף זול יותר לאונקיה, קל יותר להתחיל.</li><li><strong>GSR</strong> — כשהיחס גבוה, כסף זול יחסית לזהב.</li></ul><p>אסטרטגיה פופולרית: <strong>שניהם</strong> — חלק זהב כעוגן יציב, חלק כסף כ"מנוף" עם פוטנציאל גבוה יותר.</p>`
+                title: "זהב מול כסף - מה ההבדל להשקעה?",
+                content: `<p>שני המתכות הן 'נכסים קשים' אבל שונות בכמה נקודות מרכזיות:</p><ul><li><strong>מע"מ</strong> - זהב פטור, כסף חייב (יתרון ברור לזהב בישראל).</li><li><strong>תנודתיות</strong> - כסף תנודתי יותר מזהב; עולה חזק יותר בשוורי, יורד חזק יותר בדובי.</li><li><strong>ביקוש תעשייתי</strong> - לכסף יש ביקוש תעשייתי גבוה יותר (אלקטרוניקה, סולאר).</li><li><strong>נגישות</strong> - כסף זול יותר לאונקיה, קל יותר להתחיל.</li><li><strong>GSR</strong> - כשהיחס גבוה, כסף זול יחסית לזהב.</li></ul><p>אסטרטגיה פופולרית: <strong>שניהם</strong> - חלק זהב כעוגן יציב, חלק כסף כ"מנוף" עם פוטנציאל גבוה יותר.</p>`
             },
         ]
     },
@@ -2668,37 +2612,37 @@ const GUIDE_DATA = {
             {
                 icon: "",
                 title: "Why Gold? The Core Case",
-                content: `<p>Gold is one of the oldest wealth preservation assets in history:</p><ul><li><strong>No VAT in Israel</strong> — investment gold is VAT-exempt, unlike silver.</li><li><strong>High liquidity</strong> — can be sold almost anywhere in the world.</li><li><strong>Inflation hedge</strong> — preserved value for thousands of years.</li><li><strong>No counterparty risk</strong> — physical gold doesn't depend on any company.</li><li><strong>Stable global demand</strong> — jewelry, technology, central banks.</li></ul>`
+                content: `<p>Gold is one of the oldest wealth preservation assets in history:</p><ul><li><strong>No VAT in Israel</strong> - investment gold is VAT-exempt, unlike silver.</li><li><strong>High liquidity</strong> - can be sold almost anywhere in the world.</li><li><strong>Inflation hedge</strong> - preserved value for thousands of years.</li><li><strong>No counterparty risk</strong> - physical gold doesn't depend on any company.</li><li><strong>Stable global demand</strong> - jewelry, technology, central banks.</li></ul>`
             },
             {
                 icon: "",
                 title: "Bar vs Coin: What to Buy?",
-                content: `<p>The most common question for new gold investors:</p><ul><li><strong>Bars</strong> — lower premium, better for large quantities. Maximum metal per dollar.</li><li><strong>Coins</strong> — higher premium but also higher demand from other investors. Easier to sell in small quantities.</li></ul><p><strong>General advice:</strong> Pure investment? Go for bars. Love the collectible feel? Krugerrand, Maple Leaf, or Philharmonics are excellent choices.</p>`
+                content: `<p>The most common question for new gold investors:</p><ul><li><strong>Bars</strong> - lower premium, better for large quantities. Maximum metal per dollar.</li><li><strong>Coins</strong> - higher premium but also higher demand from other investors. Easier to sell in small quantities.</li></ul><p><strong>General advice:</strong> Pure investment? Go for bars. Love the collectible feel? Krugerrand, Maple Leaf, or Philharmonics are excellent choices.</p>`
             },
             {
                 icon: "",
                 title: "Major Gold Coins: Quick Guide",
-                content: `<p>The most popular gold coins globally:</p><ul><li><strong>Krugerrand</strong> — South Africa, 22K, 1oz. One of the most recognized worldwide.</li><li><strong>Maple Leaf</strong> — Canada, 24K (99.99%), 1oz. Highest purity among major coins.</li><li><strong>Vienna Philharmonic</strong> — Austria, 24K, 1oz. Best-selling in Europe.</li><li><strong>American Gold Eagle</strong> — USA, 22K, 1oz.</li><li><strong>Australian Kangaroo</strong> — Australia, 24K, annual design.</li></ul>`
+                content: `<p>The most popular gold coins globally:</p><ul><li><strong>Krugerrand</strong> - South Africa, 22K, 1oz. One of the most recognized worldwide.</li><li><strong>Maple Leaf</strong> - Canada, 24K (99.99%), 1oz. Highest purity among major coins.</li><li><strong>Vienna Philharmonic</strong> - Austria, 24K, 1oz. Best-selling in Europe.</li><li><strong>American Gold Eagle</strong> - USA, 22K, 1oz.</li><li><strong>Australian Kangaroo</strong> - Australia, 24K, annual design.</li></ul>`
             },
             {
                 icon: "",
-                title: "Buying Gold in Israel — Everything You Need",
-                content: `<p>Israel-specific guide:</p><ul><li><strong>VAT Exempt</strong> — Investment gold is exempt from VAT under Israeli law.</li><li><strong>Capital Gains Tax</strong> — ~25% on realized profit (educational; consult an accountant).</li><li><strong>Import</strong> — Personal imports up to €10,000 require no special declaration.</li><li><strong>Where to Buy</strong> — Authorized dealers, jewelry stores, recognized dealers with proper paperwork.</li><li><strong>Storage</strong> — Home safe, bank safe deposit box, or professional secured storage.</li></ul>`
+                title: "Buying Gold in Israel - Everything You Need",
+                content: `<p>Israel-specific guide:</p><ul><li><strong>VAT Exempt</strong> - Investment gold is exempt from VAT under Israeli law.</li><li><strong>Capital Gains Tax</strong> - ~25% on realized profit (educational; consult an accountant).</li><li><strong>Import</strong> - Personal imports up to €10,000 require no special declaration.</li><li><strong>Where to Buy</strong> - Authorized dealers, jewelry stores, recognized dealers with proper paperwork.</li><li><strong>Storage</strong> - Home safe, bank safe deposit box, or professional secured storage.</li></ul>`
             },
             {
                 icon: "",
-                title: "GSR — Gold-to-Silver Ratio as an Indicator",
-                content: `<p>The GSR shows how many ounces of silver equal one ounce of gold:</p><ul><li><strong>High GSR (80+)</strong> — gold is expensive relative to silver.</li><li><strong>Low GSR (below 50)</strong> — gold is cheap relative to silver.</li></ul><p>This is an <strong>educational tool</strong>, not a precise signal. Don't rely on it alone.</p>`
+                title: "GSR - Gold-to-Silver Ratio as an Indicator",
+                content: `<p>The GSR shows how many ounces of silver equal one ounce of gold:</p><ul><li><strong>High GSR (80+)</strong> - gold is expensive relative to silver.</li><li><strong>Low GSR (below 50)</strong> - gold is cheap relative to silver.</li></ul><p>This is an <strong>educational tool</strong>, not a precise signal. Don't rely on it alone.</p>`
             },
             {
                 icon: "",
-                title: "Gold Storage — Options & Considerations",
-                content: `<p>Storage is one of the most critical aspects of physical gold ownership:</p><ul><li><strong>Home Safe</strong> — immediate access, private, but requires quality safe and secure location.</li><li><strong>Bank Safe Deposit Box</strong> — secure, annual fee, limited access hours.</li><li><strong>Professional Vault</strong> — typically 0.1-0.5% annual fee, insurance included.</li></ul>`
+                title: "Gold Storage - Options & Considerations",
+                content: `<p>Storage is one of the most critical aspects of physical gold ownership:</p><ul><li><strong>Home Safe</strong> - immediate access, private, but requires quality safe and secure location.</li><li><strong>Bank Safe Deposit Box</strong> - secure, annual fee, limited access hours.</li><li><strong>Professional Vault</strong> - typically 0.1-0.5% annual fee, insurance included.</li></ul>`
             },
             {
                 icon: "",
-                title: "Gold vs Silver — Investment Comparison",
-                content: `<p>Both are 'hard assets' but differ in key areas:</p><ul><li><strong>VAT</strong> — Gold is exempt; silver is taxed (clear advantage for gold in Israel).</li><li><strong>Volatility</strong> — Silver is more volatile; rises harder in bull markets, falls harder in bear.</li><li><strong>Industrial demand</strong> — Silver has higher industrial demand (electronics, solar).</li><li><strong>Accessibility</strong> — Silver is cheaper per ounce, easier entry point.</li></ul>`
+                title: "Gold vs Silver - Investment Comparison",
+                content: `<p>Both are 'hard assets' but differ in key areas:</p><ul><li><strong>VAT</strong> - Gold is exempt; silver is taxed (clear advantage for gold in Israel).</li><li><strong>Volatility</strong> - Silver is more volatile; rises harder in bull markets, falls harder in bear.</li><li><strong>Industrial demand</strong> - Silver has higher industrial demand (electronics, solar).</li><li><strong>Accessibility</strong> - Silver is cheaper per ounce, easier entry point.</li></ul>`
             },
         ]
     },
@@ -2708,37 +2652,37 @@ const GUIDE_DATA = {
             {
                 icon: "",
                 title: "Почему золото? Основные причины",
-                content: `<p>Золото — один из старейших активов сохранения капитала:</p><ul><li><strong>Без НДС в Израиле</strong> — инвестиционное золото освобождено от НДС.</li><li><strong>Высокая ликвидность</strong> — можно продать почти в любой точке мира.</li><li><strong>Защита от инфляции</strong> — сохраняло ценность тысячелетиями.</li></ul>`
+                content: `<p>Золото - один из старейших активов сохранения капитала:</p><ul><li><strong>Без НДС в Израиле</strong> - инвестиционное золото освобождено от НДС.</li><li><strong>Высокая ликвидность</strong> - можно продать почти в любой точке мира.</li><li><strong>Защита от инфляции</strong> - сохраняло ценность тысячелетиями.</li></ul>`
             },
             {
                 icon: "",
                 title: "Слитки vs Монеты: что выбрать?",
-                content: `<p><ul><li><strong>Слитки</strong> — меньшая наценка, лучше для больших объёмов.</li><li><strong>Монеты</strong> — выше наценка, но и легче продать поштучно.</li></ul></p>`
+                content: `<p><ul><li><strong>Слитки</strong> - меньшая наценка, лучше для больших объёмов.</li><li><strong>Монеты</strong> - выше наценка, но и легче продать поштучно.</li></ul></p>`
             },
             {
                 icon: "",
                 title: "Главные золотые монеты: краткий справочник",
-                content: `<p><ul><li><strong>Крюгерранд</strong> — ЮАР, 22K.</li><li><strong>Кленовый лист</strong> — Канада, 24K (99.99%).</li><li><strong>Венская Филармония</strong> — Австрия, 24K.</li><li><strong>Gold Eagle</strong> — США, 22K.</li></ul></p>`
+                content: `<p><ul><li><strong>Крюгерранд</strong> - ЮАР, 22K.</li><li><strong>Кленовый лист</strong> - Канада, 24K (99.99%).</li><li><strong>Венская Филармония</strong> - Австрия, 24K.</li><li><strong>Gold Eagle</strong> - США, 22K.</li></ul></p>`
             },
             {
                 icon: "",
-                title: "Покупка золота в Израиле — всё необходимое",
-                content: `<p><ul><li><strong>Освобождение от НДС</strong> — инвестиционное золото освобождено от НДС.</li><li><strong>Налог на прирост капитала</strong> — ~25% от прибыли при продаже.</li><li><strong>Импорт</strong> — до €10,000 без специальной декларации.</li></ul></p>`
+                title: "Покупка золота в Израиле - всё необходимое",
+                content: `<p><ul><li><strong>Освобождение от НДС</strong> - инвестиционное золото освобождено от НДС.</li><li><strong>Налог на прирост капитала</strong> - ~25% от прибыли при продаже.</li><li><strong>Импорт</strong> - до €10,000 без специальной декларации.</li></ul></p>`
             },
             {
                 icon: "",
-                title: "GSR — соотношение золота к серебру",
-                content: `<p>GSR показывает, сколько унций серебра равны одной унции золота. Высокий GSR (80+) — золото дорого относительно серебра. Низкий GSR (ниже 50) — золото дёшево относительно серебра.</p>`
+                title: "GSR - соотношение золота к серебру",
+                content: `<p>GSR показывает, сколько унций серебра равны одной унции золота. Высокий GSR (80+) - золото дорого относительно серебра. Низкий GSR (ниже 50) - золото дёшево относительно серебра.</p>`
             },
             {
                 icon: "",
-                title: "Хранение золота — варианты и соображения",
-                content: `<p><ul><li><strong>Домашний сейф</strong> — мгновенный доступ, требует качественного сейфа.</li><li><strong>Банковская ячейка</strong> — безопасно, ежегодная плата.</li><li><strong>Профессиональный хранилище</strong> — 0.1-0.5% в год, обычно включает страховку.</li></ul></p>`
+                title: "Хранение золота - варианты и соображения",
+                content: `<p><ul><li><strong>Домашний сейф</strong> - мгновенный доступ, требует качественного сейфа.</li><li><strong>Банковская ячейка</strong> - безопасно, ежегодная плата.</li><li><strong>Профессиональный хранилище</strong> - 0.1-0.5% в год, обычно включает страховку.</li></ul></p>`
             },
             {
                 icon: "",
-                title: "Золото против серебра — инвестиционное сравнение",
-                content: `<p><ul><li><strong>НДС</strong> — золото освобождено, серебро облагается (преимущество золота).</li><li><strong>Волатильность</strong> — серебро более волатильно.</li><li><strong>Промышленный спрос</strong> — у серебра выше.</li></ul></p>`
+                title: "Золото против серебра - инвестиционное сравнение",
+                content: `<p><ul><li><strong>НДС</strong> - золото освобождено, серебро облагается (преимущество золота).</li><li><strong>Волатильность</strong> - серебро более волатильно.</li><li><strong>Промышленный спрос</strong> - у серебра выше.</li></ul></p>`
             },
         ]
     },
@@ -2748,7 +2692,7 @@ let _guideActiveLang = 'he';
 
 // Admin-managed guide chapters (fetched once from the content API, then cached).
 // Store-first: when present, these REPLACE the built-in gold GUIDE_DATA so guides are
-// managed entirely in the admin panel — never hardcoded. Built-in is fallback only.
+// managed entirely in the admin panel - never hardcoded. Built-in is fallback only.
 let _adminGuides = null;
 
 // Generic content fetch for any collection (mine-guides|quiz|mints|links).
@@ -2823,7 +2767,7 @@ function renderGuide(lang) {
     }).filter(ch => ch.title || ch.content);
 
     if (chapters.length === 0) {
-        // Fallback only — no managed content yet.
+        // Fallback only - no managed content yet.
         chapters = data.chapters.slice();
     }
 
@@ -2902,7 +2846,7 @@ function initDashboard() {
     document.getElementById('pnl-open-btn')?.addEventListener('click', () => goToScreen('pnl-screen'));
     document.getElementById('back-pnl')?.addEventListener('click', () => goBack());
 
-    // ── P&L form (async — auto-fetches FX rate) ──
+    // ── P&L form (async - auto-fetches FX rate) ──
     document.getElementById('pnl-form').onsubmit = async (e) => {
         e.preventDefault();
         const date  = document.getElementById('tx-date').value;
@@ -3062,7 +3006,7 @@ function boot() {
     initDevPreview();
     _loadStoreContent();   // pull store-managed quiz/museum (built-in stays as fallback)
 
-    // Only hub login — mine never shows its own passcode screen
+    // Only hub login - mine never shows its own passcode screen
     if (sessionToken()) {
         showDashboard();
     } else {
@@ -3078,7 +3022,7 @@ function initDevPreview() {
     banner.className = 'dev-preview-banner';
     banner.innerHTML = `
         <span class="dev-preview-label"> מצב פיתוח מקומי</span>
-        <span class="dev-preview-note">השינויים כאן לא על האתר החי — רענון אוטומטי אחרי שמירה</span>
+        <span class="dev-preview-note">השינויים כאן לא על האתר החי - רענון אוטומטי אחרי שמירה</span>
         <button type="button" class="dev-preview-reload" onclick="location.reload()">רענון</button>
     `;
     document.body.prepend(banner);
