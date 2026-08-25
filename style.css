@@ -85,56 +85,61 @@
 
 /* ── DARK MODE ──────────────────────────────────────────────────── */
 body.dark-mode {
-    --bg:            #181d19;
-    --blob-dk:       #0c1110;
-    --blob-md:       #141a15;
-    --blob-lt:       #1c251e;
+    --bg:            #0d1210;
+    --blob-dk:       #070a09;
+    --blob-md:       #101612;
+    --blob-lt:       #18201a;
 
-    --card:          #222c24;
-    --card-inner:    #1a2219;
-    --card-deep:     #141b14;
+    --card:          #1c2620;
+    --card-inner:    #151c18;
+    --card-deep:     #101612;
 
-    --clay:          #b87550;
-    --clay-lt:       #cc8f68;
-    --clay-dk:       #9a5e38;
+    --clay:          #d4a07a;
+    --clay-lt:       #e8b892;
+    --clay-dk:       #c4845a;
 
-    --teal:          #5a8c82;
-    --teal-dk:       #3e726a;
+    --teal:          #7ab8ae;
+    --teal-dk:       #5a948a;
 
-    --text:          #ddeadd;
-    --text-mid:      #9db89e;
-    --text-muted:    rgba(185, 215, 186, 0.42);
-    --text-light:    #edf5ee;
+    --text:          #eef5f0;
+    --text-mid:      #b7cfc0;
+    --text-muted:    rgba(210, 230, 216, 0.48);
+    --text-light:    #f7fbf8;
 
-    --purple:        #a896d8;
+    --purple:        #c4b4ee;
+    --green:         #7ad4a8;
 
     --nm-raised:
-        5px 5px 12px rgba(0, 0, 0, 0.60),
-       -3px -3px 9px rgba(60, 90, 64, 0.22);
+        6px 8px 18px rgba(0, 0, 0, 0.55),
+       -3px -3px 10px rgba(120, 160, 140, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
     --nm-raised-hover:
-        7px 8px 18px rgba(0, 0, 0, 0.68),
-       -4px -5px 12px rgba(60, 90, 64, 0.28);
+        8px 10px 24px rgba(0, 0, 0, 0.62),
+       -3px -4px 12px rgba(140, 180, 160, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
     --nm-inset:
         inset 4px 4px 10px rgba(0, 0, 0, 0.55),
-        inset -3px -3px 8px rgba(60, 90, 64, 0.18);
+        inset -2px -2px 6px rgba(110, 150, 130, 0.12);
     --nm-inner-raised:
-        3px 3px 8px rgba(0, 0, 0, 0.55),
-       -2px -2px 6px rgba(60, 90, 64, 0.18);
+        3px 3px 8px rgba(0, 0, 0, 0.50),
+       -2px -2px 6px rgba(120, 160, 140, 0.10);
     --nm-inner-inset:
-        inset 3px 3px 8px rgba(0, 0, 0, 0.52),
-        inset -2px -2px 6px rgba(60, 90, 64, 0.15);
+        inset 3px 3px 8px rgba(0, 0, 0, 0.50),
+        inset -2px -2px 6px rgba(110, 150, 130, 0.10);
     --float-card:
-        10px 14px 36px rgba(0, 0, 0, 0.72),
-        -2px -3px 12px rgba(60, 90, 64, 0.14);
+        10px 16px 40px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(180, 210, 190, 0.08);
 }
 
 body.dark-mode .dashboard-v2 {
-    background: rgba(26, 36, 28, 0.96);
-    border-color: rgba(80, 110, 82, 0.25);
+    background: linear-gradient(165deg, rgba(28, 38, 32, 0.96) 0%, rgba(16, 22, 18, 0.98) 100%);
+    border-color: rgba(160, 190, 170, 0.16);
+    box-shadow: var(--float-card);
 }
 
 body.dark-mode .section-screen-wrap {
-    background: rgba(24, 32, 25, 0.97);
+    background: linear-gradient(165deg, rgba(26, 34, 28, 0.97) 0%, rgba(14, 18, 16, 0.98) 100%);
+    border-color: rgba(160, 190, 170, 0.12);
 }
 
 body.dark-mode .terminal-container {
@@ -1586,7 +1591,75 @@ input, textarea, .chat-messages, .chat-message {
 
 body.dark-mode .icon-btn-label {
     color: var(--text-light);
-    text-shadow: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* Dark mode: lift dark line-art icons to soft silver glow */
+body.dark-mode .icon-btn {
+    background: linear-gradient(165deg, #24302a 0%, #18211c 100%);
+    box-shadow: var(--nm-raised);
+    border: 1px solid rgba(190, 220, 200, 0.10);
+}
+
+body.dark-mode .icon-btn:hover {
+    box-shadow: var(--nm-raised-hover);
+    border-color: rgba(190, 220, 200, 0.22);
+}
+
+body.dark-mode .icon-img-wrap img {
+    filter:
+        invert(1)
+        brightness(1.35)
+        contrast(1.08)
+        drop-shadow(0 0 8px rgba(200, 230, 215, 0.28));
+}
+
+body.dark-mode .hw-big-card,
+body.dark-mode .main-switch-btn,
+body.dark-mode .back-btn,
+body.dark-mode .price-strip {
+    box-shadow: var(--nm-raised);
+    border: 1px solid rgba(190, 220, 200, 0.08);
+    color: var(--text);
+}
+
+body.dark-mode .hw-big-name,
+body.dark-mode .section-screen-title,
+body.dark-mode .dashboard-title,
+body.dark-mode .quiz-question-txt,
+body.dark-mode .quiz-done-head,
+body.dark-mode .quiz-intro-text,
+body.dark-mode .quiz-rules-text,
+body.dark-mode .section-subtitle,
+body.dark-mode .personal-action-btn,
+body.dark-mode .guide-chapter,
+body.dark-mode .mint-hub-card,
+body.dark-mode .news-item,
+body.dark-mode .pnl-summary,
+body.dark-mode .pnl-table,
+body.dark-mode .status-text {
+    color: var(--text);
+}
+
+body.dark-mode .hw-big-sub,
+body.dark-mode .quiz-done-msg,
+body.dark-mode .price-strip-update {
+    color: var(--text-muted);
+}
+
+body.dark-mode .price-strip-value,
+body.dark-mode .quiz-done-score {
+    color: var(--clay-lt);
+}
+
+body.dark-mode .back-btn {
+    color: var(--text-mid);
+    background: var(--card);
+}
+
+body.dark-mode .quiz-opt-btn {
+    color: var(--text);
+    background: var(--card);
 }
 
 body.dark-mode .chart-time-btn,

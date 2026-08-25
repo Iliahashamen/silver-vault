@@ -1,5 +1,5 @@
 /**
- * Quiet trivia feedback clicks (Web Audio - no external files).
+ * Trivia feedback clicks (Web Audio - no external files).
  */
 let _quizAudioCtx = null;
 
@@ -31,7 +31,7 @@ function _quizClick({ startHz, endHz, duration, type, peak }) {
         }
 
         gain.gain.setValueAtTime(0.0001, t0);
-        gain.gain.exponentialRampToValueAtTime(peak, t0 + 0.006);
+        gain.gain.exponentialRampToValueAtTime(peak, t0 + 0.008);
         gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
 
         osc.connect(gain);
@@ -42,15 +42,15 @@ function _quizClick({ startHz, endHz, duration, type, peak }) {
 }
 
 function playQuizCorrectSound() {
-    _quizClick({ startHz: 640, endHz: 920, duration: 0.055, type: 'sine', peak: 0.045 });
+    _quizClick({ startHz: 640, endHz: 920, duration: 0.07, type: 'sine', peak: 0.18 });
     setTimeout(() => {
-        _quizClick({ startHz: 920, endHz: 1180, duration: 0.06, type: 'sine', peak: 0.038 });
+        _quizClick({ startHz: 920, endHz: 1240, duration: 0.08, type: 'sine', peak: 0.15 });
     }, 48);
 }
 
 function playQuizWrongSound() {
-    _quizClick({ startHz: 200, endHz: 120, duration: 0.1, type: 'triangle', peak: 0.042 });
+    _quizClick({ startHz: 210, endHz: 115, duration: 0.12, type: 'triangle', peak: 0.16 });
     setTimeout(() => {
-        _quizClick({ startHz: 150, endHz: 95, duration: 0.08, type: 'triangle', peak: 0.028 });
+        _quizClick({ startHz: 155, endHz: 90, duration: 0.1, type: 'triangle', peak: 0.11 });
     }, 70);
 }

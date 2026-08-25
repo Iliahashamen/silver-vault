@@ -91,58 +91,63 @@
 
 /* ── DARK MODE (Gold warm dark) ──────────────────────────────── */
 body.dark-mode {
-    --bg:            #1A1208;
-    --bubble-cream:  #3A3020;
-    --bubble-beige:  #2A2216;
-    --bubble-tan:    #1E180E;
-    --bubble-brown:  #120E08;
-    --bubble-deep:   #080604;
+    --bg:            #120e08;
+    --bubble-cream:  #3d3220;
+    --bubble-beige:  #2a2214;
+    --bubble-tan:    #1c160c;
+    --bubble-brown:  #100c06;
+    --bubble-deep:   #060402;
 
-    --card:          #2A220E;
-    --card-inner:    #221a08;
-    --card-deep:     #1a1206;
+    --card:          #241c10;
+    --card-inner:    #1a140a;
+    --card-deep:     #120e08;
 
-    --clay:          #C9A227;
-    --clay-lt:       #E2BF50;
-    --clay-dk:       #A07C12;
+    --clay:          #E2BF50;
+    --clay-lt:       #F0D878;
+    --clay-dk:       #C9A227;
 
-    --teal:          #C4903A;
-    --teal-dk:       #A07020;
+    --teal:          #D4A84B;
+    --teal-dk:       #A07C12;
 
-    --text:          #F5EDD0;
-    --text-mid:      #C8A96A;
-    --text-muted:    rgba(245, 237, 208, 0.42);
-    --text-light:    #FAFAF8;
+    --text:          #F8F1DE;
+    --text-mid:      #D8C08A;
+    --text-muted:    rgba(245, 237, 208, 0.50);
+    --text-light:    #FFFCF3;
 
-    --purple:        #D4A84B;
+    --purple:        #E2BF50;
+    --green:         #E2BF50;
 
     --nm-raised:
-        5px 5px 12px rgba(0, 0, 0, 0.60),
-       -3px -3px 9px rgba(60, 90, 64, 0.22);
+        6px 8px 18px rgba(0, 0, 0, 0.58),
+       -3px -3px 10px rgba(201, 162, 39, 0.08),
+        inset 0 1px 0 rgba(255, 240, 200, 0.08);
     --nm-raised-hover:
-        7px 8px 18px rgba(0, 0, 0, 0.68),
-       -4px -5px 12px rgba(60, 90, 64, 0.28);
+        8px 10px 24px rgba(0, 0, 0, 0.65),
+       -3px -4px 12px rgba(226, 191, 80, 0.12),
+        inset 0 1px 0 rgba(255, 240, 200, 0.10);
     --nm-inset:
-        inset 4px 4px 10px rgba(0, 0, 0, 0.55),
-        inset -3px -3px 8px rgba(60, 90, 64, 0.18);
+        inset 4px 4px 10px rgba(0, 0, 0, 0.58),
+        inset -2px -2px 6px rgba(201, 162, 39, 0.08);
     --nm-inner-raised:
-        3px 3px 8px rgba(0, 0, 0, 0.55),
-       -2px -2px 6px rgba(60, 90, 64, 0.18);
+        3px 3px 8px rgba(0, 0, 0, 0.52),
+       -2px -2px 6px rgba(201, 162, 39, 0.08);
     --nm-inner-inset:
         inset 3px 3px 8px rgba(0, 0, 0, 0.52),
-        inset -2px -2px 6px rgba(60, 90, 64, 0.15);
+        inset -2px -2px 6px rgba(201, 162, 39, 0.08);
     --float-card:
-        10px 14px 36px rgba(0, 0, 0, 0.72),
-        -2px -3px 12px rgba(60, 90, 64, 0.14);
+        10px 16px 40px rgba(0, 0, 0, 0.68),
+        0 0 0 1px rgba(201, 162, 39, 0.14);
 }
 
 body.dark-mode .dashboard-v2 {
-    background: rgba(26, 36, 28, 0.96);
-    border-color: rgba(80, 110, 82, 0.25);
+    background: linear-gradient(165deg, rgba(36, 28, 16, 0.96) 0%, rgba(18, 14, 8, 0.98) 100%);
+    border-color: rgba(201, 162, 39, 0.22);
+    box-shadow: var(--float-card);
 }
 
 body.dark-mode .section-screen-wrap {
-    background: rgba(24, 32, 25, 0.97);
+    background: linear-gradient(165deg, rgba(32, 24, 14, 0.97) 0%, rgba(16, 12, 6, 0.98) 100%);
+    border-color: rgba(201, 162, 39, 0.16);
 }
 
 body.dark-mode .terminal-container {
@@ -150,7 +155,7 @@ body.dark-mode .terminal-container {
 }
 
 body.dark-mode .modal-overlay {
-    background: rgba(5, 8, 5, 0.78);
+    background: rgba(8, 6, 2, 0.82);
 }
 
 body.dark-mode .pnl-table th {
@@ -158,7 +163,7 @@ body.dark-mode .pnl-table th {
 }
 
 body.dark-mode .row-delete-btn {
-    background: #2e3a2e;
+    background: #3a3020;
     color: var(--text-muted);
 }
 
@@ -173,7 +178,7 @@ body.dark-mode .terminal-input {
 }
 
 body.dark-mode .mr-d-modal {
-    background: rgba(8, 12, 8, 0.72);
+    background: rgba(10, 8, 4, 0.78);
 }
 
 /* Dark mode active state for dark-mode-btn */
@@ -1651,7 +1656,78 @@ body.dark-mode .blob-5 {
 
 body.dark-mode .icon-btn-label {
     color: var(--text-light);
-    text-shadow: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* Dark mode: lift dark line-art icons to warm gold glow */
+body.dark-mode .icon-btn {
+    background: linear-gradient(165deg, #2e2414 0%, #1c160c 100%);
+    box-shadow: var(--nm-raised);
+    border: 1px solid rgba(201, 162, 39, 0.18);
+}
+
+body.dark-mode .icon-btn:hover {
+    box-shadow: var(--nm-raised-hover);
+    border-color: rgba(226, 191, 80, 0.35);
+}
+
+body.dark-mode .icon-img-wrap img {
+    filter:
+        invert(1)
+        sepia(0.45)
+        saturate(2.6)
+        hue-rotate(2deg)
+        brightness(1.28)
+        contrast(1.06)
+        drop-shadow(0 0 10px rgba(226, 191, 80, 0.35));
+}
+
+body.dark-mode .hw-big-card,
+body.dark-mode .main-switch-btn,
+body.dark-mode .back-btn,
+body.dark-mode .price-strip {
+    box-shadow: var(--nm-raised);
+    border: 1px solid rgba(201, 162, 39, 0.14);
+    color: var(--text);
+}
+
+body.dark-mode .hw-big-name,
+body.dark-mode .section-screen-title,
+body.dark-mode .dashboard-title,
+body.dark-mode .quiz-question-txt,
+body.dark-mode .quiz-done-head,
+body.dark-mode .quiz-intro-text,
+body.dark-mode .quiz-rules-text,
+body.dark-mode .section-subtitle,
+body.dark-mode .personal-action-btn,
+body.dark-mode .guide-chapter,
+body.dark-mode .mint-hub-card,
+body.dark-mode .news-item,
+body.dark-mode .pnl-summary,
+body.dark-mode .pnl-table,
+body.dark-mode .status-text {
+    color: var(--text);
+}
+
+body.dark-mode .hw-big-sub,
+body.dark-mode .quiz-done-msg,
+body.dark-mode .price-strip-update {
+    color: var(--text-muted);
+}
+
+body.dark-mode .price-strip-value,
+body.dark-mode .quiz-done-score {
+    color: var(--clay-lt);
+}
+
+body.dark-mode .back-btn {
+    color: var(--text-mid);
+    background: var(--card);
+}
+
+body.dark-mode .quiz-opt-btn {
+    color: var(--text);
+    background: var(--card);
 }
 
 body.dark-mode .chart-time-btn,
