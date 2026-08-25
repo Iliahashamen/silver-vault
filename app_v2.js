@@ -1136,6 +1136,8 @@ function _quizSelect(chosen) {
     const correct = questions[idx].correct;
     const ok = chosen === correct;
     if (ok) quizState.score++;
+    if (ok) playQuizCorrectSound();
+    else playQuizWrongSound();
 
     document.querySelectorAll('.quiz-opt-btn').forEach((btn, i) => {
         btn.disabled = true;
