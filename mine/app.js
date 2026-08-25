@@ -179,6 +179,8 @@ function applyDarkMode(dark) {
     requestAnimationFrame(() => document.body.classList.add('dark-mode-animating'));
     const label = document.getElementById('dark-mode-label');
     if (label) label.textContent = dark ? 'מצב בהיר/כהה - כהה' : 'מצב בהיר/כהה - בהיר';
+    const theme = document.querySelector('meta[name="theme-color"]');
+    if (theme) theme.setAttribute('content', dark ? '#0E0A04' : '#B89868');
 }
 
 function toggleDarkMode() {

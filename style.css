@@ -193,19 +193,32 @@ body.dark-mode #dark-mode-btn {
 /* ── RESET ──────────────────────────────────────────────────────── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Full-bleed page — no zoom gaps that leave a lighter bottom strip */
+html {
+    min-height: 100%;
+    min-height: 100dvh;
+    background-color: var(--bg);
+}
+
 /* ── BODY ───────────────────────────────────────────────────────── */
 body {
     font-family: 'Assistant', sans-serif;
     background-color: var(--bg);
+    background-attachment: fixed;
     color: var(--text);
     overflow-x: hidden;
-    min-height: 100vh;
+    min-height: 100%;
+    min-height: 100dvh;
     direction: rtl;
     text-align: right;
     position: relative;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+}
+
+body.dark-mode {
+    background-color: #0d1210;
 }
 
 /* Allow text selection only in inputs and chat */
@@ -3362,13 +3375,7 @@ body.dark-mode .guide-tip-box  { background: rgba(50,140,100,0.13); }
 .learning-video-play:empty { display: none; }
 
 
-/* Slight overall UI shrink — Vault / Mine screens */
-html {
-    zoom: 0.92;
-}
-@supports not (zoom: 1) {
-    html { font-size: 92%; }
-}
+/* Keep layout full-bleed; avoid html zoom (causes lighter bottom strip) */
 @media (min-width: 600px) {
     .dashboard-v2 {
         width: clamp(340px, 52vw, 780px);

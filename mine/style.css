@@ -199,7 +199,13 @@ body.dark-mode #dark-mode-btn {
 /* ── RESET ──────────────────────────────────────────────────────── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ── BODY ───────────────────────────────────────────────────────── */
+/* Full-bleed page — no zoom gaps that leave a lighter bottom strip */
+html {
+    min-height: 100%;
+    min-height: 100dvh;
+    background-color: var(--bg);
+}
+
 body {
     font-family: 'Assistant', sans-serif;
     background:
@@ -207,9 +213,11 @@ body {
         radial-gradient(ellipse 80% 55% at 12% 8%, rgba(240, 226, 200, 0.42) 0%, transparent 52%),
         linear-gradient(155deg, #D4BC94 0%, #C4A878 32%, #A88858 68%, #8B7048 100%);
     background-color: var(--bg);
+    background-attachment: fixed;
     color: var(--text);
     overflow-x: hidden;
-    min-height: 100vh;
+    min-height: 100%;
+    min-height: 100dvh;
     direction: rtl;
     text-align: right;
     position: relative;
@@ -222,6 +230,8 @@ body.dark-mode {
     background:
         radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0, 0, 0, 0.65) 0%, transparent 55%),
         linear-gradient(160deg, #221808 0%, #1A1208 45%, #0E0A04 100%);
+    background-color: #0E0A04;
+    background-attachment: fixed;
 }
 
 /* Allow text selection only in inputs and chat */
@@ -3511,13 +3521,7 @@ body.dark-mode .guide-tip-box  { background: rgba(50,140,100,0.13); }
 .learning-video-play:empty { display: none; }
 
 
-/* Slight overall UI shrink — Vault / Mine screens */
-html {
-    zoom: 0.92;
-}
-@supports not (zoom: 1) {
-    html { font-size: 92%; }
-}
+/* Keep layout full-bleed; avoid html zoom (causes lighter bottom strip) */
 @media (min-width: 600px) {
     .dashboard-v2 {
         width: clamp(340px, 52vw, 780px);
