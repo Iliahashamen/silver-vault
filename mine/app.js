@@ -774,7 +774,7 @@ async function loadNews() {
     container.innerHTML = '<div class="news-loading">טוען חדשות...</div>';
 
     try {
-        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/news`, { cache: 'no-store' });
+        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/news`, { cache:'no-store' });
         const data = await res.json();
 
         if (!data.success || !Array.isArray(data.items) || !data.items.length) {
@@ -799,35 +799,35 @@ function initNewsLangToggle() {
 // ── NAVIGATION CHIPS (Mr. D → App deeplinks) ─────────────────────────
 
 const NAV_CHIP_DEFS = {
-    'charts':         { he: '📊 גרפים',            en: '📊 Charts',                    ru: '📊 Графики',
+    'charts':         { he: 'גרפים',            en: 'Charts',                    ru: 'Графики',
                         action: ['screen', 'charts-screen'] },
-    'museum':         { he: '🏛️ מוזיאון מינטים',    en: '🏛️ Mints Museum',              ru: '🏛️ Музей монетных дворов',
+    'museum':         { he: 'מוזיאון מינטים',    en: 'Mints Museum',              ru: 'Музей монетных дворов',
                         action: ['screen', 'museum-screen'] },
-    'museum:israel':  { he: '🇮🇱 מינט ישראל',       en: '🇮🇱 Israel Mint',               ru: '🇮🇱 Монетный двор Израиля',
+    'museum:israel':  { he: 'מינט ישראל',       en: 'Israel Mint',               ru: 'Монетный двор Израиля',
                         action: ['mint', 'israel'] },
-    'museum:germany': { he: '🇩🇪 מינט גרמניה',      en: '🇩🇪 Germany Mint',              ru: '🇩🇪 Баварский монетный двор',
+    'museum:germany': { he: 'מינט גרמניה',      en: 'Germany Mint',              ru: 'Баварский монетный двор',
                         action: ['mint', 'germany'] },
-    'museum:uk':      { he: '🇬🇧 המינט המלכותי',    en: '🇬🇧 Royal Mint',                ru: '🇬🇧 Королевский монетный двор',
+    'museum:uk':      { he: 'המינט המלכותי',    en: 'Royal Mint',                ru: 'Королевский монетный двор',
                         action: ['mint', 'uk'] },
-    'museum:usa':     { he: '🇺🇸 מינט ארה"ב',        en: '🇺🇸 US Mint',                   ru: '🇺🇸 Монетный двор США',
+    'museum:usa':     { he: 'מינט ארה"ב',        en: 'US Mint',                   ru: 'Монетный двор США',
                         action: ['mint', 'usa'] },
-    'museum:canada':  { he: '🇨🇦 מינט קנדה',          en: '🇨🇦 Royal Canadian Mint',       ru: '🇨🇦 Монетный двор Канады',
+    'museum:canada':  { he: 'מינט קנדה',          en: 'Royal Canadian Mint',       ru: 'Монетный двор Канады',
                         action: ['mint', 'canada'] },
-    'museum:perth':   { he: '🇦🇺 מינט פרת\'',          en: '🇦🇺 Perth Mint',                ru: '🇦🇺 Монетный двор Перта',
+    'museum:perth':   { he: 'מינט פרת\'',          en: 'Perth Mint',                ru: 'Монетный двор Перта',
                         action: ['mint', 'perth'] },
-    'museum:austria': { he: '🇦🇹 מינט וינה',          en: '🇦🇹 Austrian Mint',             ru: '🇦🇹 Австрийский монетный двор',
+    'museum:austria': { he: 'מינט וינה',          en: 'Austrian Mint',             ru: 'Австрийский монетный двор',
                         action: ['mint', 'austria'] },
-    'museum:mexico':  { he: '🇲🇽 מינט מקסיקו',        en: '🇲🇽 Mexico Mint',               ru: '🇲🇽 Монетный двор Мексики',
+    'museum:mexico':  { he: 'מינט מקסיקו',        en: 'Mexico Mint',               ru: 'Монетный двор Мексики',
                         action: ['mint', 'mexico'] },
-    'quiz':           { he: '❓ טריוויה זהב',        en: '❓ Gold Quiz',                  ru: '❓ Викторина',
+    'quiz':           { he: 'טריוויה זהב',        en: 'Gold Quiz',                  ru: 'Викторина',
                         action: ['quiz', ''] },
-    'pnl':            { he: '📈 מעקב רווח / הפסד',  en: '📈 P&L Tracker',               ru: '📈 Трекер прибыли/убытков',
+    'pnl':            { he: 'מעקב רווח / הפסד',  en: 'P&L Tracker',               ru: 'Трекер прибыли/убытков',
                         action: ['screen', 'pnl-screen'] },
-    'guide':          { he: '📖 מדריך הזהב',         en: '📖 Gold Guide',                 ru: '📖 Руководство по золоту',
+    'guide':          { he: 'קנייה ומכירה',           en: 'Buy & Sell',               ru: 'Покупка и продажа',
                         action: ['screen', 'guide-screen'] },
-    'news':           { he: '📰 חדשות ועדכונים',    en: '📰 News & Updates',             ru: '📰 Новости и обновления',
+    'news':           { he: 'חדשות ועדכונים',    en: 'News & Updates',             ru: 'Новости и обновления',
                         action: ['screen', 'updates-screen'] },
-    'homework':       { he: '📚 שיעורי בית',         en: '📚 Homework',                   ru: '📚 Домашнее задание',
+    'homework':       { he: 'שיעורי בית',         en: 'Homework',                   ru: 'Домашнее задание',
                         action: ['screen', 'homework-screen'] },
 };
 

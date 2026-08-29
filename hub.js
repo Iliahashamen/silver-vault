@@ -1,5 +1,5 @@
 /**
- * GROUPTECH Hub — Entry Point
+ * GROUPTECH Hub - Entry Point
  * Single passcode gate → 3 system selector.
  * Token shared via localStorage so vault/mine skip their own login.
  */
@@ -69,7 +69,7 @@ function initGridCanvas() {
 }
 
 function formatUsd(value) {
-    if (value == null || Number.isNaN(value)) return '$—';
+    if (value == null || Number.isNaN(value)) return '$-';
     return '$' + Number(value).toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
@@ -329,8 +329,8 @@ async function boot() {
             showSystems();
         } catch (err) {
             showError(err && err.message === 'unavailable'
-                ? 'השרת לא מוגדר — נסה שוב בעוד דקה'
-                : 'קוד שגוי — נסה שוב');
+                ? 'השרת לא מוגדר - נסה שוב בעוד דקה'
+                : 'קוד שגוי - נסה שוב');
             if (btn) { btn.classList.remove('loading'); btn.textContent = 'כניסה'; btn.disabled = false; }
             busy = false;
             inp && inp.focus();
@@ -359,12 +359,12 @@ async function boot() {
 
     const cloudCard = document.querySelector('.system-card.locked');
     cloudCard && cloudCard.addEventListener('click', () => {
-        showError('הענן — בקרוב');
+        showError('הענן - בקרוב');
     });
     cloudCard && cloudCard.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            showError('הענן — בקרוב');
+            showError('הענן - בקרוב');
         }
     });
 

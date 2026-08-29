@@ -149,6 +149,12 @@ function goToScreen(screenId, opts = {}) {
             if (lineChart) { lineChart.destroy(); lineChart = null; }
             requestAnimationFrame(() => renderActiveChart());
         }
+        if (screenId === 'guide-screen') {
+            _guideSlideIndex = 0;
+            if (typeof renderGuide === 'function') {
+                renderGuide(_guideActiveLang || 'he');
+            }
+        }
     }
 
     if (current && current !== target) {
@@ -818,7 +824,7 @@ async function loadNews() {
     container.innerHTML = '<div class="news-loading">טוען חדשות...</div>';
 
     try {
-        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/news`, { cache: 'no-store' });
+        const res  = await fetch(`${CONFIG.CHAT_API_URL}/api/news`, { cache:'no-store' });
         const data = await res.json();
 
         if (!data.success || !Array.isArray(data.items) || !data.items.length) {
@@ -843,35 +849,35 @@ function initNewsLangToggle() {
 // ── NAVIGATION CHIPS (Mr. D → App deeplinks) ─────────────────────────
 
 const NAV_CHIP_DEFS = {
-    'charts':         { he: '📊 גרפים',            en: '📊 Charts',                    ru: '📊 Графики',
+    'charts':         { he: 'גרפים',            en: 'Charts',                    ru: 'Графики',
                         action: ['screen', 'charts-screen'] },
-    'museum':         { he: '🏛️ מוזיאון מינטים',    en: '🏛️ Mints Museum',              ru: '🏛️ Музей монетных дворов',
+    'museum':         { he: 'מוזיאון מינטים',    en: 'Mints Museum',              ru: 'Музей монетных дворов',
                         action: ['screen', 'museum-screen'] },
-    'museum:israel':  { he: '🇮🇱 מינט ישראל',       en: '🇮🇱 Israel Mint',               ru: '🇮🇱 Монетный двор Израиля',
+    'museum:israel':  { he: 'מינט ישראל',       en: 'Israel Mint',               ru: 'Монетный двор Израиля',
                         action: ['mint', 'israel'] },
-    'museum:germany': { he: '🇩🇪 מינט גרמניה',      en: '🇩🇪 Germany Mint',              ru: '🇩🇪 Баварский монетный двор',
+    'museum:germany': { he: 'מינט גרמניה',      en: 'Germany Mint',              ru: 'Баварский монетный двор',
                         action: ['mint', 'germany'] },
-    'museum:uk':      { he: '🇬🇧 המינט המלכותי',    en: '🇬🇧 Royal Mint',                ru: '🇬🇧 Королевский монетный двор',
+    'museum:uk':      { he: 'המינט המלכותי',    en: 'Royal Mint',                ru: 'Королевский монетный двор',
                         action: ['mint', 'uk'] },
-    'museum:usa':     { he: '🇺🇸 מינט ארה"ב',        en: '🇺🇸 US Mint',                   ru: '🇺🇸 Монетный двор США',
+    'museum:usa':     { he: 'מינט ארה"ב',        en: 'US Mint',                   ru: 'Монетный двор США',
                         action: ['mint', 'usa'] },
-    'museum:canada':  { he: '🇨🇦 מינט קנדה',          en: '🇨🇦 Royal Canadian Mint',       ru: '🇨🇦 Монетный двор Канады',
+    'museum:canada':  { he: 'מינט קנדה',          en: 'Royal Canadian Mint',       ru: 'Монетный двор Канады',
                         action: ['mint', 'canada'] },
-    'museum:perth':   { he: '🇦🇺 מינט פרת\'',          en: '🇦🇺 Perth Mint',                ru: '🇦🇺 Монетный двор Перта',
+    'museum:perth':   { he: 'מינט פרת\'',          en: 'Perth Mint',                ru: 'Монетный двор Перта',
                         action: ['mint', 'perth'] },
-    'museum:austria': { he: '🇦🇹 מינט וינה',          en: '🇦🇹 Austrian Mint',             ru: '🇦🇹 Австрийский монетный двор',
+    'museum:austria': { he: 'מינט וינה',          en: 'Austrian Mint',             ru: 'Австрийский монетный двор',
                         action: ['mint', 'austria'] },
-    'museum:mexico':  { he: '🇲🇽 מינט מקסיקו',        en: '🇲🇽 Mexico Mint',               ru: '🇲🇽 Монетный двор Мексики',
+    'museum:mexico':  { he: 'מינט מקסיקו',        en: 'Mexico Mint',               ru: 'Монетный двор Мексики',
                         action: ['mint', 'mexico'] },
-    'quiz':           { he: '❓ טריוויה כסף',        en: '❓ Silver Quiz',                ru: '❓ Викторина',
+    'quiz':           { he: 'טריוויה כסף',        en: 'Silver Quiz',                ru: 'Викторина',
                         action: ['quiz', ''] },
-    'pnl':            { he: '📈 מעקב רווח / הפסד',  en: '📈 P&L Tracker',               ru: '📈 Трекер прибыли/убытков',
+    'pnl':            { he: 'מעקב רווח / הפסד',  en: 'P&L Tracker',               ru: 'Трекер прибыли/убытков',
                         action: ['screen', 'pnl-screen'] },
-    'guide':          { he: '📖 מדריך הכסף',         en: '📖 Silver Guide',               ru: '📖 Руководство по серебру',
+    'guide':          { he: 'קנייה ומכירה',           en: 'Buy & Sell',               ru: 'Покупка и продажа',
                         action: ['screen', 'guide-screen'] },
-    'news':           { he: '📰 חדשות ועדכונים',    en: '📰 News & Updates',             ru: '📰 Новости и обновления',
+    'news':           { he: 'חדשות ועדכונים',    en: 'News & Updates',             ru: 'Новости и обновления',
                         action: ['screen', 'updates-screen'] },
-    'homework':       { he: '📚 שיעורי בית',         en: '📚 Homework',                   ru: '📚 Домашнее задание',
+    'homework':       { he: 'שיעורי בית',         en: 'Homework',                   ru: 'Домашнее задание',
                         action: ['screen', 'homework-screen'] },
 };
 
@@ -2145,365 +2151,185 @@ function initMuseum() {
 // ── SILVER GUIDE ─────────────────────────────────────────────────────
 const GUIDE_DATA = {
     he: {
-        dir: 'rtl',
+        dir: "rtl",
         chapters: [
             {
                 icon: "",
-                title: 'מה זה כסף פיזי - מבוא למתחיל',
-                content: `
-                    <p>כסף פיזי הוא כסף טהור בצורת <strong>מטבעות</strong> או <strong>מטילים</strong> שאתה מחזיק בידיך ממש - לא נייר, לא מניה, לא ETF. אתה הבעלים המוחלט.</p>
-                    <p><strong>מה ההבדל בין מטבע למטיל?</strong></p>
-                    <ul>
-                        <li><strong>מטבע (Coin):</strong> מוטבע ע"י מינט ממשלתי (כמו מינט ישראל, ה-Royal Mint). יש לו ערך נקוב רשמי, עיצוב אמנותי, ולעיתים ערך קולקטיבי מעל מחיר הכסף.</li>
-                        <li><strong>מטיל (Bar):</strong> גוש כסף פשוט, לרוב זול יותר לאונקיה, מיוצר ע"י מפעלים פרטיים (כמו Heraeus, Umicore). אין לו ערך קולקטיבי.</li>
-                    </ul>
-                    <div class="guide-tip-box"> <strong>טיפ:</strong> לרוב מטילים זולים יותר לאונקיה. מטבעות מוכרים מהר יותר וקל יותר לאמת את אמיתותם.</div>
-                    <p><strong>גדלים נפוצים:</strong> ¼ אונקיה, ½ אונקיה, 1 אונקיה (הנפוץ ביותר), 5 אונקיות, 10 אונקיות, 1 ק"ג, 5 ק"ג.</p>
-                    <p><strong>טוהר:</strong> כסף טהור הוא .999 (99.9%) או .9999 (99.99%). מטבעות ישנים כמו Morgan Dollar הם .900 - לא כסף השקעה.</p>
-                `
+                title: "קנייה ומכירה של כסף פיזי בישראל",
+                content: "\n                <p class=\"guide-lead\">מצגת קצרה שמובילה אותך משלב ההחלטה ועד המימוש - בלי ז'רגון מיותר.</p>\n                <ol class=\"guide-steps\">\n                    <li>להבין מה קונים (מטבע מול מטיל)</li>\n                    <li>לבחור איפה ואיך קונים בארץ</li>\n                    <li>לאמת, לאחסן ולתעד</li>\n                    <li>לדעת איך ואיפה מוכרים כשצריך</li>\n                    <li>להכיר את המיסוי הבסיסי</li>\n                </ol>\n                <div class=\"guide-tip-box\"><strong>למי זה:</strong> מתחילים שרוצים תהליך ברור לפני הכסף הראשון.</div>\n            "
             },
             {
                 icon: "",
-                title: 'איפה קונים כסף בישראל - 2026',
-                content: `
-                    <p><strong>אפשרויות עיקריות לרכישה בארץ:</strong></p>
-                    <ul>
-                        <li><strong>מינט ישראל (החברה הישראלית למדליות ולמטבעות):</strong> האתר הרשמי <em>coins.co.il</em>. מטבעות מוכרים ומאומתים לחלוטין. פרמיום גבוה יחסית.</li>
-                        <li><strong>חנויות מטבעות פרטיות:</strong> ישנן חנויות מומחיות במרכז ובצפון. בדוק ביקורות ואמינות לפני קנייה.</li>
-                        <li><strong>פלטפורמות מקוונות בינלאומיות:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em>, <em>Europäisches Münzhaus</em> - משלוח לישראל אפשרי, שים לב לעמלות מכס ו-VAT.</li>
-                        <li><strong>שוק אפור / יחידים:</strong> פורומים, קבוצות טלגרם - <strong>סיכון גבוה לזיופים! מומלץ רק עם בדיקה מקצועית.</strong></li>
-                    </ul>
-                    <div class="guide-warn-box"> <strong>אזהרה:</strong> מכס ישראלי - ייבוא אישי של כסף מזכה בפטור ממע"מ אם הוא מוגדר כ"מטיל כסף השקעה". בדוק עם המוכר לפני הזמנה.</div>
-                `
+                title: "לפני הקנייה - מה בעצם קונים?",
+                content: "\n                <p>כסף פיזי = <strong>מטבעות</strong> או <strong>מטילים</strong> שאתה מחזיק ביד. לא נייר, לא מניה, לא ETF.</p>\n                <div class=\"guide-compare\">\n                    <div>\n                        <h4>מטבע</h4>\n                        <ul>\n                            <li>מינט ממשלתי (למשל מינט ישראל / Royal Mint)</li>\n                            <li>קל יותר למכור ולאמת</li>\n                            <li>פרמיום גבוה יותר</li>\n                        </ul>\n                    </div>\n                    <div>\n                        <h4>מטיל</h4>\n                        <ul>\n                            <li>ייצור של מפעלים (Heraeus, Umicore…)</li>\n                            <li>זול יותר לאונקיה</li>\n                            <li>פחות \"מוכר\" בקנייה מהירה</li>\n                        </ul>\n                    </div>\n                </div>\n                <p><strong>טוהר השקעה:</strong> .999 או .9999. מטבעות ישנים .900 אינם כסף השקעה.</p>\n                <div class=\"guide-tip-box\"><strong>כלל אצבע:</strong> מטיל לחיסכון ליחידת משקל; מטבע לנזילות ומכירה קלה יותר.</div>\n            "
             },
             {
                 icon: "",
-                title: 'איפה מוכרים כסף בישראל - 2026',
-                content: `
-                    <p>מכירה בארץ מוגבלת יותר מקנייה. עיקר האפשרויות:</p>
-                    <ul>
-                        <li><strong>חנויות מטבעות מורשות:</strong> הן הדרך הכי מהירה לפדיון. מצפות לקנות ממך מתחת למחיר ספוט - זה הרווח שלהן.</li>
-                        <li><strong>מינט ישראל:</strong> מקבל מטבעות ישראלים לפדיון בתנאים מסוימים.</li>
-                        <li><strong>פלטפורמות P2P (יחיד-ליחיד):</strong> קבוצות פייסבוק וטלגרם ייעודיות. מחיר טוב יותר אך תהליך ארוך יותר.</li>
-                        <li><strong>בינלאומי:</strong> מכירה לחנויות אירופיות / אמריקאיות - רלוונטי לכמויות גדולות.</li>
-                    </ul>
-                    <div class="guide-tip-box"> <strong>טיפ:</strong> מטבעות של מינטים מוכרים (Britannia, Maple Leaf, American Eagle) נמכרים <strong>הרבה יותר מהר</strong> ובמחיר טוב יותר מאשר מטבעות לא מוכרים.</div>
-                `
+                title: "תהליך הקנייה - 4 שלבים",
+                content: "\n                <ol class=\"guide-steps guide-steps-lg\">\n                    <li><strong>הגדר תקציב ונזילות</strong> - כמה אתה מוכן לנעול, בלי לגעת בכסף שוטף.</li>\n                    <li><strong>בחר מקור אמין</strong> - מינט / חנות מורשית / יבוא מסודר. לא \"מבצע\" אנונימי.</li>\n                    <li><strong>השווה מחיר אמיתי</strong> - ספוט + פרמיום + משלוח/מכס, לא רק המחיר על התווית.</li>\n                    <li><strong>קבל חשבונית ושמור</strong> - תאריך, משקל, טוהר, מחיר. זה הבסיס למכירה ולמס.</li>\n                </ol>\n                <div class=\"guide-tip-box\"><strong>קצב:</strong> עדיף להתחיל ב־1-5 אונקיות ולהבין את התהליך, לא לקנות הכול ביום אחד.</div>\n            "
             },
             {
                 icon: "",
-                title: 'כמה לקנות - אסטרטגיית כניסה למתחיל',
-                content: `
-                    <p>אין כמות "נכונה" - הכל תלוי במטרה שלך.</p>
-                    <p><strong>עקרונות בסיס:</strong></p>
-                    <ul>
-                        <li>מרבית המומחים ממליצים <strong>5%-15%</strong> מהחסכונות בנכסים קשים (כסף + זהב + מטח).</li>
-                        <li>התחל עם <strong>כמות קטנה</strong> (1-5 אונקיות) כדי להבין את התהליך לפני שמשקיעים סכומים גדולים.</li>
-                        <li>קנה בקביעות (<strong>Dollar Cost Averaging</strong>) - כל חודש כמות קבועה, בלי לנחש את השוק.</li>
-                        <li>שמור תמיד <strong>נזילות</strong> - אל תשקיע כסף שאתה עלול לצטרך בחירום.</li>
-                    </ul>
-                    <div class="guide-tip-box"> מינימום מוצלח להתחיל: <strong>10 אונקיות כסף טהור (.999)</strong> - שווה לך בניהול, אחסון ופיזור.</div>
-                `
+                title: "איפה קונים בישראל - 2026",
+                content: "\n                <ul class=\"guide-channels\">\n                    <li><strong>מינט ישראל (coins.co.il)</strong> - אמינות מקסימלית, פרמיום גבוה יחסית.</li>\n                    <li><strong>חנויות מטבעות פרטיות</strong> - מרכז וצפון; בדקו ביקורות ואמינות לפני תשלום.</li>\n                    <li><strong>אתרים בינלאומיים</strong> - Bullion By Post, Silver Gold Bull, Europäisches Münzhaus. שימו לב למכס ו־VAT.</li>\n                    <li><strong>שוק אפור / טלגרם</strong> - סיכון זיוף גבוה. רק עם בדיקה מקצועית.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>מכס:</strong> ייבוא אישי של מטיל כסף השקעה עשוי להיות פטור ממע״מ - אשרו מול המוכר לפני ההזמנה.</div>\n            "
             },
             {
                 icon: "",
-                title: 'טעויות של מתחילים - הדברים שכולם עושים בפעם הראשונה',
-                content: `
-                    <ul>
-                        <li> <strong>קונים ממקור לא מוכר</strong> - זיוף כסף נפוץ. הכלל הברזל: קנה רק ממינטים מוכרים או דילרים מורשים.</li>
-                        <li> <strong>לא בודקים את הפרמיום</strong> - מחיר ה-"כסף" שאתה קונה כולל פרמיום מעל ספוט. פרמיום גבוה מדי = נזק ברווחיות.</li>
-                        <li> <strong>מאחסנים בבית ללא ביטוח</strong> - גנב אחד, ופרידה מההשקעה. שקול כספת ביטחון או שירות אחסון.</li>
-                        <li> <strong>קונים "כסף ישן" מוזל</strong> - מטבעות .900 (כמו Morgan Dollars) אינם כסף השקעה. בדוק תמיד את הטוהר.</li>
-                        <li> <strong>ציפייה לרווח מהיר</strong> - כסף הוא חיסכון לטווח ארוך, לא מסחר. מי שקנה ב-2011 בשיא חיכה 10 שנים.</li>
-                        <li> <strong>קניית כסף "מוכסף" (silver plated)</strong> - ציפוי כסף בלבד. ערך אפסי. תמיד בדוק: .999 Fine Silver.</li>
-                    </ul>
-                    <div class="guide-warn-box"> <strong>בדיקת אמיתות:</strong> מגנט, מבחן קול, מכשיר Sigma Metalytics - זה ההשקעה הכי חכמה לפני כל קנייה גדולה.</div>
-                `
+                title: "כמה לקנות - ומתי לעצור",
+                content: "\n                <ul>\n                    <li>טווח נפוץ: <strong>5%-15%</strong> מהחסכונות בנכסים קשים (כסף + זהב + מטח).</li>\n                    <li>התחלה מומלצת: <strong>1-5 אונקיות</strong>, ואז DCA חודשי אם זה מתאים לכם.</li>\n                    <li>שמרו נזילות - כסף פיזי לא אמור לממן חשבון שוטף.</li>\n                </ul>\n                <p><strong>אבן דרך:</strong> כ־10 אונקיות .999 = בסיס ראשוני שמאפשר גם מכירה חלקית בעתיד.</p>\n                <div class=\"guide-tip-box\"><strong>לא חובה לקנות הכול בבת אחת.</strong> תהליך קנייה חוזר עדיף מלחץ של \"פספסתי את הרכבת\".</div>\n            "
             },
             {
                 icon: "",
-                title: 'אחסון בטוח - איך שומרים את הכסף',
-                content: `
-                    <p>אחסון נכון שווה כסף. אפשרויות נפוצות:</p>
-                    <ul>
-                        <li><strong>כספת ביתית:</strong> נוחה, זמינה. חייבת להיות מחוברת לקיר/רצפה. ביטוח נפרד מומלץ.</li>
-                        <li><strong>תא בנקאי (Safe Deposit Box):</strong> בטוח מגנבה. לא מכוסה על ידי ביטוח הבנק - צריך ביטוח נפרד.</li>
-                        <li><strong>שירות אחסון מקצועי (Vault Storage):</strong> חברות כמו Brinks, Loomis - מבוטח ומנוטר. פתרון לכמויות גדולות.</li>
-                    </ul>
-                    <p><strong>כלל חשוב:</strong> אל תספר לכולם שיש לך כסף פיזי. OPSEC (אבטחת מידע אישי) חשוב כמו אבטחת הכסף עצמו.</p>
-                    <div class="guide-tip-box"> <strong>אחסון:</strong> הימנע מחשיפה לאוויר לח. שקיות ניילון עם silica gel שומרות על הברק ומונעות חמצון.</div>
-                `
+                title: "אחרי הקנייה - אימות ואחסון",
+                content: "\n                <p><strong>אימות בסיסי:</strong> מגנט, צליל, ובעיקר מכשיר כמו Sigma Metalytics כשמדובר בסכומים משמעותיים.</p>\n                <ul>\n                    <li><strong>כספת ביתית</strong> - נוח; חיבור לקיר/רצפה + ביטוח נפרד.</li>\n                    <li><strong>תא בנקאי</strong> - בטוח מגניבה; הביטוח של הבנק לרוב לא מכסה - ביטוח עצמאי.</li>\n                    <li><strong>Vault מקצועי</strong> - Brinks / Loomis וכד׳ לכמויות גדולות.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>OPSEC:</strong> אל תפרסמו שיש לכם מתכת בבית. אבטחת מידע חשובה כמו הכספת.</div>\n                <div class=\"guide-tip-box\"><strong>אחסון:</strong> שמרו מיובש (silica gel) כדי להפחית חמצון.</div>\n            "
             },
             {
                 icon: "",
-                title: 'הבנת מחיר הכסף - ספוט, פרמיום ומחזורים',
-                content: `
-                    <p><strong>מחיר ספוט (Spot Price):</strong> המחיר הגלובלי של אונקיה כסף 999 פיור בשוק הסחורות (COMEX). זה המחיר "הבסיסי".</p>
-                    <p><strong>פרמיום (Premium):</strong> הסכום הנוסף שאתה משלם מעל הספוט. מכסה ייצור, הפצה ורווח הדילר.</p>
-                    <ul>
-                        <li>מטבע Britannia 1oz = ספוט + 10%-18%</li>
-                        <li>מטיל 1kg = ספוט + 3%-8%</li>
-                        <li>מטבע ישראל מינט = ספוט + 15%-25%</li>
-                    </ul>
-                    <p><strong>מחזורים היסטוריים:</strong> כסף נסק ב-2011 ל-$49 לאונקיה ואז צנח. ב-2020 שוב עלה בחדות ל-$29. ב-2024-2025 עלה מעל $30 ושמר יציבות.</p>
-                    <div class="guide-tip-box"> <strong>יחס זהב-כסף (Gold/Silver Ratio):</strong> כשהיחס גבוה (>80), כסף "זול" יחסית לזהב. יחס היסטורי: ~60:1. נכון לשנת 2026: עוקב אחר הגרף שלנו בלשונית "גרפים".</div>
-                `
+                title: "מחיר חכם - ספוט מול פרמיום",
+                content: "\n                <p><strong>ספוט:</strong> מחיר עולמי לאונקיית .999 (COMEX) - הבסיס.</p>\n                <p><strong>פרמיום:</strong> התוספת מעל הספוט (ייצור, הפצה, רווח דילר).</p>\n                <ul>\n                    <li>Britannia 1oz ≈ ספוט + 10%-18%</li>\n                    <li>מטיל 1 ק״ג ≈ ספוט + 3%-8%</li>\n                    <li>מטבע מינט ישראל ≈ ספוט + 15%-25%</li>\n                </ul>\n                <div class=\"guide-tip-box\"><strong>יחס זהב/כסף:</strong> מעל ~80 כסף נחשב \"זול\" יחסית לזהב. עקבו בלשונית הגרפים.</div>\n            "
             },
             {
                 icon: "",
-                title: 'מיסוי ורגולציה בישראל - 2026',
-                content: `
-                    <p>מס רווח הון על מכירת כסף פיזי בישראל:</p>
-                    <ul>
-                        <li><strong>יחידים:</strong> 25% מס רווח הון על הרווח (מחיר מכירה פחות מחיר קנייה).</li>
-                        <li><strong>מע"מ:</strong> כסף פיזי לצורך השקעה פטור ממע"מ בישראל (בניגוד לתכשיטים).</li>
-                        <li><strong>דיווח:</strong> עסקאות מעל סף מסוים (בדרך כלל 50,000 ₪) עשויות לדרוש דיווח לרשות המסים.</li>
-                    </ul>
-                    <div class="guide-warn-box"> <strong>חשוב:</strong> שמור תיעוד של כל קנייה ומכירה (תאריך, מחיר, כמות). זה ישמש אותך בעת חישוב המס. מידע זה הוא לימודי בלבד - התייעץ עם רואה חשבון.</div>
-                `
-            }
+                title: "תהליך המכירה - מה קורה בפועל",
+                content: "\n                <p>מכירה בארץ <strong>מוגבלת יותר</strong> מקנייה. התהליך הטיפוסי:</p>\n                <ol class=\"guide-steps guide-steps-lg\">\n                    <li><strong>בדקו ספוט היום</strong> - כדי לדעת מהו טווח סביר.</li>\n                    <li><strong>בחרו ערוץ</strong> - דילר מהיר / P2P במחיר טוב יותר / מינט למטבעות ישראליים.</li>\n                    <li><strong>הציגו הוכחת בעלות</strong> - חשבונית קנייה מסייעת באמון ובמס.</li>\n                    <li><strong>סגרו מחיר בכתב</strong> - לפני מסירה. צפו למרווח מתחת לספוט אצל דילרים.</li>\n                </ol>\n                <div class=\"guide-tip-box\"><strong>נזילות:</strong> Britannia, Maple Leaf, American Eagle נמכרים מהר יותר ובמחיר טוב יותר ממטבעות אנונימיים.</div>\n            "
+            },
+            {
+                icon: "",
+                title: "איפה מוכרים בישראל - 2026",
+                content: "\n                <ul class=\"guide-channels\">\n                    <li><strong>חנויות מטבעות מורשות</strong> - הכי מהיר למזומן; מחיר מתחת לספוט (המרווח שלהן).</li>\n                    <li><strong>מינט ישראל</strong> - פדיון מטבעות ישראליים בתנאים מסוימים.</li>\n                    <li><strong>P2P</strong> - קבוצות פייסבוק/טלגרם; מחיר טוב יותר, תהליך ארוך יותר.</li>\n                    <li><strong>בינלאומי</strong> - רלוונטי בעיקר לכמויות גדולות.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>לפני המסירה:</strong> אל תשלחו מתכת בלי אישור תשלום ברור. העדיפו מפגש במקום בטוח / העברה מאומתת.</div>\n            "
+            },
+            {
+                icon: "",
+                title: "מיסוי בישראל - מה חשוב לדעת",
+                content: "\n                <ul>\n                    <li><strong>מס רווח הון (יחידים):</strong> כ־25% על הרווח (מכירה פחות קנייה).</li>\n                    <li><strong>מע״מ:</strong> כסף השקעה נחשב לרוב פטור - בניגוד לתכשיטים. אמתו מול המוכר/רו״ח.</li>\n                    <li><strong>דיווח:</strong> עסקאות גדולות (סביב ₪50,000 ומעלה) עלולות לדרוש דיווח.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>שמרו תיעוד</strong> לכל קנייה ומכירה. המידע כאן לימודי בלבד - התייעצו עם רואה חשבון.</div>\n            "
+            },
+            {
+                icon: "",
+                title: "טעויות שכדאי לדלג עליהן",
+                content: "\n                <ul>\n                    <li>קנייה ממקור לא מוכר בלי אימות</li>\n                    <li>התעלמות מפרמיום - \"זול\" שלא סופר משלוח/מכס</li>\n                    <li>אחסון בבית בלי ביטוח / בלי OPSEC</li>\n                    <li>קניית .900 או \"מצופה כסף\" במקום .999</li>\n                    <li>ציפייה לרווח מהיר כמו במסחר יומי</li>\n                </ul>\n                <div class=\"guide-tip-box\"><strong>סיכום תהליך:</strong> מקור אמין → מחיר אמיתי → תיעוד → אחסון → מכירה מתוכננת.</div>\n            "
+            },
         ]
     },
     en: {
-        dir: 'ltr',
+        dir: "ltr",
         chapters: [
             {
                 icon: "",
-                title: 'What Is Physical Silver - A Beginner\'s Introduction',
-                content: `
-                    <p>Physical silver means owning actual <strong>coins</strong> or <strong>bars</strong> in your hands - not paper, not a stock, not an ETF. You are the outright owner.</p>
-                    <p><strong>Coin vs Bar - what's the difference?</strong></p>
-                    <ul>
-                        <li><strong>Coin:</strong> Minted by a government mint (e.g. Royal Mint, Israel Mint). Has a legal face value, artistic design, and sometimes collectible value above the silver price.</li>
-                        <li><strong>Bar:</strong> A simple silver block, usually cheaper per ounce, produced by private refiners (Heraeus, Umicore, Valcambi). No collectible premium.</li>
-                    </ul>
-                    <div class="guide-tip-box"> <strong>Tip:</strong> Bars are usually cheaper per ounce. Coins sell faster and are easier to verify as authentic.</div>
-                    <p><strong>Common sizes:</strong> ¼ oz, ½ oz, 1 oz (most popular), 5 oz, 10 oz, 1 kg, 5 kg.</p>
-                    <p><strong>Purity:</strong> Investment silver is .999 (99.9%) or .9999 (99.99%). Old coins like Morgan Dollars are .900 - not investment grade.</p>
-                `
+                title: "Buying & Selling Physical Silver in Israel",
+                content: "\n                <p class=\"guide-lead\">A short deck that walks you from decision to exit - without the fluff.</p>\n                <ol class=\"guide-steps\">\n                    <li>Know what you buy (coin vs bar)</li>\n                    <li>Choose where and how to buy locally</li>\n                    <li>Verify, store, and keep records</li>\n                    <li>Know how and where to sell when needed</li>\n                    <li>Understand the basic tax picture</li>\n                </ol>\n                <div class=\"guide-tip-box\"><strong>For:</strong> beginners who want a clear process before the first ounce.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Where to Buy Silver in Israel - 2026',
-                content: `
-                    <p><strong>Main options for buying in Israel:</strong></p>
-                    <ul>
-                        <li><strong>Israel Mint (ICMC):</strong> Official site <em>coins.co.il</em>. Fully verified coins. Higher premium.</li>
-                        <li><strong>Private coin dealers:</strong> Specialist shops in Tel Aviv and the north. Always check reviews.</li>
-                        <li><strong>International online dealers:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em>, <em>Europäisches Münzhaus</em> - shipping to Israel is possible; watch for customs duties.</li>
-                        <li><strong>P2P / private sellers:</strong> Telegram groups, forums - <strong>high counterfeit risk! Only recommended with professional verification.</strong></li>
-                    </ul>
-                    <div class="guide-warn-box"> <strong>Customs note:</strong> Personal imports of investment-grade silver bars may be VAT-exempt in Israel. Verify with the seller before ordering.</div>
-                `
+                title: "Before You Buy - What Are You Buying?",
+                content: "\n                <p>Physical silver = <strong>coins</strong> or <strong>bars</strong> you hold. Not paper, not a stock, not an ETF.</p>\n                <div class=\"guide-compare\">\n                    <div>\n                        <h4>Coin</h4>\n                        <ul>\n                            <li>Government mint (Israel Mint / Royal Mint…)</li>\n                            <li>Easier to sell and authenticate</li>\n                            <li>Higher premium</li>\n                        </ul>\n                    </div>\n                    <div>\n                        <h4>Bar</h4>\n                        <ul>\n                            <li>Private refiners (Heraeus, Umicore…)</li>\n                            <li>Cheaper per ounce</li>\n                            <li>Less liquid in a quick local sale</li>\n                        </ul>\n                    </div>\n                </div>\n                <p><strong>Investment purity:</strong> .999 or .9999. Old .900 coins are not investment silver.</p>\n                <div class=\"guide-tip-box\"><strong>Rule of thumb:</strong> bars for cost per weight; coins for liquidity.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Where to Sell Silver in Israel - 2026',
-                content: `
-                    <p>Selling locally is more limited than buying. Main options:</p>
-                    <ul>
-                        <li><strong>Licensed coin dealers:</strong> Fastest route to cash. Expect to sell below spot - that's their margin.</li>
-                        <li><strong>Israel Mint:</strong> Accepts Israeli coins for redemption under certain conditions.</li>
-                        <li><strong>P2P platforms:</strong> Dedicated Facebook/Telegram groups - better price but longer process.</li>
-                        <li><strong>International buyers:</strong> Selling to European/US dealers - relevant for larger quantities.</li>
-                    </ul>
-                    <div class="guide-tip-box"> <strong>Tip:</strong> Recognized coins (Britannia, Maple Leaf, American Eagle) sell <strong>much faster</strong> and at better prices than obscure coins.</div>
-                `
+                title: "The Buying Process - 4 Steps",
+                content: "\n                <ol class=\"guide-steps guide-steps-lg\">\n                    <li><strong>Set budget & liquidity</strong> - only money you can lock without touching living expenses.</li>\n                    <li><strong>Pick a trusted source</strong> - mint / licensed shop / orderly import. No anonymous \"deals\".</li>\n                    <li><strong>Compare the real price</strong> - spot + premium + shipping/customs, not the sticker alone.</li>\n                    <li><strong>Get an invoice and keep it</strong> - date, weight, purity, price. Basis for sale and tax.</li>\n                </ol>\n                <div class=\"guide-tip-box\"><strong>Pace:</strong> start with 1-5 oz and learn the process - don't buy everything on day one.</div>\n            "
             },
             {
                 icon: "",
-                title: 'How Much to Buy - Entry Strategy for Beginners',
-                content: `
-                    <p>There is no single "right" amount - it depends on your goals.</p>
-                    <p><strong>Core principles:</strong></p>
-                    <ul>
-                        <li>Most experts suggest <strong>5%-15%</strong> of savings in hard assets (silver + gold + foreign currency).</li>
-                        <li>Start <strong>small</strong> (1-5 oz) to understand the process before committing larger sums.</li>
-                        <li>Buy regularly using <strong>Dollar Cost Averaging</strong> - a fixed amount monthly, without timing the market.</li>
-                        <li>Always maintain <strong>liquidity</strong> - never invest money you might need in an emergency.</li>
-                    </ul>
-                    <div class="guide-tip-box"> A good starting milestone: <strong>10 oz of .999 fine silver</strong> - meaningful for management, storage, and diversification.</div>
-                `
+                title: "Where to Buy in Israel - 2026",
+                content: "\n                <ul class=\"guide-channels\">\n                    <li><strong>Israel Mint (coins.co.il)</strong> - maximum trust, relatively high premium.</li>\n                    <li><strong>Private coin shops</strong> - center & north; check reviews before paying.</li>\n                    <li><strong>International sites</strong> - Bullion By Post, Silver Gold Bull, Europäisches Münzhaus. Watch customs/VAT.</li>\n                    <li><strong>Grey market / Telegram</strong> - high counterfeit risk. Only with professional verification.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>Customs:</strong> personal import of investment silver bars may be VAT-exempt - confirm with the seller before ordering.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Beginner Mistakes - What Everyone Does the First Time',
-                content: `
-                    <ul>
-                        <li> <strong>Buying from unknown sources</strong> - silver counterfeits are common. Golden rule: buy only from recognized mints or licensed dealers.</li>
-                        <li> <strong>Ignoring the premium</strong> - the price you pay includes a markup over spot. Too high a premium = poor profitability.</li>
-                        <li> <strong>Storing at home without insurance</strong> - one theft, and the investment is gone. Consider a secured safe or storage service.</li>
-                        <li> <strong>Buying cheap "old silver"</strong> - .900 coins (Morgan Dollars etc.) are not investment silver. Always verify purity.</li>
-                        <li> <strong>Expecting quick profits</strong> - silver is a long-term store of value, not a trade. Those who bought at the 2011 peak waited 10 years.</li>
-                        <li> <strong>Buying silver-plated items</strong> - just a thin coating. Zero investment value. Always check: .999 Fine Silver.</li>
-                    </ul>
-                    <div class="guide-warn-box"> <strong>Authentication:</strong> Use a magnet, sound test, or Sigma Metalytics device - the smartest investment before any large purchase.</div>
-                `
+                title: "How Much to Buy - And When to Stop",
+                content: "\n                <ul>\n                    <li>Common range: <strong>5%-15%</strong> of savings in hard assets (silver + gold + FX).</li>\n                    <li>Good start: <strong>1-5 oz</strong>, then monthly DCA if it fits you.</li>\n                    <li>Keep liquidity - physical silver should not fund daily bills.</li>\n                </ul>\n                <p><strong>Milestone:</strong> ~10 oz of .999 is a first base that also allows partial sales later.</p>\n                <div class=\"guide-tip-box\"><strong>You don't need to buy everything at once.</strong> A repeatable process beats FOMO.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Safe Storage - How to Keep Your Silver',
-                content: `
-                    <p>Proper storage is part of the investment. Common options:</p>
-                    <ul>
-                        <li><strong>Home safe:</strong> Convenient, accessible. Must be bolted to wall/floor. Separate insurance recommended.</li>
-                        <li><strong>Bank safe deposit box:</strong> Secure from theft. NOT covered by bank insurance - get a separate policy.</li>
-                        <li><strong>Professional vault storage:</strong> Companies like Brinks, Loomis - insured and monitored. Best for large quantities.</li>
-                    </ul>
-                    <p><strong>Key rule:</strong> Don't tell everyone you own physical silver. OPSEC (operational security) matters as much as physical security.</p>
-                    <div class="guide-tip-box"> <strong>Storage:</strong> Keep silver away from humid air. Plastic bags with silica gel preserve the shine and prevent tarnishing.</div>
-                `
+                title: "After the Buy - Verify & Store",
+                content: "\n                <p><strong>Basic auth:</strong> magnet, ping test, and a tool like Sigma Metalytics for meaningful amounts.</p>\n                <ul>\n                    <li><strong>Home safe</strong> - convenient; bolt it down + separate insurance.</li>\n                    <li><strong>Bank SDB</strong> - safer from theft; bank insurance usually doesn't cover contents.</li>\n                    <li><strong>Professional vault</strong> - Brinks / Loomis etc. for larger stacks.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>OPSEC:</strong> don't advertise metal at home. Information security matters as much as the safe.</div>\n                <div class=\"guide-tip-box\"><strong>Storage:</strong> keep dry (silica gel) to reduce tarnish.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Understanding Silver Price - Spot, Premium & Cycles',
-                content: `
-                    <p><strong>Spot price:</strong> The global price of one troy ounce of .999 fine silver on the commodities market (COMEX). This is the baseline.</p>
-                    <p><strong>Premium:</strong> The extra amount you pay over spot. Covers manufacturing, distribution, and dealer profit.</p>
-                    <ul>
-                        <li>Britannia 1oz coin = spot + 10%-18%</li>
-                        <li>1 kg bar = spot + 3%-8%</li>
-                        <li>Israel Mint coin = spot + 15%-25%</li>
-                    </ul>
-                    <p><strong>Historical cycles:</strong> Silver surged to $49/oz in 2011 then crashed. Rose sharply again in 2020 to $29. In 2024-2025 it stabilized above $30.</p>
-                    <div class="guide-tip-box"> <strong>Gold/Silver Ratio:</strong> When the ratio is high (>80), silver is "cheap" relative to gold. Historical average: ~60:1. Track it live in our Charts tab.</div>
-                `
+                title: "Smart Pricing - Spot vs Premium",
+                content: "\n                <p><strong>Spot:</strong> global .999 ounce price (COMEX) - the baseline.</p>\n                <p><strong>Premium:</strong> what you pay over spot (minting, distribution, dealer margin).</p>\n                <ul>\n                    <li>Britannia 1oz ≈ spot + 10%-18%</li>\n                    <li>1 kg bar ≈ spot + 3%-8%</li>\n                    <li>Israel Mint coin ≈ spot + 15%-25%</li>\n                </ul>\n                <div class=\"guide-tip-box\"><strong>Gold/Silver ratio:</strong> above ~80 silver is relatively \"cheap\" vs gold. Track it in Charts.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Taxation & Regulation in Israel - 2026',
-                content: `
-                    <p>Capital gains tax on selling physical silver in Israel:</p>
-                    <ul>
-                        <li><strong>Individuals:</strong> 25% capital gains tax on the profit (sale price minus purchase price).</li>
-                        <li><strong>VAT:</strong> Investment silver is VAT-exempt in Israel (unlike jewelry).</li>
-                        <li><strong>Reporting:</strong> Transactions above a certain threshold (usually ₪50,000) may require reporting to the tax authority.</li>
-                    </ul>
-                    <div class="guide-warn-box"> <strong>Important:</strong> Keep records of every purchase and sale (date, price, quantity). This is for educational purposes only - consult a certified accountant for personal tax advice.</div>
-                `
-            }
+                title: "The Selling Process - What Actually Happens",
+                content: "\n                <p>Local selling is <strong>more limited</strong> than buying. Typical flow:</p>\n                <ol class=\"guide-steps guide-steps-lg\">\n                    <li><strong>Check today's spot</strong> - know a fair range.</li>\n                    <li><strong>Pick a channel</strong> - fast dealer / better-priced P2P / mint for Israeli coins.</li>\n                    <li><strong>Show proof of purchase</strong> - invoice helps trust and tax.</li>\n                    <li><strong>Lock the price in writing</strong> - before handover. Expect below-spot at dealers.</li>\n                </ol>\n                <div class=\"guide-tip-box\"><strong>Liquidity:</strong> Britannia, Maple Leaf, American Eagle sell faster and closer to fair value than obscure coins.</div>\n            "
+            },
+            {
+                icon: "",
+                title: "Where to Sell in Israel - 2026",
+                content: "\n                <ul class=\"guide-channels\">\n                    <li><strong>Licensed coin dealers</strong> - fastest cash; below spot (their margin).</li>\n                    <li><strong>Israel Mint</strong> - redeems Israeli coins under conditions.</li>\n                    <li><strong>P2P</strong> - Facebook/Telegram groups; better price, slower process.</li>\n                    <li><strong>International</strong> - mainly for larger quantities.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>Before handover:</strong> don't ship metal without clear payment confirmation. Prefer a safe meetup / verified transfer.</div>\n            "
+            },
+            {
+                icon: "",
+                title: "Tax in Israel - What Matters",
+                content: "\n                <ul>\n                    <li><strong>Capital gains (individuals):</strong> ~25% on profit (sale minus purchase).</li>\n                    <li><strong>VAT:</strong> investment silver is often treated as exempt - unlike jewelry. Confirm with seller/CPA.</li>\n                    <li><strong>Reporting:</strong> larger deals (around ₪50,000+) may need reporting.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>Keep records</strong> for every buy and sell. Educational only - consult a CPA.</div>\n            "
+            },
+            {
+                icon: "",
+                title: "Mistakes Worth Skipping",
+                content: "\n                <ul>\n                    <li>Buying from unknowns without verification</li>\n                    <li>Ignoring premium - \"cheap\" that forgets shipping/customs</li>\n                    <li>Home storage with no insurance / no OPSEC</li>\n                    <li>Buying .900 or silver-plated instead of .999</li>\n                    <li>Expecting day-trade style profits</li>\n                </ul>\n                <div class=\"guide-tip-box\"><strong>Process summary:</strong> trusted source → real price → records → storage → planned sale.</div>\n            "
+            },
         ]
     },
     ru: {
-        dir: 'rtl',
+        dir: "ltr",
         chapters: [
             {
                 icon: "",
-                title: 'Что такое физическое серебро - введение для начинающих',
-                content: `
-                    <p>Физическое серебро - это реальные <strong>монеты</strong> или <strong>слитки</strong>, которые вы держите в руках, а не бумага, акция или ETF. Вы - полноправный владелец.</p>
-                    <p><strong>Монета vs Слиток - в чём разница?</strong></p>
-                    <ul>
-                        <li><strong>Монета (Coin):</strong> Чеканится государственным монетным двором (Royal Mint, Israel Mint). Имеет номинал, художественный дизайн и иногда коллекционную ценность сверх цены серебра.</li>
-                        <li><strong>Слиток (Bar):</strong> Простой кусок серебра, обычно дешевле за унцию, производится частными аффинажными заводами (Heraeus, Umicore). Без коллекционной надбавки.</li>
-                    </ul>
-                    <div class="guide-tip-box"> <strong>Совет:</strong> Слитки дешевле за унцию. Монеты продаются быстрее и легче проверяются на подлинность.</div>
-                    <p><strong>Популярные размеры:</strong> ¼ oz, ½ oz, 1 oz (самый популярный), 5 oz, 10 oz, 1 кг, 5 кг.</p>
-                    <p><strong>Чистота:</strong> Инвестиционное серебро - .999 (99,9%) или .9999 (99,99%). Старые монеты типа Morgan Dollar - .900, не инвестиционного уровня.</p>
-                `
+                title: "Покупка и продажа физического серебра в Израиле",
+                content: "\n                <p class=\"guide-lead\">Короткая презентация: от решения до продажи - без лишнего жаргона.</p>\n                <ol class=\"guide-steps\">\n                    <li>Понять, что покупаете (монета vs слиток)</li>\n                    <li>Выбрать, где и как покупать в стране</li>\n                    <li>Проверить, хранить и документировать</li>\n                    <li>Знать, как и где продавать</li>\n                    <li>Базово разобраться с налогами</li>\n                </ol>\n                <div class=\"guide-tip-box\"><strong>Для кого:</strong> новички, которым нужен ясный процесс до первой унции.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Где купить серебро в Израиле - 2026',
-                content: `
-                    <p><strong>Основные варианты покупки в Израиле:</strong></p>
-                    <ul>
-                        <li><strong>Israel Mint (ICMC):</strong> Официальный сайт <em>coins.co.il</em>. Полностью проверенные монеты. Высокая надбавка.</li>
-                        <li><strong>Частные нумизматические магазины:</strong> Специализированные магазины в Тель-Авиве и на севере. Всегда проверяйте отзывы.</li>
-                        <li><strong>Международные онлайн-дилеры:</strong> <em>Bullion By Post</em>, <em>Silver Gold Bull</em> - доставка в Израиль возможна; следите за таможней.</li>
-                        <li><strong>Частные продавцы (P2P):</strong> Telegram-группы - <strong>высокий риск подделок! Только с профессиональной проверкой.</strong></li>
-                    </ul>
-                    <div class="guide-warn-box"> <strong>Таможня:</strong> Ввоз инвестиционных серебряных слитков может быть освобождён от НДС в Израиле. Уточните у продавца до заказа.</div>
-                `
+                title: "Перед покупкой - что именно вы покупаете?",
+                content: "\n                <p>Физическое серебро = <strong>монеты</strong> или <strong>слитки</strong> в руках. Не бумага, не акция, не ETF.</p>\n                <div class=\"guide-compare\">\n                    <div>\n                        <h4>Монета</h4>\n                        <ul>\n                            <li>Гос. монетный двор (Israel Mint / Royal Mint…)</li>\n                            <li>Легче продать и проверить</li>\n                            <li>Выше надбавка</li>\n                        </ul>\n                    </div>\n                    <div>\n                        <h4>Слиток</h4>\n                        <ul>\n                            <li>Частные аффинажи (Heraeus, Umicore…)</li>\n                            <li>Дешевле за унцию</li>\n                            <li>Менее ликвиден при быстрой продаже</li>\n                        </ul>\n                    </div>\n                </div>\n                <p><strong>Инвестиционная чистота:</strong> .999 или .9999. Старые .900 - не инвестиционное серебро.</p>\n                <div class=\"guide-tip-box\"><strong>Правило:</strong> слиток - цена за вес; монета - ликвидность.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Где продать серебро в Израиле - 2026',
-                content: `
-                    <p>Продажа в стране ограниченнее, чем покупка. Основные варианты:</p>
-                    <ul>
-                        <li><strong>Лицензированные дилеры монет:</strong> Самый быстрый способ. Ожидайте продажу ниже спота - это их маржа.</li>
-                        <li><strong>Israel Mint:</strong> Принимает израильские монеты на выкуп на определённых условиях.</li>
-                        <li><strong>P2P платформы:</strong> Группы Facebook/Telegram - лучшая цена, но процесс длиннее.</li>
-                        <li><strong>Международные покупатели:</strong> Продажа европейским/американским дилерам - актуально для больших объёмов.</li>
-                    </ul>
-                    <div class="guide-tip-box"> <strong>Совет:</strong> Монеты известных монетных дворов (Britannia, Maple Leaf, American Eagle) продаются <strong>намного быстрее</strong> по лучшей цене.</div>
-                `
+                title: "Процесс покупки - 4 шага",
+                content: "\n                <ol class=\"guide-steps guide-steps-lg\">\n                    <li><strong>Бюджет и ликвидность</strong> - только сумма, которую можно \"заморозить\".</li>\n                    <li><strong>Надёжный источник</strong> - монетный двор / лицензированный магазин / нормальный импорт.</li>\n                    <li><strong>Реальная цена</strong> - спот + надбавка + доставка/таможня.</li>\n                    <li><strong>Счёт и документы</strong> - дата, вес, чистота, цена. База для продажи и налогов.</li>\n                </ol>\n                <div class=\"guide-tip-box\"><strong>Темп:</strong> начните с 1-5 унций и поймите процесс.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Сколько покупать - стратегия входа для новичка',
-                content: `
-                    <p>Нет единственно правильной суммы - всё зависит от ваших целей.</p>
-                    <p><strong>Основные принципы:</strong></p>
-                    <ul>
-                        <li>Большинство экспертов рекомендуют <strong>5%-15%</strong> сбережений в твёрдых активах (серебро + золото + иностранная валюта).</li>
-                        <li>Начните с <strong>малого</strong> (1-5 oz), чтобы понять процесс, прежде чем вкладывать крупные суммы.</li>
-                        <li>Покупайте регулярно (<strong>усреднение стоимости</strong>) - фиксированная сумма ежемесячно, без угадывания рынка.</li>
-                        <li>Всегда сохраняйте <strong>ликвидность</strong> - не инвестируйте деньги, которые могут понадобиться в экстренной ситуации.</li>
-                    </ul>
-                    <div class="guide-tip-box"> Хорошая стартовая позиция: <strong>10 oz серебра .999</strong> - достаточно для управления, хранения и диверсификации.</div>
-                `
+                title: "Где покупать в Израиле - 2026",
+                content: "\n                <ul class=\"guide-channels\">\n                    <li><strong>Israel Mint (coins.co.il)</strong> - максимальное доверие, выше надбавка.</li>\n                    <li><strong>Частные магазины</strong> - центр и север; проверяйте отзывы.</li>\n                    <li><strong>Международные сайты</strong> - Bullion By Post, Silver Gold Bull… Учитывайте таможню/НДС.</li>\n                    <li><strong>Серый рынок / Telegram</strong> - высокий риск подделок. Только с проверкой.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>Таможня:</strong> личный ввоз инвестиционных слитков может быть без НДС - уточните у продавца.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Ошибки новичков - то, что все делают в первый раз',
-                content: `
-                    <ul>
-                        <li> <strong>Покупка из неизвестных источников</strong> - подделки серебра распространены. Правило: покупайте только у известных монетных дворов или лицензированных дилеров.</li>
-                        <li> <strong>Игнорирование надбавки</strong> - цена включает наценку над спотом. Слишком высокая надбавка = плохая доходность.</li>
-                        <li> <strong>Хранение дома без страховки</strong> - одна кража, и инвестиция потеряна. Рассмотрите сейф или профессиональное хранение.</li>
-                        <li> <strong>Покупка дешёвого "старого серебра"</strong> - монеты .900 не являются инвестиционным серебром. Всегда проверяйте чистоту.</li>
-                        <li> <strong>Ожидание быстрой прибыли</strong> - серебро - долгосрочное хранилище ценности. Купившие в 2011 году на пике ждали 10 лет.</li>
-                        <li> <strong>Покупка "посеребрённых" предметов</strong> - только напыление. Нулевая инвестиционная ценность. Всегда проверяйте: .999 Fine Silver.</li>
-                    </ul>
-                    <div class="guide-warn-box"> <strong>Проверка подлинности:</strong> Магнит, звуковой тест, устройство Sigma Metalytics - самая умная инвестиция перед любой крупной покупкой.</div>
-                `
+                title: "Сколько покупать - и когда остановиться",
+                content: "\n                <ul>\n                    <li>Частый диапазон: <strong>5%-15%</strong> сбережений в твёрдых активах.</li>\n                    <li>Старт: <strong>1-5 унций</strong>, затем DCA по месяцам.</li>\n                    <li>Оставляйте ликвидность - серебро не для текущих счетов.</li>\n                </ul>\n                <p><strong>Ориентир:</strong> ~10 унций .999 - первая база, с которой можно и частично продавать.</p>\n                <div class=\"guide-tip-box\"><strong>Не нужно покупать всё сразу.</strong> Повторяемый процесс лучше FOMO.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Безопасное хранение - как хранить серебро',
-                content: `
-                    <p>Правильное хранение - часть инвестиции. Варианты:</p>
-                    <ul>
-                        <li><strong>Домашний сейф:</strong> Удобно и доступно. Должен быть прикручен к стене/полу. Рекомендуется отдельная страховка.</li>
-                        <li><strong>Банковская ячейка:</strong> Надёжно от кражи. Банковская страховка НЕ покрывает - нужна отдельная.</li>
-                        <li><strong>Профессиональное хранилище:</strong> Brinks, Loomis - застраховано и охраняется. Лучшее решение для больших объёмов.</li>
-                    </ul>
-                    <p><strong>Важное правило:</strong> Не рассказывайте всем о своём серебре. OPSEC (информационная безопасность) так же важна, как физическая защита.</p>
-                    <div class="guide-tip-box"> <strong>Хранение:</strong> Избегайте влажного воздуха. Пакеты с силикагелем сохраняют блеск и предотвращают окисление.</div>
-                `
+                title: "После покупки - проверка и хранение",
+                content: "\n                <p><strong>Базовая проверка:</strong> магнит, звук, и при крупных суммах - прибор вроде Sigma Metalytics.</p>\n                <ul>\n                    <li><strong>Домашний сейф</strong> - удобно; крепление + отдельная страховка.</li>\n                    <li><strong>Банковская ячейка</strong> - от кражи; страховка банка обычно не покрывает содержимое.</li>\n                    <li><strong>Проф. хранилище</strong> - Brinks / Loomis для больших объёмов.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>OPSEC:</strong> не рассказывайте, что металл дома.</div>\n                <div class=\"guide-tip-box\"><strong>Хранение:</strong> сухо (силикагель) - меньше окисления.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Понимание цены серебра - спот, надбавка и циклы',
-                content: `
-                    <p><strong>Спот-цена:</strong> Мировая цена одной тройской унции чистого серебра .999 на товарном рынке (COMEX). Это базовая цена.</p>
-                    <p><strong>Надбавка (Premium):</strong> Дополнительная сумма сверх спота. Покрывает производство, дистрибуцию и прибыль дилера.</p>
-                    <ul>
-                        <li>Монета Britannia 1 oz = спот + 10%-18%</li>
-                        <li>Слиток 1 кг = спот + 3%-8%</li>
-                        <li>Монета Israel Mint = спот + 15%-25%</li>
-                    </ul>
-                    <p><strong>Исторические циклы:</strong> Серебро достигло $49/oz в 2011 году, затем упало. В 2020 снова выросло до $29. В 2024-2025 стабилизировалось выше $30.</p>
-                    <div class="guide-tip-box"> <strong>Соотношение золото/серебро:</strong> Когда оно высокое (>80), серебро "дёшево" относительно золота. Исторически ~60:1. Отслеживайте в разделе "Графики".</div>
-                `
+                title: "Умная цена - спот и надбавка",
+                content: "\n                <p><strong>Спот:</strong> мировая цена унции .999 (COMEX).</p>\n                <p><strong>Надбавка:</strong> доплата сверх спота (чеканка, дистрибуция, маржа).</p>\n                <ul>\n                    <li>Britannia 1oz ≈ спот + 10%-18%</li>\n                    <li>Слиток 1 кг ≈ спот + 3%-8%</li>\n                    <li>Монета Israel Mint ≈ спот + 15%-25%</li>\n                </ul>\n                <div class=\"guide-tip-box\"><strong>Золото/серебро:</strong> выше ~80 серебро относительно \"дешево\". Смотрите в графиках.</div>\n            "
             },
             {
                 icon: "",
-                title: 'Налогообложение в Израиле - 2026',
-                content: `
-                    <p>Налог на прирост капитала при продаже физического серебра в Израиле:</p>
-                    <ul>
-                        <li><strong>Физические лица:</strong> 25% налог на прирост капитала с прибыли (цена продажи минус цена покупки).</li>
-                        <li><strong>НДС:</strong> Инвестиционное серебро освобождено от НДС в Израиле (в отличие от ювелирных украшений).</li>
-                        <li><strong>Отчётность:</strong> Сделки выше определённого порога (обычно ₪50,000) могут потребовать отчётности в налоговую службу.</li>
-                    </ul>
-                    <div class="guide-warn-box"> <strong>Важно:</strong> Сохраняйте документы о каждой покупке и продаже (дата, цена, количество). Эта информация носит образовательный характер - проконсультируйтесь с бухгалтером.</div>
-                `
-            }
+                title: "Процесс продажи - как это работает",
+                content: "\n                <p>Продажа в стране <strong>ограниченнее</strong> покупки. Типичный путь:</p>\n                <ol class=\"guide-steps guide-steps-lg\">\n                    <li><strong>Спот сегодня</strong> - понимаете справедливый диапазон.</li>\n                    <li><strong>Канал</strong> - быстрый дилер / P2P дороже / монетный двор для израильских монет.</li>\n                    <li><strong>Документы покупки</strong> - счёт помогает доверию и налогам.</li>\n                    <li><strong>Цена письменно</strong> - до передачи. У дилеров - ниже спота.</li>\n                </ol>\n                <div class=\"guide-tip-box\"><strong>Ликвидность:</strong> Britannia, Maple Leaf, American Eagle продаются быстрее.</div>\n            "
+            },
+            {
+                icon: "",
+                title: "Где продавать в Израиле - 2026",
+                content: "\n                <ul class=\"guide-channels\">\n                    <li><strong>Лицензированные дилеры</strong> - быстрее всего; цена ниже спота.</li>\n                    <li><strong>Israel Mint</strong> - выкуп израильских монет при условиях.</li>\n                    <li><strong>P2P</strong> - Facebook/Telegram; лучше цена, дольше процесс.</li>\n                    <li><strong>Международно</strong> - в основном крупные объёмы.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>До передачи:</strong> не отправляйте металл без подтверждения оплаты.</div>\n            "
+            },
+            {
+                icon: "",
+                title: "Налоги в Израиле - что важно",
+                content: "\n                <ul>\n                    <li><strong>Прирост капитала:</strong> ~25% с прибыли (продажа минус покупка).</li>\n                    <li><strong>НДС:</strong> инвестиционное серебро часто без НДС - в отличие от украшений. Уточните.</li>\n                    <li><strong>Отчётность:</strong> крупные сделки (около ₪50,000+) могут требовать отчёта.</li>\n                </ul>\n                <div class=\"guide-warn-box\"><strong>Храните документы.</strong> Это обучение - проконсультируйтесь с бухгалтером.</div>\n            "
+            },
+            {
+                icon: "",
+                title: "Ошибки, которые лучше пропустить",
+                content: "\n                <ul>\n                    <li>Покупка у неизвестных без проверки</li>\n                    <li>Игнор надбавки - \"дешево\" без доставки/таможни</li>\n                    <li>Домашнее хранение без страховки / без OPSEC</li>\n                    <li>Покупка .900 или \"посеребрённого\" вместо .999</li>\n                    <li>Ожидание быстрой прибыли как в дейтрейдинге</li>\n                </ul>\n                <div class=\"guide-tip-box\"><strong>Итог:</strong> надёжный источник → реальная цена → документы → хранение → плановая продажа.</div>\n            "
+            },
         ]
-    }
+    },
 };
 
 let _guideActiveLang = 'he';
@@ -2562,6 +2388,16 @@ async function _loadStoreContent() {
     }
 }
 
+let _guideSlideIndex = 0;
+let _guideSlideCount = 0;
+let _guideDeckBound = false;
+
+const GUIDE_NAV_LABELS = {
+    he: { prev: 'הקודם', next: 'הבא', done: 'סיום', of: 'מתוך' },
+    en: { prev: 'Back', next: 'Next', done: 'Done', of: 'of' },
+    ru: { prev: 'Назад', next: 'Далее', done: 'Готово', of: 'из' },
+};
+
 function renderGuide(lang) {
     _guideActiveLang = lang;
     const data = GUIDE_DATA[lang] || GUIDE_DATA.he;
@@ -2570,14 +2406,10 @@ function renderGuide(lang) {
 
     container.dir = data.dir;
 
-    // Update lang buttons
     document.querySelectorAll('.guide-lang-bar .mint-lang-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.lang === lang);
     });
 
-    // Store-first: once the admin content store has guides, it is the single
-    // source of truth (hardcode-free). The built-in GUIDE_DATA is used ONLY as
-    // an offline fallback when the store is empty or unreachable.
     const admin = (_adminGuides || []).slice().sort((a, b) => (a.order || 100) - (b.order || 100));
     let chapters = admin.map(it => {
         const block = it[lang] || it.he || {};
@@ -2585,38 +2417,152 @@ function renderGuide(lang) {
     }).filter(ch => ch.title || ch.content);
 
     if (chapters.length === 0) {
-        // Fallback only - no managed content yet.
         chapters = data.chapters.slice();
     }
 
-    container.innerHTML = chapters.map((ch, i) => `
-        <div class="guide-chapter" id="guide-ch-${i}">
-            <button class="guide-chapter-header" onclick="toggleGuideChapter(${i})">
-                <span class="guide-chapter-icon">${ch.icon}</span>
-                <span class="guide-chapter-title">${ch.title}</span>
-                <span class="guide-chapter-arrow" aria-hidden="true"></span>
-            </button>
-            <div class="guide-chapter-body">${ch.content}</div>
+    const labels = GUIDE_NAV_LABELS[lang] || GUIDE_NAV_LABELS.he;
+    _guideSlideCount = chapters.length;
+    _guideSlideIndex = Math.min(_guideSlideIndex, Math.max(0, _guideSlideCount - 1));
+
+    container.innerHTML = `
+        <div class="guide-deck" id="guide-deck">
+            <div class="guide-progress" aria-hidden="true">
+                <div class="guide-progress-bar" id="guide-progress-bar"></div>
+            </div>
+            <div class="guide-slides-viewport" id="guide-slides-viewport">
+                ${chapters.map((ch, i) => `
+                    <article class="guide-slide${i === _guideSlideIndex ? ' is-active' : ''}" data-slide="${i}" ${i === _guideSlideIndex ? '' : 'hidden'}>
+                        <p class="guide-slide-kicker">${i + 1} ${labels.of} ${chapters.length}</p>
+                        <h3 class="guide-slide-title">${ch.title}</h3>
+                        <div class="guide-slide-body">${ch.content}</div>
+                    </article>
+                `).join('')}
+            </div>
+            <div class="guide-deck-nav">
+                <button type="button" class="guide-nav-btn" id="guide-prev">${labels.prev}</button>
+                <div class="guide-dots" id="guide-dots" role="tablist" aria-label="slides">
+                    ${chapters.map((_, i) => `
+                        <button type="button" class="guide-dot${i === _guideSlideIndex ? ' is-active' : ''}"
+                            data-slide="${i}" aria-label="slide ${i + 1}"></button>
+                    `).join('')}
+                </div>
+                <button type="button" class="guide-nav-btn guide-nav-btn-primary" id="guide-next">${labels.next}</button>
+            </div>
         </div>
-    `).join('');
+    `;
+
+    _wireGuideDeck();
+    _updateGuideDeckUI();
+}
+
+function _wireGuideDeck() {
+    const prev = document.getElementById('guide-prev');
+    const next = document.getElementById('guide-next');
+    const dots = document.getElementById('guide-dots');
+    const viewport = document.getElementById('guide-slides-viewport');
+
+    if (prev) prev.onclick = () => goGuideSlide(_guideSlideIndex - 1);
+    if (next) next.onclick = () => {
+        if (_guideSlideIndex >= _guideSlideCount - 1) {
+            goBack();
+            return;
+        }
+        goGuideSlide(_guideSlideIndex + 1);
+    };
+    if (dots) {
+        dots.querySelectorAll('.guide-dot').forEach(btn => {
+            btn.onclick = () => goGuideSlide(Number(btn.dataset.slide));
+        });
+    }
+
+    if (!_guideDeckBound) {
+        _guideDeckBound = true;
+        document.addEventListener('keydown', (e) => {
+            const screen = document.getElementById('guide-screen');
+            if (!screen || !screen.classList.contains('active')) return;
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                const rtl = (document.getElementById('guide-content') || {}).dir === 'rtl';
+                const forward = rtl ? (e.key === 'ArrowLeft') : (e.key === 'ArrowRight');
+                goGuideSlide(_guideSlideIndex + (forward ? 1 : -1));
+            }
+        });
+
+        let touchX = null;
+        document.addEventListener('touchstart', (e) => {
+            const screen = document.getElementById('guide-screen');
+            if (!screen || !screen.classList.contains('active')) return;
+            touchX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        document.addEventListener('touchend', (e) => {
+            const screen = document.getElementById('guide-screen');
+            if (!screen || !screen.classList.contains('active') || touchX == null) return;
+            const dx = e.changedTouches[0].clientX - touchX;
+            touchX = null;
+            if (Math.abs(dx) < 48) return;
+            const rtl = (document.getElementById('guide-content') || {}).dir === 'rtl';
+            // swipe opposite to reading direction advances
+            if (rtl) goGuideSlide(_guideSlideIndex + (dx > 0 ? 1 : -1));
+            else goGuideSlide(_guideSlideIndex + (dx < 0 ? 1 : -1));
+        }, { passive: true });
+    }
+
+    // silence unused warning in some bundlers
+    void viewport;
+}
+
+function goGuideSlide(idx) {
+    if (_guideSlideCount <= 0) return;
+    _guideSlideIndex = Math.max(0, Math.min(_guideSlideCount - 1, idx));
+    _updateGuideDeckUI();
+}
+
+function _updateGuideDeckUI() {
+    const lang = _guideActiveLang || 'he';
+    const labels = GUIDE_NAV_LABELS[lang] || GUIDE_NAV_LABELS.he;
+    const slides = document.querySelectorAll('#guide-content .guide-slide');
+    slides.forEach((el, i) => {
+        const on = i === _guideSlideIndex;
+        el.classList.toggle('is-active', on);
+        if (on) el.removeAttribute('hidden');
+        else el.setAttribute('hidden', '');
+    });
+
+    document.querySelectorAll('#guide-dots .guide-dot').forEach((d, i) => {
+        d.classList.toggle('is-active', i === _guideSlideIndex);
+    });
+
+    const bar = document.getElementById('guide-progress-bar');
+    if (bar && _guideSlideCount) {
+        bar.style.width = `${((_guideSlideIndex + 1) / _guideSlideCount) * 100}%`;
+    }
+
+    const prev = document.getElementById('guide-prev');
+    const next = document.getElementById('guide-next');
+    if (prev) {
+        prev.disabled = _guideSlideIndex <= 0;
+        prev.textContent = labels.prev;
+    }
+    if (next) {
+        const last = _guideSlideIndex >= _guideSlideCount - 1;
+        next.textContent = last ? labels.done : labels.next;
+    }
 }
 
 function toggleGuideChapter(idx) {
-    const ch = document.getElementById(`guide-ch-${idx}`);
-    if (!ch) return;
-    ch.classList.toggle('open');
+    // Legacy no-op (accordion removed). Kept so old onclick refs don't throw.
+    goGuideSlide(idx);
 }
 
 function initGuide() {
-    // Language tabs
     document.querySelectorAll('.guide-lang-bar .mint-lang-btn').forEach(btn => {
-        btn.onclick = () => renderGuide(btn.dataset.lang);
+        btn.onclick = () => {
+            _guideSlideIndex = 0;
+            renderGuide(btn.dataset.lang);
+        };
     });
 
-    // Back button
     document.getElementById('back-guide')?.addEventListener('click', () => goBack());
 
-    // Render default now, then re-render once admin-managed chapters are fetched.
     renderGuide('he');
     _fetchAdminGuides().then(() => renderGuide(_guideActiveLang || 'he'));
 }
@@ -2826,7 +2772,13 @@ function boot() {
 
     // Only hub login - vault never shows its own passcode screen
     if (sessionToken()) {
-        showDashboard();
+        showDashboard().then(() => {
+            // Deep-link: #guide-screen or #guide opens the buy/sell deck
+            const hash = (location.hash || '').replace(/^#/, '');
+            if (hash === 'guide-screen' || hash === 'guide') {
+                setTimeout(() => goToScreen('guide-screen'), 50);
+            }
+        });
     } else {
         location.replace('hub.html');
     }
@@ -2835,12 +2787,23 @@ function boot() {
 function initDevPreview() {
     if (!isLocalDevHost()) return;
 
+    // Auto-grant a local preview session so vault opens without the hub API.
+    try {
+        if (!sessionToken()) {
+            saveSession(DEV_PREVIEW_TOKEN);
+            localStorage.setItem('grouptech_session', JSON.stringify({
+                token: DEV_PREVIEW_TOKEN,
+                expires: Date.now() + SESSION_DURATION,
+            }));
+        }
+    } catch (e) {}
+
     document.body.classList.add('dev-mode');
     const banner = document.createElement('div');
     banner.className = 'dev-preview-banner';
     banner.innerHTML = `
-        <span class="dev-preview-label"> מצב פיתוח מקומי</span>
-        <span class="dev-preview-note">השינויים כאן לא על האתר החי - רענון אוטומטי אחרי שמירה</span>
+        <span class="dev-preview-label">מצב פיתוח מקומי</span>
+        <span class="dev-preview-note">השינויים כאן לא על האתר החי - רענון ידני אחרי שמירה</span>
         <button type="button" class="dev-preview-reload" onclick="location.reload()">רענון</button>
     `;
     document.body.prepend(banner);
